@@ -1,0 +1,26 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="worldOnline">
+    <output-path>$PROJECT_DIR$/out/artifacts/worldOnline</output-path>
+    <root id="archive" name="worldOnline.war">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="WorldOnline" />
+          <element id="jpa-descriptors" facet="WorldOnline/jpa/JPA" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="JPA 2.0-2.0" />
+          <element id="library" level="project" name="hibernate-4.2.2" />
+          <element id="library" level="project" name="mysql-connector-java-5.1.26-bin" />
+          <element id="library" level="project" name="Java EE 6-Java EE 6" />
+          <element id="library" level="project" name="jstl-1.2" />
+          <element id="library" level="project" name="spring-3.2.4" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="WorldOnline/javaeeApplication/javaEEApplication" />
+      <element id="javaee-facet-resources" facet="WorldOnline/web/Web" />
+    </root>
+  </artifact>
+</component>
