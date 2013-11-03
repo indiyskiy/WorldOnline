@@ -6,29 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="TestCommit">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/CompleteCardInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/CompleteCardTagInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/CompleteTagInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/CompleteTextGroupInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/requests/TagRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/requests/TextRequest.java" />
-      <change type="DELETED" beforePath="C:\Users\Graf_D\IdeaProjects\WorldOnline\WorldOnline\src\model\test\Test.java" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Graf_D\IdeaProjects\WorldOnline\WorldOnline\src\model\constants\databaseenumeration\TegType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/TagType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardParameterEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardParameterEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardTagEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardTagEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/ExampleServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/ExampleServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/TagEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/TagEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/TextCardEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/TextCardEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/TextGroupEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/TextGroupEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/UserEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/UserEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/UserHardwareEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/UserHardwareEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WorldOnline.iml" afterPath="$PROJECT_DIR$/WorldOnline.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/src/hibernate.cfg.xml" />
+    <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WorldOnline.iws" />
@@ -127,7 +105,7 @@
     <file path="dbtable:/2d28c3c8/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..cardcoordinate" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383191204791" ignored="false" />
     <file path="/UserPersonalDataEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383199254948" ignored="false" />
     <file path="/CardRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383444557416" ignored="false" />
-    <file path="/Dummy.txt" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383495440222" ignored="false" />
+    <file path="/Dummy.txt" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383495513875" ignored="false" />
     <file path="/CompliteCardInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383295500292" ignored="false" />
     <file path="/CardTagRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383297506467" ignored="false" />
     <file path="/TagRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383443514419" ignored="false" />
@@ -210,11 +188,10 @@
       <file leaf-file-name="CardRequest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/database/requests/CardRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="239" column="33" selection-start="10421" selection-end="10421" vertical-scroll-proportion="-0.12558685">
+            <state line="239" column="33" selection-start="10421" selection-end="10421" vertical-scroll-proportion="-0.12588236">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1105#1117#0" expanded="true" />
-                <element signature="e#3952#3976#0" expanded="true" />
                 <marker date="1383446318736" expanded="false" signature="4177:5662" placeholder="SELECT DISTI..Card..." />
                 <marker date="1383446318736" expanded="false" signature="4177:5661" placeholder="SELECT DISTI..Card..." />
                 <marker date="1383446318736" expanded="false" signature="6825:8354" placeholder="SELECT DISTI..Card..." />
@@ -1035,7 +1012,11 @@
       <created>1383271700462</created>
       <updated>1383271700462</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Standart Request 1">
+      <created>1383495524193</created>
+      <updated>1383495524193</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1055,6 +1036,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40245262" sideWeight="0.50053364" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277592" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.3277592" order="1" side_tool="true" content_ui="tabs" />
@@ -1068,7 +1050,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32887402" sideWeight="0.49786553" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277592" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1110,7 +1091,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="TestCommit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Standart Request 1" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1124,6 +1105,7 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="TestCommit" />
+    <MESSAGE value="Standart Request 1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1162,7 +1144,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TextCardEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="5" selection-start="2590" selection-end="2590" vertical-scroll-proportion="0.0" />
+        <state line="89" column="5" selection-start="2590" selection-end="2590" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/servlet/ExampleServlet.java">
@@ -1179,7 +1163,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/CardEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="43" selection-start="4095" selection-end="4095" vertical-scroll-proportion="0.82617587" />
+        <state line="133" column="43" selection-start="4095" selection-end="4095" vertical-scroll-proportion="0.82617587">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/CardTagEntity.java">
@@ -1243,11 +1229,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/requests/CardRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="239" column="33" selection-start="10421" selection-end="10421" vertical-scroll-proportion="-0.12558685">
+        <state line="239" column="33" selection-start="10421" selection-end="10421" vertical-scroll-proportion="-0.12588236">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1105#1117#0" expanded="true" />
-            <element signature="e#3952#3976#0" expanded="true" />
             <marker date="1383446318736" expanded="false" signature="4177:5662" placeholder="SELECT DISTI..Card..." />
             <marker date="1383446318736" expanded="false" signature="4177:5661" placeholder="SELECT DISTI..Card..." />
             <marker date="1383446318736" expanded="false" signature="6825:8354" placeholder="SELECT DISTI..Card..." />
