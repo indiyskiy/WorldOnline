@@ -1,7 +1,10 @@
 package model.database.worldonlinedb;
 
+import model.constants.databaseenumeration.CardType;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Calendar;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,6 +16,7 @@ import java.sql.Timestamp;
 @javax.persistence.Table(name = "Card", schema = "", catalog = "worldonline")
 @Entity
 public class CardEntity {
+
     @javax.persistence.Column(name = "CardID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -117,5 +121,16 @@ public class CardEntity {
         result = 31 * result + (lastUpdateTimestamp != null ? lastUpdateTimestamp.hashCode() : 0);
         result = 31 * result + (cardName != null ? cardName.hashCode() : 0);
         return result;
+    }
+
+    public CardEntity(){
+    }
+
+    public CardEntity(CardType cardType,String cardName){
+        setLastUpdateTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+        setCreationTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+        setCardVersion(0);
+        setCardType(cardType.getValue());
+        setCardName(cardName);
     }
 }

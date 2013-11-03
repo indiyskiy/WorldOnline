@@ -37,6 +37,18 @@ public class CardTagEntity {
         this.tag = tag;
     }
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "CardID")
+    private CardEntity card;
+
+    public CardEntity getCard() {
+        return card;
+    }
+
+    public void setCard(CardEntity card) {
+        this.card = card;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,6 +60,8 @@ public class CardTagEntity {
             return false;
         if (tag != null ? !tag.equals(that.tag) : that.tag != null)
             return false;
+        if (card != null ? !card.equals(that.card) : that.card != null)
+            return false;
         return true;
     }
 
@@ -55,6 +69,16 @@ public class CardTagEntity {
     public int hashCode() {
         int result = cardTagID != null ? cardTagID.hashCode() : 0;
         result = 31 * result + (tag != null ? tag.hashCode() : 0);
+        result = 31 * result + (card != null ? card.hashCode() : 0);
         return result;
+    }
+
+    public CardTagEntity(){
+
+    }
+
+    public CardTagEntity(CardEntity card,TagEntity tag){
+        setCard(card);
+        setTag(tag);
     }
 }

@@ -26,7 +26,7 @@ public class TextCardEntity {
     }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "TextGroup")
+    @JoinColumn(name = "TextGroupID")
     private TextGroupEntity textGroup;
 
     public TextGroupEntity getTextGroup() {

@@ -57,6 +57,15 @@
     <orderEntry type="library" name="spring-3.2.4" level="project" />
     <orderEntry type="library" name="simple-xml-2.7.1" level="project" />
     <orderEntry type="library" name="Base" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$APPLICATION_HOME_DIR$/lib/annotations.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

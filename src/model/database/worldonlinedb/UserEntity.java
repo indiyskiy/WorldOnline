@@ -1,7 +1,6 @@
 package model.database.worldonlinedb;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.

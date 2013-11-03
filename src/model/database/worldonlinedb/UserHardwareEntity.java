@@ -1,7 +1,6 @@
 package model.database.worldonlinedb;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 /**
  * Created with IntelliJ IDEA.

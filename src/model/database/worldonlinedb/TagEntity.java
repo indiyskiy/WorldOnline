@@ -1,5 +1,7 @@
 package model.database.worldonlinedb;
 
+import model.constants.databaseenumeration.TagType;
+
 import javax.persistence.*;
 
 /**
@@ -87,5 +89,15 @@ public class TagEntity {
         result = 31 * result + (tagTextGroup != null ? tagTextGroup.hashCode() : 0);
         result = 31 * result + (tagType != null ? tagType.hashCode() : 0);
         return result;
+    }
+
+    public TagEntity() {
+
+    }
+
+    public TagEntity(TextGroupEntity tagTextGroup, TagType tagType, String tagName) {
+        setTagTextGroup(tagTextGroup);
+        setTagType(tagType.getValue());
+        setTagName(tagName);
     }
 }

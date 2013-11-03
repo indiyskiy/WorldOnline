@@ -25,16 +25,16 @@ public class TextGroupEntity {
         textGroupID = textGroupID;
     }
 
-    @javax.persistence.Column(name = "CardGroupName")
+    @javax.persistence.Column(name = "TextGroupName")
     @Basic
-    private String cardGroupName;
+    private String textGroupName;
 
-    public String getCardGroupName() {
-        return cardGroupName;
+    public String getTextGroupName() {
+        return textGroupName;
     }
 
-    public void setCardGroupName(String cardGroupName) {
-        this.cardGroupName = cardGroupName;
+    public void setTextGroupName(String textGroupName) {
+        this.textGroupName = textGroupName;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class TextGroupEntity {
 
         if (textGroupID != null ? !textGroupID.equals(that.textGroupID) : that.textGroupID != null)
             return false;
-        if (cardGroupName != null ? !cardGroupName.equals(that.cardGroupName) : that.cardGroupName != null)
+        if (textGroupName != null ? !textGroupName.equals(that.textGroupName) : that.textGroupName != null)
             return false;
         return true;
     }
@@ -54,7 +54,15 @@ public class TextGroupEntity {
     @Override
     public int hashCode() {
         int result = textGroupID != null ? textGroupID.hashCode() : 0;
-        result = 31 * result + (cardGroupName != null ? cardGroupName.hashCode() : 0);
+        result = 31 * result + (textGroupName != null ? textGroupName.hashCode() : 0);
         return result;
+    }
+
+    public TextGroupEntity(){
+
+    }
+
+    public TextGroupEntity(String textGroupName){
+        setTextGroupName(textGroupName);
     }
 }

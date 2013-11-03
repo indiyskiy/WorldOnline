@@ -7,7 +7,7 @@ package model.constants.databaseenumeration;
  * Time: 20:27
  * To change this template use File | Settings | File Templates.
  */
-public enum TegType {
+public enum TagType {
     Unknown(0),
     Cuisine(1),
     Categories(2),
@@ -15,7 +15,7 @@ public enum TegType {
 
     private final int value;
 
-    private TegType(int value) {
+    private TagType(int value) {
         this.value = value;
     }
 
@@ -23,12 +23,12 @@ public enum TegType {
         return value;
     }
 
-    public static TegType parseInt(int value) {
-        TegType[] tegTypes = TegType.values();
-        if (value <= 0 || value > tegTypes.length) {
+    public static TagType parseInt(int value) {
+        TagType[] tagTypes = TagType.values();
+        if (value <= 0 || value > tagTypes.length) {
             return Unknown;
         } else {
-            return tegTypes[value];
+            return tagTypes[value];
         }
     }
 }
