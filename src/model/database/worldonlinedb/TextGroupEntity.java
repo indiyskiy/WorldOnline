@@ -22,7 +22,7 @@ public class TextGroupEntity {
     }
 
     public void setTextGroupID(Long textGroupID) {
-        textGroupID = textGroupID;
+        this.textGroupID = textGroupID;
     }
 
     @javax.persistence.Column(name = "TextGroupName")

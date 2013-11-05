@@ -3,8 +3,8 @@ package model.constants.databaseenumeration;
 /**
  * Created with IntelliJ IDEA.
  * User: Graf_D
- * Date: 30.10.13
- * Time: 19:06
+ * Date: 05.11.13
+ * Time: 4:48
  * To change this template use File | Settings | File Templates.
  */
 public enum LanguageType {

@@ -1,12 +1,9 @@
 package model.database.requests;
 
 
-import model.additionalentity.CompleteCardInfo;
-import model.additionalentity.CompleteCardTagInfo;
-import model.additionalentity.CompleteTagInfo;
-import model.additionalentity.CompleteTextGroupInfo;
+import model.additionalentity.*;
 import model.constants.databaseenumeration.CardType;
-import model.constants.databaseenumeration.;
+import model.constants.databaseenumeration.LanguageType;
 import model.constants.databaseenumeration.TagType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
@@ -173,6 +170,8 @@ public class CardRequest {
                     //card image
                     "LEFT OUTER JOIN CardImage ON(Card.CardID=CardImage.CardID) " +
                     "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
+                    "LEFT OUTER JOIN TextGroup AS CardImageTextGroup ON (CardImage.ImageDescriptionTextGroupID=CardImageTextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Text AS CardImageText ON (CardImageText.TextGroupID=CardImageTextGroup.TextGroupID) " +
                     //card parameter
                     "LEFT OUTER JOIN CardParameter ON (Card.CardID=CardParameter.CardID) " +
                     //card root
@@ -243,7 +242,7 @@ public class CardRequest {
                 Long tagTextGroupID = rs.getLong("TagTextGroup.TextGroupID");
                 if (!rs.wasNull()) {
                     CompleteTextGroupInfo textGroup;
-                    if (tagInfo.getCompleteTextGroupInfoMap().containsKey(tagTextGroupID)) {
+                    if (tagInfo.getCompleteTextGroupInfoMap().containsKey(tagTextGroupID) && tagInfo.getCompleteTextGroupInfoMap().get(tagTextGroupID) != null) {
                         textGroup = tagInfo.getCompleteTextGroupInfoMap().get(tagTextGroupID);
                     } else {
                         textGroup = new CompleteTextGroupInfo(TextRequest.getTextGroupByResultSet(rs, "TagTextGroup"));
@@ -259,6 +258,28 @@ public class CardRequest {
                             textGroup.getTextEntityMap().put(textID, text);
                         }
                     }
+                }
+            }
+        }
+        //card Image
+        Long cardImageID = rs.getLong("CardImage.CardImageID");
+        if (cardImageID != 0 && !rs.wasNull()) {
+            CompleteCardImageInfo completeCardImageInfo;
+            if (!card.getCompleteCardImageInfoMap().containsKey(cardImageID) && card.getCompleteCardImageInfoMap().get(cardImageID) != null) {
+                completeCardImageInfo = card.getCompleteCardImageInfoMap().get(cardImageID);
+            } else {
+                CardImageEntity cardImageEntity = ImageRequest.gerCardImageByResultSet(rs);
+                completeCardImageInfo=new CompleteCardImageInfo(cardImageEntity);
+                cardImageEntity.setCard(card.getCardEntity());
+                card.getCompleteCardImageInfoMap().put(cardImageID, completeCardImageInfo);
+                completeCardImageInfo = new CompleteCardImageInfo(cardImageEntity);
+            }
+            if (completeCardImageInfo.getImageEntity() == null) {
+                //card image
+                Long imageID = rs.getLong("Image.ImageID");
+                if(rs.getLong("Image.ImageID")!=0 && !rs.wasNull())
+                if (imageID != 0 && !rs.wasNull()) {
+                    ImageEntity imageEntity=ImageRequest.getImageFromResultSet(rs);
                 }
             }
         }
@@ -285,11 +306,18 @@ public class CardRequest {
             TagRequest.addCardTag(cardTagEntity);
             CompleteCardInfo value = getCompleteCardInfo(1);
             System.out.println("Card name = " + value.getCardEntity().getCardName());
-            Collection<CompleteCardTagInfo> tagInfos = value.getCompleteCardTagInfoMap().values();
-            for (CompleteCardTagInfo tagInfo : tagInfos) {
-                System.out.println("Card tag = " + tagInfo.getCardTagEntity().getCardTagID());
+            Collection<CompleteCardTagInfo> cardTagInfos = value.getCompleteCardTagInfoMap().values();
+            for (CompleteCardTagInfo cardTagInfo : cardTagInfos) {
+                System.out.println("Card tag id = " + cardTagInfo.getCardTagEntity().getCardTagID());
+                System.out.println("tag id= " + cardTagInfo.getCompleteTagInfo().getTagEntity().getTagID());
 
-                for(int i=0; i<tagInfo.)
+                for (CompleteTextGroupInfo textInfo : cardTagInfo.getCompleteTagInfo().getCompleteTextGroupInfoMap().values()) {
+                    System.out.println("text Group id " + textInfo.getTextGroup().getTextGroupID());
+                    System.out.println("text Group name " + textInfo.getTextGroup().getTextGroupName());
+                    for (TextEntity textEntity : textInfo.getTextEntityMap().values()) {
+                        System.out.println("text " + textEntity.getText());
+                    }
+                }
             }
             /*HashMap<Long, CompleteCardInfo> completeCardInfo = getCompleteCardInfo();
             Collection<CompleteCardInfo> values = completeCardInfo.values();
