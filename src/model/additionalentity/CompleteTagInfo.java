@@ -12,8 +12,8 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class CompleteTagInfo {
-   private TagEntity tagEntity;
-   private HashMap<Long,CompleteTextGroupInfo> completeTextGroupInfoMap;
+    private TagEntity tagEntity;
+    private HashMap<Long, CompleteTextGroupInfo> completeTextGroupInfoMap=new HashMap<Long, CompleteTextGroupInfo>();
 
     public CompleteTagInfo(TagEntity tagEntity) {
         this.tagEntity = tagEntity;

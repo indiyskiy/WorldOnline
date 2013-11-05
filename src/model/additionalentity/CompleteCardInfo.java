@@ -13,7 +13,7 @@ import java.util.HashMap;
  */
 public class CompleteCardInfo {
     private CardEntity cardEntity;
-    private HashMap<Long, CompleteCardTagInfo> completeCardTagInfoMap=new HashMap<Long, CompleteCardTagInfo>();
+    private HashMap<Long, CompleteCardTagInfo> completeCardTagInfoMap = new HashMap<Long, CompleteCardTagInfo>();
 
     public CompleteCardInfo(CardEntity cardEntity) {
         this.cardEntity = cardEntity;
@@ -29,5 +29,9 @@ public class CompleteCardInfo {
 
     public HashMap<Long, CompleteCardTagInfo> getCompleteCardTagInfoMap() {
         return completeCardTagInfoMap;
+    }
+
+    public void setCompleteCardTagInfoMap(HashMap<Long, CompleteCardTagInfo> completeCardTagInfoMap) {
+        this.completeCardTagInfoMap = completeCardTagInfoMap;
     }
 }

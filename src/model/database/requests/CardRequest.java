@@ -1,10 +1,12 @@
 package model.database.requests;
 
+
 import model.additionalentity.CompleteCardInfo;
 import model.additionalentity.CompleteCardTagInfo;
 import model.additionalentity.CompleteTagInfo;
 import model.additionalentity.CompleteTextGroupInfo;
 import model.constants.databaseenumeration.CardType;
+import model.constants.databaseenumeration.;
 import model.constants.databaseenumeration.TagType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -142,7 +145,7 @@ public class CardRequest {
             while (rs.next()) {
                 CompleteCardInfo card;
                 Long cardID = rs.getLong("Card.CardID");
-                if (cards.containsKey(cardID) && cards.get(cardID)!=null && !rs.wasNull()) {
+                if (cards.containsKey(cardID) && cards.get(cardID) != null && !rs.wasNull()) {
                     card = cards.get(cardID);
                 } else {
                     card = new CompleteCardInfo(getCardFromResultSet(rs));
@@ -192,6 +195,7 @@ public class CardRequest {
             if (rs.first()) {
                 CardEntity cardEntity = getCardFromResultSet(rs);
                 card = new CompleteCardInfo(cardEntity);
+                card = getCompleteCardInfo(card, rs);
                 while (rs.next()) {
                     card = getCompleteCardInfo(card, rs);
                 }
@@ -213,17 +217,15 @@ public class CardRequest {
     }
 
     private static CompleteCardInfo getCompleteCardInfo(CompleteCardInfo card, ResultSet rs) throws SQLException {
-
         //card tag
         Long cardTagID = rs.getLong("CardTag.CardTagID");
         if (!rs.wasNull()) {
             CompleteCardTagInfo cardTagInfo;
-            System.out.println(card);
-            System.out.println(card.getCompleteCardTagInfoMap());
             if (card.getCompleteCardTagInfoMap().containsKey(cardTagID)) {
                 cardTagInfo = card.getCompleteCardTagInfoMap().get(cardTagID);
             } else {
                 cardTagInfo = new CompleteCardTagInfo(TagRequest.getCardTagByResultSet(rs));
+                cardTagInfo.getCardTagEntity().setCard(card.getCardEntity());
                 card.getCompleteCardTagInfoMap().put(cardTagID, cardTagInfo);
             }
             //tag
@@ -269,22 +271,35 @@ public class CardRequest {
             CardEntity card = new CardEntity(CardType.CardRoute, "rootCard1");
             addCard(card);
             String tagName = "some random cuisine name";
+            TagType tagType = TagType.Cuisine;
+            TagEntity tag = TagRequest.getTag(tagType, tagName);
             if (tag == null) {
                 TextGroupEntity tagTextGroup = new TextGroupEntity("random cuisine tag text group");
+                TextEntity textEntytyEng = new TextEntity(LanguageType.English, "ololo", tagTextGroup);
+                TextRequest.addText(textEntytyEng);
+                TextEntity textEntytyRus = new TextEntity(LanguageType.Russian, "ололо", tagTextGroup);
+                TextRequest.addText(textEntytyRus);
                 tag = new TagEntity(tagTextGroup, tagType, tagName);
             }
             CardTagEntity cardTagEntity = new CardTagEntity(card, tag);
             TagRequest.addCardTag(cardTagEntity);
-            HashMap<Long, CompleteCardInfo> completeCardInfo = getCompleteCardInfo();
-            Collection<CompleteCardInfo> values = completeCardInfo.values();
-            for (CompleteCardInfo value : values) {
-                System.out.println(value.getCardEntity().getCardName());
-                Collection<CompleteCardTagInfo> tagInfos = value.getCompleteCardTagInfoMap().values();
-                for (CompleteCardTagInfo tagInfo:tagInfos) {
-                    System.out.println(tagInfo.getCardTagEntity().getCardTagID());
-                }
-                System.out.println("_______________________________________________");
+            CompleteCardInfo value = getCompleteCardInfo(1);
+            System.out.println("Card name = " + value.getCardEntity().getCardName());
+            Collection<CompleteCardTagInfo> tagInfos = value.getCompleteCardTagInfoMap().values();
+            for (CompleteCardTagInfo tagInfo : tagInfos) {
+                System.out.println("Card tag = " + tagInfo.getCardTagEntity().getCardTagID());
+
+                for(int i=0; i<tagInfo.)
             }
+            /*HashMap<Long, CompleteCardInfo> completeCardInfo = getCompleteCardInfo();
+            Collection<CompleteCardInfo> values = completeCardInfo.values();
+            for (CompleteCardInfo value2 : values) {
+                System.out.println("card name = "+value2.getCardEntity().getCardName());
+                Collection<CompleteCardTagInfo> tagInfos2 = value2.getCompleteCardTagInfoMap().values();
+                for (CompleteCardTagInfo tagInfo : tagInfos2) {
+                    System.out.println("Card tag = "+tagInfo.getCardTagEntity().getCardTagID());
+                }
+            }*/
         } catch (Exception e) {
             e.printStackTrace();
         }

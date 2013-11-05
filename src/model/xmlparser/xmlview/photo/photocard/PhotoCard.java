@@ -14,6 +14,6 @@ import java.util.List;
  */
 @Root(name = "data")
 public class PhotoCard {
-    @ElementList(inline = true,name = "Photo")
+    @ElementList(inline = true, name = "Photo")
     List<Photo> photos;
 }

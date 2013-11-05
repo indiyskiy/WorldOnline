@@ -12,8 +12,8 @@ import java.util.List;
  * Time: 18:25
  * To change this template use File | Settings | File Templates.
  */
-@Root(name="data")
+@Root(name = "data")
 public class CardHandBook {
-    @ElementList(inline=true,name = "Handbook")
+    @ElementList(inline = true, name = "Handbook")
     public List<HandBook> handBooks;
 }

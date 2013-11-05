@@ -98,6 +98,6 @@ public class HandBook {
     public String offersRu;
     @Element(name = "OffersEn", required = false)
     public String offersEN;
-        @Element(name = "Instagramm", required = false)
+    @Element(name = "Instagramm", required = false)
     public String instagramm;
 }

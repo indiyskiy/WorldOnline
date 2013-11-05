@@ -73,11 +73,11 @@ public class CardTagEntity {
         return result;
     }
 
-    public CardTagEntity(){
+    public CardTagEntity() {
 
     }
 
-    public CardTagEntity(CardEntity card,TagEntity tag){
+    public CardTagEntity(CardEntity card, TagEntity tag) {
         setCard(card);
         setTag(tag);
     }

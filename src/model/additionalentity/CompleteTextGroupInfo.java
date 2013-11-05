@@ -14,11 +14,11 @@ import java.util.HashMap;
  */
 public class CompleteTextGroupInfo {
     private TextGroupEntity textGroup;
-    private HashMap<Long,TextEntity> textEntityMap;
+    private HashMap<Long, TextEntity> textEntityMap;
 
     public CompleteTextGroupInfo(TextGroupEntity textGroup) {
         this.textGroup = textGroup;
-        textEntityMap=new HashMap<Long, TextEntity>();
+        textEntityMap = new HashMap<Long, TextEntity>();
     }
 
     public TextGroupEntity getTextGroup() {

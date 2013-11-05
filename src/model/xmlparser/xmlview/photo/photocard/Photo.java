@@ -19,17 +19,17 @@ public class Photo {
     @Element(name = "ParentMenuID", required = false)
     public String parentMenuID;
     @Element(name = "NameEn", required = false)
-    public String  nameEn;
+    public String nameEn;
     @Element(name = "NameRu", required = false)
-    public String  nameRu;
+    public String nameRu;
     @Element(name = "Filename", required = false)
-    public String   fileName;
+    public String fileName;
     @Element(name = "lat", required = false)
-    public String  lat;
+    public String lat;
     @Element(name = "lon", required = false)
-    public String    lon;
+    public String lon;
     @Element(name = "PlaceCard", required = false)
-    public String      placeCard;
+    public String placeCard;
     @Element(name = "PeopleCard", required = false)
     public String peopleCard;
 }

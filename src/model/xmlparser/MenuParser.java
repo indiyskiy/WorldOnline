@@ -29,7 +29,7 @@ public class MenuParser {
 
 
     public static void main(String[] args) {
-        MenuParser menuParser =new MenuParser();
+        MenuParser menuParser = new MenuParser();
         MainMenuData mainMenuData = menuParser.getMainMenuData("D:\\program\\MainMenuData.xml");
     }
 }

@@ -14,7 +14,7 @@ public class CompleteCardTagInfo {
     private CompleteTagInfo completeTagInfo;
 
     public CompleteCardTagInfo(CardTagEntity cardTagEntity) {
-        this.cardTagEntity=cardTagEntity;
+        this.cardTagEntity = cardTagEntity;
     }
 
     public CardTagEntity getCardTagEntity() {

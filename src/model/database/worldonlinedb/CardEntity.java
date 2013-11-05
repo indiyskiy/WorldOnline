@@ -123,10 +123,10 @@ public class CardEntity {
         return result;
     }
 
-    public CardEntity(){
+    public CardEntity() {
     }
 
-    public CardEntity(CardType cardType,String cardName){
+    public CardEntity(CardType cardType, String cardName) {
         setLastUpdateTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
         setCreationTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
         setCardVersion(0);

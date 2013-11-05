@@ -7,14 +7,14 @@ package model.constants.databaseenumeration;
  * Time: 19:06
  * To change this template use File | Settings | File Templates.
  */
-public enum Language {
+public enum LanguageType {
     Unknown(0),
     Russian(1),
     English(2);
 
     private final int value;
 
-    private Language(int value) {
+    private LanguageType(int value) {
         this.value = value;
     }
 
@@ -22,12 +22,12 @@ public enum Language {
         return value;
     }
 
-    public static Language parseInt(int value) {
-        Language[] languages = Language.values();
-        if (value <= 0 || value > languages.length) {
+    public static LanguageType parseInt(int value) {
+        LanguageType[] languageTypes = LanguageType.values();
+        if (value <= 0 || value > languageTypes.length) {
             return Unknown;
         } else {
-            return languages[value];
+            return languageTypes[value];
         }
     }
 }

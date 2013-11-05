@@ -26,7 +26,7 @@ public class UserContentEntity {
         this.userContentID = userContentID;
     }
 
-    @OneToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "GlobalVersionID")
     private GlobalVersionEntity globalVersion;
 

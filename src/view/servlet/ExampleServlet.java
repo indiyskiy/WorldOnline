@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class ExampleServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -43,10 +43,10 @@ public class ExampleServlet extends HttpServlet {
         if(UserRequests.contains(user1)){
             UserRequests.addUser(user1);
         }*/
-        ArrayList<UserEntity> allUsers= UserRequests.getAllUsers();
-        request.setAttribute("users",allUsers);
-        request.setAttribute("size",allUsers.size());
-        ServletHelper.sendForward("/example.jsp",this,request,response);
+        ArrayList<UserEntity> allUsers = UserRequests.getAllUsers();
+        request.setAttribute("users", allUsers);
+        request.setAttribute("size", allUsers.size());
+        ServletHelper.sendForward("/example.jsp", this, request, response);
     }
 
 }

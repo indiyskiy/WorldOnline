@@ -7,7 +7,7 @@ package model.constants.databaseenumeration;
  * Time: 20:53
  * To change this template use File | Settings | File Templates.
  */
-public enum  CardParameterType {
+public enum CardParameterType {
     Unknown(0),
     Lat(1),
     Lon(2),
@@ -31,7 +31,7 @@ public enum  CardParameterType {
 
     private final int value;
 
-    private CardParameterType (int value) {
+    private CardParameterType(int value) {
         this.value = value;
     }
 

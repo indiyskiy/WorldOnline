@@ -3,11 +3,11 @@ package model.constants.databaseenumeration;
 /**
  * Created with IntelliJ IDEA.
  * User: Graf_D
- * Date: 24.10.13
- * Time: 20:27
+ * Date: 04.11.13
+ * Time: 1:11
  * To change this template use File | Settings | File Templates.
  */
-public enum TagType {
+public enum  TagType {
     Unknown(0),
     Cuisine(1),
     Categories(2),

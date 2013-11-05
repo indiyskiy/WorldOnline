@@ -1,5 +1,7 @@
 package model.database.worldonlinedb;
 
+import model.constants.databaseenumeration.LanguageType;
+
 import javax.persistence.*;
 
 /**
@@ -61,6 +63,16 @@ public class TextEntity {
         this.textGroup = textGroup;
     }
 
+
+    public TextEntity() {
+
+    }
+
+    public TextEntity(LanguageType languageType, String text, TextGroupEntity textGroup) {
+        setLanguageID(languageType.getValue());
+        setText(text);
+        setTextGroup(textGroup);
+    }
 
     @Override
     public boolean equals(Object o) {

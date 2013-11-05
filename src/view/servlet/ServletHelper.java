@@ -15,8 +15,8 @@ import java.io.IOException;
  * To change this template use File | Settings | File Templates.
  */
 public class ServletHelper {
-    public static void sendForward(String url,HttpServlet servlet,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public static void sendForward(String url, HttpServlet servlet, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = servlet.getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request,response);
+        dispatcher.forward(request, response);
     }
 }

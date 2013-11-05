@@ -29,7 +29,7 @@ public class PhotoParser {
 
 
     public static void main(String[] args) {
-        PhotoParser photoParser =new PhotoParser();
+        PhotoParser photoParser = new PhotoParser();
         PhotoCard mainMenuData = photoParser.getPhotoCard("D:\\program\\photocards.xml");
     }
 }

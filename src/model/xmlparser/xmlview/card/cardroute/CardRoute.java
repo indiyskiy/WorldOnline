@@ -14,6 +14,6 @@ import java.util.List;
  */
 @Root(name = "data")
 public class CardRoute {
-    @ElementList(inline=true,name = "Route")
+    @ElementList(inline = true, name = "Route")
     public List<Route> routes;
 }

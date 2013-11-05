@@ -58,11 +58,11 @@ public class TextGroupEntity {
         return result;
     }
 
-    public TextGroupEntity(){
+    public TextGroupEntity() {
 
     }
 
-    public TextGroupEntity(String textGroupName){
+    public TextGroupEntity(String textGroupName) {
         setTextGroupName(textGroupName);
     }
 }

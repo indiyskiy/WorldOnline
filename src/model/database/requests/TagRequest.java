@@ -25,7 +25,7 @@ public class TagRequest {
         CardTagEntity cardTagEntity = null;
         if (rs.getLong("CardTag.CardTagID") != 0 && !rs.wasNull()) {
             cardTagEntity = new CardTagEntity();
-            cardTagEntity.setTag(getTagByResultSet(rs));
+            cardTagEntity.setCardTagID(rs.getLong("CardTag.CardTagID"));
         }
         return cardTagEntity;
     }

@@ -14,6 +14,6 @@ import java.util.List;
  */
 @Root(name = "data")
 public class CardRelax {
-    @ElementList(inline=true,name = "Relax")
+    @ElementList(inline = true, name = "Relax")
     public List<Relax> relaxes;
 }

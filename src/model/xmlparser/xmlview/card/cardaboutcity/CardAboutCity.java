@@ -14,6 +14,6 @@ import java.util.List;
  */
 @Root(name = "data")
 public class CardAboutCity {
-    @ElementList(inline=true,name = "Aboutcity")
+    @ElementList(inline = true, name = "Aboutcity")
     public List<AboutCity> aboutCities;
 }

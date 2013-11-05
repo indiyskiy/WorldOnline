@@ -14,6 +14,6 @@ import java.util.List;
  */
 @Root(name = "data")
 public class MainMenuData {
-    @ElementList(inline = true,name = "Submenu")
+    @ElementList(inline = true, name = "Submenu")
     List<Submenu> submenus;
 }
