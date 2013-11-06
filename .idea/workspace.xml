@@ -7,12 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/CompleteCardImageInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/CompleteCardInfo.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/CompleteCardInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/LanguageType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/LanguageType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/TextGroupEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/TextGroupEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/CompleteCardImageInfo.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/CompleteCardImageInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WorldOnline.iws" />
@@ -104,8 +101,8 @@
     <file path="dbtable:/2d28c3c8/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..card" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383191198594" ignored="false" />
     <file path="dbtable:/2d28c3c8/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..cardcoordinate" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383191204791" ignored="false" />
     <file path="/UserPersonalDataEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383199254948" ignored="false" />
-    <file path="/CardRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383681778749" ignored="false" />
-    <file path="/Dummy.txt" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383612477413" ignored="false" />
+    <file path="/CardRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383702149790" ignored="false" />
+    <file path="/Dummy.txt" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383702664251" ignored="false" />
     <file path="/CompliteCardInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383295500292" ignored="false" />
     <file path="/CardTagRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383297506467" ignored="false" />
     <file path="/TagRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383589016443" ignored="false" />
@@ -117,8 +114,8 @@
     <file path="/ComleteCardTagInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383415889301" ignored="false" />
     <file path="dbtable:/2f58b651/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..textcard" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383419917863" ignored="false" />
     <file path="/TagType.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383513121302" ignored="false" />
-    <file path="/ImageRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383681114386" ignored="false" />
-    <file path="/CompleteCardImageInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383676055811" ignored="false" />
+    <file path="/ImageRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383701229245" ignored="false" />
+    <file path="/CompleteCardImageInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383699278761" ignored="false" />
     <file path="/ImageCompliteInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383675979973" ignored="false" />
     <file path="/CompleteImageInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383675980439" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -145,6 +142,7 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
@@ -180,7 +178,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -193,12 +190,23 @@
       <file leaf-file-name="CardRequest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/database/requests/CardRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="271" column="81" selection-start="12566" selection-end="12566" vertical-scroll-proportion="0.3449692">
+            <state line="281" column="85" selection-start="13190" selection-end="13190" vertical-scroll-proportion="-0.039014373">
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1383681793907" expanded="true" signature="4070:5555" placeholder="SELECT DISTI..Card..." />
-                <marker date="1383681793907" expanded="true" signature="4070:5554" placeholder="SELECT DISTI..Card..." />
-                <marker date="1383681793907" expanded="true" signature="6720:8521" placeholder="SELECT DISTI..Card..." />
+                <marker date="1383702156748" expanded="false" signature="4070:5555" placeholder="SELECT DISTI..Card..." />
+                <marker date="1383702156748" expanded="false" signature="4070:5554" placeholder="SELECT DISTI..Card..." />
+                <marker date="1383702156748" expanded="true" signature="6720:8521" placeholder="SELECT DISTI..Card..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TextRequest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/database/requests/TextRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="34" selection-start="873" selection-end="873" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -207,10 +215,8 @@
       <file leaf-file-name="CompleteCardImageInfo.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/additionalentity/CompleteCardImageInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="11" selection-start="420" selection-end="420" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="25" column="16" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -219,9 +225,7 @@
         <entry file="file://$PROJECT_DIR$/src/model/additionalentity/CompleteCardInfo.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="39" column="48" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#464#491#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -229,10 +233,8 @@
       <file leaf-file-name="ImageRequest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/database/requests/ImageRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="34" selection-start="409" selection-end="409" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="16" column="34" selection-start="410" selection-end="410" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -285,8 +287,8 @@
         <option value="$PROJECT_DIR$/src/model/additionalentity/ImageCompliteInfo.java" />
         <option value="$PROJECT_DIR$/src/model/additionalentity/ImageCompleteInfo.java" />
         <option value="$PROJECT_DIR$/src/model/additionalentity/CompleteImageInfo.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/CompleteCardImageInfo.java" />
         <option value="$PROJECT_DIR$/src/model/additionalentity/CompleteCardInfo.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/CompleteCardImageInfo.java" />
         <option value="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" />
         <option value="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
       </list>
@@ -544,8 +546,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -566,9 +568,9 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -811,19 +813,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -850,6 +839,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -886,12 +888,6 @@
       </option>
       <envs />
       <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
-      <option name="VM_PARAMETERS" value="" />
-      <option name="USER_CFG_CLASS" />
-      <option name="CONTEXT_PROVIDER" />
       <method />
     </configuration>
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" editBeforeRun="true" APPLICATION_SERVER_NAME="Tomcat 7.01">
@@ -954,6 +950,12 @@
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
+      <method />
+    </configuration>
+    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
       <method />
     </configuration>
     <configuration default="false" name="Tomcat 7.01" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.01">
@@ -1091,20 +1093,22 @@
       <created>1383611871705</created>
       <updated>1383611871705</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Standart Request 3">
+      <created>1383681892547</created>
+      <updated>1383681892547</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32887402" sideWeight="0.49573106" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15635005" sideWeight="0.59977704" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.67001116" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1121,10 +1125,12 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20117396" sideWeight="0.59977704" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40022296" sideWeight="0.48932764" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40022296" sideWeight="0.48932764" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32887402" sideWeight="0.49573106" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1166,7 +1172,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Standart Request 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Standart Request 4" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1182,6 +1188,8 @@
     <MESSAGE value="TestCommit" />
     <MESSAGE value="Standart Request 1" />
     <MESSAGE value="Standart Request 2" />
+    <MESSAGE value="Standart Request 3" />
+    <MESSAGE value="Standart Request 4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1235,24 +1243,13 @@
     </entry>
     <entry file="dbDummy://db-console:/2f58b651/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="25" selection-start="21" selection-end="1038" vertical-scroll-proportion="-6.448276">
-          <folding />
-        </state>
+        <state line="11" column="25" selection-start="21" selection-end="1038" vertical-scroll-proportion="-6.448276" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TextGroupEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="13" selection-start="620" selection-end="620" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/requests/TextRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="1286" selection-end="1286" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1265,16 +1262,12 @@
     </entry>
     <entry file="jar://C:/glassfish4/jdk7/jre/lib/rt.jar!/java/util/HashMap.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="6" column="13" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://C:/glassfish4/jdk7/jre/lib/rt.jar!/java/sql/SQLException.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="151" selection-end="151" vertical-scroll-proportion="0.17311609">
-          <folding />
-        </state>
+        <state line="6" column="13" selection-start="151" selection-end="151" vertical-scroll-proportion="0.17311609" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/ImageEntity.java">
@@ -1284,12 +1277,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/requests/ImageRequest.java">
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/CompleteCardInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="34" selection-start="409" selection-end="409" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="39" column="48" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1300,32 +1291,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/CompleteCardInfo.java">
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/TextRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="48" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0">
+        <state line="32" column="34" selection-start="873" selection-end="873" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#464#491#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/additionalentity/CompleteCardImageInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="11" selection-start="420" selection-end="420" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="25" column="16" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/ImageRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="34" selection-start="410" selection-end="410" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/requests/CardRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="271" column="81" selection-start="12566" selection-end="12566" vertical-scroll-proportion="0.3449692">
+        <state line="281" column="85" selection-start="13190" selection-end="13190" vertical-scroll-proportion="-0.039014373">
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1383681793907" expanded="true" signature="4070:5555" placeholder="SELECT DISTI..Card..." />
-            <marker date="1383681793907" expanded="true" signature="4070:5554" placeholder="SELECT DISTI..Card..." />
-            <marker date="1383681793907" expanded="true" signature="6720:8521" placeholder="SELECT DISTI..Card..." />
+            <marker date="1383702156748" expanded="false" signature="4070:5555" placeholder="SELECT DISTI..Card..." />
+            <marker date="1383702156748" expanded="false" signature="4070:5554" placeholder="SELECT DISTI..Card..." />
+            <marker date="1383702156748" expanded="true" signature="6720:8521" placeholder="SELECT DISTI..Card..." />
           </folding>
         </state>
       </provider>

@@ -269,7 +269,7 @@ public class CardRequest {
                 completeCardImageInfo = card.getCompleteCardImageInfoMap().get(cardImageID);
             } else {
                 CardImageEntity cardImageEntity = ImageRequest.gerCardImageByResultSet(rs);
-                completeCardImageInfo=new CompleteCardImageInfo(cardImageEntity);
+                completeCardImageInfo = new CompleteCardImageInfo(cardImageEntity);
                 cardImageEntity.setCard(card.getCardEntity());
                 card.getCompleteCardImageInfoMap().put(cardImageID, completeCardImageInfo);
                 completeCardImageInfo = new CompleteCardImageInfo(cardImageEntity);
@@ -277,9 +277,18 @@ public class CardRequest {
             if (completeCardImageInfo.getImageEntity() == null) {
                 //card image
                 Long imageID = rs.getLong("Image.ImageID");
-                if(rs.getLong("Image.ImageID")!=0 && !rs.wasNull())
-                if (imageID != 0 && !rs.wasNull()) {
-                    ImageEntity imageEntity=ImageRequest.getImageFromResultSet(rs);
+                if (rs.getLong("Image.ImageID") != 0 && !rs.wasNull())
+                    if (imageID != 0 && !rs.wasNull()) {
+                        ImageEntity imageEntity = ImageRequest.getImageFromResultSet(rs);
+                        completeCardImageInfo.setImageEntity(imageEntity);
+                    }
+            }
+            Long imageTextGroup = rs.getLong("CardImageTextGroup.TextGroupID");
+            if (imageTextGroup != 0 && !rs.wasNull()) {
+                if (completeCardImageInfo.getCompleteTextGroupInfo() == null) {
+                    TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs, "CardImageTextGroup");
+                    CompleteTextGroupInfo completeTextGroupInfo = new CompleteTextGroupInfo(textGroupEntity);
+//                    if()
                 }
             }
         }
