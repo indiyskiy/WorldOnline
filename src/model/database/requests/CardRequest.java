@@ -3,6 +3,7 @@ package model.database.requests;
 
 import model.additionalentity.*;
 import model.constants.databaseenumeration.CardType;
+import model.constants.databaseenumeration.ImageType;
 import model.constants.databaseenumeration.LanguageType;
 import model.constants.databaseenumeration.TagType;
 import model.database.session.DatabaseConnection;
@@ -272,24 +273,43 @@ public class CardRequest {
                 completeCardImageInfo = new CompleteCardImageInfo(cardImageEntity);
                 cardImageEntity.setCard(card.getCardEntity());
                 card.getCompleteCardImageInfoMap().put(cardImageID, completeCardImageInfo);
-                completeCardImageInfo = new CompleteCardImageInfo(cardImageEntity);
             }
-            if (completeCardImageInfo.getImageEntity() == null) {
-                //card image
+            if (completeCardImageInfo.getCardImageEntity().getImage() == null) {
+                //image
                 Long imageID = rs.getLong("Image.ImageID");
-                if (rs.getLong("Image.ImageID") != 0 && !rs.wasNull())
+                if (rs.getLong("Image.ImageID") != 0 && !rs.wasNull()) {
                     if (imageID != 0 && !rs.wasNull()) {
                         ImageEntity imageEntity = ImageRequest.getImageFromResultSet(rs);
-                        completeCardImageInfo.setImageEntity(imageEntity);
+                        completeCardImageInfo.getCardImageEntity().setImage(imageEntity);
                     }
+                }
             }
-            Long imageTextGroup = rs.getLong("CardImageTextGroup.TextGroupID");
-            if (imageTextGroup != 0 && !rs.wasNull()) {
+            //card iamge text group
+            Long imageTextGroupID = rs.getLong("CardImageTextGroup.TextGroupID");
+            if (imageTextGroupID != 0 && !rs.wasNull()) {
                 if (completeCardImageInfo.getCompleteTextGroupInfo() == null) {
                     TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs, "CardImageTextGroup");
                     CompleteTextGroupInfo completeTextGroupInfo = new CompleteTextGroupInfo(textGroupEntity);
-//                    if()
+                    completeCardImageInfo.setCompleteTextGroupInfo(completeTextGroupInfo);
+                    Long textID = rs.getLong("CardImageText.TextID");
+                    if (textID != 0 && !rs.wasNull()) {
+                        if (!completeTextGroupInfo.getTextEntityMap().containsKey(textID) || completeTextGroupInfo.getTextEntityMap().get(textID) == null) {
+                            TextEntity textEntity = TextRequest.getTextByResultSet(rs, "CardImageText");
+                            completeTextGroupInfo.getTextEntityMap().put(textID, textEntity);
+                        }
+                    }
                 }
+            }
+        }
+        //card parameter
+        Long cardParameterID = rs.getLong("CardParameter.CardParameterID");
+        if (cardParameterID!=0 && !rs.wasNull()){
+            CardParameterEntity cardParameterEntity;
+            HashMap<Long, CardParameterEntity> cardParameterEntityMap=card.getCardParameterEntityMap();
+            if(!cardParameterEntityMap.containsKey(cardImageID) || cardParameterEntityMap.get(cardImageID)!=null){
+                cardParameterEntity=ParameterRequest.getCardParameterByResultSet(rs);
+                cardParameterEntity.setCard(card.getCardEntity());
+                cardParameterEntityMap.put(cardParameterID,cardParameterEntity);
             }
         }
         return card;
@@ -298,36 +318,50 @@ public class CardRequest {
 
     public static void main(String[] args) {
         try {
-            CardEntity card = new CardEntity(CardType.CardRoute, "rootCard1");
-            addCard(card);
-            String tagName = "some random cuisine name";
-            TagType tagType = TagType.Cuisine;
-            TagEntity tag = TagRequest.getTag(tagType, tagName);
-            if (tag == null) {
-                TextGroupEntity tagTextGroup = new TextGroupEntity("random cuisine tag text group");
-                TextEntity textEntytyEng = new TextEntity(LanguageType.English, "ololo", tagTextGroup);
-                TextRequest.addText(textEntytyEng);
-                TextEntity textEntytyRus = new TextEntity(LanguageType.Russian, "ололо", tagTextGroup);
-                TextRequest.addText(textEntytyRus);
-                tag = new TagEntity(tagTextGroup, tagType, tagName);
-            }
-            CardTagEntity cardTagEntity = new CardTagEntity(card, tag);
-            TagRequest.addCardTag(cardTagEntity);
-            CompleteCardInfo value = getCompleteCardInfo(1);
-            System.out.println("Card name = " + value.getCardEntity().getCardName());
-            Collection<CompleteCardTagInfo> cardTagInfos = value.getCompleteCardTagInfoMap().values();
-            for (CompleteCardTagInfo cardTagInfo : cardTagInfos) {
-                System.out.println("Card tag id = " + cardTagInfo.getCardTagEntity().getCardTagID());
-                System.out.println("tag id= " + cardTagInfo.getCompleteTagInfo().getTagEntity().getTagID());
+//            addEnteries
+            addEnteries();
+            //get info
+            getInfo();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-                for (CompleteTextGroupInfo textInfo : cardTagInfo.getCompleteTagInfo().getCompleteTextGroupInfoMap().values()) {
-                    System.out.println("text Group id " + textInfo.getTextGroup().getTextGroupID());
-                    System.out.println("text Group name " + textInfo.getTextGroup().getTextGroupName());
-                    for (TextEntity textEntity : textInfo.getTextEntityMap().values()) {
-                        System.out.println("text " + textEntity.getText());
-                    }
+    private static void getInfo() throws SQLException {
+        CompleteCardInfo completeCardInfo = getCompleteCardInfo(1);
+        System.out.println("Card name = " + completeCardInfo.getCardEntity().getCardName());
+        Collection<CompleteCardTagInfo> cardTagInfos = completeCardInfo.getCompleteCardTagInfoMap().values();
+        for (CompleteCardTagInfo cardTagInfo : cardTagInfos) {
+            System.out.println("Card tag id = " + cardTagInfo.getCardTagEntity().getCardTagID());
+            System.out.println("tag id= " + cardTagInfo.getCompleteTagInfo().getTagEntity().getTagID());
+
+            for (CompleteTextGroupInfo textInfo : cardTagInfo.getCompleteTagInfo().getCompleteTextGroupInfoMap().values()) {
+                System.out.println("text Group id " + textInfo.getTextGroup().getTextGroupID());
+                System.out.println("text Group name " + textInfo.getTextGroup().getTextGroupName());
+                for (TextEntity textEntity : textInfo.getTextEntityMap().values()) {
+                    System.out.println("text " + textEntity.getText());
                 }
             }
+        }
+        HashMap<Long, CompleteCardImageInfo> completeCardImageInfoMap = completeCardInfo.getCompleteCardImageInfoMap();
+        if (completeCardImageInfoMap != null) {
+            System.out.println("completeCardImageInfoMap");
+            for (CompleteCardImageInfo completeCardImageInfo : completeCardImageInfoMap.values()) {
+                CardImageEntity cardImageEntity = completeCardImageInfo.getCardImageEntity();
+                System.out.println("card image id " + cardImageEntity.getCardImageID());
+                System.out.println("card image image " + cardImageEntity.getImage().getImageID());
+                CompleteTextGroupInfo completeTextGroupInfo = completeCardImageInfo.getCompleteTextGroupInfo();
+                if (completeTextGroupInfo != null) {
+                    System.out.println("image text Group id " + completeTextGroupInfo.getTextGroup().getTextGroupID());
+                    System.out.println("image text Group name " + completeTextGroupInfo.getTextGroup().getTextGroupName());
+                    for (TextEntity textEntity : completeTextGroupInfo.getTextEntityMap().values()) {
+                        System.out.println("image text " + textEntity.getText());
+                    }
+                } else {
+                    System.out.println("completeTextGroupInfo == null");
+                }
+            }
+        }
             /*HashMap<Long, CompleteCardInfo> completeCardInfo = getCompleteCardInfo();
             Collection<CompleteCardInfo> values = completeCardInfo.values();
             for (CompleteCardInfo value2 : values) {
@@ -337,8 +371,49 @@ public class CardRequest {
                     System.out.println("Card tag = "+tagInfo.getCardTagEntity().getCardTagID());
                 }
             }*/
-        } catch (Exception e) {
-            e.printStackTrace();
+    }
+
+    private static void addEnteries() throws SQLException {
+        //add info
+        //card
+        CardEntity card = new CardEntity(CardType.CardRoute, "rootCard1");
+        addCard(card);
+        //tag
+        String tagName = "some random cuisine name";
+        TagType tagType = TagType.Cuisine;
+        TagEntity tag = TagRequest.getTag(tagType, tagName);
+        if (tag == null) {
+            //tag text
+            TextGroupEntity tagTextGroup = new TextGroupEntity("random cuisine tag text group");
+            TextEntity textEntytyEng = new TextEntity(LanguageType.English, "ololo", tagTextGroup);
+            TextRequest.addText(textEntytyEng);
+            TextEntity textEntytyRus = new TextEntity(LanguageType.Russian, "ололо", tagTextGroup);
+            TextRequest.addText(textEntytyRus);
+            tag = new TagEntity(tagTextGroup, tagType, tagName);
         }
+        CardTagEntity cardTagEntity = new CardTagEntity(card, tag);
+        TagRequest.addCardTag(cardTagEntity);
+        //image
+        ImageEntity imageEntity = new ImageEntity();
+        imageEntity.setImageWidth(1920);
+        imageEntity.setImageHeight(1080);
+        imageEntity.setImageFileSize(100500);
+        imageEntity.setImageMD5Hash("qwiwdrhqn4wevrmw4458m3nr0tr9imib34");
+        imageEntity.setImageURL("http:\\\\www.RandomFileServer.ru");
+        //card image
+        CardImageEntity cardImageEntity = new CardImageEntity();
+        cardImageEntity.setCard(card);
+        cardImageEntity.setCardImageType(ImageType.CardImage.getValue());
+        cardImageEntity.setCardImageName("card image name");
+        cardImageEntity.setImage(imageEntity);
+        //image text group
+        TextGroupEntity imageTextGroupEntity = new TextGroupEntity("random image text group");
+        cardImageEntity.setImageDescriptionTextGroup(imageTextGroupEntity);
+        TextEntity textEntytyEng = new TextEntity(LanguageType.English, "ololo iamge", imageTextGroupEntity);
+        TextRequest.addText(textEntytyEng);
+        TextEntity textEntytyRus = new TextEntity(LanguageType.Russian, "ололо картинка", imageTextGroupEntity);
+        TextRequest.addText(textEntytyRus);
+//            cardImageEntity.setImageDescriptionTextGroup(descriptionTextGroup);
+        ImageRequest.addCardImage(cardImageEntity);
     }
 }

@@ -1,7 +1,10 @@
 package model.database.requests;
 
+import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardImageEntity;
 import model.database.worldonlinedb.ImageEntity;
+import model.database.worldonlinedb.TextEntity;
+import org.hibernate.Session;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +17,21 @@ import java.sql.SQLException;
  * To change this template use File | Settings | File Templates.
  */
 public class ImageRequest {
+
+    public static void addCardImage(CardImageEntity image){
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.save(image);
+            session.getTransaction().commit();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+
     public static CardImageEntity gerCardImageByResultSet(ResultSet rs) throws SQLException {
         return gerCardImageByResultSet(rs, "CardImage");
     }
@@ -43,7 +61,7 @@ public class ImageRequest {
             imageEntity.setImageID(rs.getLong(image + ".ImageID"));
             imageEntity.setImageMD5Hash(rs.getString(image + ".ImageMD5Hash"));
             imageEntity.setImageURL(rs.getString(image + ".ImageURL"));
-            imageEntity.setImageWidth(rs.getInt(image + ".Width"));
+            imageEntity.setImageWidth(rs.getInt(image + ".ImageWidth"));
         }
         return imageEntity;
     }

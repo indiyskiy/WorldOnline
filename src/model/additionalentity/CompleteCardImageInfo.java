@@ -12,7 +12,6 @@ import model.database.worldonlinedb.ImageEntity;
  */
 public class CompleteCardImageInfo {
     private CardImageEntity cardImageEntity;
-    private ImageEntity imageEntity;
     private CompleteTextGroupInfo completeTextGroupInfo;
 
     public CompleteCardImageInfo(CardImageEntity cardImageEntity) {
@@ -25,14 +24,6 @@ public class CompleteCardImageInfo {
 
     public void setCardImageEntity(CardImageEntity cardImageEntity) {
         this.cardImageEntity = cardImageEntity;
-    }
-
-    public ImageEntity getImageEntity() {
-        return imageEntity;
-    }
-
-    public void setImageEntity(ImageEntity imageEntity) {
-        this.imageEntity = imageEntity;
     }
 
     public CompleteTextGroupInfo getCompleteTextGroupInfo() {
