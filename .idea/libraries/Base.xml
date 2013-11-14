@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="Base">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/model/xmlparser/Base.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
   </library>

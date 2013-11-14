@@ -16,13 +16,13 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 
 public class HibernateUtil {
-    private SessionFactory sessionFactory;
-    private ServiceRegistry serviceRegistry;
     private static HibernateUtil Instance = new HibernateUtil();
+    private SessionFactory sessionFactory;
 
     private HibernateUtil() {
         try {
             Configuration ac = new Configuration();
+//            Configuration ac=new Configuration().configure();
             ac.addAnnotatedClass(UserEntity.class)
                     .addAnnotatedClass(GlobalVersionEntity.class)
                     .addAnnotatedClass(UserHardwareEntity.class)
@@ -42,10 +42,12 @@ public class HibernateUtil {
                     .addAnnotatedClass(ImageEntity.class);
             Configuration configuration = new Configuration();
             configuration.configure();
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-            sessionFactory = ac.configure().buildSessionFactory(serviceRegistry);
+            ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+            Configuration conf = ac.configure();
+            sessionFactory = conf.buildSessionFactory(serviceRegistry);
         } catch (Exception ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
+            ex.printStackTrace();
             throw new ExceptionInInitializerError(ex);
         }
     }

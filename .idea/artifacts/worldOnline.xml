@@ -17,6 +17,8 @@
           <element id="library" level="project" name="Java EE 6-Java EE 6" />
           <element id="library" level="project" name="jstl-1.2" />
           <element id="library" level="project" name="spring-3.2.4" />
+          <element id="library" level="project" name="simple-xml-2.7.1" />
+          <element id="file-copy" path="$APPLICATION_HOME_DIR$/lib/annotations.jar" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="WorldOnline/javaeeApplication/javaEEApplication" />

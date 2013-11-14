@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     private final String url = "jdbc:mysql://localhost:3306/worldonline";
     private final String username = "root";
-    private final String password = "djqysdrjcvjct111";
+    private final String password = "Djqysdrjcvjct!!!";
     private Connection connection = null;
 
     public DatabaseConnection() {

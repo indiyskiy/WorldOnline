@@ -8,7 +8,7 @@
     <Resource name="jdbc/testDB"
               maxIdle="30"
               username="<root>"
-              password="<djqysdrjcvjct111>"
+              password="<Djqysdrjcvjct!!!>"
               driverClassName="com.mysql.jdbc.Driver"
               url="jdbc:mysql://localhost:3306/worldonline"
               auth="Container"
