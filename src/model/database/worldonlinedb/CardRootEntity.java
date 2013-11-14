@@ -50,7 +50,7 @@ public class CardRootEntity {
     }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "RootDescriptionTextGroup")
+    @JoinColumn(name = "RootDescriptionTextGroupID")
     private TextGroupEntity rootDescriptionTextGroup;
 
     public TextGroupEntity getRootDescriptionTextGroup() {

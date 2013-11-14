@@ -3,7 +3,10 @@ package model.database.requests;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardParameterEntity;
+import org.hibernate.Session;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Graf_D
@@ -21,8 +24,21 @@ public class ParameterRequest {
             cardParameterEntity.setCardParameterDataType(rs.getInt("CardParameter.CardParameterDataType"));
             cardParameterEntity.setCardParameterName(rs.getString("CardParameter.CardParameterName"));
             cardParameterEntity.setCardParameterType(rs.getInt("CardParameter.CardParameterType"));
-            cardParameterEntity.setCardParameterValue(rs.getString(rs.getString("CardParameter.CardParameterValue")));
+            cardParameterEntity.setCardParameterValue(rs.getString("CardParameter.CardParameterValue"));
         }
         return cardParameterEntity;
+    }
+
+    public static void addCardParameter(CardParameterEntity cardParameterEntity) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.save(cardParameterEntity);
+            session.getTransaction().commit();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 }

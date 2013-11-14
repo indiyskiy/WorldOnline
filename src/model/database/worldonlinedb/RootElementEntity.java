@@ -33,7 +33,7 @@ public class RootElementEntity {
         return placeCard;
     }
 
-    public void setPlaceCardID(CardEntity placeCard) {
+    public void setPlaceCard(CardEntity placeCard) {
         this.placeCard = placeCard;
     }
 
@@ -45,7 +45,7 @@ public class RootElementEntity {
         return cardRoot;
     }
 
-    public void setCardRootID(CardRootEntity cardRoot) {
+    public void setCardRoot(CardRootEntity cardRoot) {
         this.cardRoot = cardRoot;
     }
 

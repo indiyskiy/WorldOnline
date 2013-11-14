@@ -66,9 +66,9 @@
       <column name="CardRootID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="CardRootName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
-      <column name="RootDescriptionTextGroup" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="RootDescriptionTextGroupID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="CardRootID"/>
-      <foreign-key name="FK_cbpj7nnvyq2pt81qqbe12l5ka" columns="RootDescriptionTextGroup" ref-table="textgroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_eh8iq6ak18r3cs4k9yiu1ctc2" columns="RootDescriptionTextGroupID" ref-table="textgroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_h3w5ceyl77et3vms0t3nn081l" columns="CardID" ref-table="card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="FK_qwy7dugelmfef0oxsmdq6lw2t" table="rootelement" schema="" catalog="worldonline" columns="CardRootID"/>
     </table>

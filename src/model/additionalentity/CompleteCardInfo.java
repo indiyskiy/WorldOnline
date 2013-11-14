@@ -17,7 +17,9 @@ public class CompleteCardInfo {
     private CardEntity cardEntity;
     private HashMap<Long, CompleteCardTagInfo> completeCardTagInfoMap = new HashMap<Long, CompleteCardTagInfo>();
     private HashMap<Long,CompleteCardImageInfo> completeCardImageInfoMap=new HashMap<Long, CompleteCardImageInfo>();
-    HashMap<Long, CardParameterEntity> cardParameterEntityMap=new HashMap<Long, CardParameterEntity>();
+    private HashMap<Long, CardParameterEntity> cardParameterEntityMap=new HashMap<Long, CardParameterEntity>();
+    private CompleteCardRootInfo completeCardRootInfo;
+    private HashMap<Long,CompleteTextCardInfo> completeTextCardInfoMap=new HashMap<Long, CompleteTextCardInfo>();
 
     public CompleteCardInfo(CardEntity cardEntity) {
         this.cardEntity = cardEntity;
@@ -53,5 +55,21 @@ public class CompleteCardInfo {
 
     public void setCardParameterEntityMap(HashMap<Long, CardParameterEntity> cardParameterEntityMap) {
         this.cardParameterEntityMap = cardParameterEntityMap;
+    }
+
+    public void setCompleteCardRootInfo(CompleteCardRootInfo completeCardRootInfo) {
+        this.completeCardRootInfo = completeCardRootInfo;
+    }
+
+    public CompleteCardRootInfo getCompleteCardRootInfo() {
+        return completeCardRootInfo;
+    }
+
+    public HashMap<Long, CompleteTextCardInfo> getCompleteTextCardInfoMap() {
+        return completeTextCardInfoMap;
+    }
+
+    public void setCompleteTextCardInfoMap(HashMap<Long, CompleteTextCardInfo> completeTextCardInfoMap) {
+        this.completeTextCardInfoMap = completeTextCardInfoMap;
     }
 }
