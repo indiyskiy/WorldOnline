@@ -1,5 +1,8 @@
 package model.database.worldonlinedb;
 
+import model.constants.databaseenumeration.CardParameterType;
+import model.constants.databaseenumeration.DataType;
+
 import javax.persistence.*;
 
 /**
@@ -116,5 +119,16 @@ public class CardParameterEntity {
         result = 31 * result + (cardParameterDataType != null ? cardParameterDataType.hashCode() : 0);
         result = 31 * result + (cardParameterName != null ? cardParameterName.hashCode() : 0);
         return result;
+    }
+
+    public CardParameterEntity() {
+    }
+
+    public CardParameterEntity(CardEntity card, CardParameterType cardParameterType, DataType cardParameterDataType, String cardParameterValue) {
+        this.card = card;
+        this.cardParameterType = cardParameterType.getValue();
+        this.cardParameterValue = cardParameterValue;
+        this.cardParameterDataType = cardParameterDataType.getValue();
+        this.cardParameterName=card.getCardName()+"-"+cardParameterType;
     }
 }

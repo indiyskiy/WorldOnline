@@ -1,5 +1,7 @@
 package model.database.worldonlinedb;
 
+import model.constants.databaseenumeration.ImageType;
+
 import javax.persistence.*;
 
 /**
@@ -117,5 +119,15 @@ public class CardImageEntity {
         result = 31 * result + (cardImageName != null ? cardImageName.hashCode() : 0);
         result = 31 * result + (imageDescriptionTextGroup != null ? imageDescriptionTextGroup.hashCode() : 0);
         return result;
+    }
+
+    public CardImageEntity() {
+    }
+
+    public CardImageEntity(CardEntity card, ImageEntity image, ImageType cardImageType) {
+        this.card = card;
+        this.image = image;
+        this.cardImageType = cardImageType.getValue();
+        this.cardImageName=card.getCardName()+"-"+cardImageType;
     }
 }

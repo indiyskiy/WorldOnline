@@ -118,4 +118,15 @@ public class ImageEntity {
         result = 31 * result + (imageFileSize != null ? imageFileSize.hashCode() : 0);
         return result;
     }
+
+    public ImageEntity() {
+    }
+
+    public ImageEntity(String imageURL, Integer imageHeight, Integer imageWidth, Integer imageFileSize, String imageMD5Hash) {
+        this.imageURL = imageURL;
+        this.imageHeight = imageHeight;
+        this.imageWidth = imageWidth;
+        this.imageFileSize = imageFileSize;
+        this.imageMD5Hash = imageMD5Hash;
+    }
 }

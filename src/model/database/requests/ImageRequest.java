@@ -1,13 +1,23 @@
 package model.database.requests;
 
+import model.additionalentity.CompleteCardImageInfo;
+import model.additionalentity.CompleteTextGroupInfo;
+import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardImageEntity;
 import model.database.worldonlinedb.ImageEntity;
 import model.database.worldonlinedb.TextEntity;
+import model.database.worldonlinedb.TextGroupEntity;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.intellij.lang.annotations.Language;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,8 +27,7 @@ import java.sql.SQLException;
  * To change this template use File | Settings | File Templates.
  */
 public class ImageRequest {
-
-    public static void addCardImage(CardImageEntity image){
+    public static void addCardImage(CardImageEntity image) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
         try {
             session.beginTransaction();
@@ -31,12 +40,76 @@ public class ImageRequest {
         }
     }
 
-
-    public static CardImageEntity gerCardImageByResultSet(ResultSet rs) throws SQLException {
-        return gerCardImageByResultSet(rs, "CardImage");
+    public static void addImage(ImageEntity imageEntity) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.save(imageEntity);
+            session.getTransaction().commit();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
-    public static CardImageEntity gerCardImageByResultSet(ResultSet rs, String cardImage) throws SQLException {
+    public static ArrayList<ImageEntity> getAllImages() {
+        ArrayList<ImageEntity> imageEntities = new ArrayList<ImageEntity>();
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            imageEntities = (ArrayList<ImageEntity>) session.createCriteria(ImageEntity.class).list();
+            transaction.commit();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return imageEntities;
+    }
+
+    public static ArrayList<CardImageEntity> getAllCardImages() {
+        ArrayList<CardImageEntity> cardImageEntities = new ArrayList<CardImageEntity>();
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            cardImageEntities = (ArrayList<CardImageEntity>) session.createCriteria(CardImageEntity.class).list();
+            transaction.commit();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return cardImageEntities;
+    }
+
+    public static ImageEntity getImageByID(Long imageID) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            return (ImageEntity) session.get(ImageEntity.class, imageID);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public static CardImageEntity getCardImageByID(Long cardImageID) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            return (CardImageEntity) session.get(CardImageEntity.class, cardImageID);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public static CardImageEntity getCardImageByResultSet(ResultSet rs) throws SQLException {
+        return getCardImageByResultSet(rs, "CardImage");
+    }
+
+    public static CardImageEntity getCardImageByResultSet(ResultSet rs, String cardImage) throws SQLException {
         CardImageEntity cardImageEntity = null;
         Long cardImageID = rs.getLong(cardImage + ".CardImageID");
         if (cardImageID != 0 && !rs.wasNull()) {
@@ -49,7 +122,7 @@ public class ImageRequest {
     }
 
     public static ImageEntity getImageFromResultSet(ResultSet rs) throws SQLException {
-        return getImageFromResultSet(rs,"Image");
+        return getImageFromResultSet(rs, "Image");
     }
 
     public static ImageEntity getImageFromResultSet(ResultSet rs, String image) throws SQLException {
@@ -64,5 +137,126 @@ public class ImageRequest {
             imageEntity.setImageWidth(rs.getInt(image + ".ImageWidth"));
         }
         return imageEntity;
+    }
+
+    public static HashMap<Long, CompleteCardImageInfo> getCompleteCardImages() {
+        HashMap<Long, CompleteCardImageInfo> cardImages = new HashMap<Long, CompleteCardImageInfo>();
+        try {
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT * FROM CardImage " +
+                    "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
+                    "LEFT OUTER JOIN TextGroup  ON (CardImage.ImageDescriptionTextGroupID=CardImageTextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Text  ON (Text.TextGroupID=TextGroup.TextGroupID) ";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CompleteCardImageInfo cardImage;
+                Long cardImageID = rs.getLong("CardImage.CardImageID");
+                if (cardImageID != 0 && !rs.wasNull()) {
+                    if (cardImages.containsKey(cardImageID) && cardImages.get(cardImageID) != null) {
+                        cardImage = cardImages.get(cardImageID);
+                    } else {
+                        cardImage = new CompleteCardImageInfo(getCardImageByResultSet(rs));
+                        cardImages.put(cardImageID, cardImage);
+                    }
+                    getCompleteCardImage(rs, cardImage, "TextGroup", "Text");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cardImages;
+    }
+
+    public static HashMap<Long, CompleteCardImageInfo> getCompleteCardImagesByCard(int cardID) {
+        HashMap<Long, CompleteCardImageInfo> cardImages = new HashMap<Long, CompleteCardImageInfo>();
+        try {
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT * FROM CardImage " +
+                    "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
+                    "LEFT OUTER JOIN TextGroup  ON (CardImage.ImageDescriptionTextGroupID=CardImageTextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Text  ON (TextGroup.TextGroupID=Text.TextGroupID) " +
+                    "WHERE CardImage.CardID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, cardID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CompleteCardImageInfo cardImage;
+                Long cardImageID = rs.getLong("CardImage.CardImageID");
+                if (cardImageID != 0 && !rs.wasNull()) {
+                    if (cardImages.containsKey(cardImageID) && cardImages.get(cardImageID) != null) {
+                        cardImage = cardImages.get(cardImageID);
+                    } else {
+                        cardImage = new CompleteCardImageInfo(getCardImageByResultSet(rs));
+                        cardImages.put(cardImageID, cardImage);
+                    }
+                    getCompleteCardImage(rs, cardImage, "TextGroup", "Text");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cardImages;
+    }
+
+    public static CompleteCardImageInfo getCompleteCardImageByCardImage(int cardImageID) {
+        CompleteCardImageInfo cardImage = null;
+        try {
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT * FROM CardImage " +
+                    "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
+                    "LEFT OUTER JOIN TextGroup  ON (CardImage.ImageDescriptionTextGroupID=CardImageTextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Text  ON (TextGroup.TextGroupID=Text.TextGroupID) " +
+                    "WHERE CardImage.CardImageID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, cardImageID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.first()) {
+                Long cardImageID2 = rs.getLong("CardImage.CardImageID");
+                if (cardImageID2 != 0 && !rs.wasNull() && cardImageID == cardImageID2) {
+                    cardImage = new CompleteCardImageInfo(getCardImageByResultSet(rs));
+                    getCompleteCardImage(rs, cardImage, "TextGroup", "Text");
+                }
+            }
+            while (rs.next()) {
+                Long cardImageID2 = rs.getLong("CardImage.CardImageID");
+                if (cardImageID2 != 0 && !rs.wasNull() && cardImageID == cardImageID2) {
+                    getCompleteCardImage(rs, cardImage, "TextGroup", "Text");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cardImage;
+    }
+
+    public static void getCompleteCardImage(ResultSet rs, CompleteCardImageInfo cardImage, String textGroup, String text) throws SQLException {
+        if (cardImage.getCardImageEntity().getImage() == null) {
+            //image
+            Long imageID = rs.getLong("Image.ImageID");
+            if (rs.getLong("Image.ImageID") != 0 && !rs.wasNull()) {
+                if (imageID != 0 && !rs.wasNull()) {
+                    ImageEntity imageEntity = ImageRequest.getImageFromResultSet(rs);
+                    cardImage.getCardImageEntity().setImage(imageEntity);
+                }
+            }
+        }
+        //card image text group
+        Long imageTextGroupID = rs.getLong(textGroup + ".TextGroupID");
+        if (imageTextGroupID != 0 && !rs.wasNull()) {
+            CompleteTextGroupInfo completeTextGroupInfo;
+            if (cardImage.getCompleteTextGroupInfo() == null) {
+                TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs, textGroup);
+                completeTextGroupInfo = new CompleteTextGroupInfo(textGroupEntity);
+                cardImage.setCompleteTextGroupInfo(completeTextGroupInfo);
+                cardImage.getCardImageEntity().setImageDescriptionTextGroup(textGroupEntity);
+            } else {
+                completeTextGroupInfo = cardImage.getCompleteTextGroupInfo();
+            }
+            TextRequest.getCompleteTextGroupInfo(rs,completeTextGroupInfo,text);
+        }
     }
 }

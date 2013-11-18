@@ -88,4 +88,13 @@ public class CardCoordinateEntity {
         result = 31 * result + (latitude != null ? latitude.hashCode() : 0);
         return result;
     }
+
+    public CardCoordinateEntity() {
+    }
+
+    public CardCoordinateEntity(CardEntity card, Double longitude, Double latitude) {
+        this.card = card;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
 }

@@ -88,4 +88,12 @@ public class CardRootEntity {
         result = 31 * result + (rootDescriptionTextGroup != null ? rootDescriptionTextGroup.hashCode() : 0);
         return result;
     }
+
+    public CardRootEntity() {
+    }
+
+    public CardRootEntity(String cardRootName, CardEntity card) {
+        this.cardRootName = cardRootName;
+        this.card = card;
+    }
 }

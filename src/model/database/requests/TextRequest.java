@@ -1,13 +1,20 @@
 package model.database.requests;
 
+import model.additionalentity.CompleteCardImageInfo;
+import model.additionalentity.CompleteTextGroupInfo;
+import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.TextCardEntity;
 import model.database.worldonlinedb.TextEntity;
 import model.database.worldonlinedb.TextGroupEntity;
 import org.hibernate.Session;
+import org.intellij.lang.annotations.Language;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -84,6 +91,44 @@ public class TextRequest {
         } finally {
             if (session != null) {
                 session.close();
+            }
+        }
+    }
+
+    public static HashMap<Long, CompleteTextGroupInfo> getCompleteTextGroupInfos() {
+        HashMap<Long, CompleteTextGroupInfo> textGroupInfos = new HashMap<Long, CompleteTextGroupInfo>();
+        try {
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT * FROM TextGroup " +
+                    "JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID)";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CompleteTextGroupInfo textGroupInfo;
+                Long textGroupInfoID = rs.getLong("TextGroup.TextGroupID");
+                if (textGroupInfoID != 0 && !rs.wasNull()) {
+                    if (textGroupInfos.containsKey(textGroupInfoID) && textGroupInfos.get(textGroupInfoID) != null) {
+                        textGroupInfo = textGroupInfos.get(textGroupInfoID);
+                    } else {
+                        textGroupInfo = new CompleteTextGroupInfo(getTextGroupByResultSet(rs));
+                        textGroupInfos.put(textGroupInfoID, textGroupInfo);
+                    }
+                    getCompleteTextGroupInfo(rs, textGroupInfo, "Text");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return textGroupInfos;
+    }
+
+    public static void getCompleteTextGroupInfo(ResultSet rs, CompleteTextGroupInfo textGroupInfo,  String text) throws SQLException {
+        Long textID = rs.getLong(text + ".TextID");
+        if (textID != 0 && !rs.wasNull()) {
+            if (!textGroupInfo.getTextEntityMap().containsKey(textID) || textGroupInfo.getTextEntityMap().get(textID) == null) {
+                TextEntity textEntity = TextRequest.getTextByResultSet(rs, text);
+                textGroupInfo.getTextEntityMap().put(textID, textEntity);
             }
         }
     }
