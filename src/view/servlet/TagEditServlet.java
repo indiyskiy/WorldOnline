@@ -1,8 +1,10 @@
 package view.servlet;
 
+import controller.parser.edit.TagEditParser;
 import model.additionalentity.CompleteTagInfo;
 import model.constants.databaseenumeration.TagType;
 import model.database.requests.TagRequest;
+import model.database.worldonlinedb.TagEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +41,13 @@ public class TagEditServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
+            TagEditParser parser = new TagEditParser();
+            TagEntity tagEntity=parser.parse(request);
+            if(parser.hasNoErrors()){
+                TagRequest.editTag(tagEntity);
+            } else {
+                throw new ServletException(parser.getErrorsForHTML());
+            }
             doGet(request, response);
         } catch (Exception e) {
 //            request.setAttribute("errorMesage", e.getMessage());

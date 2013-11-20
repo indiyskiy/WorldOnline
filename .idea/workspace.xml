@@ -6,24 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="Card request 6">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/AllTagsServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/TagEditServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/Test.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/alltags.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/tagedit.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" afterPath="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/ExampleServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/ExampleServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/RootRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/RootRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/TagEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/TagEntity.java" />
+    <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/parser/edit/TagEditParser.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/TagEditServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/TagEditServlet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/TagRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/TagRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/TextRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/TextRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/example.jsp" afterPath="$PROJECT_DIR$/web/example.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WorldOnline.iws" />
@@ -116,10 +104,10 @@
     <file path="dbtable:/2d28c3c8/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..cardcoordinate" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383191204791" ignored="false" />
     <file path="/UserPersonalDataEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383199254948" ignored="false" />
     <file path="/CardRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384857390825" ignored="false" />
-    <file path="/Dummy.txt" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384937619768" ignored="false" />
+    <file path="/Dummy.txt" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384951374485" ignored="false" />
     <file path="/CompliteCardInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383295500292" ignored="false" />
     <file path="/CardTagRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383297506467" ignored="false" />
-    <file path="/TagRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384945365512" ignored="false" />
+    <file path="/TagRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384960562525" ignored="false" />
     <file path="/TextRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384852149260" ignored="false" />
     <file path="/ComleteTagInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383357717732" ignored="false" />
     <file path="/CompleteCardInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384441032686" ignored="false" />
@@ -145,7 +133,8 @@
     <file path="/alltags.jsp" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384951082841" ignored="false" />
     <file path="/TagEditRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384937833083" ignored="false" />
     <file path="/tagedit.jsp" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384949895016" ignored="false" />
-    <file path="/TagEditServlet.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384943881094" ignored="false" />
+    <file path="/TagEditServlet.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384960574212" ignored="false" />
+    <file path="/TagEditParser.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384959361926" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,37 +205,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="alltags.jsp" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/alltags.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="36" selection-start="945" selection-end="945" vertical-scroll-proportion="1.1776199">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tagedit.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/tagedit.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="8" selection-start="478" selection-end="478" vertical-scroll-proportion="-10.461538">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AllTagsServlet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/servlet/AllTagsServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="86" selection-start="1807" selection-end="1875" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TagEditServlet.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TagEditServlet.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/servlet/TagEditServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="63" selection-start="769" selection-end="769" vertical-scroll-proportion="0.0">
+            <state line="46" column="34" selection-start="1939" selection-end="1939" vertical-scroll-proportion="0.6290909">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TagEditParser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/parser/edit/TagEditParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="44" selection-start="902" selection-end="902" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -257,37 +230,16 @@
       <file leaf-file-name="TagRequest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/database/requests/TagRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="21" selection-start="1751" selection-end="1751" vertical-scroll-proportion="0.0">
+            <state line="194" column="52" selection-start="7547" selection-end="7547" vertical-scroll-proportion="0.0">
               <folding>
-                <marker date="1384945430416" expanded="true" signature="2121:2376" placeholder="SELECT * FRO..Tag..." />
-                <marker date="1384945430416" expanded="true" signature="3381:3610" placeholder="SELECT * FRO..Tag..." />
-                <marker date="1384945430416" expanded="true" signature="3381:3575" placeholder="SELECT * FRO..Tag..." />
-                <marker date="1384945430416" expanded="true" signature="3381:3574" placeholder="SELECT * FRO..Tag..." />
-                <marker date="1384945430416" expanded="true" signature="3381:3574" placeholder="SELECT * FRO..Tag..." />
-                <marker date="1384945430416" expanded="true" signature="4575:4835" placeholder="SELECT * FRO..CardTag..." />
-                <marker date="1384945430416" expanded="true" signature="4575:4885" placeholder="SELECT * FRO..CardTag..." />
-                <marker date="1384945430416" expanded="true" signature="6669:6929" placeholder="SELECT * FRO..CardTag..." />
-                <marker date="1384945430416" expanded="true" signature="9025:9218" placeholder="SELECT * FRO..Tag..." />
-                <marker date="1384945430416" expanded="true" signature="11368:11604" placeholder="SELECT * FRO..Tag..." />
+                <marker date="1384960584193" expanded="true" signature="2121:2376" placeholder="SELECT * FRO..Tag..." />
+                <marker date="1384960584193" expanded="true" signature="3381:3610" placeholder="SELECT * FRO..Tag..." />
+                <marker date="1384960584193" expanded="true" signature="4591:4901" placeholder="SELECT * FRO..CardTag..." />
+                <marker date="1384960584193" expanded="true" signature="5912:6147" placeholder="SELECT * FRO..Tag..." />
+                <marker date="1384960584193" expanded="true" signature="8329:8589" placeholder="SELECT * FRO..CardTag..." />
+                <marker date="1384960584193" expanded="true" signature="10685:10878" placeholder="SELECT * FRO..Tag..." />
+                <marker date="1384960584193" expanded="true" signature="13028:13264" placeholder="SELECT * FRO..Tag..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TagEntity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TagEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="22" selection-start="1012" selection-end="1012" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TextGroupEntity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TextGroupEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="32" selection-start="738" selection-end="751" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -311,7 +263,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
         <option value="$PROJECT_DIR$/src/model/Test.java" />
         <option value="$PROJECT_DIR$/src/view/servlet/ExampleServlet.java" />
         <option value="$PROJECT_DIR$/web/example.jsp" />
@@ -321,12 +272,13 @@
         <option value="$PROJECT_DIR$/src/view/servlet/AllTagsServlet.java" />
         <option value="$PROJECT_DIR$/src/view/servlet/TagEditRequest.java" />
         <option value="$PROJECT_DIR$/src/view/servlet/ServletHelper.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/TagEditServlet.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
         <option value="dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..tag" />
-        <option value="$PROJECT_DIR$/src/model/database/requests/TagRequest.java" />
         <option value="$PROJECT_DIR$/web/tagedit.jsp" />
         <option value="$PROJECT_DIR$/web/alltags.jsp" />
+        <option value="$PROJECT_DIR$/src/controller/parser/edit/TagEditParser.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/TagRequest.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/TagEditServlet.java" />
       </list>
     </option>
   </component>
@@ -443,6 +395,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="edit" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1014,7 +984,11 @@
       <created>1384788456531</created>
       <updated>1384788456531</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Simple jsp page test">
+      <created>1384951391661</created>
+      <updated>1384951391661</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1026,7 +1000,7 @@
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14991896" sideWeight="0.74735606" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14991896" sideWeight="0.74735606" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.64629847" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1043,7 +1017,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20340356" sideWeight="0.74735606" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25264394" sideWeight="0.4886548" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25264394" sideWeight="0.4886548" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8989424" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1094,7 +1068,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Card request 6" />
+    <option name="LAST_COMMIT_MESSAGE" value="Simple jsp page test" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1117,6 +1091,7 @@
     <MESSAGE value="First office commit" />
     <MESSAGE value="Card request 5" />
     <MESSAGE value="Card request 6" />
+    <MESSAGE value="Simple jsp page test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1138,11 +1113,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/lib/javax.servlet.jar!/javax/servlet/ServletException.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="11" selection-start="502" selection-end="502" vertical-scroll-proportion="0.48870638" />
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..textgroup">
       <provider editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -1210,65 +1180,71 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/TagEditServlet.java">
+    <entry file="file://$PROJECT_DIR$/web/alltags.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="63" selection-start="769" selection-end="769" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/requests/TagRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="21" selection-start="1751" selection-end="1751" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1384945430416" expanded="true" signature="2121:2376" placeholder="SELECT * FRO..Tag..." />
-            <marker date="1384945430416" expanded="true" signature="3381:3610" placeholder="SELECT * FRO..Tag..." />
-            <marker date="1384945430416" expanded="true" signature="3381:3575" placeholder="SELECT * FRO..Tag..." />
-            <marker date="1384945430416" expanded="true" signature="3381:3574" placeholder="SELECT * FRO..Tag..." />
-            <marker date="1384945430416" expanded="true" signature="3381:3574" placeholder="SELECT * FRO..Tag..." />
-            <marker date="1384945430416" expanded="true" signature="4575:4835" placeholder="SELECT * FRO..CardTag..." />
-            <marker date="1384945430416" expanded="true" signature="4575:4885" placeholder="SELECT * FRO..CardTag..." />
-            <marker date="1384945430416" expanded="true" signature="6669:6929" placeholder="SELECT * FRO..CardTag..." />
-            <marker date="1384945430416" expanded="true" signature="9025:9218" placeholder="SELECT * FRO..Tag..." />
-            <marker date="1384945430416" expanded="true" signature="11368:11604" placeholder="SELECT * FRO..Tag..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/AllTagsServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="86" selection-start="1807" selection-end="1875" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TagEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="22" selection-start="1012" selection-end="1012" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TextGroupEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="32" selection-start="738" selection-end="751" vertical-scroll-proportion="0.0">
+        <state line="39" column="36" selection-start="945" selection-end="945" vertical-scroll-proportion="1.1352739">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/tagedit.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="8" selection-start="478" selection-end="478" vertical-scroll-proportion="-10.461538">
+        <state line="16" column="8" selection-start="478" selection-end="478" vertical-scroll-proportion="0.47635728">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/alltags.jsp">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/AllTagsServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="36" selection-start="945" selection-end="945" vertical-scroll-proportion="1.1776199">
+        <state line="43" column="86" selection-start="1807" selection-end="1875" vertical-scroll-proportion="0.68">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TagEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="22" selection-start="1012" selection-end="1012" vertical-scroll-proportion="0.24606061">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TextGroupEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="32" selection-start="738" selection-end="751" vertical-scroll-proportion="0.43878788">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/TagRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="194" column="52" selection-start="7547" selection-end="7547" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1384960584193" expanded="true" signature="2121:2376" placeholder="SELECT * FRO..Tag..." />
+            <marker date="1384960584193" expanded="true" signature="3381:3610" placeholder="SELECT * FRO..Tag..." />
+            <marker date="1384960584193" expanded="true" signature="4591:4901" placeholder="SELECT * FRO..CardTag..." />
+            <marker date="1384960584193" expanded="true" signature="5912:6147" placeholder="SELECT * FRO..Tag..." />
+            <marker date="1384960584193" expanded="true" signature="8329:8589" placeholder="SELECT * FRO..CardTag..." />
+            <marker date="1384960584193" expanded="true" signature="10685:10878" placeholder="SELECT * FRO..Tag..." />
+            <marker date="1384960584193" expanded="true" signature="13028:13264" placeholder="SELECT * FRO..Tag..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/parser/edit/TagEditParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="44" selection-start="902" selection-end="902" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/TagEditServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="34" selection-start="1939" selection-end="1939" vertical-scroll-proportion="0.6290909">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

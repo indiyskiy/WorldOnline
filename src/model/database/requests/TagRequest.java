@@ -106,8 +106,8 @@ public class TagRequest {
         return tags;
     }
 
-    public static TagEntity getTag(long cardTagID) throws SQLException {
-        TagEntity tag = null;
+    public static CardTagEntity getCardTag(long cardTagID) throws SQLException {
+        CardTagEntity cardTag = null;
         ResultSet rs = null;
         PreparedStatement ps = null;
         DatabaseConnection dbConnection = new DatabaseConnection();
@@ -121,6 +121,37 @@ public class TagRequest {
                     "WHERE CardTag.CardTagID=?";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, cardTagID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                cardTag=getCardTagByResultSet(rs);
+                TagEntity tag = getTagByResultSet(rs);
+                TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs);
+                tag.setTagTextGroup(textGroupEntity);
+                cardTag.setTag(tag);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return cardTag;
+    }
+
+
+    public static TagEntity getTag(long tagID) throws SQLException {
+        TagEntity tag = null;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL")
+            String sql = "SELECT * FROM Tag " +
+                    "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) "+
+                    "WHERE Tag.TagID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, tagID);
             rs = ps.executeQuery();
             if (rs.first()) {
                 tag = getTagByResultSet(rs);
@@ -153,6 +184,19 @@ public class TagRequest {
         try {
             session.beginTransaction();
             session.save(tagEntity);
+            session.getTransaction().commit();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public static void editTag(TagEntity tagEntity) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.update(tagEntity);
             session.getTransaction().commit();
         } finally {
             if (session != null) {
