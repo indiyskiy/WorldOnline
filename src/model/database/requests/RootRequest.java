@@ -1,6 +1,5 @@
 package model.database.requests;
 
-import model.additionalentity.CompleteCardImageInfo;
 import model.additionalentity.CompleteCardRootInfo;
 import model.additionalentity.CompleteTextGroupInfo;
 import model.database.session.DatabaseConnection;
@@ -72,11 +71,11 @@ public class RootRequest {
     }
 
     public static CardCoordinateEntity getCardCoordinateByResultSet(ResultSet rs) throws SQLException {
-        Long cardCoordinateID=rs.getLong("CardCoordinate.CardCoordinateID");
-        if(cardCoordinateID==0 || rs.wasNull()){
+        Long cardCoordinateID = rs.getLong("CardCoordinate.CardCoordinateID");
+        if (cardCoordinateID == 0 || rs.wasNull()) {
             return null;
         }
-        CardCoordinateEntity cardCoordinateEntity=new CardCoordinateEntity();
+        CardCoordinateEntity cardCoordinateEntity = new CardCoordinateEntity();
         cardCoordinateEntity.setCardCoordinateID(cardCoordinateID);
         cardCoordinateEntity.setLatitude(rs.getDouble("CardCoordinate.Latitude"));
         cardCoordinateEntity.setLongitude(rs.getDouble("CardCoordinate.Longitude"));
@@ -98,16 +97,18 @@ public class RootRequest {
 
     public static HashMap<Long, CompleteCardRootInfo> getCompleteCardRoots() {
         HashMap<Long, CompleteCardRootInfo> cardRoots = new HashMap<Long, CompleteCardRootInfo>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            DatabaseConnection dbConnection = new DatabaseConnection();
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT *  FROM CardRoot " +
-            "LEFT OUTER JOIN RootElement ON (RootElement.CardRootID=CardRoot.CardRootID) " +
+                    "LEFT OUTER JOIN RootElement ON (RootElement.CardRootID=CardRoot.CardRootID) " +
                     "LEFT OUTER JOIN Card AS RootCard ON (RootCard.CardID=RootElement.PlaceCardID) " +
                     "LEFT OUTER JOIN TextGroup ON(CardRoot.RootDescriptionTextGroupID=TextGroup.TextGroupID) " +
                     "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID)";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
                 CompleteCardRootInfo cardRoot;
                 Long cardRootID = rs.getLong("CardImage.CardImageID");
@@ -118,13 +119,88 @@ public class RootRequest {
                         cardRoot = new CompleteCardRootInfo(getCardRootByResultSet(rs));
                         cardRoots.put(cardRootID, cardRoot);
                     }
-                    getCompleteCardRoot(rs, cardRoot,"RootCard", "TextGroup", "Text");
+                    getCompleteCardRoot(rs, cardRoot, "RootCard", "TextGroup", "Text");
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }  finally {
+            dbConnection.closeConnections(ps,rs);
         }
         return cardRoots;
+    }
+
+    public static HashMap<Long, CompleteCardRootInfo> getCompleteCardRootsByCard(long cardID) {
+        HashMap<Long, CompleteCardRootInfo> cardRoots = new HashMap<Long, CompleteCardRootInfo>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT *  FROM CardRoot " +
+                    "LEFT OUTER JOIN RootElement ON (RootElement.CardRootID=CardRoot.CardRootID) " +
+                    "LEFT OUTER JOIN Card AS RootCard ON (RootCard.CardID=RootElement.PlaceCardID) " +
+                    "LEFT OUTER JOIN TextGroup ON(CardRoot.RootDescriptionTextGroupID=TextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                    "WHERE CardRoot.CardID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CompleteCardRootInfo cardRoot;
+                Long cardRootID = rs.getLong("CardImage.CardImageID");
+                if (cardRootID != 0 && !rs.wasNull()) {
+                    if (cardRoots.containsKey(cardRootID) && cardRoots.get(cardRootID) != null) {
+                        cardRoot = cardRoots.get(cardRootID);
+                    } else {
+                        cardRoot = new CompleteCardRootInfo(getCardRootByResultSet(rs));
+                        cardRoots.put(cardRootID, cardRoot);
+                    }
+                    getCompleteCardRoot(rs, cardRoot, "RootCard", "TextGroup", "Text");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            dbConnection.closeConnections(ps,rs);
+        }
+        return cardRoots;
+    }
+
+    public static CompleteCardRootInfo getCompleteCardRootByCardRootID(long cardRootID) throws SQLException {
+        CompleteCardRootInfo cardRoot = null;
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT *  FROM CardRoot " +
+                    "LEFT OUTER JOIN RootElement ON (RootElement.CardRootID=CardRoot.CardRootID) " +
+                    "LEFT OUTER JOIN Card AS RootCard ON (RootCard.CardID=RootElement.PlaceCardID) " +
+                    "LEFT OUTER JOIN TextGroup ON(CardRoot.RootDescriptionTextGroupID=TextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                    "WHERE CardRoot.CardRootID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardRootID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                Long cardRootID2 = rs.getLong("CardImage.CardImageID");
+                if (cardRootID2 != 0 && cardRootID == cardRootID2 && !rs.wasNull()) {
+                    cardRoot = new CompleteCardRootInfo(getCardRootByResultSet(rs));
+                    getCompleteCardRoot(rs, cardRoot, "RootCard", "TextGroup", "Text");
+                } else {
+                    return null;
+                }
+                while (rs.next()) {
+                    getCompleteCardRoot(rs, cardRoot, "RootCard", "TextGroup", "Text");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return cardRoot;
     }
 
     public static void getCompleteCardRoot(ResultSet rs, CompleteCardRootInfo completeCardRootInfo, String rootCard, String textGroup, String text) throws SQLException {
@@ -142,7 +218,7 @@ public class RootRequest {
             }
             if (rootElementEntity.getPlaceCard() == null) {
                 //root element placeCard
-                Long rootCardID = rs.getLong(rootCard+".CardID");
+                Long rootCardID = rs.getLong(rootCard + ".CardID");
                 if (rootCardID != 0 && !rs.wasNull()) {
                     CardEntity cardEntity = CardRequest.getCardFromResultSet(rs, rootCard);
                     rootElementEntity.setPlaceCard(cardEntity);
@@ -150,7 +226,7 @@ public class RootRequest {
             }
         }
         //Root Text Group
-        Long rootTextGroupID = rs.getLong(textGroup+".TextGroupID");
+        Long rootTextGroupID = rs.getLong(textGroup + ".TextGroupID");
         if (rootTextGroupID != 0 && !rs.wasNull()) {
             CompleteTextGroupInfo completeTextGroupInfo;
             if (completeCardRootInfo.getCompleteTextGroupInfo() == null) {
@@ -161,7 +237,7 @@ public class RootRequest {
             } else {
                 completeTextGroupInfo = completeCardRootInfo.getCompleteTextGroupInfo();
             }
-            TextRequest.getCompleteTextGroupInfo(rs,completeTextGroupInfo,text);
+            TextRequest.getCompleteTextGroupInfo(rs, completeTextGroupInfo, text);
         }
     }
 }

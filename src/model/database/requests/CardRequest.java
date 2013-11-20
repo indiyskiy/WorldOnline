@@ -1,6 +1,7 @@
 package model.database.requests;
 
 
+import model.Test;
 import model.additionalentity.*;
 import model.constants.databaseenumeration.*;
 import model.database.session.DatabaseConnection;
@@ -96,8 +97,10 @@ public class CardRequest {
 
     public static HashMap<Long, CompleteCardInfo> getCompleteCardInfo() {
         HashMap<Long, CompleteCardInfo> cards = new HashMap<Long, CompleteCardInfo>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            DatabaseConnection dbConnection = new DatabaseConnection();
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT DISTINCT * FROM Card " +
                     "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
@@ -123,8 +126,8 @@ public class CardRequest {
                     "LEFT OUTER JOIN TextCard ON (Card.CardID=TextCard.CardID) " +
                     "LEFT OUTER JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
                     "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) ";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+             ps = connection.prepareStatement(sql);
+             rs = ps.executeQuery();
             while (rs.next()) {
                 CompleteCardInfo card;
                 Long cardID = rs.getLong("Card.CardID");
@@ -138,18 +141,19 @@ public class CardRequest {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            dbConnection.closeConnections(ps,rs);
         }
         return cards;
     }
 
     public static CompleteCardInfo getCompleteCardInfo(long cardID) throws SQLException {
         CompleteCardInfo card = null;
-        DatabaseConnection dbConnection = null;
+        DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection = null;
         ResultSet rs = null;
         PreparedStatement ps = null;
         try {
-            dbConnection = new DatabaseConnection();
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT DISTINCT * FROM Card " +
                     "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
@@ -190,15 +194,7 @@ public class CardRequest {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) {
-                connection.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            if (rs != null) {
-                rs.close();
-            }
+          dbConnection.closeConnections(ps,rs);
         }
         return card;
     }
@@ -216,31 +212,7 @@ public class CardRequest {
                 completeCardInfo.getCompleteCardTagInfoMap().put(cardTagID, cardTagInfo);
             }
             //tag
-            Long tagID = rs.getLong("Tag.TagID");
-            if (!rs.wasNull()) {
-                CompleteTagInfo tagInfo;
-                if (cardTagInfo.getCompleteTagInfo() == null) {
-                    tagInfo = new CompleteTagInfo(TagRequest.getTagByResultSet(rs));
-                    cardTagInfo.setCompleteTagInfo(tagInfo);
-                    cardTagInfo.getCardTagEntity().setTag(tagInfo.getTagEntity());
-                } else {
-                    tagInfo = cardTagInfo.getCompleteTagInfo();
-                }
-                //tag text group
-                Long tagTextGroupID = rs.getLong("TagTextGroup.TextGroupID");
-                if (!rs.wasNull()) {
-                    CompleteTextGroupInfo textGroup;
-                    if (tagInfo.getCompleteTextGroupInfoMap().containsKey(tagTextGroupID) && tagInfo.getCompleteTextGroupInfoMap().get(tagTextGroupID) != null) {
-                        textGroup = tagInfo.getCompleteTextGroupInfoMap().get(tagTextGroupID);
-                    } else {
-                        textGroup = new CompleteTextGroupInfo(TextRequest.getTextGroupByResultSet(rs, "TagTextGroup"));
-                        tagInfo.getTagEntity().setTagTextGroup(textGroup.getTextGroup());
-                        tagInfo.getCompleteTextGroupInfoMap().put(tagTextGroupID, textGroup);
-                    }
-                    //tag text
-                    TextRequest.getCompleteTextGroupInfo(rs,textGroup,"TagText");
-                }
-            }
+            TagRequest.getCompleteCardTag(rs, cardTagInfo, "TagTextGroup", "TagText");
         }
         //card Image
         Long cardImageID = rs.getLong("CardImage.CardImageID");
@@ -254,7 +226,7 @@ public class CardRequest {
                 cardImageEntity.setCard(completeCardInfo.getCardEntity());
                 completeCardInfo.getCompleteCardImageInfoMap().put(cardImageID, completeCardImageInfo);
             }
-            ImageRequest.getCompleteCardImage(rs,completeCardImageInfo,"CardImageTextGroup","CardImageText");
+            ImageRequest.getCompleteCardImage(rs, completeCardImageInfo, "CardImageTextGroup", "CardImageText");
         }
         //card parameter
         Long cardParameterID = rs.getLong("CardParameter.CardParameterID");
@@ -279,12 +251,12 @@ public class CardRequest {
                 completeCardInfo.setCompleteCardRootInfo(completeCardRootInfo);
             }
             //root element
-           RootRequest.getCompleteCardRoot(rs,completeCardRootInfo,"RootCard","TextGroup","RootText");
+            RootRequest.getCompleteCardRoot(rs, completeCardRootInfo, "RootCard", "TextGroup", "RootText");
         }
-        Long cardCoordinate=rs.getLong("CardCoordinate.CardCoordinateID");
-        if(cardCoordinate!=0 && !rs.wasNull()){
-            if(completeCardInfo.getCardCoordinateEntity()==null){
-                CardCoordinateEntity cardCoordinateEntity =  RootRequest.getCardCoordinateByResultSet(rs);
+        Long cardCoordinate = rs.getLong("CardCoordinate.CardCoordinateID");
+        if (cardCoordinate != 0 && !rs.wasNull()) {
+            if (completeCardInfo.getCardCoordinateEntity() == null) {
+                CardCoordinateEntity cardCoordinateEntity = RootRequest.getCardCoordinateByResultSet(rs);
                 cardCoordinateEntity.setCard(completeCardInfo.getCardEntity());
                 completeCardInfo.setCardCoordinateEntity(cardCoordinateEntity);
             }
@@ -310,22 +282,12 @@ public class CardRequest {
         return cardEntity;
     }
 
-    public static void main(String[] args) {
-        try {
-//            addData
-            addData();
-            CompleteCardInfo completeCardInfo = getCompleteCardInfo(1);
-            //get info
-            getInfo(completeCardInfo);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    private static void getInfo( CompleteCardInfo completeCardInfo) throws SQLException {
+
+    public static void printInfo(CompleteCardInfo completeCardInfo) throws SQLException {
         System.out.println("Card name = " + completeCardInfo.getCardEntity().getCardName());
-        if(completeCardInfo.getCardCoordinateEntity()!=null){
-           CardCoordinateEntity cardCoordinateEntity = completeCardInfo.getCardCoordinateEntity();
+        if (completeCardInfo.getCardCoordinateEntity() != null) {
+            CardCoordinateEntity cardCoordinateEntity = completeCardInfo.getCardCoordinateEntity();
             System.out.println("card coordinate = " + cardCoordinateEntity.getCardCoordinateID() + " " + cardCoordinateEntity.getLatitude() + "-" + cardCoordinateEntity.getLongitude());
         }
         Collection<CompleteCardTagInfo> cardTagInfos = completeCardInfo.getCompleteCardTagInfoMap().values();
@@ -391,82 +353,8 @@ public class CardRequest {
         Collection<CompleteTextCardInfo> completeTextCardInfos = completeCardInfo.getCompleteTextCardInfoMap().values();
         for (CompleteTextCardInfo completeTextCardInfo : completeTextCardInfos) {
             if (completeTextCardInfo.getTextCardEntity() != null) {
-                System.out.println("text card id = "+completeTextCardInfo.getTextCardEntity().getTextCardID());
+                System.out.println("text card id = " + completeTextCardInfo.getTextCardEntity().getTextCardID());
             }
         }
-    }
-
-    private static void addData() throws SQLException {
-        //add info
-        //card
-        CardEntity card = new CardEntity(CardType.CardRoute, "rootCard1");
-        addCard(card);
-        //coordinate
-        CardCoordinateEntity cardCoordinateEntity=new CardCoordinateEntity(card,18.0,77.5);
-        RootRequest.addCardCoordinate(cardCoordinateEntity);
-        //tag
-        String tagName = "some random cuisine name";
-        TagType tagType = TagType.Cuisine;
-        TagEntity tag = TagRequest.getTag(tagType, tagName);
-        if (tag == null) {
-            //tag text
-            TextGroupEntity tagTextGroup = new TextGroupEntity("random cuisine tag text group");
-            TextEntity textEntityEng = new TextEntity(LanguageType.English, "ololo tag", tagTextGroup);
-            TextRequest.addText(textEntityEng);
-            TextEntity textEntityRus = new TextEntity(LanguageType.Russian, "ололо тэг", tagTextGroup);
-            TextRequest.addText(textEntityRus);
-            tag = new TagEntity(tagTextGroup, tagType, tagName);
-        }
-        CardTagEntity cardTagEntity = new CardTagEntity(card, tag);
-        TagRequest.addCardTag(cardTagEntity);
-        //image
-        int fileSize = 100500;
-        String md5Hash="qwiwdrhqn4wevrmw4458m3nr0tr9imib34";
-        String url="http:\\\\www.RandomFileServer.ru?imgID=1";
-        ImageEntity imageEntity = new ImageEntity(url,1920, 1080, fileSize,md5Hash);
-        ImageRequest.addImage(imageEntity);
-        //card image
-        CardImageEntity cardImageEntity = new CardImageEntity(card,imageEntity,ImageType.CardImage);
-        //image text group
-        TextGroupEntity imageTextGroupEntity = new TextGroupEntity("random image text group");
-        cardImageEntity.setImageDescriptionTextGroup(imageTextGroupEntity);
-        TextEntity imageTextEntityEng = new TextEntity(LanguageType.English, "ololo image", imageTextGroupEntity);
-        TextRequest.addText(imageTextEntityEng);
-        TextEntity imageTextEntityRus = new TextEntity(LanguageType.Russian, "ололо картинка", imageTextGroupEntity);
-        TextRequest.addText(imageTextEntityRus);
-        ImageRequest.addCardImage(cardImageEntity);
-        //card parameter
-        String cardParameterValue = "http:\\\\www.youtobe.com";
-        CardParameterEntity cardParameterEntity = new CardParameterEntity(card,CardParameterType.Youtube,DataType.Link,cardParameterValue);
-        ParameterRequest.addCardParameter(cardParameterEntity);
-        //card root text group
-        TextGroupEntity rootTextGroup = new TextGroupEntity("random root text group");
-        TextEntity rootTextEntityEng = new TextEntity(LanguageType.English, "ololo root", rootTextGroup);
-        TextRequest.addText(rootTextEntityEng);
-        TextEntity rootTextEntityRus = new TextEntity(LanguageType.Russian, "ололо рут", rootTextGroup);
-        TextRequest.addText(rootTextEntityRus);
-        //card root
-        CardRootEntity cardRootEntity = new CardRootEntity("прогулки по rootCard1",card);
-        cardRootEntity.setRootDescriptionTextGroup(rootTextGroup);
-        RootRequest.addCardRoot(cardRootEntity);
-        //place card
-        CardEntity placeCard = new CardEntity(CardType.CardAboutCity, "some place card");
-        //root element
-        RootElementEntity rootElementEntity = new RootElementEntity();
-        rootElementEntity.setCardRoot(cardRootEntity);
-        rootElementEntity.setRootElementNumber(0);
-        rootElementEntity.setPlaceCard(placeCard);
-        RootRequest.addRootElement(rootElementEntity);
-        //textCard
-        TextCardEntity textCardEntity = new TextCardEntity();
-        textCardEntity.setCard(card);
-        textCardEntity.setCardTextType(TextType.Address.getValue());
-        TextGroupEntity textGroup = new TextGroupEntity("random card adress");
-        textCardEntity.setTextGroup(textGroup);
-        TextRequest.addTextCard(textCardEntity);
-        TextEntity textEntityEng = new TextEntity(LanguageType.English, "ololo sadovaya 113", textGroup);
-        TextRequest.addText(textEntityEng);
-        TextEntity textEntityRus = new TextEntity(LanguageType.Russian, "ололо садовая 113", textGroup);
-        TextRequest.addText(textEntityRus);
     }
 }

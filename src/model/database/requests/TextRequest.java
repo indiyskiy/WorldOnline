@@ -1,6 +1,5 @@
 package model.database.requests;
 
-import model.additionalentity.CompleteCardImageInfo;
 import model.additionalentity.CompleteTextGroupInfo;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
@@ -97,13 +96,15 @@ public class TextRequest {
 
     public static HashMap<Long, CompleteTextGroupInfo> getCompleteTextGroupInfos() {
         HashMap<Long, CompleteTextGroupInfo> textGroupInfos = new HashMap<Long, CompleteTextGroupInfo>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            DatabaseConnection dbConnection = new DatabaseConnection();
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT * FROM TextGroup " +
                     "JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID)";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+             ps = connection.prepareStatement(sql);
+             rs = ps.executeQuery();
             while (rs.next()) {
                 CompleteTextGroupInfo textGroupInfo;
                 Long textGroupInfoID = rs.getLong("TextGroup.TextGroupID");
@@ -119,6 +120,8 @@ public class TextRequest {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }  finally {
+            dbConnection.closeConnections(ps,rs);
         }
         return textGroupInfos;
     }

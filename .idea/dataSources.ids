@@ -130,7 +130,7 @@
       <column name="TextGroupName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="TextGroupID"/>
       <exported-key name="FK_k506468098rw8ld5q0tlbv7ic" table="cardimage" schema="" catalog="worldonline" columns="ImageDescriptionTextGroupID"/>
-      <exported-key name="FK_cbpj7nnvyq2pt81qqbe12l5ka" table="cardroot" schema="" catalog="worldonline" columns="RootDescriptionTextGroup"/>
+      <exported-key name="FK_eh8iq6ak18r3cs4k9yiu1ctc2" table="cardroot" schema="" catalog="worldonline" columns="RootDescriptionTextGroupID"/>
       <exported-key name="FK_2sksgsk24c5xcuo9ma2qwv5pc" table="tag" schema="" catalog="worldonline" columns="TagTextGroupID"/>
       <exported-key name="FK_2cb0751w8jmy1jmf7rgqkrib5" table="text" schema="" catalog="worldonline" columns="TextGroupID"/>
       <exported-key name="FK_datml1sh78o7k342o0e0gn1uk" table="textcard" schema="" catalog="worldonline" columns="TextGroupID"/>

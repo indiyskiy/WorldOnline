@@ -1,8 +1,6 @@
 package model.database.session;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,16 +21,26 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             throw new RuntimeException("Cannot connect the database!", e);
         }
-//         finally {
-//            System.out.println("Closing the connection.");
-//            if (connection != null) try {
-//                connection.close();
-//            } catch (SQLException ignore) {
-//            }
     }
 
     public Connection getConnection() {
         return connection;
+    }
+
+    public void closeConnections(PreparedStatement ps, ResultSet rs) {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

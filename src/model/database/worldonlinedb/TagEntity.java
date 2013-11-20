@@ -39,7 +39,7 @@ public class TagEntity {
         this.tagName = tagName;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "TagTextGroupID")
     private TextGroupEntity tagTextGroup;
 

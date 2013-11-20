@@ -25,24 +25,6 @@ public class ExampleServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-   /*     UserEntity user1=new UserEntity();
-        UserContentEntity userContent=new UserContentEntity();
-        GlobalVersionEntity globalVersion=new GlobalVersionEntity();
-        globalVersion.setActivationTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-        globalVersion.setCreationTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-        globalVersion.setDisableTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-        globalVersion.setGlobalVersionName("test version");
-        userContent.setGlobalVersion(globalVersion);
-        userContent.setLastConnectionTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-        userContent.setLastSynchronizeTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-        user1.setUserContent(userContent);
-        user1.setUserHardware(new UserHardwareEntity());
-        user1.setUserPersonalData(new UserPersonalDataEntity());
-        UserRequests.addUser(user1);
-        UserRequests.addUser(user1);
-        if(UserRequests.contains(user1)){
-            UserRequests.addUser(user1);
-        }*/
         ArrayList<UserEntity> allUsers = UserRequests.getAllUsers();
         request.setAttribute("users", allUsers);
         request.setAttribute("size", allUsers.size());

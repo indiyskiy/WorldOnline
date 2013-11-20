@@ -6,7 +6,6 @@ import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardImageEntity;
 import model.database.worldonlinedb.ImageEntity;
-import model.database.worldonlinedb.TextEntity;
 import model.database.worldonlinedb.TextGroupEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -141,15 +140,17 @@ public class ImageRequest {
 
     public static HashMap<Long, CompleteCardImageInfo> getCompleteCardImages() {
         HashMap<Long, CompleteCardImageInfo> cardImages = new HashMap<Long, CompleteCardImageInfo>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            DatabaseConnection dbConnection = new DatabaseConnection();
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT * FROM CardImage " +
                     "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
-                    "LEFT OUTER JOIN TextGroup  ON (CardImage.ImageDescriptionTextGroupID=CardImageTextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text  ON (Text.TextGroupID=TextGroup.TextGroupID) ";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+                    "LEFT OUTER JOIN TextGroup  ON (CardImage.ImageDescriptionTextGroupID=TextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID)";
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
                 CompleteCardImageInfo cardImage;
                 Long cardImageID = rs.getLong("CardImage.CardImageID");
@@ -165,23 +166,27 @@ public class ImageRequest {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            dbConnection.closeConnections(ps, rs);
         }
         return cardImages;
     }
 
-    public static HashMap<Long, CompleteCardImageInfo> getCompleteCardImagesByCard(int cardID) {
+    public static HashMap<Long, CompleteCardImageInfo> getCompleteCardImagesByCard(long cardID) {
         HashMap<Long, CompleteCardImageInfo> cardImages = new HashMap<Long, CompleteCardImageInfo>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            DatabaseConnection dbConnection = new DatabaseConnection();
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT * FROM CardImage " +
                     "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
-                    "LEFT OUTER JOIN TextGroup  ON (CardImage.ImageDescriptionTextGroupID=CardImageTextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN TextGroup  ON (CardImage.ImageDescriptionTextGroupID=TextGroup.TextGroupID) " +
                     "LEFT OUTER JOIN Text  ON (TextGroup.TextGroupID=Text.TextGroupID) " +
                     "WHERE CardImage.CardID=?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, cardID);
-            ResultSet rs = ps.executeQuery();
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardID);
+            rs = ps.executeQuery();
             while (rs.next()) {
                 CompleteCardImageInfo cardImage;
                 Long cardImageID = rs.getLong("CardImage.CardImageID");
@@ -197,23 +202,27 @@ public class ImageRequest {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            dbConnection.closeConnections(ps,rs);
         }
         return cardImages;
     }
 
-    public static CompleteCardImageInfo getCompleteCardImageByCardImage(int cardImageID) {
+    public static CompleteCardImageInfo getCompleteCardImageByCardImage(long cardImageID) {
         CompleteCardImageInfo cardImage = null;
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            DatabaseConnection dbConnection = new DatabaseConnection();
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT * FROM CardImage " +
                     "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
                     "LEFT OUTER JOIN TextGroup  ON (CardImage.ImageDescriptionTextGroupID=CardImageTextGroup.TextGroupID) " +
                     "LEFT OUTER JOIN Text  ON (TextGroup.TextGroupID=Text.TextGroupID) " +
                     "WHERE CardImage.CardImageID=?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, cardImageID);
-            ResultSet rs = ps.executeQuery();
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardImageID);
+            rs = ps.executeQuery();
             if (rs.first()) {
                 Long cardImageID2 = rs.getLong("CardImage.CardImageID");
                 if (cardImageID2 != 0 && !rs.wasNull() && cardImageID == cardImageID2) {
@@ -229,6 +238,8 @@ public class ImageRequest {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            dbConnection.closeConnections(ps, rs);
         }
         return cardImage;
     }
@@ -256,7 +267,7 @@ public class ImageRequest {
             } else {
                 completeTextGroupInfo = cardImage.getCompleteTextGroupInfo();
             }
-            TextRequest.getCompleteTextGroupInfo(rs,completeTextGroupInfo,text);
+            TextRequest.getCompleteTextGroupInfo(rs, completeTextGroupInfo, text);
         }
     }
 }
