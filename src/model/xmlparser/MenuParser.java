@@ -26,10 +26,4 @@ public class MenuParser {
         }
         return null;
     }
-
-
-    public static void main(String[] args) {
-        MenuParser menuParser = new MenuParser();
-        MainMenuData mainMenuData = menuParser.getMainMenuData("D:\\program\\MainMenuData.xml");
-    }
 }

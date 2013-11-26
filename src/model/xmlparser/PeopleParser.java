@@ -27,9 +27,4 @@ public class PeopleParser {
         return null;
     }
 
-
-    public static void main(String[] args) {
-        PeopleParser peopleParser = new PeopleParser();
-        PeopleAboutCity mainMenuData = peopleParser.getPeopleAboutCity("D:\\program\\people_aboutcity.xml");
-    }
 }

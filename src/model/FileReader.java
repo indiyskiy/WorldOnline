@@ -1,7 +1,6 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,10 +10,9 @@ import java.io.IOException;
  * To change this template use File | Settings | File Templates.
  */
 public class FileReader {
-    public static String readFileAsString(String filePath) throws IOException {
+    public static String readFileAsString(String filePath ) throws IOException {
         StringBuilder fileData = new StringBuilder();
-        BufferedReader reader = new BufferedReader(
-                new java.io.FileReader(filePath));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath),"UTF-8"));
         char[] buf = new char[1024];
         int numRead;
         while ((numRead = reader.read(buf)) != -1) {
@@ -24,4 +22,6 @@ public class FileReader {
         reader.close();
         return fileData.toString();
     }
+
+
 }

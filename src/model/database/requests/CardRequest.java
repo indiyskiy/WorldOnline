@@ -179,6 +179,8 @@ public class CardRequest {
                     "LEFT OUTER JOIN TextCard ON (Card.CardID=TextCard.CardID) " +
                     "LEFT OUTER JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
                     "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                    //card to card link
+                    "LEFT OUTER JOIN CardToCardLink ON (CardToCardLink.SourceCardID=Card.CardID) " +
                     "WHERE Card.CardID=?";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, cardID);
@@ -278,6 +280,7 @@ public class CardRequest {
             cardEntity.setCardVersion(rs.getInt(card + ".CardVersion"));
             cardEntity.setCreationTimestamp(rs.getTimestamp(card + ".CreationTimestamp"));
             cardEntity.setLastUpdateTimestamp(rs.getTimestamp(card + ".LastUpdateTimestamp"));
+            cardEntity.setCardState(rs.getInt(card+".CardState"));
         }
         return cardEntity;
     }

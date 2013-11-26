@@ -1,5 +1,6 @@
 package controller.parser.edit;
 
+import model.constants.databaseenumeration.TagType;
 import model.database.requests.TagRequest;
 import model.database.worldonlinedb.TagEntity;
 
@@ -38,9 +39,10 @@ public class TagEditParser {
             } else {
                 oldTag.setTagName(tagName);
             }
-//            String tagTextGroupID = request.getParameter("TagTextGroup");
-//            if(tagTextGroupID)
-//            if(oldTag.getTagTextGroup()==null || (oldTag.getTagTextGroup()!=null && String.valueOf(oldTag.getTagTextGroup()).equals(tagTextGroupID)) )
+            String tagTypeString=request.getParameter("TagType");
+            int tagTypeID=Integer.parseInt(tagTypeString);
+            TagType tagType=TagType.parseInt(tagTypeID);
+            oldTag.setTagType(tagType);
             return oldTag;
         } catch (SQLException e) {
             addError("Tag with id=" + tagID + " was not found");

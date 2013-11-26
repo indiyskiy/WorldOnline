@@ -100,4 +100,8 @@ public class TagEntity {
         setTagType(tagType.getValue());
         setTagName(tagName);
     }
+
+    public void setTagType(TagType tagType) {
+        setTagType(tagType.getValue());
+    }
 }

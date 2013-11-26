@@ -124,17 +124,4 @@ public class CardsParser {
         }
         return null;
     }
-
-
-    public static void main(String[] args) {
-        CardsParser cardsParser = new CardsParser();
-        CardAboutCity cardAboutCity = cardsParser.getCardAboutCity("D:\\program\\card_aboutcity.xml");
-        CardHandBook cardHandBook = cardsParser.getCardHandBook("D:\\program\\card_handbook.xml");
-        CardHotels cardHotels = cardsParser.getCardHotels("D:\\program\\card_hotels.xml");
-        CardMeal cardMeal = cardsParser.getCardMeal("D:\\program\\card_meals.xml");
-        CardRelax cardRelax = cardsParser.getCardRelax("D:\\program\\card_relax.xml");
-        CardRoute cardRoute = cardsParser.getCardRoute("D:\\program\\card_route.xml");
-        CardShopping cardShopping = cardsParser.getCardShopping("D:\\program\\card_shopping.xml");
-        CardSight cardSight = cardsParser.getCardSight("D:\\program\\card_sights.xml");
-    }
 }

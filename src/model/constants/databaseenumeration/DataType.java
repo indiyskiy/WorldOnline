@@ -8,14 +8,14 @@ package model.constants.databaseenumeration;
  * To change this template use File | Settings | File Templates.
  */
 public enum DataType {
-    Unknown(0),
-    Integer(1),
-    Double(2),
-    String(3),
-    Link(4),
-    Email(5),
-    PhoneNumber(6),
-    Timestamp(7);
+    UnknownType(0),
+    IntegerType(1),
+    DoubleType(2),
+    StringType(3),
+    LinkType(4),
+    EmailType(5),
+    PhoneNumberType(6),
+    TimestampType(7);
 
 
     private final int value;
@@ -31,7 +31,7 @@ public enum DataType {
     public static DataType parseInt(int value) {
         DataType[] dataTypes = DataType.values();
         if (value <= 0 || value > dataTypes.length) {
-            return Unknown;
+            return UnknownType;
         } else {
             return dataTypes[value];
         }

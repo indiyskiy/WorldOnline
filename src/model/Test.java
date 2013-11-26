@@ -31,7 +31,7 @@ public class Test {
     public static void addTestData() throws SQLException {
         //add info
         //card
-        CardEntity card = new CardEntity(CardType.CardRoute, "rootCard1");
+        CardEntity card = new CardEntity(CardType.CardRoute, "rootCard1",CardState.Active);
         CardRequest.addCard(card);
         //coordinate
         CardCoordinateEntity cardCoordinateEntity = new CardCoordinateEntity(card, 18.0, 77.5);
@@ -69,7 +69,7 @@ public class Test {
         ImageRequest.addCardImage(cardImageEntity);
         //card parameter
         String cardParameterValue = "http:\\\\www.youtobe.com";
-        CardParameterEntity cardParameterEntity = new CardParameterEntity(card, CardParameterType.Youtube, DataType.Link, cardParameterValue);
+        CardParameterEntity cardParameterEntity = new CardParameterEntity(card, CardParameterType.Youtube, DataType.LinkType, cardParameterValue);
         ParameterRequest.addCardParameter(cardParameterEntity);
         //card root text group
         TextGroupEntity rootTextGroup = new TextGroupEntity("random root text group");
@@ -82,7 +82,7 @@ public class Test {
         cardRootEntity.setRootDescriptionTextGroup(rootTextGroup);
         RootRequest.addCardRoot(cardRootEntity);
         //place card
-        CardEntity placeCard = new CardEntity(CardType.CardAboutCity, "some place card");
+        CardEntity placeCard = new CardEntity(CardType.CardAboutCity, "some place card",CardState.Active);
         //root element
         RootElementEntity rootElementEntity = new RootElementEntity();
         rootElementEntity.setCardRoot(cardRootEntity);
@@ -100,6 +100,9 @@ public class Test {
         TextRequest.addText(textEntityEng);
         TextEntity textEntityRus = new TextEntity(LanguageType.Russian, "ололо садовая 113", textGroup);
         TextRequest.addText(textEntityRus);
+        //card to card link
+        CardToCardLinkEntity cardToCardLinkEntity=new CardToCardLinkEntity(card,card,CardToCardLinkType.Unknown);
+        LinkRequest.addCardToCardLinkRequest(cardToCardLinkEntity);
     }
 
     public static void main(String[] args) {

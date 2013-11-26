@@ -39,7 +39,8 @@ public class HibernateUtil {
                     .addAnnotatedClass(CardRootEntity.class)
                     .addAnnotatedClass(RootElementEntity.class)
                     .addAnnotatedClass(CardCoordinateEntity.class)
-                    .addAnnotatedClass(ImageEntity.class);
+                    .addAnnotatedClass(ImageEntity.class)
+                    .addAnnotatedClass(CardToCardLinkEntity.class);
             Configuration configuration = new Configuration();
             configuration.configure();
             ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();

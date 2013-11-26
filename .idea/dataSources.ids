@@ -19,6 +19,7 @@
     <table name="card" schema="" catalog="worldonline" type="TABLE">
       <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="CardName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="CardState" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="CardType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="CardVersion" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="CreationTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
@@ -29,6 +30,8 @@
       <exported-key name="FK_ic9fnltx16lm8nm7cbqnj6i14" table="cardparameter" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_h3w5ceyl77et3vms0t3nn081l" table="cardroot" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_d5988m03oyar0cmc1rrehabop" table="cardtag" schema="" catalog="worldonline" columns="CardID"/>
+      <exported-key name="FK_d26ian9314gtlpkc64pm04qdx" table="cardtocardlink" schema="" catalog="worldonline" columns="TargetCardID"/>
+      <exported-key name="FK_nd7l1a14umsae1dvncv3juko7" table="cardtocardlink" schema="" catalog="worldonline" columns="SourceCardID"/>
       <exported-key name="FK_p8lmqkwbkqqbyi1v73rh6j43x" table="rootelement" schema="" catalog="worldonline" columns="PlaceCardID"/>
       <exported-key name="FK_ldbgpy6a9uyuawvm6yfnyni4" table="textcard" schema="" catalog="worldonline" columns="CardID"/>
     </table>
@@ -80,6 +83,15 @@
       <foreign-key name="FK_c191vnv9fed2brbgsp51utarl" columns="TagID" ref-table="tag" ref-schema="" ref-catalog="worldonline" ref-columns="TagID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_d5988m03oyar0cmc1rrehabop" columns="CardID" ref-table="card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
+    <table name="cardtocardlink" schema="" catalog="worldonline" type="TABLE">
+      <column name="CardToCardLinkID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="CardToCardLinkType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="SourceCardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="TargetCardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="CardToCardLinkID"/>
+      <foreign-key name="FK_d26ian9314gtlpkc64pm04qdx" columns="TargetCardID" ref-table="card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_nd7l1a14umsae1dvncv3juko7" columns="SourceCardID" ref-table="card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
     <table name="image" schema="" catalog="worldonline" type="TABLE">
       <column name="ImageID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="ImageFileSize" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
@@ -111,7 +123,7 @@
     <table name="text" schema="" catalog="worldonline" type="TABLE">
       <column name="TextID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="LanguageID" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="Text" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="Text" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1"/>
       <column name="TextGroupID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="TextID"/>
       <foreign-key name="FK_2cb0751w8jmy1jmf7rgqkrib5" columns="TextGroupID" ref-table="textgroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>

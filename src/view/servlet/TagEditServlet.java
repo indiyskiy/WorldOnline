@@ -22,6 +22,7 @@ import java.io.IOException;
 public class TagEditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            request.setCharacterEncoding("UTF-8");
             request.setAttribute("TagTypes", TagType.values());
             String tagIDString = request.getParameter("TagID");
             if (tagIDString != null) {
@@ -41,6 +42,7 @@ public class TagEditServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
+            request.setCharacterEncoding("UTF-8");
             TagEditParser parser = new TagEditParser();
             TagEntity tagEntity=parser.parse(request);
             if(parser.hasNoErrors()){

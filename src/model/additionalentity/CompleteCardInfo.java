@@ -1,9 +1,6 @@
 package model.additionalentity;
 
-import model.database.worldonlinedb.CardCoordinateEntity;
-import model.database.worldonlinedb.CardEntity;
-import model.database.worldonlinedb.CardImageEntity;
-import model.database.worldonlinedb.CardParameterEntity;
+import model.database.worldonlinedb.*;
 
 import java.util.HashMap;
 
@@ -22,6 +19,15 @@ public class CompleteCardInfo {
     private CompleteCardRootInfo completeCardRootInfo;
     private HashMap<Long,CompleteTextCardInfo> completeTextCardInfoMap=new HashMap<Long, CompleteTextCardInfo>();
     private CardCoordinateEntity cardCoordinateEntity;
+    private HashMap<Long, CardToCardLinkEntity> cardToCardLinkEntityMap;
+
+    public HashMap<Long, CardToCardLinkEntity> getCardToCardLinkEntityMap() {
+        return cardToCardLinkEntityMap;
+    }
+
+    public void setCardToCardLinkEntityMap(HashMap<Long, CardToCardLinkEntity> cardToCardLinkEntityMap) {
+        this.cardToCardLinkEntityMap = cardToCardLinkEntityMap;
+    }
 
     public CompleteCardInfo(CardEntity cardEntity) {
         this.cardEntity = cardEntity;

@@ -28,8 +28,5 @@ public class RouteParser {
     }
 
 
-    public static void main(String[] args) {
-        RouteParser routeParser = new RouteParser();
-        RouteRoute routeRoute = routeParser.getRouteRoute("D:\\program\\route_routes.xml");
-    }
+
 }

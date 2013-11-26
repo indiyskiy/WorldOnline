@@ -1,6 +1,7 @@
 package model.database.worldonlinedb;
 
 import model.constants.databaseenumeration.LanguageType;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -27,7 +28,8 @@ public class TextEntity {
         this.textID = textID;
     }
 
-    @javax.persistence.Column(name = "Text")
+    @javax.persistence.Column(name = "Text" )
+    @Type(type="text")
     @Basic
     private String text;
 

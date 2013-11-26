@@ -1,5 +1,7 @@
 package model.database.worldonlinedb;
 
+import model.constants.databaseenumeration.TextType;
+
 import javax.persistence.*;
 
 /**
@@ -87,5 +89,14 @@ public class TextCardEntity {
         result = 31 * result + (card != null ? card.hashCode() : 0);
         result = 31 * result + (cardTextType != null ? cardTextType.hashCode() : 0);
         return result;
+    }
+
+    public TextCardEntity() {
+    }
+
+    public TextCardEntity(TextGroupEntity textGroup, CardEntity card, TextType cardTextType) {
+        this.textGroup = textGroup;
+        this.card = card;
+        this.cardTextType = cardTextType.getValue();
     }
 }

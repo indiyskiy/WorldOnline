@@ -1,5 +1,6 @@
 package model.database.worldonlinedb;
 
+import model.constants.databaseenumeration.CardState;
 import model.constants.databaseenumeration.CardType;
 
 import javax.persistence.*;
@@ -90,13 +91,25 @@ public class CardEntity {
         this.cardName = cardName;
     }
 
+    @javax.persistence.Column(name = "CardState")
+    @Basic
+    private Integer cardState;
+
+    public Integer getCardState() {
+        return cardState;
+    }
+
+    public void setCardState(Integer cardState) {
+        this.cardState = cardState;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
         CardEntity that = (CardEntity) o;
-
         if (cardID != null ? !cardID.equals(that.cardID) : that.cardID != null)
             return false;
         if (cardType != null ? !cardType.equals(that.cardType) : that.cardType != null)
@@ -109,6 +122,8 @@ public class CardEntity {
             return false;
         if (cardName != null ? !cardName.equals(that.cardName) : that.cardName != null)
             return false;
+        if (cardState != null ? !cardState.equals(that.cardState) : that.cardState != null)
+            return false;
         return true;
     }
 
@@ -120,17 +135,19 @@ public class CardEntity {
         result = 31 * result + (creationTimestamp != null ? creationTimestamp.hashCode() : 0);
         result = 31 * result + (lastUpdateTimestamp != null ? lastUpdateTimestamp.hashCode() : 0);
         result = 31 * result + (cardName != null ? cardName.hashCode() : 0);
+        result = 31 * result + (cardState != null ? cardState.hashCode() : 0);
         return result;
     }
 
     public CardEntity() {
     }
 
-    public CardEntity(CardType cardType, String cardName) {
+    public CardEntity(CardType cardType, String cardName, CardState cardState) {
         setLastUpdateTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
         setCreationTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
         setCardVersion(0);
         setCardType(cardType.getValue());
         setCardName(cardName);
+        setCardState(cardState.getValue());
     }
 }

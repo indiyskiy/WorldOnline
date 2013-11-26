@@ -25,6 +25,7 @@ public class ExampleServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.setCharacterEncoding("UTF-8");
         ArrayList<UserEntity> allUsers = UserRequests.getAllUsers();
         request.setAttribute("users", allUsers);
         request.setAttribute("size", allUsers.size());

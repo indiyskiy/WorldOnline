@@ -1,6 +1,7 @@
 package model.textparser;
 
 import model.FileReader;
+import model.xmlparser.GlobalXmlParser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,15 +56,5 @@ public class StringFileParser {
         int anInt = Integer.parseInt(pair[1]);
         String string = pair[0];
         return new StringIntPair(string, anInt);
-    }
-
-    public static void main(String[] args) {
-        try {
-            parseStandartStringIntPair(FileReader.readFileAsString("D:\\program\\app_data\\Categories.txt"));
-            parseStandartStringIntPair(FileReader.readFileAsString("D:\\program\\app_data\\Kitchens.txt"));
-            parseStandartStringIntPair(FileReader.readFileAsString("D:\\program\\app_data\\Ribbons.txt"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
