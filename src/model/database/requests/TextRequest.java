@@ -26,6 +26,7 @@ public class TextRequest {
 
     public static void addText(TextEntity text) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(text);
@@ -83,6 +84,7 @@ public class TextRequest {
 
     public static void addTextCard(TextCardEntity textCardEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(textCardEntity);
@@ -103,8 +105,8 @@ public class TextRequest {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT * FROM TextGroup " +
                     "JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID)";
-             ps = connection.prepareStatement(sql);
-             rs = ps.executeQuery();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
                 CompleteTextGroupInfo textGroupInfo;
                 Long textGroupInfoID = rs.getLong("TextGroup.TextGroupID");
@@ -120,18 +122,32 @@ public class TextRequest {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }  finally {
-            dbConnection.closeConnections(ps,rs);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
         }
         return textGroupInfos;
     }
 
-    public static void getCompleteTextGroupInfo(ResultSet rs, CompleteTextGroupInfo textGroupInfo,  String text) throws SQLException {
+    public static void getCompleteTextGroupInfo(ResultSet rs, CompleteTextGroupInfo textGroupInfo, String text) throws SQLException {
         Long textID = rs.getLong(text + ".TextID");
         if (textID != 0 && !rs.wasNull()) {
             if (!textGroupInfo.getTextEntityMap().containsKey(textID) || textGroupInfo.getTextEntityMap().get(textID) == null) {
                 TextEntity textEntity = TextRequest.getTextByResultSet(rs, text);
                 textGroupInfo.getTextEntityMap().put(textID, textEntity);
+            }
+        }
+    }
+
+    public static void addTextGroup(TextGroupEntity textGroup) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.save(textGroup);
+            session.getTransaction().commit();
+        } finally {
+            if (session != null) {
+                session.close();
             }
         }
     }

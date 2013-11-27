@@ -1,12 +1,11 @@
 package model.database.requests;
 
 
-import model.Test;
 import model.additionalentity.*;
-import model.constants.databaseenumeration.*;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.*;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.intellij.lang.annotations.Language;
@@ -33,6 +32,7 @@ public class CardRequest {
     public static ArrayList<CardEntity> getAllCards() {
         ArrayList<CardEntity> cardEntities = new ArrayList<CardEntity>();
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             Transaction transaction = session.beginTransaction();
             cardEntities = (ArrayList<CardEntity>) session.createCriteria(CardEntity.class).list();
@@ -47,6 +47,7 @@ public class CardRequest {
 
     public static CardEntity getCardByID(Long cardID) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             return (CardEntity) session.get(CardEntity.class, cardID);
         } finally {
@@ -57,7 +58,10 @@ public class CardRequest {
     }
 
     public static boolean addCard(CardEntity card) {
+        System.out.println("add card " + card.getCardName() + " " + card.getCardType());
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
+        Transaction transaction = null;
         try {
             session.beginTransaction();
             session.save(card);
@@ -82,6 +86,7 @@ public class CardRequest {
 
     public static void addCard(List<CardEntity> cards) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             for (CardEntity card : cards) {
@@ -126,8 +131,8 @@ public class CardRequest {
                     "LEFT OUTER JOIN TextCard ON (Card.CardID=TextCard.CardID) " +
                     "LEFT OUTER JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
                     "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) ";
-             ps = connection.prepareStatement(sql);
-             rs = ps.executeQuery();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
                 CompleteCardInfo card;
                 Long cardID = rs.getLong("Card.CardID");
@@ -142,7 +147,7 @@ public class CardRequest {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            dbConnection.closeConnections(ps,rs);
+            dbConnection.closeConnections(ps, rs);
         }
         return cards;
     }
@@ -196,7 +201,7 @@ public class CardRequest {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-          dbConnection.closeConnections(ps,rs);
+            dbConnection.closeConnections(ps, rs);
         }
         return card;
     }
@@ -280,12 +285,10 @@ public class CardRequest {
             cardEntity.setCardVersion(rs.getInt(card + ".CardVersion"));
             cardEntity.setCreationTimestamp(rs.getTimestamp(card + ".CreationTimestamp"));
             cardEntity.setLastUpdateTimestamp(rs.getTimestamp(card + ".LastUpdateTimestamp"));
-            cardEntity.setCardState(rs.getInt(card+".CardState"));
+            cardEntity.setCardState(rs.getInt(card + ".CardState"));
         }
         return cardEntity;
     }
-
-
 
     public static void printInfo(CompleteCardInfo completeCardInfo) throws SQLException {
         System.out.println("Card name = " + completeCardInfo.getCardEntity().getCardName());

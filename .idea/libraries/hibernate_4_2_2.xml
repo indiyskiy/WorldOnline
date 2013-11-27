@@ -1,6 +1,5 @@
 <component name="libraryTable">
-  <library name="hibernate-4.2.2" type="hibernate">
-    <properties version="4.2.2" />
+  <library name="hibernate-4.2.2">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/hibernate-core-4.2.2.Final.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar!/" />

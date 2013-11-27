@@ -75,13 +75,13 @@ public class ImageEntity {
 
     @javax.persistence.Column(name = "ImageFileSize")
     @Basic
-    private Integer imageFileSize;
+    private Long imageFileSize;
 
-    public Integer getImageFileSize() {
+    public Long getImageFileSize() {
         return imageFileSize;
     }
 
-    public void setImageFileSize(Integer imageFileSize) {
+    public void setImageFileSize(Long imageFileSize) {
         this.imageFileSize = imageFileSize;
     }
 
@@ -122,7 +122,7 @@ public class ImageEntity {
     public ImageEntity() {
     }
 
-    public ImageEntity(String imageURL, Integer imageHeight, Integer imageWidth, Integer imageFileSize, String imageMD5Hash) {
+    public ImageEntity(String imageURL, Integer imageHeight, Integer imageWidth, Long imageFileSize, String imageMD5Hash) {
         this.imageURL = imageURL;
         this.imageHeight = imageHeight;
         this.imageWidth = imageWidth;

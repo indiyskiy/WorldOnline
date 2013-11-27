@@ -1,11 +1,11 @@
 package model.database.requests;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardParameterEntity;
 import org.hibernate.Session;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,10 +16,10 @@ import org.hibernate.Session;
  */
 public class ParameterRequest {
     public static CardParameterEntity getCardParameterByResultSet(ResultSet rs) throws SQLException {
-        Long  cardParameterEntityID = rs.getLong("CardParameter.CardParameterID");
-        CardParameterEntity cardParameterEntity=null;
-        if(cardParameterEntityID!=0 && !rs.wasNull()){
-            cardParameterEntity=new CardParameterEntity();
+        Long cardParameterEntityID = rs.getLong("CardParameter.CardParameterID");
+        CardParameterEntity cardParameterEntity = null;
+        if (cardParameterEntityID != 0 && !rs.wasNull()) {
+            cardParameterEntity = new CardParameterEntity();
             cardParameterEntity.setCardParameterID(cardParameterEntityID);
             cardParameterEntity.setCardParameterDataType(rs.getInt("CardParameter.CardParameterDataType"));
             cardParameterEntity.setCardParameterName(rs.getString("CardParameter.CardParameterName"));
@@ -31,6 +31,7 @@ public class ParameterRequest {
 
     public static void addCardParameter(CardParameterEntity cardParameterEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(cardParameterEntity);

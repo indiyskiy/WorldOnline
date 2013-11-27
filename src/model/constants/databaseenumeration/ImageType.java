@@ -10,7 +10,9 @@ package model.constants.databaseenumeration;
 public enum ImageType {
     Unknown(0),
     CardImage(1),
-    GalleryImage(2);
+    Photo(2),
+    PanoramaToList(3),
+    Panorama(4);
 
     private final int value;
 

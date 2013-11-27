@@ -46,6 +46,7 @@ public class RootRequest {
 
     public static void addCardRoot(CardRootEntity cardRootEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(cardRootEntity);
@@ -59,6 +60,7 @@ public class RootRequest {
 
     public static void addRootElement(RootElementEntity rootElementEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(rootElementEntity);
@@ -84,6 +86,7 @@ public class RootRequest {
 
     public static void addCardCoordinate(CardCoordinateEntity cardCoordinateEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(cardCoordinateEntity);
@@ -124,8 +127,8 @@ public class RootRequest {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }  finally {
-            dbConnection.closeConnections(ps,rs);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
         }
         return cardRoots;
     }
@@ -162,7 +165,7 @@ public class RootRequest {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            dbConnection.closeConnections(ps,rs);
+            dbConnection.closeConnections(ps, rs);
         }
         return cardRoots;
     }

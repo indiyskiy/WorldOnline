@@ -27,7 +27,7 @@ public class TextCardEntity {
         this.textCardID = textCardID;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "TextGroupID")
     private TextGroupEntity textGroup;
 
@@ -95,8 +95,8 @@ public class TextCardEntity {
     }
 
     public TextCardEntity(TextGroupEntity textGroup, CardEntity card, TextType cardTextType) {
-        this.textGroup = textGroup;
-        this.card = card;
-        this.cardTextType = cardTextType.getValue();
+        setTextGroup(textGroup);
+        setCard(card);
+        setCardTextType(cardTextType.getValue());
     }
 }

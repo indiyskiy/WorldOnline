@@ -1,7 +1,6 @@
 package model.database.requests;
 
 import model.database.session.HibernateUtil;
-import model.database.worldonlinedb.CardImageEntity;
 import model.database.worldonlinedb.CardToCardLinkEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -21,6 +20,7 @@ public class LinkRequest {
     public static ArrayList<CardToCardLinkEntity> getAllCardToCardLink() {
         ArrayList<CardToCardLinkEntity> cardToCardLinkEntities = new ArrayList<CardToCardLinkEntity>();
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             Transaction transaction = session.beginTransaction();
             cardToCardLinkEntities = (ArrayList<CardToCardLinkEntity>) session.createCriteria(CardToCardLinkEntity.class).list();
@@ -35,6 +35,7 @@ public class LinkRequest {
 
     public static CardToCardLinkEntity getCardToCardLinkByID(Long cardToCardLinkID) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             return (CardToCardLinkEntity) session.get(CardToCardLinkEntity.class, cardToCardLinkID);
         } finally {
@@ -46,6 +47,7 @@ public class LinkRequest {
 
     public static void addCardToCardLinkRequest(CardToCardLinkEntity cardToCardLinkEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(cardToCardLinkEntity);

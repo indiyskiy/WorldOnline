@@ -57,7 +57,7 @@ public class TagRequest {
             @Language("MySQL")
             String sql = "SELECT * FROM Tag " +
                     "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) "+
+                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
                     "WHERE Tag.TagType=? AND Tag.TagName=?";
             ps = connection.prepareStatement(sql);
             ps.setInt(1, tagType.getValue());
@@ -86,8 +86,8 @@ public class TagRequest {
             @Language("MySQL")
             String sql = "SELECT * FROM Tag " +
                     "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) "+
-            "WHERE Tag.TagType=?";
+                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                    "WHERE Tag.TagType=?";
 
             ps = connection.prepareStatement(sql);
             ps.setInt(1, tagType.getValue());
@@ -117,13 +117,13 @@ public class TagRequest {
             String sql = "SELECT * FROM CardTag " +
                     "JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
                     "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) "+
+                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
                     "WHERE CardTag.CardTagID=?";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, cardTagID);
             rs = ps.executeQuery();
             if (rs.first()) {
-                cardTag=getCardTagByResultSet(rs);
+                cardTag = getCardTagByResultSet(rs);
                 TagEntity tag = getTagByResultSet(rs);
                 TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs);
                 tag.setTagTextGroup(textGroupEntity);
@@ -137,7 +137,6 @@ public class TagRequest {
         return cardTag;
     }
 
-
     public static TagEntity getTag(long tagID) throws SQLException {
         TagEntity tag = null;
         ResultSet rs = null;
@@ -148,7 +147,7 @@ public class TagRequest {
             @Language("MySQL")
             String sql = "SELECT * FROM Tag " +
                     "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) "+
+                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
                     "WHERE Tag.TagID=?";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, tagID);
@@ -168,6 +167,7 @@ public class TagRequest {
 
     public static void addCardTag(CardTagEntity cardTagEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(cardTagEntity);
@@ -181,6 +181,7 @@ public class TagRequest {
 
     public static void addTag(TagEntity tagEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(tagEntity);
@@ -194,6 +195,7 @@ public class TagRequest {
 
     public static void editTag(TagEntity tagEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.update(tagEntity);
@@ -318,10 +320,10 @@ public class TagRequest {
             ps = connection.prepareStatement(sql);
             ps.setLong(1, tagID);
             rs = ps.executeQuery();
-            System.out.println("0-"+tagID);
+            System.out.println("0-" + tagID);
             if (rs.first()) {
                 Long tagID2 = rs.getLong("Tag.TagID");
-                System.out.println("1-"+tagID2);
+                System.out.println("1-" + tagID2);
                 if (tagID2 != 0 && tagID == tagID2 && !rs.wasNull()) {
                     tag = new CompleteTagInfo(getTagByResultSet(rs));
                     getCompleteTag(rs, tag, "TextGroup", "Text");

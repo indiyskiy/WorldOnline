@@ -20,37 +20,46 @@ public class HibernateUtil {
     private SessionFactory sessionFactory;
 
     private HibernateUtil() {
+//    public HibernateUtil() {
         try {
-            Configuration ac = new Configuration();
-//            Configuration ac=new Configuration().configure();
-            ac.addAnnotatedClass(UserEntity.class)
-                    .addAnnotatedClass(GlobalVersionEntity.class)
-                    .addAnnotatedClass(UserHardwareEntity.class)
-                    .addAnnotatedClass(UserContentEntity.class)
-                    .addAnnotatedClass(UserPersonalDataEntity.class)
-                    .addAnnotatedClass(CardEntity.class)
-                    .addAnnotatedClass(CardParameterEntity.class)
-                    .addAnnotatedClass(TextCardEntity.class)
-                    .addAnnotatedClass(TextGroupEntity.class)
-                    .addAnnotatedClass(TextEntity.class)
-                    .addAnnotatedClass(TagEntity.class)
-                    .addAnnotatedClass(CardTagEntity.class)
-                    .addAnnotatedClass(CardImageEntity.class)
-                    .addAnnotatedClass(CardRootEntity.class)
-                    .addAnnotatedClass(RootElementEntity.class)
-                    .addAnnotatedClass(CardCoordinateEntity.class)
-                    .addAnnotatedClass(ImageEntity.class)
-                    .addAnnotatedClass(CardToCardLinkEntity.class);
-            Configuration configuration = new Configuration();
-            configuration.configure();
-            ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-            Configuration conf = ac.configure();
-            sessionFactory = conf.buildSessionFactory(serviceRegistry);
+//            Configuration configuration = new Configuration();
+//            configuration.configure();
+//            configuration.setNamingStrategy(new ImprovedNamingStrategy());
+//            ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+            Configuration ac = buildConfig();
+            ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(ac.getProperties()).buildServiceRegistry();
+            sessionFactory = ac.buildSessionFactory(serviceRegistry);
+//            sessionFactory = new Configuration().configure().buildSessionFactory();
         } catch (Exception ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
             ex.printStackTrace();
             throw new ExceptionInInitializerError(ex);
         }
+    }
+
+    private static Configuration buildConfig() {
+        Configuration ac = new Configuration();
+//            Configuration ac=new Configuration().configure();
+        ac.addAnnotatedClass(UserEntity.class)
+                .addAnnotatedClass(GlobalVersionEntity.class)
+                .addAnnotatedClass(UserHardwareEntity.class)
+                .addAnnotatedClass(UserContentEntity.class)
+                .addAnnotatedClass(UserPersonalDataEntity.class)
+                .addAnnotatedClass(CardEntity.class)
+                .addAnnotatedClass(CardParameterEntity.class)
+                .addAnnotatedClass(TextCardEntity.class)
+                .addAnnotatedClass(TextGroupEntity.class)
+                .addAnnotatedClass(TextEntity.class)
+                .addAnnotatedClass(TagEntity.class)
+                .addAnnotatedClass(CardTagEntity.class)
+                .addAnnotatedClass(CardImageEntity.class)
+                .addAnnotatedClass(CardRootEntity.class)
+                .addAnnotatedClass(RootElementEntity.class)
+                .addAnnotatedClass(CardCoordinateEntity.class)
+                .addAnnotatedClass(ImageEntity.class)
+                .addAnnotatedClass(CardToCardLinkEntity.class);
+        ac.configure();
+        return ac;
     }
 
     public static HibernateUtil getInstance() {

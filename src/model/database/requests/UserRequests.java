@@ -23,6 +23,7 @@ public class UserRequests {
     public static ArrayList<UserEntity> getAllUsers() {
         ArrayList<UserEntity> userEntity = new ArrayList<UserEntity>();
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             Transaction transaction = session.beginTransaction();
             userEntity = (ArrayList<UserEntity>) session.createCriteria(UserEntity.class).list();
@@ -35,9 +36,9 @@ public class UserRequests {
         return userEntity;
     }
 
-
     public static UserEntity getUserByID(Long userID) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             return (UserEntity) session.get(UserEntity.class, userID);
         } finally {
@@ -49,6 +50,7 @@ public class UserRequests {
 
     public static boolean addUser(UserEntity user) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(user);
@@ -80,6 +82,7 @@ public class UserRequests {
 
     public static void addUsers(List<UserEntity> users) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             for (UserEntity user : users) {

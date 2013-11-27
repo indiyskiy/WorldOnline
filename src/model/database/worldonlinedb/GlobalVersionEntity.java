@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  * Time: 18:23
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "worldonline", schema = "", catalog = "worldonline")
+@javax.persistence.Table(name = "GlobalVersion", schema = "", catalog = "worldonline")
 @Entity
 public class GlobalVersionEntity {
     @javax.persistence.Column(name = "GlobalVersionID")

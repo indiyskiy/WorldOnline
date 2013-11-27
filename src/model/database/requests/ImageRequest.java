@@ -28,6 +28,7 @@ import java.util.HashMap;
 public class ImageRequest {
     public static void addCardImage(CardImageEntity image) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(image);
@@ -41,6 +42,7 @@ public class ImageRequest {
 
     public static void addImage(ImageEntity imageEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(imageEntity);
@@ -55,6 +57,7 @@ public class ImageRequest {
     public static ArrayList<ImageEntity> getAllImages() {
         ArrayList<ImageEntity> imageEntities = new ArrayList<ImageEntity>();
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             Transaction transaction = session.beginTransaction();
             imageEntities = (ArrayList<ImageEntity>) session.createCriteria(ImageEntity.class).list();
@@ -70,6 +73,7 @@ public class ImageRequest {
     public static ArrayList<CardImageEntity> getAllCardImages() {
         ArrayList<CardImageEntity> cardImageEntities = new ArrayList<CardImageEntity>();
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             Transaction transaction = session.beginTransaction();
             cardImageEntities = (ArrayList<CardImageEntity>) session.createCriteria(CardImageEntity.class).list();
@@ -84,6 +88,7 @@ public class ImageRequest {
 
     public static ImageEntity getImageByID(Long imageID) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             return (ImageEntity) session.get(ImageEntity.class, imageID);
         } finally {
@@ -95,6 +100,7 @@ public class ImageRequest {
 
     public static CardImageEntity getCardImageByID(Long cardImageID) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             return (CardImageEntity) session.get(CardImageEntity.class, cardImageID);
         } finally {
@@ -128,7 +134,7 @@ public class ImageRequest {
         ImageEntity imageEntity = null;
         if (rs.getLong(image + ".ImageID") != 0 && !rs.wasNull()) {
             imageEntity = new ImageEntity();
-            imageEntity.setImageFileSize(rs.getInt(image + ".ImageFileSize"));
+            imageEntity.setImageFileSize(rs.getLong(image + ".ImageFileSize"));
             imageEntity.setImageHeight(rs.getInt(image + ".ImageHeight"));
             imageEntity.setImageID(rs.getLong(image + ".ImageID"));
             imageEntity.setImageMD5Hash(rs.getString(image + ".ImageMD5Hash"));
@@ -203,7 +209,7 @@ public class ImageRequest {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            dbConnection.closeConnections(ps,rs);
+            dbConnection.closeConnections(ps, rs);
         }
         return cardImages;
     }
@@ -269,5 +275,28 @@ public class ImageRequest {
             }
             TextRequest.getCompleteTextGroupInfo(rs, completeTextGroupInfo, text);
         }
+    }
+
+    public static ImageEntity getImageByHash(String hash) {
+        ImageEntity image = null;
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT * FROM Image " +
+                    "WHERE Image.ImageMD5Hash=?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, hash);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                image = getImageFromResultSet(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return image;
     }
 }

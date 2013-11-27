@@ -25,15 +25,6 @@
       <column name="CreationTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
       <column name="LastUpdateTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="CardID"/>
-      <exported-key name="FK_55sp0hs3nhgu8yq0xlp3s84d4" table="cardcoordinate" schema="" catalog="worldonline" columns="CardID"/>
-      <exported-key name="FK_kad18leo0yike87hf7oa63gi9" table="cardimage" schema="" catalog="worldonline" columns="CardID"/>
-      <exported-key name="FK_ic9fnltx16lm8nm7cbqnj6i14" table="cardparameter" schema="" catalog="worldonline" columns="CardID"/>
-      <exported-key name="FK_h3w5ceyl77et3vms0t3nn081l" table="cardroot" schema="" catalog="worldonline" columns="CardID"/>
-      <exported-key name="FK_d5988m03oyar0cmc1rrehabop" table="cardtag" schema="" catalog="worldonline" columns="CardID"/>
-      <exported-key name="FK_d26ian9314gtlpkc64pm04qdx" table="cardtocardlink" schema="" catalog="worldonline" columns="TargetCardID"/>
-      <exported-key name="FK_nd7l1a14umsae1dvncv3juko7" table="cardtocardlink" schema="" catalog="worldonline" columns="SourceCardID"/>
-      <exported-key name="FK_p8lmqkwbkqqbyi1v73rh6j43x" table="rootelement" schema="" catalog="worldonline" columns="PlaceCardID"/>
-      <exported-key name="FK_ldbgpy6a9uyuawvm6yfnyni4" table="textcard" schema="" catalog="worldonline" columns="CardID"/>
     </table>
     <table name="cardcoordinate" schema="" catalog="worldonline" type="TABLE">
       <column name="CardCoordinateID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>

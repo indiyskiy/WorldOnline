@@ -52,7 +52,7 @@ public class Test {
         CardTagEntity cardTagEntity = new CardTagEntity(card, tag);
         TagRequest.addCardTag(cardTagEntity);
         //image
-        int fileSize = 100500;
+        Long fileSize = 100500l;
         String md5Hash = "qwiwdrhqn4wevrmw4458m3nr0tr9imib34";
         String url = "http:\\\\www.RandomFileServer.ru?imgID=1";
         ImageEntity imageEntity = new ImageEntity(url, 1920, 1080, fileSize, md5Hash);
