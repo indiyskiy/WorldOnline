@@ -26,7 +26,7 @@ public enum ImageType {
 
     public static ImageType parseInt(int value) {
         ImageType[] imageTypes = ImageType.values();
-        if (value <= 0 || value > imageTypes.length) {
+        if (value <= 0 || value >=imageTypes.length) {
             return Unknown;
         } else {
             return imageTypes[value];

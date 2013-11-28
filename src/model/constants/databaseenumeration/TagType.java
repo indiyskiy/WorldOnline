@@ -25,7 +25,7 @@ public enum  TagType {
 
     public static TagType parseInt(int value) {
         TagType[] tagTypes = TagType.values();
-        if (value <= 0 || value > tagTypes.length) {
+        if (value <= 0 || value >=tagTypes.length) {
             return Unknown;
         } else {
             return tagTypes[value];

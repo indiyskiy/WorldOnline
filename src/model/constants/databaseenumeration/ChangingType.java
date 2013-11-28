@@ -26,7 +26,7 @@ public enum ChangingType {
 
     public static ChangingType parseInt(int value) {
         ChangingType[] changingTypes = ChangingType.values();
-        if (value <= 0 || value > changingTypes.length) {
+        if (value <= 0 || value >=changingTypes.length) {
             return Unknown;
         } else {
             return changingTypes[value];

@@ -16,4 +16,12 @@ import java.util.List;
 public class MainMenuData {
     @ElementList(inline = true, name = "Submenu")
     List<Submenu> submenus;
+
+    public List<Submenu> getSubmenus() {
+        return submenus;
+    }
+
+    public void setSubmenus(List<Submenu> submenus) {
+        this.submenus = submenus;
+    }
 }

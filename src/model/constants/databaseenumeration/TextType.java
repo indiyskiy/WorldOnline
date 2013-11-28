@@ -28,7 +28,7 @@ public enum TextType {
 
     public static TextType parseInt(int value) {
         TextType[] textTypes = TextType.values();
-        if (value <= 0 || value > textTypes.length) {
+        if (value <= 0 || value >=textTypes.length) {
             return Unknown;
         } else {
             return textTypes[value];

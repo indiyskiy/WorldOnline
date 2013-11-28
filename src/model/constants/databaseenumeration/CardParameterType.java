@@ -45,7 +45,7 @@ public enum CardParameterType {
 
     public static CardParameterType parseInt(int value) {
         CardParameterType[] cardParameterTypes = CardParameterType.values();
-        if (value <= 0 || value > cardParameterTypes.length) {
+        if (value <= 0 || value >=cardParameterTypes.length) {
             return Unknown;
         } else {
             return cardParameterTypes[value];

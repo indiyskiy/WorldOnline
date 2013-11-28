@@ -26,7 +26,7 @@ public enum CardState {
 
     public static CardState parseInt(int value) {
         CardState[] changingTypes = CardState.values();
-        if (value <= 0 || value > changingTypes.length) {
+        if (value <= 0 || value >=changingTypes.length) {
             return Unknown;
         } else {
             return changingTypes[value];

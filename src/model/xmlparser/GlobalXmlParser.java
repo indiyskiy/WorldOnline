@@ -1,6 +1,7 @@
 package model.xmlparser;
 
 import model.FileReader;
+import model.additionalentity.CompleteCardInfo;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.*;
 import model.database.requests.*;
@@ -24,6 +25,7 @@ import model.xmlparser.xmlview.card.cardshopping.Shopping;
 import model.xmlparser.xmlview.card.cardsights.CardSight;
 import model.xmlparser.xmlview.card.cardsights.Sight;
 import model.xmlparser.xmlview.mainmenudata.MainMenuData;
+import model.xmlparser.xmlview.mainmenudata.Submenu;
 import model.xmlparser.xmlview.people.peopleaboutcity.PeopleAboutCity;
 import model.xmlparser.xmlview.photo.photocard.PhotoCard;
 import model.xmlparser.xmlview.route.routeroute.RouteRoute;
@@ -57,6 +59,8 @@ public class GlobalXmlParser {
         try {
             GlobalXmlParser globalXmlParser = new GlobalXmlParser();
             globalXmlParser.globalParse();
+            CompleteCardInfo completeCardInfo = CardRequest.getCompleteCardInfo(1);
+            CardRequest.printInfo(completeCardInfo);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -93,6 +97,7 @@ public class GlobalXmlParser {
         //main menu
         MenuParser menuParser = new MenuParser();
         MainMenuData mainMenuData = menuParser.getMainMenuData(root + "MainMenuData.xml");
+        saveMainMenu(mainMenuData);
         //people
         PeopleParser peopleParser = new PeopleParser();
         PeopleAboutCity peopleAboutCity = peopleParser.getPeopleAboutCity(root + "people_aboutcity.xml");
@@ -102,6 +107,13 @@ public class GlobalXmlParser {
         //root
         RouteParser routeParser = new RouteParser();
         RouteRoute routeRoute = routeParser.getRouteRoute(root + "route_routes.xml");
+    }
+
+    private void saveMainMenu(MainMenuData mainMenuData) {
+        List<Submenu> submenus = mainMenuData.getSubmenus();
+        for(Submenu submenu:submenus){
+
+        }
     }
 
     private void saveCardShopping(CardShopping cardShopping) throws IOException, SQLException {
@@ -533,7 +545,6 @@ public class GlobalXmlParser {
     }
 
     private void saveImages(String imageNames, CardEntity card, ImageType imageType) {
-//        System.out.println(imageNames+" "+imageType);
         if (imageNames == null || imageNames.isEmpty()) {
             return;
         }
@@ -646,18 +657,32 @@ public class GlobalXmlParser {
         }
         if (textEn != null && !textEn.isEmpty()) {
             textGroupEntity = new TextGroupEntity(name + "_" + textType);
-            TextEntity textEntity = new TextEntity(LanguageType.English, textEn, textGroupEntity);
-            TextRequest.addText(textEntity);
+            TextEntity textEntity = TextRequest.findTextByText(textEn);
+            if (textEntity == null) {
+                textEntity = new TextEntity(LanguageType.English, textEn, textGroupEntity);
+                TextRequest.addText(textEntity);
+            } else {
+                textGroupEntity = textEntity.getTextGroup();
+            }
         }
         if (textRu != null && !textRu.isEmpty()) {
             if (textGroupEntity == null) {
                 textGroupEntity = new TextGroupEntity(name + "_" + textType);
             }
-            TextEntity textEntity = new TextEntity(LanguageType.Russian, textRu, textGroupEntity);
-            TextRequest.addText(textEntity);
+            TextEntity textEntity = TextRequest.findTextByText(textRu);
+            if (textEntity == null) {
+                textEntity = new TextEntity(LanguageType.Russian, textRu, textGroupEntity);
+                TextRequest.addText(textEntity);
+            } else {
+                if (textGroupEntity.getTextGroupID() == null) {
+                    textGroupEntity = textEntity.getTextGroup();
+                }
+            }
+        }
+        if (textGroupEntity != null && textGroupEntity.getTextGroupID() == null) {
+            TextRequest.addTextGroup(textGroupEntity);
         }
         if (textGroupEntity != null) {
-            TextRequest.addTextGroup(textGroupEntity);
             TextCardEntity textCardEntity = new TextCardEntity(textGroupEntity, card, textType);
             TextRequest.addTextCard(textCardEntity);
         }
@@ -679,10 +704,9 @@ public class GlobalXmlParser {
             }
             File imageFile = new File(imageRoot + imageName);
             if (!imageFile.exists()) {
-                System.out.println(imageRoot + " : " + imageName + " FROM " + imageType);
+//                System.out.println(imageRoot + " : " + imageName + " FROM " + imageType);
                 return;
             }
-
             BufferedImage bimg = ImageIO.read(imageFile);
             int width = bimg.getWidth();
             int height = bimg.getHeight();
@@ -699,7 +723,7 @@ public class GlobalXmlParser {
             cardImageEntity.setCardImageName(imageName);
             ImageRequest.addCardImage(cardImageEntity);
         } catch (Exception e) {
-            System.out.println("Exception on " + imageRoot + " : " + imageName + " FROM " + imageType);
+//            System.out.println("Exception on " + imageRoot + " : " + imageName + " FROM " + imageType);
             e.printStackTrace();
         }
     }
@@ -739,7 +763,7 @@ public class GlobalXmlParser {
 }
 
 /*
-public String priceFile;
-public String metro;
+priceFile;
+metro;
 parentMenuID
 */

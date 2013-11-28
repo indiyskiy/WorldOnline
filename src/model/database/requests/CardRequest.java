@@ -2,6 +2,7 @@ package model.database.requests;
 
 
 import model.additionalentity.*;
+import model.constants.databaseenumeration.TextType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.*;
@@ -58,7 +59,7 @@ public class CardRequest {
     }
 
     public static boolean addCard(CardEntity card) {
-        System.out.println("add card " + card.getCardName() + " " + card.getCardType());
+//        System.out.println("add card " + card.getCardName() + " " + card.getCardType());
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
 //        Session session = new HibernateUtil().getSessionFactory().openSession();
         Transaction transaction = null;
@@ -268,6 +269,21 @@ public class CardRequest {
                 completeCardInfo.setCardCoordinateEntity(cardCoordinateEntity);
             }
         }
+        Long textCardID=rs.getLong("TextCard.TextCardID");
+        if(textCardID!=0 && !rs.wasNull()){
+          HashMap<Long,CompleteTextCardInfo>cardInfoHashMap=completeCardInfo.getCompleteTextCardInfoMap();
+            CompleteTextCardInfo completeTextCardInfo=cardInfoHashMap.get(textCardID);
+            if(completeTextCardInfo==null){
+                TextCardEntity textCardEntity=TextRequest.getTextCardByResultSet(rs);
+                completeTextCardInfo=new CompleteTextCardInfo(textCardEntity);
+                cardInfoHashMap.put(textCardID,completeTextCardInfo);
+            }
+           if(completeTextCardInfo.getCompleteTextGroupInfo()==null){
+               CompleteTextGroupInfo completeTextGroupInfo=new CompleteTextGroupInfo(TextRequest.getTextGroupByResultSet(rs));
+               completeTextCardInfo.setCompleteTextGroupInfo(completeTextGroupInfo);
+           }
+            TextRequest.getCompleteTextGroupInfo(rs,completeTextCardInfo.getCompleteTextGroupInfo(),"Text");
+        }
         return completeCardInfo;
     }
 
@@ -356,10 +372,12 @@ public class CardRequest {
                 }
             }
         }
+
         Collection<CompleteTextCardInfo> completeTextCardInfos = completeCardInfo.getCompleteTextCardInfoMap().values();
         for (CompleteTextCardInfo completeTextCardInfo : completeTextCardInfos) {
             if (completeTextCardInfo.getTextCardEntity() != null) {
-                System.out.println("text card id = " + completeTextCardInfo.getTextCardEntity().getTextCardID());
+//                System.out.println("text card id = " + completeTextCardInfo.getTextCardEntity().getTextCardID());
+                System.out.println(TextType.parseInt(completeTextCardInfo.getTextCardEntity().getCardTextType())+" "+completeTextCardInfo.getCompleteTextGroupInfo().getTextGroup().getTextGroupName());
             }
         }
     }

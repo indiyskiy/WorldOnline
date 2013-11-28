@@ -24,7 +24,7 @@ public enum LanguageType {
 
     public static LanguageType parseInt(int value) {
         LanguageType[] languageTypes = LanguageType.values();
-        if (value <= 0 || value > languageTypes.length) {
+        if (value <= 0 || value >=languageTypes.length) {
             return Unknown;
         } else {
             return languageTypes[value];

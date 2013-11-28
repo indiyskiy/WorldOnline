@@ -151,4 +151,30 @@ public class TextRequest {
             }
         }
     }
+
+    public static TextEntity findTextByText(String text) {
+        TextEntity textEntity = null;
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT * FROM TextGroup " +
+                    "JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID) " +
+                    "WHERE Text.Text Like ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, text);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                textEntity = getTextByResultSet(rs);
+                TextGroupEntity textGroupEntity = getTextGroupByResultSet(rs);
+                textEntity.setTextGroup(textGroupEntity);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return textEntity;
+    }
 }
