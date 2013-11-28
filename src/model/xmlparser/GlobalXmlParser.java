@@ -1,14 +1,10 @@
 package model.xmlparser;
 
 import model.FileReader;
+import model.constants.ServerConsts;
 import model.constants.databaseenumeration.*;
-import model.database.requests.CardRequest;
-import model.database.requests.ParameterRequest;
-import model.database.requests.TagRequest;
-import model.database.worldonlinedb.CardEntity;
-import model.database.worldonlinedb.CardParameterEntity;
-import model.database.worldonlinedb.CardTagEntity;
-import model.database.worldonlinedb.TagEntity;
+import model.database.requests.*;
+import model.database.worldonlinedb.*;
 import model.textparser.StringFileParser;
 import model.textparser.StringIntPair;
 import model.xmlparser.xmlview.card.cardaboutcity.AboutCity;
@@ -33,6 +29,8 @@ import model.xmlparser.xmlview.photo.photocard.PhotoCard;
 import model.xmlparser.xmlview.route.routeroute.RouteRoute;
 import org.springframework.util.FileCopyUtils;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -575,10 +573,10 @@ public class GlobalXmlParser {
     }
 
     private void saveParameter(String parameter, CardEntity card, CardParameterType cardParameterType) {
-//        if (isValidParameter(parameter, cardParameterType.getDataType())) {
-//            CardParameterEntity cardParameterEntity = new CardParameterEntity(card, cardParameterType, cardParameterType.getDataType(), parameter);
-//            ParameterRequest.addCardParameter(cardParameterEntity);
-//        }
+        if (isValidParameter(parameter, cardParameterType.getDataType())) {
+            CardParameterEntity cardParameterEntity = new CardParameterEntity(card, cardParameterType, cardParameterType.getDataType(), parameter);
+            ParameterRequest.addCardParameter(cardParameterEntity);
+        }
     }
 
     private boolean isValidParameter(String parameter, DataType cardParameterDataType) {
@@ -635,74 +633,75 @@ public class GlobalXmlParser {
     }
 
     private void saveText(String textRu, String textEn, String nameRu, String nameEn, TextType textType, CardEntity card) {
-//        TextGroupEntity textGroupEntity = null;
-//        String name;
-//        if (nameEn != null) {
-//            name = nameEn;
-//        } else {
-//            if (nameRu != null) {
-//                name = nameRu;
-//            } else {
-//                name = "";
-//            }
-//        }
-//        if (textEn != null && !textEn.isEmpty()) {
-//            textGroupEntity = new TextGroupEntity(name + "_" + textType);
-//            TextEntity textEntity = new TextEntity(LanguageType.English, textEn, textGroupEntity);
-//            TextRequest.addText(textEntity);
-//        }
-//        if (textRu != null && !textRu.isEmpty()) {
-//            if (textGroupEntity == null) {
-//                textGroupEntity = new TextGroupEntity(name + "_" + textType);
-//            }
-//            TextEntity textEntity = new TextEntity(LanguageType.Russian, textRu, textGroupEntity);
-//            TextRequest.addText(textEntity);
-//        }
-//        if (textGroupEntity != null) {
-//            TextRequest.addTextGroup(textGroupEntity);
-//            TextCardEntity textCardEntity = new TextCardEntity(textGroupEntity, card, textType);
-//            TextRequest.addTextCard(textCardEntity);
-//        }
+        TextGroupEntity textGroupEntity = null;
+        String name;
+        if (nameEn != null) {
+            name = nameEn;
+        } else {
+            if (nameRu != null) {
+                name = nameRu;
+            } else {
+                name = "";
+            }
+        }
+        if (textEn != null && !textEn.isEmpty()) {
+            textGroupEntity = new TextGroupEntity(name + "_" + textType);
+            TextEntity textEntity = new TextEntity(LanguageType.English, textEn, textGroupEntity);
+            TextRequest.addText(textEntity);
+        }
+        if (textRu != null && !textRu.isEmpty()) {
+            if (textGroupEntity == null) {
+                textGroupEntity = new TextGroupEntity(name + "_" + textType);
+            }
+            TextEntity textEntity = new TextEntity(LanguageType.Russian, textRu, textGroupEntity);
+            TextRequest.addText(textEntity);
+        }
+        if (textGroupEntity != null) {
+            TextRequest.addTextGroup(textGroupEntity);
+            TextCardEntity textCardEntity = new TextCardEntity(textGroupEntity, card, textType);
+            TextRequest.addTextCard(textCardEntity);
+        }
     }
 
     private void saveTags(ArrayList<StringIntPair> tagList, TagType tagType) {
-//        for (StringIntPair tagItem : tagList) {
-//            TextGroupEntity textGroup = new TextGroupEntity(tagType + "_" + tagItem.getString());
-//            TagEntity tagEntity = new TagEntity(textGroup, tagType, tagItem.getString());
-//            tagEntity.setTagID((long) tagItem.getAnInt());
-//            TagRequest.addTag(tagEntity);
-//        }
+        for (StringIntPair tagItem : tagList) {
+            TextGroupEntity textGroup = new TextGroupEntity(tagType + "_" + tagItem.getString());
+            TagEntity tagEntity = new TagEntity(textGroup, tagType, tagItem.getString());
+            tagEntity.setTagID((long) tagItem.getAnInt());
+            TagRequest.addTag(tagEntity);
+        }
     }
 
     private void saveImage(String imageName, CardEntity card, ImageType imageType) {
-//        try {
-//            if (imageName == null || imageName.isEmpty()) {
-//                return;
-//            }
-//            File imageFile = new File(imageRoot + imageName);
-//            if (!imageFile.exists()) {
-//                System.out.println(imageRoot + " : " + imageName + " FROM " + imageType);
-//                return;
-//            }
-//            BufferedImage bimg = ImageIO.read(imageFile);
-//            int width = bimg.getWidth();
-//            int height = bimg.getHeight();
-//            long size = imageFile.length();
-//            String hash = getMd5Hash(imageFile);
-//            saveFile(imageFile, imageName, imageType.toString());
-//            String someUrl = ServerConsts.ServerURL + ServerConsts.getWorldOnlineFileModule + ServerConsts.getImageServlet;
-//            ImageEntity imageEntity = ImageRequest.getImageByHash(hash);
-//            if (imageEntity == null) {
-//                imageEntity = new ImageEntity(someUrl + "?fileName=" + imageName, height, width, size, hash);
-//            }
-//            ImageRequest.addImage(imageEntity);
-//            CardImageEntity cardImageEntity = new CardImageEntity(card, imageEntity, imageType);
-//            cardImageEntity.setCardImageName(imageName);
-//            ImageRequest.addCardImage(cardImageEntity);
-//        } catch (Exception e) {
-//            System.out.println("Exception on " + imageRoot + " : " + imageName + " FROM " + imageType);
-//            e.printStackTrace();
-//        }
+        try {
+            if (imageName == null || imageName.isEmpty()) {
+                return;
+            }
+            File imageFile = new File(imageRoot + imageName);
+            if (!imageFile.exists()) {
+                System.out.println(imageRoot + " : " + imageName + " FROM " + imageType);
+                return;
+            }
+
+            BufferedImage bimg = ImageIO.read(imageFile);
+            int width = bimg.getWidth();
+            int height = bimg.getHeight();
+            long size = imageFile.length();
+            String hash = getMd5Hash(imageFile);
+            ImageEntity imageEntity = ImageRequest.getImageByHash(hash);
+            if (imageEntity == null) {
+                saveFile(imageFile, imageName, imageType.toString());
+                String someUrl = ServerConsts.ServerURL + ServerConsts.getWorldOnlineFileModule + ServerConsts.getImageServlet;
+                imageEntity = new ImageEntity(someUrl + "?fileName=" + imageName, height, width, size, hash);
+                ImageRequest.addImage(imageEntity);
+            }
+            CardImageEntity cardImageEntity = new CardImageEntity(card, imageEntity, imageType);
+            cardImageEntity.setCardImageName(imageName);
+            ImageRequest.addCardImage(cardImageEntity);
+        } catch (Exception e) {
+            System.out.println("Exception on " + imageRoot + " : " + imageName + " FROM " + imageType);
+            e.printStackTrace();
+        }
     }
 
     private void saveFile(File file, String fileName, String subRoot) throws IOException {

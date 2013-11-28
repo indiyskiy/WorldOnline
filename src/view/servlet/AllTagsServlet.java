@@ -21,7 +21,6 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class AllTagsServlet extends HttpServlet {
-    private static boolean init = false;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -31,15 +30,6 @@ public class AllTagsServlet extends HttpServlet {
         try {
             response.setContentType ("text/html; charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
-            if (!init) {
-                init = true;
-                try {
-                    new GlobalXmlParser().globalParse();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-//            Test.addManyTags();
             if (request.getParameter("TagType") == null || request.getParameter("TagType").isEmpty()) {
                 TagType[] tagTypes = TagType.values();
                 for (TagType tagType : tagTypes) {
