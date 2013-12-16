@@ -20,7 +20,7 @@ import java.io.IOException;
  * To change this template use File | Settings | File Templates.
  */
 public class TagEditServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             request.setCharacterEncoding("UTF-8");
             request.setAttribute("TagTypes", TagType.values());

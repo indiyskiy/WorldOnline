@@ -9,8 +9,7 @@
 </head>
 
 <body>
-Hi there! It is "All Tags Page". Here they are:
-<br>
+
 <table border="" width="70%" align="center">
     <tr>
         <td width="3%">
@@ -22,7 +21,7 @@ Hi there! It is "All Tags Page". Here they are:
         <td>
             Тип тега
         </td>
-        <td width="15%>
+        <td width="15%">
 
         </td>
     </tr>
@@ -39,7 +38,7 @@ Hi there! It is "All Tags Page". Here they are:
                         ${tag.tagType} - unknown
                 </td>
                 <td>
-                    <a href="tagedit?TagID=${tag.tagID}">Редактировать</a>
+                    <a href='tagedit?TagID=${tag.tagID}'>Редактировать</a>
                 </td>
             </tr>
         </c:forEach>
@@ -58,7 +57,7 @@ Hi there! It is "All Tags Page". Here they are:
                         ${tag.tagType} - cuisine
                 </td>
                 <td>
-                    <a href="tagedit?TagID=${tag.tagID}">Редактировать</a>
+                    <a href='tagedit?TagID=${tag.tagID}'>Редактировать</a>
                 </td>
             </tr>
         </c:forEach>
@@ -77,7 +76,7 @@ Hi there! It is "All Tags Page". Here they are:
                         ${tag.tagType}  - categories
                 </td>
                 <td>
-                    <a href="tagedit?TagID=${tag.tagID}">Редактировать</a>
+                    <a href='tagedit?TagID=${tag.tagID}'>Редактировать</a>
                 </td>
             </tr>
         </c:forEach>
@@ -96,7 +95,7 @@ Hi there! It is "All Tags Page". Here they are:
                         ${tag.tagType} - ribbons
                 </td>
                 <td>
-                    <a href="tagedit?TagID=${tag.tagID}">Редактировать</a>
+                    <a href='tagedit?TagID=${tag.tagID}'>Редактировать</a>
                 </td>
             </tr>
         </c:forEach>

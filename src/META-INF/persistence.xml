@@ -159,6 +159,7 @@
         <class>model.database.worldonlinedb.RootElementEntity</class>
         <class>model.database.worldonlinedb.CardCoordinateEntity</class>
         <class>model.database.worldonlinedb.CardToCardLinkEntity</class>
+        <class>model.database.worldonlinedb.MenuEntity</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/worldonline"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>

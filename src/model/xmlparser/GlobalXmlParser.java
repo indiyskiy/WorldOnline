@@ -174,7 +174,7 @@ public class GlobalXmlParser {
         List<Sight> sights = cardSight.sights;
         for (Sight sight : sights) {
             CardState cardState;
-            if (sight.notShow.equals("0")) {
+            if (sight.notShow.equals("1")) {
                 cardState = CardState.NotActive;
             } else {
                 cardState = CardState.Active;

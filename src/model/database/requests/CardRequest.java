@@ -2,11 +2,11 @@ package model.database.requests;
 
 
 import model.additionalentity.*;
+import model.constants.databaseenumeration.CardType;
 import model.constants.databaseenumeration.TextType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.*;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.intellij.lang.annotations.Language;
@@ -269,20 +269,20 @@ public class CardRequest {
                 completeCardInfo.setCardCoordinateEntity(cardCoordinateEntity);
             }
         }
-        Long textCardID=rs.getLong("TextCard.TextCardID");
-        if(textCardID!=0 && !rs.wasNull()){
-          HashMap<Long,CompleteTextCardInfo>cardInfoHashMap=completeCardInfo.getCompleteTextCardInfoMap();
-            CompleteTextCardInfo completeTextCardInfo=cardInfoHashMap.get(textCardID);
-            if(completeTextCardInfo==null){
-                TextCardEntity textCardEntity=TextRequest.getTextCardByResultSet(rs);
-                completeTextCardInfo=new CompleteTextCardInfo(textCardEntity);
-                cardInfoHashMap.put(textCardID,completeTextCardInfo);
+        Long textCardID = rs.getLong("TextCard.TextCardID");
+        if (textCardID != 0 && !rs.wasNull()) {
+            HashMap<Long, CompleteTextCardInfo> cardInfoHashMap = completeCardInfo.getCompleteTextCardInfoMap();
+            CompleteTextCardInfo completeTextCardInfo = cardInfoHashMap.get(textCardID);
+            if (completeTextCardInfo == null) {
+                TextCardEntity textCardEntity = TextRequest.getTextCardByResultSet(rs);
+                completeTextCardInfo = new CompleteTextCardInfo(textCardEntity);
+                cardInfoHashMap.put(textCardID, completeTextCardInfo);
             }
-           if(completeTextCardInfo.getCompleteTextGroupInfo()==null){
-               CompleteTextGroupInfo completeTextGroupInfo=new CompleteTextGroupInfo(TextRequest.getTextGroupByResultSet(rs));
-               completeTextCardInfo.setCompleteTextGroupInfo(completeTextGroupInfo);
-           }
-            TextRequest.getCompleteTextGroupInfo(rs,completeTextCardInfo.getCompleteTextGroupInfo(),"Text");
+            if (completeTextCardInfo.getCompleteTextGroupInfo() == null) {
+                CompleteTextGroupInfo completeTextGroupInfo = new CompleteTextGroupInfo(TextRequest.getTextGroupByResultSet(rs));
+                completeTextCardInfo.setCompleteTextGroupInfo(completeTextGroupInfo);
+            }
+            TextRequest.getCompleteTextGroupInfo(rs, completeTextCardInfo.getCompleteTextGroupInfo(), "Text");
         }
         return completeCardInfo;
     }
@@ -377,8 +377,32 @@ public class CardRequest {
         for (CompleteTextCardInfo completeTextCardInfo : completeTextCardInfos) {
             if (completeTextCardInfo.getTextCardEntity() != null) {
 //                System.out.println("text card id = " + completeTextCardInfo.getTextCardEntity().getTextCardID());
-                System.out.println(TextType.parseInt(completeTextCardInfo.getTextCardEntity().getCardTextType())+" "+completeTextCardInfo.getCompleteTextGroupInfo().getTextGroup().getTextGroupName());
+                System.out.println(TextType.parseInt(completeTextCardInfo.getTextCardEntity().getCardTextType()) + " " + completeTextCardInfo.getCompleteTextGroupInfo().getTextGroup().getTextGroupName());
             }
         }
+    }
+
+    public static ArrayList<CardEntity> getAllCards(CardType cardType) {
+        ArrayList<CardEntity> cards = new ArrayList<CardEntity>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT DISTINCT * FROM Card " +
+                    "WHERE Card.CardType=?";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, cardType.getValue());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CardEntity cardEntity = getCardFromResultSet(rs);
+                cards.add(cardEntity);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return cards;
     }
 }

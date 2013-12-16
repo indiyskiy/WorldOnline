@@ -28,8 +28,7 @@ public class AllTagsServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            response.setContentType ("text/html; charset=UTF-8");
-            request.setCharacterEncoding("UTF-8");
+          ServletHelper.setUTF8(request,response);
             if (request.getParameter("TagType") == null || request.getParameter("TagType").isEmpty()) {
                 TagType[] tagTypes = TagType.values();
                 for (TagType tagType : tagTypes) {
@@ -51,4 +50,6 @@ public class AllTagsServlet extends HttpServlet {
             throw new ServletException(e);
         }
     }
+
+
 }

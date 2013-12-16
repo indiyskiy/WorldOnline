@@ -46,4 +46,28 @@
         <servlet-name>TagEditServlet</servlet-name>
         <url-pattern>/tagedit</url-pattern>
     </servlet-mapping>
+
+    <!--all cards-->
+    <servlet>
+        <display-name>AllCardsServlet</display-name>
+        <servlet-name>AllCardsServlet</servlet-name>
+        <servlet-class>view.servlet.AllCardsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AllCardsServlet</servlet-name>
+        <url-pattern>/allcards</url-pattern>
+    </servlet-mapping>
+
+    <!--momplete card info-->
+    <servlet>
+        <display-name>CompleteCardInfoServlet</display-name>
+        <servlet-name>CompleteCardInfoServlet</servlet-name>
+        <servlet-class>view.servlet.CompleteCardInfoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CompleteCardInfoServlet</servlet-name>
+        <url-pattern>/completecardinfo</url-pattern>
+    </servlet-mapping>
 </web-app>
