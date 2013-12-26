@@ -1,8 +1,8 @@
 package model.logger;
 
 import model.constants.Component;
+import model.mailer.ErrorMailer;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -14,6 +14,7 @@ import java.util.Calendar;
  * To change this template use File | Settings | File Templates.
  */
 public class LoggerMessage {
+    private final static LogLevel lowestMailLevel = LogLevel.Warning;
     private final String text;
     private final LogLevel logLevel;
     private final String timestamp;
@@ -30,13 +31,13 @@ public class LoggerMessage {
         callerClass="unknown";
     }*/
 
-    public LoggerMessage(String text,LogLevel logLevel,Component component,Class callerClass) {
+    public LoggerMessage(String text, LogLevel logLevel, Component component, Class callerClass) {
         this.text = text;
-        this.logLevel=logLevel;
-        this.component=component;
-        timestamp =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-        date =  new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
-        this.callerClass=callerClass.getCanonicalName();
+        this.logLevel = logLevel;
+        this.component = component;
+        timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        date = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+        this.callerClass = callerClass.getCanonicalName();
     }
 
     public String getText() {
@@ -59,7 +60,14 @@ public class LoggerMessage {
         return component;
     }
 
-    public String getMessage(){
-     return timestamp+" "+logLevel.toString().toUpperCase()+" "+callerClass+": "+text;
+    public String getMessage() {
+        return timestamp + " " + logLevel.toString().toUpperCase() + " " + callerClass + ": " + text;
+    }
+
+    public void logMyself(LoggerFile loggerFile) {
+        loggerFile.printToFile(getMessage());
+        if (logLevel.isBigger(lowestMailLevel)) {
+            ErrorMailer.sendError(this);
+        }
     }
 }

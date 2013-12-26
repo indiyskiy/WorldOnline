@@ -1,14 +1,8 @@
 package model.logger;
 
 import model.constants.Component;
+import model.exception.ExceptionUtils;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 26.12.13
- * Time: 11:46
- * To change this template use File | Settings | File Templates.
- */
 public class LoggerFactory {
     private Component component;
     private Class senderClass;
@@ -32,7 +26,7 @@ public class LoggerFactory {
         log(message, LogLevel.Error);
     }
     public void error(Exception error) {
-        log(error.toString());
+        log(ExceptionUtils.getTrace(error));
     }
 
     public void info(String message) {

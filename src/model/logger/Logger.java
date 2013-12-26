@@ -32,22 +32,6 @@ public class Logger implements Runnable {
         return instance;
     }
 
-    public static void main(String[] args) {
-        Logger logger = Logger.getInstance();
-        Random random = new Random(System.currentTimeMillis());
-        for (int i = 0; i < 1000; i++) {
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                loggerFactory.error(e);
-            }
-            int rnd1 = random.nextInt(LogLevel.values().length);
-            LogLevel logLevel = LogLevel.parseInt(rnd1);
-            int rnd2 = random.nextInt(Component.values().length);
-            Component component = Component.parseInt(rnd2);
-            logger.addMessage(new LoggerMessage("main menu test log " + i, logLevel, component, Logger.class));
-        }
-    }
 
     @Override
     public void run() {
@@ -95,7 +79,8 @@ public class Logger implements Runnable {
             loggerFile.open();
             openedFiles.put(loggerFile.getSignature(), loggerFile);
         }
-        loggerFile.printToFile(loggerMessage.getMessage());
+        loggerMessage.logMyself(loggerFile);
+//        loggerFile.printToFile(loggerMessage.getMessage());
     }
 
     public void addMessage(String text, LogLevel logLevel, Component component, Class callerClass){

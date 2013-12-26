@@ -32,4 +32,8 @@ public enum LogLevel {
             return changingTypes[value];
         }
     }
+
+    public boolean isBigger(LogLevel logLevel) {
+        return (this.value>=logLevel.getValue());
+    }
 }
