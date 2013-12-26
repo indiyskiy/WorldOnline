@@ -1,11 +1,13 @@
 package model.database.requests;
 
 import model.additionalentity.CompleteTextGroupInfo;
+import model.constants.Component;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.TextCardEntity;
 import model.database.worldonlinedb.TextEntity;
 import model.database.worldonlinedb.TextGroupEntity;
+import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.intellij.lang.annotations.Language;
 
@@ -23,6 +25,8 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class TextRequest {
+
+    private static LoggerFactory loggerFactory=new LoggerFactory(Component.Database,TextRequest.class);
 
     public static void addText(TextEntity text) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
@@ -121,7 +125,7 @@ public class TextRequest {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -171,7 +175,7 @@ public class TextRequest {
                 textEntity.setTextGroup(textGroupEntity);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }

@@ -19,7 +19,8 @@ public class CompleteCardInfo {
     private CompleteCardRootInfo completeCardRootInfo;
     private HashMap<Long,CompleteTextCardInfo> completeTextCardInfoMap=new HashMap<Long, CompleteTextCardInfo>();
     private CardCoordinateEntity cardCoordinateEntity;
-    private HashMap<Long, CardToCardLinkEntity> cardToCardLinkEntityMap;
+    private HashMap<Long, CardToCardLinkEntity> cardToCardLinkEntityMap=new HashMap<Long, CardToCardLinkEntity>();
+    private HashMap<Long, CardToCardLinkEntity> cardToCardLinkedOnEntityMap=new HashMap<Long, CardToCardLinkEntity>();
 
     public HashMap<Long, CardToCardLinkEntity> getCardToCardLinkEntityMap() {
         return cardToCardLinkEntityMap;
@@ -87,5 +88,9 @@ public class CompleteCardInfo {
 
     public CardCoordinateEntity getCardCoordinateEntity() {
         return cardCoordinateEntity;
+    }
+
+    public HashMap<Long, CardToCardLinkEntity> getCardToCardLinkedOnEntityMap() {
+        return cardToCardLinkedOnEntityMap;
     }
 }

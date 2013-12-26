@@ -2,15 +2,19 @@ package model.database.requests;
 
 import model.additionalentity.CompleteCardImageInfo;
 import model.additionalentity.CompleteTextGroupInfo;
+import model.constants.Component;
+import model.constants.ServerConsts;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardImageEntity;
 import model.database.worldonlinedb.ImageEntity;
 import model.database.worldonlinedb.TextGroupEntity;
+import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.intellij.lang.annotations.Language;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,6 +30,8 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class ImageRequest {
+    private static LoggerFactory loggerFactory=new LoggerFactory(Component.Database,ImageRequest.class);
+
     public static void addCardImage(CardImageEntity image) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
 //        Session session = new HibernateUtil().getSessionFactory().openSession();
@@ -138,7 +144,7 @@ public class ImageRequest {
             imageEntity.setImageHeight(rs.getInt(image + ".ImageHeight"));
             imageEntity.setImageID(rs.getLong(image + ".ImageID"));
             imageEntity.setImageMD5Hash(rs.getString(image + ".ImageMD5Hash"));
-            imageEntity.setImageURL(rs.getString(image + ".ImageURL"));
+            imageEntity.setImageFilePath(rs.getString(image + ".ImageFilePath"));
             imageEntity.setImageWidth(rs.getInt(image + ".ImageWidth"));
         }
         return imageEntity;
@@ -171,7 +177,7 @@ public class ImageRequest {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+           loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -207,7 +213,7 @@ public class ImageRequest {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+           loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -243,7 +249,7 @@ public class ImageRequest {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+           loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -293,10 +299,23 @@ public class ImageRequest {
                 image = getImageFromResultSet(rs);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
         return image;
+    }
+
+    public static File getImage(long imageID) {
+        ImageEntity imageEntity=getImageByID(imageID);
+        if(imageEntity!=null){
+        return getFile(imageEntity.getImageFilePath());
+        }
+        return null;
+    }
+
+    private static File getFile(String imageFilePath) {
+        File imageFile = new File(ServerConsts.fileStorageRoot+imageFilePath+"\\");
+        return imageFile;
     }
 }

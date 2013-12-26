@@ -1,5 +1,8 @@
 package model.database.session;
 
+import model.constants.Component;
+import model.logger.LoggerFactory;
+
 import java.sql.*;
 
 /**
@@ -14,6 +17,7 @@ public class DatabaseConnection {
     private final String username = "root";
     private final String password = "Djqysdrjcvjct!!!";
     private Connection connection = null;
+    private LoggerFactory loggerFactory=new LoggerFactory(Component.Database,DatabaseConnection.class);
 
     public DatabaseConnection() {
         try {
@@ -39,7 +43,7 @@ public class DatabaseConnection {
                 rs.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         }
     }
 }

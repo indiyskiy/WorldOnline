@@ -2,9 +2,11 @@ package model.database.requests;
 
 import model.additionalentity.CompleteCardRootInfo;
 import model.additionalentity.CompleteTextGroupInfo;
+import model.constants.Component;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.*;
+import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.intellij.lang.annotations.Language;
 
@@ -22,6 +24,8 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class RootRequest {
+    private static LoggerFactory loggerFactory=new LoggerFactory(Component.Database,RootRequest.class);
+
     public static CardRootEntity getCardRootByResultSet(ResultSet rs) throws SQLException {
         Long cardRootID = rs.getLong("CardRoot.CardRootID");
         if (cardRootID == 0 || rs.wasNull()) {
@@ -126,7 +130,7 @@ public class RootRequest {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -163,7 +167,7 @@ public class RootRequest {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -199,7 +203,7 @@ public class RootRequest {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }

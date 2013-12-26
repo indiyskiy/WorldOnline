@@ -25,7 +25,6 @@
       <column name="CreationTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
       <column name="LastUpdateTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="CardID"/>
-      <exported-key name="FK_55sp0hs3nhgu8yq0xlp3s84d4" table="cardcoordinate" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_kad18leo0yike87hf7oa63gi9" table="cardimage" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_ic9fnltx16lm8nm7cbqnj6i14" table="cardparameter" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_h3w5ceyl77et3vms0t3nn081l" table="cardroot" schema="" catalog="worldonline" columns="CardID"/>
@@ -60,7 +59,7 @@
       <column name="CardParameterDataType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="CardParameterName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <column name="CardParameterType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="CardParameterValue" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="CardParameterValue" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
       <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="CardParameterID"/>
       <foreign-key name="FK_ic9fnltx16lm8nm7cbqnj6i14" columns="CardID" ref-table="card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
@@ -104,10 +103,10 @@
     </table>
     <table name="image" schema="" catalog="worldonline" type="TABLE">
       <column name="ImageID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="ImageFilePath" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <column name="ImageFileSize" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="ImageHeight" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="ImageMD5Hash" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="ImageURL" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <column name="ImageWidth" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="ImageID"/>
       <exported-key name="FK_8fm246c7jttx9wgymof08lmen" table="cardimage" schema="" catalog="worldonline" columns="ImageID"/>
@@ -209,14 +208,6 @@
       <column name="UserLanguage" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="UserPersonalDataID"/>
       <exported-key name="FK_hw73w84hod076vg7ua3ksbq9v" table="user" schema="" catalog="worldonline" columns="UserPersonalDataID"/>
-    </table>
-    <table name="worldonline" schema="" catalog="worldonline" type="TABLE">
-      <column name="GlobalVersionID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="ActivationTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
-      <column name="CreationTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
-      <column name="DisableTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
-      <column name="GlobalVersionName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="GlobalVersionID"/>
     </table>
   </data-source>
 </component>

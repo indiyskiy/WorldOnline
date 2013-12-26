@@ -2,10 +2,12 @@ package model.xmlparser;
 
 import model.FileReader;
 import model.additionalentity.CompleteCardInfo;
+import model.constants.Component;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.*;
 import model.database.requests.*;
 import model.database.worldonlinedb.*;
+import model.logger.LoggerFactory;
 import model.textparser.StringFileParser;
 import model.textparser.StringIntPair;
 import model.xmlparser.xmlview.card.cardaboutcity.AboutCity;
@@ -41,6 +43,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -51,12 +54,15 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class GlobalXmlParser {
+    private static final String imageRoot = "ImageData\\";
+    private static final String fileRoot = "FileBase\\";
+    private static HashMap<Integer, CardEntity> restaurantChainMap;
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, GlobalXmlParser.class);
     private final String root = "\\cardsdata\\";
-    private final String imageRoot = "\\imageData\\";
-    private final String fileRoot = "FileBase\\";
 
     public static void main(String[] args) {
         try {
+            restaurantChainMap = new HashMap<Integer, CardEntity>();
             GlobalXmlParser globalXmlParser = new GlobalXmlParser();
             globalXmlParser.globalParse();
             CompleteCardInfo completeCardInfo = CardRequest.getCompleteCardInfo(1);
@@ -65,6 +71,8 @@ public class GlobalXmlParser {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            restaurantChainMap = null;
         }
     }
 
@@ -111,7 +119,7 @@ public class GlobalXmlParser {
 
     private void saveMainMenu(MainMenuData mainMenuData) {
         List<Submenu> submenus = mainMenuData.getSubmenus();
-        for(Submenu submenu:submenus){
+        for (Submenu submenu : submenus) {
 
         }
     }
@@ -134,8 +142,10 @@ public class GlobalXmlParser {
             saveText(shopping.newsRu, shopping.newsEn, shopping.nameRU, shopping.nameEN, TextType.News, card);
             saveText(shopping.offersRu, shopping.offersEn, shopping.nameRU, shopping.nameEN, TextType.Offers, card);
 
-            saveParameter(shopping.lat, card, CardParameterType.Lat);
-            saveParameter(shopping.lon, card, CardParameterType.Lon);
+            if (shopping.lat != null && !shopping.lat.replaceAll(" ", "").isEmpty() && shopping.lon != null && !shopping.lon.replaceAll(" ", "").isEmpty()) {
+                saveCoordinate(shopping.lat, shopping.lon, card);
+            }
+
             saveParameter(shopping.phone, card, CardParameterType.Phone);
             saveParameter(shopping.openHours, card, CardParameterType.OpenHours);
             saveParameter(shopping.site, card, CardParameterType.Site);
@@ -156,6 +166,56 @@ public class GlobalXmlParser {
             saveParameter(shopping.instagramm, card, CardParameterType.Instagramm);
             saveParameter(shopping.billboard, card, CardParameterType.Billboard);
 
+            saveParameter(shopping.apoi, card, CardParameterType.Apoi);
+            saveParameter(shopping.ayda, card, CardParameterType.Ayda);
+            saveParameter(shopping.blogFcsSpb, card, CardParameterType.BlogFcsSpb);
+            saveParameter(shopping.cafeSpb, card, CardParameterType.CafeSpb);
+            saveParameter(shopping.dpRu, card, CardParameterType.DpRu);
+            saveParameter(shopping.flamp, card, CardParameterType.Flamp);
+            saveParameter(shopping.imhoNet, card, CardParameterType.ImhoNet);
+            saveParameter(shopping.iRecommend, card, CardParameterType.IRecommend);
+            saveParameter(shopping.komandirovka, card, CardParameterType.Komandirovka);
+            saveParameter(shopping.menuRu, card, CardParameterType.MenuRu);
+            saveParameter(shopping.otzovik, card, CardParameterType.Otzovik);
+            saveParameter(shopping.peterburgRu, card, CardParameterType.PeterburgRu);
+            saveParameter(shopping.restlook, card, CardParameterType.Restlook);
+            saveParameter(shopping.restop, card, CardParameterType.Restop);
+            saveParameter(shopping.restoran, card, CardParameterType.Restoran);
+            saveParameter(shopping.restozoom, card, CardParameterType.Restozoom);
+            saveParameter(shopping.spbrestoran, card, CardParameterType.Spbrestoran);
+            saveParameter(shopping.szoSpr, card, CardParameterType.SzoSpr);
+            saveParameter(shopping.theVillage, card, CardParameterType.TheVillage);
+            saveParameter(shopping.tourprom, card, CardParameterType.Tourprom);
+            saveParameter(shopping.traveltipz, card, CardParameterType.Traveltipz);
+            saveParameter(shopping.tulp, card, CardParameterType.Tulp);
+            saveParameter(shopping.turbina, card, CardParameterType.Turbina);
+            saveParameter(shopping.uvoice, card, CardParameterType.Uvoice);
+            saveParameter(shopping.wrestorane, card, CardParameterType.Wrestorane);
+            saveParameter(shopping.yell, card, CardParameterType.Yell);
+            saveParameter(shopping.zoon, card, CardParameterType.Zoon);
+
+            String freePass = "0";
+            if ("yes".equalsIgnoreCase(shopping.freePass)) {
+                freePass = "100";
+            }
+            saveParameter(freePass, card, CardParameterType.FreePass);
+
+            saveParameter(shopping.facts, card, CardParameterType.Facts);
+            saveParameter(shopping.legends, card, CardParameterType.Legends);
+            saveParameter(shopping.literature, card, CardParameterType.Literature);
+            saveParameter(shopping.anecdotes, card, CardParameterType.Anecdotes);
+            saveParameter(shopping.films, card, CardParameterType.Films);
+            saveParameter(shopping.famousPassers, card, CardParameterType.FamousPassers);
+            saveParameter(shopping.citations, card, CardParameterType.Citations);
+            saveParameter(shopping.borisStars, card, CardParameterType.BorisStars);
+            saveParameter(shopping.restoclub, card, CardParameterType.Restoclub);
+            saveParameter(shopping.afisha, card, CardParameterType.Afisha);
+            saveParameter(shopping.timeout, card, CardParameterType.Timeout);
+            saveParameter(shopping.wikipedia, card, CardParameterType.Wikipedia);
+            saveParameter(shopping.wikitravel, card, CardParameterType.Wikitravel);
+            saveParameter(shopping.reservationDiscount, card, CardParameterType.ReservationDiscount);
+            saveParameter(shopping.reservationPhone, card, CardParameterType.ReservationPhone);
+
             saveCardTags(shopping.kitchen, card, TagType.Cuisine);
             saveCardTags(shopping.categories, card, TagType.Categories);
             saveCardTags(shopping.ribbons, card, TagType.Ribbons);
@@ -164,10 +224,33 @@ public class GlobalXmlParser {
             saveImages(shopping.panoramaToList, card, ImageType.PanoramaToList);
             saveImages(shopping.panorama, card, ImageType.Panorama);
             saveImages(shopping.cardImage, card, ImageType.CardImage);
+
+            addRestarauntChainLink(shopping.restaurantChain, card);
         }
 //            handBook.priceFile);
 //            handBook.metro);
 //            handBook.parentMenuID);
+    }
+
+    private void addRestarauntChainLink(String restaurantChain, CardEntity card) {
+        if (restaurantChain != null && !restaurantChain.replaceAll(" ", "").isEmpty()) {
+            Integer restChainID = Integer.parseInt(restaurantChain);
+            CardEntity targetCard;
+            if (restChainID > 0) {
+                if (restaurantChainMap.containsKey(restChainID) && restaurantChainMap.get(restChainID) != null) {
+                    targetCard = restaurantChainMap.get(restChainID);
+                } else {
+                    targetCard = new CardEntity(CardType.RestaurantChainCard, CardType.RestaurantChainCard + "_" + restChainID, CardState.Active);
+                    restaurantChainMap.put(restChainID, targetCard);
+                }
+                addCardToCardLink(targetCard, card, CardToCardLinkType.RestaurantChain);
+            }
+        }
+    }
+
+    private void addCardToCardLink(CardEntity targetCard, CardEntity card, CardToCardLinkType cardToCardLinkType) {
+        CardToCardLinkEntity cardToCardLinkEntity = new CardToCardLinkEntity(card, targetCard, cardToCardLinkType);
+        LinkRequest.addCardToCardLinkRequest(cardToCardLinkEntity);
     }
 
     private void saveCardSight(CardSight cardSight) throws IOException, SQLException {
@@ -188,8 +271,10 @@ public class GlobalXmlParser {
             saveText(sight.newsRu, sight.newsEn, sight.nameRU, sight.nameEN, TextType.News, card);
             saveText(sight.offersRu, sight.offersEn, sight.nameRU, sight.nameEN, TextType.Offers, card);
 
-            saveParameter(sight.lat, card, CardParameterType.Lat);
-            saveParameter(sight.lon, card, CardParameterType.Lon);
+            if (sight.lat != null && !sight.lat.replaceAll(" ", "").isEmpty() && sight.lon != null && !sight.lon.replaceAll(" ", "").isEmpty()) {
+                saveCoordinate(sight.lat, sight.lon, card);
+            }
+
             saveParameter(sight.phone, card, CardParameterType.Phone);
             saveParameter(sight.openHours, card, CardParameterType.OpenHours);
             saveParameter(sight.site, card, CardParameterType.Site);
@@ -210,6 +295,56 @@ public class GlobalXmlParser {
             saveParameter(sight.instagramm, card, CardParameterType.Instagramm);
             saveParameter(sight.billboard, card, CardParameterType.Billboard);
 
+            saveParameter(sight.apoi, card, CardParameterType.Apoi);
+            saveParameter(sight.ayda, card, CardParameterType.Ayda);
+            saveParameter(sight.blogFcsSpb, card, CardParameterType.BlogFcsSpb);
+            saveParameter(sight.cafeSpb, card, CardParameterType.CafeSpb);
+            saveParameter(sight.dpRu, card, CardParameterType.DpRu);
+            saveParameter(sight.flamp, card, CardParameterType.Flamp);
+            saveParameter(sight.imhoNet, card, CardParameterType.ImhoNet);
+            saveParameter(sight.iRecommend, card, CardParameterType.IRecommend);
+            saveParameter(sight.komandirovka, card, CardParameterType.Komandirovka);
+            saveParameter(sight.menuRu, card, CardParameterType.MenuRu);
+            saveParameter(sight.otzovik, card, CardParameterType.Otzovik);
+            saveParameter(sight.peterburgRu, card, CardParameterType.PeterburgRu);
+            saveParameter(sight.restlook, card, CardParameterType.Restlook);
+            saveParameter(sight.restop, card, CardParameterType.Restop);
+            saveParameter(sight.restoran, card, CardParameterType.Restoran);
+            saveParameter(sight.restozoom, card, CardParameterType.Restozoom);
+            saveParameter(sight.spbrestoran, card, CardParameterType.Spbrestoran);
+            saveParameter(sight.szoSpr, card, CardParameterType.SzoSpr);
+            saveParameter(sight.theVillage, card, CardParameterType.TheVillage);
+            saveParameter(sight.tourprom, card, CardParameterType.Tourprom);
+            saveParameter(sight.traveltipz, card, CardParameterType.Traveltipz);
+            saveParameter(sight.tulp, card, CardParameterType.Tulp);
+            saveParameter(sight.turbina, card, CardParameterType.Turbina);
+            saveParameter(sight.uvoice, card, CardParameterType.Uvoice);
+            saveParameter(sight.wrestorane, card, CardParameterType.Wrestorane);
+            saveParameter(sight.yell, card, CardParameterType.Yell);
+            saveParameter(sight.zoon, card, CardParameterType.Zoon);
+
+            String freePass = "0";
+            if ("yes".equalsIgnoreCase(sight.freePass)) {
+                freePass = "100";
+            }
+            saveParameter(freePass, card, CardParameterType.FreePass);
+
+            saveParameter(sight.facts, card, CardParameterType.Facts);
+            saveParameter(sight.legends, card, CardParameterType.Legends);
+            saveParameter(sight.literature, card, CardParameterType.Literature);
+            saveParameter(sight.anecdotes, card, CardParameterType.Anecdotes);
+            saveParameter(sight.films, card, CardParameterType.Films);
+            saveParameter(sight.famousPassers, card, CardParameterType.FamousPassers);
+            saveParameter(sight.citations, card, CardParameterType.Citations);
+            saveParameter(sight.borisStars, card, CardParameterType.BorisStars);
+            saveParameter(sight.restoclub, card, CardParameterType.Restoclub);
+            saveParameter(sight.afisha, card, CardParameterType.Afisha);
+            saveParameter(sight.timeout, card, CardParameterType.Timeout);
+            saveParameter(sight.wikipedia, card, CardParameterType.Wikipedia);
+            saveParameter(sight.wikitravel, card, CardParameterType.Wikitravel);
+            saveParameter(sight.reservationDiscount, card, CardParameterType.ReservationDiscount);
+            saveParameter(sight.reservationPhone, card, CardParameterType.ReservationPhone);
+
             saveCardTags(sight.kitchen, card, TagType.Cuisine);
             saveCardTags(sight.categories, card, TagType.Categories);
             saveCardTags(sight.ribbons, card, TagType.Ribbons);
@@ -218,6 +353,8 @@ public class GlobalXmlParser {
             saveImages(sight.panoramaToList, card, ImageType.PanoramaToList);
             saveImages(sight.panorama, card, ImageType.Panorama);
             saveImages(sight.cardImage, card, ImageType.CardImage);
+
+            addRestarauntChainLink(sight.restaurantChain, card);
         }
 //            handBook.priceFile);
 //            handBook.metro);
@@ -242,8 +379,10 @@ public class GlobalXmlParser {
             saveText(route.newsRu, route.newsEn, route.nameRU, route.nameEN, TextType.News, card);
             saveText(route.offersRu, route.offersEn, route.nameRU, route.nameEN, TextType.Offers, card);
 
-            saveParameter(route.lat, card, CardParameterType.Lat);
-            saveParameter(route.lon, card, CardParameterType.Lon);
+            if (route.lat != null && !route.lat.replaceAll(" ", "").isEmpty() && route.lon != null && !route.lon.replaceAll(" ", "").isEmpty()) {
+                saveCoordinate(route.lat, route.lon, card);
+            }
+
             saveParameter(route.phone, card, CardParameterType.Phone);
             saveParameter(route.openHours, card, CardParameterType.OpenHours);
             saveParameter(route.site, card, CardParameterType.Site);
@@ -263,6 +402,56 @@ public class GlobalXmlParser {
             saveParameter(route.tripadviser, card, CardParameterType.Tripadviser);
             saveParameter(route.instagramm, card, CardParameterType.Instagramm);
             saveParameter(route.billboard, card, CardParameterType.Billboard);
+
+            saveParameter(route.apoi, card, CardParameterType.Apoi);
+            saveParameter(route.ayda, card, CardParameterType.Ayda);
+            saveParameter(route.blogFcsSpb, card, CardParameterType.BlogFcsSpb);
+            saveParameter(route.cafeSpb, card, CardParameterType.CafeSpb);
+            saveParameter(route.dpRu, card, CardParameterType.DpRu);
+            saveParameter(route.flamp, card, CardParameterType.Flamp);
+            saveParameter(route.imhoNet, card, CardParameterType.ImhoNet);
+            saveParameter(route.iRecommend, card, CardParameterType.IRecommend);
+            saveParameter(route.komandirovka, card, CardParameterType.Komandirovka);
+            saveParameter(route.menuRu, card, CardParameterType.MenuRu);
+            saveParameter(route.otzovik, card, CardParameterType.Otzovik);
+            saveParameter(route.peterburgRu, card, CardParameterType.PeterburgRu);
+            saveParameter(route.restlook, card, CardParameterType.Restlook);
+            saveParameter(route.restop, card, CardParameterType.Restop);
+            saveParameter(route.restoran, card, CardParameterType.Restoran);
+            saveParameter(route.restozoom, card, CardParameterType.Restozoom);
+            saveParameter(route.spbrestoran, card, CardParameterType.Spbrestoran);
+            saveParameter(route.szoSpr, card, CardParameterType.SzoSpr);
+            saveParameter(route.theVillage, card, CardParameterType.TheVillage);
+            saveParameter(route.tourprom, card, CardParameterType.Tourprom);
+            saveParameter(route.traveltipz, card, CardParameterType.Traveltipz);
+            saveParameter(route.tulp, card, CardParameterType.Tulp);
+            saveParameter(route.turbina, card, CardParameterType.Turbina);
+            saveParameter(route.uvoice, card, CardParameterType.Uvoice);
+            saveParameter(route.wrestorane, card, CardParameterType.Wrestorane);
+            saveParameter(route.yell, card, CardParameterType.Yell);
+            saveParameter(route.zoon, card, CardParameterType.Zoon);
+
+            String freePass = "0";
+            if ("yes".equalsIgnoreCase(route.freePass)) {
+                freePass = "100";
+            }
+            saveParameter(freePass, card, CardParameterType.FreePass);
+
+            saveParameter(route.facts, card, CardParameterType.Facts);
+            saveParameter(route.legends, card, CardParameterType.Legends);
+            saveParameter(route.literature, card, CardParameterType.Literature);
+            saveParameter(route.anecdotes, card, CardParameterType.Anecdotes);
+            saveParameter(route.films, card, CardParameterType.Films);
+            saveParameter(route.famousPassers, card, CardParameterType.FamousPassers);
+            saveParameter(route.citations, card, CardParameterType.Citations);
+            saveParameter(route.borisStars, card, CardParameterType.BorisStars);
+            saveParameter(route.restoclub, card, CardParameterType.Restoclub);
+            saveParameter(route.afisha, card, CardParameterType.Afisha);
+            saveParameter(route.timeout, card, CardParameterType.Timeout);
+            saveParameter(route.wikipedia, card, CardParameterType.Wikipedia);
+            saveParameter(route.wikitravel, card, CardParameterType.Wikitravel);
+            saveParameter(route.reservationDiscount, card, CardParameterType.ReservationDiscount);
+            saveParameter(route.reservationPhone, card, CardParameterType.ReservationPhone);
 
             saveCardTags(route.kitchen, card, TagType.Cuisine);
             saveCardTags(route.categories, card, TagType.Categories);
@@ -296,8 +485,10 @@ public class GlobalXmlParser {
             saveText(relax.newsRu, relax.newsEn, relax.nameRU, relax.nameEN, TextType.News, card);
             saveText(relax.offersRu, relax.offersEn, relax.nameRU, relax.nameEN, TextType.Offers, card);
 
-            saveParameter(relax.lat, card, CardParameterType.Lat);
-            saveParameter(relax.lon, card, CardParameterType.Lon);
+            if (relax.lat != null && !relax.lat.replaceAll(" ", "").isEmpty() && relax.lon != null && !relax.lon.replaceAll(" ", "").isEmpty()) {
+                saveCoordinate(relax.lat, relax.lon, card);
+            }
+
             saveParameter(relax.phone, card, CardParameterType.Phone);
             saveParameter(relax.openHours, card, CardParameterType.OpenHours);
             saveParameter(relax.site, card, CardParameterType.Site);
@@ -318,6 +509,56 @@ public class GlobalXmlParser {
             saveParameter(relax.instagramm, card, CardParameterType.Instagramm);
             saveParameter(relax.billboard, card, CardParameterType.Billboard);
 
+            saveParameter(relax.apoi, card, CardParameterType.Apoi);
+            saveParameter(relax.ayda, card, CardParameterType.Ayda);
+            saveParameter(relax.blogFcsSpb, card, CardParameterType.BlogFcsSpb);
+            saveParameter(relax.cafeSpb, card, CardParameterType.CafeSpb);
+            saveParameter(relax.dpRu, card, CardParameterType.DpRu);
+            saveParameter(relax.flamp, card, CardParameterType.Flamp);
+            saveParameter(relax.imhoNet, card, CardParameterType.ImhoNet);
+            saveParameter(relax.iRecommend, card, CardParameterType.IRecommend);
+            saveParameter(relax.komandirovka, card, CardParameterType.Komandirovka);
+            saveParameter(relax.menuRu, card, CardParameterType.MenuRu);
+            saveParameter(relax.otzovik, card, CardParameterType.Otzovik);
+            saveParameter(relax.peterburgRu, card, CardParameterType.PeterburgRu);
+            saveParameter(relax.restlook, card, CardParameterType.Restlook);
+            saveParameter(relax.restop, card, CardParameterType.Restop);
+            saveParameter(relax.restoran, card, CardParameterType.Restoran);
+            saveParameter(relax.restozoom, card, CardParameterType.Restozoom);
+            saveParameter(relax.spbrestoran, card, CardParameterType.Spbrestoran);
+            saveParameter(relax.szoSpr, card, CardParameterType.SzoSpr);
+            saveParameter(relax.theVillage, card, CardParameterType.TheVillage);
+            saveParameter(relax.tourprom, card, CardParameterType.Tourprom);
+            saveParameter(relax.traveltipz, card, CardParameterType.Traveltipz);
+            saveParameter(relax.tulp, card, CardParameterType.Tulp);
+            saveParameter(relax.turbina, card, CardParameterType.Turbina);
+            saveParameter(relax.uvoice, card, CardParameterType.Uvoice);
+            saveParameter(relax.wrestorane, card, CardParameterType.Wrestorane);
+            saveParameter(relax.yell, card, CardParameterType.Yell);
+            saveParameter(relax.zoon, card, CardParameterType.Zoon);
+
+            String freePass = "0";
+            if ("yes".equalsIgnoreCase(relax.freePass)) {
+                freePass = "100";
+            }
+            saveParameter(freePass, card, CardParameterType.FreePass);
+
+            saveParameter(relax.facts, card, CardParameterType.Facts);
+            saveParameter(relax.legends, card, CardParameterType.Legends);
+            saveParameter(relax.literature, card, CardParameterType.Literature);
+            saveParameter(relax.anecdotes, card, CardParameterType.Anecdotes);
+            saveParameter(relax.films, card, CardParameterType.Films);
+            saveParameter(relax.famousPassers, card, CardParameterType.FamousPassers);
+            saveParameter(relax.citations, card, CardParameterType.Citations);
+            saveParameter(relax.borisStars, card, CardParameterType.BorisStars);
+            saveParameter(relax.restoclub, card, CardParameterType.Restoclub);
+            saveParameter(relax.afisha, card, CardParameterType.Afisha);
+            saveParameter(relax.timeout, card, CardParameterType.Timeout);
+            saveParameter(relax.wikipedia, card, CardParameterType.Wikipedia);
+            saveParameter(relax.wikitravel, card, CardParameterType.Wikitravel);
+            saveParameter(relax.reservationDiscount, card, CardParameterType.ReservationDiscount);
+            saveParameter(relax.reservationPhone, card, CardParameterType.ReservationPhone);
+
             saveCardTags(relax.kitchen, card, TagType.Cuisine);
             saveCardTags(relax.categories, card, TagType.Categories);
             saveCardTags(relax.ribbons, card, TagType.Ribbons);
@@ -327,6 +568,7 @@ public class GlobalXmlParser {
             saveImages(relax.panorama, card, ImageType.Panorama);
             saveImages(relax.cardImage, card, ImageType.CardImage);
 
+            addRestarauntChainLink(relax.restaurantChain, card);
 //            handBook.priceFile);
 //            handBook.metro);
 //            handBook.parentMenuID);
@@ -351,8 +593,10 @@ public class GlobalXmlParser {
             saveText(meal.newsRu, meal.newsEn, meal.nameRU, meal.nameEN, TextType.News, card);
             saveText(meal.offersRu, meal.offersEn, meal.nameRU, meal.nameEN, TextType.Offers, card);
 
-            saveParameter(meal.lat, card, CardParameterType.Lat);
-            saveParameter(meal.lon, card, CardParameterType.Lon);
+            if (meal.lat != null && !meal.lat.replaceAll(" ", "").isEmpty() && meal.lon != null && !meal.lon.replaceAll(" ", "").isEmpty()) {
+                saveCoordinate(meal.lat, meal.lon, card);
+            }
+
             saveParameter(meal.phone, card, CardParameterType.Phone);
             saveParameter(meal.openHours, card, CardParameterType.OpenHours);
             saveParameter(meal.site, card, CardParameterType.Site);
@@ -373,6 +617,56 @@ public class GlobalXmlParser {
             saveParameter(meal.instagramm, card, CardParameterType.Instagramm);
             saveParameter(meal.billboard, card, CardParameterType.Billboard);
 
+            saveParameter(meal.apoi, card, CardParameterType.Apoi);
+            saveParameter(meal.ayda, card, CardParameterType.Ayda);
+            saveParameter(meal.blogFcsSpb, card, CardParameterType.BlogFcsSpb);
+            saveParameter(meal.cafeSpb, card, CardParameterType.CafeSpb);
+            saveParameter(meal.dpRu, card, CardParameterType.DpRu);
+            saveParameter(meal.flamp, card, CardParameterType.Flamp);
+            saveParameter(meal.imhoNet, card, CardParameterType.ImhoNet);
+            saveParameter(meal.iRecommend, card, CardParameterType.IRecommend);
+            saveParameter(meal.komandirovka, card, CardParameterType.Komandirovka);
+            saveParameter(meal.menuRu, card, CardParameterType.MenuRu);
+            saveParameter(meal.otzovik, card, CardParameterType.Otzovik);
+            saveParameter(meal.peterburgRu, card, CardParameterType.PeterburgRu);
+            saveParameter(meal.restlook, card, CardParameterType.Restlook);
+            saveParameter(meal.restop, card, CardParameterType.Restop);
+            saveParameter(meal.restoran, card, CardParameterType.Restoran);
+            saveParameter(meal.restozoom, card, CardParameterType.Restozoom);
+            saveParameter(meal.spbrestoran, card, CardParameterType.Spbrestoran);
+            saveParameter(meal.szoSpr, card, CardParameterType.SzoSpr);
+            saveParameter(meal.theVillage, card, CardParameterType.TheVillage);
+            saveParameter(meal.tourprom, card, CardParameterType.Tourprom);
+            saveParameter(meal.traveltipz, card, CardParameterType.Traveltipz);
+            saveParameter(meal.tulp, card, CardParameterType.Tulp);
+            saveParameter(meal.turbina, card, CardParameterType.Turbina);
+            saveParameter(meal.uvoice, card, CardParameterType.Uvoice);
+            saveParameter(meal.wrestorane, card, CardParameterType.Wrestorane);
+            saveParameter(meal.yell, card, CardParameterType.Yell);
+            saveParameter(meal.zoon, card, CardParameterType.Zoon);
+
+            String freePass = "0";
+            if ("yes".equalsIgnoreCase(meal.freePass)) {
+                freePass = "100";
+            }
+            saveParameter(freePass, card, CardParameterType.FreePass);
+
+            saveParameter(meal.facts, card, CardParameterType.Facts);
+            saveParameter(meal.legends, card, CardParameterType.Legends);
+            saveParameter(meal.literature, card, CardParameterType.Literature);
+            saveParameter(meal.anecdotes, card, CardParameterType.Anecdotes);
+            saveParameter(meal.films, card, CardParameterType.Films);
+            saveParameter(meal.famousPassers, card, CardParameterType.FamousPassers);
+            saveParameter(meal.citations, card, CardParameterType.Citations);
+            saveParameter(meal.borisStars, card, CardParameterType.BorisStars);
+            saveParameter(meal.restoclub, card, CardParameterType.Restoclub);
+            saveParameter(meal.afisha, card, CardParameterType.Afisha);
+            saveParameter(meal.timeout, card, CardParameterType.Timeout);
+            saveParameter(meal.wikipedia, card, CardParameterType.Wikipedia);
+            saveParameter(meal.wikitravel, card, CardParameterType.Wikitravel);
+            saveParameter(meal.reservationDiscount, card, CardParameterType.ReservationDiscount);
+            saveParameter(meal.reservationPhone, card, CardParameterType.ReservationPhone);
+
             saveCardTags(meal.kitchen, card, TagType.Cuisine);
             saveCardTags(meal.categories, card, TagType.Categories);
             saveCardTags(meal.ribbons, card, TagType.Ribbons);
@@ -381,6 +675,8 @@ public class GlobalXmlParser {
             saveImages(meal.panoramaToList, card, ImageType.PanoramaToList);
             saveImages(meal.panorama, card, ImageType.Panorama);
             saveImages(meal.cardImage, card, ImageType.CardImage);
+
+            addRestarauntChainLink(meal.restaurantChain, card);
 
 //            handBook.priceFile);
 //            handBook.metro);
@@ -406,8 +702,10 @@ public class GlobalXmlParser {
             saveText(hotel.newsRu, hotel.newsEn, hotel.nameRU, hotel.nameEN, TextType.News, card);
             saveText(hotel.offersRu, hotel.offersEn, hotel.nameRU, hotel.nameEN, TextType.Offers, card);
 
-            saveParameter(hotel.lat, card, CardParameterType.Lat);
-            saveParameter(hotel.lon, card, CardParameterType.Lon);
+            if (hotel.lat != null && !hotel.lat.replaceAll(" ", "").isEmpty() && hotel.lon != null && !hotel.lon.replaceAll(" ", "").isEmpty()) {
+                saveCoordinate(hotel.lat, hotel.lon, card);
+            }
+
             saveParameter(hotel.phone, card, CardParameterType.Phone);
             saveParameter(hotel.openHours, card, CardParameterType.OpenHours);
             saveParameter(hotel.site, card, CardParameterType.Site);
@@ -435,6 +733,9 @@ public class GlobalXmlParser {
             saveImages(hotel.photo, card, ImageType.Photo);
             saveImages(hotel.panoramaToList, card, ImageType.PanoramaToList);
             saveImages(hotel.panorama, card, ImageType.Panorama);
+
+            addRestarauntChainLink(hotel.restaurantChain, card);
+
         }
     }
 
@@ -456,8 +757,10 @@ public class GlobalXmlParser {
             saveText(handBook.newsRu, handBook.newsEn, handBook.nameRU, handBook.nameEN, TextType.News, card);
             saveText(handBook.offersRu, handBook.offersEn, handBook.nameRU, handBook.nameEN, TextType.Offers, card);
 
-            saveParameter(handBook.lat, card, CardParameterType.Lat);
-            saveParameter(handBook.lon, card, CardParameterType.Lon);
+            if (handBook.lat != null && !handBook.lat.replaceAll(" ", "").isEmpty() && handBook.lon != null && !handBook.lon.replaceAll(" ", "").isEmpty()) {
+                saveCoordinate(handBook.lat, handBook.lon, card);
+            }
+
             saveParameter(handBook.phone, card, CardParameterType.Phone);
             saveParameter(handBook.openHours, card, CardParameterType.OpenHours);
             saveParameter(handBook.site, card, CardParameterType.Site);
@@ -510,8 +813,10 @@ public class GlobalXmlParser {
             saveText(aboutCity.newsRu, aboutCity.newsEn, aboutCity.nameRU, aboutCity.nameEN, TextType.News, card);
             saveText(aboutCity.offersRu, aboutCity.offersEn, aboutCity.nameRU, aboutCity.nameEN, TextType.Offers, card);
 
-            saveParameter(aboutCity.lat, card, CardParameterType.Lat);
-            saveParameter(aboutCity.lon, card, CardParameterType.Lon);
+            if (aboutCity.lat != null && !aboutCity.lat.replaceAll(" ", "").isEmpty() && aboutCity.lon != null && !aboutCity.lon.replaceAll(" ", "").isEmpty()) {
+                saveCoordinate(aboutCity.lat, aboutCity.lon, card);
+            }
+
             saveParameter(aboutCity.phone, card, CardParameterType.Phone);
             saveParameter(aboutCity.openHours, card, CardParameterType.OpenHours);
             saveParameter(aboutCity.site, card, CardParameterType.Site);
@@ -638,6 +943,7 @@ public class GlobalXmlParser {
             }
 
         } catch (Exception e) {
+            loggerFactory.info("invalid parameter " + parameter + " in type "+cardParameterDataType);
             return false;
         }
         return true;
@@ -697,14 +1003,27 @@ public class GlobalXmlParser {
         }
     }
 
+    private void saveCoordinate(String lat, String lon, CardEntity card) {
+        try {
+            if (isValidParameter(lat, DataType.DoubleType) && isValidParameter(lon, DataType.DoubleType)) {
+                double doubleLat = Double.parseDouble(lat);
+                double doubleLon = Double.parseDouble(lon);
+                CardCoordinateEntity cardCoordinateEntity = new CardCoordinateEntity(card, doubleLon, doubleLat);
+                CoordinateRequest.addCardCoordinate(cardCoordinateEntity);
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        }
+    }
+
     private void saveImage(String imageName, CardEntity card, ImageType imageType) {
         try {
             if (imageName == null || imageName.isEmpty()) {
                 return;
             }
-            File imageFile = new File(imageRoot + imageName);
+            File imageFile = new File("\\" + imageRoot + imageName);
             if (!imageFile.exists()) {
-//                System.out.println(imageRoot + " : " + imageName + " FROM " + imageType);
+                loggerFactory.error(imageRoot + " : " + imageName + " FROM " + imageType);
                 return;
             }
             BufferedImage bimg = ImageIO.read(imageFile);
@@ -714,26 +1033,27 @@ public class GlobalXmlParser {
             String hash = getMd5Hash(imageFile);
             ImageEntity imageEntity = ImageRequest.getImageByHash(hash);
             if (imageEntity == null) {
-                saveFile(imageFile, imageName, imageType.toString());
-                String someUrl = ServerConsts.ServerURL + ServerConsts.getWorldOnlineFileModule + ServerConsts.getImageServlet;
-                imageEntity = new ImageEntity(someUrl + "?fileName=" + imageName, height, width, size, hash);
+                saveFile(imageFile, imageName, imageRoot + imageType.toString());
+                String path = fileRoot + imageRoot + imageType.toString() + "\\" + imageName;
+                imageEntity = new ImageEntity(path, height, width, size, hash);
                 ImageRequest.addImage(imageEntity);
             }
             CardImageEntity cardImageEntity = new CardImageEntity(card, imageEntity, imageType);
             cardImageEntity.setCardImageName(imageName);
             ImageRequest.addCardImage(cardImageEntity);
         } catch (Exception e) {
-//            System.out.println("Exception on " + imageRoot + " : " + imageName + " FROM " + imageType);
-            e.printStackTrace();
+            loggerFactory.error("Exception on " + fileRoot + imageRoot + " : " + imageName + " FROM " + imageType);
+            loggerFactory.error(e.toString());
         }
     }
 
     private void saveFile(File file, String fileName, String subRoot) throws IOException {
-        File outFolder = new File("..\\..\\" + fileRoot + subRoot);
+        String mainRoot = ServerConsts.fileStorageRoot + fileRoot + subRoot;
+        File outFolder = new File(mainRoot);
         if (!outFolder.exists()) {
             outFolder.mkdirs();
         }
-        File out = new File("..\\..\\" + fileRoot + subRoot + "\\" + fileName);
+        File out = new File(mainRoot + "\\" + fileName);
         FileCopyUtils.copy(file, out);
     }
 
@@ -742,7 +1062,6 @@ public class GlobalXmlParser {
         try {
             FileInputStream fis = new FileInputStream(file);
             MessageDigest md = MessageDigest.getInstance("MD5");
-            //Using MessageDigest update() method to provide input
             byte[] buffer = new byte[8192];
             int numOfBytesRead;
             while ((numOfBytesRead = fis.read(buffer)) > 0) {
@@ -751,15 +1070,13 @@ public class GlobalXmlParser {
             byte[] hash = md.digest();
             checksum = new BigInteger(1, hash).toString(16); //don't use this, truncates leading zero
         } catch (IOException ex) {
-//            logger.log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
+            loggerFactory.error(ex);
         } catch (NoSuchAlgorithmException ex) {
-//            logger.log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
+            loggerFactory.error(ex);
         }
-//        System.out.println(checksum);
         return checksum;
     }
+
 }
 
 /*

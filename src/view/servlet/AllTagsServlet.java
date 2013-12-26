@@ -1,9 +1,11 @@
 package view.servlet;
 
 import model.FileReader;
+import model.constants.Component;
 import model.constants.databaseenumeration.TagType;
 import model.database.requests.TagRequest;
 import model.database.worldonlinedb.TagEntity;
+import model.logger.LoggerFactory;
 import model.xmlparser.GlobalXmlParser;
 
 import javax.servlet.ServletException;
@@ -21,6 +23,8 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class AllTagsServlet extends HttpServlet {
+
+    private LoggerFactory loggerFactory=new LoggerFactory(Component.Admin,AllTagsServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -47,6 +51,7 @@ public class AllTagsServlet extends HttpServlet {
         } catch (Exception e) {
 //            request.setAttribute("errorMesage", e.getMessage());
 //            ServletHelper.sendForward("/error.jsp", this, request, response);
+            loggerFactory.error(e);
             throw new ServletException(e);
         }
     }

@@ -139,7 +139,7 @@ public class CardEntity {
         return result;
     }
 
-    public CardEntity() {
+    public  CardEntity() {
     }
 
     public CardEntity(CardType cardType, String cardName, CardState cardState) {

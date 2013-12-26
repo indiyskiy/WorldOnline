@@ -3,6 +3,7 @@ package model.database.requests;
 import model.additionalentity.CompleteCardTagInfo;
 import model.additionalentity.CompleteTagInfo;
 import model.additionalentity.CompleteTextGroupInfo;
+import model.constants.Component;
 import model.constants.databaseenumeration.TagType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
@@ -10,6 +11,7 @@ import model.database.worldonlinedb.CardEntity;
 import model.database.worldonlinedb.CardTagEntity;
 import model.database.worldonlinedb.TagEntity;
 import model.database.worldonlinedb.TextGroupEntity;
+import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.intellij.lang.annotations.Language;
 
@@ -28,6 +30,8 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class TagRequest {
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, TagRequest.class);
+
     public static CardTagEntity getCardTagByResultSet(ResultSet rs) throws SQLException {
         CardTagEntity cardTagEntity = null;
         if (rs.getLong("CardTag.CardTagID") != 0 && !rs.wasNull()) {
@@ -70,7 +74,7 @@ public class TagRequest {
                 tag.setTagTextGroup(textGroupEntity);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -100,7 +104,7 @@ public class TagRequest {
                 tags.add(tag);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -131,7 +135,7 @@ public class TagRequest {
                 cardTag.setTag(tag);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -159,7 +163,7 @@ public class TagRequest {
                 tag.setTagTextGroup(textGroupEntity);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -219,7 +223,7 @@ public class TagRequest {
                     "JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
                     "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
                     "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Card on(Card.CardID=CardTag.CardID)";
+                    "LEFT OUTER JOIN Card ON(Card.CardID=CardTag.CardID)";
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -236,7 +240,7 @@ public class TagRequest {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -257,9 +261,9 @@ public class TagRequest {
             //tag text group
             getCompleteTag(rs, tagInfo, textGroupName, textName);
         }
-        Long cardID=rs.getLong("Card.CardID");
-        if(cardID!=0 && !rs.wasNull() && cardTagInfo.getCardTagEntity().getCard()==null){
-            CardEntity cardEntity=CardRequest.getCardFromResultSet(rs);
+        Long cardID = rs.getLong("Card.CardID");
+        if (cardID != 0 && !rs.wasNull() && cardTagInfo.getCardTagEntity().getCard() == null) {
+            CardEntity cardEntity = CardRequest.getCardFromResultSet(rs);
             cardTagInfo.getCardTagEntity().setCard(cardEntity);
         }
     }
@@ -290,7 +294,7 @@ public class TagRequest {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -340,7 +344,7 @@ public class TagRequest {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }

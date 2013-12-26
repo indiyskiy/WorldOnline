@@ -16,7 +16,8 @@ public enum CardType {
     CardRelax(5),
     CardRoute(6),
     CardShopping(7),
-    CardSight(8);
+    CardSight(8),
+    RestaurantChainCard(9);
 
     private final int value;
 

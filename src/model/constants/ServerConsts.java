@@ -10,6 +10,7 @@ package model.constants;
 public class ServerConsts {
     public static final String ServerURL="http://127.0.0.1:8080/";
     public static final String worldOnlineAdminModule="worldOnline/";
-    public static final String getWorldOnlineFileModule="WorldOnlineFileServer/";
-    public static final String getImageServlet="getimage";
+//    public static final String worldOnlineFileModule="WorldOnlineFileServer/";
+    public static final String fileStorageRoot="C:\\Users\\Servcer\\";
+
 }

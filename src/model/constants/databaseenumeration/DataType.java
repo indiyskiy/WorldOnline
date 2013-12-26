@@ -15,7 +15,8 @@ public enum DataType {
     LinkType(4),
     EmailType(5),
     PhoneNumberType(6),
-    TimestampType(7);
+    TimestampType(7),
+    Percent(8);
 
 
     private final int value;

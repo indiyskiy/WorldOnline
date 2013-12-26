@@ -2,17 +2,18 @@ package view.servlet;
 
 import model.additionalentity.CompleteCardInfo;
 import model.additionalentity.CompleteCardTagInfo;
-import model.constants.databaseenumeration.CardState;
-import model.constants.databaseenumeration.CardType;
-import model.constants.databaseenumeration.TagType;
-import model.constants.databaseenumeration.TextType;
+import model.constants.Component;
+import model.constants.databaseenumeration.*;
 import model.database.requests.CardRequest;
 import model.database.requests.TagRequest;
+import model.logger.LoggerFactory;
+import model.xmlparser.GlobalXmlParser;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -24,18 +25,7 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class CompleteCardInfoServlet extends HttpServlet {
-
-    public static void main(String[] args) {
-        CompleteCardInfo completeCardInfo = null;
-        HashMap<Long, CompleteCardTagInfo> cardTags = TagRequest.getCompleteCardTags();
-//        HashMap<Long, CompleteCardTagInfo> cardTags = CardRequest.getCompleteCardInfo();
-        for (CompleteCardTagInfo tag : cardTags.values()) {
-//            if (tag.getCompleteTagInfo().getTagEntity().getTagType() == TagType.Cuisine.getValue()) {
-            if (tag.getCompleteTagInfo().getTagEntity().getTagType() == TagType.Ribbons.getValue()) {
-                System.out.println(tag.getCardTagEntity().getCard().getCardID());
-            }
-        }
-    }
+LoggerFactory loggerFactory=new LoggerFactory(Component.Admin,CompleteCardInfoServlet.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
@@ -44,6 +34,8 @@ public class CompleteCardInfoServlet extends HttpServlet {
             request.setAttribute("cardStates", CardState.values());
             request.setAttribute("textTypes", TextType.values());
             request.setAttribute("tagTypes", TagType.values());
+            request.setAttribute("cardToCardLinkTypes", CardToCardLinkType.values());
+            request.setAttribute("imageTypes",ImageType.values());
             String cardIDString = request.getParameter("CardID");
             if (cardIDString != null) {
                 int cardID = Integer.parseInt(cardIDString);
@@ -61,12 +53,22 @@ public class CompleteCardInfoServlet extends HttpServlet {
                     if (completeCardInfo.getCompleteCardTagInfoMap() != null && !completeCardInfo.getCompleteCardTagInfoMap().isEmpty()) {
                         request.setAttribute("tags", completeCardInfo.getCompleteCardTagInfoMap().values());
                     }
+                    if (completeCardInfo.getCardToCardLinkEntityMap() != null && !completeCardInfo.getCardToCardLinkEntityMap().isEmpty()) {
+                        request.setAttribute("links", completeCardInfo.getCardToCardLinkEntityMap().values());
+                    }
+                    if (completeCardInfo.getCardToCardLinkedOnEntityMap() != null && !completeCardInfo.getCardToCardLinkedOnEntityMap().isEmpty()) {
+                        request.setAttribute("linkedOn", completeCardInfo.getCardToCardLinkedOnEntityMap().values());
+                    }
+                    if (completeCardInfo.getCompleteCardImageInfoMap()!= null && !completeCardInfo.getCompleteCardImageInfoMap().isEmpty()) {
+                        request.setAttribute("images", completeCardInfo.getCompleteCardImageInfoMap().values());
+                    }
                 }
                 ServletHelper.sendForward("/completecardinfo.jsp?CardID=" + cardID, this, request, response);
             }
         } catch (Exception e) {
 //            request.setAttribute("errorMesage", e.getMessage());
 //            ServletHelper.sendForward("/error.jsp", this, request, response);
+            loggerFactory.error(e.toString());
             throw new ServletException(e);
         }
     }

@@ -1,6 +1,8 @@
 package model.database.session;
 
+import model.constants.Component;
 import model.database.worldonlinedb.*;
+import model.logger.LoggerFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -17,6 +19,7 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 public class HibernateUtil {
     private static HibernateUtil Instance = new HibernateUtil();
+    private final LoggerFactory loggerFactory = new LoggerFactory(Component.Database, HibernateUtil.class);
     private SessionFactory sessionFactory;
 
     private HibernateUtil() {
@@ -32,7 +35,7 @@ public class HibernateUtil {
 //            sessionFactory = new Configuration().configure().buildSessionFactory();
         } catch (Exception ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
-            ex.printStackTrace();
+            loggerFactory.error(ex);
             throw new ExceptionInInitializerError(ex);
         }
     }

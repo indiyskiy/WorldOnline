@@ -25,16 +25,16 @@ public class ImageEntity {
         this.imageID = imageID;
     }
 
-    @javax.persistence.Column(name = "ImageURL")
+    @javax.persistence.Column(name = "ImageFilePath")
     @Basic
-    private String imageURL;
+    private String imageFilePath;
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImageFilePath() {
+        return imageFilePath;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setImageFilePath(String ImageFilePath) {
+        this.imageFilePath = ImageFilePath;
     }
 
     @javax.persistence.Column(name = "ImageMD5Hash")
@@ -95,7 +95,7 @@ public class ImageEntity {
 
         if (imageID != null ? !imageID.equals(that.imageID) : that.imageID != null)
             return false;
-        if (imageURL != null ? !imageURL.equals(that.imageURL) : that.imageURL != null)
+        if (imageFilePath != null ? !imageFilePath.equals(that.imageFilePath) : that.imageFilePath != null)
             return false;
         if (imageMD5Hash != null ? !imageMD5Hash.equals(that.imageMD5Hash) : that.imageMD5Hash != null)
             return false;
@@ -111,7 +111,7 @@ public class ImageEntity {
     @Override
     public int hashCode() {
         int result = imageID != null ? imageID.hashCode() : 0;
-        result = 31 * result + (imageURL != null ? imageURL.hashCode() : 0);
+        result = 31 * result + (imageFilePath != null ? imageFilePath.hashCode() : 0);
         result = 31 * result + (imageMD5Hash != null ? imageMD5Hash.hashCode() : 0);
         result = 31 * result + (imageHeight != null ? imageHeight.hashCode() : 0);
         result = 31 * result + (imageWidth != null ? imageWidth.hashCode() : 0);
@@ -122,8 +122,8 @@ public class ImageEntity {
     public ImageEntity() {
     }
 
-    public ImageEntity(String imageURL, Integer imageHeight, Integer imageWidth, Long imageFileSize, String imageMD5Hash) {
-        this.imageURL = imageURL;
+    public ImageEntity(String imageFilePath, Integer imageHeight, Integer imageWidth, Long imageFileSize, String imageMD5Hash) {
+        this.imageFilePath = imageFilePath;
         this.imageHeight = imageHeight;
         this.imageWidth = imageWidth;
         this.imageFileSize = imageFileSize;

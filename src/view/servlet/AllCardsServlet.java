@@ -1,11 +1,13 @@
 package view.servlet;
 
+import model.constants.Component;
 import model.constants.databaseenumeration.CardType;
 import model.constants.databaseenumeration.TagType;
 import model.database.requests.CardRequest;
 import model.database.requests.TagRequest;
 import model.database.worldonlinedb.CardEntity;
 import model.database.worldonlinedb.TagEntity;
+import model.logger.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +24,8 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class AllCardsServlet extends HttpServlet {
+    private LoggerFactory loggerFactory=new LoggerFactory(Component.Admin,AllCardsServlet.class);
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
@@ -44,6 +48,7 @@ public class AllCardsServlet extends HttpServlet {
         } catch (Exception e) {
 //            request.setAttribute("errorMesage", e.getMessage());
 //            ServletHelper.sendForward("/error.jsp", this, request, response);
+            loggerFactory.error(e);
             throw new ServletException(e);
         }
     }

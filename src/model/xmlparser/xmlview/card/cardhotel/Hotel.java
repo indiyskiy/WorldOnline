@@ -98,4 +98,6 @@ public class Hotel {
     public String offersEn;
     @Element(name = "Instagramm", required = false)
     public String instagramm;
+    @Element(name = "RestaurantChain", required = false)
+    public String restaurantChain;
 }

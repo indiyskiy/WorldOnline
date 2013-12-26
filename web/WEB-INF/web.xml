@@ -70,4 +70,16 @@
         <servlet-name>CompleteCardInfoServlet</servlet-name>
         <url-pattern>/completecardinfo</url-pattern>
     </servlet-mapping>
+
+    <!-- image -->
+    <servlet>
+        <display-name>ImageServlet</display-name>
+        <servlet-name>ImageServlet</servlet-name>
+        <servlet-class>view.servlet.ImageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ImageServlet</servlet-name>
+        <url-pattern>/image/*</url-pattern>
+    </servlet-mapping>
 </web-app>

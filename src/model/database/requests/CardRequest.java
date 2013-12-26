@@ -2,11 +2,14 @@ package model.database.requests;
 
 
 import model.additionalentity.*;
+import model.constants.Component;
 import model.constants.databaseenumeration.CardType;
 import model.constants.databaseenumeration.TextType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.*;
+import model.logger.LogLevel;
+import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.intellij.lang.annotations.Language;
@@ -29,6 +32,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class CardRequest {
+    private static LoggerFactory loggerFactory=new LoggerFactory(Component.Database,CardRequest.class);
 
     public static ArrayList<CardEntity> getAllCards() {
         ArrayList<CardEntity> cardEntities = new ArrayList<CardEntity>();
@@ -59,9 +63,7 @@ public class CardRequest {
     }
 
     public static boolean addCard(CardEntity card) {
-//        System.out.println("add card " + card.getCardName() + " " + card.getCardType());
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         Transaction transaction = null;
         try {
             session.beginTransaction();
@@ -146,7 +148,7 @@ public class CardRequest {
                 getCompleteCardInfo(card, rs);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -187,6 +189,10 @@ public class CardRequest {
                     "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
                     //card to card link
                     "LEFT OUTER JOIN CardToCardLink ON (CardToCardLink.SourceCardID=Card.CardID) " +
+                    "LEFT OUTER JOIN Card AS TargetCard ON (CardToCardLink.TargetCardID=TargetCard.CardID) " +
+                    //linket at
+                    "LEFT OUTER JOIN CardToCardLink AS CardToCardLinkedOn ON (CardToCardLinkedOn.TargetCardID=Card.CardID) " +
+                    "LEFT OUTER JOIN Card AS SourceCard ON (CardToCardLinkedOn.SourceCardID=SourceCard.CardID) " +
                     "WHERE Card.CardID=?";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, cardID);
@@ -200,7 +206,7 @@ public class CardRequest {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -284,6 +290,42 @@ public class CardRequest {
             }
             TextRequest.getCompleteTextGroupInfo(rs, completeTextCardInfo.getCompleteTextGroupInfo(), "Text");
         }
+        //card links
+        Long cardToCardLinkID=rs.getLong("CardToCardLink.CardToCardLinkID");
+        if(cardToCardLinkID!=0 && !rs.wasNull()){
+            HashMap<Long,CardToCardLinkEntity> cardToCardLinkEntityMap = completeCardInfo.getCardToCardLinkEntityMap();
+            CardToCardLinkEntity cardToCardLinkEntity=cardToCardLinkEntityMap.get(cardToCardLinkID);
+            if(cardToCardLinkEntity==null){
+                cardToCardLinkEntity=LinkRequest.getCardToCardLinkByResultSet(rs,"CardToCardLink");
+                cardToCardLinkEntityMap.put(cardToCardLinkID,cardToCardLinkEntity);
+                cardToCardLinkEntity.setSourceCard(completeCardInfo.getCardEntity());
+            }
+            if(cardToCardLinkEntity.getTargetCard()==null){
+                Long targetCardID=rs.getLong("TargetCard.CardID");
+                if(targetCardID!=0 && !rs.wasNull()){
+                    CardEntity cardEntity=getCardFromResultSet(rs,"TargetCard");
+                    cardToCardLinkEntity.setTargetCard(cardEntity);
+                }
+            }
+        }
+        //card linked on
+        Long cardToCardLinkedOnID=rs.getLong("CardToCardLinkedOn.CardToCardLinkID");
+        if(cardToCardLinkedOnID!=0 && !rs.wasNull()){
+            HashMap<Long,CardToCardLinkEntity> cardToCardLinkedOnEntityMap = completeCardInfo.getCardToCardLinkedOnEntityMap();
+            CardToCardLinkEntity cardToCardLinkedOnEntity=cardToCardLinkedOnEntityMap.get(cardToCardLinkedOnID);
+            if(cardToCardLinkedOnEntity==null){
+                cardToCardLinkedOnEntity=LinkRequest.getCardToCardLinkByResultSet(rs,"CardToCardLinkedOn");
+                cardToCardLinkedOnEntityMap.put(cardToCardLinkedOnID,cardToCardLinkedOnEntity);
+                cardToCardLinkedOnEntity.setTargetCard(completeCardInfo.getCardEntity());
+            }
+            if(cardToCardLinkedOnEntity.getSourceCard()==null){
+                Long targetCardID=rs.getLong("SourceCard.CardID");
+                if(targetCardID!=0 && !rs.wasNull()){
+                    CardEntity cardEntity=getCardFromResultSet(rs,"SourceCard");
+                    cardToCardLinkedOnEntity.setSourceCard(cardEntity);
+                }
+            }
+        }
         return completeCardInfo;
     }
 
@@ -307,21 +349,21 @@ public class CardRequest {
     }
 
     public static void printInfo(CompleteCardInfo completeCardInfo) throws SQLException {
-        System.out.println("Card name = " + completeCardInfo.getCardEntity().getCardName());
+        loggerFactory.info("Card name = " + completeCardInfo.getCardEntity().getCardName());
         if (completeCardInfo.getCardCoordinateEntity() != null) {
             CardCoordinateEntity cardCoordinateEntity = completeCardInfo.getCardCoordinateEntity();
-            System.out.println("card coordinate = " + cardCoordinateEntity.getCardCoordinateID() + " " + cardCoordinateEntity.getLatitude() + "-" + cardCoordinateEntity.getLongitude());
+            loggerFactory.info("card coordinate = " + cardCoordinateEntity.getCardCoordinateID() + " " + cardCoordinateEntity.getLatitude() + "-" + cardCoordinateEntity.getLongitude());
         }
         Collection<CompleteCardTagInfo> cardTagInfos = completeCardInfo.getCompleteCardTagInfoMap().values();
         for (CompleteCardTagInfo cardTagInfo : cardTagInfos) {
-            System.out.println("Card tag id = " + cardTagInfo.getCardTagEntity().getCardTagID());
-            System.out.println("tag id= " + cardTagInfo.getCompleteTagInfo().getTagEntity().getTagID());
+            loggerFactory.info("Card tag id = " + cardTagInfo.getCardTagEntity().getCardTagID());
+            loggerFactory.info("tag id= " + cardTagInfo.getCompleteTagInfo().getTagEntity().getTagID());
 
             for (CompleteTextGroupInfo textInfo : cardTagInfo.getCompleteTagInfo().getCompleteTextGroupInfoMap().values()) {
-                System.out.println("text Group id " + textInfo.getTextGroup().getTextGroupID());
-                System.out.println("text Group name " + textInfo.getTextGroup().getTextGroupName());
+                loggerFactory.info("text Group id " + textInfo.getTextGroup().getTextGroupID());
+                loggerFactory.info("text Group name " + textInfo.getTextGroup().getTextGroupName());
                 for (TextEntity textEntity : textInfo.getTextEntityMap().values()) {
-                    System.out.println("text " + textEntity.getText());
+                    loggerFactory.info("text " + textEntity.getText());
                 }
             }
         }
@@ -329,14 +371,14 @@ public class CardRequest {
         if (completeCardImageInfoMap != null) {
             for (CompleteCardImageInfo completeCardImageInfo : completeCardImageInfoMap.values()) {
                 CardImageEntity cardImageEntity = completeCardImageInfo.getCardImageEntity();
-                System.out.println("card image id " + cardImageEntity.getCardImageID());
-                System.out.println("card image image " + cardImageEntity.getImage().getImageID());
+                loggerFactory.info("card image id " + cardImageEntity.getCardImageID());
+                loggerFactory.info("card image image " + cardImageEntity.getImage().getImageID());
                 CompleteTextGroupInfo completeTextGroupInfo = completeCardImageInfo.getCompleteTextGroupInfo();
                 if (completeTextGroupInfo != null) {
-                    System.out.println("image text Group id " + completeTextGroupInfo.getTextGroup().getTextGroupID());
-                    System.out.println("image text Group name " + completeTextGroupInfo.getTextGroup().getTextGroupName());
+                    loggerFactory.info("image text Group id " + completeTextGroupInfo.getTextGroup().getTextGroupID());
+                    loggerFactory.info("image text Group name " + completeTextGroupInfo.getTextGroup().getTextGroupName());
                     for (TextEntity textEntity : completeTextGroupInfo.getTextEntityMap().values()) {
-                        System.out.println("image text " + textEntity.getText());
+                        loggerFactory.info("image text " + textEntity.getText());
                     }
                 }
             }
@@ -345,30 +387,30 @@ public class CardRequest {
         if (cardParameterEntityMap != null) {
             Collection<CardParameterEntity> cardParameterEntities = cardParameterEntityMap.values();
             for (CardParameterEntity cardParameterEntity : cardParameterEntities) {
-                System.out.println("card parameter id = " + cardParameterEntity.getCardParameterID());
-                System.out.println("card parameter value = " + cardParameterEntity.getCardParameterValue());
+                loggerFactory.info("card parameter id = " + cardParameterEntity.getCardParameterID());
+                loggerFactory.info("card parameter value = " + cardParameterEntity.getCardParameterValue());
             }
         }
         if (completeCardInfo.getCompleteCardRootInfo() != null) {
             CompleteCardRootInfo completeCardRootInfo = completeCardInfo.getCompleteCardRootInfo();
             if (completeCardRootInfo.getCardRootEntity() != null) {
                 CardRootEntity cardRootEntity = completeCardRootInfo.getCardRootEntity();
-                System.out.println("card root id =  " + cardRootEntity.getCardRootID());
-                System.out.println("card root name =  " + cardRootEntity.getCardRootName());
+                loggerFactory.info("card root id =  " + cardRootEntity.getCardRootID());
+                loggerFactory.info("card root name =  " + cardRootEntity.getCardRootName());
             }
             if (completeCardRootInfo.getRootElementEntityMap() != null) {
                 Collection<RootElementEntity> rootElementEntities = completeCardRootInfo.getRootElementEntityMap().values();
                 for (RootElementEntity rootElementEntity : rootElementEntities) {
-                    System.out.println("root element ID = " + rootElementEntity.getRootElementID());
-                    System.out.println("root element name = " + rootElementEntity.getPlaceCard().getCardName());
+                    loggerFactory.info("root element ID = " + rootElementEntity.getRootElementID());
+                    loggerFactory.info("root element name = " + rootElementEntity.getPlaceCard().getCardName());
                 }
             }
             CompleteTextGroupInfo completeTextGroupInfo = completeCardRootInfo.getCompleteTextGroupInfo();
             if (completeTextGroupInfo != null) {
-                System.out.println("root text Group id " + completeTextGroupInfo.getTextGroup().getTextGroupID());
-                System.out.println("root text Group name " + completeTextGroupInfo.getTextGroup().getTextGroupName());
+               loggerFactory.info("root text Group id " + completeTextGroupInfo.getTextGroup().getTextGroupID());
+               loggerFactory.info("root text Group name " + completeTextGroupInfo.getTextGroup().getTextGroupName());
                 for (TextEntity textEntity : completeTextGroupInfo.getTextEntityMap().values()) {
-                    System.out.println("root text " + textEntity.getText());
+                    loggerFactory.info("root text " + textEntity.getText());
                 }
             }
         }
@@ -376,8 +418,7 @@ public class CardRequest {
         Collection<CompleteTextCardInfo> completeTextCardInfos = completeCardInfo.getCompleteTextCardInfoMap().values();
         for (CompleteTextCardInfo completeTextCardInfo : completeTextCardInfos) {
             if (completeTextCardInfo.getTextCardEntity() != null) {
-//                System.out.println("text card id = " + completeTextCardInfo.getTextCardEntity().getTextCardID());
-                System.out.println(TextType.parseInt(completeTextCardInfo.getTextCardEntity().getCardTextType()) + " " + completeTextCardInfo.getCompleteTextGroupInfo().getTextGroup().getTextGroupName());
+                loggerFactory.info(TextType.parseInt(completeTextCardInfo.getTextCardEntity().getCardTextType()) + " " + completeTextCardInfo.getCompleteTextGroupInfo().getTextGroup().getTextGroupName());
             }
         }
     }
@@ -399,7 +440,7 @@ public class CardRequest {
                 cards.add(cardEntity);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+           loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }

@@ -1,5 +1,7 @@
 package model.xmlparser;
 
+import model.constants.Component;
+import model.logger.LoggerFactory;
 import model.xmlparser.xmlview.people.peopleaboutcity.PeopleAboutCity;
 import org.simpleframework.xml.core.Persister;
 
@@ -14,15 +16,17 @@ import java.io.FileNotFoundException;
  * To change this template use File | Settings | File Templates.
  */
 public class PeopleParser {
+    private LoggerFactory loggerFactory=new LoggerFactory(Component.Parser,PeopleParser.class);
+
     public PeopleAboutCity getPeopleAboutCity(String root) {
         try {
             FileInputStream reader = new FileInputStream(root);
             Persister serializer = new Persister();
             return serializer.read(PeopleAboutCity.class, reader, false);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         } catch (Exception e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
         }
         return null;
     }
