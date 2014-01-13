@@ -26,7 +26,7 @@ import java.util.HashMap;
  */
 public class TextRequest {
 
-    private static LoggerFactory loggerFactory=new LoggerFactory(Component.Database,TextRequest.class);
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, TextRequest.class);
 
     public static void addText(TextEntity text) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
@@ -165,7 +165,7 @@ public class TextRequest {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT * FROM TextGroup " +
                     "JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID) " +
-                    "WHERE Text.Text Like ?";
+                    "WHERE Text.Text LIKE ?";
             ps = connection.prepareStatement(sql);
             ps.setString(1, text);
             rs = ps.executeQuery();
@@ -180,5 +180,33 @@ public class TextRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return textEntity;
+    }
+
+    public static CompleteTextGroupInfo getCompleteTextGroupInfo(long textGroupID) {
+        CompleteTextGroupInfo completeTextGroupInfo = null;
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT * FROM TextGroup " +
+                    "JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID) " +
+                    "WHERE TextGroup.TextGroupID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, textGroupID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                completeTextGroupInfo = new CompleteTextGroupInfo(getTextGroupByResultSet(rs));
+                getCompleteTextGroupInfo(rs, completeTextGroupInfo, "Text");
+            while (rs.next()) {
+                getCompleteTextGroupInfo(rs, completeTextGroupInfo, "Text");
+            }
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return completeTextGroupInfo;
     }
 }

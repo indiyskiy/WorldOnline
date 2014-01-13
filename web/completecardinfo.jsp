@@ -82,7 +82,11 @@
         <br/>
         <c:forEach items="${cardTexts}" var="cardText">
             Тексты
-            [${cardText.completeTextGroupInfo.textGroup.textGroupID}]${cardText.completeTextGroupInfo.textGroup.textGroupName} (
+            <a href='completetextgroupinfo?TextGroupID=${cardText.completeTextGroupInfo.textGroup.textGroupID}'>
+                [${cardText.completeTextGroupInfo.textGroup.textGroupID}]
+                    ${cardText.completeTextGroupInfo.textGroup.textGroupName}
+            </a>
+            (
             <c:forEach items="${textTypes}" var="textType">
                 <c:if test="${textType.value==cardText.textCardEntity.cardTextType}">
                     ${textType}
@@ -116,9 +120,9 @@
     <dd>
         <br/>
         <c:forEach items="${links}" var="link">
-             <a href='completecardinfo?CardID=${link.targetCard.cardID}'>
-            [${link.targetCard.cardID}]${link.targetCard.cardName}
-        </a>
+            <a href='completecardinfo?CardID=${link.targetCard.cardID}'>
+                [${link.targetCard.cardID}]${link.targetCard.cardName}
+            </a>
             (
             <c:forEach items="${cardToCardLinkTypes}" var="cardToCardLinkType">
                 <c:if test="${cardToCardLinkType.value==link.cardToCardLinkType}">
@@ -136,9 +140,9 @@
     <dd>
         <br/>
         <c:forEach items="${linkedOn}" var="link">
-             <a href='completecardinfo?CardID=${link.sourceCard.cardID}'>
-            [${link.sourceCard.cardID}]${link.sourceCard.cardName}
-        </a>
+            <a href='completecardinfo?CardID=${link.sourceCard.cardID}'>
+                [${link.sourceCard.cardID}]${link.sourceCard.cardName}
+            </a>
             (
             <c:forEach items="${cardToCardLinkTypes}" var="cardToCardLinkType">
                 <c:if test="${cardToCardLinkType.value==link.cardToCardLinkType}">
@@ -156,7 +160,7 @@
     <dd>
         <br/>
         <c:forEach items="${images}" var="image">
-             [${image.cardImageEntity.image.imageID}]${image.cardImageEntity.cardImageName} (
+            [${image.cardImageEntity.image.imageID}]${image.cardImageEntity.cardImageName} (
             <c:forEach items="${imageTypes}" var="imageType">
                 <c:if test="${imageType.value==image.cardImageEntity.cardImageType}">
                     ${imageType}

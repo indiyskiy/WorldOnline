@@ -1,7 +1,8 @@
-package view.servlet;
+package view.servlet.admin;
 
 import model.database.requests.UserRequests;
 import model.database.worldonlinedb.UserEntity;
+import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

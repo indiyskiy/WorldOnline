@@ -1,13 +1,12 @@
-package view.servlet;
+package view.servlet.admin;
 
+import controller.parser.edit.adminparser.AllCardParser;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardType;
-import model.constants.databaseenumeration.TagType;
 import model.database.requests.CardRequest;
-import model.database.requests.TagRequest;
 import model.database.worldonlinedb.CardEntity;
-import model.database.worldonlinedb.TagEntity;
 import model.logger.LoggerFactory;
+import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,17 +31,17 @@ public class AllCardsServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ServletHelper.setUTF8(request, response);
+        AllCardParser parser=new AllCardParser();
+        parser.parse(request);
         try {
             ServletHelper.setUTF8(request, response);
-            if (request.getParameter("CardType") == null || request.getParameter("CardType").isEmpty()) {
-                ArrayList<CardEntity> cardEntities = CardRequest.getAllCards();
-                request.setAttribute("cardList", cardEntities);
+            ArrayList<CardEntity> cardEntities;
+            if (!parser.haveMatter()) {
+               cardEntities = CardRequest.getAllCards();
             } else {
-                int type = Integer.parseInt(request.getParameter("CardType"));
-                CardType cardType = CardType.parseInt(type);
-                ArrayList<CardEntity> cardEntities = CardRequest.getAllCards(cardType);
-                request.setAttribute("cardList", cardEntities);
+                cardEntities = CardRequest.getAllCards(parser);
             }
+            request.setAttribute("cardList", cardEntities);
             request.setAttribute("cardTypes",CardType.values());
             ServletHelper.sendForward("/allcards.jsp", this, request, response);
         } catch (Exception e) {

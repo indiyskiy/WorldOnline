@@ -8,13 +8,6 @@ import javax.mail.MessagingException;
 import java.util.HashMap;
 
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 26.12.13
- * Time: 14:54
- * To change this template use File | Settings | File Templates.
- */
 public class ErrorMailer {
     private static final String sender = "petersburgonlineerrorsystem";
     private static final String password = "djqysdrjcvjct";

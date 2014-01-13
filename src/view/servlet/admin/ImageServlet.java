@@ -1,4 +1,4 @@
-package view.servlet;
+package view.servlet.admin;
 
 import model.database.requests.ImageRequest;
 

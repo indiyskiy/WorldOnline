@@ -15,7 +15,7 @@
     <servlet>
         <display-name>ExampleServlet</display-name>
         <servlet-name>ExampleServlet</servlet-name>
-        <servlet-class>view.servlet.ExampleServlet</servlet-class>
+        <servlet-class>view.servlet.admin.ExampleServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -27,7 +27,7 @@
     <servlet>
         <display-name>AllTagsServlet</display-name>
         <servlet-name>AllTagsServlet</servlet-name>
-        <servlet-class>view.servlet.AllTagsServlet</servlet-class>
+        <servlet-class>view.servlet.admin.AllTagsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -39,7 +39,7 @@
     <servlet>
         <display-name>TagEditServlet</display-name>
         <servlet-name>TagEditServlet</servlet-name>
-        <servlet-class>view.servlet.TagEditServlet</servlet-class>
+        <servlet-class>view.servlet.admin.TagEditServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -51,7 +51,7 @@
     <servlet>
         <display-name>AllCardsServlet</display-name>
         <servlet-name>AllCardsServlet</servlet-name>
-        <servlet-class>view.servlet.AllCardsServlet</servlet-class>
+        <servlet-class>view.servlet.admin.AllCardsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -63,7 +63,7 @@
     <servlet>
         <display-name>CompleteCardInfoServlet</display-name>
         <servlet-name>CompleteCardInfoServlet</servlet-name>
-        <servlet-class>view.servlet.CompleteCardInfoServlet</servlet-class>
+        <servlet-class>view.servlet.admin.CompleteCardInfoServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -75,11 +75,23 @@
     <servlet>
         <display-name>ImageServlet</display-name>
         <servlet-name>ImageServlet</servlet-name>
-        <servlet-class>view.servlet.ImageServlet</servlet-class>
+        <servlet-class>view.servlet.admin.ImageServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>ImageServlet</servlet-name>
         <url-pattern>/image/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- text group info -->
+    <servlet>
+        <display-name>CompleteTextGroupInfoServlet</display-name>
+        <servlet-name>CompleteTextGroupInfoServlet</servlet-name>
+        <servlet-class>view.servlet.admin.CompleteTextGroupInfoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CompleteTextGroupInfoServlet</servlet-name>
+        <url-pattern>/completetextgroupinfo</url-pattern>
     </servlet-mapping>
 </web-app>

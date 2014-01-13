@@ -1,12 +1,11 @@
-package view.servlet;
+package view.servlet.admin;
 
-import model.FileReader;
 import model.constants.Component;
 import model.constants.databaseenumeration.TagType;
 import model.database.requests.TagRequest;
 import model.database.worldonlinedb.TagEntity;
 import model.logger.LoggerFactory;
-import model.xmlparser.GlobalXmlParser;
+import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +31,7 @@ public class AllTagsServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-          ServletHelper.setUTF8(request,response);
+          ServletHelper.setUTF8(request, response);
             if (request.getParameter("TagType") == null || request.getParameter("TagType").isEmpty()) {
                 TagType[] tagTypes = TagType.values();
                 for (TagType tagType : tagTypes) {

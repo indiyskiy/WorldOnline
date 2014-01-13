@@ -1,6 +1,7 @@
 package model.database.requests;
 
 
+import controller.parser.edit.adminparser.AllCardParser;
 import model.additionalentity.*;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardType;
@@ -423,7 +424,7 @@ public class CardRequest {
         }
     }
 
-    public static ArrayList<CardEntity> getAllCards(CardType cardType) {
+    public static ArrayList<CardEntity> getAllCards(AllCardParser parser) {
         ArrayList<CardEntity> cards = new ArrayList<CardEntity>();
         DatabaseConnection dbConnection = new DatabaseConnection();
         PreparedStatement ps = null;
@@ -431,9 +432,31 @@ public class CardRequest {
         try {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT DISTINCT * FROM Card " +
-                    "WHERE Card.CardType=?";
+                    "WHERE 1=1";
+            if(parser.getCardID()!=null){
+             sql+=" AND Card.CardID=?";
+            }
+            if(parser.getCardName()!=null && !parser.getCardName().isEmpty()){
+                sql+=" AND Card.CardName=?";
+            }
+            if(parser.getCardType()!=null){
+                sql+=" AND Card.CardType=?";
+            }
+
             ps = connection.prepareStatement(sql);
-            ps.setInt(1, cardType.getValue());
+            int i=1;
+            if(parser.getCardID()!=null){
+            ps.setLong(i, parser.getCardID());
+                i++;
+            }
+            if(parser.getCardName()!=null && !parser.getCardName().isEmpty()){
+                ps.setString(i, parser.getCardName());
+                i++;
+            }
+            if(parser.getCardType()!=null){
+                ps.setInt(i, parser.getCardType().getValue());
+                i++;
+            }
             rs = ps.executeQuery();
             while (rs.next()) {
                 CardEntity cardEntity = getCardFromResultSet(rs);

@@ -1,10 +1,11 @@
-package view.servlet;
+package view.servlet.admin;
 
 import controller.parser.edit.TagEditParser;
 import model.additionalentity.CompleteTagInfo;
 import model.constants.databaseenumeration.TagType;
 import model.database.requests.TagRequest;
 import model.database.worldonlinedb.TagEntity;
+import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

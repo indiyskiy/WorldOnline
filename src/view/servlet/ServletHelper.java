@@ -25,4 +25,16 @@ public class ServletHelper {
         response.setContentType ("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
     }
+
+    public static String getAndSetAttribute(HttpServletRequest request, String name){
+        if(name==null){
+          return null;
+        }
+        String param=request.getParameter(name);
+        if(param!=null){
+            name=name.substring(0,1).toLowerCase()+name.substring(1);
+            request.setAttribute(name,param);
+        }
+        return param;
+    }
 }

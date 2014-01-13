@@ -1,21 +1,17 @@
-package view.servlet;
+package view.servlet.admin;
 
 import model.additionalentity.CompleteCardInfo;
-import model.additionalentity.CompleteCardTagInfo;
 import model.constants.Component;
 import model.constants.databaseenumeration.*;
 import model.database.requests.CardRequest;
-import model.database.requests.TagRequest;
 import model.logger.LoggerFactory;
-import model.xmlparser.GlobalXmlParser;
+import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
