@@ -32,4 +32,9 @@
               jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;
             org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"
             />
+
+    <Realm className="org.apache.catalina.realm.DataSourceRealm"
+           dataSourceName="jdbc/testDB"
+           userTable="AdminUser" userNameCol="adminUserName" userCredCol="adminUserPassword"
+           userRoleTable="AdminRole" roleNameCol="adminUserRole" localDataSource="true"/>
 </Context>

@@ -8,6 +8,23 @@
     <title>All cards</title>
 </head>
 <body>
+Страница <c:forEach var="i" begin="0" end="${pages}">
+    <c:choose>
+        <c:when test="${i==0 && (''.equals(page) || empty  page )}">
+            <b> ${i} </b>
+        </c:when>
+        <c:when test="${i==page}">
+            <b> ${i} </b>
+        </c:when>
+        <c:otherwise>
+            <a href="allcards?Page=${i}&CardNameRe=${cardNameRe}&CardIDRe=${cardIDRe}&CardTypeRe=${cardTypeRe}">
+                    ${i}
+            </a>
+        </c:otherwise>
+    </c:choose>
+
+</c:forEach>
+<br/>
 
 <form action="allcards" method="GET">
     Имя карточки <input type="text" name="CardNameRe"
@@ -15,16 +32,21 @@
     ID карточки <input type="text" name="CardIDRe"
                        value="${cardIDRe}"/>
     Тип карточки <select name="CardTypeRe">
-    <option value="">Любой</option>
+    <option value=""
+            <c:if test="${''==cardTypeRe}">
+                selected
+            </c:if>
+            >Любой
+    </option>
     <c:forEach items="${cardTypes}" var="cardType">
         <option value="${cardType.value}"
                 <c:if test="${cardType.value==cardTypeRe}">
                     selected
                 </c:if>
-                >${cardType}</option>
+                >${cardType.text}</option>
     </c:forEach>
 </select>
-    <input type="submit" value="Start test"/>
+    <input type="submit" value="Найти"/>
 </form>
 
 <table border="" width="70%" align="center">
@@ -50,12 +72,28 @@
             <td>
                 <c:forEach items="${cardTypes}" var="cardType">
                     <c:if test="${cardType.value==card.cardType}">
-                        ${cardType}
+                        ${cardType.text}
                     </c:if>
                 </c:forEach>
             </td>
         </tr>
     </c:forEach>
 </table>
+<br/>
+Страница <c:forEach var="i" begin="0" end="${pages}">
+    <c:choose>
+        <c:when test="${i==0 && (''.equals(page) || empty  page )}">
+            <b> ${i} </b>
+        </c:when>
+        <c:when test="${i==page}">
+            <b> ${i} </b>
+        </c:when>
+        <c:otherwise>
+            <a href="allcards?Page=${i}&CardNameRe=${cardNameRe}&CardIDRe=${cardIDRe}&CardTypeRe=${cardTypeRe}">
+                    ${i}
+            </a>
+        </c:otherwise>
+    </c:choose>
+</c:forEach>
 </body>
 </html>

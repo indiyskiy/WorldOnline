@@ -25,7 +25,8 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class TextRequest {
-
+    //todo запилить поиск перевода по тексту(или айдишнику) и языку
+    //todo и перепилить парсинг текстов ,чтоб не дублировался перевод при совпадающих словах
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, TextRequest.class);
 
     public static void addText(TextEntity text) {

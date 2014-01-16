@@ -23,7 +23,8 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class AllCardsServlet extends HttpServlet {
-    private LoggerFactory loggerFactory=new LoggerFactory(Component.Admin,AllCardsServlet.class);
+    private final int MAX_ITEMS = 50;
+    private LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, AllCardsServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -31,18 +32,25 @@ public class AllCardsServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ServletHelper.setUTF8(request, response);
-        AllCardParser parser=new AllCardParser();
+        AllCardParser parser = new AllCardParser(MAX_ITEMS);
         parser.parse(request);
         try {
             ServletHelper.setUTF8(request, response);
             ArrayList<CardEntity> cardEntities;
+            long pages;
             if (!parser.haveMatter()) {
-               cardEntities = CardRequest.getAllCards();
+                cardEntities = CardRequest.getAllCards(parser.getFirstElem(), MAX_ITEMS);
+                long results = CardRequest.countCard();
+                pages = (results / MAX_ITEMS);
             } else {
                 cardEntities = CardRequest.getAllCards(parser);
+                Long results = CardRequest.countCard(parser);
+                pages = (results / MAX_ITEMS);
             }
+            request.setAttribute("pages", pages);
+//            request.setAttribute("page", pages);
             request.setAttribute("cardList", cardEntities);
-            request.setAttribute("cardTypes",CardType.values());
+            request.setAttribute("cardTypes", CardType.values());
             ServletHelper.sendForward("/allcards.jsp", this, request, response);
         } catch (Exception e) {
 //            request.setAttribute("errorMesage", e.getMessage());

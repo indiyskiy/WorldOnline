@@ -16,14 +16,23 @@ public class AllCardParser {
     Long cardID = null;
     String cardName=null;
     CardType cardType = null;
+    int firstElem =0;
+    int maxItems=0;
+
+    public AllCardParser(int maxItems) {
+        this.maxItems = maxItems;
+    }
 
     public void parse(HttpServletRequest request) {
-        if (ServletHelper.getAndSetAttribute(request, "CardIDRe") != null && !ServletHelper.getAndSetAttribute(request, "CardIDRe").isEmpty()) {
+        if (request.getParameter("CardIDRe") != null && !request.getParameter("CardIDRe").isEmpty()) {
             cardID = Long.parseLong(ServletHelper.getAndSetAttribute(request, "CardIDRe"));
         }
         cardName = ServletHelper.getAndSetAttribute(request, "CardNameRe");
-        if (ServletHelper.getAndSetAttribute(request, "CardTypeRe") != null && !ServletHelper.getAndSetAttribute(request, "CardTypeRe").isEmpty()) {
+        if (request.getParameter("CardTypeRe") != null && !request.getParameter("CardTypeRe").isEmpty()) {
             cardType = CardType.parseInt(Integer.parseInt(ServletHelper.getAndSetAttribute(request, "CardTypeRe")));
+        }
+        if(request.getParameter("Page")!=null && !request.getParameter("Page").isEmpty()){
+            firstElem = maxItems*Integer.parseInt((ServletHelper.getAndSetAttribute(request,"Page")));
         }
     }
 
@@ -37,6 +46,14 @@ public class AllCardParser {
 
     public CardType getCardType() {
         return cardType;
+    }
+
+    public int getFirstElem() {
+        return firstElem;
+    }
+
+    public int getMaxItems() {
+        return maxItems;
     }
 
     public boolean haveMatter() {

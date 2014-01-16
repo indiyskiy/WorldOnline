@@ -4,15 +4,14 @@ package model.database.requests;
 import controller.parser.edit.adminparser.AllCardParser;
 import model.additionalentity.*;
 import model.constants.Component;
-import model.constants.databaseenumeration.CardType;
 import model.constants.databaseenumeration.TextType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.*;
-import model.logger.LogLevel;
 import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.intellij.lang.annotations.Language;
 
 import java.sql.Connection;
@@ -33,15 +32,15 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class CardRequest {
-    private static LoggerFactory loggerFactory=new LoggerFactory(Component.Database,CardRequest.class);
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, CardRequest.class);
 
-    public static ArrayList<CardEntity> getAllCards() {
+    public static ArrayList<CardEntity> getAllCards(int firstElem, int maxElems) {
         ArrayList<CardEntity> cardEntities = new ArrayList<CardEntity>();
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
 //        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             Transaction transaction = session.beginTransaction();
-            cardEntities = (ArrayList<CardEntity>) session.createCriteria(CardEntity.class).list();
+            cardEntities = (ArrayList<CardEntity>) session.createCriteria(CardEntity.class).setFirstResult(firstElem).setMaxResults(maxElems).list();
             transaction.commit();
         } finally {
             if (session != null) {
@@ -292,37 +291,37 @@ public class CardRequest {
             TextRequest.getCompleteTextGroupInfo(rs, completeTextCardInfo.getCompleteTextGroupInfo(), "Text");
         }
         //card links
-        Long cardToCardLinkID=rs.getLong("CardToCardLink.CardToCardLinkID");
-        if(cardToCardLinkID!=0 && !rs.wasNull()){
-            HashMap<Long,CardToCardLinkEntity> cardToCardLinkEntityMap = completeCardInfo.getCardToCardLinkEntityMap();
-            CardToCardLinkEntity cardToCardLinkEntity=cardToCardLinkEntityMap.get(cardToCardLinkID);
-            if(cardToCardLinkEntity==null){
-                cardToCardLinkEntity=LinkRequest.getCardToCardLinkByResultSet(rs,"CardToCardLink");
-                cardToCardLinkEntityMap.put(cardToCardLinkID,cardToCardLinkEntity);
+        Long cardToCardLinkID = rs.getLong("CardToCardLink.CardToCardLinkID");
+        if (cardToCardLinkID != 0 && !rs.wasNull()) {
+            HashMap<Long, CardToCardLinkEntity> cardToCardLinkEntityMap = completeCardInfo.getCardToCardLinkEntityMap();
+            CardToCardLinkEntity cardToCardLinkEntity = cardToCardLinkEntityMap.get(cardToCardLinkID);
+            if (cardToCardLinkEntity == null) {
+                cardToCardLinkEntity = LinkRequest.getCardToCardLinkByResultSet(rs, "CardToCardLink");
+                cardToCardLinkEntityMap.put(cardToCardLinkID, cardToCardLinkEntity);
                 cardToCardLinkEntity.setSourceCard(completeCardInfo.getCardEntity());
             }
-            if(cardToCardLinkEntity.getTargetCard()==null){
-                Long targetCardID=rs.getLong("TargetCard.CardID");
-                if(targetCardID!=0 && !rs.wasNull()){
-                    CardEntity cardEntity=getCardFromResultSet(rs,"TargetCard");
+            if (cardToCardLinkEntity.getTargetCard() == null) {
+                Long targetCardID = rs.getLong("TargetCard.CardID");
+                if (targetCardID != 0 && !rs.wasNull()) {
+                    CardEntity cardEntity = getCardFromResultSet(rs, "TargetCard");
                     cardToCardLinkEntity.setTargetCard(cardEntity);
                 }
             }
         }
         //card linked on
-        Long cardToCardLinkedOnID=rs.getLong("CardToCardLinkedOn.CardToCardLinkID");
-        if(cardToCardLinkedOnID!=0 && !rs.wasNull()){
-            HashMap<Long,CardToCardLinkEntity> cardToCardLinkedOnEntityMap = completeCardInfo.getCardToCardLinkedOnEntityMap();
-            CardToCardLinkEntity cardToCardLinkedOnEntity=cardToCardLinkedOnEntityMap.get(cardToCardLinkedOnID);
-            if(cardToCardLinkedOnEntity==null){
-                cardToCardLinkedOnEntity=LinkRequest.getCardToCardLinkByResultSet(rs,"CardToCardLinkedOn");
-                cardToCardLinkedOnEntityMap.put(cardToCardLinkedOnID,cardToCardLinkedOnEntity);
+        Long cardToCardLinkedOnID = rs.getLong("CardToCardLinkedOn.CardToCardLinkID");
+        if (cardToCardLinkedOnID != 0 && !rs.wasNull()) {
+            HashMap<Long, CardToCardLinkEntity> cardToCardLinkedOnEntityMap = completeCardInfo.getCardToCardLinkedOnEntityMap();
+            CardToCardLinkEntity cardToCardLinkedOnEntity = cardToCardLinkedOnEntityMap.get(cardToCardLinkedOnID);
+            if (cardToCardLinkedOnEntity == null) {
+                cardToCardLinkedOnEntity = LinkRequest.getCardToCardLinkByResultSet(rs, "CardToCardLinkedOn");
+                cardToCardLinkedOnEntityMap.put(cardToCardLinkedOnID, cardToCardLinkedOnEntity);
                 cardToCardLinkedOnEntity.setTargetCard(completeCardInfo.getCardEntity());
             }
-            if(cardToCardLinkedOnEntity.getSourceCard()==null){
-                Long targetCardID=rs.getLong("SourceCard.CardID");
-                if(targetCardID!=0 && !rs.wasNull()){
-                    CardEntity cardEntity=getCardFromResultSet(rs,"SourceCard");
+            if (cardToCardLinkedOnEntity.getSourceCard() == null) {
+                Long targetCardID = rs.getLong("SourceCard.CardID");
+                if (targetCardID != 0 && !rs.wasNull()) {
+                    CardEntity cardEntity = getCardFromResultSet(rs, "SourceCard");
                     cardToCardLinkedOnEntity.setSourceCard(cardEntity);
                 }
             }
@@ -408,8 +407,8 @@ public class CardRequest {
             }
             CompleteTextGroupInfo completeTextGroupInfo = completeCardRootInfo.getCompleteTextGroupInfo();
             if (completeTextGroupInfo != null) {
-               loggerFactory.info("root text Group id " + completeTextGroupInfo.getTextGroup().getTextGroupID());
-               loggerFactory.info("root text Group name " + completeTextGroupInfo.getTextGroup().getTextGroupName());
+                loggerFactory.info("root text Group id " + completeTextGroupInfo.getTextGroup().getTextGroupID());
+                loggerFactory.info("root text Group name " + completeTextGroupInfo.getTextGroup().getTextGroupName());
                 for (TextEntity textEntity : completeTextGroupInfo.getTextEntityMap().values()) {
                     loggerFactory.info("root text " + textEntity.getText());
                 }
@@ -433,27 +432,27 @@ public class CardRequest {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT DISTINCT * FROM Card " +
                     "WHERE 1=1";
-            if(parser.getCardID()!=null){
-             sql+=" AND Card.CardID=?";
+            if (parser.getCardID() != null) {
+                sql += " AND Card.CardID=?";
             }
-            if(parser.getCardName()!=null && !parser.getCardName().isEmpty()){
-                sql+=" AND Card.CardName=?";
+            if (parser.getCardName() != null && !parser.getCardName().isEmpty()) {
+                sql += " AND Card.CardName=?";
             }
-            if(parser.getCardType()!=null){
-                sql+=" AND Card.CardType=?";
+            if (parser.getCardType() != null) {
+                sql += " AND Card.CardType=?";
             }
-
+            sql += " LIMIT " + parser.getFirstElem() + ", " + parser.getMaxItems();
             ps = connection.prepareStatement(sql);
-            int i=1;
-            if(parser.getCardID()!=null){
-            ps.setLong(i, parser.getCardID());
+            int i = 1;
+            if (parser.getCardID() != null) {
+                ps.setLong(i, parser.getCardID());
                 i++;
             }
-            if(parser.getCardName()!=null && !parser.getCardName().isEmpty()){
+            if (parser.getCardName() != null && !parser.getCardName().isEmpty()) {
                 ps.setString(i, parser.getCardName());
                 i++;
             }
-            if(parser.getCardType()!=null){
+            if (parser.getCardType() != null) {
                 ps.setInt(i, parser.getCardType().getValue());
                 i++;
             }
@@ -463,10 +462,58 @@ public class CardRequest {
                 cards.add(cardEntity);
             }
         } catch (SQLException e) {
-           loggerFactory.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
         return cards;
+    }
+
+    public static Long countCard() {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        return (Long) session.createCriteria(CardEntity.class).setProjection(Projections.rowCount()).uniqueResult();
+    }
+
+    public static Long countCard(AllCardParser parser) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT count(1) as results FROM Card " +
+                    "WHERE 1=1";
+            if (parser.getCardID() != null) {
+                sql += " AND Card.CardID=?";
+            }
+            if (parser.getCardName() != null && !parser.getCardName().isEmpty()) {
+                sql += " AND Card.CardName=?";
+            }
+            if (parser.getCardType() != null) {
+                sql += " AND Card.CardType=?";
+            }
+            ps = connection.prepareStatement(sql);
+            int i = 1;
+            if (parser.getCardID() != null) {
+                ps.setLong(i, parser.getCardID());
+                i++;
+            }
+            if (parser.getCardName() != null && !parser.getCardName().isEmpty()) {
+                ps.setString(i, parser.getCardName());
+                i++;
+            }
+            if (parser.getCardType() != null) {
+                ps.setInt(i, parser.getCardType().getValue());
+                i++;
+            }
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                return rs.getLong("results");
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return 0L;
     }
 }

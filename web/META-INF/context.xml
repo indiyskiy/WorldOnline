@@ -11,4 +11,11 @@
               driverClassName="com.mysql.jdbc.Driver"
               url="jdbc:mysql://localhost:3306/worldonline"
             />
+
+
+
+    <Realm className="org.apache.catalina.realm.DataSourceRealm"
+           dataSourceName="jdbc/testDB"
+           userTable="AdminUser" userNameCol="adminUserName" userCredCol="adminUserPassword"
+           userRoleTable="AdminRole" roleNameCol="adminUserRole" localDataSource="true"/>
 </Context>
