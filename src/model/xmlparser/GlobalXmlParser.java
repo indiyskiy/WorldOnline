@@ -57,7 +57,7 @@ public class GlobalXmlParser {
     private static final String imageRoot = "ImageData\\";
     private static final String fileRoot = "FileBase\\";
     private static HashMap<Integer, CardEntity> restaurantChainMap;
-    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, GlobalXmlParser.class);
+//    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, GlobalXmlParser.class);
     private final String root = "\\cardsdata\\";
 
     public static void main(String[] args) {
@@ -943,7 +943,8 @@ public class GlobalXmlParser {
             }
 
         } catch (Exception e) {
-            loggerFactory.info("invalid parameter " + parameter + " in type "+cardParameterDataType);
+            e.printStackTrace();
+//            loggerFactory.info("invalid parameter " + parameter + " in type " + cardParameterDataType);
             return false;
         }
         return true;
@@ -971,20 +972,27 @@ public class GlobalXmlParser {
                 textGroupEntity = textEntity.getTextGroup();
             }
         }
-        if (textRu != null && !textRu.isEmpty()) {
-            if (textGroupEntity == null) {
-                textGroupEntity = new TextGroupEntity(name + "_" + textType);
-            }
-            TextEntity textEntity = TextRequest.findTextByText(textRu);
-            if (textEntity == null) {
-                textEntity = new TextEntity(LanguageType.Russian, textRu, textGroupEntity);
-                TextRequest.addText(textEntity);
-            } else {
-                if (textGroupEntity.getTextGroupID() == null) {
-                    textGroupEntity = textEntity.getTextGroup();
+        boolean translated = false;
+        if (textEn != null && !textEn.isEmpty()) {
+            translated = TextRequest.isTranslated(textEn, LanguageType.Russian);
+        }
+        if (!translated)
+            if (textRu != null && !textRu.isEmpty()) {
+                {
+                    if (textGroupEntity == null) {
+                        textGroupEntity = new TextGroupEntity(name + "_" + textType);
+                    }
+                    TextEntity textEntity = TextRequest.findTextByText(textRu);
+                    if (textEntity == null) {
+                        textEntity = new TextEntity(LanguageType.Russian, textRu, textGroupEntity);
+                        TextRequest.addText(textEntity);
+                    } else {
+                        if (textGroupEntity.getTextGroupID() == null) {
+                            textGroupEntity = textEntity.getTextGroup();
+                        }
+                    }
                 }
             }
-        }
         if (textGroupEntity != null && textGroupEntity.getTextGroupID() == null) {
             TextRequest.addTextGroup(textGroupEntity);
         }
@@ -1012,7 +1020,8 @@ public class GlobalXmlParser {
                 CoordinateRequest.addCardCoordinate(cardCoordinateEntity);
             }
         } catch (Exception e) {
-            loggerFactory.error(e);
+            e.printStackTrace();
+//            loggerFactory.error(e);
         }
     }
 
@@ -1023,7 +1032,8 @@ public class GlobalXmlParser {
             }
             File imageFile = new File("\\" + imageRoot + imageName);
             if (!imageFile.exists()) {
-                loggerFactory.error(imageRoot + " : " + imageName + " FROM " + imageType);
+                System.out.println(imageRoot + " : " + imageName + " FROM " + imageType);
+//                loggerFactory.error(imageRoot + " : " + imageName + " FROM " + imageType);
                 return;
             }
             BufferedImage bimg = ImageIO.read(imageFile);
@@ -1042,8 +1052,9 @@ public class GlobalXmlParser {
             cardImageEntity.setCardImageName(imageName);
             ImageRequest.addCardImage(cardImageEntity);
         } catch (Exception e) {
-            loggerFactory.error("Exception on " + fileRoot + imageRoot + " : " + imageName + " FROM " + imageType);
-            loggerFactory.error(e.toString());
+            e.printStackTrace();
+//            loggerFactory.error("Exception on " + fileRoot + imageRoot + " : " + imageName + " FROM " + imageType);
+//            loggerFactory.error(e.toString());
         }
     }
 
@@ -1070,9 +1081,11 @@ public class GlobalXmlParser {
             byte[] hash = md.digest();
             checksum = new BigInteger(1, hash).toString(16); //don't use this, truncates leading zero
         } catch (IOException ex) {
-            loggerFactory.error(ex);
+            ex.printStackTrace();
+//            loggerFactory.error(ex);
         } catch (NoSuchAlgorithmException ex) {
-            loggerFactory.error(ex);
+            ex.printStackTrace();
+//            loggerFactory.error(ex);
         }
         return checksum;
     }

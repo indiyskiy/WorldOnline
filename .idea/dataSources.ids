@@ -61,8 +61,8 @@
       <column name="ImageID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="ImageDescriptionTextGroupID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="CardImageID"/>
-      <foreign-key name="FK_8fm246c7jttx9wgymof08lmen" columns="ImageID" ref-table="image" ref-schema="" ref-catalog="worldonline" ref-columns="ImageID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_k506468098rw8ld5q0tlbv7ic" columns="ImageDescriptionTextGroupID" ref-table="textgroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_8fm246c7jttx9wgymof08lmen" columns="ImageID" ref-table="image" ref-schema="" ref-catalog="worldonline" ref-columns="ImageID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_kad18leo0yike87hf7oa63gi9" columns="CardID" ref-table="card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="cardparameter" schema="" catalog="worldonline" type="TABLE">
@@ -133,8 +133,8 @@
       <column name="ParentMenuID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="PushedIconImage" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="MenuID"/>
-      <foreign-key name="FK_e8gah0u36h5rfomvwgn1uk440" columns="ParentMenuID" ref-table="menu" ref-schema="" ref-catalog="worldonline" ref-columns="MenuID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_iux2sw72n6vb5awix24x7spuq" columns="PushedIconImage" ref-table="image" ref-schema="" ref-catalog="worldonline" ref-columns="ImageID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_e8gah0u36h5rfomvwgn1uk440" columns="ParentMenuID" ref-table="menu" ref-schema="" ref-catalog="worldonline" ref-columns="MenuID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_tgq8tlsqbv1wc2i3kod4h2cxx" columns="NameTextGroupID" ref-table="textgroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_vukdig5n3fkp9q3yp00jcd1n" columns="IconImage" ref-table="image" ref-schema="" ref-catalog="worldonline" ref-columns="ImageID" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="FK_e8gah0u36h5rfomvwgn1uk440" table="menu" schema="" catalog="worldonline" columns="ParentMenuID"/>
@@ -191,8 +191,8 @@
       <column name="UserHardwareID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="UserPersonalDataID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="UserID"/>
-      <foreign-key name="FK_brhus6h5p1pcopgtusn5d2uh5" columns="UserHardwareID" ref-table="userhardware" ref-schema="" ref-catalog="worldonline" ref-columns="UserHardwareID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_hw73w84hod076vg7ua3ksbq9v" columns="UserPersonalDataID" ref-table="userpersonaldata" ref-schema="" ref-catalog="worldonline" ref-columns="UserPersonalDataID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_brhus6h5p1pcopgtusn5d2uh5" columns="UserHardwareID" ref-table="userhardware" ref-schema="" ref-catalog="worldonline" ref-columns="UserHardwareID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_ni3wk87vu1n5d2jfhblui5veo" columns="UserContentID" ref-table="usercontent" ref-schema="" ref-catalog="worldonline" ref-columns="UserContentID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="usercontent" schema="" catalog="worldonline" type="TABLE">

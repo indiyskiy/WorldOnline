@@ -116,4 +116,17 @@
         <servlet-name>CompleteTextGroupInfoServlet</servlet-name>
         <url-pattern>/completetextgroupinfo</url-pattern>
     </servlet-mapping>
+
+
+    <!-- text group info -->
+    <servlet>
+        <display-name>LogOutServlet</display-name>
+        <servlet-name>LogOutServlet</servlet-name>
+        <servlet-class>view.servlet.admin.LogOutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LogOutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
 </web-app>

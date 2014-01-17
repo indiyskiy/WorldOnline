@@ -2,6 +2,7 @@ package model.database.requests;
 
 import model.additionalentity.CompleteTextGroupInfo;
 import model.constants.Component;
+import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.TextCardEntity;
@@ -25,8 +26,6 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class TextRequest {
-    //todo запилить поиск перевода по тексту(или айдишнику) и языку
-    //todo и перепилить парсинг текстов ,чтоб не дублировался перевод при совпадающих словах
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, TextRequest.class);
 
     public static void addText(TextEntity text) {
@@ -209,5 +208,32 @@ public class TextRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return completeTextGroupInfo;
+    }
+
+    public static boolean isTranslated(String text, LanguageType language){
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT * FROM Text AS defText " +
+                    "JOIN TextGroup ON (TextGroup.TextGroupID=defText.TextGroupID) " +
+                    "JOIN Text AS targetText ON(TextGroup.TextGroupID=targetText.TextGroupID) " +
+                    "WHERE defText.Text like ? AND targetText.LanguageID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, text);
+            ps.setLong(2, language.getValue());
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return false;
     }
 }

@@ -17,5 +17,7 @@
     <a href="allcards">Все карточки</a>
     <br/>
     <a href="alltags">Все тэги</a>
+<br/>
+    <a href="logout">Выход</a>
 </body>
 </html>
