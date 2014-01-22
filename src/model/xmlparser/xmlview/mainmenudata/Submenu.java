@@ -15,7 +15,6 @@ import org.simpleframework.xml.Root;
 public class Submenu {
     @Attribute(name = "id", required = true)
     public String id;
-
     @Element(name = "MainMenuID", required = false)
     public String mainMenuID;
     @Element(name = "NameRU", required = false)
@@ -28,4 +27,19 @@ public class Submenu {
     public String orderID;
     @Element(name = "Ribbon", required = false)
     public String ribbon;
+
+    public Long number;
+
+    public Submenu(String id, String mainMenuID, String nameRU, String nameEN, String image, String orderID, String ribbon) {
+        this.id = id;
+        this.mainMenuID = mainMenuID;
+        this.nameRU = nameRU;
+        this.nameEN = nameEN;
+        this.image = image;
+        this.orderID = orderID;
+        this.ribbon = ribbon;
+    }
+
+    public Submenu() {
+    }
 }

@@ -120,9 +120,6 @@
       <column name="ImageMD5Hash" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <column name="ImageWidth" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="ImageID"/>
-      <exported-key name="FK_8fm246c7jttx9wgymof08lmen" table="cardimage" schema="" catalog="worldonline" columns="ImageID"/>
-      <exported-key name="FK_iux2sw72n6vb5awix24x7spuq" table="menu" schema="" catalog="worldonline" columns="PushedIconImage"/>
-      <exported-key name="FK_vukdig5n3fkp9q3yp00jcd1n" table="menu" schema="" catalog="worldonline" columns="IconImage"/>
     </table>
     <table name="menu" schema="" catalog="worldonline" type="TABLE">
       <column name="MenuID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -184,16 +181,6 @@
       <exported-key name="FK_2sksgsk24c5xcuo9ma2qwv5pc" table="tag" schema="" catalog="worldonline" columns="TagTextGroupID"/>
       <exported-key name="FK_2cb0751w8jmy1jmf7rgqkrib5" table="text" schema="" catalog="worldonline" columns="TextGroupID"/>
       <exported-key name="FK_datml1sh78o7k342o0e0gn1uk" table="textcard" schema="" catalog="worldonline" columns="TextGroupID"/>
-    </table>
-    <table name="user" schema="" catalog="worldonline" type="TABLE">
-      <column name="UserID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="UserContentID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
-      <column name="UserHardwareID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
-      <column name="UserPersonalDataID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="UserID"/>
-      <foreign-key name="FK_hw73w84hod076vg7ua3ksbq9v" columns="UserPersonalDataID" ref-table="userpersonaldata" ref-schema="" ref-catalog="worldonline" ref-columns="UserPersonalDataID" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="FK_brhus6h5p1pcopgtusn5d2uh5" columns="UserHardwareID" ref-table="userhardware" ref-schema="" ref-catalog="worldonline" ref-columns="UserHardwareID" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="FK_ni3wk87vu1n5d2jfhblui5veo" columns="UserContentID" ref-table="usercontent" ref-schema="" ref-catalog="worldonline" ref-columns="UserContentID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="usercontent" schema="" catalog="worldonline" type="TABLE">
       <column name="UserContentID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>

@@ -64,7 +64,6 @@ public class CardRequest {
 
     public static boolean addCard(CardEntity card) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-        Transaction transaction = null;
         try {
             session.beginTransaction();
             session.save(card);
@@ -89,7 +88,6 @@ public class CardRequest {
 
     public static void addCard(List<CardEntity> cards) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             for (CardEntity card : cards) {

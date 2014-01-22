@@ -2,12 +2,10 @@ package model.xmlparser;
 
 import model.FileReader;
 import model.additionalentity.CompleteCardInfo;
-import model.constants.Component;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.*;
 import model.database.requests.*;
 import model.database.worldonlinedb.*;
-import model.logger.LoggerFactory;
 import model.textparser.StringFileParser;
 import model.textparser.StringIntPair;
 import model.xmlparser.xmlview.card.cardaboutcity.AboutCity;
@@ -57,7 +55,7 @@ public class GlobalXmlParser {
     private static final String imageRoot = "ImageData\\";
     private static final String fileRoot = "FileBase\\";
     private static HashMap<Integer, CardEntity> restaurantChainMap;
-//    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, GlobalXmlParser.class);
+    //    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, GlobalXmlParser.class);
     private final String root = "\\cardsdata\\";
 
     public static void main(String[] args) {
@@ -103,9 +101,7 @@ public class GlobalXmlParser {
         CardShopping cardShopping = cardsParser.getCardShopping(root + "card_shopping.xml");
         saveCardShopping(cardShopping);
         //main menu
-        MenuParser menuParser = new MenuParser();
-        MainMenuData mainMenuData = menuParser.getMainMenuData(root + "MainMenuData.xml");
-        saveMainMenu(mainMenuData);
+        MenuParser.saveMenu();
         //people
         PeopleParser peopleParser = new PeopleParser();
         PeopleAboutCity peopleAboutCity = peopleParser.getPeopleAboutCity(root + "people_aboutcity.xml");
@@ -117,12 +113,7 @@ public class GlobalXmlParser {
         RouteRoute routeRoute = routeParser.getRouteRoute(root + "route_routes.xml");
     }
 
-    private void saveMainMenu(MainMenuData mainMenuData) {
-        List<Submenu> submenus = mainMenuData.getSubmenus();
-        for (Submenu submenu : submenus) {
 
-        }
-    }
 
     private void saveCardShopping(CardShopping cardShopping) throws IOException, SQLException {
         List<Shopping> shoppingList = cardShopping.shoppings;
@@ -925,6 +916,8 @@ public class GlobalXmlParser {
                     }
                     parameter = parameter.replaceAll("-", "");
                     parameter = parameter.replaceAll(" ", "");
+                    parameter = parameter.replaceAll("\\(", "");
+                    parameter = parameter.replaceAll("\\)", "");
                     if (parameter.length() < 3) {
                         return false;
                     }

@@ -129,4 +129,16 @@
         <servlet-name>LogOutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+
+    <!--menus info -->
+    <servlet>
+        <display-name>AllMenusServlet</display-name>
+        <servlet-name>AllMenusServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AllMenusServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AllMenusServlet</servlet-name>
+        <url-pattern>/allmenus</url-pattern>
+    </servlet-mapping>
 </web-app>

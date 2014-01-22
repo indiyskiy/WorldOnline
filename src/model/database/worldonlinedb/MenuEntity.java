@@ -31,11 +31,11 @@ public class MenuEntity {
     @JoinColumn(name = "ParentMenuID")
     private MenuEntity parentMenu;
 
-    public MenuEntity getMenu() {
+    public MenuEntity getParentMenu() {
         return parentMenu;
     }
 
-    public void setMenu(MenuEntity menu) {
+    public void setParentMenu(MenuEntity menu) {
         this.parentMenu = menu;
     }
 
