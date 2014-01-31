@@ -15,13 +15,15 @@
         </a>
     </c:if>
     <c:if test="${empty parent}">
-        ...
+        <a href="allmenus">
+            ...
+        </a>
     </c:if>
 </div>
 
 <div style="margin-left:40px">
     <c:if test="${not empty menu}">
-        [${menu.menuID}]${menu.menuName}
+        [${menu.menuID}]${menu.menuName}<a href="completemenuinfo?MenuID=${menu.menuID}">(подробнее)</a>
         <br/>
     </c:if>
 </div>

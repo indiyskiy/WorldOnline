@@ -1,5 +1,7 @@
 package model.database.requests;
 
+import model.additionalentity.CompleteMenuInfo;
+import model.additionalentity.CompleteTextGroupInfo;
 import model.additionalentity.MenuInfo;
 import model.additionalentity.SimpleMenu;
 import model.constants.Component;
@@ -7,6 +9,7 @@ import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.MenuEntity;
+import model.database.worldonlinedb.TextGroupEntity;
 import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.intellij.lang.annotations.Language;
@@ -70,7 +73,7 @@ public class MenuRequest {
         }
     }
 
-    public static MenuInfo getCompleteMenuInfo(Long menuID, LanguageType language) {
+    public static MenuInfo getMenuInfo(Long menuID, LanguageType language) {
         MenuInfo menuInfo = null;
         DatabaseConnection dbConnection = new DatabaseConnection();
         PreparedStatement ps = null;
@@ -81,13 +84,13 @@ public class MenuRequest {
             @Language(value = "MySQL") String sql = "SELECT * FROM Menu " +
                     "JOIN TextGroup " +
                     "ON (TextGroup.TextGroupID=Menu.NameTextGroupID) " +
-                    "JOIN Text ON(Text.TextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Menu AS Submenu " +
-                    "ON (Submenu.ParentMenuID=Menu.MenuID) " +
+                    "JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Menu AS SubMenu " +
+                    "ON (SubMenu.ParentMenuID=Menu.MenuID) " +
                     "LEFT OUTER JOIN TextGroup AS SubMenuTextGroup " +
-                    "ON (SubmenuTextGroup.TextGroupID=Submenu.NameTextGroupID) " +
-                    "LEFT OUTER JOIN Text AS SubText " +
-                    "ON (SubText.TextGroupID=SubMenuTextGroup.TextGroupID) " +
+                    "ON (SubMenuTextGroup.TextGroupID=SubMenu.NameTextGroupID) " +
+                    "LEFT OUTER JOIN Text AS SubMenuText " +
+                    "ON (SubMenuText.TextGroupID=SubMenuTextGroup.TextGroupID) " +
                     "LEFT OUTER JOIN Menu AS ParentMenu " +
                     "ON Menu.ParentMenuID =ParentMenu.MenuID " +
                     "LEFT OUTER JOIN TextGroup AS ParentTextGroup " +
@@ -95,16 +98,19 @@ public class MenuRequest {
                     "LEFT OUTER JOIN Text AS ParentText " +
                     "ON (ParentText.TextGroupID=ParentTextGroup.TextGroupID) " +
                     "WHERE " +
-                    "Text.LanguageID=" + language.getValue() +
-                    " AND (SubText.LanguageID=" + language.getValue() +
-                    " OR SubText.LanguageID IS NULL) "+
-                    " AND (ParentText.LanguageID=" + language.getValue() +
-                    " OR ParentText.LanguageID IS NULL) "+
-                    " AND Menu.MenuID=?";
+                    "Text.LanguageID=" + language.getValue() + " " +
+                    "AND (SubMenuText.LanguageID=? " +
+                    "OR SubMenuText.LanguageID IS NULL) " +
+                    "AND (ParentText.LanguageID=? " +
+                    "OR ParentText.LanguageID IS NULL) " +
+                    "AND Menu.MenuID=? " +
+                    "ORDER BY SubMenu.Number";
 
             ps = connection.prepareStatement(sql);
             if (menuID != null) {
-                ps.setLong(1, menuID);
+                ps.setInt(1, language.getValue());
+                ps.setInt(2, language.getValue());
+                ps.setLong(3, menuID);
             }
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -121,30 +127,39 @@ public class MenuRequest {
         return menuInfo;
     }
 
-    private static void getMenuInfo(MenuInfo menuInfo, ResultSet rs) throws SQLException {
-        Long menu=rs.getLong("Menu.MenuID");
-        if (menuInfo.getMenu() == null  && !rs.wasNull() && menu!=0) {
-            SimpleMenu simpleMenu=new SimpleMenu();
-            setMenuValues(simpleMenu, rs, "Menu", "Text");
-            menuInfo.setMenu(simpleMenu);
-        }
-        Long parent=rs.getLong("ParentMenu.MenuID");
-        if(menuInfo.getParentMenu()==null && !rs.wasNull() && parent!=0){
-            SimpleMenu simpleMenu=new SimpleMenu();
-            setMenuValues(simpleMenu, rs, "ParentMenu", "ParentText");
-            menuInfo.setParentMenu(simpleMenu);
-        }
-        Long subMenuID = rs.getLong("Submenu.MenuID");
+    private static void getRootMenuInfo(MenuInfo menuInfo, ResultSet rs) throws SQLException {
+        Long subMenuID = rs.getLong("SubMenu.MenuID");
         if (subMenuID != 0 && !rs.wasNull()) {
             SimpleMenu submenuInfo = new SimpleMenu();
-            setMenuValues(submenuInfo, rs, "Submenu", "SubText");
+            setMenuValues(submenuInfo, rs, "SubMenu", "SubMenuText");
             menuInfo.getSubmenus().add(submenuInfo);
         }
     }
 
-    private static void setMenuValues(SimpleMenu simpleMenu, ResultSet rs,String menu, String text) throws SQLException {
-        simpleMenu.setMenuID(rs.getLong(menu+".MenuID"));
-        simpleMenu.setMenuName(rs.getString(text+".Text"));
+    private static void getMenuInfo(MenuInfo menuInfo, ResultSet rs) throws SQLException {
+        Long menu = rs.getLong("Menu.MenuID");
+        if (menuInfo.getMenu() == null && !rs.wasNull() && menu != 0) {
+            SimpleMenu simpleMenu = new SimpleMenu();
+            setMenuValues(simpleMenu, rs, "Menu", "Text");
+            menuInfo.setMenu(simpleMenu);
+        }
+        Long parent = rs.getLong("ParentMenu.MenuID");
+        if (menuInfo.getParentMenu() == null && !rs.wasNull() && parent != 0) {
+            SimpleMenu simpleMenu = new SimpleMenu();
+            setMenuValues(simpleMenu, rs, "ParentMenu", "ParentText");
+            menuInfo.setParentMenu(simpleMenu);
+        }
+        Long subMenuID = rs.getLong("SubMenu.MenuID");
+        if (subMenuID != 0 && !rs.wasNull()) {
+            SimpleMenu submenuInfo = new SimpleMenu();
+            setMenuValues(submenuInfo, rs, "SubMenu", "SubMenuText");
+            menuInfo.getSubmenus().add(submenuInfo);
+        }
+    }
+
+    private static void setMenuValues(SimpleMenu simpleMenu, ResultSet rs, String menu, String text) throws SQLException {
+        simpleMenu.setMenuID(rs.getLong(menu + ".MenuID"));
+        simpleMenu.setMenuName(rs.getString(text + ".Text"));
     }
 
     private static MenuEntity getMenu(ResultSet rs) throws SQLException {
@@ -163,14 +178,92 @@ public class MenuRequest {
         return menuEntity;
     }
 
-    public static void main(String[] args) {
-        System.out.println(getCompleteMenuInfo(1L,LanguageType.Russian).getMenu().getMenuName());
-        System.out.println(getCompleteMenuInfo(2L,LanguageType.Russian).getMenu().getMenuName());
-        System.out.println(getCompleteMenuInfo(4L,LanguageType.Russian).getMenu().getMenuName());
-        System.out.println(getCompleteMenuInfo(8L,LanguageType.Russian).getMenu().getMenuName());
-        System.out.println(getCompleteMenuInfo(16L,LanguageType.Russian).getMenu().getMenuName());
-        System.out.println(getCompleteMenuInfo(32L,LanguageType.Russian).getMenu().getMenuName());
-        System.out.println(getCompleteMenuInfo(64L,LanguageType.Russian).getMenu().getMenuName());
-        System.out.println(getCompleteMenuInfo(100L,LanguageType.Russian).getMenu().getMenuName());
+    public static MenuInfo getRootMenuInfo(LanguageType language) {
+        MenuInfo menuInfo = null;
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language(value = "MySQL") String sql = "SELECT * FROM Menu AS SubMenu " +
+                    "JOIN TextGroup AS SubMenuTextGroup " +
+                    "ON (SubMenuTextGroup.TextGroupID=SubMenu.NameTextGroupID) " +
+                    "JOIN Text AS SubMenuText " +
+                    "ON(SubMenuText.TextGroupID=SubMenuTextGroup.TextGroupID) " +
+                    "WHERE " +
+                    "SubMenu.ParentMenuID IS NULL AND " +
+                    "SubMenuText.LanguageID=? " +
+                    "ORDER BY SubMenu.Number";
+
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, language.getValue());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                if (menuInfo == null) {
+                    menuInfo = new MenuInfo();
+                }
+                getRootMenuInfo(menuInfo, rs);
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return menuInfo;
     }
+
+    public static CompleteMenuInfo getCompleteMenuInfo(Long menuId) {
+        CompleteMenuInfo completeMenuInfo = null;
+        MenuInfo menuInfo = null;
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language(value = "MySQL") String sql = "SELECT * FROM Menu " +
+                    "JOIN TextGroup  " +
+                    "ON (TextGroup.TextGroupID=Menu.NameTextGroupID) " +
+                    "JOIN Text " +
+                    "ON(Text.TextGroupID=TextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Image ON (Menu.IconImageID=Image.ImageID)" +
+                    "WHERE Menu.MenuID=? ";
+
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, menuId);
+            rs = ps.executeQuery();
+            completeMenuInfo = getCompleteMenuInfo(rs);
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return completeMenuInfo;
+    }
+
+    private static CompleteMenuInfo getCompleteMenuInfo(ResultSet rs) throws SQLException {
+        if (rs.first()) {
+            MenuEntity menuEntity = getMenu(rs);
+            CompleteMenuInfo completeMenuInfo = new CompleteMenuInfo(menuEntity);
+            setAdditionalCompleteMenuInfo(completeMenuInfo, rs);
+            while (rs.next()) {
+                setAdditionalCompleteMenuInfo(completeMenuInfo, rs);
+            }
+            return completeMenuInfo;
+        }
+        return null;
+    }
+
+    private static void setAdditionalCompleteMenuInfo(CompleteMenuInfo completeMenuInfo, ResultSet rs) throws SQLException {
+        CompleteTextGroupInfo completeTextGroupInfo;
+        if (completeMenuInfo.getCompleteTextGroupInfo() == null) {
+            TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs);
+            completeTextGroupInfo = new CompleteTextGroupInfo(textGroupEntity);
+            completeMenuInfo.setCompleteTextGroupInfo(completeTextGroupInfo);
+        } else {
+            completeTextGroupInfo = completeMenuInfo.getCompleteTextGroupInfo();
+        }
+        TextRequest.getCompleteTextGroupInfo(rs, completeTextGroupInfo, "Text");
+    }
+
 }

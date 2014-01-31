@@ -11,13 +11,15 @@
     <title>main page</title>
 </head>
 <body>
-    Добро пожаловать в админку Петербурга на ладони!
-    <br/>
-    <br/>
-    <a href="allcards">Все карточки</a>
-    <br/>
-    <a href="alltags">Все тэги</a>
+Добро пожаловать в админку Петербурга на ладони!
 <br/>
-    <a href="logout">Выход</a>
+<br/>
+<a href="allcards">Все карточки</a>
+<br/>
+<a href="alltags">Все тэги</a>
+<br/>
+<a href="allmenus">Все категории</a>
+<br/>
+<a href="logout">Выход</a>
 </body>
 </html>

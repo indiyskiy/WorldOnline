@@ -6,22 +6,32 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="[XmlParser] translates">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AllMenusServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/CompleteMenuInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/MenuImageType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/MenuInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/SimpleMenu.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/allmenus.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/css/tree.css" />
+    <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/admin/CompleteMenuInfoServlet.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/GlobalBaseParseServlet.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/completemenuinfo.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/globalbaseparse.jsp" />
+      <change type="DELETED" beforePath="C:\Users\Servcer\IdeaProjects\WorldOnline\web\css\tree.css" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/AllMenusServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AllMenusServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/CompleteMenuInfo.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/CompleteMenuInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" afterPath="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/session/HibernateUtil.java" afterPath="$PROJECT_DIR$/src/model/database/session/HibernateUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/logger/LoggerFile.java" afterPath="$PROJECT_DIR$/src/model/logger/LoggerFile.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/MenuEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/MenuEntity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/MenuParser.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/MenuParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/mainmenudata/Submenu.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/mainmenudata/Submenu.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/ServerConsts.java" afterPath="$PROJECT_DIR$/src/model/constants/ServerConsts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/allmenus.jsp" afterPath="$PROJECT_DIR$/web/allmenus.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/completecardinfo.jsp" afterPath="$PROJECT_DIR$/web/completecardinfo.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/META-INF/context.xml" afterPath="$PROJECT_DIR$/META-INF/context.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/META-INF/context.xml" afterPath="$PROJECT_DIR$/web/META-INF/context.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/src/hibernate.cfg.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/index.jsp" afterPath="$PROJECT_DIR$/web/index.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/src/META-INF/persistence.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -29,20 +39,20 @@
     <ignored path=".idea/workspace.xml" />
     <file path="/fragment.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390383063229" ignored="false" />
     <file path="/Test.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385459229261" ignored="false" />
-    <file path="/a.dummy" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1389963063898" ignored="false" />
-    <file path="/HibernateUtil.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1388050291486" ignored="false" />
-    <file path="/hibernate.cfg.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385464516500" ignored="false" />
-    <file path="/a.sql" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1381839618572" ignored="false" />
+    <file path="/a.dummy" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1391171473589" ignored="false" />
+    <file path="/HibernateUtil.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390550683746" ignored="false" />
+    <file path="/hibernate.cfg.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390556070994" ignored="false" />
+    <file path="/a.sql" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390485774914" ignored="false" />
     <file path="/dummy.sql" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1381839618572" ignored="false" />
     <file path="/ArticleEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1381926052178" ignored="false" />
     <file path="/UserEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383192290611" ignored="false" />
     <file path="/CardEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385108914574" ignored="false" />
     <file path="/Data Source" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390309512399" ignored="false" />
-    <file path="/context.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1389796013623" ignored="false" />
+    <file path="/context.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390826565007" ignored="false" />
     <file path="/DatabaseConnection.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1388050473136" ignored="false" />
     <file path="/ExampleServlet.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383191116906" ignored="false" />
     <file path="$PROJECT_DIR$/../TheGame/web/META-INF/context.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1382013892031" ignored="false" />
-    <file path="/web.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390293625102" ignored="false" />
+    <file path="/web.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390994339451" ignored="false" />
     <file path="/UserRequests.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383268259208" ignored="false" />
     <file path="/ServletHelper.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1389621970985" ignored="false" />
     <file path="/example.jsp" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384866773730" ignored="false" />
@@ -65,8 +75,8 @@
     <file path="/CardSight.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1382356211457" ignored="false" />
     <file path="/Sight.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1382357362742" ignored="false" />
     <file path="/MainMenuData.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1382358055496" ignored="false" />
-    <file path="/Submenu.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390219321468" ignored="false" />
-    <file path="/MenuParser.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390223190781" ignored="false" />
+    <file path="/Submenu.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390557707036" ignored="false" />
+    <file path="/MenuParser.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1391162610995" ignored="false" />
     <file path="/PeopleAboutCity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1382360874672" ignored="false" />
     <file path="/PeopleParser.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1388051564476" ignored="false" />
     <file path="/PhotoCard.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1382364433892" ignored="false" />
@@ -93,7 +103,7 @@
     <file path="/UserHardwareEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383191918903" ignored="false" />
     <file path="/UserContentEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383014473972" ignored="false" />
     <file path="/GlobalVersionEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383043890205" ignored="false" />
-    <file path="/persistence.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385650581644" ignored="false" />
+    <file path="/persistence.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390550732458" ignored="false" />
     <file path="dbtable:/2d28c3c8/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonlinedb..userhardware" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383010492672" ignored="false" />
     <file path="dbtable:/2d28c3c8/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonlinedb..userpersonaldata" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383010496742" ignored="false" />
     <file path="dbtable:/2d28c3c8/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonlinedb..user" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383010462823" ignored="false" />
@@ -114,7 +124,7 @@
     <file path="dbtable:/2d28c3c8/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..cardcoordinate" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383191204791" ignored="false" />
     <file path="/UserPersonalDataEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383199254948" ignored="false" />
     <file path="/CardRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1389862669345" ignored="false" />
-    <file path="/Dummy.txt" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390376616270" ignored="false" />
+    <file path="/Dummy.txt" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1391155552216" ignored="false" />
     <file path="/CompliteCardInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383295500292" ignored="false" />
     <file path="/CardTagRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383297506467" ignored="false" />
     <file path="/TagRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1388050104189" ignored="false" />
@@ -126,14 +136,14 @@
     <file path="/ComleteCardTagInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383415889301" ignored="false" />
     <file path="dbtable:/2f58b651/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..textcard" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383419917863" ignored="false" />
     <file path="/TagType.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383513121302" ignored="false" />
-    <file path="/ImageRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1388049632188" ignored="false" />
+    <file path="/ImageRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1391088264536" ignored="false" />
     <file path="/CompleteCardImageInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383699278761" ignored="false" />
     <file path="/ImageCompliteInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383675979973" ignored="false" />
     <file path="/CompleteImageInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1383675980439" ignored="false" />
     <file path="/ParameterRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384420267968" ignored="false" />
     <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/src/com/laseev/base/windows/CardWindow.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385978717160" ignored="false" />
     <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/src/com/laseev/base/export/InputOutput.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387974391900" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_hotels.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320433" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_hotels.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
     <file path="/CompleteCardRootInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384435458251" ignored="false" />
     <file path="/RootRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1388049707419" ignored="false" />
     <file path="/CompleteTextCardInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384441797842" ignored="false" />
@@ -145,7 +155,7 @@
     <file path="/tagedit.jsp" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384949895016" ignored="false" />
     <file path="/TagEditServlet.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1384960574212" ignored="false" />
     <file path="/TagEditParser.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385019509199" ignored="false" />
-    <file path="/GlobalXmlParser.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1389968124545" ignored="false" />
+    <file path="/GlobalXmlParser.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1391178175060" ignored="false" />
     <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/src/com/laseev/base/windows/MetroWindow.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385117649668" ignored="false" />
     <file path="/MetroWindow.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385117648020" ignored="false" />
     <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/src/com/laseev/base/windows/TreeModel.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385986344773" ignored="false" />
@@ -154,7 +164,7 @@
     <file path="/CardToCardLinkEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385388276188" ignored="false" />
     <file path="/CardToCardLinkType.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387290689059" ignored="false" />
     <file path="/LinkRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385391909106" ignored="false" />
-    <file path="/ServerConsts.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387882644553" ignored="false" />
+    <file path="/ServerConsts.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1391088247514" ignored="false" />
     <file path="/MenuEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390214080859" ignored="false" />
     <file path="/MenuType.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385650178580" ignored="false" />
     <file path="/AllCardsServlet.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1389869230452" ignored="false" />
@@ -184,43 +194,43 @@
     <file path="/CardNode.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385982993827" ignored="false" />
     <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/src/com/laseev/base/model/nodes/menu/Tag.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1385983676524" ignored="false" />
     <file path="/CoordinateRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387280387372" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_meals.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320433" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_route.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320433" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/photocards.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320432" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_relax.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320433" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_shopping.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320432" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_aboutcity.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320432" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_routes.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320432" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_hotels.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320432" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/MainMenuData.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320432" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_handbook.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320432" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_relax.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320432" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_sights.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320433" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_handbook.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320433" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_sights.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320433" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_meals.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320433" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_aboutcity.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320433" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_shopping.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320433" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_shopping.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320433" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_meals.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320433" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_aboutcity.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320434" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_hotels.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320434" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_relax.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320434" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_handbook.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376320434" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_meals.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_route.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/photocards.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_relax.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_shopping.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_aboutcity.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_routes.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_hotels.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/MainMenuData.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396345856" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_handbook.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_relax.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_sights.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_handbook.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_sights.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_meals.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_aboutcity.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_shopping.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_shopping.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/route_meals.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_aboutcity.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346345" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_hotels.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_relax.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/people_handbook.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
     <file path="/*.regexp" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387376325499" ignored="false" />
     <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/src/com/laseev/base/export/iphone/ExportIphone.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390205729507" ignored="false" />
     <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/app_data/Ribbons.txt" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387373859114" ignored="false" />
     <file path="/Ribbons.txt" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387364706344" ignored="false" />
     <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/src/com/laseev/base/windows/CategoriesWindow.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387369986250" ignored="false" />
     <file path="/CategoriesWindow.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387369914404" ignored="false" />
-    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_sights.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387373859115" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/card_sights.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
     <file path="/PlacecardInitializer.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387375945754" ignored="false" />
     <file path="/ImageServlet.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387870205393" ignored="false" />
     <file path="/Logger.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1388054789914" ignored="false" />
     <file path="/LoggerMessage.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1388062355859" ignored="false" />
     <file path="/LogLevel.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1388062409743" ignored="false" />
     <file path="/Component.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1387969482339" ignored="false" />
-    <file path="/LoggerFile.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1388050425216" ignored="false" />
+    <file path="/LoggerFile.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390999172253" ignored="false" />
     <file path="/LoggerFactory.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1388064023709" ignored="false" />
     <file path="/CardsParser.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1388050526688" ignored="false" />
     <file path="/Mailer.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1388063533657" ignored="false" />
@@ -234,17 +244,46 @@
     <file path="/AdminUser.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1389775081853" ignored="false" />
     <file path="/AdminRoleEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1389778559774" ignored="false" />
     <file path="/AdminUserEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1389780607060" ignored="false" />
-    <file path="/index.jsp" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1389881132302" ignored="false" />
+    <file path="/index.jsp" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1391171792219" ignored="false" />
     <file path="/LogOutServlet.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1389880958194" ignored="false" />
     <file path="/MenuImageType.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1389967882194" ignored="false" />
-    <file path="/MenuRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390389958890" ignored="false" />
+    <file path="/MenuRequest.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1391161642850" ignored="false" />
     <file path="/CompleteMenuEntity.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390224532105" ignored="false" />
-    <file path="/CompleteMenuInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390229826605" ignored="false" />
-    <file path="/allmenus.jsp" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390391439007" ignored="false" />
-    <file path="/AllMenusServlet.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390390283091" ignored="false" />
+    <file path="/CompleteMenuInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390472662830" ignored="false" />
+    <file path="/allmenus.jsp" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390558370985" ignored="false" />
+    <file path="/AllMenusServlet.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390469911761" ignored="false" />
     <file path="/MenuInfo.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390386515848" ignored="false" />
     <file path="/SimpleMenu.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390383086651" ignored="false" />
     <file path="/tree.css" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390390578363" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_android/en/meals_arrays.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346345" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_iphone/photocards.plist" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346345" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_android/en/relax_arrays.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346345" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_android/en/handbook_arrays.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346345" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_android/en/sights_arrays.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346345" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_iphone/SubMenu_Ru.plist" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346345" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_android/en/hotels_arrays.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346345" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_android/en/routes_arrays.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346345" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_iphone/menues_Hotels_en.plist" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_iphone/menues_Meals_en.plist" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_android/ru/meals_arrays.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_android/ru/relax_arrays.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_android/ru/handbook_arrays.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_android/ru/sights_arrays.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_android/ru/hotels_arrays.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_iphone/SubMenu_En.plist" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_android/ru/routes_arrays.xml" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_iphone/menues_Relax_en.plist" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_iphone/menues_Hotels_ru.plist" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_iphone/menues_Handbook_en.plist" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_iphone/menues_Meals_ru.plist" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_iphone/routes_Routes_ru.plist" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_iphone/routes_Routes_en.plist" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_iphone/menues_Relax_ru.plist" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base/export_iphone/menues_Handbook_ru.plist" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390396346346" ignored="false" />
+    <file path="/CompleteMenuInfoServlet.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390484035723" ignored="false" />
+    <file path="/completemenuinfo.jsp" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1390486504187" ignored="false" />
+    <file path="/GlobalBaseParseServlet.java" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1391074481129" ignored="false" />
+    <file path="/globalbaseparse.jsp" changelist="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" time="1391075488086" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,6 +308,7 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -305,7 +345,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -315,81 +354,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MenuRequest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/database/requests/MenuRequest.java">
+      <file leaf-file-name="GlobalXmlParser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="125" column="64" selection-start="4942" selection-end="4942" vertical-scroll-proportion="0.0">
+            <state line="1019" column="38" selection-start="58517" selection-end="58517" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerConsts.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/constants/ServerConsts.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="31" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageRequest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/database/requests/ImageRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="317" column="47" selection-start="13974" selection-end="13974" vertical-scroll-proportion="0.0">
               <folding>
-                <marker date="1390389985022" expanded="true" signature="1933:2028" placeholder="UPDATE Menu ..." />
-                <marker date="1390389985022" expanded="true" signature="2756:4018" placeholder="SELECT * FRO..Menu..." />
-                <marker date="1390389985022" expanded="true" signature="2756:4196" placeholder="SELECT * FRO..Menu..." />
-                <marker date="1390389985022" expanded="true" signature="2756:3800" placeholder="SELECT * FRO..Menu..." />
-                <marker date="1390389985022" expanded="true" signature="2756:3554" placeholder="SELECT * FRO..Menu..." />
+                <marker date="1391177933884" expanded="true" signature="6465:6779" placeholder="SELECT * FRO..CardImage..." />
+                <marker date="1391177933884" expanded="true" signature="8207:8572" placeholder="SELECT * FRO..CardImage..." />
+                <marker date="1391177933884" expanded="true" signature="9975:10354" placeholder="SELECT * FRO..CardImage..." />
+                <marker date="1391177933884" expanded="true" signature="13171:13242" placeholder="SELECT * FRO..Image..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AllMenusServlet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AllMenusServlet.java">
+      <file leaf-file-name="ImageEntity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/ImageEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="45" selection-start="2028" selection-end="2028" vertical-scroll-proportion="0.0">
+            <state line="124" column="19" selection-start="3582" selection-end="3582" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MenuInfo.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/additionalentity/MenuInfo.java">
+      <file leaf-file-name="hibernate.cfg.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="20" selection-start="584" selection-end="584" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#325#337#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimpleMenu.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/additionalentity/SimpleMenu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="27" selection-start="257" selection-end="265" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="allmenus.jsp" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/allmenus.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="0" selection-start="721" selection-end="721" vertical-scroll-proportion="0.9663158">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tree.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/css/tree.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="28" selection-start="63" selection-end="63" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="spoiler.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/css/spoiler.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="completecardinfo.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/completecardinfo.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="44" selection-start="461" selection-end="468" vertical-scroll-proportion="6.8235292">
+            <state line="17" column="40" selection-start="1042" selection-end="1042" vertical-scroll-proportion="0.4473684">
               <folding />
             </state>
           </provider>
@@ -414,22 +423,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/model/additionalentity/CompleteMenuEntity.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/CompleteMenuInfo.java" />
+        <option value="dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..Card" />
+        <option value="dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..Menu" />
+        <option value="$PROJECT_DIR$/src/model/xmlparser/MenuParser.java" />
+        <option value="dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..User" />
+        <option value="dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..adminUser" />
+        <option value="dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..adminUserRole" />
+        <option value="$PROJECT_DIR$/src/view/servlet/GlobalBaseParseServlet.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
-        <option value="dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..image" />
-        <option value="$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java" />
-        <option value="dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..card" />
+        <option value="$PROJECT_DIR$/web/completecardinfo.jsp" />
+        <option value="dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..TextGroup" />
+        <option value="$PROJECT_DIR$/web/index.jsp" />
+        <option value="$PROJECT_DIR$/src/model/constants/ServerConsts.java" />
         <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
-        <option value="db-console:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/MenuInfoList.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/SimpleMenu.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/MenuInfo.java" />
-        <option value="dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..menu" />
-        <option value="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/AllMenusServlet.java" />
-        <option value="$PROJECT_DIR$/web/css/tree.css" />
-        <option value="$PROJECT_DIR$/web/allmenus.jsp" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" />
+        <option value="dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..Image" />
+        <option value="$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java" />
       </list>
     </option>
   </component>
@@ -483,6 +492,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -533,7 +544,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="WEB-INF" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -587,19 +598,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="additionalentity" />
+              <option name="myItemId" value="xmlparser" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Console.TableResult.DefaultCopyAction" value="HTML Table" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
@@ -611,7 +620,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="Database.TableEditor.Splitter" value="0.9" />
+    <property name="Database.TableEditor.Splitter" value="1.0" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="findjar.last.used.dir" value="$USER_HOME$/Documents/Илья/PetersburgBase/PetersburgBase/Base" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -638,16 +647,6 @@
       <recent name="model.constants" />
       <recent name="model.logger" />
     </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="model.constants" />
-      <recent name="model.xmlparser.xmlview" />
-      <recent name="model.xmlparser" />
-      <recent name="view" />
-      <recent name="model.database.worldonlinedb" />
-    </key>
-    <key name="ImportMappingsDialog.RecentPackages">
-      <recent name="database" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\src\model\xmlparser\" />
       <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\lib" />
@@ -655,8 +654,18 @@
       <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\WebContent" />
       <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\web\WEB-INF\lib" />
     </key>
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="database" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="model.constants" />
+      <recent name="model.xmlparser.xmlview" />
+      <recent name="model.xmlparser" />
+      <recent name="view" />
+      <recent name="model.database.worldonlinedb" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.MenuRequest">
+  <component name="RunManager" selected="Application.MenuParser">
     <configuration default="false" name="GlobalXmlParser" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -958,10 +967,10 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.MenuRequest" />
-        <item index="1" class="java.lang.String" itemvalue="Application.AllMenusServlet" />
-        <item index="2" class="java.lang.String" itemvalue="Application.GlobalXmlParser" />
-        <item index="3" class="java.lang.String" itemvalue="Application.MenuParser" />
+        <item index="0" class="java.lang.String" itemvalue="Application.MenuParser" />
+        <item index="1" class="java.lang.String" itemvalue="Application.GlobalXmlParser" />
+        <item index="2" class="java.lang.String" itemvalue="Application.MenuRequest" />
+        <item index="3" class="java.lang.String" itemvalue="Application.AllMenusServlet" />
         <item index="4" class="java.lang.String" itemvalue="Application.ErrorMailer" />
       </list>
     </recent_temporary>
@@ -1082,11 +1091,15 @@
       <created>1389963136818</created>
       <updated>1389963136818</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="[Admin] menus">
+      <created>1390392008589</created>
+      <updated>1390392008589</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1010" extended-state="0" />
+    <frame x="-8" y="-8" width="1296" height="1010" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1095,15 +1108,15 @@
       <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2573443" sideWeight="0.49513775" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18881686" sideWeight="0.6439483" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22690438" sideWeight="0.8296122" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.8014101" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3572268" sideWeight="0.5081037" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17038777" sideWeight="0.50567263" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15802269" sideWeight="0.67215043" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32902467" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17116061" sideWeight="0.49756888" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17038777" sideWeight="0.4943274" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1111,8 +1124,8 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23987034" sideWeight="0.6439483" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3560517" sideWeight="0.4910859" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24311183" sideWeight="0.8296122" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3560517" sideWeight="0.4910859" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37132785" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1162,7 +1175,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="[XmlParser] translates" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Admin] menus" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1197,6 +1210,7 @@
     <MESSAGE value="[Admin]Card search panel and Text group page" />
     <MESSAGE value="[Admin] main page" />
     <MESSAGE value="[XmlParser] translates" />
+    <MESSAGE value="[Admin] menus" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1218,134 +1232,142 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="dbDummy://db-console:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/GlobalBaseParseServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="15" selection-start="2831" selection-end="3293" vertical-scroll-proportion="0.0">
+        <state line="29" column="30" selection-start="1063" selection-end="1063" vertical-scroll-proportion="0.42983565">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Logs/Database/2014-01-21/Log.txt">
+    <entry file="file://$PROJECT_DIR$/src/model/xmlparser/MenuParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="351" selection-end="351" vertical-scroll-proportion="0.0">
+        <state line="40" column="17" selection-start="1546" selection-end="1546" vertical-scroll-proportion="0.27939317">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
+    <entry file="file://$PROJECT_DIR$/src/model/database/ProcEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="136" column="57" selection-start="4491" selection-end="4491" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/CompleteMenuInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="27" selection-start="444" selection-end="444" vertical-scroll-proportion="0.28848484">
+        <state line="303" column="32" selection-start="8433" selection-end="8433" vertical-scroll-proportion="0.3693086">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/CompleteTextGroupInfo.java">
+    <entry file="file://$PROJECT_DIR$/META-INF/context.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="29" selection-start="419" selection-end="419" vertical-scroll-proportion="0.2678788">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TextEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="23" selection-start="800" selection-end="804" vertical-scroll-proportion="0.02093596">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/MenuEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="23" selection-start="512" selection-end="518" vertical-scroll-proportion="0.02093596">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..menu">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/MenuInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="20" selection-start="584" selection-end="584" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#325#337#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/SimpleMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="27" selection-start="257" selection-end="265" vertical-scroll-proportion="0.0">
+        <state line="12" column="47" selection-start="486" selection-end="486" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/requests/MenuRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="64" selection-start="4942" selection-end="4942" vertical-scroll-proportion="0.0">
+        <state line="105" column="38" selection-start="4321" selection-end="4322" vertical-scroll-proportion="49.24">
           <folding>
-            <marker date="1390389985022" expanded="true" signature="1933:2028" placeholder="UPDATE Menu ..." />
-            <marker date="1390389985022" expanded="true" signature="2756:4018" placeholder="SELECT * FRO..Menu..." />
-            <marker date="1390389985022" expanded="true" signature="2756:4196" placeholder="SELECT * FRO..Menu..." />
-            <marker date="1390389985022" expanded="true" signature="2756:3800" placeholder="SELECT * FRO..Menu..." />
-            <marker date="1390389985022" expanded="true" signature="2756:3554" placeholder="SELECT * FRO..Menu..." />
+            <marker date="1391161676906" expanded="true" signature="-1:-1" placeholder="UPDATE Menu ..." />
+            <marker date="1391161676906" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Menu..." />
+            <marker date="1391161676906" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Menu..." />
+            <marker date="1391161676906" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Menu..." />
+            <marker date="1391161676906" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Menu..." />
+            <marker date="1391161676906" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Menu..." />
+            <marker date="1391161676906" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Menu..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AllMenusServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/controller/parser/edit/TagEditParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="45" selection-start="2028" selection-end="2028" vertical-scroll-proportion="0.0">
+        <state line="61" column="43" selection-start="2044" selection-end="2044" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/tree.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="28" selection-start="63" selection-end="63" vertical-scroll-proportion="0.0">
+    <entry file="dbDummy://dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..TextGroup">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/completecardinfo.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="44" selection-start="461" selection-end="468" vertical-scroll-proportion="6.8235292">
+        <state line="170" column="43" selection-start="5456" selection-end="5456" vertical-scroll-proportion="0.64902997">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/spoiler.css">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="10" selection-start="1220" selection-end="1220" vertical-scroll-proportion="-11.56">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="32" selection-start="445" selection-end="445" vertical-scroll-proportion="0.5862069">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/ImageEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="124" column="19" selection-start="3582" selection-end="3582" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..Image">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/allmenus.jsp">
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/ImageRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="721" selection-end="721" vertical-scroll-proportion="0.9663158">
+        <state line="317" column="47" selection-start="13974" selection-end="13974" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1391177933884" expanded="true" signature="6465:6779" placeholder="SELECT * FRO..CardImage..." />
+            <marker date="1391177933884" expanded="true" signature="8207:8572" placeholder="SELECT * FRO..CardImage..." />
+            <marker date="1391177933884" expanded="true" signature="9975:10354" placeholder="SELECT * FRO..CardImage..." />
+            <marker date="1391177933884" expanded="true" signature="13171:13242" placeholder="SELECT * FRO..Image..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/ServerConsts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="31" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1019" column="38" selection-start="58517" selection-end="58517" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="40" selection-start="1042" selection-end="1042" vertical-scroll-proportion="0.4473684">
           <folding />
         </state>
       </provider>

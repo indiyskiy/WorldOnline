@@ -13,7 +13,7 @@ import java.sql.*;
  * To change this template use File | Settings | File Templates.
  */
 public class DatabaseConnection {
-    private final String url = "jdbc:mysql://localhost:3306/worldonline";
+    private final String url = "jdbc:mysql://127.0.0.1:3306/worldonline";
     private final String username = "root";
     private final String password = "Djqysdrjcvjct!!!";
     private Connection connection = null;

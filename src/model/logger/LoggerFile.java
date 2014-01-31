@@ -14,7 +14,7 @@ import java.io.*;
 public class LoggerFile {
     private final String root;
     private final String date;
-    private final String globalLogDir = "Logs";
+    private final String globalLogDir = "logs";
     private final String fileName = "Log";
     private File file;
     private boolean isOpened;
@@ -31,8 +31,8 @@ public class LoggerFile {
 
     public void open(){
         try {
-            String currentDir = new File("").getAbsolutePath();
-            File newDir = new File(currentDir + "\\" + globalLogDir + "\\" + root + "\\" + date);
+//            String currentDir = new File("").getAbsolutePath();
+            File newDir = new File("/home/" + globalLogDir + "/" + root + "/" + date);
             if (!newDir.exists()) {
                 newDir.mkdirs();
             }

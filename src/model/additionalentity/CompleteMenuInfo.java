@@ -1,5 +1,6 @@
 package model.additionalentity;
 
+import model.database.worldonlinedb.ImageEntity;
 import model.database.worldonlinedb.MenuEntity;
 
 import java.util.HashMap;
@@ -15,6 +16,7 @@ public class CompleteMenuInfo {
     private MenuEntity menuEntity;
     private HashMap<Long,CompleteMenuInfo> kids=new HashMap<Long, CompleteMenuInfo>();
     private CompleteTextGroupInfo completeTextGroupInfo;
+    private ImageEntity image;
 
     public CompleteMenuInfo(MenuEntity menuEntity) {
         this.menuEntity = menuEntity;
@@ -38,5 +40,13 @@ public class CompleteMenuInfo {
 
     public void setCompleteTextGroupInfo(CompleteTextGroupInfo completeTextGroupInfo) {
         this.completeTextGroupInfo = completeTextGroupInfo;
+    }
+
+    public ImageEntity getImage() {
+        return image;
+    }
+
+    public void setImage(ImageEntity image) {
+        this.image = image;
     }
 }

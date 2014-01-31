@@ -64,7 +64,7 @@ public class MenuEntity {
     }
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "IconImage")
+    @JoinColumn(name = "IconImageID")
     private ImageEntity iconImage;
 
     public ImageEntity getIconImage() {
@@ -77,7 +77,7 @@ public class MenuEntity {
 
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "PushedIconImage")
+    @JoinColumn(name = "PushedIconImageID")
     private ImageEntity pushedIconImage;
 
     public ImageEntity getPushedIconImage() {

@@ -2,10 +2,12 @@ package model.xmlparser;
 
 import model.FileReader;
 import model.additionalentity.CompleteCardInfo;
+import model.constants.Component;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.*;
 import model.database.requests.*;
 import model.database.worldonlinedb.*;
+import model.logger.LoggerFactory;
 import model.textparser.StringFileParser;
 import model.textparser.StringIntPair;
 import model.xmlparser.xmlview.card.cardaboutcity.AboutCity;
@@ -24,8 +26,6 @@ import model.xmlparser.xmlview.card.cardshopping.CardShopping;
 import model.xmlparser.xmlview.card.cardshopping.Shopping;
 import model.xmlparser.xmlview.card.cardsights.CardSight;
 import model.xmlparser.xmlview.card.cardsights.Sight;
-import model.xmlparser.xmlview.mainmenudata.MainMenuData;
-import model.xmlparser.xmlview.mainmenudata.Submenu;
 import model.xmlparser.xmlview.people.peopleaboutcity.PeopleAboutCity;
 import model.xmlparser.xmlview.photo.photocard.PhotoCard;
 import model.xmlparser.xmlview.route.routeroute.RouteRoute;
@@ -51,36 +51,27 @@ import java.util.List;
  * Time: 11:51
  * To change this template use File | Settings | File Templates.
  */
-public class GlobalXmlParser {
-    private static final String imageRoot = "ImageData\\";
-    private static final String fileRoot = "FileBase\\";
-    private static HashMap<Integer, CardEntity> restaurantChainMap;
-    //    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, GlobalXmlParser.class);
-    private final String root = "\\cardsdata\\";
+public class GlobalXmlParser implements Runnable {
+    public static final String globalHome = "/home/oldBase/";
+    public static final String imageFolder= "imageData/";
+    public static final String imageRoot = globalHome + imageFolder;
+    public static final String fileRoot = "fileBase/";
+    public static HashMap<Integer, CardEntity> restaurantChainMap;
+    public static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, GlobalXmlParser.class);
+    public static final String root = globalHome + "base/";
 
-    public static void main(String[] args) {
-        try {
-            restaurantChainMap = new HashMap<Integer, CardEntity>();
-            GlobalXmlParser globalXmlParser = new GlobalXmlParser();
-            globalXmlParser.globalParse();
-            CompleteCardInfo completeCardInfo = CardRequest.getCompleteCardInfo(1);
-            CardRequest.printInfo(completeCardInfo);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            restaurantChainMap = null;
-        }
+    public static void parse() {
+        new Thread(new GlobalXmlParser()).start();
     }
 
     public void globalParse() throws IOException, SQLException {
-
-        ArrayList<StringIntPair> categories = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(root + "app_data\\Categories.txt"), ",");
+        loggerFactory.info("globalParse");
+        loggerFactory.info(root + "app_data/Categories.txt");
+        ArrayList<StringIntPair> categories = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(root + "app_data/Categories.txt"), ",");
         saveTags(categories, TagType.Categories);
-        ArrayList<StringIntPair> kitchens = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(root + "app_data\\Kitchens.txt"), ",");
+        ArrayList<StringIntPair> kitchens = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(root + "app_data/Kitchens.txt"), ",");
         saveTags(kitchens, TagType.Cuisine);
-        ArrayList<StringIntPair> ribbons = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(root + "app_data\\Ribbons.txt"), ",");
+        ArrayList<StringIntPair> ribbons = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(root + "app_data/Ribbons.txt"), ",");
         saveTags(ribbons, TagType.Ribbons);
         //cards
         CardsParser cardsParser = new CardsParser();
@@ -111,9 +102,8 @@ public class GlobalXmlParser {
         //root
         RouteParser routeParser = new RouteParser();
         RouteRoute routeRoute = routeParser.getRouteRoute(root + "route_routes.xml");
+        loggerFactory.info("/globalParse");
     }
-
-
 
     private void saveCardShopping(CardShopping cardShopping) throws IOException, SQLException {
         List<Shopping> shoppingList = cardShopping.shoppings;
@@ -857,12 +847,12 @@ public class GlobalXmlParser {
         ArrayList<Integer> integers = StringFileParser.getIntegerListByString(stringOfTags, ",");
         String fileText = "";
         if (tagType.equals(TagType.Cuisine)) {
-            fileText = FileReader.readFileAsString(root + "app_data\\Kitchens.txt");
+            fileText = FileReader.readFileAsString(root + "app_data/Kitchens.txt");
         } else {
             if (tagType.equals(TagType.Categories)) {
-                fileText = FileReader.readFileAsString(root + "app_data\\Categories.txt");
+                fileText = FileReader.readFileAsString(root + "app_data/Categories.txt");
             } else {
-                fileText = FileReader.readFileAsString(root + "app_data\\Ribbons.txt");
+                fileText = FileReader.readFileAsString(root + "app_data/Ribbons.txt");
             }
         }
         ArrayList<StringIntPair> stringIntPairs = StringFileParser.parseStandardStringIntPair(fileText, ",");
@@ -936,7 +926,7 @@ public class GlobalXmlParser {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
 //            loggerFactory.info("invalid parameter " + parameter + " in type " + cardParameterDataType);
             return false;
         }
@@ -996,11 +986,15 @@ public class GlobalXmlParser {
     }
 
     private void saveTags(ArrayList<StringIntPair> tagList, TagType tagType) {
-        for (StringIntPair tagItem : tagList) {
-            TextGroupEntity textGroup = new TextGroupEntity(tagType + "_" + tagItem.getString());
-            TagEntity tagEntity = new TagEntity(textGroup, tagType, tagItem.getString());
-            tagEntity.setTagID((long) tagItem.getAnInt());
-            TagRequest.addTag(tagEntity);
+        try {
+            for (StringIntPair tagItem : tagList) {
+                TextGroupEntity textGroup = new TextGroupEntity(tagType + "_" + tagItem.getString());
+                TagEntity tagEntity = new TagEntity(textGroup, tagType, tagItem.getString());
+                tagEntity.setTagID((long) tagItem.getAnInt());
+                TagRequest.addTag(tagEntity);
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
         }
     }
 
@@ -1013,7 +1007,7 @@ public class GlobalXmlParser {
                 CoordinateRequest.addCardCoordinate(cardCoordinateEntity);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
 //            loggerFactory.error(e);
         }
     }
@@ -1023,9 +1017,9 @@ public class GlobalXmlParser {
             if (imageName == null || imageName.isEmpty()) {
                 return;
             }
-            File imageFile = new File("\\" + imageRoot + imageName);
+            File imageFile = new File(imageRoot + imageName);
             if (!imageFile.exists()) {
-                System.out.println(imageRoot + " : " + imageName + " FROM " + imageType);
+                loggerFactory.info(imageFile.getAbsolutePath() +" : "+imageFile.getName() + " FROM " + imageType);
 //                loggerFactory.error(imageRoot + " : " + imageName + " FROM " + imageType);
                 return;
             }
@@ -1036,8 +1030,8 @@ public class GlobalXmlParser {
             String hash = getMd5Hash(imageFile);
             ImageEntity imageEntity = ImageRequest.getImageByHash(hash);
             if (imageEntity == null) {
-                saveFile(imageFile, imageName, imageRoot + imageType.toString());
-                String path = fileRoot + imageRoot + imageType.toString() + "\\" + imageName;
+                saveFile(imageFile, imageName, imageFolder + imageType.toString());
+                String path =    imageFolder + imageType.toString() + imageType.toString() + "/" + imageName;
                 imageEntity = new ImageEntity(path, height, width, size, hash);
                 ImageRequest.addImage(imageEntity);
             }
@@ -1045,20 +1039,25 @@ public class GlobalXmlParser {
             cardImageEntity.setCardImageName(imageName);
             ImageRequest.addCardImage(cardImageEntity);
         } catch (Exception e) {
-            e.printStackTrace();
+            loggerFactory.error(e);
 //            loggerFactory.error("Exception on " + fileRoot + imageRoot + " : " + imageName + " FROM " + imageType);
 //            loggerFactory.error(e.toString());
         }
     }
 
     private void saveFile(File file, String fileName, String subRoot) throws IOException {
-        String mainRoot = ServerConsts.fileStorageRoot + fileRoot + subRoot;
-        File outFolder = new File(mainRoot);
-        if (!outFolder.exists()) {
-            outFolder.mkdirs();
+        try {
+            String mainRoot = ServerConsts.fileStorageServerRoot + fileRoot + subRoot;
+            loggerFactory.info("main root "+mainRoot);
+            File outFolder = new File(mainRoot);
+            if (!outFolder.exists()) {
+                outFolder.mkdirs();
+            }
+            File out = new File(mainRoot + "/" + fileName);
+            FileCopyUtils.copy(file, out);
+        } catch (Exception e) {
+            loggerFactory.error(e);
         }
-        File out = new File(mainRoot + "\\" + fileName);
-        FileCopyUtils.copy(file, out);
     }
 
     public String getMd5Hash(File file) {
@@ -1073,16 +1072,31 @@ public class GlobalXmlParser {
             }
             byte[] hash = md.digest();
             checksum = new BigInteger(1, hash).toString(16); //don't use this, truncates leading zero
-        } catch (IOException ex) {
-            ex.printStackTrace();
-//            loggerFactory.error(ex);
-        } catch (NoSuchAlgorithmException ex) {
-            ex.printStackTrace();
-//            loggerFactory.error(ex);
+        } catch (IOException e) {
+            loggerFactory.error(e);
+        } catch (NoSuchAlgorithmException e) {
+            loggerFactory.error(e);
         }
         return checksum;
     }
 
+    @Override
+    public void run() {
+        try {
+            loggerFactory.info("run");
+            restaurantChainMap = new HashMap<Integer, CardEntity>();
+            GlobalXmlParser globalXmlParser = new GlobalXmlParser();
+            globalXmlParser.globalParse();
+            CompleteCardInfo completeCardInfo = CardRequest.getCompleteCardInfo(1);
+            CardRequest.printInfo(completeCardInfo);
+        } catch (IOException e) {
+            loggerFactory.error(e);
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            restaurantChainMap = null;
+        }
+    }
 }
 
 /*

@@ -61,7 +61,9 @@ public class HibernateUtil {
                 .addAnnotatedClass(CardCoordinateEntity.class)
                 .addAnnotatedClass(ImageEntity.class)
                 .addAnnotatedClass(CardToCardLinkEntity.class)
-                .addAnnotatedClass(MenuEntity.class);
+                .addAnnotatedClass(MenuEntity.class)
+                .addAnnotatedClass(AdminUserEntity.class)
+                .addAnnotatedClass(AdminRoleEntity.class);
         ac.configure();
         return ac;
     }

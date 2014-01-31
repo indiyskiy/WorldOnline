@@ -11,6 +11,6 @@ public class ServerConsts {
     public static final String ServerURL="http://127.0.0.1:8080/";
     public static final String worldOnlineAdminModule="worldOnline/";
 //    public static final String worldOnlineFileModule="WorldOnlineFileServer/";
-    public static final String fileStorageRoot="C:\\Users\\Servcer\\";
+    public static final String fileStorageServerRoot ="/home/base/";
 
 }

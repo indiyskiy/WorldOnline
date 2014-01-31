@@ -315,7 +315,7 @@ public class ImageRequest {
     }
 
     private static File getFile(String imageFilePath) {
-        File imageFile = new File(ServerConsts.fileStorageRoot+imageFilePath+"\\");
+        File imageFile = new File(imageFilePath);
         return imageFile;
     }
 }
