@@ -21,7 +21,7 @@ import java.io.IOException;
  * To change this template use File | Settings | File Templates.
  */
 public class CompleteCardInfoServlet extends HttpServlet {
-LoggerFactory loggerFactory=new LoggerFactory(Component.Admin,CompleteCardInfoServlet.class);
+    LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, CompleteCardInfoServlet.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
@@ -31,7 +31,7 @@ LoggerFactory loggerFactory=new LoggerFactory(Component.Admin,CompleteCardInfoSe
             request.setAttribute("textTypes", TextType.values());
             request.setAttribute("tagTypes", TagType.values());
             request.setAttribute("cardToCardLinkTypes", CardToCardLinkType.values());
-            request.setAttribute("imageTypes",ImageType.values());
+            request.setAttribute("imageTypes", ImageType.values());
             String cardIDString = request.getParameter("CardID");
             if (cardIDString != null) {
                 int cardID = Integer.parseInt(cardIDString);
@@ -39,6 +39,7 @@ LoggerFactory loggerFactory=new LoggerFactory(Component.Admin,CompleteCardInfoSe
                 if (completeCardInfo != null) {
                     if (completeCardInfo.getCardEntity() != null) {
                         request.setAttribute("card", completeCardInfo.getCardEntity());
+                        request.setAttribute("simpleCard", completeCardInfo.getSimpleCard());
                     }
                     if (completeCardInfo.getCardCoordinateEntity() != null) {
                         request.setAttribute("cardCoordinate", completeCardInfo.getCardCoordinateEntity());
@@ -55,9 +56,12 @@ LoggerFactory loggerFactory=new LoggerFactory(Component.Admin,CompleteCardInfoSe
                     if (completeCardInfo.getCardToCardLinkedOnEntityMap() != null && !completeCardInfo.getCardToCardLinkedOnEntityMap().isEmpty()) {
                         request.setAttribute("linkedOn", completeCardInfo.getCardToCardLinkedOnEntityMap().values());
                     }
-                    if (completeCardInfo.getCompleteCardImageInfoMap()!= null && !completeCardInfo.getCompleteCardImageInfoMap().isEmpty()) {
+                    if (completeCardInfo.getCompleteCardImageInfoMap() != null && !completeCardInfo.getCompleteCardImageInfoMap().isEmpty()) {
                         request.setAttribute("images", completeCardInfo.getCompleteCardImageInfoMap().values());
                     }
+//                    if (completeCardInfo.getCompleteMenuInfoMap() != null && !completeCardInfo.getCompleteMenuInfoMap().isEmpty()) {
+                        request.setAttribute("menus", completeCardInfo.getCompleteMenuInfoMap().values());
+//                    }
                 }
                 ServletHelper.sendForward("/completecardinfo.jsp?CardID=" + cardID, this, request, response);
             }

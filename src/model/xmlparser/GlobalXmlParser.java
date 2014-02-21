@@ -1,7 +1,6 @@
 package model.xmlparser;
 
 import model.FileReader;
-import model.additionalentity.CompleteCardInfo;
 import model.constants.Component;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.*;
@@ -52,57 +51,55 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class GlobalXmlParser implements Runnable {
-    public static final String globalHome = "/home/oldBase/";
-    public static final String imageFolder= "imageData/";
-    public static final String imageRoot = globalHome + imageFolder;
-    public static final String fileRoot = "fileBase/";
+
     public static HashMap<Integer, CardEntity> restaurantChainMap;
     public static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, GlobalXmlParser.class);
-    public static final String root = globalHome + "base/";
 
     public static void parse() {
         new Thread(new GlobalXmlParser()).start();
     }
 
     public void globalParse() throws IOException, SQLException {
-        loggerFactory.info("globalParse");
-        loggerFactory.info(root + "app_data/Categories.txt");
-        ArrayList<StringIntPair> categories = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(root + "app_data/Categories.txt"), ",");
+        ArrayList<StringIntPair> categories = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Categories.txt"), ",");
         saveTags(categories, TagType.Categories);
-        ArrayList<StringIntPair> kitchens = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(root + "app_data/Kitchens.txt"), ",");
+        ArrayList<StringIntPair> kitchens = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Kitchens.txt"), ",");
         saveTags(kitchens, TagType.Cuisine);
-        ArrayList<StringIntPair> ribbons = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(root + "app_data/Ribbons.txt"), ",");
+        ArrayList<StringIntPair> ribbons = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Ribbons.txt"), ",");
         saveTags(ribbons, TagType.Ribbons);
         //cards
         CardsParser cardsParser = new CardsParser();
-        CardAboutCity cardAboutCity = cardsParser.getCardAboutCity(root + "card_aboutcity.xml");
+        CardAboutCity cardAboutCity = cardsParser.getCardAboutCity(ServerConsts.root + "card_aboutcity.xml");
         saveCardsAboutCity(cardAboutCity);
-        CardHandBook cardHandBook = cardsParser.getCardHandBook(root + "card_handbook.xml");
+        CardHandBook cardHandBook = cardsParser.getCardHandBook(ServerConsts.root + "card_handbook.xml");
         saveCardHandBook(cardHandBook);
-        CardHotels cardHotels = cardsParser.getCardHotels(root + "card_hotels.xml");
+        CardHotels cardHotels = cardsParser.getCardHotels(ServerConsts.root + "card_hotels.xml");
         saveCardHotels(cardHotels);
-        CardMeal cardMeal = cardsParser.getCardMeal(root + "card_meals.xml");
+        CardMeal cardMeal = cardsParser.getCardMeal(ServerConsts.root + "card_meals.xml");
         saveCardMeal(cardMeal);
-        CardRelax cardRelax = cardsParser.getCardRelax(root + "card_relax.xml");
+        CardRelax cardRelax = cardsParser.getCardRelax(ServerConsts.root + "card_relax.xml");
         saveCardRelax(cardRelax);
-        CardRoute cardRoute = cardsParser.getCardRoute(root + "card_route.xml");
+        CardRoute cardRoute = cardsParser.getCardRoute(ServerConsts.root + "card_route.xml");
         saveCardRoute(cardRoute);
-        CardSight cardSight = cardsParser.getCardSight(root + "card_sights.xml");
+        CardSight cardSight = cardsParser.getCardSight(ServerConsts.root + "card_sights.xml");
         saveCardSight(cardSight);
-        CardShopping cardShopping = cardsParser.getCardShopping(root + "card_shopping.xml");
+        CardShopping cardShopping = cardsParser.getCardShopping(ServerConsts.root + "card_shopping.xml");
         saveCardShopping(cardShopping);
         //main menu
-        MenuParser.saveMenu();
+        MenuParser menuParser=new MenuParser();
+        menuParser.saveMenu();
+        HashMap<String,MenuEntity> menuEntityHashMap=menuParser.getMenuEntityHashMap();
+
         //people
         PeopleParser peopleParser = new PeopleParser();
-        PeopleAboutCity peopleAboutCity = peopleParser.getPeopleAboutCity(root + "people_aboutcity.xml");
+        PeopleAboutCity peopleAboutCity = peopleParser.getPeopleAboutCity(ServerConsts.root + "people_aboutcity.xml");
         //photo
         PhotoParser photoParser = new PhotoParser();
-        PhotoCard photoCard = photoParser.getPhotoCard(root + "photocards.xml");
+        PhotoCard photoCard = photoParser.getPhotoCard(ServerConsts.root + "photocards.xml");
         //root
         RouteParser routeParser = new RouteParser();
-        RouteRoute routeRoute = routeParser.getRouteRoute(root + "route_routes.xml");
-        loggerFactory.info("/globalParse");
+        RouteRoute routeRoute = routeParser.getRouteRoute(ServerConsts.root + "route_routes.xml");
+        MenuCardLinkParser menuCardLinkParser=new MenuCardLinkParser(menuEntityHashMap);
+        menuCardLinkParser.parseMenuCardLink();
     }
 
     private void saveCardShopping(CardShopping cardShopping) throws IOException, SQLException {
@@ -847,12 +844,12 @@ public class GlobalXmlParser implements Runnable {
         ArrayList<Integer> integers = StringFileParser.getIntegerListByString(stringOfTags, ",");
         String fileText = "";
         if (tagType.equals(TagType.Cuisine)) {
-            fileText = FileReader.readFileAsString(root + "app_data/Kitchens.txt");
+            fileText = FileReader.readFileAsString(ServerConsts.root + "app_data/Kitchens.txt");
         } else {
             if (tagType.equals(TagType.Categories)) {
-                fileText = FileReader.readFileAsString(root + "app_data/Categories.txt");
+                fileText = FileReader.readFileAsString(ServerConsts.root + "app_data/Categories.txt");
             } else {
-                fileText = FileReader.readFileAsString(root + "app_data/Ribbons.txt");
+                fileText = FileReader.readFileAsString(ServerConsts.root + "app_data/Ribbons.txt");
             }
         }
         ArrayList<StringIntPair> stringIntPairs = StringFileParser.parseStandardStringIntPair(fileText, ",");
@@ -927,7 +924,6 @@ public class GlobalXmlParser implements Runnable {
 
         } catch (Exception e) {
             loggerFactory.error(e);
-//            loggerFactory.info("invalid parameter " + parameter + " in type " + cardParameterDataType);
             return false;
         }
         return true;
@@ -1017,10 +1013,8 @@ public class GlobalXmlParser implements Runnable {
             if (imageName == null || imageName.isEmpty()) {
                 return;
             }
-            File imageFile = new File(imageRoot + imageName);
+            File imageFile = new File(ServerConsts.oldImageRoot + imageName);
             if (!imageFile.exists()) {
-                loggerFactory.info(imageFile.getAbsolutePath() +" : "+imageFile.getName() + " FROM " + imageType);
-//                loggerFactory.error(imageRoot + " : " + imageName + " FROM " + imageType);
                 return;
             }
             BufferedImage bimg = ImageIO.read(imageFile);
@@ -1030,8 +1024,8 @@ public class GlobalXmlParser implements Runnable {
             String hash = getMd5Hash(imageFile);
             ImageEntity imageEntity = ImageRequest.getImageByHash(hash);
             if (imageEntity == null) {
-                saveFile(imageFile, imageName, imageFolder + imageType.toString());
-                String path =    imageFolder + imageType.toString() + imageType.toString() + "/" + imageName;
+                saveFile(imageFile, imageName, ServerConsts.imageFolder + imageType);
+                String path = ServerConsts.imageFolder + imageType.toString() + "/" + imageName;
                 imageEntity = new ImageEntity(path, height, width, size, hash);
                 ImageRequest.addImage(imageEntity);
             }
@@ -1040,20 +1034,17 @@ public class GlobalXmlParser implements Runnable {
             ImageRequest.addCardImage(cardImageEntity);
         } catch (Exception e) {
             loggerFactory.error(e);
-//            loggerFactory.error("Exception on " + fileRoot + imageRoot + " : " + imageName + " FROM " + imageType);
-//            loggerFactory.error(e.toString());
         }
     }
 
-    private void saveFile(File file, String fileName, String subRoot) throws IOException {
+    private void saveFile(File file,  String fileName, String path) throws IOException {
         try {
-            String mainRoot = ServerConsts.fileStorageServerRoot + fileRoot + subRoot;
-            loggerFactory.info("main root "+mainRoot);
+            String mainRoot = path;
             File outFolder = new File(mainRoot);
             if (!outFolder.exists()) {
                 outFolder.mkdirs();
             }
-            File out = new File(mainRoot + "/" + fileName);
+            File out = new File(mainRoot+"/"+fileName);
             FileCopyUtils.copy(file, out);
         } catch (Exception e) {
             loggerFactory.error(e);
@@ -1071,7 +1062,7 @@ public class GlobalXmlParser implements Runnable {
                 md.update(buffer, 0, numOfBytesRead);
             }
             byte[] hash = md.digest();
-            checksum = new BigInteger(1, hash).toString(16); //don't use this, truncates leading zero
+            checksum = new BigInteger(1, hash).toString(16);
         } catch (IOException e) {
             loggerFactory.error(e);
         } catch (NoSuchAlgorithmException e) {
@@ -1083,12 +1074,10 @@ public class GlobalXmlParser implements Runnable {
     @Override
     public void run() {
         try {
-            loggerFactory.info("run");
             restaurantChainMap = new HashMap<Integer, CardEntity>();
             GlobalXmlParser globalXmlParser = new GlobalXmlParser();
             globalXmlParser.globalParse();
-            CompleteCardInfo completeCardInfo = CardRequest.getCompleteCardInfo(1);
-            CardRequest.printInfo(completeCardInfo);
+//            CompleteCardInfo completeCardInfo = CardRequest.getCompleteCardInfo(1);
         } catch (IOException e) {
             loggerFactory.error(e);
         } catch (SQLException e) {
@@ -1097,7 +1086,14 @@ public class GlobalXmlParser implements Runnable {
             restaurantChainMap = null;
         }
     }
+
+    public static void main(String[] args) {
+        GlobalXmlParser globalXmlParser=new GlobalXmlParser();
+        globalXmlParser.run();
+    }
 }
+
+
 
 /*
 priceFile;

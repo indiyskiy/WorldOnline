@@ -47,6 +47,18 @@
     <dt>Общая информация</dt>
     <dd>
         <br/>
+        <b>Имя:</b> ${simpleCard.name}
+        <br/>
+        <b>Адрес:</b> ${simpleCard.address}
+        <br/>
+        <b>Описание:</b> ${simpleCard.description}
+    </dd>
+</dl>
+<br/>
+<dl class="spoiler" onclick="clickSpoiler(this);">
+    <dt>Дополнительная информация</dt>
+    <dd>
+        <br/>
         Дата созданая ${card.creationTimestamp}
         <br/>
         Дата последнего изменения ${card.lastUpdateTimestamp}
@@ -58,21 +70,31 @@
             </c:if>
         </c:forEach>
         <br/>
-        Статус
+        Статус:
         <c:forEach items="${cardStates}" var="cardState">
             <c:if test="${cardState.value==card.cardState}">
-                ${cardState}
+                ${cardState}.
             </c:if>
         </c:forEach>
         <br/><br/>
         <c:choose>
             <c:when test="${! empty cardCoordinate}">
-                card coordinate is ${cardCoordinate.longitude} : ${cardCoordinate.latitude}
+                Координаты ${cardCoordinate.longitude} : ${cardCoordinate.latitude}.
             </c:when>
             <c:otherwise>
-                card coordinate is empty
+                Координаты не указаны.
             </c:otherwise>
         </c:choose>
+    </dd>
+</dl>
+<br/>
+<dl class="spoiler" onclick="clickSpoiler(this);">
+    <dt>Категории</dt>
+    <dd>
+        <c:forEach var="menu" items="${menus}">
+            [${menu.menuEntity.menuID}] ${menu.simpleMenu.menuName}
+            <a href="allcards?menu=${menu.menuEntity.menuID}">(все карточки категории)</a>
+        </c:forEach>
     </dd>
 </dl>
 <br/>

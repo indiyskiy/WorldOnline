@@ -18,10 +18,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -41,6 +38,22 @@ public class CardRequest {
         try {
             Transaction transaction = session.beginTransaction();
             cardEntities = (ArrayList<CardEntity>) session.createCriteria(CardEntity.class).setFirstResult(firstElem).setMaxResults(maxElems).list();
+            transaction.commit();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return cardEntities;
+    }
+
+    public static ArrayList<CardEntity> getAllCards() {
+        ArrayList<CardEntity> cardEntities = new ArrayList<CardEntity>();
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            cardEntities = (ArrayList<CardEntity>) session.createCriteria(CardEntity.class).list();
             transaction.commit();
         } finally {
             if (session != null) {
@@ -131,7 +144,12 @@ public class CardRequest {
                     //card text
                     "LEFT OUTER JOIN TextCard ON (Card.CardID=TextCard.CardID) " +
                     "LEFT OUTER JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) ";
+                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                    //card menu
+                    "LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.CardID=Card.CardID) " +
+                    "LEFT OUTER JOIN Menu ON (MenuCardLink.MenuID=Menu.MenuID) " +
+                    "LEFT OUTER JOIN TextGroup AS MenuTextGroup ON (MenuTextGroup.TextGroupID=Menu.NameTextGroupID) " +
+                    "LEFT OUTER JOIN Text AS MenuText ON (MenuTextGroup.TextGroupID=MenuText.TextGroupID)";
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -191,6 +209,11 @@ public class CardRequest {
                     //linket at
                     "LEFT OUTER JOIN CardToCardLink AS CardToCardLinkedOn ON (CardToCardLinkedOn.TargetCardID=Card.CardID) " +
                     "LEFT OUTER JOIN Card AS SourceCard ON (CardToCardLinkedOn.SourceCardID=SourceCard.CardID) " +
+                    //card menu
+                    "LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.CardID=Card.CardID) " +
+                    "LEFT OUTER JOIN Menu ON (MenuCardLink.MenuID=Menu.MenuID) " +
+                    "LEFT OUTER JOIN TextGroup AS MenuTextGroup ON (MenuTextGroup.TextGroupID=Menu.NameTextGroupID) " +
+                    "LEFT OUTER JOIN Text AS MenuText ON (MenuTextGroup.TextGroupID=MenuText.TextGroupID)" +
                     "WHERE Card.CardID=?";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, cardID);
@@ -324,6 +347,20 @@ public class CardRequest {
                 }
             }
         }
+
+        Long menuCardID = rs.getLong("Menu.MenuID");
+        if (menuCardID != 0 && !rs.wasNull()) {
+            HashMap<Long, CompleteMenuInfo> completeMenuInfoMap = completeCardInfo.getCompleteMenuInfoMap();
+            CompleteMenuInfo completeMenuInfo = completeMenuInfoMap.get(menuCardID);
+            if (completeMenuInfo == null) {
+                MenuEntity menuEntity = MenuRequest.getMenu(rs);
+                completeMenuInfo = new CompleteMenuInfo(menuEntity);
+                MenuRequest.setAdditionalCompleteMenuInfo(completeMenuInfo, rs, "MenuText", "MenuTextGroup");
+                completeMenuInfoMap.put(menuCardID, completeMenuInfo);
+            } else {
+                MenuRequest.setAdditionalCompleteMenuInfo(completeMenuInfo, rs, "MenuText", "MenuTextGroup");
+            }
+        }
         return completeCardInfo;
     }
 
@@ -346,80 +383,7 @@ public class CardRequest {
         return cardEntity;
     }
 
-    public static void printInfo(CompleteCardInfo completeCardInfo) throws SQLException {
-        loggerFactory.info("Card name = " + completeCardInfo.getCardEntity().getCardName());
-        if (completeCardInfo.getCardCoordinateEntity() != null) {
-            CardCoordinateEntity cardCoordinateEntity = completeCardInfo.getCardCoordinateEntity();
-            loggerFactory.info("card coordinate = " + cardCoordinateEntity.getCardCoordinateID() + " " + cardCoordinateEntity.getLatitude() + "-" + cardCoordinateEntity.getLongitude());
-        }
-        Collection<CompleteCardTagInfo> cardTagInfos = completeCardInfo.getCompleteCardTagInfoMap().values();
-        for (CompleteCardTagInfo cardTagInfo : cardTagInfos) {
-            loggerFactory.info("Card tag id = " + cardTagInfo.getCardTagEntity().getCardTagID());
-            loggerFactory.info("tag id= " + cardTagInfo.getCompleteTagInfo().getTagEntity().getTagID());
 
-            for (CompleteTextGroupInfo textInfo : cardTagInfo.getCompleteTagInfo().getCompleteTextGroupInfoMap().values()) {
-                loggerFactory.info("text Group id " + textInfo.getTextGroup().getTextGroupID());
-                loggerFactory.info("text Group name " + textInfo.getTextGroup().getTextGroupName());
-                for (TextEntity textEntity : textInfo.getTextEntityMap().values()) {
-                    loggerFactory.info("text " + textEntity.getText());
-                }
-            }
-        }
-        HashMap<Long, CompleteCardImageInfo> completeCardImageInfoMap = completeCardInfo.getCompleteCardImageInfoMap();
-        if (completeCardImageInfoMap != null) {
-            for (CompleteCardImageInfo completeCardImageInfo : completeCardImageInfoMap.values()) {
-                CardImageEntity cardImageEntity = completeCardImageInfo.getCardImageEntity();
-                loggerFactory.info("card image id " + cardImageEntity.getCardImageID());
-                loggerFactory.info("card image image " + cardImageEntity.getImage().getImageID());
-                CompleteTextGroupInfo completeTextGroupInfo = completeCardImageInfo.getCompleteTextGroupInfo();
-                if (completeTextGroupInfo != null) {
-                    loggerFactory.info("image text Group id " + completeTextGroupInfo.getTextGroup().getTextGroupID());
-                    loggerFactory.info("image text Group name " + completeTextGroupInfo.getTextGroup().getTextGroupName());
-                    for (TextEntity textEntity : completeTextGroupInfo.getTextEntityMap().values()) {
-                        loggerFactory.info("image text " + textEntity.getText());
-                    }
-                }
-            }
-        }
-        HashMap<Long, CardParameterEntity> cardParameterEntityMap = completeCardInfo.getCardParameterEntityMap();
-        if (cardParameterEntityMap != null) {
-            Collection<CardParameterEntity> cardParameterEntities = cardParameterEntityMap.values();
-            for (CardParameterEntity cardParameterEntity : cardParameterEntities) {
-                loggerFactory.info("card parameter id = " + cardParameterEntity.getCardParameterID());
-                loggerFactory.info("card parameter value = " + cardParameterEntity.getCardParameterValue());
-            }
-        }
-        if (completeCardInfo.getCompleteCardRootInfo() != null) {
-            CompleteCardRootInfo completeCardRootInfo = completeCardInfo.getCompleteCardRootInfo();
-            if (completeCardRootInfo.getCardRootEntity() != null) {
-                CardRootEntity cardRootEntity = completeCardRootInfo.getCardRootEntity();
-                loggerFactory.info("card root id =  " + cardRootEntity.getCardRootID());
-                loggerFactory.info("card root name =  " + cardRootEntity.getCardRootName());
-            }
-            if (completeCardRootInfo.getRootElementEntityMap() != null) {
-                Collection<RootElementEntity> rootElementEntities = completeCardRootInfo.getRootElementEntityMap().values();
-                for (RootElementEntity rootElementEntity : rootElementEntities) {
-                    loggerFactory.info("root element ID = " + rootElementEntity.getRootElementID());
-                    loggerFactory.info("root element name = " + rootElementEntity.getPlaceCard().getCardName());
-                }
-            }
-            CompleteTextGroupInfo completeTextGroupInfo = completeCardRootInfo.getCompleteTextGroupInfo();
-            if (completeTextGroupInfo != null) {
-                loggerFactory.info("root text Group id " + completeTextGroupInfo.getTextGroup().getTextGroupID());
-                loggerFactory.info("root text Group name " + completeTextGroupInfo.getTextGroup().getTextGroupName());
-                for (TextEntity textEntity : completeTextGroupInfo.getTextEntityMap().values()) {
-                    loggerFactory.info("root text " + textEntity.getText());
-                }
-            }
-        }
-
-        Collection<CompleteTextCardInfo> completeTextCardInfos = completeCardInfo.getCompleteTextCardInfoMap().values();
-        for (CompleteTextCardInfo completeTextCardInfo : completeTextCardInfos) {
-            if (completeTextCardInfo.getTextCardEntity() != null) {
-                loggerFactory.info(TextType.parseInt(completeTextCardInfo.getTextCardEntity().getCardTextType()) + " " + completeTextCardInfo.getCompleteTextGroupInfo().getTextGroup().getTextGroupName());
-            }
-        }
-    }
 
     public static ArrayList<CardEntity> getAllCards(AllCardParser parser) {
         ArrayList<CardEntity> cards = new ArrayList<CardEntity>();
@@ -513,5 +477,63 @@ public class CardRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return 0L;
+    }
+
+    public static CardEntity getCardByName(String name) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT * FROM Text " +
+                    "JOIN TextGroup ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                    "JOIN TextCard ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
+                    "JOIN Card ON (TextCard.CardID=Card.CardID) " +
+                    "WHERE Text.Text LIKE ?";
+//            @Language("MySQL") String sql = "SELECT * FROM Card " +
+//                    "WHERE Card.CardName LIKE ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, name);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                Long cardID = rs.getLong("Card.CardID");
+                return getCardByID(cardID);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return null;
+    }
+
+    public static HashSet<String> getAllCardNames(Long cardID) {
+        HashSet<String> res = new HashSet<String>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT Text.Text FROM Text " +
+                    "JOIN TextGroup ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                    "JOIN TextCard ON (TextCard.TextGroupID=TextGroup.TextGroupID) " +
+                    "JOIN Card ON (Card.CardID=TextCard.CardID) " +
+                    "WHERE Card.CardID=? " +
+                    "AND TextCard.CardTextType=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardID);
+            ps.setInt(2, TextType.Name.getValue());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                res.add(rs.getString("Text.Text"));
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return res;
     }
 }

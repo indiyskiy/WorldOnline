@@ -8,6 +8,7 @@ import model.constants.Component;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
+import model.database.worldonlinedb.MenuCardLinkEntity;
 import model.database.worldonlinedb.MenuEntity;
 import model.database.worldonlinedb.TextGroupEntity;
 import model.logger.LoggerFactory;
@@ -18,6 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -35,6 +37,20 @@ public class MenuRequest {
             session.beginTransaction();
             session.save(menuEntity);
             session.getTransaction().commit();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public static void addMenuCardLink(MenuCardLinkEntity menuCardLinkEntity) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.save(menuCardLinkEntity);
+            session.getTransaction().commit();
+            System.out.println("add menucardlink " + menuCardLinkEntity.getMenuCardLinkID());
         } finally {
             if (session != null) {
                 session.close();
@@ -162,7 +178,7 @@ public class MenuRequest {
         simpleMenu.setMenuName(rs.getString(text + ".Text"));
     }
 
-    private static MenuEntity getMenu(ResultSet rs) throws SQLException {
+    public static MenuEntity getMenu(ResultSet rs) throws SQLException {
         return getMenu(rs, "Menu");
     }
 
@@ -241,29 +257,74 @@ public class MenuRequest {
         return completeMenuInfo;
     }
 
-    private static CompleteMenuInfo getCompleteMenuInfo(ResultSet rs) throws SQLException {
+    public static CompleteMenuInfo getCompleteMenuInfo(ResultSet rs) throws SQLException {
         if (rs.first()) {
             MenuEntity menuEntity = getMenu(rs);
             CompleteMenuInfo completeMenuInfo = new CompleteMenuInfo(menuEntity);
-            setAdditionalCompleteMenuInfo(completeMenuInfo, rs);
+            setAdditionalCompleteMenuInfo(completeMenuInfo, rs, "Text", "TextGroup");
             while (rs.next()) {
-                setAdditionalCompleteMenuInfo(completeMenuInfo, rs);
+                setAdditionalCompleteMenuInfo(completeMenuInfo, rs, "Text", "TextGroup");
             }
             return completeMenuInfo;
         }
         return null;
     }
 
-    private static void setAdditionalCompleteMenuInfo(CompleteMenuInfo completeMenuInfo, ResultSet rs) throws SQLException {
+    public static void setAdditionalCompleteMenuInfo(CompleteMenuInfo completeMenuInfo, ResultSet rs, String text, String textGroup) throws SQLException {
         CompleteTextGroupInfo completeTextGroupInfo;
         if (completeMenuInfo.getCompleteTextGroupInfo() == null) {
-            TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs);
+            TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs, textGroup);
             completeTextGroupInfo = new CompleteTextGroupInfo(textGroupEntity);
             completeMenuInfo.setCompleteTextGroupInfo(completeTextGroupInfo);
         } else {
             completeTextGroupInfo = completeMenuInfo.getCompleteTextGroupInfo();
         }
-        TextRequest.getCompleteTextGroupInfo(rs, completeTextGroupInfo, "Text");
+        TextRequest.getCompleteTextGroupInfo(rs, completeTextGroupInfo, text);
     }
 
+    public static MenuEntity getMenuByName(String name) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT * FROM Text " +
+                    "JOIN TextGroup ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                    "JOIN Menu ON (Menu.NameTextGroupID=TextGroup.TextGroupID) " +
+                    "WHERE Text.Text LIKE ?";
+
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, name);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                Long cardID = rs.getLong("Menu.MenuID");
+                logger.info("return " + cardID);
+                return getMenu(cardID);
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        logger.info("return null");
+        return null;
+    }
+
+    public static void addMenuCardLink(ArrayList<MenuCardLinkEntity> menuCardLinkEntities) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            for (MenuCardLinkEntity menuCardLinkEntity : menuCardLinkEntities) {
+                session.save(menuCardLinkEntity);
+            }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }

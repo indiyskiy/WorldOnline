@@ -3,7 +3,6 @@ package model.database.requests;
 import model.additionalentity.CompleteCardImageInfo;
 import model.additionalentity.CompleteTextGroupInfo;
 import model.constants.Component;
-import model.constants.ServerConsts;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardImageEntity;
@@ -30,7 +29,7 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class ImageRequest {
-    private static LoggerFactory loggerFactory=new LoggerFactory(Component.Database,ImageRequest.class);
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, ImageRequest.class);
 
     public static void addCardImage(CardImageEntity image) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
@@ -177,7 +176,7 @@ public class ImageRequest {
                 }
             }
         } catch (SQLException e) {
-           loggerFactory.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -213,7 +212,7 @@ public class ImageRequest {
                 }
             }
         } catch (SQLException e) {
-           loggerFactory.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -249,7 +248,7 @@ public class ImageRequest {
                 }
             }
         } catch (SQLException e) {
-           loggerFactory.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -307,15 +306,14 @@ public class ImageRequest {
     }
 
     public static File getImage(long imageID) {
-        ImageEntity imageEntity=getImageByID(imageID);
-        if(imageEntity!=null){
-        return getFile(imageEntity.getImageFilePath());
+        ImageEntity imageEntity = getImageByID(imageID);
+        if (imageEntity != null) {
+            return getFile(imageEntity.getImageFilePath());
         }
         return null;
     }
 
     private static File getFile(String imageFilePath) {
-        File imageFile = new File(imageFilePath);
-        return imageFile;
+        return new File(imageFilePath);
     }
 }

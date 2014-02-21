@@ -162,6 +162,7 @@
         <class>model.database.worldonlinedb.MenuEntity</class>
         <class>model.database.worldonlinedb.AdminRoleEntity</class>
         <class>model.database.worldonlinedb.AdminUserEntity</class>
+        <class>model.database.worldonlinedb.MenuCardLinkEntity</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/worldonline"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>

@@ -1,10 +1,10 @@
 package model.xmlparser;
 
 import model.constants.Component;
+import model.constants.ServerConsts;
 import model.constants.databaseenumeration.LanguageType;
 import model.constants.databaseenumeration.MenuImageType;
 import model.constants.databaseenumeration.MenuType;
-import model.database.requests.CardRequest;
 import model.database.requests.MenuRequest;
 import model.database.requests.TextRequest;
 import model.database.worldonlinedb.ImageEntity;
@@ -30,24 +30,21 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class MenuParser {
-    HashMap<Long, Long> downloadedMenuHash = new HashMap<Long, Long>();
+    private HashMap<Long, Long> downloadedMenuHash = new HashMap<Long, Long>();
+    private HashMap<String, MenuEntity> menuEntityHashMap = new HashMap<String, MenuEntity>();
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, MenuParser.class);
 
-    public static void saveMenu() {
-        MenuParser menuParser = new MenuParser();
-        MainMenuData mainMenuData = menuParser.getMainMenuData(GlobalXmlParser.root+"MainMenuData.xml");
-        menuParser.loadHardcodedMenues();
-        menuParser.saveMainMenu(mainMenuData);
-        menuParser.saveSubmenu(mainMenuData);
+    public void saveMenu() {
+        MainMenuData mainMenuData = getMainMenuData(ServerConsts.root + "MainMenuData.xml");
+        loadHardcodedMenues();
+        saveMainMenu(mainMenuData);
+        saveSubmenu(mainMenuData);
     }
 
     private void saveSubmenu(MainMenuData mainMenuData) {
         List<Submenu> submenus = mainMenuData.getSubmenus();
         List<Submenu> secondLevel = new ArrayList<Submenu>();
         for (Submenu submenu : submenus) {
-//            System.out.println(submenu);
-//            System.out.println(submenu.nameRU);
-//            System.out.println(submenu.mainMenuID);
             if (submenu.mainMenuID != null && submenu.mainMenuID.contains("_")) {
                 secondLevel.add(submenu);
             }
@@ -57,7 +54,7 @@ public class MenuParser {
             String[] array = submenu.mainMenuID.split("_");
             Long rootMenuID = Long.parseLong(array[0]);
             Long parentMenuID = Long.parseLong(array[1]);
-            Submenu parent=findSubmenu(parentMenuID,rootMenuID,submenus);
+            Submenu parent = findSubmenu(parentMenuID, rootMenuID, submenus);
             parentMenuID = Long.parseLong(parent.id);
             MenuEntity parentMenu = MenuRequest.getMenu(downloadedMenuHash.get(parentMenuID));
             MenuEntity menu = MenuRequest.getMenu(downloadedMenuHash.get(Long.parseLong(submenu.id)));
@@ -116,7 +113,7 @@ public class MenuParser {
                 long count = counter.get(Long.parseLong(submenu.mainMenuID)) + 1;
                 counter.remove(Long.parseLong(submenu.mainMenuID));
                 counter.put(Long.parseLong(submenu.mainMenuID), count);
-                submenu.number =  count;
+                submenu.number = count;
             }
         }
     }
@@ -124,10 +121,10 @@ public class MenuParser {
     private Submenu findSubmenu(Long number, Long parentID, List<Submenu> submenus) {
         for (Submenu submenu : submenus) {
             try {
-            if (submenu.number==number && !submenu.mainMenuID.contains("_") && parentID == Long.parseLong(submenu.mainMenuID)) {
-                return submenu;
-            }
-        } catch (NullPointerException e){
+                if (submenu.number.equals(number) && !submenu.mainMenuID.contains("_") && parentID == Long.parseLong(submenu.mainMenuID)) {
+                    return submenu;
+                }
+            } catch (NullPointerException e) {
                 e.printStackTrace();
                 System.out.println(submenu);
                 System.out.println(submenu.nameRU);
@@ -153,11 +150,12 @@ public class MenuParser {
             MenuType menuType = null;
             MenuEntity menuEntity = new MenuEntity(mainMenu, textGroupEntity, menuImage, pushedMenuImage, menuType);
             menuEntity.setNumber(Integer.parseInt(submenu.orderID));
-            if(menuEntity.getNumber()==null){
+            if (menuEntity.getNumber() == null) {
                 System.out.println("NULL NUMBER!!! " + submenu.nameRU + " " + submenu.orderID);
             }
             MenuRequest.addMenu(menuEntity);
             downloadedMenuHash.put(menuID, menuEntity.getMenuID());
+            put(submenu.id, menuEntity);
 //            System.out.println(menuID + " " + menuEntity.getMenuID());
         }
     }
@@ -165,6 +163,11 @@ public class MenuParser {
     private ImageEntity getMenuImage(String image, MenuImageType simple) {
 //        System.out.println(image);
         return null;
+    }
+
+    private void put(String menuID, MenuEntity menuEntity) {
+        loggerFactory.info("put "+menuID+" ; "+menuEntity.getMenuID());
+        menuEntityHashMap.put(menuID, menuEntity);
     }
 
     private void loadHardcodedMenues() {
@@ -190,7 +193,7 @@ public class MenuParser {
         addMenusToDB(menu);
     }
 
-    public static void main(String[] args) {
-       saveMenu();
+    public HashMap<String, MenuEntity> getMenuEntityHashMap() {
+        return menuEntityHashMap;
     }
 }

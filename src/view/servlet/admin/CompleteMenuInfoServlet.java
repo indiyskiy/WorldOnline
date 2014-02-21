@@ -1,9 +1,7 @@
 package view.servlet.admin;
 
 import model.additionalentity.CompleteMenuInfo;
-import model.additionalentity.MenuInfo;
 import model.constants.Component;
-import model.constants.databaseenumeration.LanguageType;
 import model.database.requests.MenuRequest;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
@@ -39,16 +37,15 @@ public class CompleteMenuInfoServlet extends HttpServlet {
             if (menuId != null) {
                 CompleteMenuInfo menuInfo = MenuRequest.getCompleteMenuInfo(menuId);
                 if (menuInfo != null) {
-                    loggerFactory.info("here i am");
-                    request.setAttribute("menu",menuInfo.getMenuEntity());
-                    request.setAttribute("textGroup",menuInfo.getCompleteTextGroupInfo().getTextGroup());
-                    request.setAttribute("image",menuInfo.getImage());
+                    request.setAttribute("menu", menuInfo.getMenuEntity());
+                    request.setAttribute("textGroup", menuInfo.getCompleteTextGroupInfo().getTextGroup());
+                    request.setAttribute("image", menuInfo.getImage());
 //                    request.setAttribute("texts",menuInfo.getCompleteTextGroupInfo().getTextEntityMap().values());
 //                    request.setAttribute("menu", menuInfo.getMenu());
 //                    request.setAttribute("submenus", menuInfo.getSubmenus());
 //                    request.setAttribute("parent", menuInfo.getParentMenu());
                 }
-                ServletHelper.sendForward("/completemenuinfo.jsp?MenuId="+menuId, this, request, response);
+                ServletHelper.sendForward("/completemenuinfo.jsp?MenuId=" + menuId, this, request, response);
             }
         } catch (Exception e) {
 //            request.setAttribute("errorMesage", e.getMessage());

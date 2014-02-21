@@ -16,6 +16,32 @@ public class ImageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long imageID;
+    @javax.persistence.Column(name = "ImageFilePath")
+    @Basic
+    private String imageFilePath;
+    @javax.persistence.Column(name = "ImageMD5Hash")
+    @Basic
+    private String imageMD5Hash;
+    @javax.persistence.Column(name = "ImageHeight")
+    @Basic
+    private Integer imageHeight;
+    @javax.persistence.Column(name = "ImageWidth")
+    @Basic
+    private Integer imageWidth;
+    @javax.persistence.Column(name = "ImageFileSize")
+    @Basic
+    private Long imageFileSize;
+
+    public ImageEntity() {
+    }
+
+    public ImageEntity(String imageFilePath, Integer imageHeight, Integer imageWidth, Long imageFileSize, String imageMD5Hash) {
+        this.imageFilePath = imageFilePath;
+        this.imageHeight = imageHeight;
+        this.imageWidth = imageWidth;
+        this.imageFileSize = imageFileSize;
+        this.imageMD5Hash = imageMD5Hash;
+    }
 
     public Long getImageID() {
         return imageID;
@@ -25,10 +51,6 @@ public class ImageEntity {
         this.imageID = imageID;
     }
 
-    @javax.persistence.Column(name = "ImageFilePath")
-    @Basic
-    private String imageFilePath;
-
     public String getImageFilePath() {
         return imageFilePath;
     }
@@ -36,10 +58,6 @@ public class ImageEntity {
     public void setImageFilePath(String ImageFilePath) {
         this.imageFilePath = ImageFilePath;
     }
-
-    @javax.persistence.Column(name = "ImageMD5Hash")
-    @Basic
-    private String imageMD5Hash;
 
     public String getImageMD5Hash() {
         return imageMD5Hash;
@@ -49,10 +67,6 @@ public class ImageEntity {
         this.imageMD5Hash = imageMD5Hash;
     }
 
-    @javax.persistence.Column(name = "ImageHeight")
-    @Basic
-    private Integer imageHeight;
-
     public Integer getImageHeight() {
         return imageHeight;
     }
@@ -60,10 +74,6 @@ public class ImageEntity {
     public void setImageHeight(Integer imageHeight) {
         this.imageHeight = imageHeight;
     }
-
-    @javax.persistence.Column(name = "ImageWidth")
-    @Basic
-    private Integer imageWidth;
 
     public Integer getImageWidth() {
         return imageWidth;
@@ -73,10 +83,6 @@ public class ImageEntity {
         this.imageWidth = imageWidth;
     }
 
-    @javax.persistence.Column(name = "ImageFileSize")
-    @Basic
-    private Long imageFileSize;
-
     public Long getImageFileSize() {
         return imageFileSize;
     }
@@ -84,7 +90,6 @@ public class ImageEntity {
     public void setImageFileSize(Long imageFileSize) {
         this.imageFileSize = imageFileSize;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -117,16 +122,5 @@ public class ImageEntity {
         result = 31 * result + (imageWidth != null ? imageWidth.hashCode() : 0);
         result = 31 * result + (imageFileSize != null ? imageFileSize.hashCode() : 0);
         return result;
-    }
-
-    public ImageEntity() {
-    }
-
-    public ImageEntity(String imageFilePath, Integer imageHeight, Integer imageWidth, Long imageFileSize, String imageMD5Hash) {
-        this.imageFilePath = imageFilePath;
-        this.imageHeight = imageHeight;
-        this.imageWidth = imageWidth;
-        this.imageFileSize = imageFileSize;
-        this.imageMD5Hash = imageMD5Hash;
     }
 }
