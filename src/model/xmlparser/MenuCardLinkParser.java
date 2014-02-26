@@ -9,6 +9,7 @@ import model.database.worldonlinedb.CardEntity;
 import model.database.worldonlinedb.MenuCardLinkEntity;
 import model.database.worldonlinedb.MenuEntity;
 import model.logger.LoggerFactory;
+import model.textparser.StringFileParser;
 import model.xmlparser.xmlview.card.cardaboutcity.AboutCity;
 import model.xmlparser.xmlview.card.cardaboutcity.CardAboutCity;
 import model.xmlparser.xmlview.card.cardhandbook.CardHandBook;
@@ -26,11 +27,11 @@ import model.xmlparser.xmlview.card.cardshopping.Shopping;
 import model.xmlparser.xmlview.card.cardsights.CardSight;
 import model.xmlparser.xmlview.card.cardsights.Sight;
 import model.xmlparser.xmlview.mainmenudata.MainMenuData;
+import model.xmlparser.xmlview.mainmenudata.Submenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -42,19 +43,17 @@ import java.util.Map;
 public class MenuCardLinkParser {
     private final static String root = ServerConsts.root;
     public static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, MenuCardLinkParser.class);
-    private final HashMap<String, MenuEntity> menuEntityHashMap;
     public ArrayList<MenuCardLinkEntity> menuCardLinkEntities = new ArrayList<MenuCardLinkEntity>();
+    public HashMap<Integer, Integer> menuCardMap = StringFileParser.getIntIntMap(root + "addData/menuCardMap.txt");
     private MainMenuData mainMenuData = new MenuParser().getMainMenuData(root + "MainMenuData.xml");
 
-    public MenuCardLinkParser(HashMap<String, MenuEntity> menuEntityHashMap) {
-        for (Map.Entry<String, MenuEntity> entry : menuEntityHashMap.entrySet()) {
-            loggerFactory.info("map iterate " + entry.getKey() + " ; " + entry.getValue().getMenuID());
-        }
-        this.menuEntityHashMap = menuEntityHashMap;
+    public static void main(String[] args) {
+        new MenuCardLinkParser().parseMenuCardLink();
     }
 
     private MenuCardLinkEntity addLink(CardEntity cardEntity, MenuEntity menuEntity) {
-        if (menuEntity != null) {
+        if (menuEntity != null && cardEntity!=null) {
+            loggerFactory.debug("saving");
             MenuCardLinkEntity menuCardLinkEntity = new MenuCardLinkEntity();
             menuCardLinkEntity.setCard(cardEntity);
             menuCardLinkEntity.setMenu(menuEntity);
@@ -66,6 +65,8 @@ public class MenuCardLinkParser {
     }
 
     public void parseMenuCardLink() {
+        loggerFactory.debug(menuCardMap.values().toString());
+        loggerFactory.debug(menuCardMap.keySet().toString());
         menuCardLinkEntities.clear();
         CardsParser cardsParser = new CardsParser();
         CardAboutCity cardAboutCity = cardsParser.getCardAboutCity(root + "card_aboutcity.xml");
@@ -110,6 +111,7 @@ public class MenuCardLinkParser {
             }
         }
         try {
+            loggerFactory.debug("saving "+menuCardLinkEntities.size()+" links");
             MenuRequest.addMenuCardLink(menuCardLinkEntities);
         } catch (Exception e) {
             loggerFactory.error(e);
@@ -118,15 +120,17 @@ public class MenuCardLinkParser {
 
     private MenuCardLinkEntity saveCardAboutCity(CardAboutCity cardAboutCity, HashSet<String> names, CardEntity cardEntity) {
         for (AboutCity aboutCity : cardAboutCity.aboutCities) {
-            String nameEN = aboutCity.nameEN;
-            String nameRU = aboutCity.nameRU;
-            if (names.contains(nameEN) || names.contains(nameRU)) {
-                MenuEntity menuEntity = findMenu(aboutCity.parentMenuID);
-                if (menuEntity != null) {
-                    return addLink(cardEntity, menuEntity);
-                } else {
-//                    loggerFactory.info("~menu entity for card " + cardEntity.getCardID());
+            try {
+                String nameEN = aboutCity.nameEN;
+                String nameRU = aboutCity.nameRU;
+                if (names.contains(nameEN) || names.contains(nameRU)) {
+                    MenuEntity menuEntity = findMenu(aboutCity.id);
+                    if (menuEntity != null) {
+                        return addLink(cardEntity, menuEntity);
+                    }
                 }
+            } catch (Exception e) {
+                loggerFactory.error(e);
             }
         }
         return null;
@@ -134,16 +138,17 @@ public class MenuCardLinkParser {
 
     private MenuCardLinkEntity saveCardHotels(CardHotels cardHotels, HashSet<String> names, CardEntity cardEntity) {
         for (Hotel hotel : cardHotels.hotels) {
-            String nameEN = hotel.nameEN;
-            String nameRU = hotel.nameRU;
-//            loggerFactory.info(nameEN + " " + nameRU);
-            if (names.contains(nameEN) || names.contains(nameRU)) {
-                MenuEntity menuEntity = findMenu(hotel.parentMenuID);
-                if (menuEntity != null) {
-                    return addLink(cardEntity, menuEntity);
-                } else {
-//                    loggerFactory.info("~menu entity for card " + cardEntity.getCardID());
+            try {
+                String nameEN = hotel.nameEN;
+                String nameRU = hotel.nameRU;
+                if (names.contains(nameEN) || names.contains(nameRU)) {
+                    MenuEntity menuEntity = findMenu(hotel.id);
+                    if (menuEntity != null) {
+                        return addLink(cardEntity, menuEntity);
+                    }
                 }
+            } catch (Exception e) {
+                loggerFactory.error(e);
             }
         }
         return null;
@@ -151,16 +156,17 @@ public class MenuCardLinkParser {
 
     private MenuCardLinkEntity saveCardMeal(CardMeal cardMeal, HashSet<String> names, CardEntity cardEntity) {
         for (Meal meal : cardMeal.meals) {
-            String nameEN = meal.nameEN;
-            String nameRU = meal.nameRU;
-//            loggerFactory.info(nameEN + " " + nameRU);
-            if (names.contains(nameEN) || names.contains(nameRU)) {
-                MenuEntity menuEntity = findMenu(meal.parentMenuID);
-                if (menuEntity != null) {
-                    return addLink(cardEntity, menuEntity);
-                } else {
-//                    loggerFactory.info("~menu entity for card " + cardEntity.getCardID());
+            try {
+                String nameEN = meal.nameEN;
+                String nameRU = meal.nameRU;
+                if (names.contains(nameEN) || names.contains(nameRU)) {
+                    MenuEntity menuEntity = findMenu(meal.id);
+                    if (menuEntity != null) {
+                        return addLink(cardEntity, menuEntity);
+                    }
                 }
+            } catch (Exception e) {
+                loggerFactory.error(e);
             }
         }
         return null;
@@ -168,16 +174,17 @@ public class MenuCardLinkParser {
 
     private MenuCardLinkEntity saveCardRelax(CardRelax cardRelax, HashSet<String> names, CardEntity cardEntity) {
         for (Relax relax : cardRelax.relaxes) {
-            String nameEN = relax.nameEN;
-            String nameRU = relax.nameRU;
-//            loggerFactory.info(nameEN + " " + nameRU);
-            if (names.contains(nameEN) || names.contains(nameRU)) {
-                MenuEntity menuEntity = findMenu(relax.parentMenuID);
-                if (menuEntity != null) {
-                    return addLink(cardEntity, menuEntity);
-                } else {
-//                    loggerFactory.info("~menu entity for card " + cardEntity.getCardID());
+            try {
+                String nameEN = relax.nameEN;
+                String nameRU = relax.nameRU;
+                if (names.contains(nameEN) || names.contains(nameRU)) {
+                    MenuEntity menuEntity = findMenu(relax.id);
+                    if (menuEntity != null) {
+                        return addLink(cardEntity, menuEntity);
+                    }
                 }
+            } catch (Exception e) {
+                loggerFactory.error(e);
             }
         }
         return null;
@@ -185,16 +192,18 @@ public class MenuCardLinkParser {
 
     private MenuCardLinkEntity saveCardRoute(CardRoute cardRoute, HashSet<String> names, CardEntity cardEntity) {
         for (Route route : cardRoute.routes) {
-            String nameEN = route.nameEN;
-            String nameRU = route.nameRU;
-//            loggerFactory.info(nameEN + " " + nameRU);
-            if (names.contains(nameEN) || names.contains(nameRU)) {
-                MenuEntity menuEntity = findMenu(route.parentMenuID);
-                if (menuEntity != null) {
-                    return addLink(cardEntity, menuEntity);
-                } else {
-//                    loggerFactory.info("~menu entity for card " + cardEntity.getCardID());
+            try {
+
+                String nameEN = route.nameEN;
+                String nameRU = route.nameRU;
+                if (names.contains(nameEN) || names.contains(nameRU)) {
+                    MenuEntity menuEntity = findMenu(route.id);
+                    if (menuEntity != null) {
+                        return addLink(cardEntity, menuEntity);
+                    }
                 }
+            } catch (Exception e) {
+                loggerFactory.error(e);
             }
         }
         return null;
@@ -202,17 +211,18 @@ public class MenuCardLinkParser {
 
     private MenuCardLinkEntity saveCardSight(CardSight cardSight, HashSet<String> names, CardEntity cardEntity) {
         for (Sight sight : cardSight.sights) {
-            String nameEN = sight.nameEN;
-            String nameRU = sight.nameRU;
-//            loggerFactory.info(nameEN + " " + nameRU);
-            if (names.contains(nameEN) || names.contains(nameRU)) {
-                MenuEntity menuEntity = findMenu(sight.parentMenuID);
-                if (menuEntity != null) {
+            try {
+                String nameEN = sight.nameEN;
+                String nameRU = sight.nameRU;
+                if (names.contains(nameEN) || names.contains(nameRU)) {
+                    MenuEntity menuEntity = findMenu(sight.id);
+                    if (menuEntity != null) {
 
-                    return addLink(cardEntity, menuEntity);
-                } else {
-//                    loggerFactory.info("~menu entity for card " + cardEntity.getCardID());
+                        return addLink(cardEntity, menuEntity);
+                    }
                 }
+            } catch (Exception e) {
+                loggerFactory.error(e);
             }
         }
         return null;
@@ -220,16 +230,18 @@ public class MenuCardLinkParser {
 
     private MenuCardLinkEntity saveCardShopping(CardShopping cardShopping, HashSet<String> names, CardEntity cardEntity) {
         for (Shopping shopping : cardShopping.shoppings) {
-            String nameEN = shopping.nameEN;
-            String nameRU = shopping.nameRU;
+            try {
+                String nameEN = shopping.nameEN;
+                String nameRU = shopping.nameRU;
 //            loggerFactory.info(nameEN + " " + nameRU);
-            if (names.contains(nameEN) || names.contains(nameRU)) {
-                MenuEntity menuEntity = findMenu(shopping.parentMenuID);
-                if (menuEntity != null) {
-                    return addLink(cardEntity, menuEntity);
-                } else {
-//                    loggerFactory.info("~menu entity for card " + cardEntity.getCardID());
+                if (names.contains(nameEN) || names.contains(nameRU)) {
+                    MenuEntity menuEntity = findMenu(shopping.id);
+                    if (menuEntity != null) {
+                        return addLink(cardEntity, menuEntity);
+                    }
                 }
+            } catch (Exception e) {
+                loggerFactory.error(e);
             }
         }
         return null;
@@ -237,25 +249,38 @@ public class MenuCardLinkParser {
 
     private MenuCardLinkEntity saveCardHandBook(CardHandBook cardHandBook, HashSet<String> names, CardEntity cardEntity) {
         for (HandBook handBook : cardHandBook.handBooks) {
-            String nameEN = handBook.nameEN;
-            String nameRU = handBook.nameRU;
-//            loggerFactory.info(nameEN + " " + nameRU);
-            if (names.contains(nameEN) || names.contains(nameRU)) {
-                MenuEntity menuEntity = findMenu(handBook.parentMenuID);
-                if (menuEntity != null) {
-                    return addLink(cardEntity, menuEntity);
-                } else {
-//                    loggerFactory.info("~menu entity for card " + cardEntity.getCardID());
+            try {
+                String nameEN = handBook.nameEN;
+                String nameRU = handBook.nameRU;
+                if (names.contains(nameEN) || names.contains(nameRU)) {
+                    MenuEntity menuEntity = findMenu(handBook.id);
+                    if (menuEntity != null) {
+                        return addLink(cardEntity, menuEntity);
+                    }
                 }
+            } catch (Exception e) {
+                loggerFactory.error(e);
             }
         }
         return null;
     }
 
-    private MenuEntity findMenu(String parentMenuID) {
-        MenuEntity menuEntity = menuEntityHashMap.get(parentMenuID);
-        loggerFactory.info(parentMenuID + " " + menuEntity.getMenuID());
-        return menuEntity;
+    private MenuEntity findMenu(String cardID) {
+        Integer menuID = menuCardMap.get(Integer.parseInt(cardID));
+//        loggerFactory.debug("try to find "+cardID+" where menuID="+menuID);
+        for (Submenu submenu : mainMenuData.getSubmenus()) {
+            if (submenu.id.equals(String.valueOf(menuID))) {
+                System.out.println("sumbenu was found");
+                MenuEntity menuEntity= MenuRequest.getMenuByName(submenu.nameEN);
+                if(menuEntity!=null){
+                    loggerFactory.debug("OK!");
+                } else {
+                    System.out.print(cardID+" "+menuID);
+                }
+                return menuEntity;
+            }
+        }
+        return null;
     }
 
 

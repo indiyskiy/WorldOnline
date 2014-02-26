@@ -98,7 +98,8 @@ public class GlobalXmlParser implements Runnable {
         //root
         RouteParser routeParser = new RouteParser();
         RouteRoute routeRoute = routeParser.getRouteRoute(ServerConsts.root + "route_routes.xml");
-        MenuCardLinkParser menuCardLinkParser=new MenuCardLinkParser(menuEntityHashMap);
+        //menu card link
+        MenuCardLinkParser menuCardLinkParser=new MenuCardLinkParser();
         menuCardLinkParser.parseMenuCardLink();
     }
 

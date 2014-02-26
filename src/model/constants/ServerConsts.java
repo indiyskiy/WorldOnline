@@ -12,7 +12,8 @@ public class ServerConsts {
     public static final String worldOnlineAdminModule="worldOnline/";
 //    public static final String worldOnlineFileModule="WorldOnlineFileServer/";
 
-    public static final String home = "/home/";
+    public static final String home = "C:/home/";
+//    public static final String home = "/home/";
     public static final String newBase = home + "base/";
     public static final String newFileBase = newBase + "fileBase/";
     public static final String imageFolder = newFileBase + "imageData/";

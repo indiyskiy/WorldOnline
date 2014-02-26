@@ -300,7 +300,11 @@ public class MenuRequest {
             if (rs.first()) {
                 Long cardID = rs.getLong("Menu.MenuID");
                 logger.info("return " + cardID);
-                return getMenu(cardID);
+                if (cardID != 0 && !rs.wasNull()) {
+                    return getMenu(cardID);
+                } else {
+                    logger.debug(name+" not found");
+                }
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -316,7 +320,7 @@ public class MenuRequest {
         try {
             session.beginTransaction();
             for (MenuCardLinkEntity menuCardLinkEntity : menuCardLinkEntities) {
-                session.save(menuCardLinkEntity);
+                session.merge(menuCardLinkEntity);
             }
             session.getTransaction().commit();
         } catch (Exception e) {

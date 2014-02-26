@@ -4,7 +4,6 @@ import model.constants.Component;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Random;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,7 +14,7 @@ import java.util.Random;
  */
 public class Logger implements Runnable {
     private static Logger instance = new Logger();
-    private static LoggerFactory loggerFactory=new LoggerFactory(Component.Global,Logger.class);
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Global, Logger.class);
     private final Object lock;
     private LinkedList<LoggerMessage> loggerMessageList;
     private HashMap<String, LoggerFile> openedFiles;
@@ -31,7 +30,6 @@ public class Logger implements Runnable {
     public static Logger getInstance() {
         return instance;
     }
-
 
     @Override
     public void run() {
@@ -71,10 +69,8 @@ public class Logger implements Runnable {
                 loggerFile.close();
                 openedFiles.remove(loggerFile.getSignature());
                 openedFiles.put(loggerFileTest.getSignature(), loggerFileTest);
-                loggerFile = loggerFileTest;
-            } else {
-                loggerFile = loggerFileTest;
             }
+            loggerFile = loggerFileTest;
         } else {
             loggerFile.open();
             openedFiles.put(loggerFile.getSignature(), loggerFile);
@@ -83,8 +79,8 @@ public class Logger implements Runnable {
 //        loggerFile.printToFile(loggerMessage.getMessage());
     }
 
-    public void addMessage(String text, LogLevel logLevel, Component component, Class callerClass){
-        LoggerMessage message=new LoggerMessage(text,logLevel,component,callerClass);
+    public void addMessage(String text, LogLevel logLevel, Component component, Class callerClass) {
+        LoggerMessage message = new LoggerMessage(text, logLevel, component, callerClass);
         addMessage(message);
     }
 

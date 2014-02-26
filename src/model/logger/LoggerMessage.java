@@ -66,6 +66,7 @@ public class LoggerMessage {
 
     public void logMyself(LoggerFile loggerFile) {
         loggerFile.printToFile(getMessage());
+        System.out.println(getMessage());
         if (logLevel.isBigger(lowestMailLevel)) {
             ErrorMailer.sendError(this);
         }

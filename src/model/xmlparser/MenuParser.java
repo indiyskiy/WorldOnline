@@ -34,6 +34,13 @@ public class MenuParser {
     private HashMap<String, MenuEntity> menuEntityHashMap = new HashMap<String, MenuEntity>();
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, MenuParser.class);
 
+    public static void main(String[] args) {
+        MenuParser menuParser = new MenuParser();
+        menuParser.saveMenu();
+        MenuCardLinkParser menuCardLinkParser = new MenuCardLinkParser();
+        menuCardLinkParser.parseMenuCardLink();
+    }
+
     public void saveMenu() {
         MainMenuData mainMenuData = getMainMenuData(ServerConsts.root + "MainMenuData.xml");
         loadHardcodedMenues();
@@ -120,17 +127,19 @@ public class MenuParser {
 
     private Submenu findSubmenu(Long number, Long parentID, List<Submenu> submenus) {
         for (Submenu submenu : submenus) {
-            try {
-                if (submenu.number.equals(number) && !submenu.mainMenuID.contains("_") && parentID == Long.parseLong(submenu.mainMenuID)) {
-                    return submenu;
+            if (submenu.number != null) {
+                try {
+                    if (submenu.number.equals(number) && !submenu.mainMenuID.contains("_") && parentID == Long.parseLong(submenu.mainMenuID)) {
+                        return submenu;
+                    }
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                    System.out.println(submenu);
+                    System.out.println(submenu.nameRU);
+                    System.out.println(submenu.number);
+                    System.out.println(submenu.mainMenuID);
+                    throw e;
                 }
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-                System.out.println(submenu);
-                System.out.println(submenu.nameRU);
-                System.out.println(submenu.number);
-                System.out.println(submenu.mainMenuID);
-                throw e;
             }
         }
         return null;
@@ -166,7 +175,7 @@ public class MenuParser {
     }
 
     private void put(String menuID, MenuEntity menuEntity) {
-        loggerFactory.info("put "+menuID+" ; "+menuEntity.getMenuID());
+        loggerFactory.info("put " + menuID + " ; " + menuEntity.getMenuID());
         menuEntityHashMap.put(menuID, menuEntity);
     }
 

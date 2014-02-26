@@ -190,7 +190,8 @@
             </c:forEach>
             )
             <br/>
-            <img src='http://148.251.42.117:8080/worldOnline/image/${image.cardImageEntity.image.imageID}'/>
+            <%--<img src='http://148.251.42.117:8080/worldOnline/image/${image.cardImageEntity.image.imageID}'/>--%>
+            <img src='http://192.168.1.33:8080/worldOnline/image/${image.cardImageEntity.image.imageID}'/>
             <br/>
         </c:forEach>
     </dd>

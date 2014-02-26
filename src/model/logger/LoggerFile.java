@@ -1,6 +1,7 @@
 package model.logger;
 
 import model.constants.Component;
+import model.constants.ServerConsts;
 
 import java.io.*;
 
@@ -32,7 +33,7 @@ public class LoggerFile {
     public void open(){
         try {
 //            String currentDir = new File("").getAbsolutePath();
-            File newDir = new File("/home/" + globalLogDir + "/" + root + "/" + date);
+            File newDir = new File(ServerConsts.home + globalLogDir + "/" + root + "/" + date);
             if (!newDir.exists()) {
                 newDir.mkdirs();
             }

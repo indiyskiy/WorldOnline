@@ -1,6 +1,11 @@
 package model.textparser;
 
+import model.FileReader;
+import model.constants.Component;
+import model.logger.LoggerFactory;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,6 +15,8 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class StringFileParser {
+    public static LoggerFactory loggerFactory = new LoggerFactory(Component.Global, StringFileParser.class);
+
     public static ArrayList<Integer> getIntegerListByString(String text, String spliter) {
         ArrayList<Integer> integerArrayList = new ArrayList<Integer>();
         String[] strings = text.split(spliter);
@@ -19,7 +26,7 @@ public class StringFileParser {
         return integerArrayList;
     }
 
-    public static ArrayList<Double> getDoubleListByString(String text,String spliter) {
+    public static ArrayList<Double> getDoubleListByString(String text, String spliter) {
         ArrayList<Double> integerArrayList = new ArrayList<Double>();
         String[] strings = text.split(spliter);
         for (String string : strings) {
@@ -28,9 +35,9 @@ public class StringFileParser {
         return integerArrayList;
     }
 
-
-    public static ArrayList<StringIntPair> parseStandardStringIntPair(String text,String splitter) {
+    public static ArrayList<StringIntPair> parseStandardStringIntPair(String text, String splitter) {
         ArrayList<StringIntPair> pairs = new ArrayList<StringIntPair>();
+        System.out.println(text);
         int i = 0;
         int start;
         int end = 0;
@@ -47,10 +54,28 @@ public class StringFileParser {
         return pairs;
     }
 
-    private static StringIntPair getStringIntPair(String subString,String spliter) {
+    private static StringIntPair getStringIntPair(String subString, String spliter) {
+        System.out.println(subString);
         String[] pair = subString.split(spliter);
         int anInt = Integer.parseInt(pair[1]);
         String string = pair[0];
         return new StringIntPair(string, anInt);
+    }
+
+    public static HashMap<Integer, Integer> getIntIntMap(String fileRoot) {
+        try {
+            String[] stringIntPairs =FileReader.readFileAsString(fileRoot).split("\n");
+            HashMap<Integer, Integer> integerIntegerHashMap = new HashMap<Integer, Integer>();
+            System.out.println("getIntIntMap");
+            for (String stringIntPair : stringIntPairs) {
+                String[] strings=stringIntPair.split(";");
+                System.out.println(strings[0] + " " + strings[1]);
+                integerIntegerHashMap.put(Integer.parseInt(strings[0]), Integer.parseInt(strings[1]));
+            }
+            return integerIntegerHashMap;
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        }
+        return new HashMap<Integer, Integer>();
     }
 }
