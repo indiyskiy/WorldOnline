@@ -37,7 +37,7 @@ public class StringFileParser {
 
     public static ArrayList<StringIntPair> parseStandardStringIntPair(String text, String splitter) {
         ArrayList<StringIntPair> pairs = new ArrayList<StringIntPair>();
-        System.out.println(text);
+//        System.out.println(text);
         int i = 0;
         int start;
         int end = 0;
@@ -55,7 +55,6 @@ public class StringFileParser {
     }
 
     private static StringIntPair getStringIntPair(String subString, String spliter) {
-        System.out.println(subString);
         String[] pair = subString.split(spliter);
         int anInt = Integer.parseInt(pair[1]);
         String string = pair[0];
@@ -64,11 +63,11 @@ public class StringFileParser {
 
     public static HashMap<Integer, Integer> getIntIntMap(String fileRoot) {
         try {
-            String[] stringIntPairs =FileReader.readFileAsString(fileRoot).split("\n");
+            String[] stringIntPairs = FileReader.readFileAsString(fileRoot).split("\n");
             HashMap<Integer, Integer> integerIntegerHashMap = new HashMap<Integer, Integer>();
             System.out.println("getIntIntMap");
             for (String stringIntPair : stringIntPairs) {
-                String[] strings=stringIntPair.split(";");
+                String[] strings = stringIntPair.split(";");
                 System.out.println(strings[0] + " " + strings[1]);
                 integerIntegerHashMap.put(Integer.parseInt(strings[0]), Integer.parseInt(strings[1]));
             }
