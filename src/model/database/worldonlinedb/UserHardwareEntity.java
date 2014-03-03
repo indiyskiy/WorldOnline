@@ -12,6 +12,15 @@ import javax.persistence.*;
 @javax.persistence.Table(name = "UserHardware", schema = "", catalog = "worldonline")
 @Entity
 public class UserHardwareEntity {
+    public UserHardwareEntity(){
+
+    }
+
+    public UserHardwareEntity(String deviceUniqueKey, String deviceTokenKey) {
+        this.deviceUniqueKey = deviceUniqueKey;
+        this.deviceTokenKey = deviceTokenKey;
+    }
+
     @javax.persistence.Column(name = "UserHardwareID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

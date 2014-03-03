@@ -16,6 +16,25 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "UserPersonalDataID")
+    private UserPersonalDataEntity userPersonalData;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "UserHardwareID")
+    private UserHardwareEntity userHardware;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "UserContentID")
+    private UserContentEntity userContent;
+
+    public UserEntity() {
+
+    }
+
+    public UserEntity(UserPersonalDataEntity userPersonalData, UserHardwareEntity userHardware, UserContentEntity userContent) {
+        this.userPersonalData = userPersonalData;
+        this.userHardware=userHardware;
+        this.userContent=userContent;
+    }
 
     public Long getUserId() {
         return userId;
@@ -25,10 +44,6 @@ public class UserEntity {
         this.userId = userId;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "UserPersonalDataID")
-    private UserPersonalDataEntity userPersonalData;
-
     public UserPersonalDataEntity getUserPersonalData() {
         return userPersonalData;
     }
@@ -36,10 +51,6 @@ public class UserEntity {
     public void setUserPersonalData(UserPersonalDataEntity userPersonalData) {
         this.userPersonalData = userPersonalData;
     }
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "UserHardwareID")
-    private UserHardwareEntity userHardware;
 
     public UserHardwareEntity getUserHardware() {
         return userHardware;
@@ -49,10 +60,6 @@ public class UserEntity {
         this.userHardware = userHardware;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "UserContentID")
-    private UserContentEntity userContent;
-
     public UserContentEntity getUserContent() {
         return userContent;
     }
@@ -60,7 +67,6 @@ public class UserEntity {
     public void setUserContent(UserContentEntity userContent) {
         this.userContent = userContent;
     }
-
 
     @Override
     public boolean equals(Object o) {

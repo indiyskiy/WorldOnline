@@ -2,6 +2,7 @@ package model.database.worldonlinedb;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Calendar;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,10 +14,26 @@ import java.sql.Timestamp;
 @javax.persistence.Table(name = "UserContent", schema = "", catalog = "worldonline")
 @Entity
 public class UserContentEntity {
+
     @javax.persistence.Column(name = "UserContentID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userContentID;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "GlobalVersionID")
+    private GlobalVersionEntity globalVersion;
+    @javax.persistence.Column(name = "LastConnectionTimestamp")
+    @Basic
+    private Timestamp lastConnectionTimestamp;
+    @javax.persistence.Column(name = "LastSynchronizeTimestamp")
+    @Basic
+    private Timestamp lastSynchronizeTimestamp;
+
+    public static UserContentEntity getNewUserContentEntity() {
+        UserContentEntity userContentEntity = new UserContentEntity();
+        userContentEntity.setLastConnectionTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+        return userContentEntity;
+    }
 
     public Long getUserContentID() {
         return userContentID;
@@ -26,10 +43,6 @@ public class UserContentEntity {
         this.userContentID = userContentID;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "GlobalVersionID")
-    private GlobalVersionEntity globalVersion;
-
     public GlobalVersionEntity getGlobalVersion() {
         return globalVersion;
     }
@@ -38,10 +51,6 @@ public class UserContentEntity {
         this.globalVersion = globalVersion;
     }
 
-    @javax.persistence.Column(name = "LastConnectionTimestamp")
-    @Basic
-    private Timestamp lastConnectionTimestamp;
-
     public Timestamp getLastConnectionTimestamp() {
         return lastConnectionTimestamp;
     }
@@ -49,10 +58,6 @@ public class UserContentEntity {
     public void setLastConnectionTimestamp(Timestamp lastConnectionTimestamp) {
         this.lastConnectionTimestamp = lastConnectionTimestamp;
     }
-
-    @javax.persistence.Column(name = "LastSynchronizeTimestamp")
-    @Basic
-    private Timestamp lastSynchronizeTimestamp;
 
     public Timestamp getLastSynchronizeTimestamp() {
         return lastSynchronizeTimestamp;

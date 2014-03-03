@@ -1,5 +1,6 @@
 package model.database.worldonlinedb;
 
+import model.constants.databaseenumeration.LanguageType;
 import javax.persistence.*;
 
 /**
@@ -12,6 +13,15 @@ import javax.persistence.*;
 @javax.persistence.Table(name = "UserPersonalData", schema = "", catalog = "worldonline")
 @Entity
 public class UserPersonalDataEntity {
+    public UserPersonalDataEntity(LanguageType userLanguage){
+      this.userLanguage=userLanguage.getValue();
+      this.additionalInformation="";
+    }
+
+    public UserPersonalDataEntity(){
+
+    }
+
     @javax.persistence.Column(name = "UserPersonalDataID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
