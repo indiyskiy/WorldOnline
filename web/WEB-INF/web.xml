@@ -164,4 +164,17 @@
         <servlet-name>GlobalBaseParseServlet</servlet-name>
         <url-pattern>/globalbaseparse</url-pattern>
     </servlet-mapping>
+
+    <!--MOBILE-->
+    <!--registration-->
+    <servlet>
+        <display-name>UserRegistrationServlet</display-name>
+        <servlet-name>UserRegistrationServlet</servlet-name>
+        <servlet-class>view.servlet.phone.UserRegistrationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserRegistrationServlet</servlet-name>
+        <url-pattern>/mobile/userregistration</url-pattern>
+    </servlet-mapping>
 </web-app>
