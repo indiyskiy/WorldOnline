@@ -53,10 +53,7 @@ public class AllCardsServlet extends HttpServlet {
             request.setAttribute("cardTypes", CardType.values());
             ServletHelper.sendForward("/allcards.jsp", this, request, response);
         } catch (Exception e) {
-//            request.setAttribute("errorMesage", e.getMessage());
-//            ServletHelper.sendForward("/error.jsp", this, request, response);
-            loggerFactory.error(e);
-            throw new ServletException(e);
+            ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
     }
 }
