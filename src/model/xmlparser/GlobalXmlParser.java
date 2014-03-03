@@ -59,12 +59,24 @@ public class GlobalXmlParser implements Runnable {
         new Thread(new GlobalXmlParser()).start();
     }
 
+    public static void main(String[] args) {
+        try {
+            restaurantChainMap = new HashMap<Integer, CardEntity>();
+            GlobalXmlParser globalXmlParser = new GlobalXmlParser();
+            globalXmlParser.globalParse();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
     public void globalParse() throws IOException, SQLException {
-        ArrayList<StringIntPair> categories = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Categories.txt"), ",");
+        ArrayList<StringIntPair> categories = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Categories.txt"), ";");
         saveTags(categories, TagType.Categories);
-        ArrayList<StringIntPair> kitchens = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Kitchens.txt"), ",");
+        ArrayList<StringIntPair> kitchens = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Kitchens.txt"), ";");
         saveTags(kitchens, TagType.Cuisine);
-        ArrayList<StringIntPair> ribbons = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Ribbons.txt"), ",");
+        ArrayList<StringIntPair> ribbons = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Ribbons.txt"), ";");
         saveTags(ribbons, TagType.Ribbons);
         //cards
         CardsParser cardsParser = new CardsParser();
@@ -85,9 +97,9 @@ public class GlobalXmlParser implements Runnable {
         CardShopping cardShopping = cardsParser.getCardShopping(ServerConsts.root + "card_shopping.xml");
         saveCardShopping(cardShopping);
         //main menu
-        MenuParser menuParser=new MenuParser();
+        MenuParser menuParser = new MenuParser();
         menuParser.saveMenu();
-        HashMap<String,MenuEntity> menuEntityHashMap=menuParser.getMenuEntityHashMap();
+        HashMap<String, MenuEntity> menuEntityHashMap = menuParser.getMenuEntityHashMap();
 
         //people
         PeopleParser peopleParser = new PeopleParser();
@@ -99,7 +111,7 @@ public class GlobalXmlParser implements Runnable {
         RouteParser routeParser = new RouteParser();
         RouteRoute routeRoute = routeParser.getRouteRoute(ServerConsts.root + "route_routes.xml");
         //menu card link
-        MenuCardLinkParser menuCardLinkParser=new MenuCardLinkParser();
+        MenuCardLinkParser menuCardLinkParser = new MenuCardLinkParser();
         menuCardLinkParser.parseMenuCardLink();
     }
 
@@ -853,7 +865,7 @@ public class GlobalXmlParser implements Runnable {
                 fileText = FileReader.readFileAsString(ServerConsts.root + "app_data/Ribbons.txt");
             }
         }
-        ArrayList<StringIntPair> stringIntPairs = StringFileParser.parseStandardStringIntPair(fileText, ",");
+        ArrayList<StringIntPair> stringIntPairs = StringFileParser.parseStandardStringIntPair(fileText, ";");
         for (Integer integer : integers) {
             for (StringIntPair stringIntPair : stringIntPairs) {
                 if (integer == stringIntPair.getAnInt()) {
@@ -1038,14 +1050,14 @@ public class GlobalXmlParser implements Runnable {
         }
     }
 
-    private void saveFile(File file,  String fileName, String path) throws IOException {
+    private void saveFile(File file, String fileName, String path) throws IOException {
         try {
             String mainRoot = path;
             File outFolder = new File(mainRoot);
             if (!outFolder.exists()) {
                 outFolder.mkdirs();
             }
-            File out = new File(mainRoot+"/"+fileName);
+            File out = new File(mainRoot + "/" + fileName);
             FileCopyUtils.copy(file, out);
         } catch (Exception e) {
             loggerFactory.error(e);
@@ -1086,11 +1098,6 @@ public class GlobalXmlParser implements Runnable {
         } finally {
             restaurantChainMap = null;
         }
-    }
-
-    public static void main(String[] args) {
-        GlobalXmlParser globalXmlParser=new GlobalXmlParser();
-        globalXmlParser.run();
     }
 }
 
