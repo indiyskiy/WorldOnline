@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import controller.phone.entity.ParsedRegistrationRequest;
 import model.constants.ExceptionTexts;
 import model.constants.databaseenumeration.LanguageType;
+import model.constants.databaseenumeration.MobilePlatform;
 import model.database.requests.UserRequests;
 import model.exception.ParseRequestException;
 import model.phone.responseentity.RegistrationResponse;
@@ -44,9 +45,21 @@ public class RegistrationParser {
         if (languageType == null || languageType == LanguageType.Unknown) {
             throw new ParseRequestException(ExceptionTexts.registrationIllegalLanguageException);
         }
-        parsedRegistrationRequest.setDeviceID(deviceID);
-
-        //todo write method
+        parsedRegistrationRequest.setLanguage(languageType);
+        String deviceToken = request.getParameter("deviceToken");
+        if (deviceToken == null || deviceToken.isEmpty()) {
+            throw new ParseRequestException(ExceptionTexts.registrationNoDeviseTokenException);
+        }
+        parsedRegistrationRequest.setDeviceToken(deviceToken);
+        String mobilePlatformValue = request.getParameter("mobilePlatform");
+        if (mobilePlatformValue == null || mobilePlatformValue.isEmpty()) {
+            throw new ParseRequestException(ExceptionTexts.registrationNoPlatformTypeException);
+        }
+        MobilePlatform mobilePlatform = MobilePlatform.parse(mobilePlatformValue);
+        if (mobilePlatform == null || mobilePlatform == MobilePlatform.Unknown) {
+            throw new ParseRequestException(ExceptionTexts.registrationIllegalMobilePlatformException);
+        }
+        parsedRegistrationRequest.setMobilePlatform(mobilePlatform);
         return parsedRegistrationRequest;
     }
 

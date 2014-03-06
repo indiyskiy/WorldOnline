@@ -1,5 +1,7 @@
 package model.database.worldonlinedb;
 
+import model.constants.databaseenumeration.MobilePlatform;
+
 import javax.persistence.*;
 
 /**
@@ -12,19 +14,29 @@ import javax.persistence.*;
 @javax.persistence.Table(name = "UserHardware", schema = "", catalog = "worldonline")
 @Entity
 public class UserHardwareEntity {
-    public UserHardwareEntity(){
-
-    }
-
-    public UserHardwareEntity(String deviceUniqueKey, String deviceTokenKey) {
-        this.deviceUniqueKey = deviceUniqueKey;
-        this.deviceTokenKey = deviceTokenKey;
-    }
-
     @javax.persistence.Column(name = "UserHardwareID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userHardwareID;
+    @javax.persistence.Column(name = "DeviceUniqueKey")
+    @Basic
+    private String deviceUniqueKey;
+    @javax.persistence.Column(name = "DeviceTokenKey")
+    @Basic
+    private String deviceTokenKey;
+    @javax.persistence.Column(name = "MobilePlatform")
+    @Basic
+    private Integer mobilePlatform;
+
+    public UserHardwareEntity() {
+
+    }
+
+    public UserHardwareEntity(String deviceUniqueKey, String deviceTokenKey, MobilePlatform mobilePlatform) {
+        this.deviceUniqueKey = deviceUniqueKey;
+        this.deviceTokenKey = deviceTokenKey;
+        this.mobilePlatform=mobilePlatform.getValue();
+    }
 
     public Long getUserHardwareID() {
         return userHardwareID;
@@ -34,10 +46,6 @@ public class UserHardwareEntity {
         this.userHardwareID = userHardwareID;
     }
 
-    @javax.persistence.Column(name = "DeviceUniqueKey")
-    @Basic
-    private String deviceUniqueKey;
-
     public String getDeviceUniqueKey() {
         return deviceUniqueKey;
     }
@@ -45,10 +53,6 @@ public class UserHardwareEntity {
     public void setDeviceUniqueKey(String deviceUniqueKey) {
         this.deviceUniqueKey = deviceUniqueKey;
     }
-
-    @javax.persistence.Column(name = "DeviceTokenKey")
-    @Basic
-    private String deviceTokenKey;
 
     public String getDeviceTokenKey() {
         return deviceTokenKey;
@@ -58,17 +62,12 @@ public class UserHardwareEntity {
         this.deviceTokenKey = deviceTokenKey;
     }
 
-
-    @OneToOne
-    @JoinColumn(name = "UserGlobalVersionID")
-    private GlobalVersionEntity globalVersionEntity;
-
-    public GlobalVersionEntity getGlobalVersionEntity() {
-        return globalVersionEntity;
+    public Integer getMobilePlatform() {
+        return mobilePlatform;
     }
 
-    public void setGlobalVersionEntity(GlobalVersionEntity globalVersionEntity) {
-        this.globalVersionEntity = globalVersionEntity;
+    public void setMobilePlatform(Integer mobilePlatform) {
+        this.mobilePlatform = mobilePlatform;
     }
 
     @Override
@@ -84,7 +83,9 @@ public class UserHardwareEntity {
             return false;
         if (deviceTokenKey != null ? !deviceTokenKey.equals(that.deviceTokenKey) : that.deviceTokenKey != null)
             return false;
-        if (globalVersionEntity != null ? !globalVersionEntity.equals(that.globalVersionEntity) : that.globalVersionEntity != null)
+        if (deviceTokenKey != null ? !deviceTokenKey.equals(that.deviceTokenKey) : that.deviceTokenKey != null)
+            return false;
+        if (mobilePlatform != null ? !mobilePlatform.equals(that.mobilePlatform) : that.mobilePlatform != null)
             return false;
         return true;
     }
@@ -94,7 +95,7 @@ public class UserHardwareEntity {
         int result = userHardwareID != null ? userHardwareID.hashCode() : 0;
         result = 31 * result + (deviceUniqueKey != null ? deviceUniqueKey.hashCode() : 0);
         result = 31 * result + (deviceTokenKey != null ? deviceTokenKey.hashCode() : 0);
-        result = 31 * result + (globalVersionEntity != null ? globalVersionEntity.hashCode() : 0);
+        result = 31 * result + (mobilePlatform != null ? mobilePlatform.hashCode() : 0);
         return result;
     }
 }

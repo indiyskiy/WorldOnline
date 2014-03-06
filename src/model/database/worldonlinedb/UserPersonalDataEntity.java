@@ -1,6 +1,7 @@
 package model.database.worldonlinedb;
 
 import model.constants.databaseenumeration.LanguageType;
+
 import javax.persistence.*;
 
 /**
@@ -13,19 +14,25 @@ import javax.persistence.*;
 @javax.persistence.Table(name = "UserPersonalData", schema = "", catalog = "worldonline")
 @Entity
 public class UserPersonalDataEntity {
-    public UserPersonalDataEntity(LanguageType userLanguage){
-      this.userLanguage=userLanguage.getValue();
-      this.additionalInformation="";
-    }
-
-    public UserPersonalDataEntity(){
-
-    }
-
     @javax.persistence.Column(name = "UserPersonalDataID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userPersonalData;
+    @javax.persistence.Column(name = "UserLanguage")
+    @Basic
+    private Integer userLanguage;
+    @javax.persistence.Column(name = "AdditionalInformation")
+    @Basic
+    private String additionalInformation;
+
+    public UserPersonalDataEntity(LanguageType userLanguage) {
+        this.userLanguage = userLanguage.getValue();
+        this.additionalInformation = "";
+    }
+
+    public UserPersonalDataEntity() {
+
+    }
 
     public Long getUserPersonalData() {
         return userPersonalData;
@@ -35,10 +42,6 @@ public class UserPersonalDataEntity {
         this.userPersonalData = userPersonalData;
     }
 
-    @javax.persistence.Column(name = "UserLanguage")
-    @Basic
-    private Integer userLanguage;
-
     public Integer getUserLanguage() {
         return userLanguage;
     }
@@ -46,10 +49,6 @@ public class UserPersonalDataEntity {
     public void setUserLanguage(Integer userLanguage) {
         this.userLanguage = userLanguage;
     }
-
-    @javax.persistence.Column(name = "AdditionalInformation")
-    @Basic
-    private String additionalInformation;
 
     public String getAdditionalInformation() {
         return additionalInformation;

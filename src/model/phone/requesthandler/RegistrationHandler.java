@@ -19,7 +19,9 @@ public class RegistrationHandler {
 
     public static RegistrationResponse handleRequest(ParsedRegistrationRequest parsedRegistrationRequest) {
         UserPersonalDataEntity userPersonalData=new UserPersonalDataEntity(parsedRegistrationRequest.getLanguage());
-        UserHardwareEntity userHardware=new UserHardwareEntity(parsedRegistrationRequest.getDeviceID(),parsedRegistrationRequest.getDeviceToken());
+        UserHardwareEntity userHardware=new UserHardwareEntity(parsedRegistrationRequest.getDeviceID(),
+                parsedRegistrationRequest.getDeviceToken(),
+                parsedRegistrationRequest.getMobilePlatform());
         UserContentEntity userContent= UserContentEntity.getNewUserContentEntity();
         UserEntity userEntity=new UserEntity(userPersonalData,userHardware,userContent);
         UserRequests.addUser(userEntity);

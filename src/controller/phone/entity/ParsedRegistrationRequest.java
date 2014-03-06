@@ -1,6 +1,7 @@
 package controller.phone.entity;
 
 import model.constants.databaseenumeration.LanguageType;
+import model.constants.databaseenumeration.MobilePlatform;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,6 +15,7 @@ public class ParsedRegistrationRequest {
     private String deviceID;
     private LanguageType language;
     private String deviceToken;
+    private MobilePlatform mobilePlatform;
 
     public ParsedRegistrationRequest() {
         this.language=LanguageType.Unknown;
@@ -49,5 +51,13 @@ public class ParsedRegistrationRequest {
 
     public void setDeviceToken(String deviceToken) {
         this.deviceToken = deviceToken;
+    }
+
+    public MobilePlatform getMobilePlatform() {
+        return mobilePlatform;
+    }
+
+    public void setMobilePlatform(MobilePlatform mobilePlatform) {
+        this.mobilePlatform = mobilePlatform;
     }
 }

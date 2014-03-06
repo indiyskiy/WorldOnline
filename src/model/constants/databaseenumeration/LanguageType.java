@@ -30,4 +30,8 @@ public enum LanguageType {
             return languageTypes[value];
         }
     }
+
+    public static LanguageType parse(String languageValue) {
+        return LanguageType.valueOf(languageValue);
+    }
 }
