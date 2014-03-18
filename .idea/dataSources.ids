@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source source="LOCAL" name="Data Source" product="MySQL" version="5.6.14" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )" uuid="34f38d7b-cfb2-451e-9c30-8bd9e281b76d">
-    <extra-name-characters>#@</extra-name-characters>
-    <identifier-quote-string>`</identifier-quote-string>
-    <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-    <jdbc-url>jdbc:mysql://127.0.0.1:3306/worldonline</jdbc-url>
-    <user-name>root</user-name>
-    <user-password>dfeedfc0dfdbdfd3dfd9dfcedfd8dfc0dfc9dfdcdfc0dfc9dfdedf8bdf8bdf8b</user-password>
-    <schema-pattern>worldonline.*</schema-pattern>
-    <default-schemas>worldonline.*</default-schemas>
-    <default-dialect>MySQL</default-dialect>
-    <libraries>
-      <library>
-        <url>file://$PROJECT_DIR$/mysql-connector-java-5.1.26-bin.jar</url>
-      </library>
-    </libraries>
+  <data-source source="LOCAL" name="Data Source" uuid="34f38d7b-cfb2-451e-9c30-8bd9e281b76d">
+    <database-info product="MySQL" version="5.6.16" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
     <schema name="" catalog="worldonline"/>
     <table name="adminrole" schema="" catalog="worldonline" type="TABLE">
       <column name="adminUserName" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
@@ -111,7 +102,6 @@
       <column name="GlobalVersionName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="GlobalVersionID"/>
       <exported-key name="FK_g0u5db8xqxrw4f2l2tg2vhded" table="usercontent" schema="" catalog="worldonline" columns="GlobalVersionID"/>
-      <exported-key name="FK_s51h4fgeldlj49rkdktcfqilx" table="userhardware" schema="" catalog="worldonline" columns="UserGlobalVersionID"/>
     </table>
     <table name="image" schema="" catalog="worldonline" type="TABLE">
       <column name="ImageID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -218,9 +208,8 @@
       <column name="UserHardwareID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="DeviceTokenKey" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <column name="DeviceUniqueKey" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="UserGlobalVersionID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="MobilePlatform" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="UserHardwareID"/>
-      <foreign-key name="FK_s51h4fgeldlj49rkdktcfqilx" columns="UserGlobalVersionID" ref-table="globalversion" ref-schema="" ref-catalog="worldonline" ref-columns="GlobalVersionID" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="FK_brhus6h5p1pcopgtusn5d2uh5" table="user" schema="" catalog="worldonline" columns="UserHardwareID"/>
     </table>
     <table name="userpersonaldata" schema="" catalog="worldonline" type="TABLE">
@@ -230,5 +219,8 @@
       <primary-key name="PRIMARY" columns="UserPersonalDataID"/>
       <exported-key name="FK_hw73w84hod076vg7ua3ksbq9v" table="user" schema="" catalog="worldonline" columns="UserPersonalDataID"/>
     </table>
+  </data-source>
+  <data-source source="LOCAL" name="hibernate.cfg.xml" uuid="a09cc10e-7f3a-432f-944b-00b65398186d">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
 </component>

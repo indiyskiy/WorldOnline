@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1382150296">
-    <data-source source="LOCAL" name="Data Source" product="MySQL" version="5.6.14" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )" uuid="34f38d7b-cfb2-451e-9c30-8bd9e281b76d">
-      <extra-name-characters>#@</extra-name-characters>
-      <identifier-quote-string>`</identifier-quote-string>
+  <component name="DataSourceManagerImpl" format="xml" hash="2877479526">
+    <data-source source="LOCAL" name="Data Source" uuid="34f38d7b-cfb2-451e-9c30-8bd9e281b76d">
+      <driver-ref>mysql</driver-ref>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://127.0.0.1:3306/worldonline</jdbc-url>
       <user-name>root</user-name>
@@ -14,6 +13,18 @@
       <libraries>
         <library>
           <url>file://$PROJECT_DIR$/mysql-connector-java-5.1.26-bin.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="hibernate.cfg.xml" uuid="a09cc10e-7f3a-432f-944b-00b65398186d">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1:3306/worldonline</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfeedfc0dfdbdfd3dfd9dfcedfd8dfc0dfc9dfdcdfc0dfc9dfdedf8bdf8bdf8b</user-password>
+      <libraries>
+        <library>
+          <url>file://C:\Users\Илья\IdeaProjects\WorldOnline\mysql-connector-java-5.1.26-bin.jar</url>
         </library>
       </libraries>
     </data-source>

@@ -1,6 +1,7 @@
 package model.xmlparser;
 
 import model.FileReader;
+import model.Md5Hash;
 import model.constants.Component;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.*;
@@ -33,11 +34,7 @@ import org.springframework.util.FileCopyUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,9 +62,9 @@ public class GlobalXmlParser implements Runnable {
             GlobalXmlParser globalXmlParser = new GlobalXmlParser();
             globalXmlParser.globalParse();
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 
@@ -1034,7 +1031,7 @@ public class GlobalXmlParser implements Runnable {
             int width = bimg.getWidth();
             int height = bimg.getHeight();
             long size = imageFile.length();
-            String hash = getMd5Hash(imageFile);
+            String hash = Md5Hash.getMd5Hash(imageFile);
             ImageEntity imageEntity = ImageRequest.getImageByHash(hash);
             if (imageEntity == null) {
                 saveFile(imageFile, imageName, ServerConsts.imageFolder + imageType);
@@ -1064,25 +1061,6 @@ public class GlobalXmlParser implements Runnable {
         }
     }
 
-    public String getMd5Hash(File file) {
-        String checksum = null;
-        try {
-            FileInputStream fis = new FileInputStream(file);
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] buffer = new byte[8192];
-            int numOfBytesRead;
-            while ((numOfBytesRead = fis.read(buffer)) > 0) {
-                md.update(buffer, 0, numOfBytesRead);
-            }
-            byte[] hash = md.digest();
-            checksum = new BigInteger(1, hash).toString(16);
-        } catch (IOException e) {
-            loggerFactory.error(e);
-        } catch (NoSuchAlgorithmException e) {
-            loggerFactory.error(e);
-        }
-        return checksum;
-    }
 
     @Override
     public void run() {
@@ -1095,6 +1073,8 @@ public class GlobalXmlParser implements Runnable {
             loggerFactory.error(e);
         } catch (SQLException e) {
             loggerFactory.error(e);
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
             restaurantChainMap = null;
         }
@@ -1106,5 +1086,4 @@ public class GlobalXmlParser implements Runnable {
 /*
 priceFile;
 metro;
-parentMenuID
 */

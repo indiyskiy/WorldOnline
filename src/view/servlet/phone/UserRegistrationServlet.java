@@ -27,6 +27,7 @@ public class UserRegistrationServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
+        loggerFactory.debug("UserRegistrationServlet started");
         try {
             ParsedRegistrationRequest parsedRegistrationRequest = RegistrationParser.parse(request);
             RegistrationResponse registrationResponse = RegistrationHandler.handleRequest(parsedRegistrationRequest);

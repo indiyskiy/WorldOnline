@@ -18,7 +18,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 
 /**
@@ -384,7 +387,6 @@ public class CardRequest {
     }
 
 
-
     public static ArrayList<CardEntity> getAllCards(AllCardParser parser) {
         ArrayList<CardEntity> cards = new ArrayList<CardEntity>();
         DatabaseConnection dbConnection = new DatabaseConnection();
@@ -536,4 +538,6 @@ public class CardRequest {
         }
         return res;
     }
+
+
 }

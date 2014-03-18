@@ -18,15 +18,15 @@ import model.phone.responseentity.RegistrationResponse;
 public class RegistrationHandler {
 
     public static RegistrationResponse handleRequest(ParsedRegistrationRequest parsedRegistrationRequest) {
-        UserPersonalDataEntity userPersonalData=new UserPersonalDataEntity(parsedRegistrationRequest.getLanguage());
-        UserHardwareEntity userHardware=new UserHardwareEntity(parsedRegistrationRequest.getDeviceID(),
+        UserPersonalDataEntity userPersonalData = new UserPersonalDataEntity(parsedRegistrationRequest.getLanguage());
+        UserHardwareEntity userHardware = new UserHardwareEntity(parsedRegistrationRequest.getDeviceID(),
                 parsedRegistrationRequest.getDeviceToken(),
                 parsedRegistrationRequest.getMobilePlatform());
-        UserContentEntity userContent= UserContentEntity.getNewUserContentEntity();
-        UserEntity userEntity=new UserEntity(userPersonalData,userHardware,userContent);
+        UserContentEntity userContent = UserContentEntity.getNewUserContentEntity();
+        UserEntity userEntity = new UserEntity(userPersonalData, userHardware, userContent);
         UserRequests.addUser(userEntity);
-        RegistrationResponse registrationResponse=new RegistrationResponse();
-        registrationResponse.setUserID(userEntity.getUserId());
+        RegistrationResponse registrationResponse = new RegistrationResponse();
+        registrationResponse.setUserID(userEntity.getUserID());
         return registrationResponse;
     }
 }

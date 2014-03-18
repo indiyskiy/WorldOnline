@@ -13,24 +13,24 @@
 
 
     <!--<security-constraint>-->
-        <!--<web-resource-collection>-->
-            <!--<web-resource-name>Wildcard means whole app requires authentication</web-resource-name>-->
-            <!--<url-pattern>/*</url-pattern>-->
-            <!--<http-method>GET</http-method>-->
-            <!--<http-method>POST</http-method>-->
-        <!--</web-resource-collection>-->
-        <!--<auth-constraint>-->
-            <!--<role-name>1</role-name>-->
-        <!--</auth-constraint>-->
+    <!--<web-resource-collection>-->
+    <!--<web-resource-name>Wildcard means whole app requires authentication</web-resource-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+    <!--<http-method>GET</http-method>-->
+    <!--<http-method>POST</http-method>-->
+    <!--</web-resource-collection>-->
+    <!--<auth-constraint>-->
+    <!--<role-name>1</role-name>-->
+    <!--</auth-constraint>-->
 
-        <!--<user-data-constraint>-->
-            <!--&lt;!&ndash; transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE &ndash;&gt;-->
-            <!--<transport-guarantee>NONE</transport-guarantee>-->
-        <!--</user-data-constraint>-->
+    <!--<user-data-constraint>-->
+    <!--&lt;!&ndash; transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE &ndash;&gt;-->
+    <!--<transport-guarantee>NONE</transport-guarantee>-->
+    <!--</user-data-constraint>-->
     <!--</security-constraint>-->
 
     <!--<login-config>-->
-        <!--<auth-method>BASIC</auth-method>-->
+    <!--<auth-method>BASIC</auth-method>-->
     <!--</login-config>-->
 
     <!--example-->
@@ -163,6 +163,30 @@
     <servlet-mapping>
         <servlet-name>GlobalBaseParseServlet</servlet-name>
         <url-pattern>/globalbaseparse</url-pattern>
+    </servlet-mapping>
+
+    <!--all users-->
+    <servlet>
+        <display-name>AllUsersServlet</display-name>
+        <servlet-name>AllUsersServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AllUsersServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AllUsersServlet</servlet-name>
+        <url-pattern>/allusers</url-pattern>
+    </servlet-mapping>
+
+    <!--complete user info-->
+    <servlet>
+        <display-name>CompleteUserInfoServlet</display-name>
+        <servlet-name>CompleteUserInfoServlet</servlet-name>
+        <servlet-class>view.servlet.admin.CompleteUserInfoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CompleteUserInfoServlet</servlet-name>
+        <url-pattern>/completeuserinfo</url-pattern>
     </servlet-mapping>
 
     <!--MOBILE-->

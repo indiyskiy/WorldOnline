@@ -12,10 +12,10 @@ import javax.persistence.*;
 @javax.persistence.Table(name = "User", schema = "", catalog = "worldonline")
 @Entity
 public class UserEntity {
-    @javax.persistence.Column(name = "UserID")
+    @javax.persistence.Column(name = "userID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userId;
+    private Long userID;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "UserPersonalDataID")
     private UserPersonalDataEntity userPersonalData;
@@ -32,16 +32,16 @@ public class UserEntity {
 
     public UserEntity(UserPersonalDataEntity userPersonalData, UserHardwareEntity userHardware, UserContentEntity userContent) {
         this.userPersonalData = userPersonalData;
-        this.userHardware=userHardware;
-        this.userContent=userContent;
+        this.userHardware = userHardware;
+        this.userContent = userContent;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getUserID() {
+        return userID;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
     public UserPersonalDataEntity getUserPersonalData() {
@@ -75,7 +75,7 @@ public class UserEntity {
 
         UserEntity that = (UserEntity) o;
 
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null)
+        if (userID != null ? !userID.equals(that.userID) : that.userID != null)
             return false;
         if (userPersonalData != null ? !userPersonalData.equals(that.userPersonalData) : that.userPersonalData != null)
             return false;
@@ -88,7 +88,7 @@ public class UserEntity {
 
     @Override
     public int hashCode() {
-        int result = userId != null ? userId.hashCode() : 0;
+        int result = userID != null ? userID.hashCode() : 0;
         result = 31 * result + (userPersonalData != null ? userPersonalData.hashCode() : 0);
         result = 31 * result + (userHardware != null ? userHardware.hashCode() : 0);
         result = 31 * result + (userContent != null ? userContent.hashCode() : 0);
