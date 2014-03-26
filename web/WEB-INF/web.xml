@@ -6,34 +6,12 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
     <resource-ref>
-        <res-ref-name>jdbc/thegamedb</res-ref-name>
+        <res-ref-name>jdbc/worldOnLineDB</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
 
-
-    <!--<security-constraint>-->
-    <!--<web-resource-collection>-->
-    <!--<web-resource-name>Wildcard means whole app requires authentication</web-resource-name>-->
-    <!--<url-pattern>/*</url-pattern>-->
-    <!--<http-method>GET</http-method>-->
-    <!--<http-method>POST</http-method>-->
-    <!--</web-resource-collection>-->
-    <!--<auth-constraint>-->
-    <!--<role-name>1</role-name>-->
-    <!--</auth-constraint>-->
-
-    <!--<user-data-constraint>-->
-    <!--&lt;!&ndash; transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE &ndash;&gt;-->
-    <!--<transport-guarantee>NONE</transport-guarantee>-->
-    <!--</user-data-constraint>-->
-    <!--</security-constraint>-->
-
-    <!--<login-config>-->
-    <!--<auth-method>BASIC</auth-method>-->
-    <!--</login-config>-->
-
-    <!--example-->
+    <!--tmp-->
     <servlet>
         <display-name>ExampleServlet</display-name>
         <servlet-name>ExampleServlet</servlet-name>
@@ -44,6 +22,19 @@
         <servlet-name>ExampleServlet</servlet-name>
         <url-pattern>/example</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <display-name>GlobalBaseParseServlet</display-name>
+        <servlet-name>GlobalBaseParseServlet</servlet-name>
+        <servlet-class>view.servlet.GlobalBaseParseServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GlobalBaseParseServlet</servlet-name>
+        <url-pattern>/globalbaseparse</url-pattern>
+    </servlet-mapping>
+
+    <!--ADMIN SERVLETS-->
 
     <!--all tags-->
     <servlet>
@@ -153,17 +144,6 @@
         <servlet-name>CompleteMenuInfoServlet</servlet-name>
         <url-pattern>/completemenuinfo</url-pattern>
     </servlet-mapping>
-    <!--XML parser-->
-    <servlet>
-        <display-name>GlobalBaseParseServlet</display-name>
-        <servlet-name>GlobalBaseParseServlet</servlet-name>
-        <servlet-class>view.servlet.GlobalBaseParseServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>GlobalBaseParseServlet</servlet-name>
-        <url-pattern>/globalbaseparse</url-pattern>
-    </servlet-mapping>
 
     <!--all users-->
     <servlet>
@@ -201,4 +181,32 @@
         <servlet-name>UserRegistrationServlet</servlet-name>
         <url-pattern>/mobile/userregistration</url-pattern>
     </servlet-mapping>
+
+
+    <!--test servlets-->
+
+    <!--user card link request-->
+    <servlet>
+        <display-name>UserCardTestServlet</display-name>
+        <servlet-name>UserCardTestServlet</servlet-name>
+        <servlet-class>view.servlet.test.UserCardTestServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserCardTestServlet</servlet-name>
+        <url-pattern>/test/usercardtest</url-pattern>
+    </servlet-mapping>
+
+    <!--add user request-->
+    <servlet>
+        <display-name>UserTestServlet</display-name>
+        <servlet-name>UserTestServlet</servlet-name>
+        <servlet-class>view.servlet.test.UserTestServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserTestServlet</servlet-name>
+        <url-pattern>/test/usertest</url-pattern>
+    </servlet-mapping>
+
 </web-app>

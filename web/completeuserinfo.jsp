@@ -51,7 +51,7 @@
 
         <form method="POST">
             <b>Дополнительная информация:</b>
-            <input type="text" name="additionalInformation" size="20"
+            <input type="text" name="additionalInformation" size="20" rows="5"
                    value="${user.userPersonalData.additionalInformation}"/>
             <input type="hidden" value="${user.userID}" name="userID"/>
             <input type="submit" value="Submit" name="action" title="Сохранить"/>

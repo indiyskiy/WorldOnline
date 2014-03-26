@@ -1,6 +1,6 @@
 <Context>
 
-    <Resource name="jdbc/testDB"
+    <Resource name="jdbc/worldOnLineDB"
               auth="Container"
               type="javax.sql.DataSource"
               maxActive="100"
@@ -12,10 +12,8 @@
               url="jdbc:mysql://127.0.0.1:3306/worldonline"
             />
 
-
-
-    <!--<Realm className="org.apache.catalina.realm.DataSourceRealm"-->
-           <!--dataSourceName="jdbc/testDB"-->
-           <!--userTable="adminUser" userNameCol="adminUserName" userCredCol="adminUserPassword"-->
-           <!--userRoleTable="adminRole" roleNameCol="adminUserRole" localDataSource="true"/>-->
+    <Realm className="org.apache.catalina.realm.DataSourceRealm"
+           dataSourceName="jdbc/worldOnLineDB"
+           userTable="adminUser" userNameCol="adminUserName" userCredCol="adminUserPassword"
+           userRoleTable="adminRole" roleNameCol="adminUserRole" localDataSource="true"/>
 </Context>
