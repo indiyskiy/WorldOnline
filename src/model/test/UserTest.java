@@ -2,9 +2,12 @@ package model.test;
 
 import model.HTTPRequestSender;
 import model.Md5Hash;
+import model.constants.Component;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.LanguageType;
 import model.constants.databaseenumeration.MobilePlatform;
+import model.database.requests.UserRequests;
+import model.logger.LoggerFactory;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -15,18 +18,18 @@ import java.util.ArrayList;
  * Created by Илья on 14.03.14.
  */
 public class UserTest {
-    private static final String url = ServerConsts.ServerURL + ServerConsts.worldOnlineModule + ServerConsts.mobileModule + "userregistration";
+    private static final String url = ServerConsts.GlobalServerURL + ServerConsts.worldOnlineModule + ServerConsts.mobileModule + "userregistration";
+    private static final LoggerFactory loggerFactory = new LoggerFactory(Component.Test, UserTest.class);
 
-
-    //marr registration request test
-    public static void addManyUsers(int number) {
+    private static void addManyUsers(int number) {
+        loggerFactory.debug("run addmanyusers " + number);
         for (int i = 0; i < number; i++) {
             Thread thread = new Thread(new RegEntity(i));
             thread.start();
         }
     }
 
-    public static ArrayList<NameValuePair> getParameters(int number) {
+    private static ArrayList<NameValuePair> getParameters(int number) {
         ArrayList<NameValuePair> requestList = new ArrayList<NameValuePair>();
         requestList.add(new BasicNameValuePair("model", "somerandommodel" + number));
         requestList.add(new BasicNameValuePair("deviceID", "uniquedeviceid" + number));
@@ -48,25 +51,37 @@ public class UserTest {
         return Md5Hash.getMd5Hash(String.valueOf(number));
     }
 
-    public static class RegEntity implements Runnable {
+    private static class RegEntity implements Runnable {
         private int number;
 
-        public RegEntity(int number) {
+        private RegEntity(int number) {
             this.number = number;
         }
 
         @Override
         public void run() {
             try {
-                HTTPRequestSender.sendPostRequest(getParameters(number), url);
+                loggerFactory.debug("run " + number);
+                ArrayList<NameValuePair> nameValuePairs = getParameters(number);
+                loggerFactory.debug("1");
+                HTTPRequestSender.sendPostRequest(nameValuePairs, url);
+                loggerFactory.debug("/run");
             } catch (IOException e) {
-                e.printStackTrace();
+                loggerFactory.error(e);
             }
         }
     }
 
-    public static void main(String[] args) {
-        addManyUsers(100);
+    public static boolean test() {
+        try {
+            int counter = 100;
+            addManyUsers(counter);
+            Thread.sleep(5000);
+            return (counter <= UserRequests.countUser());
+        } catch (InterruptedException e) {
+            loggerFactory.error(e);
+        }
+        return false;
     }
 
 }

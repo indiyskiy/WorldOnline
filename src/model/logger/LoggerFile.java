@@ -15,13 +15,10 @@ import java.io.*;
 public class LoggerFile {
     private final String root;
     private final String date;
-    private final String globalLogDir = "logs";
     private final String fileName = "Log";
-    private File file;
     private boolean isOpened;
-    private OutputStreamWriter writer;
     private PrintWriter out;
-    private LoggerFactory loggerFactory=new LoggerFactory(Component.Global,LoggerFile.class);
+    private LoggerFactory loggerFactory = new LoggerFactory(Component.Global, LoggerFile.class);
 
     public LoggerFile(String root, String date) {
         this.root = root;
@@ -30,15 +27,15 @@ public class LoggerFile {
 
     }
 
-    public void open(){
+    public void open() {
         try {
 //            String currentDir = new File("").getAbsolutePath();
-            File newDir = new File(ServerConsts.home + globalLogDir + "/" + root + "/" + date);
+            File newDir = new File(ServerConsts.home + ServerConsts.globalLogDir + root + "/" + date);
             if (!newDir.exists()) {
                 newDir.mkdirs();
             }
-            file = new File(newDir, fileName + ".txt");
-            writer = new OutputStreamWriter(new FileOutputStream(file, true), "UTF-8");
+            File file = new File(newDir, fileName + ".txt");
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file, true), "UTF-8");
             out = new PrintWriter(new BufferedWriter(writer));
             isOpened = true;
         } catch (Exception e) {

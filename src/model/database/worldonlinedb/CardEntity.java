@@ -45,13 +45,13 @@ public class CardEntity {
 
     @javax.persistence.Column(name = "CardVersion")
     @Basic
-    private Integer cardVersion;
+    private Long cardVersion;
 
-    public Integer getCardVersion() {
+    public Long getCardVersion() {
         return cardVersion;
     }
 
-    public void setCardVersion(Integer cardVersion) {
+    public void setCardVersion(Long cardVersion) {
         this.cardVersion = cardVersion;
     }
 
@@ -145,9 +145,13 @@ public class CardEntity {
     public CardEntity(CardType cardType, String cardName, CardState cardState) {
         setLastUpdateTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
         setCreationTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-        setCardVersion(0);
+        setCardVersion(0L);
         setCardType(cardType.getValue());
         setCardName(cardName);
         setCardState(cardState.getValue());
+    }
+
+    public void incrementCardVersion() {
+        cardVersion++;
     }
 }

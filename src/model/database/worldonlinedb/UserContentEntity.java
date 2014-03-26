@@ -93,4 +93,8 @@ public class UserContentEntity {
         result = 31 * result + (lastSynchronizeTimestamp != null ? lastSynchronizeTimestamp.hashCode() : 0);
         return result;
     }
+
+    public void updateLastSinc() {
+        this.lastSynchronizeTimestamp = new Timestamp(System.currentTimeMillis());
+    }
 }

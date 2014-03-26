@@ -6,6 +6,7 @@ import model.constants.databaseenumeration.MobilePlatform;
 import model.database.requests.UserRequests;
 import model.database.worldonlinedb.UserEntity;
 import model.logger.LoggerFactory;
+import model.textparser.RequestParser;
 import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
@@ -27,8 +28,9 @@ public class CompleteUserInfoServlet extends HttpServlet {
             Long userID = Long.parseLong(userIDValue);
             UserEntity user = UserRequests.getUserByID(userID);
             String addInformation = request.getParameter("additionalInformation");
+            addInformation = RequestParser.shieldText(addInformation);
             user.getUserPersonalData().setAdditionalInformation(addInformation);
-            UserRequests.editTag(user);
+            UserRequests.editUser(user);
             doGet(request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

@@ -64,6 +64,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(MenuEntity.class)
                 .addAnnotatedClass(AdminUserEntity.class)
                 .addAnnotatedClass(MenuCardLinkEntity.class)
+                .addAnnotatedClass(UserCardEntity.class)
                 .addAnnotatedClass(AdminRoleEntity.class);
         ac.configure();
         return ac;

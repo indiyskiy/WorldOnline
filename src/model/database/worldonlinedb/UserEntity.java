@@ -94,4 +94,10 @@ public class UserEntity {
         result = 31 * result + (userContent != null ? userContent.hashCode() : 0);
         return result;
     }
+
+    public void updateLastSinc() {
+        if (this.userContent != null) {
+            this.userContent.updateLastSinc();
+        }
+    }
 }

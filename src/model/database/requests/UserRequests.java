@@ -1,13 +1,11 @@
 package model.database.requests;
 
 import controller.parser.edit.adminparser.AllUsersParser;
+import model.additionalentity.CardUserStat;
 import model.constants.Component;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
-import model.database.worldonlinedb.UserContentEntity;
-import model.database.worldonlinedb.UserEntity;
-import model.database.worldonlinedb.UserHardwareEntity;
-import model.database.worldonlinedb.UserPersonalDataEntity;
+import model.database.worldonlinedb.*;
 import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -32,7 +30,7 @@ public class UserRequests {
 
     private static LoggerFactory loggerFactory=new LoggerFactory(Component.Database,UserRequests.class);
 
-    public static void editTag(UserEntity userEntity) {
+    public static void editUser(UserEntity userEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
 //        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
@@ -60,6 +58,34 @@ public class UserRequests {
             }
         }
         return userEntity;
+    }
+
+    public static ArrayList<CardUserStat> getUserCardStats(long userID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<CardUserStat> cardUserStats = new ArrayList<CardUserStat>();
+        boolean b = true;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language(value = "MySQL") String sql = "SELECT * FROM UserCard " +
+                    "JOIN Card ON (UserCard.CardID = Card.CardID)";
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CardUserStat cardUserStat = new CardUserStat();
+                cardUserStat.setCardID(rs.getLong("UserCard.CardID"));
+                cardUserStat.setUserID(rs.getLong("UserCard.UserID"));
+                cardUserStat.setCardVersion(rs.getLong("Card.CardVersion"));
+                cardUserStat.setUserVersion(rs.getLong("UserCard.CardVersion"));
+                cardUserStats.add(cardUserStat);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return cardUserStats;
     }
 
     public static UserEntity getUserByID(Long userID) {
@@ -215,4 +241,20 @@ public class UserRequests {
     public static Long countUser(AllUsersParser parser) {
         return 0L;
     }
+
+    public static boolean addUserCard(UserCardEntity userCard) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.save(userCard);
+            session.getTransaction().commit();
+            return true;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
 }
