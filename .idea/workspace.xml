@@ -8,7 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="carduser link and test">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/worldOnline.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/worldOnline.xml" />
     </list>
     <ignored path="WorldOnline.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -134,7 +133,7 @@
       <file leaf-file-name="workspace.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="20" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.46575344" vertical-offset="51" max-vertical-offset="33405">
+            <state line="18" column="20" selection-start="989" selection-end="989" vertical-scroll-proportion="0.46575344" vertical-offset="34" max-vertical-offset="33456">
               <folding />
             </state>
           </provider>
@@ -896,7 +895,7 @@
       <workItem from="1395215242703" duration="62799000" />
       <workItem from="1395299461846" duration="19053000" />
       <workItem from="1395644894421" duration="35432000" />
-      <workItem from="1395755650236" duration="16386000" />
+      <workItem from="1395755650236" duration="16399000" />
     </task>
     <task id="LOCAL-00001" summary="TestCommit">
       <created>1383271700462</created>
@@ -1078,11 +1077,15 @@
       <created>1395847182350</created>
       <updated>1395847182350</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="carduser link and test">
+      <created>1395847192903</created>
+      <updated>1395847192903</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193817000" />
+    <option name="totallyTimeSpent" value="193830000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
@@ -1863,7 +1866,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="20" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.46575344" vertical-offset="51" max-vertical-offset="33405">
+        <state line="18" column="20" selection-start="989" selection-end="989" vertical-scroll-proportion="0.46575344" vertical-offset="34" max-vertical-offset="33456">
           <folding />
         </state>
       </provider>
