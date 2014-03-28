@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class UserRequests {
 
-    private static LoggerFactory loggerFactory=new LoggerFactory(Component.Database,UserRequests.class);
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, UserRequests.class);
 
     public static void editUser(UserEntity userEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
@@ -152,16 +152,16 @@ public class UserRequests {
         DatabaseConnection dbConnection = new DatabaseConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        boolean b=true;
+        boolean b = true;
         try {
             Connection connection = dbConnection.getConnection();
             @Language(value = "MySQL") String sql = "SELECT UserHardware.UserHardwareID FROM UserHardware " +
                     "WHERE UserHardware.DeviceUniqueKey=?";
             ps = connection.prepareStatement(sql);
-            ps.setString(1,deviceID);
+            ps.setString(1, deviceID);
             rs = ps.executeQuery();
             if (rs.first()) {
-             b=false;
+                b = false;
             }
         } catch (SQLException e) {
             loggerFactory.error(e);
@@ -242,19 +242,5 @@ public class UserRequests {
         return 0L;
     }
 
-    public static boolean addUserCard(UserCardEntity userCard) {
-        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
-        try {
-            session.beginTransaction();
-            session.save(userCard);
-            session.getTransaction().commit();
-            return true;
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-    }
 
 }

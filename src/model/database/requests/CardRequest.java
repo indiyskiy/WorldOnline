@@ -375,7 +375,6 @@ public class CardRequest {
             cardEntity.setCardID(rs.getLong(card + ".CardID"));
             cardEntity.setCardName(rs.getString(card + ".CardName"));
             cardEntity.setCardType(rs.getInt(card + ".CardType"));
-            cardEntity.setCardVersion(rs.getLong(card + ".CardVersion"));
             cardEntity.setCreationTimestamp(rs.getTimestamp(card + ".CreationTimestamp"));
             cardEntity.setLastUpdateTimestamp(rs.getTimestamp(card + ".LastUpdateTimestamp"));
             cardEntity.setCardState(rs.getInt(card + ".CardState"));
