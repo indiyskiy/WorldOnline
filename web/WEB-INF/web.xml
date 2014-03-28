@@ -185,18 +185,6 @@
 
     <!--test servlets-->
 
-    <!--user card link request-->
-    <servlet>
-        <display-name>UserCardTestServlet</display-name>
-        <servlet-name>UserCardTestServlet</servlet-name>
-        <servlet-class>view.servlet.test.UserCardTestServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>UserCardTestServlet</servlet-name>
-        <url-pattern>/test/usercardtest</url-pattern>
-    </servlet-mapping>
-
     <!--add user request-->
     <servlet>
         <display-name>UserTestServlet</display-name>
