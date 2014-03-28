@@ -43,18 +43,6 @@ public class CardEntity {
         this.cardType = cardType;
     }
 
-    @javax.persistence.Column(name = "CardVersion")
-    @Basic
-    private Long cardVersion;
-
-    public Long getCardVersion() {
-        return cardVersion;
-    }
-
-    public void setCardVersion(Long cardVersion) {
-        this.cardVersion = cardVersion;
-    }
-
     @javax.persistence.Column(name = "CreationTimestamp")
     @Basic
     private Timestamp creationTimestamp;
@@ -106,15 +94,13 @@ public class CardEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()){
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         CardEntity that = (CardEntity) o;
         if (cardID != null ? !cardID.equals(that.cardID) : that.cardID != null)
             return false;
         if (cardType != null ? !cardType.equals(that.cardType) : that.cardType != null)
-            return false;
-        if (cardVersion != null ? !cardVersion.equals(that.cardVersion) : that.cardVersion != null)
             return false;
         if (creationTimestamp != null ? !creationTimestamp.equals(that.creationTimestamp) : that.creationTimestamp != null)
             return false;
@@ -131,7 +117,6 @@ public class CardEntity {
     public int hashCode() {
         int result = cardID != null ? cardID.hashCode() : 0;
         result = 31 * result + (cardType != null ? cardType.hashCode() : 0);
-        result = 31 * result + (cardVersion != null ? cardVersion.hashCode() : 0);
         result = 31 * result + (creationTimestamp != null ? creationTimestamp.hashCode() : 0);
         result = 31 * result + (lastUpdateTimestamp != null ? lastUpdateTimestamp.hashCode() : 0);
         result = 31 * result + (cardName != null ? cardName.hashCode() : 0);
@@ -139,19 +124,15 @@ public class CardEntity {
         return result;
     }
 
-    public  CardEntity() {
+    public CardEntity() {
     }
 
     public CardEntity(CardType cardType, String cardName, CardState cardState) {
         setLastUpdateTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
         setCreationTimestamp(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-        setCardVersion(0L);
         setCardType(cardType.getValue());
         setCardName(cardName);
         setCardState(cardState.getValue());
     }
 
-    public void incrementCardVersion() {
-        cardVersion++;
-    }
 }

@@ -2,9 +2,7 @@ package model.database.worldonlinedb;
 
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,6 +18,14 @@ public class AdminUserEntity {
     @Id
     private String adminUserName;
 
+    @javax.persistence.Column(name = "adminUserPassword")
+    @Basic
+    private String adminUserPassword;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "AdminRole")
+    private AdminRoleEntity adminRole;
+
     public String getAdminUserName() {
         return adminUserName;
     }
@@ -27,12 +33,6 @@ public class AdminUserEntity {
     public void setAdminUserName(String adminUserName) {
         this.adminUserName = adminUserName;
     }
-
-
-    @javax.persistence.Column(name = "adminUserPassword")
-    @Type(type = "text")
-    @Basic
-    private String adminUserPassword;
 
     public String getAdminUserPassword() {
         return adminUserPassword;

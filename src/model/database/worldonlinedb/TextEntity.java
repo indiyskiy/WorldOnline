@@ -28,8 +28,8 @@ public class TextEntity {
         this.textID = textID;
     }
 
-    @javax.persistence.Column(name = "Text" )
-    @Type(type="text")
+    @javax.persistence.Column(name = "Text")
+    @Type(type = "text")
     @Basic
     private String text;
 
@@ -80,9 +80,7 @@ public class TextEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         TextEntity that = (TextEntity) o;
-
         if (textID != null ? !textID.equals(that.textID) : that.textID != null)
             return false;
         if (text != null ? !text.equals(that.text) : that.text != null)

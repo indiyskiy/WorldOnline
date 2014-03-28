@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by Илья on 18.03.14.
+ * Created by Илья on 28.03.14.
  */
 @javax.persistence.Table(name = "UserCard", schema = "", catalog = "worldonline")
 @Entity
@@ -12,78 +12,46 @@ public class UserCardEntity {
     @javax.persistence.Column(name = "UserCardID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userCardID;
+    private Long userCard;
 
-    @javax.persistence.Column(name = "CardVersion")
+    @javax.persistence.Column(name = "LastUpdateTimeStamp")
     @Basic
-    private Long cardVersion;
+    private Timestamp lastUpdateTimeStamp;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "UserContentID")
-    private UserContentEntity userContent;
+    @javax.persistence.Column(name = "DownloadTimeStamp")
+    @Basic
+    private Timestamp downloadTimeStamp;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "CardID")
     private CardEntity card;
 
-    @javax.persistence.Column(name = "LastUpdateTimestamp")
-    @Basic
-    private Timestamp lastUpdateTimestamp;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "UserContentID")
+    private UserContentEntity userContentID;
 
-    @javax.persistence.Column(name = "CardState")
-    @Basic
-    private Integer cardState;
-
-    public UserCardEntity() {
-
+    public Long getUserCard() {
+        return userCard;
     }
 
-    public UserCardEntity(UserEntity userEntity, CardEntity cardEntity) {
-        this.card = cardEntity;
-        this.userContent = userEntity.getUserContent();
-        this.cardVersion = cardEntity.getCardVersion();
-        this.cardState = cardEntity.getCardState();
-        updateLastUpdateTimestamp();
+    public void setUserCard(Long userCard) {
+        this.userCard = userCard;
     }
 
-    public UserCardEntity(UserContentEntity userContentEntity, CardEntity cardEntity) {
-        this.card = cardEntity;
-        this.userContent = userContentEntity;
-        this.cardVersion = cardEntity.getCardVersion();
-        this.cardState = cardEntity.getCardState();
-        updateLastUpdateTimestamp();
+    public Timestamp getLastUpdateTimeStamp() {
+        return lastUpdateTimeStamp;
     }
 
-    public Long getUserCardID() {
-        return userCardID;
+    public void setLastUpdateTimeStamp(Timestamp lastUpdateTimeStamp) {
+        this.lastUpdateTimeStamp = lastUpdateTimeStamp;
     }
 
-    public void setUserCardID(Long userCardID) {
-        this.userCardID = userCardID;
+    public Timestamp getDownloadTimeStamp() {
+        return downloadTimeStamp;
     }
 
-    public Long getVersion() {
-        return cardVersion;
-    }
-
-    public void setVersion(Long version) {
-        this.cardVersion = version;
-    }
-
-    public UserContentEntity getUserContent() {
-        return userContent;
-    }
-
-    public void setUserContent(UserContentEntity userContent) {
-        this.userContent = userContent;
-    }
-
-    public Long getCardVersion() {
-        return cardVersion;
-    }
-
-    public void setCardVersion(Long cardVersion) {
-        this.cardVersion = cardVersion;
+    public void setDownloadTimeStamp(Timestamp downloadTimeStamp) {
+        this.downloadTimeStamp = downloadTimeStamp;
     }
 
     public CardEntity getCard() {
@@ -94,23 +62,11 @@ public class UserCardEntity {
         this.card = card;
     }
 
-    public Integer getCardState() {
-        return cardState;
+    public UserContentEntity getUserContentID() {
+        return userContentID;
     }
 
-    public void setCardState(Integer status) {
-        this.cardState = status;
-    }
-
-    public Timestamp getLastUpdateTimestamp() {
-        return lastUpdateTimestamp;
-    }
-
-    public void setLastUpdateTimestamp(Timestamp lastUpdateTimestamp) {
-        this.lastUpdateTimestamp = lastUpdateTimestamp;
-    }
-
-    public void updateLastUpdateTimestamp() {
-        this.lastUpdateTimestamp = new Timestamp(System.currentTimeMillis());
+    public void setUserContentID(UserContentEntity userContentID) {
+        this.userContentID = userContentID;
     }
 }

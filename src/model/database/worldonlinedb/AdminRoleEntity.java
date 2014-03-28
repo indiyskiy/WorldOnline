@@ -1,8 +1,6 @@
 package model.database.worldonlinedb;
 
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -15,19 +13,16 @@ import java.io.Serializable;
 @javax.persistence.Table(name = "AdminRole", schema = "", catalog = "worldonline")
 @Entity
 public class AdminRoleEntity {
-    @EmbeddedId
-    AdminRoleID id;
+    @javax.persistence.Column(name = "AdminRoleID")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long AdminRoleID;
+
+    @javax.persistence.Column(name = "AdminRoleName")
+    @Basic
+    private String adminRoleName;
+
 }
 
-@Embeddable
-class AdminRoleID implements Serializable {
-    private String adminUserName;
-    private Integer adminUserRole;
 
-    public AdminRoleID() {}
 
-   public AdminRoleID(String adminUserName, Integer adminUserRole) {
-        this.adminUserName = adminUserName;
-        this.adminUserRole = adminUserRole;
-    }
-}
