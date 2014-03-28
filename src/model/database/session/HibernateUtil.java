@@ -8,31 +8,16 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 15.10.13
- * Time: 3:51
- * To change this template use File | Settings | File Templates.
- */
-
-
 public class HibernateUtil {
     private static HibernateUtil Instance = new HibernateUtil();
-    private final LoggerFactory loggerFactory = new LoggerFactory(Component.Database, HibernateUtil.class);
+    private static final LoggerFactory loggerFactory = new LoggerFactory(Component.Database, HibernateUtil.class);
     private SessionFactory sessionFactory;
 
     private HibernateUtil() {
-//    public HibernateUtil() {
         try {
-//            Configuration configuration = new Configuration();
-//            configuration.configure();
-//            configuration.setNamingStrategy(new ImprovedNamingStrategy());
-//            ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
             Configuration ac = buildConfig();
             ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(ac.getProperties()).buildServiceRegistry();
             sessionFactory = ac.buildSessionFactory(serviceRegistry);
-//            sessionFactory = new Configuration().configure().buildSessionFactory();
         } catch (Exception ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
             loggerFactory.error(ex);
@@ -42,7 +27,6 @@ public class HibernateUtil {
 
     private static Configuration buildConfig() {
         Configuration ac = new Configuration();
-//            Configuration ac=new Configuration().configure();
         ac.addAnnotatedClass(UserEntity.class)
                 .addAnnotatedClass(GlobalVersionEntity.class)
                 .addAnnotatedClass(UserHardwareEntity.class)
@@ -64,6 +48,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(MenuEntity.class)
                 .addAnnotatedClass(AdminUserEntity.class)
                 .addAnnotatedClass(MenuCardLinkEntity.class)
+                .addAnnotatedClass(CardChangeEntity.class)
                 .addAnnotatedClass(UserCardEntity.class)
                 .addAnnotatedClass(AdminRoleEntity.class);
         ac.configure();
