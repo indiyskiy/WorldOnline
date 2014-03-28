@@ -1,12 +1,5 @@
 package model.constants.databaseenumeration;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 24.10.13
- * Time: 21:30
- * To change this template use File | Settings | File Templates.
- */
 public enum CardState {
     Unknown(0),
     Active(1),
@@ -26,7 +19,7 @@ public enum CardState {
 
     public static CardState parseInt(int value) {
         CardState[] changingTypes = CardState.values();
-        if (value <= 0 || value >=changingTypes.length) {
+        if (value <= 0 || value >= changingTypes.length) {
             return Unknown;
         } else {
             return changingTypes[value];

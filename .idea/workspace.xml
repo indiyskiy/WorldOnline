@@ -6,7 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="carduser link and test">
+    <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="Card user info">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/DataBaseEntityType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/UpdateStatus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/UpdateType.java" />
+      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\test\UserCardTest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\view\servlet\test\UserCardTestServlet.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardState.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardState.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WorldOnline.iws" />
@@ -75,119 +81,7 @@
     <favorites_list name="WorldOnline" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="hibernate.cfg.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="53" selection-start="936" selection-end="936" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserCardTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/test/UserCardTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="30" selection-start="3880" selection-end="3880" vertical-scroll-proportion="0.0" vertical-offset="122" max-vertical-offset="1428">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CardRequest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/database/requests/CardRequest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="620" column="77" selection-start="30167" selection-end="30167" vertical-scroll-proportion="-4.24" vertical-offset="10145" max-vertical-offset="12053">
-              <folding>
-                <element signature="e#27467#27473#0" expanded="true" />
-                <element signature="e#28739#28745#0" expanded="true" />
-                <marker date="1395846883035" expanded="true" signature="4404:6868" placeholder="SELECT DISTI..Card..." />
-                <marker date="1395846883035" expanded="true" signature="8046:11080" placeholder="SELECT DISTI..Card..." />
-                <marker date="1395846883035" expanded="true" signature="21061:21123" placeholder="SELECT DISTI..Card..." />
-                <marker date="1395846883035" expanded="true" signature="23027:23098" placeholder="SELECT count..Card..." />
-                <marker date="1395846883035" expanded="true" signature="24625:24930" placeholder="SELECT * FRO..Text..." />
-                <marker date="1395846883035" expanded="true" signature="25899:26262" placeholder="SELECT Text...Text..." />
-                <marker date="1395846883035" expanded="true" signature="27591:27983" placeholder="SELECT Card...Card..." />
-                <marker date="1395846883035" expanded="true" signature="28863:29255" placeholder="SELECT Card...Card..." />
-                <marker date="1395846883035" expanded="true" signature="30135:30527" placeholder="SELECT Card...Card..." />
-                <marker date="1395846883035" expanded="true" signature="30135:30590" placeholder="SELECT Card...Card..." />
-                <marker date="1395846883035" expanded="true" signature="31475:31931" placeholder="SELECT Card...Card..." />
-                <marker date="1395846883035" expanded="true" signature="32809:33181" placeholder="SELECT Card...Card..." />
-                <marker date="1395846883035" expanded="true" signature="32809:33178" placeholder="SELECT Card...Card..." />
-                <marker date="1395846883035" expanded="true" signature="32809:33151" placeholder="SELECT Card...Card..." />
-                <marker date="1395846883035" expanded="true" signature="33977:33997" placeholder="DELETE FROM ..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dataSources.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/dataSources.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="100" max-vertical-offset="663">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workspace.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="20" selection-start="989" selection-end="989" vertical-scroll-proportion="0.46575344" vertical-offset="34" max-vertical-offset="33456">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserEntity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/UserEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="99" column="34" selection-start="3238" selection-end="3238" vertical-scroll-proportion="0.0" vertical-offset="925" max-vertical-offset="1581">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserContentEntity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/UserContentEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="82" selection-start="3561" selection-end="3561" vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="1496">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserRequests.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/database/requests/UserRequests.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="259" column="1" selection-start="9662" selection-end="9662" vertical-scroll-proportion="0.0" vertical-offset="3611" max-vertical-offset="4216">
-              <folding>
-                <marker date="1395846886468" expanded="true" signature="2548:2640" placeholder="SELECT * FRO..UserCard..." />
-                <marker date="1395846886468" expanded="true" signature="5775:5889" placeholder="SELECT UserH..UserHardware..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CardEntity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/CardEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="43" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="1491" max-vertical-offset="2295">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CardState.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/CardState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -211,15 +105,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..userhardware" />
-        <option value="dbtable:/f57da195/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..userpersonaldata" />
-        <option value="$PROJECT_DIR$/src/model/exception/ParseRequestException.java" />
-        <option value="$PROJECT_DIR$/src/model/logger/LoggerFactory.java" />
-        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/UserHardwareEntity.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/entity/ParsedRegistrationRequest.java" />
-        <option value="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" />
-        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/UserPersonalDataEntity.java" />
-        <option value="$PROJECT_DIR$/src/model/constants/Status.java" />
         <option value="$PROJECT_DIR$/src/controller/parser/edit/adminparser/allCardParser.java" />
         <option value="$PROJECT_DIR$/src/controller/parser/edit/adminparser/AllCardParser1.java" />
         <option value="$PROJECT_DIR$/src/controller/parser/edit/adminparser/AllCardParser.java" />
@@ -236,32 +121,41 @@
         <option value="$PROJECT_DIR$/web/completeuserinfo.jsp" />
         <option value="$PROJECT_DIR$/src/model/textparser/RequestParser.java" />
         <option value="$PROJECT_DIR$/src/model/additionalentity/CardUserStat.java" />
-        <option value="$PROJECT_DIR$/src/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/CardEntity.java" />
         <option value="$PROJECT_DIR$/src/view/servlet/admin/CompleteUserInfoServlet.java" />
-        <option value="$PROJECT_DIR$/src/model/database/session/HibernateUtil.java" />
         <option value="db-console:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/" />
         <option value="$PROJECT_DIR$/src/model/logger/LoggerFile.java" />
         <option value="$PROJECT_DIR$/web/completecardinfo.jsp" />
         <option value="$PROJECT_DIR$/src/view/servlet/test/UserTestServlet.java" />
         <option value="$PROJECT_DIR$/web/allusers.jsp" />
         <option value="$PROJECT_DIR$/src/model/constants/Component.java" />
-        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/AdminUserEntity.java" />
         <option value="$PROJECT_DIR$/web/META-INF/context.xml" />
         <option value="$PROJECT_DIR$/META-INF/context.xml" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/model/constants/ServerConsts.java" />
         <option value="$PROJECT_DIR$/src/model/test/UserTest.java" />
         <option value="$PROJECT_DIR$/src/model/HTTPRequestSender.java" />
         <option value="$PROJECT_DIR$/src/view/servlet/test/UserCardTestServlet.java" />
-        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/UserCardEntity.java" />
-        <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/UserEntity.java" />
         <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/UserContentEntity.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardState.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/UpdateStatus.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/UpdateType.java" />
+        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/CardEntity.java" />
+        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/TextGroupEntity.java" />
         <option value="$PROJECT_DIR$/src/model/database/requests/UserRequests.java" />
         <option value="$PROJECT_DIR$/src/model/test/UserCardTest.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/DataBaseEntityType.java" />
+        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/TextEntity.java" />
+        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/CardChange.java" />
+        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/AdminUserEntity.java" />
+        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/AdminRoleEntity.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/CardChangeEntity.java" />
+        <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
+        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/UserCardEntity.java" />
+        <option value="$PROJECT_DIR$/src/model/database/session/HibernateUtil.java" />
+        <option value="$PROJECT_DIR$/src/META-INF/persistence.xml" />
       </list>
     </option>
   </component>
@@ -315,6 +209,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -343,7 +238,669 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="META-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="servlet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="servlet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="servlet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="servlet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xmlparser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="textparser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="responseentity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="requesthandler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mailer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logger" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exception" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="worldonlinedb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="session" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="requests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constants" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="additionalentity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="META-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="edit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="edit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adminparser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="META-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -361,9 +918,116 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scopes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inspectionProfiles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dictionaries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="copyright" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="artifacts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -377,7 +1041,7 @@
     <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="preferences.externalResources" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="D:/" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.includeJavaFiles" value="false" />
@@ -411,22 +1075,22 @@
       <recent name="model.phone.responseentity" />
       <recent name="model.phone.requesthandler" />
     </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="controller" />
-      <recent name="controller.parser.edit.phone" />
-      <recent name="model.phone" />
-      <recent name="model.constants" />
-      <recent name="model.xmlparser.xmlview" />
-    </key>
-    <key name="ImportMappingsDialog.RecentPackages">
-      <recent name="database" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\lib" />
       <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\src\model\xmlparser\" />
       <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\lib" />
       <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\web" />
       <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\WebContent" />
+    </key>
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="database" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="controller" />
+      <recent name="controller.parser.edit.phone" />
+      <recent name="model.phone" />
+      <recent name="model.constants" />
+      <recent name="model.xmlparser.xmlview" />
     </key>
   </component>
   <component name="RunManager" selected="Application.UserCardTest">
@@ -895,7 +1559,9 @@
       <workItem from="1395215242703" duration="62799000" />
       <workItem from="1395299461846" duration="19053000" />
       <workItem from="1395644894421" duration="35432000" />
-      <workItem from="1395755650236" duration="16399000" />
+      <workItem from="1395755650236" duration="16445000" />
+      <workItem from="1395904210283" duration="18127000" />
+      <workItem from="1395990764844" duration="6482000" />
     </task>
     <task id="LOCAL-00001" summary="TestCommit">
       <created>1383271700462</created>
@@ -1081,14 +1747,50 @@
       <created>1395847192903</created>
       <updated>1395847192903</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="carduser link and test">
+      <created>1395847207643</created>
+      <updated>1395847207643</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Card user info">
+      <created>1395999595415</created>
+      <updated>1395999595415</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Card user info">
+      <created>1395999605763</created>
+      <updated>1395999605763</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Card user info">
+      <created>1395999628714</created>
+      <updated>1395999628714</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Card user info">
+      <created>1395999643209</created>
+      <updated>1395999643209</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Card user info">
+      <created>1395999648150</created>
+      <updated>1395999648150</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Card user info">
+      <created>1395999694429</created>
+      <updated>1395999694429</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Card user info">
+      <created>1395999707878</created>
+      <updated>1395999707878</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Card user info">
+      <created>1395999750291</created>
+      <updated>1395999750291</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193830000" />
+    <option name="totallyTimeSpent" value="218485000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1105,15 +1807,15 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740214" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27382874" sideWeight="0.7426557" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28675282" sideWeight="0.7426557" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36654803" sideWeight="0.4911147" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.053380784" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38790035" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39952996" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21115065" sideWeight="0.49353796" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21115065" sideWeight="0.49353796" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.3277592" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1149,9 +1851,9 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.64629847" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22657177" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39952996" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
@@ -1177,7 +1879,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Standart Request 1" />
     <MESSAGE value="Standart Request 2" />
     <MESSAGE value="Standart Request 3" />
     <MESSAGE value="Standart Request 4" />
@@ -1202,7 +1903,8 @@
     <MESSAGE value="card menu link revenge!" />
     <MESSAGE value="user admin panel" />
     <MESSAGE value="carduser link and test" />
-    <option name="LAST_COMMIT_MESSAGE" value="carduser link and test" />
+    <MESSAGE value="Card user info" />
+    <option name="LAST_COMMIT_MESSAGE" value="Card user info" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1229,71 +1931,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..card">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/requests/TagRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="23" selection-start="7933" selection-end="7933" vertical-scroll-proportion="0.33277592" vertical-offset="2861" max-vertical-offset="5746" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..usercontent">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..user">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://db-console:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="16" selection-start="115" selection-end="115" vertical-scroll-proportion="1.2068965" vertical-offset="103" max-vertical-offset="561" />
-      </provider>
-    </entry>
-    <entry file="jar://C:/glassfish4/jdk7/jre/lib/rt.jar!/java/io/File.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="19" selection-start="3341" selection-end="3341" vertical-scroll-proportion="0.3327338" vertical-offset="1430" max-vertical-offset="2873" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1049" column="22" selection-start="59809" selection-end="59809" vertical-scroll-proportion="0.0" vertical-offset="16730" max-vertical-offset="17969">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/ServletHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="23" selection-start="1818" selection-end="1818" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1190" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AllCardsServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="31" selection-start="2287" selection-end="2287" vertical-scroll-proportion="0.0" vertical-offset="311" max-vertical-offset="867">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/logger/LoggerFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="74" selection-start="867" selection-end="867" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1462">
-          <folding />
-        </state>
+        <state line="32" column="74" selection-start="867" selection-end="867" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1462" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/completecardinfo.jsp">
@@ -1315,43 +1955,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/allusers.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="23" selection-start="892" selection-end="892" vertical-scroll-proportion="-2.8076923" vertical-offset="488" max-vertical-offset="1360">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/session/HibernateUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="39" selection-start="2973" selection-end="2973" vertical-scroll-proportion="0.0" vertical-offset="687" max-vertical-offset="1292">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/META-INF/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="44" selection-start="10211" selection-end="10211" vertical-scroll-proportion="4.5801654" vertical-offset="0" max-vertical-offset="3111">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/AdminRoleEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="19" selection-start="566" selection-end="566" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/AdminUserEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="21" selection-start="504" selection-end="504" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="714">
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#678#679#0" expanded="false" />
-            <element signature="e#728#729#0" expanded="false" />
-            <element signature="e#1012#1013#0" expanded="false" />
-            <element signature="e#1070#1071#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="33" column="23" selection-start="892" selection-end="892" vertical-scroll-proportion="-2.8076923" vertical-offset="488" max-vertical-offset="1360" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/constants/Component.java">
@@ -1446,20 +2050,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="196" column="39" selection-start="6391" selection-end="6409" vertical-scroll-proportion="0.5630355" vertical-offset="2872" max-vertical-offset="3689">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TextGroupEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="2" selection-start="656" selection-end="752" vertical-scroll-proportion="0.35495716" vertical-offset="101" max-vertical-offset="1122">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/glassfish4/jdk7/jre/lib/rt.jar!/java/lang/System.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="30" selection-start="1705" selection-end="1705" vertical-scroll-proportion="0.33333334" vertical-offset="446" max-vertical-offset="1717" />
@@ -1478,20 +2068,6 @@
       </provider>
       <provider editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/test/UserCardTestServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="36" selection-start="997" selection-end="997" vertical-scroll-proportion="0.4345048" vertical-offset="0" max-vertical-offset="626">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="53" selection-start="936" selection-end="936" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="uml://DATABASE/34f38d7b-cfb2-451e-9c30-8bd9e281b76d">
@@ -1524,12 +2100,13 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="0.6361767728674204" x="984.0" y="674.8966074313408" />
+          <settings layout="Hierarchic Group" zoom="0.6361767728674204" x="984.0" y="675.0" />
           <SelectedNodes />
           <Categories>
-            <Category>Key columns</Category>
             <Category>Columns</Category>
+            <Category>Key columns</Category>
           </Categories>
+          <SCOPE>All</SCOPE>
         </state>
       </provider>
     </entry>
@@ -1730,12 +2307,13 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="0.4050602409638554" x="1518.167757287329" y="3984.3057035185484" />
+          <settings layout="Hierarchic Group" zoom="0.4050602409638554" x="1518.0" y="3984.0" />
           <SelectedNodes />
           <Categories>
-            <Category>Key columns</Category>
             <Category>Columns</Category>
+            <Category>Key columns</Category>
           </Categories>
+          <SCOPE>All</SCOPE>
         </state>
       </provider>
     </entry>
@@ -1771,89 +2349,20 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="0.3712143928035982" x="1657.5" y="480.0" />
+          <settings layout="Hierarchic Group" zoom="0.3712143928035982" x="1658.0" y="480.0" />
           <SelectedNodes />
           <Categories>
-            <Category>Key columns</Category>
             <Category>Columns</Category>
+            <Category>Key columns</Category>
           </Categories>
+          <SCOPE>All</SCOPE>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/UserCardEntity.java">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="41" selection-start="168" selection-end="176" vertical-scroll-proportion="0.15414508" vertical-offset="0" max-vertical-offset="1581">
+        <state line="77" column="0" selection-start="3713" selection-end="3713" vertical-scroll-proportion="1.7178478" vertical-offset="0" max-vertical-offset="32657">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/CardState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/CardEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="43" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2295">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/UserEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="34" selection-start="3238" selection-end="3238" vertical-scroll-proportion="0.0" vertical-offset="925" max-vertical-offset="1581">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/requests/UserRequests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="259" column="1" selection-start="9662" selection-end="9662" vertical-scroll-proportion="0.0" vertical-offset="3611" max-vertical-offset="4216">
-          <folding>
-            <marker date="1395846886468" expanded="true" signature="2548:2640" placeholder="SELECT * FRO..UserCard..." />
-            <marker date="1395846886468" expanded="true" signature="5775:5889" placeholder="SELECT UserH..UserHardware..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/UserContentEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="82" selection-start="3561" selection-end="3561" vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="1496">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/test/UserCardTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="30" selection-start="3880" selection-end="3880" vertical-scroll-proportion="0.0" vertical-offset="122" max-vertical-offset="1428">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/requests/CardRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="620" column="77" selection-start="30167" selection-end="30167" vertical-scroll-proportion="-4.24" vertical-offset="10145" max-vertical-offset="12053">
-          <folding>
-            <element signature="e#27467#27473#0" expanded="true" />
-            <element signature="e#28739#28745#0" expanded="true" />
-            <marker date="1395846883035" expanded="true" signature="4404:6868" placeholder="SELECT DISTI..Card..." />
-            <marker date="1395846883035" expanded="true" signature="8046:11080" placeholder="SELECT DISTI..Card..." />
-            <marker date="1395846883035" expanded="true" signature="21061:21123" placeholder="SELECT DISTI..Card..." />
-            <marker date="1395846883035" expanded="true" signature="23027:23098" placeholder="SELECT count..Card..." />
-            <marker date="1395846883035" expanded="true" signature="24625:24930" placeholder="SELECT * FRO..Text..." />
-            <marker date="1395846883035" expanded="true" signature="25899:26262" placeholder="SELECT Text...Text..." />
-            <marker date="1395846883035" expanded="true" signature="27591:27983" placeholder="SELECT Card...Card..." />
-            <marker date="1395846883035" expanded="true" signature="28863:29255" placeholder="SELECT Card...Card..." />
-            <marker date="1395846883035" expanded="true" signature="30135:30527" placeholder="SELECT Card...Card..." />
-            <marker date="1395846883035" expanded="true" signature="30135:30590" placeholder="SELECT Card...Card..." />
-            <marker date="1395846883035" expanded="true" signature="31475:31931" placeholder="SELECT Card...Card..." />
-            <marker date="1395846883035" expanded="true" signature="32809:33181" placeholder="SELECT Card...Card..." />
-            <marker date="1395846883035" expanded="true" signature="32809:33178" placeholder="SELECT Card...Card..." />
-            <marker date="1395846883035" expanded="true" signature="32809:33151" placeholder="SELECT Card...Card..." />
-            <marker date="1395846883035" expanded="true" signature="33977:33997" placeholder="DELETE FROM ..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1864,9 +2373,244 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/UserContentEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="20" selection-start="989" selection-end="989" vertical-scroll-proportion="0.46575344" vertical-offset="34" max-vertical-offset="33456">
+        <state line="97" column="82" selection-start="3561" selection-end="3561" vertical-scroll-proportion="0.8097015" vertical-offset="692" max-vertical-offset="1496">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/TextType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="1" selection-start="223" selection-end="723" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/UserRequests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="236" column="11" selection-start="9029" selection-end="9029" vertical-scroll-proportion="0.0" vertical-offset="3416" max-vertical-offset="3995">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/DataBaseEntityType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="38" selection-start="710" selection-end="710" vertical-scroll-proportion="0.62423503" vertical-offset="0" max-vertical-offset="817">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TextEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="4" selection-start="750" selection-end="750" vertical-scroll-proportion="0.33265308" vertical-offset="245" max-vertical-offset="1547">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/UpdateType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="22" selection-start="58" selection-end="68" vertical-scroll-proportion="0.07249467" vertical-offset="0" max-vertical-offset="527">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/CardState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="12" selection-start="58" selection-end="58" vertical-scroll-proportion="0.06938776" vertical-offset="0" max-vertical-offset="544">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/hibernate-core-4.2.2.Final.jar!/org/hibernate/cfg/Configuration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="36" selection-start="6720" selection-end="6720" vertical-scroll-proportion="0.5022124" vertical-offset="1320" max-vertical-offset="10676" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/CardEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="110" column="17" selection-start="3061" selection-end="3061" vertical-scroll-proportion="1.9958072" vertical-offset="510" max-vertical-offset="2040">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/UpdateStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="24" selection-start="59" selection-end="71" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="561">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/CardCoordinateEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="20" selection-start="336" selection-end="336" vertical-scroll-proportion="0.46331236" vertical-offset="0" max-vertical-offset="1530">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/UserEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="99" column="34" selection-start="3238" selection-end="3238" vertical-scroll-proportion="0.0" vertical-offset="777" max-vertical-offset="1581">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/AdminUserEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="27" selection-start="718" selection-end="718" vertical-scroll-proportion="0.0" vertical-offset="139" max-vertical-offset="680">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/spring-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="783">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="183" column="0" selection-start="6008" selection-end="6008" vertical-scroll-proportion="0.5422277" vertical-offset="2668" max-vertical-offset="3485">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/CardRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="377" column="0" selection-start="20285" selection-end="20285" vertical-scroll-proportion="0.0" vertical-offset="5912" max-vertical-offset="12036">
+          <folding>
+            <marker date="1395927647576" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Card..." />
+            <marker date="1395927647576" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Card..." />
+            <marker date="1395927647576" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Card..." />
+            <marker date="1395927647576" expanded="true" signature="-1:-1" placeholder="SELECT count..Card..." />
+            <marker date="1395927647576" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Text..." />
+            <marker date="1395927647576" expanded="true" signature="-1:-1" placeholder="SELECT Text...Text..." />
+            <marker date="1395927647576" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1395927647576" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1395927647576" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1395927647576" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1395927647576" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1395927647576" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/AdminRoleEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="615" selection-end="615" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/CardChangeEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="0" selection-start="2159" selection-end="2159" vertical-scroll-proportion="0.83353734" vertical-offset="883" max-vertical-offset="1700">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TextGroupEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="33" selection-start="501" selection-end="599" vertical-scroll-proportion="0.374541" vertical-offset="0" max-vertical-offset="1003">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://DATABASE/34f38d7b-cfb2-451e-9c30-8bd9e281b76d.schema:worldonline">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>DATABASE</ID>
+          <OriginalElement>34f38d7b-cfb2-451e-9c30-8bd9e281b76d.schema:worldonline</OriginalElement>
+          <nodes>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.textcard</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.card</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.cardtag</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.cardimage</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.rootelement</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.cardroot</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.globalversion</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.usercontent</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.adminuser</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.cardcoordinate</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.menucardlink</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.textgroup</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.text</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.cardchange</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.usercard</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.userhardware</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.image</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.cardtocardlink</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.tag</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.user</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.cardparameter</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.menu</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.userpersonaldata</node>
+            <node x="" y="">34f38d7b-cfb2-451e-9c30-8bd9e281b76d.table:worldonline.adminrole</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.6752802843861088" x="3023.6177363838833" y="543.9527306461765" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Key columns</Category>
+            <Category>Columns</Category>
+          </Categories>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="52" selection-start="759" selection-end="759" vertical-scroll-proportion="0.4473684" vertical-offset="0" max-vertical-offset="456">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="166" column="58" selection-start="10419" selection-end="10433" vertical-scroll-proportion="5.7676992" vertical-offset="215" max-vertical-offset="3128">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/UserCardEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="31" selection-start="934" selection-end="934" vertical-scroll-proportion="1.1102041" vertical-offset="0" max-vertical-offset="1326">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#964#965#0" expanded="true" />
+            <element signature="e#1010#1011#0" expanded="true" />
+            <element signature="e#1050#1051#0" expanded="true" />
+            <element signature="e#1099#1100#0" expanded="true" />
+            <element signature="e#1141#1142#0" expanded="true" />
+            <element signature="e#1214#1215#0" expanded="true" />
+            <element signature="e#1276#1277#0" expanded="true" />
+            <element signature="e#1323#1324#0" expanded="true" />
+            <element signature="e#1363#1364#0" expanded="true" />
+            <element signature="e#1432#1433#0" expanded="true" />
+            <element signature="e#1490#1491#0" expanded="true" />
+            <element signature="e#1525#1526#0" expanded="true" />
+            <element signature="e#1552#1553#0" expanded="true" />
+            <element signature="e#1596#1597#0" expanded="true" />
+            <element signature="e#1628#1629#0" expanded="true" />
+            <element signature="e#1679#1680#0" expanded="true" />
+            <element signature="e#1715#1716#0" expanded="true" />
+            <element signature="e#1784#1785#0" expanded="true" />
+            <element signature="e#1834#1835#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TextCardEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="3" selection-start="1023" selection-end="1148" vertical-scroll-proportion="0.8385744" vertical-offset="127" max-vertical-offset="1530">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/session/HibernateUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="36" selection-start="1013" selection-end="1013" vertical-scroll-proportion="0.5702306" vertical-offset="0" max-vertical-offset="1037">
           <folding />
         </state>
       </provider>
