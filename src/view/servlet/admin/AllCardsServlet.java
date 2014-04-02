@@ -1,7 +1,9 @@
 package view.servlet.admin;
 
 import controller.parser.edit.adminparser.AllCardParser;
+import model.constants.AdminRule;
 import model.constants.Component;
+import model.constants.ProtectAdminLevel;
 import model.constants.databaseenumeration.CardType;
 import model.database.requests.CardRequest;
 import model.database.worldonlinedb.CardEntity;
@@ -9,20 +11,13 @@ import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 29.11.13
- * Time: 11:25
- * To change this template use File | Settings | File Templates.
- */
-public class AllCardsServlet extends HttpServlet {
+
+public class AllCardsServlet extends ProtectedServlet {
     private final int MAX_ITEMS = 50;
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, AllCardsServlet.class);
 
@@ -48,12 +43,16 @@ public class AllCardsServlet extends HttpServlet {
                 pages = (results / MAX_ITEMS);
             }
             request.setAttribute("pages", pages);
-//            request.setAttribute("page", pages);
             request.setAttribute("cardList", cardEntities);
             request.setAttribute("cardTypes", CardType.values());
             ServletHelper.sendForward("/allcards.jsp", this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
+    }
+
+    @Override
+    protected AdminRule setAdminRule() {
+        return AdminRule.Moderator;
     }
 }

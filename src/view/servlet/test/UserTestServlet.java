@@ -1,9 +1,12 @@
 package view.servlet.test;
 
+import model.constants.AdminRule;
 import model.constants.Component;
+import model.constants.ProtectAdminLevel;
 import model.database.requests.UserRequests;
 import model.logger.LoggerFactory;
 import model.test.UserTest;
+import view.servlet.admin.ProtectedServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +17,7 @@ import java.io.IOException;
 /**
  * Created by Илья on 24.03.14.
  */
-public class UserTestServlet extends HttpServlet {
+public class UserTestServlet extends ProtectedServlet {
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, UserTestServlet.class);
 
 
@@ -28,5 +31,10 @@ public class UserTestServlet extends HttpServlet {
             loggerFactory.info("UserTestServlet result is " + success);
             response.getOutputStream().print("UserTestServlet result is " + success);
         }
+    }
+
+    @Override
+    protected AdminRule setAdminRule() {
+        return AdminRule.AdminOnly;
     }
 }

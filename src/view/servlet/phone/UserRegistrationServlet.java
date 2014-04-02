@@ -3,10 +3,12 @@ package view.servlet.phone;
 import controller.phone.entity.ParsedRegistrationRequest;
 import controller.phone.parser.RegistrationParser;
 import model.constants.Component;
+import model.constants.ProtectAdminLevel;
 import model.logger.LoggerFactory;
 import model.phone.requesthandler.RegistrationHandler;
 import model.phone.responseentity.RegistrationResponse;
 import view.servlet.ServletHelper;
+import view.servlet.admin.ProtectedServlet;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,4 +39,5 @@ public class UserRegistrationServlet extends HttpServlet {
             ServletHelper.sendMobileError(loggerFactory, e, response);
         }
     }
+
 }

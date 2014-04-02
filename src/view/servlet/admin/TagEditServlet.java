@@ -2,9 +2,13 @@ package view.servlet.admin;
 
 import controller.parser.edit.TagEditParser;
 import model.additionalentity.CompleteTagInfo;
+import model.constants.AdminRule;
+import model.constants.Component;
+import model.constants.ProtectAdminLevel;
 import model.constants.databaseenumeration.TagType;
 import model.database.requests.TagRequest;
 import model.database.worldonlinedb.TagEntity;
+import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
@@ -20,7 +24,9 @@ import java.io.IOException;
  * Time: 12:57
  * To change this template use File | Settings | File Templates.
  */
-public class TagEditServlet extends HttpServlet {
+public class TagEditServlet extends ProtectedServlet {
+    LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, TagEditServlet.class);
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             request.setCharacterEncoding("UTF-8");
@@ -35,9 +41,7 @@ public class TagEditServlet extends HttpServlet {
                 ServletHelper.sendForward("/tagedit.jsp?TagID=" + tagIDString, this, request, response);
             }
         } catch (Exception e) {
-//            request.setAttribute("errorMesage", e.getMessage());
-//            ServletHelper.sendForward("/error.jsp", this, request, response);
-            throw new ServletException(e);
+            ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
     }
 
@@ -53,9 +57,12 @@ public class TagEditServlet extends HttpServlet {
             }
             doGet(request, response);
         } catch (Exception e) {
-//            request.setAttribute("errorMesage", e.getMessage());
-//            ServletHelper.sendForward("/error.jsp", this, request, response);
-            throw new ServletException(e);
+            ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
+    }
+
+    @Override
+    protected AdminRule setAdminRule() {
+        return AdminRule.HeightModerator;
     }
 }

@@ -1,7 +1,9 @@
 package view.servlet.admin;
 
 import model.additionalentity.CompleteCardInfo;
+import model.constants.AdminRule;
 import model.constants.Component;
+import model.constants.ProtectAdminLevel;
 import model.constants.databaseenumeration.*;
 import model.database.requests.CardRequest;
 import model.logger.LoggerFactory;
@@ -20,7 +22,7 @@ import java.io.IOException;
  * Time: 14:16
  * To change this template use File | Settings | File Templates.
  */
-public class CompleteCardInfoServlet extends HttpServlet {
+public class CompleteCardInfoServlet extends ProtectedServlet {
     LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, CompleteCardInfoServlet.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -66,14 +68,16 @@ public class CompleteCardInfoServlet extends HttpServlet {
                 ServletHelper.sendForward("/completecardinfo.jsp?CardID=" + cardID, this, request, response);
             }
         } catch (Exception e) {
-//            request.setAttribute("errorMesage", e.getMessage());
-//            ServletHelper.sendForward("/error.jsp", this, request, response);
-            loggerFactory.error(e.toString());
-            throw new ServletException(e);
+            ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doGet(request, response);
+    }
+
+    @Override
+    protected AdminRule setAdminRule() {
+        return AdminRule.Moderator;
     }
 }

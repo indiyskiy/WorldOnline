@@ -1,5 +1,7 @@
 package view.servlet.admin;
 
+import model.constants.AdminRule;
+import model.constants.ProtectAdminLevel;
 import model.database.requests.UserRequests;
 import model.database.worldonlinedb.UserEntity;
 import view.servlet.ServletHelper;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
  * Time: 15:09
  * To change this template use File | Settings | File Templates.
  */
-public class ExampleServlet extends HttpServlet {
+public class ExampleServlet extends ProtectedServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -33,4 +35,8 @@ public class ExampleServlet extends HttpServlet {
         ServletHelper.sendForward("/example.jsp", this, request, response);
     }
 
+    @Override
+    protected AdminRule setAdminRule() {
+        return AdminRule.AdminOnly;
+    }
 }

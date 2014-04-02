@@ -1,9 +1,12 @@
 package view.servlet;
 
+import model.constants.AdminRule;
 import model.constants.Component;
+import model.constants.ProtectAdminLevel;
 import model.database.requests.CardRequest;
 import model.logger.LoggerFactory;
 import model.xmlparser.GlobalXmlParser;
+import view.servlet.admin.ProtectedServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +21,7 @@ import java.io.IOException;
  * Time: 15:14
  * To change this template use File | Settings | File Templates.
  */
-public class GlobalBaseParseServlet extends HttpServlet {
+public class GlobalBaseParseServlet extends ProtectedServlet {
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, GlobalBaseParseServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,5 +33,10 @@ public class GlobalBaseParseServlet extends HttpServlet {
             GlobalXmlParser.parse();
         }
         ServletHelper.sendForward("/globalbaseparse.jsp", this, request, response);
+    }
+
+    @Override
+    protected AdminRule setAdminRule() {
+        return AdminRule.AdminOnly;
     }
 }

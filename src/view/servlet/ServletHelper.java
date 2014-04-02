@@ -1,6 +1,7 @@
 package view.servlet;
 
 import controller.phone.parser.MobileErrorParser;
+import model.constants.Component;
 import model.logger.LoggerFactory;
 
 import javax.servlet.RequestDispatcher;
@@ -20,8 +21,10 @@ import java.io.UnsupportedEncodingException;
  * To change this template use File | Settings | File Templates.
  */
 public class ServletHelper {
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, ServletHelper.class);
 
     public static void sendForward(String url, HttpServlet servlet, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        loggerFactory.debug(url);
         RequestDispatcher dispatcher = servlet.getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
@@ -52,7 +55,7 @@ public class ServletHelper {
 
     public static void sendError(Exception error, HttpServletRequest request, HttpServletResponse response, HttpServlet servlet, LoggerFactory loggerFactory) {
         try {
-            request.setAttribute("errorMesage", error.getMessage());
+            request.setAttribute("errorMessage", error.getMessage());
             loggerFactory.error(error);
             ServletHelper.sendForward("/error.jsp", servlet, request, response);
         } catch (ServletException e) {

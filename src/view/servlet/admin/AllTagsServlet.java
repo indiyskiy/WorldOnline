@@ -1,6 +1,8 @@
 package view.servlet.admin;
 
+import model.constants.AdminRule;
 import model.constants.Component;
+import model.constants.ProtectAdminLevel;
 import model.constants.databaseenumeration.TagType;
 import model.database.requests.TagRequest;
 import model.database.worldonlinedb.TagEntity;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
  * Time: 15:09
  * To change this template use File | Settings | File Templates.
  */
-public class AllTagsServlet extends HttpServlet {
+public class AllTagsServlet extends ProtectedServlet {
 
     private LoggerFactory loggerFactory=new LoggerFactory(Component.Admin,AllTagsServlet.class);
 
@@ -48,12 +50,12 @@ public class AllTagsServlet extends HttpServlet {
             }
             ServletHelper.sendForward("/alltags.jsp", this, request, response);
         } catch (Exception e) {
-//            request.setAttribute("errorMesage", e.getMessage());
-//            ServletHelper.sendForward("/error.jsp", this, request, response);
-            loggerFactory.error(e);
-            throw new ServletException(e);
+            ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
     }
 
-
+    @Override
+    protected AdminRule setAdminRule() {
+        return AdminRule.Moderator;
+    }
 }

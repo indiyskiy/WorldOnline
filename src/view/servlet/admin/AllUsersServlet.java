@@ -1,7 +1,9 @@
 package view.servlet.admin;
 
 import controller.parser.edit.adminparser.AllUsersParser;
+import model.constants.AdminRule;
 import model.constants.Component;
+import model.constants.ProtectAdminLevel;
 import model.constants.databaseenumeration.MobilePlatform;
 import model.database.requests.UserRequests;
 import model.database.worldonlinedb.UserEntity;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by Илья on 13.03.14.
  */
-public class AllUsersServlet extends HttpServlet {
+public class AllUsersServlet extends ProtectedServlet {
     private final int MAX_ITEMS = 50;
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, AllUsersServlet.class);
 
@@ -50,5 +52,10 @@ public class AllUsersServlet extends HttpServlet {
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
+    }
+
+    @Override
+    protected AdminRule setAdminRule() {
+        return AdminRule.Moderator;
     }
 }

@@ -1,7 +1,9 @@
 package view.servlet.admin;
 
 import model.additionalentity.MenuInfo;
+import model.constants.AdminRule;
 import model.constants.Component;
+import model.constants.ProtectAdminLevel;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.requests.MenuRequest;
 import model.logger.LoggerFactory;
@@ -20,7 +22,7 @@ import java.io.IOException;
  * Time: 12:13
  * To change this template use File | Settings | File Templates.
  */
-public class AllMenusServlet extends HttpServlet {
+public class AllMenusServlet extends ProtectedServlet {
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, AllMenusServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,11 +52,12 @@ public class AllMenusServlet extends HttpServlet {
             }
             ServletHelper.sendForward(redirect, this, request, response);
         } catch (Exception e) {
-//            request.setAttribute("errorMesage", e.getMessage());
-//            ServletHelper.sendForward("/error.jsp", this, request, response);
-            loggerFactory.error(e);
-            throw new ServletException(e);
+            ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
     }
 
+    @Override
+    protected AdminRule setAdminRule() {
+        return AdminRule.Moderator;
+    }
 }

@@ -1,6 +1,8 @@
 package view.servlet.admin;
 
+import model.constants.AdminRule;
 import model.constants.Component;
+import model.constants.ProtectAdminLevel;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
@@ -17,7 +19,7 @@ import java.io.IOException;
  * Time: 17:58
  * To change this template use File | Settings | File Templates.
  */
-public class LogOutServlet extends HttpServlet {
+public class LogOutServlet extends ProtectedServlet {
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, LogOutServlet.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -36,5 +38,11 @@ public class LogOutServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doGet(request, response);
+    }
+
+
+    @Override
+    protected AdminRule setAdminRule() {
+        return AdminRule.Registered;
     }
 }
