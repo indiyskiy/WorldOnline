@@ -14,16 +14,21 @@ import javax.persistence.*;
 @javax.persistence.Table(name = "AdminUser", schema = "", catalog = "worldonline")
 @Entity
 public class AdminUserEntity {
-    @javax.persistence.Column(name = "adminUserName")
+    @javax.persistence.Column(name = "AdminUserID")
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long adminUserID;
+
+    @javax.persistence.Column(name = "AdminUserName")
+    @Basic
     private String adminUserName;
 
-    @javax.persistence.Column(name = "adminUserPassword")
+    @javax.persistence.Column(name = "AdminUserPassword")
     @Basic
     private String adminUserPassword;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "AdminRole")
+    @JoinColumn(name = "AdminRoleID")
     private AdminRoleEntity adminRole;
 
     public String getAdminUserName() {
@@ -40,5 +45,21 @@ public class AdminUserEntity {
 
     public void setAdminUserPassword(String adminUserPassword) {
         this.adminUserPassword = adminUserPassword;
+    }
+
+    public Long getAdminUserID() {
+        return adminUserID;
+    }
+
+    public void setAdminUserID(Long adminUserID) {
+        this.adminUserID = adminUserID;
+    }
+
+    public AdminRoleEntity getAdminRole() {
+        return adminRole;
+    }
+
+    public void setAdminRole(AdminRoleEntity adminRole) {
+        this.adminRole = adminRole;
     }
 }

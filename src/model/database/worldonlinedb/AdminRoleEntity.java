@@ -22,6 +22,21 @@ public class AdminRoleEntity {
     @Basic
     private String adminRoleName;
 
+    public Long getAdminRoleID() {
+        return AdminRoleID;
+    }
+
+    public void setAdminRoleID(Long adminRoleID) {
+        AdminRoleID = adminRoleID;
+    }
+
+    public String getAdminRoleName() {
+        return adminRoleName;
+    }
+
+    public void setAdminRoleName(String adminRoleName) {
+        this.adminRoleName = adminRoleName;
+    }
 }
 
 
