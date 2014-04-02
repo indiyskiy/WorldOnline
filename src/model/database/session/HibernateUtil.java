@@ -47,6 +47,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(CardToCardLinkEntity.class)
                 .addAnnotatedClass(MenuEntity.class)
                 .addAnnotatedClass(AdminUserEntity.class)
+                .addAnnotatedClass(AdminUserSessionEntity.class)
                 .addAnnotatedClass(MenuCardLinkEntity.class)
                 .addAnnotatedClass(CardChangeEntity.class)
                 .addAnnotatedClass(UserCardEntity.class)

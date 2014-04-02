@@ -13,11 +13,11 @@ import java.sql.*;
  * To change this template use File | Settings | File Templates.
  */
 public class DatabaseConnection {
-    private final String url = "jdbc:mysql://127.0.0.1:3306/worldonline";
+    private final String url = "jdbc:mysql://127.0.0.1:3306/worldonline?autoReconnect=true";
     private final String username = "root";
     private final String password = "Djqysdrjcvjct!!!";
     private Connection connection = null;
-    private LoggerFactory loggerFactory=new LoggerFactory(Component.Database,DatabaseConnection.class);
+    private LoggerFactory loggerFactory = new LoggerFactory(Component.Database, DatabaseConnection.class);
 
     public DatabaseConnection() {
         try {
