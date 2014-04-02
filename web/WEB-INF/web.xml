@@ -169,6 +169,18 @@
         <url-pattern>/completeuserinfo</url-pattern>
     </servlet-mapping>
 
+    <!--Login-->
+    <servlet>
+        <display-name>LoginServlet</display-name>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>view.servlet.admin.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
     <!--MOBILE-->
     <!--registration-->
     <servlet>
