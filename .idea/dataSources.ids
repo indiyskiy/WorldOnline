@@ -2516,24 +2516,28 @@
       <primary-key name="PRIMARY" columns="CountryCode,Language"/>
     </table>
     <table name="adminrole" schema="" catalog="worldonline" type="TABLE">
-      <column name="adminUserName" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
-      <column name="adminUserRole" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="adminUserName,adminUserRole"/>
+      <column name="AdminRoleID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="AdminRoleName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="AdminRoleID"/>
+      <exported-key name="FK_c8yuvxaqikgsqd2ptqleo2t11" table="adminuser" schema="" catalog="worldonline" columns="AdminRole"/>
     </table>
     <table name="adminuser" schema="" catalog="worldonline" type="TABLE">
       <column name="adminUserName" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
-      <column name="adminUserPassword" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1"/>
+      <column name="adminUserPassword" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="AdminRole" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="adminUserName"/>
+      <foreign-key name="FK_c8yuvxaqikgsqd2ptqleo2t11" columns="AdminRole" ref-table="adminrole" ref-schema="" ref-catalog="worldonline" ref-columns="AdminRoleID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_ornsyiqjudhj594vc4p9p9k1x" table="cardchange" schema="" catalog="worldonline" columns="ChangingAdminUser"/>
     </table>
     <table name="card" schema="" catalog="worldonline" type="TABLE">
       <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="CardName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <column name="CardState" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="CardType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="CardVersion" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="CreationTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
       <column name="LastUpdateTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="CardID"/>
+      <exported-key name="FK_8ey9lpcspainsig2jt8hcqqsf" table="cardchange" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_55sp0hs3nhgu8yq0xlp3s84d4" table="cardcoordinate" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_kad18leo0yike87hf7oa63gi9" table="cardimage" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_ic9fnltx16lm8nm7cbqnj6i14" table="cardparameter" schema="" catalog="worldonline" columns="CardID"/>
@@ -2545,6 +2549,18 @@
       <exported-key name="FK_p8lmqkwbkqqbyi1v73rh6j43x" table="rootelement" schema="" catalog="worldonline" columns="PlaceCardID"/>
       <exported-key name="FK_ldbgpy6a9uyuawvm6yfnyni4" table="textcard" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_lv8j07r0w9oki3nwxvhiam6qm" table="usercard" schema="" catalog="worldonline" columns="CardID"/>
+    </table>
+    <table name="cardchange" schema="" catalog="worldonline" type="TABLE">
+      <column name="CardChangeID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="ChangingTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="DataType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="UpdateStatus" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="UpdateType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="ChangingAdminUser" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="CardChangeID"/>
+      <foreign-key name="FK_ornsyiqjudhj594vc4p9p9k1x" columns="ChangingAdminUser" ref-table="adminuser" ref-schema="" ref-catalog="worldonline" ref-columns="adminUserName" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_8ey9lpcspainsig2jt8hcqqsf" columns="CardID" ref-table="card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="cardcoordinate" schema="" catalog="worldonline" type="TABLE">
       <column name="CardCoordinateID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -2706,9 +2722,8 @@
     </table>
     <table name="usercard" schema="" catalog="worldonline" type="TABLE">
       <column name="UserCardID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="CardState" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="CardVersion" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
-      <column name="LastUpdateTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="DownloadTimeStamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="LastUpdateTimeStamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
       <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="UserContentID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="UserCardID"/>
