@@ -47,11 +47,11 @@ public class HibernateUtil {
                 .addAnnotatedClass(CardToCardLinkEntity.class)
                 .addAnnotatedClass(MenuEntity.class)
                 .addAnnotatedClass(AdminUserEntity.class)
+                .addAnnotatedClass(AdminUserAdditionalInfoEntity.class)
                 .addAnnotatedClass(AdminUserSessionEntity.class)
                 .addAnnotatedClass(MenuCardLinkEntity.class)
                 .addAnnotatedClass(CardChangeEntity.class)
-                .addAnnotatedClass(UserCardEntity.class)
-                .addAnnotatedClass(AdminRoleEntity.class);
+                .addAnnotatedClass(UserCardEntity.class);
         ac.configure();
         return ac;
     }

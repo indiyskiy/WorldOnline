@@ -1,7 +1,7 @@
 package model.database.requests;
 
 
-import controller.parser.edit.adminparser.AllCardParser;
+import controller.parser.adminparser.AllCardParser;
 import model.additionalentity.*;
 import model.constants.Component;
 import model.constants.databaseenumeration.TextType;

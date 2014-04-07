@@ -11,15 +11,37 @@
       <column name="AdminRoleID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="AdminRoleName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="AdminRoleID"/>
-      <exported-key name="FK_c8yuvxaqikgsqd2ptqleo2t11" table="adminuser" schema="" catalog="worldonline" columns="AdminRole"/>
+      <exported-key name="FK_294qr6njr7l1ta7w9bw6lnlt9" table="adminuser" schema="" catalog="worldonline" columns="AdminRoleID"/>
     </table>
     <table name="adminuser" schema="" catalog="worldonline" type="TABLE">
-      <column name="adminUserName" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
-      <column name="adminUserPassword" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="AdminRole" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="adminUserName"/>
-      <foreign-key name="FK_c8yuvxaqikgsqd2ptqleo2t11" columns="AdminRole" ref-table="adminrole" ref-schema="" ref-catalog="worldonline" ref-columns="AdminRoleID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <column name="AdminUserID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="AdminUserName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="AdminUserPassword" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="Confirmed" sqlType="BIT" length="0" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="AdminRoleID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="AdminUserAdditionalInfoID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="AdminUserID"/>
+      <foreign-key name="FK_56verawt0sn0gnwyayuyhceap" columns="AdminUserAdditionalInfoID" ref-table="adminuseradditionalinfo" ref-schema="" ref-catalog="worldonline" ref-columns="AdminUserAdditionalInfoID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_294qr6njr7l1ta7w9bw6lnlt9" columns="AdminRoleID" ref-table="adminrole" ref-schema="" ref-catalog="worldonline" ref-columns="AdminRoleID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_2vj6nwmypbkisxiteir2mgsfc" table="adminusersession" schema="" catalog="worldonline" columns="AdminUserID"/>
       <exported-key name="FK_ornsyiqjudhj594vc4p9p9k1x" table="cardchange" schema="" catalog="worldonline" columns="ChangingAdminUser"/>
+    </table>
+    <table name="adminuseradditionalinfo" schema="" catalog="worldonline" type="TABLE">
+      <column name="AdminUserAdditionalInfoID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="AdminUserEmail" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="AdminUserFirstName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="AdminUserRegistrationTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="AdminUserSecondName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="AdminUserAdditionalInfoID"/>
+      <exported-key name="FK_56verawt0sn0gnwyayuyhceap" table="adminuser" schema="" catalog="worldonline" columns="AdminUserAdditionalInfoID"/>
+    </table>
+    <table name="adminusersession" schema="" catalog="worldonline" type="TABLE">
+      <column name="AdminUserSessionID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="SessionCreationTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="SessionKey" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="AdminUserID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="AdminUserSessionID"/>
+      <foreign-key name="FK_2vj6nwmypbkisxiteir2mgsfc" columns="AdminUserID" ref-table="adminuser" ref-schema="" ref-catalog="worldonline" ref-columns="AdminUserID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="card" schema="" catalog="worldonline" type="TABLE">
       <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -49,9 +71,9 @@
       <column name="UpdateStatus" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="UpdateType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
-      <column name="ChangingAdminUser" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="ChangingAdminUser" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="CardChangeID"/>
-      <foreign-key name="FK_ornsyiqjudhj594vc4p9p9k1x" columns="ChangingAdminUser" ref-table="adminuser" ref-schema="" ref-catalog="worldonline" ref-columns="adminUserName" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_ornsyiqjudhj594vc4p9p9k1x" columns="ChangingAdminUser" ref-table="adminuser" ref-schema="" ref-catalog="worldonline" ref-columns="AdminUserID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_8ey9lpcspainsig2jt8hcqqsf" columns="CardID" ref-table="card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="cardcoordinate" schema="" catalog="worldonline" type="TABLE">

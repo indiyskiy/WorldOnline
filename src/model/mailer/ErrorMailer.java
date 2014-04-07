@@ -2,6 +2,7 @@ package model.mailer;
 
 import model.constants.Component;
 import model.constants.MailConsts;
+import model.logger.LogLevel;
 import model.logger.LoggerMessage;
 
 import javax.mail.MessagingException;
@@ -9,8 +10,8 @@ import java.util.HashMap;
 
 
 public class ErrorMailer {
-    private static final String sender = "petersburgonlineerrorsystem";
-    private static final String password = "djqysdrjcvjct";
+    private static final String sender = "worldOnLineError";
+    private static final String password = "djqysdrjcvjct111";
     private static final HashMap<Component, String[]> responsibilities = setResp();
 
     private static HashMap<Component, String[]> setResp() {
@@ -25,7 +26,7 @@ public class ErrorMailer {
 
     private static void sendMail(String mail, String text, String title) {
         try {
-            GmailSender.Send(sender, password, mail, title, text);
+            MailSender.send(sender, password, mail, title, text, model.mailer.MailConsts.Yandex);
         } catch (MessagingException e) {
             e.printStackTrace();
         }
@@ -34,7 +35,7 @@ public class ErrorMailer {
     private static void sendMail(String[] mails, String text, String title) {
         try {
             for (String mail : mails) {
-                GmailSender.Send(sender, password, mail, title, text);
+                MailSender.send(sender, password, mail, title, text, model.mailer.MailConsts.Yandex);
             }
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -42,7 +43,8 @@ public class ErrorMailer {
     }
 
     public static void sendError(LoggerMessage loggerMessage) {
-        String[] mails=responsibilities.get(loggerMessage.getComponent());
-        sendMail(mails,loggerMessage.getMessage(),loggerMessage.getComponent()+" error");
+        String[] mails = responsibilities.get(loggerMessage.getComponent());
+        sendMail(mails, loggerMessage.getMessage(), loggerMessage.getComponent() + " error");
     }
+
 }

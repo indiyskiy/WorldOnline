@@ -1,6 +1,6 @@
 package model.database.requests;
 
-import controller.parser.edit.adminparser.AllUsersParser;
+import controller.parser.adminparser.AllUsersParser;
 import model.additionalentity.CardUserStat;
 import model.constants.Component;
 import model.database.session.DatabaseConnection;

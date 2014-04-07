@@ -27,9 +27,18 @@ public class AdminUserEntity {
     @Basic
     private String adminUserPassword;
 
+    @javax.persistence.Column(name = "Confirmed")
+    @Basic
+    private Boolean confirmed;
+
+    @javax.persistence.Column(name = "AdminRole")
+    @Basic
+    private Integer adminRole;
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "AdminRoleID")
-    private AdminRoleEntity adminRole;
+    @JoinColumn(name = "AdminUserAdditionalInfoID")
+    private AdminUserAdditionalInfoEntity adminUserAdditionalInfo;
+
 
     public String getAdminUserName() {
         return adminUserName;
@@ -55,11 +64,28 @@ public class AdminUserEntity {
         this.adminUserID = adminUserID;
     }
 
-    public AdminRoleEntity getAdminRole() {
+    public Integer getAdminRole() {
         return adminRole;
     }
 
-    public void setAdminRole(AdminRoleEntity adminRole) {
+    public void setAdminRole(Integer adminRole) {
         this.adminRole = adminRole;
     }
+
+    public Boolean getConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
+    public AdminUserAdditionalInfoEntity getAdminUserAdditionalInfo() {
+        return adminUserAdditionalInfo;
+    }
+
+    public void setAdminUserAdditionalInfo(AdminUserAdditionalInfoEntity adminUserAdditionalInfo) {
+        this.adminUserAdditionalInfo = adminUserAdditionalInfo;
+    }
 }
+

@@ -1,4 +1,4 @@
-package controller.parser.edit.adminparser;
+package controller.parser.adminparser;
 
 import model.constants.databaseenumeration.CardType;
 import view.servlet.ServletHelper;
@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AllCardParser {
     Long cardID = null;
-    String cardName=null;
+    String cardName = null;
     CardType cardType = null;
-    int firstElem =0;
-    int maxItems=0;
+    int firstElem = 0;
+    int maxItems = 0;
 
     public AllCardParser(int maxItems) {
         this.maxItems = maxItems;
@@ -31,8 +31,8 @@ public class AllCardParser {
         if (request.getParameter("CardTypeRe") != null && !request.getParameter("CardTypeRe").isEmpty()) {
             cardType = CardType.parseInt(Integer.parseInt(ServletHelper.getAndSetAttribute(request, "CardTypeRe")));
         }
-        if(request.getParameter("Page")!=null && !request.getParameter("Page").isEmpty()){
-            firstElem = maxItems*Integer.parseInt((ServletHelper.getAndSetAttribute(request,"Page")));
+        if (request.getParameter("Page") != null && !request.getParameter("Page").isEmpty()) {
+            firstElem = maxItems * Integer.parseInt((ServletHelper.getAndSetAttribute(request, "Page")));
         }
     }
 
@@ -57,7 +57,7 @@ public class AllCardParser {
     }
 
     public boolean haveMatter() {
-        if (cardID!=null){
+        if (cardID != null) {
             return true;
         }
         if (cardName != null && !cardName.isEmpty()) {

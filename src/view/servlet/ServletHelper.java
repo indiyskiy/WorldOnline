@@ -55,9 +55,13 @@ public class ServletHelper {
 
     public static void sendError(Exception error, HttpServletRequest request, HttpServletResponse response, HttpServlet servlet, LoggerFactory loggerFactory) {
         try {
-            request.setAttribute("errorMessage", error.getMessage());
+            if (request != null) {
+                request.setAttribute("errorMessage", error.getMessage());
+            }
             loggerFactory.error(error);
-            ServletHelper.sendForward("/error.jsp", servlet, request, response);
+            if (request != null && response != null && servlet != null) {
+                ServletHelper.sendForward("/error.jsp", servlet, request, response);
+            }
         } catch (ServletException e) {
             loggerFactory.error(e);
         } catch (IOException e) {
@@ -67,7 +71,7 @@ public class ServletHelper {
 
     public static void sendMobileError(LoggerFactory loggerFactory, Exception error, HttpServletResponse response) {
         loggerFactory.error(error);
-        String errorJSON= MobileErrorParser.parse(error);
+        String errorJSON = MobileErrorParser.parse(error);
         try {
             sendResponse(response, errorJSON);
         } catch (IOException e) {

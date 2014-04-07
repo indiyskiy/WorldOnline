@@ -23,7 +23,6 @@ public abstract class ProtectedServlet extends HttpServlet {
     private ServerInit serverInit = ServerInit.getInstance();
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        loggerFactory.info("service");
         this.adminRule = setAdminRule();
         HttpSession session = request.getSession(false);
         AccessStatus isPassed;
@@ -41,7 +40,6 @@ public abstract class ProtectedServlet extends HttpServlet {
             if (adminRule == AdminRule.Unregistered) {
                 return AccessStatus.Accept;
             } else {
-                loggerFactory.info("den 1");
                 return AccessStatus.Denied;
             }
         }
@@ -53,7 +51,6 @@ public abstract class ProtectedServlet extends HttpServlet {
             if (adminRule == AdminRule.Unregistered) {
                 return AccessStatus.Accept;
             } else {
-                loggerFactory.info("den 2");
                 return AccessStatus.Denied;
             }
         }
@@ -66,7 +63,6 @@ public abstract class ProtectedServlet extends HttpServlet {
             return AccessStatus.TooRegistered;
         }
         if (!adminRule.getAccessStatusMap().contains(protectAdminLevel)) {
-            loggerFactory.info("den 3 " + protectAdminLevel);
             return AccessStatus.Denied;
         }
         return AccessStatus.Accept;

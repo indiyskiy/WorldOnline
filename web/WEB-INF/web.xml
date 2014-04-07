@@ -181,6 +181,18 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <!--registration-->
+    <servlet>
+        <display-name>RegistrationServlet</display-name>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <servlet-class>view.servlet.admin.RegistrationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
+
     <!--MOBILE-->
     <!--registration-->
     <servlet>

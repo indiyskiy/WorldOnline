@@ -8,10 +8,10 @@ package model.constants;
  * To change this template use File | Settings | File Templates.
  */
 public class MailConsts {
-    private static final String Evdokimov="indiyskiy@gmail.com";
-    public static final String[] AdminDevMailList=new String[]{Evdokimov};
-    public static final String[] DatabaseDevMailList=new String[]{Evdokimov};
-    public static final String[] GlobalDevMailList=new String[]{Evdokimov};
-    public static final String[] ParserDevMailList=new String[]{Evdokimov};
-    public static final String[] PhoneDevMailList=new String[]{Evdokimov};
+    public static final String Evdokimov = "indiyskiy@gmail.com";
+    public static final String[] AdminDevMailList = new String[]{Evdokimov};
+    public static final String[] DatabaseDevMailList = new String[]{Evdokimov};
+    public static final String[] GlobalDevMailList = new String[]{Evdokimov};
+    public static final String[] ParserDevMailList = new String[]{Evdokimov};
+    public static final String[] PhoneDevMailList = new String[]{Evdokimov};
 }

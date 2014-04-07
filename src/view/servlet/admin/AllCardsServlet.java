@@ -1,9 +1,8 @@
 package view.servlet.admin;
 
-import controller.parser.edit.adminparser.AllCardParser;
+import controller.parser.adminparser.AllCardParser;
 import model.constants.AdminRule;
 import model.constants.Component;
-import model.constants.ProtectAdminLevel;
 import model.constants.databaseenumeration.CardType;
 import model.database.requests.CardRequest;
 import model.database.worldonlinedb.CardEntity;

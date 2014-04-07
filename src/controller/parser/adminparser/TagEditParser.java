@@ -1,4 +1,4 @@
-package controller.parser.edit;
+package controller.parser.adminparser;
 
 import model.constants.databaseenumeration.TagType;
 import model.database.requests.TagRequest;
@@ -39,9 +39,9 @@ public class TagEditParser {
             } else {
                 oldTag.setTagName(tagName);
             }
-            String tagTypeString=request.getParameter("TagType");
-            int tagTypeID=Integer.parseInt(tagTypeString);
-            TagType tagType=TagType.parseInt(tagTypeID);
+            String tagTypeString = request.getParameter("TagType");
+            int tagTypeID = Integer.parseInt(tagTypeString);
+            TagType tagType = TagType.parseInt(tagTypeID);
             oldTag.setTagType(tagType);
             return oldTag;
         } catch (SQLException e) {

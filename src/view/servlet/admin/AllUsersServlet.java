@@ -1,9 +1,8 @@
 package view.servlet.admin;
 
-import controller.parser.edit.adminparser.AllUsersParser;
+import controller.parser.adminparser.AllUsersParser;
 import model.constants.AdminRule;
 import model.constants.Component;
-import model.constants.ProtectAdminLevel;
 import model.constants.databaseenumeration.MobilePlatform;
 import model.database.requests.UserRequests;
 import model.database.worldonlinedb.UserEntity;
@@ -11,7 +10,6 @@ import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

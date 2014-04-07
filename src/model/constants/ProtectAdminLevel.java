@@ -5,10 +5,11 @@ package model.constants;
  */
 public enum ProtectAdminLevel {
     Unregistered(0),
-    Client(1),
-    LowModerator(2),
-    HeightModerator(3),
-    Administrator(4);
+    Registered(1),
+    Client(2),
+    LowModerator(3),
+    HeightModerator(4),
+    Administrator(5);
 
     private int value;
 

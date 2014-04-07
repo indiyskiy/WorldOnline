@@ -1,9 +1,13 @@
 package model.database.requests;
 
 import model.Md5Hash;
+import model.TimeManager;
 import model.additionalentity.LoginRequest;
+import model.additionalentity.ParsedRegistrationRequest;
 import model.constants.Component;
+import model.constants.MailConsts;
 import model.constants.ProtectAdminLevel;
+import model.constants.ServerConsts;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.*;
@@ -27,16 +31,15 @@ public class AdminUserRequest {
         PreparedStatement ps = null;
         try {
             connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT AdminRole.AdminRoleName " +
-                    "FROM AdminRole " +
-                    "JOIN AdminUser ON (AdminUser.AdminRoleID=AdminRole.AdminRoleID) " +
+            @Language("MySQL") String sql = "SELECT AdminUser.AdminRole FROM AdminUser  " +
                     "JOIN AdminUserSession ON (AdminUserSession.AdminUserID=AdminUser.AdminUserID) " +
-                    "WHERE AdminUserSession.SessionKey=?";
+                    "WHERE AdminUserSession.SessionKey=? " +
+                    "AND AdminUser.Confirmed=TRUE";
             ps = connection.prepareStatement(sql);
             ps.setString(1, key);
             rs = ps.executeQuery();
             if (rs.first()) {
-                return ProtectAdminLevel.parse(rs.getString("AdminRole.AdminRoleName"));
+                return ProtectAdminLevel.parseInt(rs.getInt("AdminUser.AdminRole"));
             }
         } catch (SQLException e) {
             loggerFactory.error(e);
@@ -74,19 +77,6 @@ public class AdminUserRequest {
         return null;
     }
 
-    public static boolean addAdminRole(AdminRoleEntity adminRole) {
-        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-        try {
-            session.beginTransaction();
-            session.save(adminRole);
-            session.getTransaction().commit();
-            return true;
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-    }
 
     public static boolean addAdminUser(AdminUserEntity adminUser) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
@@ -107,30 +97,25 @@ public class AdminUserRequest {
         return (Long) session.createCriteria(AdminUserEntity.class).setProjection(Projections.rowCount()).uniqueResult();
     }
 
-    public static Long countRoles() {
-        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-        return (Long) session.createCriteria(AdminRoleEntity.class).setProjection(Projections.rowCount()).uniqueResult();
-    }
 
     public static void addRootAdminUser() {
-        if (AdminUserRequest.countUsers() == 0 && AdminUserRequest.countRoles() == 0) {
+        if (AdminUserRequest.countUsers() == 0) {
             AdminUserEntity adminUserEntity = new AdminUserEntity();
             adminUserEntity.setAdminUserName("root");
             adminUserEntity.setAdminUserPassword(Md5Hash.getMd5Hash("eva01hashin"));
-            for (ProtectAdminLevel protectAdminLevel : ProtectAdminLevel.values()) {
-                AdminRoleEntity adminRoleEntity = new AdminRoleEntity();
-                adminRoleEntity.setAdminRoleName(protectAdminLevel.toString());
-                AdminUserRequest.addAdminRole(adminRoleEntity);
-                if (protectAdminLevel == ProtectAdminLevel.Administrator) {
-                    adminUserEntity.setAdminRole(adminRoleEntity);
-                }
-            }
+            adminUserEntity.setConfirmed(true);
+            adminUserEntity.setAdminRole(ProtectAdminLevel.Administrator.getValue());
+            AdminUserAdditionalInfoEntity adminUserAdditionalInfo = new AdminUserAdditionalInfoEntity();
+            adminUserAdditionalInfo.setAdminUserEmail(MailConsts.Evdokimov);
+            adminUserAdditionalInfo.setAdminUserFirstName("root");
+            adminUserAdditionalInfo.setAdminUserSecondName("root");
+            adminUserAdditionalInfo.setAdminUserRegistrationTimestamp(TimeManager.currentTime());
+            adminUserEntity.setAdminUserAdditionalInfo(adminUserAdditionalInfo);
             AdminUserRequest.addAdminUser(adminUserEntity);
         }
     }
 
     public static void addSession(String key, String login) {
-        loggerFactory.debug("addSession");
         AdminUserEntity userEntity = getUserByLogin(login);
         AdminUserSessionEntity adminUserSessionEntity = new AdminUserSessionEntity();
         adminUserSessionEntity.setAdminUser(userEntity);
@@ -138,7 +123,7 @@ public class AdminUserRequest {
         addSession(adminUserSessionEntity);
     }
 
-    private static AdminUserEntity getUserByLogin(String login) {
+    public static AdminUserEntity getUserByLogin(String login) {
         DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
         ResultSet rs = null;
@@ -147,7 +132,8 @@ public class AdminUserRequest {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT * " +
                     "FROM AdminUser " +
-                    "JOIN AdminRole ON (AdminRole.AdminRoleID=AdminUser.AdminRoleID) " +
+                    "JOIN AdminUserAdditionalInfo " +
+                    "ON (AdminUserAdditionalInfo.AdminUserAdditionalInfoID=AdminUser.AdminUserAdditionalInfoID) " +
                     "WHERE AdminUserName=?";
 
             ps = connection.prepareStatement(sql);
@@ -160,10 +146,13 @@ public class AdminUserRequest {
                 adminUserEntity.setAdminUserName(login);
                 adminUserEntity.setAdminUserPassword(password);
                 adminUserEntity.setAdminUserID(rs.getLong("AdminUser.AdminUserID"));
-                AdminRoleEntity adminRoleEntity = new AdminRoleEntity();
-                adminRoleEntity.setAdminRoleName(rs.getString("AdminRole.AdminRoleName"));
-                adminRoleEntity.setAdminRoleID(rs.getLong("AdminRole.AdminRoleID"));
-                adminUserEntity.setAdminRole(adminRoleEntity);
+                adminUserEntity.setConfirmed(rs.getBoolean("AdminUser.Confirmed"));
+                adminUserEntity.setAdminRole(rs.getInt("AdminUser.AdminRole"));
+                AdminUserAdditionalInfoEntity adminUserAdditionalInfoEntity = new AdminUserAdditionalInfoEntity();
+                adminUserAdditionalInfoEntity.setAdminUserRegistrationTimestamp(rs.getTimestamp("AdminUserAdditionalInfo.AdminUserRegistrationTimestamp"));
+                adminUserAdditionalInfoEntity.setAdminUserFirstName(rs.getString("AdminUserAdditionalInfo.AdminUserFirstName"));
+                adminUserAdditionalInfoEntity.setAdminUserEmail(rs.getString("AdminUserAdditionalInfo.AdminUserEmail"));
+                adminUserAdditionalInfoEntity.setAdminUserSecondName(rs.getString("AdminUserAdditionalInfo.AdminUserSecondName"));
                 return adminUserEntity;
             }
         } catch (SQLException e) {
@@ -186,5 +175,14 @@ public class AdminUserRequest {
                 session.close();
             }
         }
+    }
+
+    public static void registUser(ParsedRegistrationRequest parsedRegistrationRequest) {
+        AdminUserEntity adminUserEntity = new AdminUserEntity();
+        adminUserEntity.setAdminUserPassword(parsedRegistrationRequest.getPassword());
+        adminUserEntity.setConfirmed(false);
+        adminUserEntity.setAdminUserName(parsedRegistrationRequest.getLogin());
+        adminUserEntity.setAdminRole(ProtectAdminLevel.Registered.getValue());
+        addAdminUser(adminUserEntity);
     }
 }

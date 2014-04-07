@@ -160,8 +160,8 @@
         <class>model.database.worldonlinedb.CardCoordinateEntity</class>
         <class>model.database.worldonlinedb.CardToCardLinkEntity</class>
         <class>model.database.worldonlinedb.MenuEntity</class>
-        <class>model.database.worldonlinedb.AdminRoleEntity</class>
         <class>model.database.worldonlinedb.AdminUserEntity</class>
+        <class>model.database.worldonlinedb.AdminUserAdditionalInfoEntity</class>
         <class>model.database.worldonlinedb.AdminUserSessionEntity</class>
         <class>model.database.worldonlinedb.MenuCardLinkEntity</class>
         <class>model.database.worldonlinedb.CardChangeEntity</class>

@@ -12,7 +12,8 @@ public enum AdminRule {
     HeightModerator,
     AdminOnly,
     Nobody,
-    Unregistered;
+    Unregistered,
+    Client;
 
     public HashSet<ProtectAdminLevel> getAccessStatusMap() {
         HashSet<ProtectAdminLevel> protectAdminLevels = new HashSet<ProtectAdminLevel>();
@@ -22,10 +23,19 @@ public enum AdminRule {
                 protectAdminLevels.add(ProtectAdminLevel.HeightModerator);
                 protectAdminLevels.add(ProtectAdminLevel.LowModerator);
                 protectAdminLevels.add(ProtectAdminLevel.Client);
+                protectAdminLevels.add(ProtectAdminLevel.Registered);
                 protectAdminLevels.add(ProtectAdminLevel.Unregistered);
                 break;
             }
             case Registered: {
+                protectAdminLevels.add(ProtectAdminLevel.Administrator);
+                protectAdminLevels.add(ProtectAdminLevel.HeightModerator);
+                protectAdminLevels.add(ProtectAdminLevel.LowModerator);
+                protectAdminLevels.add(ProtectAdminLevel.Client);
+                protectAdminLevels.add(ProtectAdminLevel.Registered);
+                break;
+            }
+            case Client: {
                 protectAdminLevels.add(ProtectAdminLevel.Administrator);
                 protectAdminLevels.add(ProtectAdminLevel.HeightModerator);
                 protectAdminLevels.add(ProtectAdminLevel.LowModerator);

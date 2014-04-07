@@ -1,4 +1,4 @@
-package controller.parser.edit.adminparser;
+package controller.parser.adminparser;
 
 import model.constants.databaseenumeration.MobilePlatform;
 import view.servlet.ServletHelper;

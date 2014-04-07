@@ -2,6 +2,7 @@ package model.xmlparser;
 
 import model.FileReader;
 import model.Md5Hash;
+import model.ParameterValidator;
 import model.constants.Component;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.*;
@@ -877,67 +878,12 @@ public class GlobalXmlParser implements Runnable {
     }
 
     private void saveParameter(String parameter, CardEntity card, CardParameterType cardParameterType) {
-        if (isValidParameter(parameter, cardParameterType.getDataType())) {
+        if (ParameterValidator.isValidParameter(parameter, cardParameterType.getDataType())) {
             CardParameterEntity cardParameterEntity = new CardParameterEntity(card, cardParameterType, cardParameterType.getDataType(), parameter);
             ParameterRequest.addCardParameter(cardParameterEntity);
         }
     }
 
-    private boolean isValidParameter(String parameter, DataType cardParameterDataType) {
-        try {
-            if (parameter == null || parameter.isEmpty()) {
-                return false;
-            }
-            switch (cardParameterDataType) {
-                case DoubleType: {
-                    Double.parseDouble(parameter);
-                    break;
-                }
-                case EmailType: {
-                    //todo validator
-//                    InternetAddress emailAddr = new InternetAddress(parameter);
-//                    emailAddr.validate();
-                    break;
-                }
-                case IntegerType: {
-                    Integer.parseInt(parameter);
-                    break;
-                }
-                case LinkType: {
-                    //todo validator
-                    break;
-                }
-                case PhoneNumberType: {
-                    if (parameter.startsWith("+")) {
-                        parameter = parameter.substring(1, parameter.length());
-                    }
-                    parameter = parameter.replaceAll("-", "");
-                    parameter = parameter.replaceAll(" ", "");
-                    parameter = parameter.replaceAll("\\(", "");
-                    parameter = parameter.replaceAll("\\)", "");
-                    if (parameter.length() < 3) {
-                        return false;
-                    }
-                    Long.parseLong(parameter);
-                    break;
-                }
-                case StringType: {
-                    break;
-                }
-                case UnknownType: {
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
-
-        } catch (Exception e) {
-            loggerFactory.error(e);
-            return false;
-        }
-        return true;
-    }
 
     private void saveText(String textRu, String textEn, String nameRu, String nameEn, TextType textType, CardEntity card) {
         TextGroupEntity textGroupEntity = null;
@@ -1006,7 +952,7 @@ public class GlobalXmlParser implements Runnable {
 
     private void saveCoordinate(String lat, String lon, CardEntity card) {
         try {
-            if (isValidParameter(lat, DataType.DoubleType) && isValidParameter(lon, DataType.DoubleType)) {
+            if (ParameterValidator.isValidParameter(lat, DataType.DoubleType) && ParameterValidator.isValidParameter(lon, DataType.DoubleType)) {
                 double doubleLat = Double.parseDouble(lat);
                 double doubleLon = Double.parseDouble(lon);
                 CardCoordinateEntity cardCoordinateEntity = new CardCoordinateEntity(card, doubleLon, doubleLat);

@@ -25,8 +25,9 @@ public class LoggerFactory {
     public void error(String message) {
         log(message, LogLevel.Error);
     }
+
     public void error(Exception error) {
-        log(ExceptionUtils.getTrace(error));
+        error(ExceptionUtils.getTrace(error));
     }
 
     public void info(String message) {
