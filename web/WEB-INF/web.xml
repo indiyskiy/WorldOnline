@@ -193,6 +193,18 @@
         <url-pattern>/registration</url-pattern>
     </servlet-mapping>
 
+    <!--registration confirm-->
+    <servlet>
+        <display-name>RegistrationConfirmServlet</display-name>
+        <servlet-name>RegistrationConfirmServlet</servlet-name>
+        <servlet-class>view.servlet.admin.RegistrationConfirmServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegistrationConfirmServlet</servlet-name>
+        <url-pattern>/mailConfirm/*</url-pattern>
+    </servlet-mapping>
+
     <!--MOBILE-->
     <!--registration-->
     <servlet>

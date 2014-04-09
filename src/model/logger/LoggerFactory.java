@@ -41,4 +41,9 @@ public class LoggerFactory {
     public void warning(String message) {
         log(message, LogLevel.Warning);
     }
+
+
+    public void warning(Exception error) {
+        warning(ExceptionUtils.getTrace(error));
+    }
 }

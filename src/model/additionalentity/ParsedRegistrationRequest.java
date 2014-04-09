@@ -1,5 +1,8 @@
 package model.additionalentity;
 
+import model.Md5Hash;
+import model.database.requests.AdminUserRequest;
+
 /**
  * Created by Илья on 07.04.14.
  */
@@ -49,5 +52,14 @@ public class ParsedRegistrationRequest {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getHashMd5() {
+        String str = AdminUserRequest.getMd5Hash(login, email, password, firstName, secondName);
+        return str;
+    }
+
+    public void setPasswordFromOriginal(String s) {
+        password = Md5Hash.getMd5Hash(s);
     }
 }

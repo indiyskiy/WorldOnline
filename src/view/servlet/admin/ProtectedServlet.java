@@ -37,7 +37,7 @@ public abstract class ProtectedServlet extends HttpServlet {
 
     private AccessStatus getIsPassed(HttpSession session) {
         if (session == null) {
-            if (adminRule == AdminRule.Unregistered) {
+            if (adminRule.getAccessStatusMap().contains(ProtectAdminLevel.Unregistered)) {
                 return AccessStatus.Accept;
             } else {
                 return AccessStatus.Denied;

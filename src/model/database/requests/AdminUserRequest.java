@@ -92,6 +92,21 @@ public class AdminUserRequest {
         }
     }
 
+
+    public static boolean editAdminUser(AdminUserEntity adminUser) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.update(adminUser);
+            session.getTransaction().commit();
+            return true;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
     public static Long countUsers() {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
         return (Long) session.createCriteria(AdminUserEntity.class).setProjection(Projections.rowCount()).uniqueResult();
@@ -132,19 +147,16 @@ public class AdminUserRequest {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT * " +
                     "FROM AdminUser " +
-                    "JOIN AdminUserAdditionalInfo " +
-                    "ON (AdminUserAdditionalInfo.AdminUserAdditionalInfoID=AdminUser.AdminUserAdditionalInfoID) " +
-                    "WHERE AdminUserName=?";
+                    "JOIN AdminUserAdditionalInfo ON (AdminUserAdditionalInfo.AdminUserAdditionalInfoID=AdminUser.AdminUserAdditionalInfoID) " +
+                    "WHERE AdminUser.AdminUserName=?";
 
             ps = connection.prepareStatement(sql);
             ps.setString(1, login);
             rs = ps.executeQuery();
             if (rs.first()) {
                 AdminUserEntity adminUserEntity = new AdminUserEntity();
-                login = rs.getString("AdminUser.AdminUserName");
-                String password = rs.getString("AdminUser.AdminUserPassword");
-                adminUserEntity.setAdminUserName(login);
-                adminUserEntity.setAdminUserPassword(password);
+                adminUserEntity.setAdminUserName(rs.getString("AdminUser.AdminUserName"));
+                adminUserEntity.setAdminUserPassword(rs.getString("AdminUser.AdminUserPassword"));
                 adminUserEntity.setAdminUserID(rs.getLong("AdminUser.AdminUserID"));
                 adminUserEntity.setConfirmed(rs.getBoolean("AdminUser.Confirmed"));
                 adminUserEntity.setAdminRole(rs.getInt("AdminUser.AdminRole"));
@@ -153,6 +165,8 @@ public class AdminUserRequest {
                 adminUserAdditionalInfoEntity.setAdminUserFirstName(rs.getString("AdminUserAdditionalInfo.AdminUserFirstName"));
                 adminUserAdditionalInfoEntity.setAdminUserEmail(rs.getString("AdminUserAdditionalInfo.AdminUserEmail"));
                 adminUserAdditionalInfoEntity.setAdminUserSecondName(rs.getString("AdminUserAdditionalInfo.AdminUserSecondName"));
+                adminUserAdditionalInfoEntity.setAdminUserAdditionalInfoID(rs.getLong("AdminUserAdditionalInfo.AdminUserAdditionalInfoID"));
+                adminUserEntity.setAdminUserAdditionalInfo(adminUserAdditionalInfoEntity);
                 return adminUserEntity;
             }
         } catch (SQLException e) {
@@ -183,6 +197,23 @@ public class AdminUserRequest {
         adminUserEntity.setConfirmed(false);
         adminUserEntity.setAdminUserName(parsedRegistrationRequest.getLogin());
         adminUserEntity.setAdminRole(ProtectAdminLevel.Registered.getValue());
+        AdminUserAdditionalInfoEntity additionalInfoEntity = new AdminUserAdditionalInfoEntity();
+        additionalInfoEntity.setAdminUserSecondName(parsedRegistrationRequest.getSecondName());
+        additionalInfoEntity.setAdminUserEmail(parsedRegistrationRequest.getEmail());
+        additionalInfoEntity.setAdminUserFirstName(parsedRegistrationRequest.getFirstName());
+        additionalInfoEntity.setAdminUserRegistrationTimestamp(TimeManager.currentTime());
+        adminUserEntity.setAdminUserAdditionalInfo(additionalInfoEntity);
         addAdminUser(adminUserEntity);
+    }
+
+    public static String getMd5Hash(String login, String email, String password, String firstName, String secondName) {
+        String str = "";
+        str += login;
+        str += email;
+        str += password;
+        str += firstName;
+        str += secondName;
+        str = Md5Hash.getMd5Hash(str);
+        return str;
     }
 }

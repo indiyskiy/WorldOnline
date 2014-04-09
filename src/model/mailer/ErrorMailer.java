@@ -3,6 +3,7 @@ package model.mailer;
 import model.constants.Component;
 import model.constants.MailConsts;
 import model.logger.LogLevel;
+import model.logger.LoggerFactory;
 import model.logger.LoggerMessage;
 
 import javax.mail.MessagingException;
@@ -13,6 +14,7 @@ public class ErrorMailer {
     private static final String sender = "worldOnLineError";
     private static final String password = "djqysdrjcvjct111";
     private static final HashMap<Component, String[]> responsibilities = setResp();
+    private static final LoggerFactory loggerFactory = new LoggerFactory(Component.Global, ErrorMailer.class);
 
     private static HashMap<Component, String[]> setResp() {
         HashMap<Component, String[]> responsibilities = new HashMap<Component, String[]>();
@@ -28,7 +30,7 @@ public class ErrorMailer {
         try {
             MailSender.send(sender, password, mail, title, text, model.mailer.MailConsts.Yandex);
         } catch (MessagingException e) {
-            e.printStackTrace();
+            loggerFactory.warning(e);
         }
     }
 
@@ -38,7 +40,7 @@ public class ErrorMailer {
                 MailSender.send(sender, password, mail, title, text, model.mailer.MailConsts.Yandex);
             }
         } catch (MessagingException e) {
-            e.printStackTrace();
+            loggerFactory.warning(e);
         }
     }
 
