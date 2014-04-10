@@ -39,7 +39,7 @@ public class AllUsersServlet extends ProtectedServlet {
                 long results = UserRequests.countUser();
                 pages = (results / MAX_ITEMS);
             } else {
-                userEntities = UserRequests.getAllUserss(parser);
+                userEntities = UserRequests.getAllUsers(parser);
                 Long results = UserRequests.countUser(parser);
                 pages = (results / MAX_ITEMS);
             }

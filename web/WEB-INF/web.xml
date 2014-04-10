@@ -218,6 +218,18 @@
         <url-pattern>/mobile/userregistration</url-pattern>
     </servlet-mapping>
 
+    <!--all menu ids-->
+    <servlet>
+        <display-name>GetAllMenusServlet</display-name>
+        <servlet-name>GetAllMenusServlet</servlet-name>
+        <servlet-class>view.servlet.phone.GetAllMenusServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetAllMenusServlet</servlet-name>
+        <url-pattern>/mobile/getallmenus</url-pattern>
+    </servlet-mapping>
+
 
     <!--test servlets-->
 

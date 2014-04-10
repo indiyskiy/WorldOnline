@@ -20,6 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -298,12 +299,13 @@ public class MenuRequest {
             ps.setString(1, name);
             rs = ps.executeQuery();
             if (rs.first()) {
-                Long cardID = rs.getLong("Menu.MenuID");
-                logger.info("return " + cardID);
-                if (cardID != 0 && !rs.wasNull()) {
-                    return getMenu(cardID);
+                Long menuID = rs.getLong("Menu.MenuID");
+                logger.info("return " + menuID);
+                if (menuID != 0 && !rs.wasNull()) {
+                    //todo rewrite with rs.get
+                    return getMenu(menuID);
                 } else {
-                    logger.debug(name+" not found");
+                    logger.debug(name + " not found");
                 }
             }
         } catch (SQLException e) {
@@ -330,5 +332,30 @@ public class MenuRequest {
                 session.close();
             }
         }
+    }
+
+    public static LinkedList<Long> getMenuList() {
+        LinkedList<Long> menuIDList = new LinkedList<>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT Menu.MenuID FROM Menu";
+
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Long menuID = rs.getLong("Menu.MenuID");
+                menuIDList.add(menuID);
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        logger.info("return null");
+        return menuIDList;
     }
 }

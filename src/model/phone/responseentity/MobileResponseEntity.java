@@ -12,7 +12,7 @@ import model.constants.Status;
 public abstract class MobileResponseEntity {
     private Status status;
 
-    protected MobileResponseEntity(Status status) {
+    public MobileResponseEntity(Status status) {
         this.status = status;
     }
 

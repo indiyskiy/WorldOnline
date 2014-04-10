@@ -192,7 +192,7 @@ public class UserRequests {
         return (Long) session.createCriteria(UserEntity.class).setProjection(Projections.rowCount()).uniqueResult();
     }
 
-    public static ArrayList<UserEntity> getAllUserss(AllUsersParser parser) {
+    public static ArrayList<UserEntity> getAllUsers(AllUsersParser parser) {
         ArrayList<UserEntity> users = new ArrayList<UserEntity>();
       /*  DatabaseConnection dbConnection = new DatabaseConnection();
         PreparedStatement ps = null;
@@ -243,4 +243,25 @@ public class UserRequests {
     }
 
 
+    public static boolean isUserExist(Long userID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language(value = "MySQL") String sql = "SELECT User.UserID FROM User " +
+                    "WHERE User.UserID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, userID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return false;
+    }
 }

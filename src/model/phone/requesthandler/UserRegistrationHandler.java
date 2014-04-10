@@ -1,23 +1,21 @@
 package model.phone.requesthandler;
 
+import controller.phone.entity.AllMenusRequest;
+import controller.phone.entity.MobileRequest;
 import controller.phone.entity.ParsedRegistrationRequest;
 import model.database.requests.UserRequests;
 import model.database.worldonlinedb.UserContentEntity;
 import model.database.worldonlinedb.UserEntity;
 import model.database.worldonlinedb.UserHardwareEntity;
 import model.database.worldonlinedb.UserPersonalDataEntity;
+import model.exception.IllegalTypeException;
+import model.phone.responseentity.MobileResponseEntity;
 import model.phone.responseentity.RegistrationResponse;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 28.02.14
- * Time: 16:35
- * To change this template use File | Settings | File Templates.
- */
-public class RegistrationHandler {
 
-    public static RegistrationResponse handleRequest(ParsedRegistrationRequest parsedRegistrationRequest) {
+public class UserRegistrationHandler implements MobileHandler {
+
+    public RegistrationResponse handleRequest(ParsedRegistrationRequest parsedRegistrationRequest) {
         UserPersonalDataEntity userPersonalData = new UserPersonalDataEntity(parsedRegistrationRequest.getLanguage());
         UserHardwareEntity userHardware = new UserHardwareEntity(parsedRegistrationRequest.getDeviceID(),
                 parsedRegistrationRequest.getDeviceToken(),
@@ -28,5 +26,14 @@ public class RegistrationHandler {
         RegistrationResponse registrationResponse = new RegistrationResponse();
         registrationResponse.setUserID(userEntity.getUserID());
         return registrationResponse;
+    }
+
+    @Override
+    public MobileResponseEntity handleRequest(MobileRequest mobileRequest) throws IllegalTypeException {
+        if (mobileRequest.getClass() != ParsedRegistrationRequest.class) {
+            throw new IllegalTypeException(MobileRequest.class, AllMenusRequest.class);
+        }
+        ParsedRegistrationRequest parsedRegistrationRequest = (ParsedRegistrationRequest) mobileRequest;
+        return handleRequest(parsedRegistrationRequest);
     }
 }

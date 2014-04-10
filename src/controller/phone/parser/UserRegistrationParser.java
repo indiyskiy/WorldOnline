@@ -6,7 +6,10 @@ import model.constants.ExceptionTexts;
 import model.constants.databaseenumeration.LanguageType;
 import model.constants.databaseenumeration.MobilePlatform;
 import model.database.requests.UserRequests;
+import model.exception.IllegalTypeException;
 import model.exception.ParseRequestException;
+import model.phone.responseentity.AllMenusResponse;
+import model.phone.responseentity.MobileResponseEntity;
 import model.phone.responseentity.RegistrationResponse;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +21,9 @@ import javax.servlet.http.HttpServletRequest;
  * Time: 15:17
  * To change this template use File | Settings | File Templates.
  */
-public class RegistrationParser {
+public class UserRegistrationParser implements MobileParser {
 
-    public static ParsedRegistrationRequest parse(HttpServletRequest request) throws ParseRequestException {
+    public ParsedRegistrationRequest parse(HttpServletRequest request) throws ParseRequestException {
         ParsedRegistrationRequest parsedRegistrationRequest = new ParsedRegistrationRequest();
         String mobileDeviceModel = request.getParameter("model");
         if (mobileDeviceModel == null || mobileDeviceModel.isEmpty()) {
@@ -61,6 +64,15 @@ public class RegistrationParser {
         }
         parsedRegistrationRequest.setMobilePlatform(mobilePlatform);
         return parsedRegistrationRequest;
+    }
+
+    @Override
+    public String getResponse(MobileResponseEntity mobileResponseEntity) throws IllegalTypeException {
+        if (mobileResponseEntity.getClass() != RegistrationResponse.class) {
+            throw new IllegalTypeException(MobileResponseEntity.class, RegistrationResponse.class);
+        }
+        RegistrationResponse registrationResponse = (RegistrationResponse) mobileResponseEntity;
+        return getResponse(registrationResponse);
     }
 
     public static String getResponse(RegistrationResponse registrationResponse) {

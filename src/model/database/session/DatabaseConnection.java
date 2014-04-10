@@ -28,6 +28,14 @@ public class DatabaseConnection {
     }
 
     public Connection getConnection() {
+        try {
+            if (connection == null || connection.isClosed()) {
+                loggerFactory.error("db connection is closed or null");
+            }
+        } catch (SQLException e) {
+            loggerFactory.error("db connection is closed");
+            loggerFactory.error(e);
+        }
         return connection;
     }
 

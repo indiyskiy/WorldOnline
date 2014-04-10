@@ -7,17 +7,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="[admin]authorization">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/textparser/DESSecretKey.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/admin/RegistrationConfirmServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/textparser/StringCrypter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/AllMenusHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/parser/AllMenusParser.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/entity/AllMenusRequest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/AllMenusResponse.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/phone/GetAllMenusServlet.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/exception/IllegalTypeException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/MobileHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/parser/MobileParser.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/entity/MobileRequest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/phone/MobileServlet.java" />
+      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\controller\phone\parser\RegistrationParser.java" afterPath="$PROJECT_DIR$/src/controller/phone/parser/UserRegistrationParser.java" />
+      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\phone\requesthandler\RegistrationHandler.java" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/UserRegistrationHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/mailer/ErrorMailer.java" afterPath="$PROJECT_DIR$/src/model/mailer/ErrorMailer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/logger/LoggerFactory.java" afterPath="$PROJECT_DIR$/src/model/logger/LoggerFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/mailer/MailSender.java" afterPath="$PROJECT_DIR$/src/model/mailer/MailSender.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/ParsedRegistrationRequest.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/ParsedRegistrationRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/ProtectedServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/ProtectedServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/mailer/RegistrationMailer.java" afterPath="$PROJECT_DIR$/src/model/mailer/RegistrationMailer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/AllUsersServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AllUsersServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" afterPath="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" afterPath="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/phone/parser/MobileErrorParser.java" afterPath="$PROJECT_DIR$/src/controller/phone/parser/MobileErrorParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/phone/responseentity/MobileResponseEntity.java" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/MobileResponseEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/exception/ParseRequestException.java" afterPath="$PROJECT_DIR$/src/model/exception/ParseRequestException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/phone/entity/ParsedRegistrationRequest.java" afterPath="$PROJECT_DIR$/src/controller/phone/entity/ParsedRegistrationRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/ServletHelper.java" afterPath="$PROJECT_DIR$/src/view/servlet/ServletHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/phone/UserRegistrationServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/phone/UserRegistrationServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/UserRequests.java" afterPath="$PROJECT_DIR$/src/model/database/requests/UserRequests.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -88,99 +101,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RegistrationMailer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/mailer/RegistrationMailer.java">
+      <file leaf-file-name="AllMenusParser.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/AllMenusParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="30" selection-start="1511" selection-end="1511" vertical-scroll-proportion="0.0" vertical-offset="96" max-vertical-offset="1445">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegistrationServlet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/RegistrationServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="34" selection-start="1465" selection-end="1465" vertical-scroll-proportion="0.0" vertical-offset="327" max-vertical-offset="918">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccessStatus.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/constants/AccessStatus.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="28" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProtectedServlet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/ProtectedServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="40" selection-start="1148" selection-end="1148" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="1428">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StringCrypter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/textparser/StringCrypter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="19" selection-start="1174" selection-end="1174" vertical-scroll-proportion="0.0" vertical-offset="956" max-vertical-offset="1547">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServerConsts.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/constants/ServerConsts.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="31" selection-start="160" selection-end="160" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="442">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminUserRequest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="167" column="136" selection-start="7664" selection-end="7664" vertical-scroll-proportion="0.56852794" vertical-offset="2180" max-vertical-offset="3502">
-              <folding>
-                <marker date="1397040192186" expanded="true" signature="1235:1495" placeholder="SELECT Admin..AdminUser..." />
-                <marker date="1397040192186" expanded="true" signature="2294:2468" placeholder="SELECT Admin..AdminUser..." />
-                <marker date="1397040192186" expanded="true" signature="5957:6207" placeholder="SELECT * FRO..AdminUser..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegistrationConfirmServlet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/RegistrationConfirmServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="57" selection-start="1103" selection-end="1103" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ParsedRegistrationRequest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/additionalentity/ParsedRegistrationRequest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="1" selection-start="1340" selection-end="1340" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="850">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MailSender.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/mailer/MailSender.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="53" selection-start="2671" selection-end="2671" vertical-scroll-proportion="0.0" vertical-offset="952" max-vertical-offset="1173">
+            <state line="35" column="64" selection-start="1436" selection-end="1436" vertical-scroll-proportion="0.3233831" vertical-offset="97" max-vertical-offset="901">
               <folding />
             </state>
           </provider>
@@ -210,41 +134,11 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/controller/parser/edit/adminparser/LoginParser.java" />
-        <option value="$PROJECT_DIR$/META-INF/context.xml" />
-        <option value="$PROJECT_DIR$/web/META-INF/context.xml" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/LoginRequest.java" />
-        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/AdminRoleEntity.java" />
-        <option value="$PROJECT_DIR$/src/model/ServerInit.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/AllMenusServlet.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/AllTagsServlet.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/CompleteMenuInfoServlet.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/TagEditServlet.java" />
-        <option value="$PROJECT_DIR$/web/error.jsp" />
-        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/AdminUserSessionEntity.java" />
-        <option value="$PROJECT_DIR$/web/unknownError.jsp" />
-        <option value="$PROJECT_DIR$/web/denied.jsp" />
-        <option value="$PROJECT_DIR$/web/globalbaseparse.jsp" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/Registration.java" />
-        <option value="$PROJECT_DIR$/web/login.jsp" />
-        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/AdminUserAdditionalInfoEntity.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/LoginServlet.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/GlobalBaseParseServlet.java" />
-        <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
-        <option value="$PROJECT_DIR$/src/controller/parser/edit/adminparser/RegistrationParse.java" />
-        <option value="$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java" />
-        <option value="$PROJECT_DIR$/src/controller/parser/adminparser/RegistrationParse.java" />
-        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/AdminUserEntity.java" />
-        <option value="$PROJECT_DIR$/src/model/database/session/HibernateUtil.java" />
-        <option value="$PROJECT_DIR$/src/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/src/model/ParameterValidator.java" />
         <option value="$PROJECT_DIR$/src/model/constants/ProtectAdminLevel.java" />
         <option value="$PROJECT_DIR$/src/model/constants/AdminRule.java" />
         <option value="$PROJECT_DIR$/src/model/mailer/GmailSender.java" />
         <option value="$PROJECT_DIR$/src/model/mailer/MailConsts.java" />
         <option value="$PROJECT_DIR$/web/registration.jsp" />
-        <option value="$PROJECT_DIR$/src/view/servlet/ServletHelper.java" />
         <option value="$PROJECT_DIR$/src/model/logger/LoggerMessage.java" />
         <option value="$PROJECT_DIR$/src/model/logger/LoggerFactory.java" />
         <option value="$PROJECT_DIR$/src/model/mailer/ErrorMailer.java" />
@@ -256,11 +150,41 @@
         <option value="$PROJECT_DIR$/src/model/mailer/MailSender.java" />
         <option value="$PROJECT_DIR$/src/model/additionalentity/ParsedRegistrationRequest.java" />
         <option value="$PROJECT_DIR$/src/view/servlet/admin/MailConfirmServlet.java" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/view/servlet/admin/ProtectedServlet.java" />
         <option value="$PROJECT_DIR$/src/view/servlet/admin/RegistrationConfirmServlet.java" />
         <option value="$PROJECT_DIR$/src/model/mailer/RegistrationMailer.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/parser/AllMenusRequestParser.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/entity/ParsedAllMenusRequest.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/entity/AllMenusRequest.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/entity/MobileRequest.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/entity/ParsedRegistrationRequest.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/parser/MobileErrorParser.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/MobileRequestHandler.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/PhoneHandler.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/MobileHandler.java" />
+        <option value="$PROJECT_DIR$/src/model/exception/IllegalTypeException.java" />
+        <option value="$PROJECT_DIR$/src/model/exception/ParseRequestException.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/parser/MobileParser.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/phone/MobileServlet.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/phone/GetAllMenusServlet.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/Caster.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/parser/RegistrationParser.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/RegistrationHandler.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/UserRegistrationHandler.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/phone/UserRegistrationServlet.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/responseentity/MobileResponseEntity.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/AllMenusHandler.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/responseentity/AllMenusResponse.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/ServletHelper.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/parser/AllMenusParser.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/UserRequests.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/AllUsersServlet.java" />
+        <option value="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" />
+        <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
       </list>
     </option>
   </component>
@@ -314,6 +238,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -360,6 +285,46 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="servlet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="servlet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -382,13 +347,104 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="constants" />
+              <option name="myItemId" value="phone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="requesthandler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -437,21 +493,11 @@
       <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\lib" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
-      <recent name="controller.parser.edit.adminparser" />
-      <recent name="model.additionalentity" />
-      <recent name="model.database.requests" />
-      <recent name="model.constants" />
-      <recent name="model.textparser" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\lib" />
-      <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\src\model\xmlparser\" />
-      <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\lib" />
-      <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\web" />
-      <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\WebContent" />
-    </key>
-    <key name="ImportMappingsDialog.RecentPackages">
-      <recent name="database" />
+      <recent name="view.servlet.phone" />
+      <recent name="model.exception" />
+      <recent name="controller.phone.entity" />
+      <recent name="controller.phone.parser" />
+      <recent name="model.phone.requesthandler" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="controller.parser" />
@@ -459,6 +505,16 @@
       <recent name="controller.parser.edit.phone" />
       <recent name="model.phone" />
       <recent name="model.constants" />
+    </key>
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="database" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\lib" />
+      <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\src\model\xmlparser\" />
+      <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\lib" />
+      <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\web" />
+      <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\WebContent" />
     </key>
   </component>
   <component name="RunManager" selected="Application.RegistrationMailer">
@@ -938,7 +994,9 @@
       <workItem from="1396855859247" duration="23641000" />
       <workItem from="1396944145237" duration="2589000" />
       <workItem from="1396947392850" duration="19768000" />
-      <workItem from="1397026941442" duration="9410000" />
+      <workItem from="1397026941442" duration="9550000" />
+      <workItem from="1397045375447" duration="5261000" />
+      <workItem from="1397112993046" duration="11759000" />
     </task>
     <task id="LOCAL-00001" summary="TestCommit">
       <created>1383271700462</created>
@@ -1192,22 +1250,26 @@
       <created>1396885300010</created>
       <updated>1396885300010</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="[admin]authorization">
+      <created>1397040200865</created>
+      <updated>1397040200879</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="360321000" />
+    <option name="totallyTimeSpent" value="377481000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.8014101" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19547658" sideWeight="0.78613394" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19547658" sideWeight="0.78613394" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38790035" sideWeight="0.50807756" order="7" side_tool="true" content_ui="tabs" />
@@ -1216,12 +1278,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740214" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28675282" sideWeight="0.7426557" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28675282" sideWeight="0.7426557" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36654803" sideWeight="0.4911147" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24317913" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24317913" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39952996" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2123369" sideWeight="0.49353796" order="7" side_tool="false" content_ui="tabs" />
@@ -1240,10 +1302,10 @@
     <layout-to-restore>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.8014101" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19547658" sideWeight="0.78613394" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.8014101" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38790035" sideWeight="0.50807756" order="11" side_tool="true" content_ui="tabs" />
@@ -1255,7 +1317,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28675282" sideWeight="0.7426557" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36654803" sideWeight="0.4911147" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36654803" sideWeight="0.4911147" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36180308" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1263,7 +1325,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24317913" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24317913" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39952996" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2123369" sideWeight="0.49353796" order="16" side_tool="false" content_ui="tabs" />
@@ -1340,182 +1402,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/TagEditServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="91" selection-start="944" selection-end="944" vertical-scroll-proportion="0.0" vertical-offset="430" max-vertical-offset="1003" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/error.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="21" selection-start="287" selection-end="287" vertical-scroll-proportion="0.287013" vertical-offset="0" max-vertical-offset="770" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/unknownError.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="19" selection-start="293" selection-end="293" vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="374" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/denied.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="4" selection-start="294" selection-end="294" vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="408" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="30" selection-start="406" selection-end="406" vertical-scroll-proportion="0.52667814" vertical-offset="0" max-vertical-offset="581" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/globalbaseparse.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="27" selection-start="326" selection-end="326" vertical-scroll-proportion="0.43889844" vertical-offset="0" max-vertical-offset="581" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/javax.servlet.jar!/javax/servlet/http/HttpServlet.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="19" selection-start="1582" selection-end="1582" vertical-scroll-proportion="0.35676625" vertical-offset="239" max-vertical-offset="833" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/login.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="9" selection-start="504" selection-end="504" vertical-scroll-proportion="-10.461538" vertical-offset="0" max-vertical-offset="510" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/AdminUserAdditionalInfoEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="48" selection-start="965" selection-end="965" vertical-scroll-proportion="0.0" vertical-offset="740" max-vertical-offset="1326" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/AdminUserSessionEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="12" selection-start="764" selection-end="764" vertical-scroll-proportion="0.0" vertical-offset="251" max-vertical-offset="884" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/CardChangeEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="12" selection-start="1092" selection-end="1092" vertical-scroll-proportion="0.32125205" vertical-offset="451" max-vertical-offset="1241" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/GlobalBaseParseServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="27" selection-start="414" selection-end="414" vertical-scroll-proportion="0.042288557" vertical-offset="0" max-vertical-offset="804">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/parser/adminparser/AllCardParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="13" selection-start="343" selection-end="343" vertical-scroll-proportion="0.23492463" vertical-offset="0" max-vertical-offset="1088" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="950" column="5" selection-start="55961" selection-end="55961" vertical-scroll-proportion="-0.97573435" vertical-offset="16251" max-vertical-offset="17034" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/AdminUserEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="3" selection-start="1672" selection-end="1736" vertical-scroll-proportion="0.0" vertical-offset="685" max-vertical-offset="1292" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/ParameterValidator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="12" selection-start="2136" selection-end="2136" vertical-scroll-proportion="0.6693679" vertical-offset="641" max-vertical-offset="1258">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/constants/ProtectAdminLevel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="8" selection-start="106" selection-end="106" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/parser/adminparser/RegistrationParse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="41" selection-start="2405" selection-end="2405" vertical-scroll-proportion="0.7389079" vertical-offset="434" max-vertical-offset="1020" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/mailer/MailConsts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="29" selection-start="435" selection-end="435" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="38" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/META-INF/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="162" column="0" selection-start="10099" selection-end="10099" vertical-scroll-proportion="0.50879395" vertical-offset="2349" max-vertical-offset="3145">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/session/HibernateUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="56" selection-start="2648" selection-end="2648" vertical-scroll-proportion="0.0" vertical-offset="481" max-vertical-offset="1054" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/registration.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="9" selection-start="729" selection-end="729" vertical-scroll-proportion="-14.384615" vertical-offset="51" max-vertical-offset="663" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/javax.servlet.jar!/javax/servlet/ServletRequest.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="9" selection-start="1146" selection-end="1146" vertical-scroll-proportion="-7.64" vertical-offset="523" max-vertical-offset="1462" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/LoginServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="30" selection-start="1980" selection-end="1980" vertical-scroll-proportion="0.8248945" vertical-offset="204" max-vertical-offset="901">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/parser/adminparser/LoginParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="26" selection-start="264" selection-end="264" vertical-scroll-proportion="0.26771653" vertical-offset="0" max-vertical-offset="508" />
-      </provider>
-    </entry>
-    <entry file="jar://C:/glassfish4/jdk7/jre/lib/rt.jar!/java/util/LinkedList.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="19" selection-start="1524" selection-end="1524" vertical-scroll-proportion="0.33333334" vertical-offset="566" max-vertical-offset="3009" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/logger/LogLevel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="4" selection-start="247" selection-end="247" vertical-scroll-proportion="0.0" vertical-offset="52" max-vertical-offset="731" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/logger/LoggerMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="20" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1156" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/logger/Logger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="19" selection-start="2727" selection-end="2727" vertical-scroll-proportion="0.0" vertical-offset="781" max-vertical-offset="1598" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/ServletHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="28" selection-start="2294" selection-end="2294" vertical-scroll-proportion="0.5050505" vertical-offset="583" max-vertical-offset="1292">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/mailer/ErrorMailer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="37" selection-start="1913" selection-end="1913" vertical-scroll-proportion="1.1505922" vertical-offset="0" max-vertical-offset="867">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/constants/MailConsts.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="33" selection-start="305" selection-end="305" vertical-scroll-proportion="0.31641287" vertical-offset="0" max-vertical-offset="591">
@@ -1532,12 +1418,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/textparser/DESSecretKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="19" selection-start="274" selection-end="277" vertical-scroll-proportion="0.3888889" vertical-offset="0" max-vertical-offset="612">
-          <folding>
-            <element signature="e#407#408#0" expanded="true" />
-            <element signature="e#433#434#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="14" column="19" selection-start="274" selection-end="277" vertical-scroll-proportion="0.3888889" vertical-offset="0" max-vertical-offset="612" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/javax.mail.jar!/com/sun/mail/smtp/SMTPTransport.class">
@@ -1557,102 +1438,351 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="199" column="60" selection-start="6554" selection-end="6554" vertical-scroll-proportion="0.0" vertical-offset="3263" max-vertical-offset="4097">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/constants/ServerConsts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="31" selection-start="160" selection-end="160" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/mailer/MailSender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="53" selection-start="2671" selection-end="2671" vertical-scroll-proportion="0.0" vertical-offset="952" max-vertical-offset="1173">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/glassfish4/jdk7/jre/lib/jce.jar!/javax/crypto/Cipher.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="24" selection-start="8153" selection-end="8153" vertical-scroll-proportion="0.33333334" vertical-offset="1882" max-vertical-offset="2975">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/constants/AccessStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="28" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
-          <folding />
-        </state>
+        <state line="121" column="24" selection-start="8153" selection-end="8153" vertical-scroll-proportion="0.33333334" vertical-offset="1882" max-vertical-offset="2975" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/constants/AdminRule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="12" selection-start="105" selection-end="105" vertical-scroll-proportion="-0.4890017" vertical-offset="408" max-vertical-offset="1360">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/ProtectedServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="40" selection-start="1148" selection-end="1148" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="1428">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/textparser/StringCrypter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="19" selection-start="1174" selection-end="1174" vertical-scroll-proportion="0.0" vertical-offset="1060" max-vertical-offset="1547">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/RegistrationConfirmServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="57" selection-start="1103" selection-end="1103" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/ParsedRegistrationRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="1" selection-start="1340" selection-end="1340" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="850">
-          <folding />
-        </state>
+        <state line="7" column="12" selection-start="105" selection-end="105" vertical-scroll-proportion="-0.4890017" vertical-offset="408" max-vertical-offset="1360" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/mailer/RegistrationMailer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="30" selection-start="1511" selection-end="1511" vertical-scroll-proportion="0.0" vertical-offset="96" max-vertical-offset="1445">
+        <state line="34" column="30" selection-start="1511" selection-end="1511" vertical-scroll-proportion="0.46741855" vertical-offset="35" max-vertical-offset="1445">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/RegistrationServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="34" selection-start="1465" selection-end="1465" vertical-scroll-proportion="0.0" vertical-offset="327" max-vertical-offset="918">
+        <state line="35" column="34" selection-start="1465" selection-end="1465" vertical-scroll-proportion="0.46867168" vertical-offset="0" max-vertical-offset="798">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/AccessStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="28" selection-start="121" selection-end="121" vertical-scroll-proportion="0.12781955" vertical-offset="0" max-vertical-offset="798">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/ProtectedServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="40" selection-start="1148" selection-end="1148" vertical-scroll-proportion="-0.31135532" vertical-offset="493" max-vertical-offset="1428">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/textparser/StringCrypter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="19" selection-start="1174" selection-end="1174" vertical-scroll-proportion="-0.1001221" vertical-offset="490" max-vertical-offset="1309" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/ServerConsts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="31" selection-start="160" selection-end="160" vertical-scroll-proportion="0.103785105" vertical-offset="0" max-vertical-offset="819" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/RegistrationConfirmServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="57" selection-start="1103" selection-end="1103" vertical-scroll-proportion="0.41514042" vertical-offset="0" max-vertical-offset="819" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/ParsedRegistrationRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="1" selection-start="1340" selection-end="1340" vertical-scroll-proportion="0.85470086" vertical-offset="31" max-vertical-offset="850" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/mailer/MailSender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="53" selection-start="2671" selection-end="2671" vertical-scroll-proportion="0.7258065" vertical-offset="163" max-vertical-offset="969">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/glassfish4/jdk7/jre/lib/rt.jar!/java/sql/Connection.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="17" selection-start="155" selection-end="155" vertical-scroll-proportion="0.14655173" vertical-offset="0" max-vertical-offset="2057">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/EventEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="296" column="52" selection-start="6710" selection-end="6710" vertical-scroll-proportion="0.33275864" vertical-offset="3275" max-vertical-offset="4420">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/CardRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="426" column="14" selection-start="22306" selection-end="22306" vertical-scroll-proportion="0.0" vertical-offset="6658" max-vertical-offset="12036">
+          <folding>
+            <marker date="1396861114822" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Card..." />
+            <marker date="1396861114822" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Card..." />
+            <marker date="1396861114822" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Card..." />
+            <marker date="1396861114822" expanded="true" signature="-1:-1" placeholder="SELECT count..Card..." />
+            <marker date="1396861114822" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Text..." />
+            <marker date="1396861114822" expanded="true" signature="-1:-1" placeholder="SELECT Text...Text..." />
+            <marker date="1396861114822" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1396861114822" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1396861114822" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1396861114822" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1396861114822" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1396861114822" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/MobileErrorParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="31" selection-start="427" selection-end="427" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/ParsedRegistrationRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="55" selection-start="360" selection-end="360" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/exception/IllegalTypeException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="102" selection-start="427" selection-end="427" vertical-scroll-proportion="0.46023688" vertical-offset="0" max-vertical-offset="591">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/exception/ParseRequestException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="26" selection-end="26" vertical-scroll-proportion="0.05752961" vertical-offset="0" max-vertical-offset="591">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/phone/requesthandler/MobileHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="32" selection-start="257" selection-end="257" vertical-scroll-proportion="0.25888324" vertical-offset="0" max-vertical-offset="591">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/MobileRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="25" selection-start="99" selection-end="99" vertical-scroll-proportion="0.1388889" vertical-offset="0" max-vertical-offset="612">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/AllMenusRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="50" selection-start="111" selection-end="124" vertical-scroll-proportion="0.14382403" vertical-offset="0" max-vertical-offset="591">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/phone/MobileServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="50" selection-start="1408" selection-end="1408" vertical-scroll-proportion="0.0" vertical-offset="310" max-vertical-offset="901">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/phone/UserRegistrationServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="28" selection-start="956" selection-end="956" vertical-scroll-proportion="0.30018082" vertical-offset="361" max-vertical-offset="935">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#926#927#0" expanded="true" />
+            <element signature="e#962#963#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/phone/requesthandler/UserRegistrationHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="13" selection-start="625" selection-end="625" vertical-scroll-proportion="0.14705883" vertical-offset="0" max-vertical-offset="595">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/phone/responseentity/RegistrationResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="13" selection-start="236" selection-end="236" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/phone/responseentity/MobileResponseEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="10" selection-start="306" selection-end="306" vertical-scroll-proportion="0.3888889" vertical-offset="0" max-vertical-offset="612">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/phone/GetAllMenusServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="19" selection-start="815" selection-end="815" vertical-scroll-proportion="0.29411766" vertical-offset="0" max-vertical-offset="714">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/phone/requesthandler/AllMenusHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="19" selection-start="379" selection-end="379" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-2.2.4.jar!/com/google/gson/JsonArray.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="11" selection-start="355" selection-end="355" vertical-scroll-proportion="0.24593128" vertical-offset="0" max-vertical-offset="935">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-2.2.4.jar!/com/google/gson/JsonObject.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="18" selection-start="131" selection-end="137" vertical-scroll-proportion="0.09222423" vertical-offset="0" max-vertical-offset="799">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-2.2.4.jar!/com/google/gson/Gson.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="28" selection-start="2846" selection-end="2846" vertical-scroll-proportion="0.34719712" vertical-offset="505" max-vertical-offset="1598">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/UserRegistrationParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="37" selection-start="884" selection-end="884" vertical-scroll-proportion="-0.9031142" vertical-offset="743" max-vertical-offset="1326">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/MenuRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="350" column="23" selection-start="14199" selection-end="14199" vertical-scroll-proportion="-10.56" vertical-offset="5346" max-vertical-offset="5899">
+          <folding>
+            <marker date="1397122762011" expanded="true" signature="-1:-1" placeholder="UPDATE Menu ..." />
+            <marker date="1397122762011" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Menu..." />
+            <marker date="1397122762011" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Menu..." />
+            <marker date="1397122762011" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Menu..." />
+            <marker date="1397122762011" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Text..." />
+            <marker date="1397122762011" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Text..." />
+            <marker date="1397122762011" expanded="true" signature="-1:-1" placeholder="SELECT Menu...Menu..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/ServletHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="42" selection-start="3128" selection-end="3128" vertical-scroll-proportion="0.74626863" vertical-offset="573" max-vertical-offset="1377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/MobileParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="25" selection-start="373" selection-end="373" vertical-scroll-proportion="0.2748756" vertical-offset="0" max-vertical-offset="804">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/phone/responseentity/AllMenusResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="16" selection-start="320" selection-end="320" vertical-scroll-proportion="0.35373318" vertical-offset="0" max-vertical-offset="817">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#357#358#0" expanded="true" />
+            <element signature="e#395#396#0" expanded="true" />
+            <element signature="e#439#440#0" expanded="true" />
+            <element signature="e#469#470#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AllUsersServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="55" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.0" vertical-offset="84" max-vertical-offset="867">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/ExceptionTexts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="95" selection-start="1338" selection-end="1338" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/UserRequests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="251" column="64" selection-start="9480" selection-end="9480" vertical-scroll-proportion="0.0" vertical-offset="3757" max-vertical-offset="4335">
+          <folding>
+            <marker date="1397124036075" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..UserCard..." />
+            <marker date="1397124036075" expanded="true" signature="-1:-1" placeholder="SELECT UserH..UserHardware..." />
+            <marker date="1397124036075" expanded="true" signature="-1:-1" placeholder="SELECT User...User..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="213" column="14" selection-start="7029" selection-end="7029" vertical-scroll-proportion="0.5927152" vertical-offset="3263" max-vertical-offset="4301">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="27" selection-start="1029" selection-end="1029" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/glassfish4/jdk7/jre/lib/rt.jar!/java/sql/DriverManager.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="151" selection-end="151" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1156">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="33" selection-start="734" selection-end="734" vertical-scroll-proportion="0.449827" vertical-offset="80" max-vertical-offset="1037">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="167" column="136" selection-start="7664" selection-end="7664" vertical-scroll-proportion="0.56852794" vertical-offset="2180" max-vertical-offset="3502">
+        <state line="210" column="21" selection-start="9661" selection-end="9661" vertical-scroll-proportion="0.82470787" vertical-offset="2753" max-vertical-offset="3536">
           <folding>
-            <marker date="1397040192186" expanded="true" signature="1235:1495" placeholder="SELECT Admin..AdminUser..." />
-            <marker date="1397040192186" expanded="true" signature="2294:2468" placeholder="SELECT Admin..AdminUser..." />
-            <marker date="1397040192186" expanded="true" signature="5957:6207" placeholder="SELECT * FRO..AdminUser..." />
+            <marker date="1397124036036" expanded="true" signature="-1:-1" placeholder="SELECT Admin..AdminUser..." />
+            <marker date="1397124036036" expanded="true" signature="-1:-1" placeholder="SELECT Admin..AdminUser..." />
+            <marker date="1397124036036" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..AdminUser..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/AllMenusParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="64" selection-start="1436" selection-end="1436" vertical-scroll-proportion="0.3233831" vertical-offset="97" max-vertical-offset="901">
+          <folding />
         </state>
       </provider>
     </entry>

@@ -10,7 +10,7 @@ import model.constants.databaseenumeration.MobilePlatform;
  * Time: 15:16
  * To change this template use File | Settings | File Templates.
  */
-public class ParsedRegistrationRequest {
+public class ParsedRegistrationRequest extends MobileRequest {
     private String model;
     private String deviceID;
     private LanguageType language;
@@ -18,7 +18,7 @@ public class ParsedRegistrationRequest {
     private MobilePlatform mobilePlatform;
 
     public ParsedRegistrationRequest() {
-        this.language=LanguageType.Unknown;
+        this.language = LanguageType.Unknown;
     }
 
     public String getDeviceID() {

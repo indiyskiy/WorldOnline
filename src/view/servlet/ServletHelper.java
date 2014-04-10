@@ -53,6 +53,11 @@ public class ServletHelper {
         out.close();
     }
 
+    public static void sendJson(HttpServletResponse response, String responseString) throws IOException {
+        response.setContentType("application/json");
+        sendResponse(response, responseString);
+    }
+
     public static void sendError(Exception error, HttpServletRequest request, HttpServletResponse response, HttpServlet servlet, LoggerFactory loggerFactory) {
         try {
             if (request != null) {
@@ -71,9 +76,9 @@ public class ServletHelper {
 
     public static void sendMobileError(LoggerFactory loggerFactory, Exception error, HttpServletResponse response) {
         loggerFactory.error(error);
-        String errorJSON = MobileErrorParser.parse(error);
+        String errorJSON = new MobileErrorParser().parse(error);
         try {
-            sendResponse(response, errorJSON);
+            sendJson(response, errorJSON);
         } catch (IOException e) {
             loggerFactory.error(e);
         }
