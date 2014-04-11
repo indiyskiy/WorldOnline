@@ -3,14 +3,12 @@ package view.servlet.admin;
 import model.additionalentity.CompleteCardInfo;
 import model.constants.AdminRule;
 import model.constants.Component;
-import model.constants.ProtectAdminLevel;
 import model.constants.databaseenumeration.*;
 import model.database.requests.CardRequest;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -62,7 +60,7 @@ public class CompleteCardInfoServlet extends ProtectedServlet {
                         request.setAttribute("images", completeCardInfo.getCompleteCardImageInfoMap().values());
                     }
 //                    if (completeCardInfo.getCompleteMenuInfoMap() != null && !completeCardInfo.getCompleteMenuInfoMap().isEmpty()) {
-                        request.setAttribute("menus", completeCardInfo.getCompleteMenuInfoMap().values());
+                    request.setAttribute("menus", completeCardInfo.getCompleteMenuInfoMap().values());
 //                    }
                 }
                 ServletHelper.sendForward("/completecardinfo.jsp?CardID=" + cardID, this, request, response);

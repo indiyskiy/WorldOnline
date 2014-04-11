@@ -25,7 +25,7 @@ public enum MenuType {
 
     public static MenuType parseInt(int value) {
         MenuType[] menuTypes = MenuType.values();
-        if (value <= 0 || value >=menuTypes.length) {
+        if (value <= 0 || value >= menuTypes.length) {
             return Unknown;
         } else {
             return menuTypes[value];

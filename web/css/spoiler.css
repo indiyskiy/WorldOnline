@@ -1,9 +1,38 @@
 /*spoiler*/
-.spoiler {border-radius:7px; border:1px solid blue; background:lavender;}
-.spoiler {cursor:pointer; margin:5px 0;}
+.spoiler {
+    border-radius: 7px;
+    border: 1px solid blue;
+    background: lavender;
+}
+
+.spoiler {
+    cursor: pointer;
+    margin: 5px 0;
+}
+
 /*.spoiler:hover {background:lavenderblush;}*/
-.spoiler dt:hover {background:lavenderblush; border-radius:12px;}
-.spoiler dt {margin:3px; padding:2px 0 5px 9px;}
-.spoiler dd {display:none; border-radius:7px; border:1px solid blue;}
-.spoiler dd {margin:0 9px 7px 33px; padding:7px; text-align:justify;}
-.spoiler dd {background:lavender;}
+.spoiler dt:hover {
+    background: lavenderblush;
+    border-radius: 12px;
+}
+
+.spoiler dt {
+    margin: 3px;
+    padding: 2px 0 5px 9px;
+}
+
+.spoiler dd {
+    display: none;
+    border-radius: 7px;
+    border: 1px solid blue;
+}
+
+.spoiler dd {
+    margin: 0 9px 7px 33px;
+    padding: 7px;
+    text-align: justify;
+}
+
+.spoiler dd {
+    background: lavender;
+}

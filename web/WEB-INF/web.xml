@@ -230,6 +230,18 @@
         <url-pattern>/mobile/getallmenus</url-pattern>
     </servlet-mapping>
 
+    <!--all menu ids-->
+    <servlet>
+        <display-name>GetMenuServlet</display-name>
+        <servlet-name>GetMenuServlet</servlet-name>
+        <servlet-class>view.servlet.phone.GetMenuServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetMenuServlet</servlet-name>
+        <url-pattern>/mobile/getmenu</url-pattern>
+    </servlet-mapping>
+
 
     <!--test servlets-->
 

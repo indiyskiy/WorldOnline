@@ -16,7 +16,7 @@ import java.io.FileNotFoundException;
  * To change this template use File | Settings | File Templates.
  */
 public class PeopleParser {
-    private LoggerFactory loggerFactory=new LoggerFactory(Component.Parser,PeopleParser.class);
+    private LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, PeopleParser.class);
 
     public PeopleAboutCity getPeopleAboutCity(String root) {
         try {

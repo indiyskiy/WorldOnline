@@ -16,8 +16,8 @@ public class Tag {
     public Integer tagID;
 
     public Tag getClone() {
-        Tag clone=new Tag();
-        clone.tagID=this.tagID;
+        Tag clone = new Tag();
+        clone.tagID = this.tagID;
         return clone;
     }
 }

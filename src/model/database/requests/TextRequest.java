@@ -198,9 +198,9 @@ public class TextRequest {
             if (rs.first()) {
                 completeTextGroupInfo = new CompleteTextGroupInfo(getTextGroupByResultSet(rs));
                 getCompleteTextGroupInfo(rs, completeTextGroupInfo, "Text");
-            while (rs.next()) {
-                getCompleteTextGroupInfo(rs, completeTextGroupInfo, "Text");
-            }
+                while (rs.next()) {
+                    getCompleteTextGroupInfo(rs, completeTextGroupInfo, "Text");
+                }
             }
         } catch (SQLException e) {
             loggerFactory.error(e);
@@ -210,7 +210,7 @@ public class TextRequest {
         return completeTextGroupInfo;
     }
 
-    public static boolean isTranslated(String text, LanguageType language){
+    public static boolean isTranslated(String text, LanguageType language) {
         DatabaseConnection dbConnection = new DatabaseConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;

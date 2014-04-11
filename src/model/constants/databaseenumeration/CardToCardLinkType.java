@@ -20,7 +20,7 @@ public enum CardToCardLinkType {
 
     public static CardToCardLinkType parseInt(int value) {
         CardToCardLinkType[] cardToCardLinkTypes = CardToCardLinkType.values();
-        if (value <= 0 || value >=cardToCardLinkTypes.length) {
+        if (value <= 0 || value >= cardToCardLinkTypes.length) {
             return Unknown;
         } else {
             return cardToCardLinkTypes[value];

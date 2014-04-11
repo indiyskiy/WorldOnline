@@ -1,6 +1,9 @@
 package model;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,9 +13,9 @@ import java.io.*;
  * To change this template use File | Settings | File Templates.
  */
 public class FileReader {
-    public static String readFileAsString(String filePath ) throws IOException {
+    public static String readFileAsString(String filePath) throws IOException {
         StringBuilder fileData = new StringBuilder();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath),"UTF-8"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"));
         char[] buf = new char[1024];
         int numRead;
         while ((numRead = reader.read(buf)) != -1) {

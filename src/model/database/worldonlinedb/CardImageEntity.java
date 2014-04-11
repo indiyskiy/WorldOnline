@@ -128,6 +128,6 @@ public class CardImageEntity {
         this.card = card;
         this.image = image;
         this.cardImageType = cardImageType.getValue();
-        this.cardImageName=card.getCardName()+"-"+cardImageType;
+        this.cardImageName = card.getCardName() + "-" + cardImageType;
     }
 }

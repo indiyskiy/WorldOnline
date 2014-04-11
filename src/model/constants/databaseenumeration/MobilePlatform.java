@@ -25,7 +25,7 @@ public enum MobilePlatform {
 
     public static MobilePlatform parseInt(int value) {
         MobilePlatform[] mobilePlatforms = MobilePlatform.values();
-        if (value <= 0 || value >=mobilePlatforms.length) {
+        if (value <= 0 || value >= mobilePlatforms.length) {
             return Unknown;
         } else {
             return mobilePlatforms[value];
@@ -33,6 +33,6 @@ public enum MobilePlatform {
     }
 
     public static MobilePlatform parse(String mobilePlatformValue) {
-            return MobilePlatform.valueOf(mobilePlatformValue);
+        return MobilePlatform.valueOf(mobilePlatformValue);
     }
 }

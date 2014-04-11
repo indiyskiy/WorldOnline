@@ -30,7 +30,8 @@
     </value>
 </select>
     <br/>
-    Группа текстов тега [ID${tag.tagTextGroup.textGroupID}]${tag.tagTextGroup.textGroupName} ( <a href="texteroupedit?TextGroupID=${tag.tagTextGroup.textGroupID}">Редактировать</a>)
+    Группа текстов тега [ID${tag.tagTextGroup.textGroupID}]${tag.tagTextGroup.textGroupName} ( <a
+        href="texteroupedit?TextGroupID=${tag.tagTextGroup.textGroupID}">Редактировать</a>)
     <br/>
     <input type="submit" value="Submit" name="action"/>
 </form>

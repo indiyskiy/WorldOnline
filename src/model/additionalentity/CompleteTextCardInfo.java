@@ -14,7 +14,7 @@ public class CompleteTextCardInfo {
     private CompleteTextGroupInfo completeTextGroupInfo;
 
     public CompleteTextCardInfo(TextCardEntity textCardEntity) {
-        this.textCardEntity=textCardEntity;
+        this.textCardEntity = textCardEntity;
     }
 
     public TextCardEntity getTextCardEntity() {

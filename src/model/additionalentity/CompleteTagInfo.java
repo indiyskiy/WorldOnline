@@ -13,7 +13,7 @@ import java.util.HashMap;
  */
 public class CompleteTagInfo {
     private TagEntity tagEntity;
-    private HashMap<Long, CompleteTextGroupInfo> completeTextGroupInfoMap=new HashMap<Long, CompleteTextGroupInfo>();
+    private HashMap<Long, CompleteTextGroupInfo> completeTextGroupInfoMap = new HashMap<Long, CompleteTextGroupInfo>();
 
     public CompleteTagInfo(TagEntity tagEntity) {
         this.tagEntity = tagEntity;

@@ -2,7 +2,6 @@ package model.mailer;
 
 import model.constants.Component;
 import model.constants.MailConsts;
-import model.logger.LogLevel;
 import model.logger.LoggerFactory;
 import model.logger.LoggerMessage;
 

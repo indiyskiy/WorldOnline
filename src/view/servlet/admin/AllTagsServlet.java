@@ -2,7 +2,6 @@ package view.servlet.admin;
 
 import model.constants.AdminRule;
 import model.constants.Component;
-import model.constants.ProtectAdminLevel;
 import model.constants.databaseenumeration.TagType;
 import model.database.requests.TagRequest;
 import model.database.worldonlinedb.TagEntity;
@@ -10,7 +9,6 @@ import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -25,7 +23,7 @@ import java.util.ArrayList;
  */
 public class AllTagsServlet extends ProtectedServlet {
 
-    private LoggerFactory loggerFactory=new LoggerFactory(Component.Admin,AllTagsServlet.class);
+    private LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, AllTagsServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -33,7 +31,7 @@ public class AllTagsServlet extends ProtectedServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-          ServletHelper.setUTF8(request, response);
+            ServletHelper.setUTF8(request, response);
             if (request.getParameter("TagType") == null || request.getParameter("TagType").isEmpty()) {
                 TagType[] tagTypes = TagType.values();
                 for (TagType tagType : tagTypes) {

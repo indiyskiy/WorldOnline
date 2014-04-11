@@ -3,14 +3,12 @@ package view.servlet.admin;
 import model.additionalentity.MenuInfo;
 import model.constants.AdminRule;
 import model.constants.Component;
-import model.constants.ProtectAdminLevel;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.requests.MenuRequest;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -38,10 +36,10 @@ public class AllMenusServlet extends ProtectedServlet {
                 menuId = Long.parseLong(request.getParameter("MenuID"));
             }
             MenuInfo menuInfo;
-            String redirect="/allmenus.jsp";
+            String redirect = "/allmenus.jsp";
             if (menuId != null) {
                 menuInfo = MenuRequest.getMenuInfo(menuId, LanguageType.Russian);
-                redirect+="?MenuID="+menuId;
+                redirect += "?MenuID=" + menuId;
             } else {
                 menuInfo = MenuRequest.getRootMenuInfo(LanguageType.Russian);
             }

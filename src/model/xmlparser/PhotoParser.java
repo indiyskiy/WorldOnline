@@ -16,7 +16,7 @@ import java.io.FileNotFoundException;
  * To change this template use File | Settings | File Templates.
  */
 public class PhotoParser {
-    private LoggerFactory loggerFactory=new LoggerFactory(Component.Parser,PhotoParser.class);
+    private LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, PhotoParser.class);
 
     public PhotoCard getPhotoCard(String root) {
         try {

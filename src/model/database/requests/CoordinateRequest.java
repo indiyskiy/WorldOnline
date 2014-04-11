@@ -2,7 +2,6 @@ package model.database.requests;
 
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardCoordinateEntity;
-import model.database.worldonlinedb.CardEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

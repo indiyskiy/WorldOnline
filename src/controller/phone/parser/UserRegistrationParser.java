@@ -8,7 +8,6 @@ import model.constants.databaseenumeration.MobilePlatform;
 import model.database.requests.UserRequests;
 import model.exception.IllegalTypeException;
 import model.exception.ParseRequestException;
-import model.phone.responseentity.AllMenusResponse;
 import model.phone.responseentity.MobileResponseEntity;
 import model.phone.responseentity.RegistrationResponse;
 

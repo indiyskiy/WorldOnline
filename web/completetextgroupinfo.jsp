@@ -19,35 +19,35 @@
 <h1 align="center">Группа текстов [${textGroup.textGroupID}]${textGroup.textGroupName}</h1>
 <br/>
 <br/>
-    <table border="" width="70%" align="center">
-        <tr>
-            <td width="5%">
-                ID
-            </td>
-            <td>
-                Текст
-            </td>
-            <td width="15%">
-                Язык
-            </td>
-        </tr>
+<table border="" width="70%" align="center">
+    <tr>
+        <td width="5%">
+            ID
+        </td>
+        <td>
+            Текст
+        </td>
+        <td width="15%">
+            Язык
+        </td>
+    </tr>
     <c:forEach items="${textes}" var="text">
-        <tr>
-            <td width="5%">
-                    ${text.textID}
-            </td>
-            <td>
-                    ${text.text}
-            </td>
-            <td width="15%">
-                <c:forEach items="${languages}" var="language">
-                    <c:if test="${language.value==text.languageID}">
-                     ${language}
-                    </c:if>
+    <tr>
+        <td width="5%">
+                ${text.textID}
+        </td>
+        <td>
+                ${text.text}
+        </td>
+        <td width="15%">
+            <c:forEach items="${languages}" var="language">
+                <c:if test="${language.value==text.languageID}">
+                    ${language}
+                </c:if>
 
-                </c:forEach>
-            </td>
-        </tr>
+            </c:forEach>
+        </td>
+    </tr>
     </c:forEach>
 </body>
 </html>

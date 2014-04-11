@@ -1,18 +1,11 @@
 package view.servlet.phone;
 
-import controller.phone.entity.AllMenusRequest;
 import controller.phone.parser.AllMenusParser;
 import controller.phone.parser.MobileParser;
 import model.constants.Component;
 import model.logger.LoggerFactory;
 import model.phone.requesthandler.AllMenusHandler;
 import model.phone.requesthandler.MobileHandler;
-import model.phone.responseentity.AllMenusResponse;
-import view.servlet.ServletHelper;
-
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 
 public class GetAllMenusServlet extends MobileServlet {

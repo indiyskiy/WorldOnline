@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashSet;
 
 public abstract class ProtectedServlet extends HttpServlet {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, ProtectedServlet.class);

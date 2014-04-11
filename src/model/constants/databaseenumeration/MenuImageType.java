@@ -8,13 +8,13 @@ package model.constants.databaseenumeration;
  * To change this template use File | Settings | File Templates.
  */
 public enum MenuImageType {
-     Unknown(0),
+    Unknown(0),
     Simple(1),
     Pushed(2);
     private final int value;
 
     MenuImageType(int value) {
-        this.value=value;
+        this.value = value;
     }
 
     public int getValue() {
@@ -24,7 +24,7 @@ public enum MenuImageType {
 
     public static MenuImageType parseInt(int value) {
         MenuImageType[] menuImageTypes = MenuImageType.values();
-        if (value <= 0 || value >=menuImageTypes.length) {
+        if (value <= 0 || value >= menuImageTypes.length) {
             return Unknown;
         } else {
             return menuImageTypes[value];

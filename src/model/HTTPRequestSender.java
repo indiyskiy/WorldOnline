@@ -18,14 +18,11 @@ public class HTTPRequestSender {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Global, HTTPRequestSender.class);
 
     public static void sendPostRequest(List<NameValuePair> nameValuePairs, String urlString) throws IOException {
-        loggerFactory.info("sendPostRequest");
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(urlString);
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         CloseableHttpResponse response2 = httpClient.execute(httpPost);
         try {
-//            System.out.println(response2.getStatusLine());
-            loggerFactory.info(response2.getStatusLine().toString());
             HttpEntity entity2 = response2.getEntity();
             EntityUtils.consume(entity2);
         } catch (Exception e) {

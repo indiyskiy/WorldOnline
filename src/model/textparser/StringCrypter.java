@@ -1,20 +1,15 @@
 package model.textparser;
 
-import java.io.IOException;
-
 import org.apache.commons.codec.binary.Base64;
 
+import javax.crypto.*;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
 
 public class StringCrypter {
 

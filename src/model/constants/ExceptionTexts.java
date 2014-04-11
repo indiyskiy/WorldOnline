@@ -18,6 +18,11 @@ public class ExceptionTexts {
     public static final String allMenusUserIDEmptyException = "phone.getAllMenus.UserID.empty";
     public static final String allMenusUserIDIncorrectException = "phone.getAllMenus.UserID.Incorrect";
     public static final String allMenusUserNotExistException = "phone.getAllMenus.UserID.NotExist";
+    public static final String getMenuUserIDEmptyException = "phone.getMenu.UserID.empty";
+    public static final String getMenuUserIDIncorrectException = "phone.getMenu.UserID.Incorrect";
+    public static final String getMenuUserNotExistException = "phone.getMenu.UserID.NotExist";
+    public static String getMenuMenuIDEmptyException = "phone.getMenu.MenuID.empty";
+    public static final String getMenuMenuIDIncorrectException = "phone.getMenu.MenuID.Incorrect";
 
     private static HashSet<String> getMobileErrors() {
         HashSet<String> mobileErrors = new HashSet<String>();
@@ -26,6 +31,9 @@ public class ExceptionTexts {
         mobileErrors.add(registrationDeviceIDNotUniqueException);
         mobileErrors.add(registrationNoLanguageException);
         mobileErrors.add(registrationIllegalLanguageException);
+        mobileErrors.add(allMenusUserIDEmptyException);
+        mobileErrors.add(allMenusUserIDIncorrectException);
+        mobileErrors.add(allMenusUserNotExistException);
         return mobileErrors;
     }
 }

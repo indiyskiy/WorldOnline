@@ -22,7 +22,6 @@ public class UserTest {
     private static final LoggerFactory loggerFactory = new LoggerFactory(Component.Test, UserTest.class);
 
     private static void addManyUsers(int number) {
-        loggerFactory.debug("run addmanyusers " + number);
         for (int i = 0; i < number; i++) {
             Thread thread = new Thread(new RegEntity(i));
             thread.start();
@@ -61,11 +60,8 @@ public class UserTest {
         @Override
         public void run() {
             try {
-                loggerFactory.debug("run " + number);
                 ArrayList<NameValuePair> nameValuePairs = getParameters(number);
-                loggerFactory.debug("1");
                 HTTPRequestSender.sendPostRequest(nameValuePairs, url);
-                loggerFactory.debug("/run");
             } catch (IOException e) {
                 loggerFactory.error(e);
             }

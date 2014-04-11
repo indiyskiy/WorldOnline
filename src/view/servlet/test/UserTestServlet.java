@@ -2,14 +2,12 @@ package view.servlet.test;
 
 import model.constants.AdminRule;
 import model.constants.Component;
-import model.constants.ProtectAdminLevel;
 import model.database.requests.UserRequests;
 import model.logger.LoggerFactory;
 import model.test.UserTest;
 import view.servlet.admin.ProtectedServlet;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -28,7 +26,6 @@ public class UserTestServlet extends ProtectedServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (UserRequests.countUser() < 2) {
             boolean success = UserTest.test();
-            loggerFactory.info("UserTestServlet result is " + success);
             response.getOutputStream().print("UserTestServlet result is " + success);
         }
     }

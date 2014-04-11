@@ -1,13 +1,11 @@
 package view.servlet.admin;
 
 import model.constants.AdminRule;
-import model.constants.ProtectAdminLevel;
 import model.database.requests.ImageRequest;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.*;
 
 /**

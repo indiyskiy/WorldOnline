@@ -1,9 +1,7 @@
 package model.database.requests;
 
-import model.additionalentity.CompleteMenuInfo;
-import model.additionalentity.CompleteTextGroupInfo;
-import model.additionalentity.MenuInfo;
-import model.additionalentity.SimpleMenu;
+import controller.phone.entity.GetMenuRequest;
+import model.additionalentity.*;
 import model.constants.Component;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
@@ -300,12 +298,9 @@ public class MenuRequest {
             rs = ps.executeQuery();
             if (rs.first()) {
                 Long menuID = rs.getLong("Menu.MenuID");
-                logger.info("return " + menuID);
                 if (menuID != 0 && !rs.wasNull()) {
                     //todo rewrite with rs.get
                     return getMenu(menuID);
-                } else {
-                    logger.debug(name + " not found");
                 }
             }
         } catch (SQLException e) {
@@ -313,7 +308,6 @@ public class MenuRequest {
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        logger.info("return null");
         return null;
     }
 
@@ -355,7 +349,53 @@ public class MenuRequest {
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        logger.info("return null");
         return menuIDList;
+    }
+
+    public static MenuCompleteInformation getMenuCompleteInformation(GetMenuRequest getMenuRequest) {
+        MenuCompleteInformation menuCompleteInformation = new MenuCompleteInformation();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT " +
+                    "Menu.IconImageID, " +
+                    "Menu.PushedIconImageID, " +
+                    "Menu.MenuID, " +
+                    "Menu.ParentMenuID, " +
+                    "Menu.Number," +
+                    "Text.Text " +
+                    "FROM Menu " +
+                    "JOIN User ON(User.userID=?) " +
+                    "JOIN UserPersonalData ON(User.UserPersonalDataID=UserPersonalData.UserPersonalDataID) " +
+                    "JOIN TextGroup ON (TextGroup.TextGroupID=Menu.NameTextGroupID) " +
+                    "JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID AND Text.LanguageID=UserPersonalData.UserLanguage) " +
+                    "WHERE Menu.MenuID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, getMenuRequest.getUserID());
+            ps.setLong(2, getMenuRequest.getMenuID());
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                Long menuID = rs.getLong("Menu.MenuID");
+                Long iconImageID = rs.getLong("Menu.IconImageID");
+                Long pushedIconImageID = rs.getLong("Menu.PushedIconImageID");
+                Long parentMenuID = rs.getLong("Menu.ParentMenuID");
+                String text = rs.getString("Text.Text");
+                Integer number = rs.getInt("Menu.Number");
+                menuCompleteInformation.setMenuID(menuID);
+                menuCompleteInformation.setIconImageID(iconImageID);
+                menuCompleteInformation.setPushedIconImageID(pushedIconImageID);
+                menuCompleteInformation.setParentMenuID(parentMenuID);
+                menuCompleteInformation.setText(text);
+                menuCompleteInformation.setNumber(number);
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return menuCompleteInformation;
     }
 }

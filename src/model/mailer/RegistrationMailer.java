@@ -10,7 +10,6 @@ import model.textparser.DESSecretKey;
 import model.textparser.StringCrypter;
 
 import javax.mail.MessagingException;
-import java.util.Random;
 
 public class RegistrationMailer {
     private static final String servletAddress = ServerConsts.GlobalServerURL + ServerConsts.worldOnlineModule + "mailConfirm/";
@@ -34,7 +33,6 @@ public class RegistrationMailer {
 
     public static void sendRegistrationMail(ParsedRegistrationRequest parsedRegistrationRequest) {
         try {
-            loggerFactory.debug("sendRegistrationMail");
             String registrationText = text + getLink(parsedRegistrationRequest);
             MailSender.send(sender, password, parsedRegistrationRequest.getEmail(), title, registrationText, model.mailer.MailConsts.Yandex);
         } catch (MessagingException e) {
@@ -57,7 +55,6 @@ public class RegistrationMailer {
             loggerFactory.error(login + " (userEntity == null)");
             return false;
         }
-        loggerFactory.error(login + " registering");
         String adminUserLogin = userEntity.getAdminUserName();
         String adminUserEmail = userEntity.getAdminUserAdditionalInfo().getAdminUserEmail();
         String adminUserPassword = userEntity.getAdminUserPassword();

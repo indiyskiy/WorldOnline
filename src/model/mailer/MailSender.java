@@ -32,7 +32,6 @@ public class MailSender {
     }
 
     public static void send(final String username, final String password, String recipientEmail, String ccEmail, String title, String message, MailConsts mailConsts) throws AddressException, MessagingException {
-        loggerFactory.debug("send");
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         Properties props = System.getProperties();
@@ -54,7 +53,6 @@ public class MailSender {
         msg.setText(message, "utf-8");
         msg.setSentDate(new Date());
         SMTPTransport t = (SMTPTransport) session.getTransport("smtps");
-        loggerFactory.debug(username + " " + password);
         t.connect(mailConsts.getHost(), username, password);
         t.sendMessage(msg, msg.getAllRecipients());
         t.close();

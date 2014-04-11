@@ -1,14 +1,10 @@
 package view.servlet.phone;
 
-import controller.phone.entity.AllMenusRequest;
 import controller.phone.entity.MobileRequest;
-import controller.phone.parser.AllMenusParser;
 import controller.phone.parser.MobileParser;
-import model.exception.ParseRequestException;
+import model.ServerInit;
 import model.logger.LoggerFactory;
-import model.phone.requesthandler.AllMenusHandler;
 import model.phone.requesthandler.MobileHandler;
-import model.phone.responseentity.AllMenusResponse;
 import model.phone.responseentity.MobileResponseEntity;
 import view.servlet.ServletHelper;
 
@@ -23,6 +19,7 @@ public abstract class MobileServlet extends HttpServlet {
     private final MobileParser mobileParser = getMobileParser();
     private final MobileHandler mobileHandler = getMobileHandler();
     private final LoggerFactory loggerFactory = getLoggerFactory();
+    private ServerInit serverInit = ServerInit.getInstance();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         doPost(request, response);

@@ -1,7 +1,6 @@
 package model.additionalentity;
 
 import model.database.worldonlinedb.CardImageEntity;
-import model.database.worldonlinedb.ImageEntity;
 
 /**
  * Created with IntelliJ IDEA.

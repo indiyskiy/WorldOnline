@@ -24,7 +24,7 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class RootRequest {
-    private static LoggerFactory loggerFactory=new LoggerFactory(Component.Database,RootRequest.class);
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, RootRequest.class);
 
     public static CardRootEntity getCardRootByResultSet(ResultSet rs) throws SQLException {
         Long cardRootID = rs.getLong("CardRoot.CardRootID");

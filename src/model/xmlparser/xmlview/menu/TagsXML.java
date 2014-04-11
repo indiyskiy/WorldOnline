@@ -20,7 +20,7 @@ import java.util.ArrayList;
 @Root(name = "data")
 public class TagsXML {
     @ElementList(inline = true, name = "Tags", required = false)
-    public ArrayList<CompleteTag> tags=new ArrayList<CompleteTag>();
+    public ArrayList<CompleteTag> tags = new ArrayList<CompleteTag>();
 
     public static TagsXML loadTagsXML() throws Exception {
         Serializer serializer = new Persister(new Format("<?xml version=\"1.0\" encoding= \"UTF-8\" ?>"));

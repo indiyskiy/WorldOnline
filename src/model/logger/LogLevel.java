@@ -26,7 +26,7 @@ public enum LogLevel {
 
     public static LogLevel parseInt(int value) {
         LogLevel[] changingTypes = LogLevel.values();
-        if (value <= 0 || value >=changingTypes.length) {
+        if (value <= 0 || value >= changingTypes.length) {
             return Default;
         } else {
             return changingTypes[value];
@@ -34,6 +34,6 @@ public enum LogLevel {
     }
 
     public boolean isBigger(LogLevel logLevel) {
-        return (this.value>=logLevel.getValue());
+        return (this.value >= logLevel.getValue());
     }
 }

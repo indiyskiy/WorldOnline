@@ -35,7 +35,7 @@ public class UserHardwareEntity {
     public UserHardwareEntity(String deviceUniqueKey, String deviceTokenKey, MobilePlatform mobilePlatform) {
         this.deviceUniqueKey = deviceUniqueKey;
         this.deviceTokenKey = deviceTokenKey;
-        this.mobilePlatform=mobilePlatform.getValue();
+        this.mobilePlatform = mobilePlatform.getValue();
     }
 
     public Long getUserHardwareID() {

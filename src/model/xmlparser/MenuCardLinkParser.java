@@ -52,8 +52,7 @@ public class MenuCardLinkParser {
     }
 
     private MenuCardLinkEntity addLink(CardEntity cardEntity, MenuEntity menuEntity) {
-        if (menuEntity != null && cardEntity!=null) {
-            loggerFactory.debug("saving");
+        if (menuEntity != null && cardEntity != null) {
             MenuCardLinkEntity menuCardLinkEntity = new MenuCardLinkEntity();
             menuCardLinkEntity.setCard(cardEntity);
             menuCardLinkEntity.setMenu(menuEntity);
@@ -65,8 +64,6 @@ public class MenuCardLinkParser {
     }
 
     public void parseMenuCardLink() {
-        loggerFactory.debug(menuCardMap.values().toString());
-        loggerFactory.debug(menuCardMap.keySet().toString());
         menuCardLinkEntities.clear();
         CardsParser cardsParser = new CardsParser();
         CardAboutCity cardAboutCity = cardsParser.getCardAboutCity(root + "card_aboutcity.xml");
@@ -111,7 +108,6 @@ public class MenuCardLinkParser {
             }
         }
         try {
-            loggerFactory.debug("saving "+menuCardLinkEntities.size()+" links");
             MenuRequest.addMenuCardLink(menuCardLinkEntities);
         } catch (Exception e) {
             loggerFactory.error(e);
@@ -267,15 +263,12 @@ public class MenuCardLinkParser {
 
     private MenuEntity findMenu(String cardID) {
         Integer menuID = menuCardMap.get(Integer.parseInt(cardID));
-//        loggerFactory.debug("try to find "+cardID+" where menuID="+menuID);
         for (Submenu submenu : mainMenuData.getSubmenus()) {
             if (submenu.id.equals(String.valueOf(menuID))) {
                 System.out.println("sumbenu was found");
-                MenuEntity menuEntity= MenuRequest.getMenuByName(submenu.nameEN);
-                if(menuEntity!=null){
-                    loggerFactory.debug("OK!");
-                } else {
-                    System.out.print(cardID+" "+menuID);
+                MenuEntity menuEntity = MenuRequest.getMenuByName(submenu.nameEN);
+                if (menuEntity == null) {
+                    System.out.print(cardID + " " + menuID);
                 }
                 return menuEntity;
             }

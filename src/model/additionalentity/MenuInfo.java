@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class MenuInfo {
     private SimpleMenu menu;
-    private ArrayList<SimpleMenu> submenus=new ArrayList<SimpleMenu>();
+    private ArrayList<SimpleMenu> submenus = new ArrayList<SimpleMenu>();
     private SimpleMenu parentMenu;
 
     public SimpleMenu getMenu() {

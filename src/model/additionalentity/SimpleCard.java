@@ -10,10 +10,10 @@ import model.database.worldonlinedb.CardEntity;
  * To change this template use File | Settings | File Templates.
  */
 public class SimpleCard {
-   private CardEntity cardEntity;
-   private String name;
-   private String description;
-   private String address;
+    private CardEntity cardEntity;
+    private String name;
+    private String description;
+    private String address;
 
     public CardEntity getCardEntity() {
         return cardEntity;

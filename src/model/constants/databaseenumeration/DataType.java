@@ -31,7 +31,7 @@ public enum DataType {
 
     public static DataType parseInt(int value) {
         DataType[] dataTypes = DataType.values();
-        if (value <= 0 || value >=dataTypes.length) {
+        if (value <= 0 || value >= dataTypes.length) {
             return UnknownType;
         } else {
             return dataTypes[value];

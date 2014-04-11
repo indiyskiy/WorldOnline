@@ -16,7 +16,7 @@ import java.io.FileNotFoundException;
  * To change this template use File | Settings | File Templates.
  */
 public class RouteParser {
-    private LoggerFactory loggerFactory=new LoggerFactory(Component.Parser,RouteParser.class);
+    private LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, RouteParser.class);
 
     public RouteRoute getRouteRoute(String root) {
         try {

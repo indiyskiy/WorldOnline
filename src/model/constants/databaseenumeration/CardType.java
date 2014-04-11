@@ -31,48 +31,48 @@ public enum CardType {
 
     public static CardType parseInt(int value) {
         CardType[] cardTypes = CardType.values();
-        if (value <= 0 || value >=cardTypes.length) {
+        if (value <= 0 || value >= cardTypes.length) {
             return Unknown;
         } else {
             return cardTypes[value];
         }
     }
 
-    public String getText(){
-        switch (this){
-          case Unknown:{
-              return "неизвестно";
-          }
-          case CardAboutCity:{
-              return "про город";
-          }
-          case CardHandBook:{
-              return "из справочника";
-          }
-          case CardHotel:{
-              return "отель";
-          }
-          case CardMeal:{
-              return "еда";
-          }
-          case CardRelax:{
-              return "отдых";
-          }
-          case CardRoute:{
-              return "маршрут";
-          }
-          case CardShopping:{
-              return "покупки";
-          }
-          case CardSight:{
-              return "достопремечательность";
-          }
-          case RestaurantChainCard:{
-              return "сеть заведений";
-          }
-          default:{
-              return "неизвестно";
-          }
+    public String getText() {
+        switch (this) {
+            case Unknown: {
+                return "неизвестно";
+            }
+            case CardAboutCity: {
+                return "про город";
+            }
+            case CardHandBook: {
+                return "из справочника";
+            }
+            case CardHotel: {
+                return "отель";
+            }
+            case CardMeal: {
+                return "еда";
+            }
+            case CardRelax: {
+                return "отдых";
+            }
+            case CardRoute: {
+                return "маршрут";
+            }
+            case CardShopping: {
+                return "покупки";
+            }
+            case CardSight: {
+                return "достопремечательность";
+            }
+            case RestaurantChainCard: {
+                return "сеть заведений";
+            }
+            default: {
+                return "неизвестно";
+            }
         }
     }
 

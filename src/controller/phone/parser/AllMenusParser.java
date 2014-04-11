@@ -1,13 +1,10 @@
 package controller.phone.parser;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import controller.phone.entity.AllMenusRequest;
-import controller.phone.entity.MobileRequest;
 import model.constants.ExceptionTexts;
-import model.database.requests.AdminUserRequest;
 import model.database.requests.UserRequests;
 import model.exception.IllegalTypeException;
 import model.exception.ParseRequestException;
@@ -22,13 +19,13 @@ import javax.servlet.http.HttpServletRequest;
 public class AllMenusParser implements MobileParser {
     public AllMenusRequest parse(HttpServletRequest request) throws ParseRequestException {
         AllMenusRequest allMenusRequest = new AllMenusRequest();
-        String idString = request.getParameter("userID");
-        if (idString == null || idString.isEmpty()) {
+        String userIdString = request.getParameter("userID");
+        if (userIdString == null || userIdString.isEmpty()) {
             throw new ParseRequestException(ExceptionTexts.allMenusUserIDEmptyException);
         }
         Long userID;
         try {
-            userID = Long.parseLong(idString);
+            userID = Long.parseLong(userIdString);
         } catch (Exception e) {
             throw new ParseRequestException(ExceptionTexts.allMenusUserIDIncorrectException);
         }

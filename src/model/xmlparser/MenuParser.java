@@ -175,7 +175,6 @@ public class MenuParser {
     }
 
     private void put(String menuID, MenuEntity menuEntity) {
-        loggerFactory.info("put " + menuID + " ; " + menuEntity.getMenuID());
         menuEntityHashMap.put(menuID, menuEntity);
     }
 

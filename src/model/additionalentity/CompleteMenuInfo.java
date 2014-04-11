@@ -22,7 +22,7 @@ public class CompleteMenuInfo {
     private HashMap<Long, CompleteMenuInfo> kids = new HashMap<Long, CompleteMenuInfo>();
     private CompleteTextGroupInfo completeTextGroupInfo;
     private ImageEntity image;
-    private LoggerFactory loggerFactory=new LoggerFactory(Component.Global,CompleteMenuInfo.class);
+    private LoggerFactory loggerFactory = new LoggerFactory(Component.Global, CompleteMenuInfo.class);
 
     public CompleteMenuInfo(MenuEntity menuEntity) {
         this.menuEntity = menuEntity;
@@ -61,7 +61,7 @@ public class CompleteMenuInfo {
         simpleMenu.setMenuID(menuEntity.getMenuID());
         Collection<TextEntity> textEntities = completeTextGroupInfo.getTextEntityMap().values();
         simpleMenu.setMenuName("no name-no texts");
-        int i=0;
+        int i = 0;
         for (TextEntity textEntity : textEntities) {
             if (textEntity.getLanguageID() == LanguageType.Russian.getValue()
                     && textEntity.getText() != null
@@ -69,7 +69,7 @@ public class CompleteMenuInfo {
                 simpleMenu.setMenuName(textEntity.getText());
                 return simpleMenu;
             } else {
-                simpleMenu.setMenuName("no name "+i);
+                simpleMenu.setMenuName("no name " + i);
             }
             i++;
         }

@@ -108,10 +108,10 @@ public class MenuEntity {
         this.nameTextGroup = nameTextGroup;
         this.iconImage = iconImage;
         this.pushedIconImage = pushedIconImage;
-        if(parentMenu!=null){
-        this.menuType = menuType.getValue();
+        if (parentMenu != null) {
+            this.menuType = menuType.getValue();
         } else {
-            this.menuType= MenuType.RootMenu.getValue();
+            this.menuType = MenuType.RootMenu.getValue();
         }
     }
 }

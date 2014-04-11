@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
@@ -24,7 +25,6 @@ public class ServletHelper {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, ServletHelper.class);
 
     public static void sendForward(String url, HttpServlet servlet, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        loggerFactory.debug(url);
         RequestDispatcher dispatcher = servlet.getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
@@ -53,10 +53,24 @@ public class ServletHelper {
         out.close();
     }
 
+    public static void sendResponse(OutputStream out, String responseString) throws IOException {
+        out.write(responseString.getBytes());
+        out.flush();
+        out.close();
+    }
+
+
     public static void sendJson(HttpServletResponse response, String responseString) throws IOException {
         response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         sendResponse(response, responseString);
     }
+
+
+    public static void sendJson(OutputStream outputStream, String responseString) throws IOException {
+        sendResponse(outputStream, responseString);
+    }
+
 
     public static void sendError(Exception error, HttpServletRequest request, HttpServletResponse response, HttpServlet servlet, LoggerFactory loggerFactory) {
         try {
@@ -67,20 +81,22 @@ public class ServletHelper {
             if (request != null && response != null && servlet != null) {
                 ServletHelper.sendForward("/error.jsp", servlet, request, response);
             }
-        } catch (ServletException e) {
-            loggerFactory.error(e);
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             loggerFactory.error(e);
         }
     }
 
     public static void sendMobileError(LoggerFactory loggerFactory, Exception error, HttpServletResponse response) {
-        loggerFactory.error(error);
+        if (loggerFactory != null) {
+            loggerFactory.error(error);
+        } else {
+            ServletHelper.loggerFactory.error(error);
+        }
         String errorJSON = new MobileErrorParser().parse(error);
         try {
             sendJson(response, errorJSON);
-        } catch (IOException e) {
-            loggerFactory.error(e);
+        } catch (Exception e) {
+            ServletHelper.loggerFactory.error(e);
         }
     }
 }

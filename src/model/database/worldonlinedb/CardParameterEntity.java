@@ -52,7 +52,7 @@ public class CardParameterEntity {
         this.cardParameterType = cardParameterType;
     }
 
-    @javax.persistence.Column(name = "CardParameterValue",columnDefinition="TEXT")
+    @javax.persistence.Column(name = "CardParameterValue", columnDefinition = "TEXT")
     @Basic
     private String cardParameterValue;
 
@@ -129,6 +129,6 @@ public class CardParameterEntity {
         this.cardParameterType = cardParameterType.getValue();
         this.cardParameterValue = cardParameterValue;
         this.cardParameterDataType = cardParameterDataType.getValue();
-        this.cardParameterName=card.getCardName()+"-"+cardParameterType;
+        this.cardParameterName = card.getCardName() + "-" + cardParameterType;
     }
 }

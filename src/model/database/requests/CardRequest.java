@@ -565,7 +565,6 @@ public class CardRequest {
                     "JOIN User ON (User.UserContentID=UserContent.UserContentID) " +
                     "WHERE UserCard.CardVersion=Card.CardVersion " +
                     "AND User.UserID=?";
-            loggerFactory.debug(sql.replaceAll("\\?", String.valueOf(userID)));
             ps = connection.prepareStatement(sql);
             ps.setLong(1, userID);
             rs = ps.executeQuery();
@@ -594,7 +593,6 @@ public class CardRequest {
                     "JOIN User ON (User.UserContentID=UserContent.UserContentID) " +
                     "WHERE UserCard.CardVersion<Card.CardVersion " +
                     "AND User.UserID=?";
-            loggerFactory.debug(sql.replaceAll("\\?", String.valueOf(userID)));
             ps = connection.prepareStatement(sql);
             ps.setLong(1, userID);
             rs = ps.executeQuery();
@@ -624,7 +622,6 @@ public class CardRequest {
                     "WHERE UserCard.CardVersion<Card.CardVersion " +
                     "AND User.UserID=? " +
                     "AND Card.CardState=UserCard.CardState";
-            loggerFactory.debug(sql.replaceAll("\\?", String.valueOf(userID)));
             ps = connection.prepareStatement(sql);
             ps.setLong(1, userID);
             rs = ps.executeQuery();
@@ -654,7 +651,6 @@ public class CardRequest {
                     "WHERE UserCard.CardVersion<Card.CardVersion " +
                     "AND User.UserID=? " +
                     "AND Card.CardState!=UserCard.CardState";
-            loggerFactory.debug(sql.replaceAll("\\?", String.valueOf(userID)));
             ps = connection.prepareStatement(sql);
             ps.setLong(1, userID);
             rs = ps.executeQuery();
@@ -683,8 +679,6 @@ public class CardRequest {
                     "JOIN UserContent ON (User.UserContentID=UserContent.UserContentID) " +
                     "LEFT OUTER JOIN UserCard ON (UserCard.CardID=Card.CardID AND UserContent.UserContentID=UserCard.UserContentID) " +
                     "WHERE UserCard.UserCardID IS NULL";
-
-            loggerFactory.debug(sql.replaceAll("\\?", String.valueOf(userID)));
             ps = connection.prepareStatement(sql);
             ps.setLong(1, userID);
             rs = ps.executeQuery();
