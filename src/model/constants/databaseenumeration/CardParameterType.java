@@ -9,68 +9,68 @@ package model.constants.databaseenumeration;
  */
 public enum CardParameterType {
     Unknown(0, DataType.UnknownType),
-    Phone(3, DataType.PhoneNumberType),      //main info
-    OpenHours(4, DataType.StringType),       //main info
-    Site(5, DataType.LinkType),              //main info
-    Email(6, DataType.EmailType),            //main info
-    Vkcom(7, DataType.LinkType),             //links
-    Fbcom(8, DataType.LinkType),             //links
-    Twitter(9, DataType.LinkType),           //links
-    Frsqr(10, DataType.LinkType),            //links
-    Youtube(11, DataType.LinkType),          //links
-    WifiLogin(12, DataType.StringType),      //add info
-    WifiPass(13, DataType.StringType),       //add info
-    LiveJournal(14, DataType.LinkType),      //links
-    AppStore(15, DataType.LinkType),         //application
-    GooglePlay(16, DataType.LinkType),       //application
-    Tripadviser(17, DataType.LinkType),      //reviews \/
-    Instagramm(18, DataType.LinkType),       //links
-    Booking(19, DataType.LinkType),          //reviews \/
-    MiddlePrice(20, DataType.IntegerType),   //add info
-    Billboard(21, DataType.LinkType),        //links
-    Apoi(22, DataType.LinkType),             //reviews \/
-    Ayda(23, DataType.LinkType),             //reviews \/
-    BlogFcsSpb(24, DataType.LinkType),       //reviews \/
-    CafeSpb(25, DataType.LinkType),          //reviews \/
-    DpRu(26, DataType.LinkType),             //reviews \/
-    Flamp(27, DataType.LinkType),            //reviews \/
-    ImhoNet(28, DataType.LinkType),          //reviews \/
-    IRecommend(29, DataType.LinkType),       //reviews \/
-    Komandirovka(30, DataType.LinkType),     //reviews \/
-    MenuRu(31, DataType.LinkType),           //reviews \/
-    Otzovik(32, DataType.LinkType),          //reviews \/
-    PeterburgRu(33, DataType.LinkType),      //reviews \/
-    Restlook(34, DataType.LinkType),         //reviews \/
-    Restop(35, DataType.LinkType),           //reviews \/
-    Restoran(36, DataType.LinkType),         //reviews \/
-    Restozoom(37, DataType.LinkType),        //reviews \/
-    Spbrestoran(38, DataType.LinkType),      //reviews \/
-    SzoSpr(39, DataType.LinkType),           //reviews \/
-    TheVillage(40, DataType.LinkType),       //reviews \/
-    Tourprom(41, DataType.LinkType),         //reviews \/
-    Traveltipz(42, DataType.LinkType),       //reviews \/
-    Tulp(43, DataType.LinkType),             //reviews \/
-    Turbina(44, DataType.LinkType),          //reviews \/
-    Uvoice(45, DataType.LinkType),           //reviews \/
-    Wrestorane(46, DataType.LinkType),       //reviews \/
-    Yell(47, DataType.LinkType),             //reviews \/
-    Zoon(48, DataType.LinkType),             //reviews \/
-    FreePass(49, DataType.Percent),          //add info
-    Facts(50, DataType.StringType),          //facts \/
-    Legends(51, DataType.StringType),        //facts \/
-    Literature(52, DataType.StringType),     //facts \/
-    Anecdotes(53, DataType.StringType),      //facts \/
-    Films(54, DataType.StringType),          //facts \/
-    FamousPassers(55, DataType.StringType),  //facts \/
-    Citations(56, DataType.StringType),      //facts \/
-    BorisStars(57, DataType.LinkType),       //reviews \/
-    Restoclub(58, DataType.LinkType),        //reviews \/
-    Afisha(59, DataType.LinkType),           //reviews \/
-    Timeout(60, DataType.LinkType),          //reviews \/
-    Wikipedia(61, DataType.LinkType),        //links
-    Wikitravel(62, DataType.LinkType),       //links
-    ReservationDiscount(63, DataType.Percent),//add info
-    ReservationPhone(64, DataType.PhoneNumberType);//add info
+    Phone(3, DataType.PhoneNumberType),
+    OpenHours(4, DataType.StringType),
+    Site(5, DataType.LinkType),
+    Email(6, DataType.EmailType),
+    Vkcom(7, DataType.LinkType),
+    Fbcom(8, DataType.LinkType),
+    Twitter(9, DataType.LinkType),
+    Frsqr(10, DataType.LinkType),
+    Youtube(11, DataType.LinkType),
+    WifiLogin(12, DataType.StringType),
+    WifiPass(13, DataType.StringType),
+    LiveJournal(14, DataType.LinkType),
+    AppStore(15, DataType.LinkType),
+    GooglePlay(16, DataType.LinkType),
+    Tripadviser(17, DataType.LinkType),
+    Instagramm(18, DataType.LinkType),
+    Booking(19, DataType.LinkType),
+    MiddlePrice(20, DataType.IntegerType),
+    Billboard(21, DataType.LinkType),
+    Apoi(22, DataType.LinkType),
+    Ayda(23, DataType.LinkType),
+    BlogFcsSpb(24, DataType.LinkType),
+    CafeSpb(25, DataType.LinkType),
+    DpRu(26, DataType.LinkType),
+    Flamp(27, DataType.LinkType),
+    ImhoNet(28, DataType.LinkType),
+    IRecommend(29, DataType.LinkType),
+    Komandirovka(30, DataType.LinkType),
+    MenuRu(31, DataType.LinkType),
+    Otzovik(32, DataType.LinkType),
+    PeterburgRu(33, DataType.LinkType),
+    Restlook(34, DataType.LinkType),
+    Restop(35, DataType.LinkType),
+    Restoran(36, DataType.LinkType),
+    Restozoom(37, DataType.LinkType),
+    Spbrestoran(38, DataType.LinkType),
+    SzoSpr(39, DataType.LinkType),
+    TheVillage(40, DataType.LinkType),
+    Tourprom(41, DataType.LinkType),
+    Traveltipz(42, DataType.LinkType),
+    Tulp(43, DataType.LinkType),
+    Turbina(44, DataType.LinkType),
+    Uvoice(45, DataType.LinkType),
+    Wrestorane(46, DataType.LinkType),
+    Yell(47, DataType.LinkType),
+    Zoon(48, DataType.LinkType),
+    FreePass(49, DataType.Percent),
+    Facts(50, DataType.StringType),
+    Legends(51, DataType.StringType),
+    Literature(52, DataType.StringType),
+    Anecdotes(53, DataType.StringType),
+    Films(54, DataType.StringType),
+    FamousPassers(55, DataType.StringType),
+    Citations(56, DataType.StringType),
+    BorisStars(57, DataType.LinkType),
+    Restoclub(58, DataType.LinkType),
+    Afisha(59, DataType.LinkType),
+    Timeout(60, DataType.LinkType),
+    Wikipedia(61, DataType.LinkType),
+    Wikitravel(62, DataType.LinkType),
+    ReservationDiscount(63, DataType.Percent),
+    ReservationPhone(64, DataType.PhoneNumberType);
     public static final CardParameterType[] reviews = new CardParameterType[]{
             Tripadviser, Booking, Apoi, Ayda,
             BlogFcsSpb, CafeSpb, DpRu, Flamp,
@@ -94,7 +94,10 @@ public enum CardParameterType {
         this.dataType = dataType;
     }
 
-    public static CardParameterType parseInt(int value) {
+    public static CardParameterType parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
         CardParameterType[] cardParameterTypes = CardParameterType.values();
         if (value <= 0 || value >= cardParameterTypes.length) {
             return Unknown;

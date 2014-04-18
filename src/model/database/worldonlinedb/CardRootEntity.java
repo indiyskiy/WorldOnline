@@ -17,6 +17,18 @@ public class CardRootEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cardRootID;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "CardID")
+    private CardEntity card;
+
+    @javax.persistence.Column(name = "CardRootName")
+    @Basic
+    private String cardRootName;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "RootDescriptionTextGroupID")
+    private TextGroupEntity rootDescriptionTextGroup;
+
     public Long getCardRootID() {
         return cardRootID;
     }
@@ -24,10 +36,6 @@ public class CardRootEntity {
     public void setCardRootID(Long cardRootID) {
         this.cardRootID = cardRootID;
     }
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "CardID")
-    private CardEntity card;
 
     public CardEntity getCard() {
         return card;
@@ -37,10 +45,6 @@ public class CardRootEntity {
         this.card = card;
     }
 
-    @javax.persistence.Column(name = "CardRootName")
-    @Basic
-    private String cardRootName;
-
     public String getCardRootName() {
         return cardRootName;
     }
@@ -48,10 +52,6 @@ public class CardRootEntity {
     public void setCardRootName(String cardRootName) {
         this.cardRootName = cardRootName;
     }
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "RootDescriptionTextGroupID")
-    private TextGroupEntity rootDescriptionTextGroup;
 
     public TextGroupEntity getRootDescriptionTextGroup() {
         return rootDescriptionTextGroup;

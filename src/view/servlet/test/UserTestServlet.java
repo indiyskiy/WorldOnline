@@ -24,10 +24,8 @@ public class UserTestServlet extends ProtectedServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (UserRequests.countUser() < 2) {
-            boolean success = UserTest.test();
-            response.getOutputStream().print("UserTestServlet result is " + success);
-        }
+        boolean success = UserTest.test();
+        response.getOutputStream().print("UserTestServlet result is " + success);
     }
 
     @Override

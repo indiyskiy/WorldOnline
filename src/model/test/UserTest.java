@@ -20,9 +20,11 @@ import java.util.ArrayList;
 public class UserTest {
     private static final String url = ServerConsts.GlobalServerURL + ServerConsts.worldOnlineModule + ServerConsts.mobileModule + "userregistration";
     private static final LoggerFactory loggerFactory = new LoggerFactory(Component.Test, UserTest.class);
+    public static int counter = 0;
 
     private static void addManyUsers(int number) {
         for (int i = 0; i < number; i++) {
+            counter++;
             Thread thread = new Thread(new RegEntity(i));
             thread.start();
         }
@@ -62,6 +64,7 @@ public class UserTest {
             try {
                 ArrayList<NameValuePair> nameValuePairs = getParameters(number);
                 HTTPRequestSender.sendPostRequest(nameValuePairs, url);
+                counter--;
             } catch (IOException e) {
                 loggerFactory.error(e);
             }
@@ -72,9 +75,11 @@ public class UserTest {
         try {
             int counter = 100;
             addManyUsers(counter);
-            Thread.sleep(5000);
+            while (counter > 0) {
+                Thread.sleep(500);
+            }
             return (counter <= UserRequests.countUser());
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         }
         return false;

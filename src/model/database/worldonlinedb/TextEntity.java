@@ -20,6 +20,19 @@ public class TextEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long textID;
 
+    @javax.persistence.Column(name = "Text")
+    @Type(type = "text")
+    @Basic
+    private String text;
+
+    @javax.persistence.Column(name = "LanguageID")
+    @Basic
+    private Integer languageID;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "TextGroupID")
+    private TextGroupEntity textGroup;
+
     public Long getTextID() {
         return textID;
     }
@@ -27,11 +40,6 @@ public class TextEntity {
     public void setTextID(Long textID) {
         this.textID = textID;
     }
-
-    @javax.persistence.Column(name = "Text")
-    @Type(type = "text")
-    @Basic
-    private String text;
 
     public String getText() {
         return text;
@@ -41,10 +49,6 @@ public class TextEntity {
         this.text = text;
     }
 
-    @javax.persistence.Column(name = "LanguageID")
-    @Basic
-    private Integer languageID;
-
     public Integer getLanguageID() {
         return languageID;
     }
@@ -52,10 +56,6 @@ public class TextEntity {
     public void setLanguageID(Integer languageID) {
         this.languageID = languageID;
     }
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "TextGroupID")
-    private TextGroupEntity textGroup;
 
     public TextGroupEntity getTextGroup() {
         return textGroup;

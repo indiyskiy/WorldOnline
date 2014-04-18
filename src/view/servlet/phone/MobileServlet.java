@@ -3,6 +3,8 @@ package view.servlet.phone;
 import controller.phone.entity.MobileRequest;
 import controller.phone.parser.MobileParser;
 import model.ServerInit;
+import model.exception.IllegalTypeException;
+import model.exception.ParseRequestException;
 import model.logger.LoggerFactory;
 import model.phone.requesthandler.MobileHandler;
 import model.phone.responseentity.MobileResponseEntity;
@@ -11,10 +13,8 @@ import view.servlet.ServletHelper;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-/**
- * Created by Илья on 10.04.14.
- */
 public abstract class MobileServlet extends HttpServlet {
     private final MobileParser mobileParser = getMobileParser();
     private final MobileHandler mobileHandler = getMobileHandler();
@@ -31,6 +31,13 @@ public abstract class MobileServlet extends HttpServlet {
             MobileResponseEntity mobileResponseEntity = mobileHandler.handleRequest(mobileRequest);
             String responseString = mobileParser.getResponse(mobileResponseEntity);
             ServletHelper.sendJson(response, responseString);
+
+        } catch (IllegalTypeException e) {
+            ServletHelper.sendMobileError(loggerFactory, e, response);
+        } catch (ParseRequestException e) {
+            ServletHelper.sendMobileError(loggerFactory, e, response);
+        } catch (IOException e) {
+            ServletHelper.sendMobileError(loggerFactory, e, response);
         } catch (Exception e) {
             ServletHelper.sendMobileError(loggerFactory, e, response);
         }

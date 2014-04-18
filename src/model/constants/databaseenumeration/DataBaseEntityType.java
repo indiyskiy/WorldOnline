@@ -25,7 +25,10 @@ public enum DataBaseEntityType {
         return value;
     }
 
-    public static DataBaseEntityType parseInt(int value) {
+    public static DataBaseEntityType parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
         DataBaseEntityType[] dataBaseEntityTypes = DataBaseEntityType.values();
         if (value <= 0 || value >= dataBaseEntityTypes.length) {
             return Unknown;

@@ -23,7 +23,10 @@ public enum MenuType {
         return value;
     }
 
-    public static MenuType parseInt(int value) {
+    public static MenuType parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
         MenuType[] menuTypes = MenuType.values();
         if (value <= 0 || value >= menuTypes.length) {
             return Unknown;

@@ -4,7 +4,7 @@ package model.database.requests;
 import controller.parser.adminparser.AllCardParser;
 import model.additionalentity.*;
 import model.constants.Component;
-import model.constants.databaseenumeration.TextType;
+import model.constants.databaseenumeration.*;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.*;
@@ -563,6 +563,7 @@ public class CardRequest {
                     "JOIN UserCard ON (UserCard.CardID=Card.CardID) " +
                     "JOIN UserContent ON(UserContent.UserContentID=UserCard.UserContentID) " +
                     "JOIN User ON (User.UserContentID=UserContent.UserContentID) " +
+                    "LEFT OUTER JOIN CardChange ON(CardChange.CardID=Card.CardID) " +
                     "WHERE UserCard.CardVersion=Card.CardVersion " +
                     "AND User.UserID=?";
             ps = connection.prepareStatement(sql);
@@ -579,111 +580,34 @@ public class CardRequest {
         return res;
     }
 
-    public static ArrayList<Long> getUnActualCards(Long userID) {
+    public static ArrayList<CardUpdateInfo> getUnActualCards(Long userID) {
         DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
-        ArrayList<Long> res = new ArrayList<Long>();
+        ArrayList<CardUpdateInfo> res = new ArrayList<CardUpdateInfo>();
         try {
             connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT Card.CardID FROM Card " +
-                    "JOIN UserCard ON (UserCard.CardID=Card.CardID) " +
-                    "JOIN UserContent ON(UserContent.UserContentID=UserCard.UserContentID) " +
-                    "JOIN User ON (User.UserContentID=UserContent.UserContentID) " +
-                    "WHERE UserCard.CardVersion<Card.CardVersion " +
-                    "AND User.UserID=?";
+            @Language("MySQL") String sql = "SELECT Card.CardID, " +
+                    "CardChange.DataType,CardChange.UpdateType,CardChange.UpdateStatus " +
+                    "FROM Card " +
+                    "LEFT OUTER JOIN CardChange ON(CardChange.CardID=Card.CardID) " +
+                    "LEFT OUTER JOIN UserCard ON (UserCard.CardID=Card.CardID) " +
+                    "LEFT OUTER JOIN UserContent ON(UserContent.UserContentID=UserCard.UserContentID) " +
+                    "LEFT OUTER JOIN User ON (User.UserContentID=UserContent.UserContentID) " +
+                    "WHERE (UserCard.LastUpdateTimeStamp<CardChange.ChangingTimestamp " +
+                    "OR UserCard.UserCardID IS NULL) " +
+                    "AND (User.UserID=? OR User.UserID IS NULL)";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, userID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                res.add(rs.getLong("Card.CardID"));
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        return res;
-    }
-
-    public static ArrayList<Long> getCardsToUpdate(Long userID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        Connection connection;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        ArrayList<Long> res = new ArrayList<Long>();
-        try {
-            connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT Card.CardID FROM Card " +
-                    "JOIN UserCard ON (UserCard.CardID=Card.CardID) " +
-                    "JOIN UserContent ON(UserContent.UserContentID=UserCard.UserContentID) " +
-                    "JOIN User ON (User.UserContentID=UserContent.UserContentID) " +
-                    "WHERE UserCard.CardVersion<Card.CardVersion " +
-                    "AND User.UserID=? " +
-                    "AND Card.CardState=UserCard.CardState";
-            ps = connection.prepareStatement(sql);
-            ps.setLong(1, userID);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                res.add(rs.getLong("Card.CardID"));
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        return res;
-    }
-
-    public static ArrayList<Long> getCardsStatusChanged(Long userID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        Connection connection;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        ArrayList<Long> res = new ArrayList<Long>();
-        try {
-            connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT Card.CardID FROM Card " +
-                    "JOIN UserCard ON (UserCard.CardID=Card.CardID) " +
-                    "JOIN UserContent ON(UserContent.UserContentID=UserCard.UserContentID) " +
-                    "JOIN User ON (User.UserContentID=UserContent.UserContentID) " +
-                    "WHERE UserCard.CardVersion<Card.CardVersion " +
-                    "AND User.UserID=? " +
-                    "AND Card.CardState!=UserCard.CardState";
-            ps = connection.prepareStatement(sql);
-            ps.setLong(1, userID);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                res.add(rs.getLong("Card.CardID"));
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        return res;
-    }
-
-
-    public static ArrayList<Long> getCardsToAdd(Long userID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        Connection connection;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        ArrayList<Long> res = new ArrayList<Long>();
-        try {
-            connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT Card.CardID FROM Card " +
-                    "JOIN User ON (User.UserID=?) " +
-                    "JOIN UserContent ON (User.UserContentID=UserContent.UserContentID) " +
-                    "LEFT OUTER JOIN UserCard ON (UserCard.CardID=Card.CardID AND UserContent.UserContentID=UserCard.UserContentID) " +
-                    "WHERE UserCard.UserCardID IS NULL";
-            ps = connection.prepareStatement(sql);
-            ps.setLong(1, userID);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                res.add(rs.getLong("Card.CardID"));
+                CardUpdateInfo cardUpdateInfo = new CardUpdateInfo();
+                cardUpdateInfo.setCardID(rs.getLong("Card.CardID"));
+                cardUpdateInfo.setUpdateType(UpdateType.parseInt(rs.getInt("CardChange.UpdateType")));
+                cardUpdateInfo.setDataType(ChangingDataType.parseInt(rs.getInt("CardChange.DataType")));
+                cardUpdateInfo.setUpdateStatus(UpdateStatus.parseInt(rs.getInt("CardChange.UpdateStatus")));
+                res.add(cardUpdateInfo);
             }
         } catch (SQLException e) {
             loggerFactory.error(e);
@@ -710,5 +634,6 @@ public class CardRequest {
         }
         return res;
     }
+
 
 }

@@ -23,7 +23,10 @@ public enum MobilePlatform {
         return value;
     }
 
-    public static MobilePlatform parseInt(int value) {
+    public static MobilePlatform parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
         MobilePlatform[] mobilePlatforms = MobilePlatform.values();
         if (value <= 0 || value >= mobilePlatforms.length) {
             return Unknown;

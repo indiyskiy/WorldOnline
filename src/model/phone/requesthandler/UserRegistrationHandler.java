@@ -1,6 +1,6 @@
 package model.phone.requesthandler;
 
-import controller.phone.entity.AllMenusRequest;
+import controller.phone.entity.GetAllMenuIDsRequest;
 import controller.phone.entity.MobileRequest;
 import controller.phone.entity.ParsedRegistrationRequest;
 import model.database.requests.UserRequests;
@@ -31,7 +31,7 @@ public class UserRegistrationHandler implements MobileHandler {
     @Override
     public MobileResponseEntity handleRequest(MobileRequest mobileRequest) throws IllegalTypeException {
         if (mobileRequest.getClass() != ParsedRegistrationRequest.class) {
-            throw new IllegalTypeException(MobileRequest.class, AllMenusRequest.class);
+            throw new IllegalTypeException(MobileRequest.class, GetAllMenuIDsRequest.class);
         }
         ParsedRegistrationRequest parsedRegistrationRequest = (ParsedRegistrationRequest) mobileRequest;
         return handleRequest(parsedRegistrationRequest);

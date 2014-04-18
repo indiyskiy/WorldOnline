@@ -1,12 +1,5 @@
 package model.constants.databaseenumeration;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 24.10.13
- * Time: 21:04
- * To change this template use File | Settings | File Templates.
- */
 public enum TextType {
     Unknown(0),
     Name(1),
@@ -26,7 +19,10 @@ public enum TextType {
         return value;
     }
 
-    public static TextType parseInt(int value) {
+    public static TextType parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
         TextType[] textTypes = TextType.values();
         if (value <= 0 || value >= textTypes.length) {
             return Unknown;

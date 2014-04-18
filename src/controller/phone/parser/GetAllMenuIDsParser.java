@@ -3,7 +3,7 @@ package controller.phone.parser;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import controller.phone.entity.AllMenusRequest;
+import controller.phone.entity.GetAllMenuIDsRequest;
 import model.constants.ExceptionTexts;
 import model.database.requests.UserRequests;
 import model.exception.IllegalTypeException;
@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by Илья on 09.04.14.
  */
-public class AllMenusParser implements MobileParser {
-    public AllMenusRequest parse(HttpServletRequest request) throws ParseRequestException {
-        AllMenusRequest allMenusRequest = new AllMenusRequest();
+public class GetAllMenuIDsParser implements MobileParser {
+    public GetAllMenuIDsRequest parse(HttpServletRequest request) throws ParseRequestException {
+        GetAllMenuIDsRequest getAllMenuIDsRequest = new GetAllMenuIDsRequest();
         String userIdString = request.getParameter("userID");
         if (userIdString == null || userIdString.isEmpty()) {
             throw new ParseRequestException(ExceptionTexts.allMenusUserIDEmptyException);
@@ -32,8 +32,8 @@ public class AllMenusParser implements MobileParser {
         if (!UserRequests.isUserExist(userID)) {
             throw new ParseRequestException(ExceptionTexts.allMenusUserNotExistException);
         }
-        allMenusRequest.setUserID(userID);
-        return allMenusRequest;
+        getAllMenuIDsRequest.setUserID(userID);
+        return getAllMenuIDsRequest;
     }
 
     public static String getResponse(AllMenusResponse allMenusResponse) {

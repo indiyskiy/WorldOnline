@@ -220,14 +220,14 @@
 
     <!--all menu ids-->
     <servlet>
-        <display-name>GetAllMenusServlet</display-name>
-        <servlet-name>GetAllMenusServlet</servlet-name>
-        <servlet-class>view.servlet.phone.GetAllMenusServlet</servlet-class>
+        <display-name>GetAllMenusIdsServlet</display-name>
+        <servlet-name>GetAllMenusIdsServlet</servlet-name>
+        <servlet-class>view.servlet.phone.GetAllMenusIdsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>GetAllMenusServlet</servlet-name>
-        <url-pattern>/mobile/getallmenus</url-pattern>
+        <servlet-name>GetAllMenusIdsServlet</servlet-name>
+        <url-pattern>/mobile/getallmenusids</url-pattern>
     </servlet-mapping>
 
     <!--all menu ids-->
@@ -240,6 +240,18 @@
     <servlet-mapping>
         <servlet-name>GetMenuServlet</servlet-name>
         <url-pattern>/mobile/getmenu</url-pattern>
+    </servlet-mapping>
+
+    <!--all menus-->
+    <servlet>
+        <display-name>GetAllMenusServlet</display-name>
+        <servlet-name>GetAllMenusServlet</servlet-name>
+        <servlet-class>view.servlet.phone.GetAllMenusServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetAllMenusServlet</servlet-name>
+        <url-pattern>/mobile/getallmenus</url-pattern>
     </servlet-mapping>
 
 

@@ -2,7 +2,9 @@ package view.servlet;
 
 import controller.phone.parser.MobileErrorParser;
 import model.constants.Component;
+import model.exception.ParseRequestException;
 import model.logger.LoggerFactory;
+import org.apache.http.HttpResponse;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,7 +50,7 @@ public class ServletHelper {
 
     public static void sendResponse(HttpServletResponse response, String responseString) throws IOException {
         PrintWriter out = response.getWriter();
-        out.println(responseString);
+        out.print(responseString);
         out.flush();
         out.close();
     }
@@ -82,7 +84,7 @@ public class ServletHelper {
                 ServletHelper.sendForward("/error.jsp", servlet, request, response);
             }
         } catch (ServletException | IOException e) {
-            loggerFactory.error(e);
+            loggerFactory.warning(e);
         }
     }
 
@@ -90,7 +92,12 @@ public class ServletHelper {
         if (loggerFactory != null) {
             loggerFactory.error(error);
         } else {
-            ServletHelper.loggerFactory.error(error);
+            ServletHelper.loggerFactory.warning(error);
+        }
+        if (error.getClass() == ParseRequestException.class) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        } else {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
         String errorJSON = new MobileErrorParser().parse(error);
         try {

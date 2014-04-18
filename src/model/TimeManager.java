@@ -21,15 +21,4 @@ public class TimeManager {
         return new Timestamp(System.currentTimeMillis());
     }
 
-    public static void main(String[] args) {
-        try {
-            Timestamp a = currentTime();
-            Thread.sleep(60000);
-            Timestamp b = currentTime();
-            System.out.println(getDifferentInMillis(b, a));
-            System.out.println(millisToMinutes(getDifferentInMillis(b, a)));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 }

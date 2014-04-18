@@ -1,5 +1,6 @@
 package model.xmlparser;
 
+import model.additionalentity.CompleteMenuInfo;
 import model.constants.Component;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.CardType;
@@ -46,10 +47,6 @@ public class MenuCardLinkParser {
     public ArrayList<MenuCardLinkEntity> menuCardLinkEntities = new ArrayList<MenuCardLinkEntity>();
     public HashMap<Integer, Integer> menuCardMap = StringFileParser.getIntIntMap(root + "addData/menuCardMap.txt");
     private MainMenuData mainMenuData = new MenuParser().getMainMenuData(root + "MainMenuData.xml");
-
-    public static void main(String[] args) {
-        new MenuCardLinkParser().parseMenuCardLink();
-    }
 
     private MenuCardLinkEntity addLink(CardEntity cardEntity, MenuEntity menuEntity) {
         if (menuEntity != null && cardEntity != null) {
@@ -265,11 +262,8 @@ public class MenuCardLinkParser {
         Integer menuID = menuCardMap.get(Integer.parseInt(cardID));
         for (Submenu submenu : mainMenuData.getSubmenus()) {
             if (submenu.id.equals(String.valueOf(menuID))) {
-                System.out.println("sumbenu was found");
-                MenuEntity menuEntity = MenuRequest.getMenuByName(submenu.nameEN);
-                if (menuEntity == null) {
-                    System.out.print(cardID + " " + menuID);
-                }
+                CompleteMenuInfo completeMenuInfo = MenuRequest.getMenuByName(submenu.nameEN);
+                MenuEntity menuEntity = completeMenuInfo.getMenuEntity();
                 return menuEntity;
             }
         }

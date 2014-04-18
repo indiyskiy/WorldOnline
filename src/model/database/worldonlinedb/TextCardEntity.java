@@ -4,13 +4,6 @@ import model.constants.databaseenumeration.TextType;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 29.10.13
- * Time: 17:10
- * To change this template use File | Settings | File Templates.
- */
 @javax.persistence.Table(name = "TextCard", schema = "", catalog = "worldonline")
 @Entity
 public class TextCardEntity {
@@ -18,6 +11,18 @@ public class TextCardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long textCardID;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "TextGroupID")
+    private TextGroupEntity textGroup;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "CardID")
+    private CardEntity card;
+
+    @javax.persistence.Column(name = "CardTextType")
+    @Basic
+    private Integer cardTextType;
 
     public Long getTextCardID() {
         return textCardID;
@@ -27,10 +32,6 @@ public class TextCardEntity {
         this.textCardID = textCardID;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "TextGroupID")
-    private TextGroupEntity textGroup;
-
     public TextGroupEntity getTextGroup() {
         return textGroup;
     }
@@ -39,10 +40,6 @@ public class TextCardEntity {
         this.textGroup = textGroup;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "CardID")
-    private CardEntity card;
-
     public CardEntity getCard() {
         return card;
     }
@@ -50,10 +47,6 @@ public class TextCardEntity {
     public void setCard(CardEntity card) {
         this.card = card;
     }
-
-    @javax.persistence.Column(name = "CardTextType")
-    @Basic
-    private Integer cardTextType;
 
     public Integer getCardTextType() {
         return cardTextType;

@@ -18,7 +18,10 @@ public enum CardToCardLinkType {
         this.value = value;
     }
 
-    public static CardToCardLinkType parseInt(int value) {
+    public static CardToCardLinkType parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
         CardToCardLinkType[] cardToCardLinkTypes = CardToCardLinkType.values();
         if (value <= 0 || value >= cardToCardLinkTypes.length) {
             return Unknown;

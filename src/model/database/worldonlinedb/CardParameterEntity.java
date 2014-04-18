@@ -20,6 +20,26 @@ public class CardParameterEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cardParameterID;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "CardID")
+    private CardEntity card;
+
+    @javax.persistence.Column(name = "CardParameterType")
+    @Basic
+    private Integer cardParameterType;
+
+    @javax.persistence.Column(name = "CardParameterValue", columnDefinition = "TEXT")
+    @Basic
+    private String cardParameterValue;
+
+    @javax.persistence.Column(name = "CardParameterDataType")
+    @Basic
+    private Integer cardParameterDataType;
+
+    @javax.persistence.Column(name = "CardParameterName")
+    @Basic
+    private String cardParameterName;
+
     public Long getCardParameterID() {
         return cardParameterID;
     }
@@ -27,10 +47,6 @@ public class CardParameterEntity {
     public void setCardParameterID(Long cardParameterID) {
         this.cardParameterID = cardParameterID;
     }
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "CardID")
-    private CardEntity card;
 
     public CardEntity getCard() {
         return card;
@@ -40,10 +56,6 @@ public class CardParameterEntity {
         this.card = card;
     }
 
-    @javax.persistence.Column(name = "CardParameterType")
-    @Basic
-    private Integer cardParameterType;
-
     public Integer getCardParameterType() {
         return cardParameterType;
     }
@@ -51,10 +63,6 @@ public class CardParameterEntity {
     public void setCardParameterType(Integer cardParameterType) {
         this.cardParameterType = cardParameterType;
     }
-
-    @javax.persistence.Column(name = "CardParameterValue", columnDefinition = "TEXT")
-    @Basic
-    private String cardParameterValue;
 
     public String getCardParameterValue() {
         return cardParameterValue;
@@ -64,10 +72,6 @@ public class CardParameterEntity {
         this.cardParameterValue = cardParameterValue;
     }
 
-    @javax.persistence.Column(name = "CardParameterDataType")
-    @Basic
-    private Integer cardParameterDataType;
-
     public Integer getCardParameterDataType() {
         return cardParameterDataType;
     }
@@ -75,10 +79,6 @@ public class CardParameterEntity {
     public void setCardParameterDataType(Integer cardParameterDataType) {
         this.cardParameterDataType = cardParameterDataType;
     }
-
-    @javax.persistence.Column(name = "CardParameterName")
-    @Basic
-    private String cardParameterName;
 
     public String getCardParameterName() {
         return cardParameterName;

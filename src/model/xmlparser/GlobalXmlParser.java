@@ -54,22 +54,13 @@ public class GlobalXmlParser implements Runnable {
     public static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, GlobalXmlParser.class);
 
     public static void parse() {
+        loggerFactory.info("parse");
         new Thread(new GlobalXmlParser()).start();
-    }
-
-    public static void main(String[] args) {
-        try {
-            restaurantChainMap = new HashMap<Integer, CardEntity>();
-            GlobalXmlParser globalXmlParser = new GlobalXmlParser();
-            globalXmlParser.globalParse();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        loggerFactory.info("/parse");
     }
 
     public void globalParse() throws IOException, SQLException {
+        loggerFactory.info("globalParse");
         ArrayList<StringIntPair> categories = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Categories.txt"), ";");
         saveTags(categories, TagType.Categories);
         ArrayList<StringIntPair> kitchens = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Kitchens.txt"), ";");
@@ -111,9 +102,11 @@ public class GlobalXmlParser implements Runnable {
         //menu card link
         MenuCardLinkParser menuCardLinkParser = new MenuCardLinkParser();
         menuCardLinkParser.parseMenuCardLink();
+        loggerFactory.info("/globalParse");
     }
 
     private void saveCardShopping(CardShopping cardShopping) throws IOException, SQLException {
+        loggerFactory.info("saveCardShopping");
         List<Shopping> shoppingList = cardShopping.shoppings;
         for (Shopping shopping : shoppingList) {
             CardState cardState;
@@ -219,9 +212,11 @@ public class GlobalXmlParser implements Runnable {
 //            handBook.priceFile);
 //            handBook.metro);
 //            handBook.parentMenuID);
+        loggerFactory.info("/saveCardShopping");
     }
 
     private void addRestarauntChainLink(String restaurantChain, CardEntity card) {
+        loggerFactory.info("addRestarauntChainLink");
         if (restaurantChain != null && !restaurantChain.replaceAll(" ", "").isEmpty()) {
             Integer restChainID = Integer.parseInt(restaurantChain);
             CardEntity targetCard;
@@ -235,14 +230,18 @@ public class GlobalXmlParser implements Runnable {
                 addCardToCardLink(targetCard, card, CardToCardLinkType.RestaurantChain);
             }
         }
+        loggerFactory.info("addRestarauntChainLink");
     }
 
     private void addCardToCardLink(CardEntity targetCard, CardEntity card, CardToCardLinkType cardToCardLinkType) {
+        loggerFactory.info("addCardToCardLink");
         CardToCardLinkEntity cardToCardLinkEntity = new CardToCardLinkEntity(card, targetCard, cardToCardLinkType);
         LinkRequest.addCardToCardLinkRequest(cardToCardLinkEntity);
+        loggerFactory.info("/addCardToCardLink");
     }
 
     private void saveCardSight(CardSight cardSight) throws IOException, SQLException {
+        loggerFactory.info("saveCardSight");
         List<Sight> sights = cardSight.sights;
         for (Sight sight : sights) {
             CardState cardState;
@@ -348,9 +347,11 @@ public class GlobalXmlParser implements Runnable {
 //            handBook.priceFile);
 //            handBook.metro);
 //            handBook.parentMenuID);
+        loggerFactory.info("/saveCardSight");
     }
 
     private void saveCardRoute(CardRoute cardRoute) throws IOException, SQLException {
+        loggerFactory.info("saveCardRoute");
         List<Route> routes = cardRoute.routes;
         for (Route route : routes) {
             CardState cardState;
@@ -454,9 +455,11 @@ public class GlobalXmlParser implements Runnable {
 //            handBook.priceFile);
 //            handBook.metro);
 //            handBook.parentMenuID);
+        loggerFactory.info("/saveCardRoute");
     }
 
     private void saveCardRelax(CardRelax cardRelax) throws IOException, SQLException {
+        loggerFactory.info("saveCardRelax");
         List<Relax> relaxes = cardRelax.relaxes;
         for (Relax relax : relaxes) {
             CardState cardState;
@@ -562,9 +565,11 @@ public class GlobalXmlParser implements Runnable {
 //            handBook.metro);
 //            handBook.parentMenuID);
         }
+        loggerFactory.info("/saveCardRelax");
     }
 
     private void saveCardMeal(CardMeal cardMeal) throws SQLException, IOException {
+        loggerFactory.info("saveCardMeal");
         List<Meal> meals = cardMeal.meals;
         for (Meal meal : meals) {
             CardState cardState;
@@ -671,9 +676,11 @@ public class GlobalXmlParser implements Runnable {
 //            handBook.metro);
 //            handBook.parentMenuID);
         }
+        loggerFactory.info("/saveCardMeal");
     }
 
     private void saveCardHotels(CardHotels cardHotels) throws SQLException, IOException {
+        loggerFactory.info("saveCardHotels");
         List<Hotel> hotels = cardHotels.hotels;
         for (Hotel hotel : hotels) {
             CardState cardState;
@@ -724,11 +731,12 @@ public class GlobalXmlParser implements Runnable {
             saveImages(hotel.panorama, card, ImageType.Panorama);
 
             addRestarauntChainLink(hotel.restaurantChain, card);
-
         }
+        loggerFactory.info("saveCardHotels");
     }
 
     private void saveCardHandBook(CardHandBook cardHandBook) throws SQLException, IOException {
+        loggerFactory.info("saveCardHandBook");
         List<HandBook> handBooks = cardHandBook.handBooks;
         for (HandBook handBook : handBooks) {
             CardState cardState;
@@ -783,9 +791,11 @@ public class GlobalXmlParser implements Runnable {
 //            handBook.metro);
 //            handBook.parentMenuID);
         }
+        loggerFactory.info("/saveCardHandBook");
     }
 
     private void saveCardsAboutCity(CardAboutCity cardAboutCity) throws SQLException, IOException {
+        loggerFactory.info("saveCardsAboutCity");
         List<AboutCity> aboutCityList = cardAboutCity.aboutCities;
         for (AboutCity aboutCity : aboutCityList) {
             CardState cardState;
@@ -836,19 +846,23 @@ public class GlobalXmlParser implements Runnable {
             saveImages(aboutCity.cardImage, card, ImageType.CardImage);
 
         }
+        loggerFactory.info("/saveCardsAboutCity");
     }
 
     private void saveImages(String imageNames, CardEntity card, ImageType imageType) {
+        loggerFactory.info("saveImages");
         if (imageNames == null || imageNames.isEmpty()) {
             return;
         }
         String[] imageNameArray = imageNames.split(";");
         for (String imageName : imageNameArray) {
-            saveImage(imageName, card, imageType);
+            saveImage(imageName, card, imageType, ServerConsts.oldImageRoot + imageName);
         }
+        loggerFactory.info("/saveImages");
     }
 
     private void saveCardTags(String stringOfTags, CardEntity card, TagType tagType) throws SQLException, IOException {
+        loggerFactory.info("saveCardTags");
         if (stringOfTags == null || stringOfTags.equals("") || stringOfTags.equals("null")) {
             return;
         }
@@ -875,17 +889,21 @@ public class GlobalXmlParser implements Runnable {
                 }
             }
         }
+        loggerFactory.info("/saveCardTags");
     }
 
     private void saveParameter(String parameter, CardEntity card, CardParameterType cardParameterType) {
+        loggerFactory.info("saveParameter");
         if (ParameterValidator.isValidParameter(parameter, cardParameterType.getDataType())) {
             CardParameterEntity cardParameterEntity = new CardParameterEntity(card, cardParameterType, cardParameterType.getDataType(), parameter);
             ParameterRequest.addCardParameter(cardParameterEntity);
         }
+        loggerFactory.info("/saveParameter");
     }
 
 
     private void saveText(String textRu, String textEn, String nameRu, String nameEn, TextType textType, CardEntity card) {
+        loggerFactory.info("saveText");
         TextGroupEntity textGroupEntity = null;
         String name;
         if (nameEn != null) {
@@ -935,9 +953,11 @@ public class GlobalXmlParser implements Runnable {
             TextCardEntity textCardEntity = new TextCardEntity(textGroupEntity, card, textType);
             TextRequest.addTextCard(textCardEntity);
         }
+        loggerFactory.info("/saveText");
     }
 
     private void saveTags(ArrayList<StringIntPair> tagList, TagType tagType) {
+        loggerFactory.info("saveTags");
         try {
             for (StringIntPair tagItem : tagList) {
                 TextGroupEntity textGroup = new TextGroupEntity(tagType + "_" + tagItem.getString());
@@ -948,9 +968,11 @@ public class GlobalXmlParser implements Runnable {
         } catch (Exception e) {
             loggerFactory.error(e);
         }
+        loggerFactory.info("/saveTags");
     }
 
     private void saveCoordinate(String lat, String lon, CardEntity card) {
+        loggerFactory.info("saveCoordinate");
         try {
             if (ParameterValidator.isValidParameter(lat, DataType.DoubleType) && ParameterValidator.isValidParameter(lon, DataType.DoubleType)) {
                 double doubleLat = Double.parseDouble(lat);
@@ -962,14 +984,16 @@ public class GlobalXmlParser implements Runnable {
             loggerFactory.error(e);
 //            loggerFactory.error(e);
         }
+        loggerFactory.info("/saveCoordinate");
     }
 
-    private void saveImage(String imageName, CardEntity card, ImageType imageType) {
+    private void saveImage(String imageName, CardEntity card, ImageType imageType, String root) {
+        loggerFactory.info("saveImage");
         try {
             if (imageName == null || imageName.isEmpty()) {
                 return;
             }
-            File imageFile = new File(ServerConsts.oldImageRoot + imageName);
+            File imageFile = new File(root);
             if (!imageFile.exists()) {
                 return;
             }
@@ -991,10 +1015,12 @@ public class GlobalXmlParser implements Runnable {
         } catch (Exception e) {
             loggerFactory.error(e);
         }
+        loggerFactory.info("/saveImage");
     }
 
-    private void saveFile(File file, String fileName, String path) throws IOException {
+    public static void saveFile(File file, String fileName, String path) throws IOException {
         try {
+            loggerFactory.info("saveFile");
             String mainRoot = path;
             File outFolder = new File(mainRoot);
             if (!outFolder.exists()) {
@@ -1005,25 +1031,26 @@ public class GlobalXmlParser implements Runnable {
         } catch (Exception e) {
             loggerFactory.error(e);
         }
+        loggerFactory.info("/saveFile");
     }
 
 
     @Override
     public void run() {
+        loggerFactory.info("run");
         try {
             restaurantChainMap = new HashMap<Integer, CardEntity>();
             GlobalXmlParser globalXmlParser = new GlobalXmlParser();
             globalXmlParser.globalParse();
 //            CompleteCardInfo completeCardInfo = CardRequest.getCompleteCardInfo(1);
-        } catch (IOException e) {
-            loggerFactory.error(e);
-        } catch (SQLException e) {
+        } catch (IOException | SQLException e) {
             loggerFactory.error(e);
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             restaurantChainMap = null;
         }
+        loggerFactory.info("/run");
     }
 }
 

@@ -76,18 +76,6 @@ public class MenuEntity {
     }
 
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "PushedIconImageID")
-    private ImageEntity pushedIconImage;
-
-    public ImageEntity getPushedIconImage() {
-        return pushedIconImage;
-    }
-
-    public void setPushedIconImage(ImageEntity pushedIconImage) {
-        this.pushedIconImage = pushedIconImage;
-    }
-
     @javax.persistence.Column(name = "MenuType")
     @Basic
     private Integer menuType;
@@ -103,11 +91,10 @@ public class MenuEntity {
     public MenuEntity() {
     }
 
-    public MenuEntity(MenuEntity parentMenu, TextGroupEntity nameTextGroup, ImageEntity iconImage, ImageEntity pushedIconImage, MenuType menuType) {
+    public MenuEntity(MenuEntity parentMenu, TextGroupEntity nameTextGroup, ImageEntity iconImage, MenuType menuType) {
         this.parentMenu = parentMenu;
         this.nameTextGroup = nameTextGroup;
         this.iconImage = iconImage;
-        this.pushedIconImage = pushedIconImage;
         if (parentMenu != null) {
             this.menuType = menuType.getValue();
         } else {

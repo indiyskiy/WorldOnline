@@ -19,6 +19,26 @@ public class CardImageEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cardImageID;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ImageID")
+    private ImageEntity image;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "CardID")
+    private CardEntity card;
+
+    @javax.persistence.Column(name = "CardImageType")
+    @Basic
+    private Integer cardImageType;
+
+    @javax.persistence.Column(name = "CardImageName")
+    @Basic
+    private String cardImageName;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ImageDescriptionTextGroupID")
+    private TextGroupEntity imageDescriptionTextGroup;
+
     public Long getCardImageID() {
         return cardImageID;
     }
@@ -26,10 +46,6 @@ public class CardImageEntity {
     public void setCardImageID(Long cardImageID) {
         this.cardImageID = cardImageID;
     }
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "CardID")
-    private CardEntity card;
 
     public CardEntity getCard() {
         return card;
@@ -39,10 +55,6 @@ public class CardImageEntity {
         this.card = card;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "ImageID")
-    private ImageEntity image;
-
     public ImageEntity getImage() {
         return image;
     }
@@ -50,10 +62,6 @@ public class CardImageEntity {
     public void setImage(ImageEntity image) {
         this.image = image;
     }
-
-    @javax.persistence.Column(name = "CardImageType")
-    @Basic
-    private Integer cardImageType;
 
     public Integer getCardImageType() {
         return cardImageType;
@@ -63,10 +71,6 @@ public class CardImageEntity {
         this.cardImageType = cardImageType;
     }
 
-    @javax.persistence.Column(name = "CardImageName")
-    @Basic
-    private String cardImageName;
-
     public String getCardImageName() {
         return cardImageName;
     }
@@ -74,10 +78,6 @@ public class CardImageEntity {
     public void setCardImageName(String cardImageName) {
         this.cardImageName = cardImageName;
     }
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "ImageDescriptionTextGroupID")
-    private TextGroupEntity imageDescriptionTextGroup;
 
     public TextGroupEntity getImageDescriptionTextGroup() {
         return imageDescriptionTextGroup;

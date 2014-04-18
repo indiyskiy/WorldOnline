@@ -29,7 +29,10 @@ public enum DataType {
         return value;
     }
 
-    public static DataType parseInt(int value) {
+    public static DataType parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
         DataType[] dataTypes = DataType.values();
         if (value <= 0 || value >= dataTypes.length) {
             return UnknownType;

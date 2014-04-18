@@ -69,8 +69,7 @@ public class LoggerMessage {
         System.out.println(getMessage());
         System.out.println("ErrorMailer " + logLevel + " " + lowestMailLevel);
         if (logLevel.isBigger(lowestMailLevel)) {
-            System.out.println("ErrorMailer.sendError(this);");
-            ErrorMailer.sendError(this);
+//            ErrorMailer.sendError(this);
         }
     }
 }

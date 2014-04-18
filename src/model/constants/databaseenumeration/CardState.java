@@ -17,7 +17,10 @@ public enum CardState {
         return value;
     }
 
-    public static CardState parseInt(int value) {
+    public static CardState parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
         CardState[] changingTypes = CardState.values();
         if (value <= 0 || value >= changingTypes.length) {
             return Unknown;

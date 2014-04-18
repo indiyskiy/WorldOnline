@@ -1,21 +1,23 @@
 package model.xmlparser;
 
+import model.Md5Hash;
 import model.constants.Component;
 import model.constants.ServerConsts;
+import model.constants.databaseenumeration.ImageType;
 import model.constants.databaseenumeration.LanguageType;
-import model.constants.databaseenumeration.MenuImageType;
 import model.constants.databaseenumeration.MenuType;
+import model.database.requests.ImageRequest;
 import model.database.requests.MenuRequest;
 import model.database.requests.TextRequest;
-import model.database.worldonlinedb.ImageEntity;
-import model.database.worldonlinedb.MenuEntity;
-import model.database.worldonlinedb.TextEntity;
-import model.database.worldonlinedb.TextGroupEntity;
+import model.database.worldonlinedb.*;
 import model.logger.LoggerFactory;
 import model.xmlparser.xmlview.mainmenudata.MainMenuData;
 import model.xmlparser.xmlview.mainmenudata.Submenu;
 import org.simpleframework.xml.core.Persister;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -33,13 +35,6 @@ public class MenuParser {
     private HashMap<Long, Long> downloadedMenuHash = new HashMap<Long, Long>();
     private HashMap<String, MenuEntity> menuEntityHashMap = new HashMap<String, MenuEntity>();
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, MenuParser.class);
-
-    public static void main(String[] args) {
-        MenuParser menuParser = new MenuParser();
-        menuParser.saveMenu();
-        MenuCardLinkParser menuCardLinkParser = new MenuCardLinkParser();
-        menuCardLinkParser.parseMenuCardLink();
-    }
 
     public void saveMenu() {
         MainMenuData mainMenuData = getMainMenuData(ServerConsts.root + "MainMenuData.xml");
@@ -134,10 +129,10 @@ public class MenuParser {
                     }
                 } catch (NullPointerException e) {
                     e.printStackTrace();
-                    System.out.println(submenu);
-                    System.out.println(submenu.nameRU);
-                    System.out.println(submenu.number);
-                    System.out.println(submenu.mainMenuID);
+                    String s = String.valueOf(submenu);
+                    s += "\r\n" + submenu.nameRU;
+                    s += "\r\n" + submenu.number;
+                    s += "\r\n" + submenu.mainMenuID;
                     throw e;
                 }
             }
@@ -154,23 +149,45 @@ public class MenuParser {
             TextEntity enText = new TextEntity(LanguageType.English, submenu.nameEN, textGroupEntity);
             TextRequest.addText(ruText);
             TextRequest.addText(enText);
-            ImageEntity menuImage = getMenuImage(submenu.image, MenuImageType.Simple);
-            ImageEntity pushedMenuImage = getMenuImage(submenu.image, MenuImageType.Pushed);
+            ImageEntity menuImage = getMenuImage(submenu.image);
             MenuType menuType = null;
-            MenuEntity menuEntity = new MenuEntity(mainMenu, textGroupEntity, menuImage, pushedMenuImage, menuType);
+            MenuEntity menuEntity = new MenuEntity(mainMenu, textGroupEntity, menuImage, menuType);
             menuEntity.setNumber(Integer.parseInt(submenu.orderID));
             if (menuEntity.getNumber() == null) {
-                System.out.println("NULL NUMBER!!! " + submenu.nameRU + " " + submenu.orderID);
+                loggerFactory.error("NULL NUMBER!!! " + submenu.nameRU + " " + submenu.orderID);
             }
             MenuRequest.addMenu(menuEntity);
             downloadedMenuHash.put(menuID, menuEntity.getMenuID());
             put(submenu.id, menuEntity);
-//            System.out.println(menuID + " " + menuEntity.getMenuID());
         }
     }
 
-    private ImageEntity getMenuImage(String image, MenuImageType simple) {
-//        System.out.println(image);
+    private ImageEntity getMenuImage(String imageName) {
+        try {
+            if (imageName == null || imageName.isEmpty()) {
+                return null;
+            }
+            String root = ServerConsts.oldIconsRoot + imageName;
+            File imageFile = new File(root);
+            if (!imageFile.exists()) {
+                return null;
+            }
+            BufferedImage bimg = ImageIO.read(imageFile);
+            int width = bimg.getWidth();
+            int height = bimg.getHeight();
+            long size = imageFile.length();
+            String hash = Md5Hash.getMd5Hash(imageFile);
+            ImageEntity imageEntity = ImageRequest.getImageByHash(hash);
+            if (imageEntity == null) {
+                ImageType imageType = ImageType.MenuIcon;
+                GlobalXmlParser.saveFile(imageFile, imageName, ServerConsts.imageFolder + imageType);
+                String path = ServerConsts.imageFolder + imageType.toString() + "/" + imageName;
+                imageEntity = new ImageEntity(path, height, width, size, hash);
+            }
+            return imageEntity;
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        }
         return null;
     }
 

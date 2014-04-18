@@ -12,7 +12,9 @@ public enum ImageType {
     CardImage(1),
     Photo(2),
     PanoramaToList(3),
-    Panorama(4);
+    Panorama(4),
+    MenuIcon(5),
+    MenuIconPushed(6);
 
     private final int value;
 
@@ -24,7 +26,10 @@ public enum ImageType {
         return value;
     }
 
-    public static ImageType parseInt(int value) {
+    public static ImageType parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
         ImageType[] imageTypes = ImageType.values();
         if (value <= 0 || value >= imageTypes.length) {
             return Unknown;

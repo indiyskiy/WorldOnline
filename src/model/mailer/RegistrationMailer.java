@@ -70,17 +70,4 @@ public class RegistrationMailer {
         }
     }
 
-    public static void main(String[] args) {
-        ParsedRegistrationRequest parsedRegistrationRequest = new ParsedRegistrationRequest();
-        parsedRegistrationRequest.setLogin("Graf_D");
-        parsedRegistrationRequest.setSecondName("Graf");
-        parsedRegistrationRequest.setFirstName("D");
-        parsedRegistrationRequest.setPasswordFromOriginal("0513666");
-        parsedRegistrationRequest.setEmail("indiyskiy@gmail.com");
-        String accstr = getLink(parsedRegistrationRequest);
-        System.out.println(accstr);
-        accstr = accstr.replaceAll(servletAddress, "");
-        confirmAccount(accstr);
-    }
-
 }

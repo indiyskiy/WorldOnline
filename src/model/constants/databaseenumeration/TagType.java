@@ -23,7 +23,10 @@ public enum TagType {
         return value;
     }
 
-    public static TagType parseInt(int value) {
+    public static TagType parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
         TagType[] tagTypes = TagType.values();
         if (value <= 0 || value >= tagTypes.length) {
             return Unknown;

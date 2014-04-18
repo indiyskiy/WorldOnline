@@ -16,7 +16,10 @@ public enum UpdateType {
         return value;
     }
 
-    public static UpdateType parseInt(int value) {
+    public static UpdateType parseInt(Integer value) {
+        if (value == null) {
+            return Create;
+        }
         UpdateType[] updateTypes = UpdateType.values();
         if (value <= 0 || value >= updateTypes.length) {
             return Unknown;

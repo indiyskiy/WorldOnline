@@ -22,7 +22,10 @@ public enum LanguageType {
         return value;
     }
 
-    public static LanguageType parseInt(int value) {
+    public static LanguageType parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
         LanguageType[] languageTypes = LanguageType.values();
         if (value <= 0 || value >= languageTypes.length) {
             return Unknown;

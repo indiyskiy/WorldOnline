@@ -18,7 +18,10 @@ public enum UpdateStatus {
         return value;
     }
 
-    public static UpdateStatus parseInt(int value) {
+    public static UpdateStatus parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
         UpdateStatus[] updateStatuses = UpdateStatus.values();
         if (value <= 0 || value >= updateStatuses.length) {
             return Unknown;

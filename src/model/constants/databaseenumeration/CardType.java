@@ -29,7 +29,10 @@ public enum CardType {
         return value;
     }
 
-    public static CardType parseInt(int value) {
+    public static CardType parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
         CardType[] cardTypes = CardType.values();
         if (value <= 0 || value >= cardTypes.length) {
             return Unknown;

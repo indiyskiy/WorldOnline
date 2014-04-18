@@ -6,7 +6,6 @@ package model.additionalentity;
 public class MenuCompleteInformation {
     private Long menuID;
     private Long iconImageID;
-    private Long pushedIconImageID;
     private Long parentMenuID;
     private String text;
     private Integer number;
@@ -27,13 +26,6 @@ public class MenuCompleteInformation {
         return iconImageID;
     }
 
-    public void setPushedIconImageID(Long pushedIconImageID) {
-        this.pushedIconImageID = pushedIconImageID;
-    }
-
-    public Long getPushedIconImageID() {
-        return pushedIconImageID;
-    }
 
     public void setParentMenuID(Long parentMenuID) {
         this.parentMenuID = parentMenuID;

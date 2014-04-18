@@ -1,9 +1,9 @@
 package controller.phone.entity;
 
 /**
- * Created by Илья on 09.04.14.
+ * Created by Илья on 15.04.14.
  */
-public class AllMenusRequest extends MobileRequest {
+public class GetAllMenusRequest extends MobileRequest {
     private Long userID;
 
     public void setUserID(Long userID) {

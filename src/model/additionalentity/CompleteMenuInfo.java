@@ -22,6 +22,7 @@ public class CompleteMenuInfo {
     private HashMap<Long, CompleteMenuInfo> kids = new HashMap<Long, CompleteMenuInfo>();
     private CompleteTextGroupInfo completeTextGroupInfo;
     private ImageEntity image;
+    private CompleteMenuInfo parentMenuInfo;
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Global, CompleteMenuInfo.class);
 
     public CompleteMenuInfo(MenuEntity menuEntity) {
@@ -54,6 +55,14 @@ public class CompleteMenuInfo {
 
     public void setImage(ImageEntity image) {
         this.image = image;
+    }
+
+    public CompleteMenuInfo getParentMenuInfo() {
+        return parentMenuInfo;
+    }
+
+    public void setParentMenuInfo(CompleteMenuInfo parentMenuInfo) {
+        this.parentMenuInfo = parentMenuInfo;
     }
 
     public SimpleMenu getSimpleMenu() {
