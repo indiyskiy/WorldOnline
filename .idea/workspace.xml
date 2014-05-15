@@ -10,8 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="[database] weather">
-      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\META-INF\MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\META-INF\application.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WorldOnline.iws" />
@@ -822,7 +820,7 @@
       <workItem from="1399879838173" duration="22318000" />
       <workItem from="1399965653684" duration="37478000" />
       <workItem from="1400138069515" duration="613000" />
-      <workItem from="1400145061930" duration="13844000" />
+      <workItem from="1400145061930" duration="13857000" />
     </task>
     <task id="LOCAL-00001" summary="TestCommit">
       <created>1383271700462</created>
@@ -1120,11 +1118,15 @@
       <created>1400168653319</created>
       <updated>1400168653319</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="[database] weather">
+      <created>1400168674107</created>
+      <updated>1400168674107</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="656886000" />
+    <option name="totallyTimeSpent" value="656899000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
