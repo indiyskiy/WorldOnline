@@ -1,6 +1,6 @@
 package controller.parser.adminparser;
 
-import model.additionalentity.LoginRequest;
+import model.additionalentity.admin.LoginRequest;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

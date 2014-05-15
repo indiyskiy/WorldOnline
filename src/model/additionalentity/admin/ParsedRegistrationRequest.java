@@ -1,6 +1,6 @@
-package model.additionalentity;
+package model.additionalentity.admin;
 
-import model.Md5Hash;
+import helper.Md5Hash;
 import model.database.requests.AdminUserRequest;
 
 /**

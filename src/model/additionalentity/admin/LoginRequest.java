@@ -1,6 +1,6 @@
-package model.additionalentity;
+package model.additionalentity.admin;
 
-import model.Md5Hash;
+import helper.Md5Hash;
 
 /**
  * Created by Илья on 31.03.14.

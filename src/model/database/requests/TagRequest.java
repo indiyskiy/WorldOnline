@@ -1,8 +1,8 @@
 package model.database.requests;
 
 import model.additionalentity.CompleteCardTagInfo;
-import model.additionalentity.CompleteTagInfo;
 import model.additionalentity.CompleteTextGroupInfo;
+import model.additionalentity.admin.CompleteTagInfo;
 import model.constants.Component;
 import model.constants.databaseenumeration.TagType;
 import model.database.session.DatabaseConnection;

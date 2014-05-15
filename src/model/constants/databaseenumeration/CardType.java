@@ -17,7 +17,8 @@ public enum CardType {
     CardRoute(6),
     CardShopping(7),
     CardSight(8),
-    RestaurantChainCard(9);
+    RestaurantChainCard(9),
+    CardPhoto(10);
 
     private final int value;
 
@@ -72,6 +73,9 @@ public enum CardType {
             }
             case RestaurantChainCard: {
                 return "сеть заведений";
+            }
+            case CardPhoto: {
+                return "Фото объекта";
             }
             default: {
                 return "неизвестно";

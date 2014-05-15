@@ -2,28 +2,30 @@ package model.database.session;
 
 import model.constants.Component;
 import model.logger.LoggerFactory;
+import org.apache.tomcat.jdbc.pool.DataSource;
 
-import java.sql.*;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 16.10.13
- * Time: 20:30
- * To change this template use File | Settings | File Templates.
- */
 public class DatabaseConnection {
-    private final String url = "jdbc:mysql://127.0.0.1:3306/worldonline?autoReconnect=true";
-    private final String username = "root";
-    private final String password = "Djqysdrjcvjct!!!";
     private Connection connection = null;
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Database, DatabaseConnection.class);
 
     public DatabaseConnection() {
         try {
-            connection = DriverManager.getConnection(url, username, password);
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env/");
+            DataSource ds = (DataSource) envCtx.lookup("jdbc/worldOnLineDB");
+            connection = ds.getConnection();
         } catch (SQLException e) {
+            loggerFactory.error(e);
             throw new RuntimeException("Cannot connect the database!", e);
+        } catch (Exception e) {
+            loggerFactory.error(e);
         }
     }
 
@@ -54,5 +56,6 @@ public class DatabaseConnection {
             loggerFactory.error(e);
         }
     }
+
 }
 

@@ -1,6 +1,6 @@
 package model.mailer;
 
-import model.additionalentity.ParsedRegistrationRequest;
+import model.additionalentity.admin.ParsedRegistrationRequest;
 import model.constants.Component;
 import model.constants.ServerConsts;
 import model.database.requests.AdminUserRequest;

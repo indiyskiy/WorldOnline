@@ -1,5 +1,6 @@
-package model.additionalentity;
+package model.additionalentity.admin;
 
+import model.additionalentity.CompleteTextGroupInfo;
 import model.database.worldonlinedb.TagEntity;
 
 import java.util.HashMap;

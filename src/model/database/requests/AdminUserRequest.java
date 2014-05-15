@@ -1,9 +1,9 @@
 package model.database.requests;
 
-import model.Md5Hash;
-import model.TimeManager;
-import model.additionalentity.LoginRequest;
-import model.additionalentity.ParsedRegistrationRequest;
+import helper.Md5Hash;
+import helper.TimeManager;
+import model.additionalentity.admin.LoginRequest;
+import model.additionalentity.admin.ParsedRegistrationRequest;
 import model.constants.Component;
 import model.constants.MailConsts;
 import model.constants.ProtectAdminLevel;

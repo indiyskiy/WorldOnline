@@ -1,7 +1,6 @@
 package model.additionalentity;
 
 import model.constants.databaseenumeration.ChangingDataType;
-import model.constants.databaseenumeration.DataType;
 import model.constants.databaseenumeration.UpdateStatus;
 import model.constants.databaseenumeration.UpdateType;
 

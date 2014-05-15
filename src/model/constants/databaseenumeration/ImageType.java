@@ -14,7 +14,8 @@ public enum ImageType {
     PanoramaToList(3),
     Panorama(4),
     MenuIcon(5),
-    MenuIconPushed(6);
+    MenuIconPushed(6),
+    PhotoCardImage(7);
 
     private final int value;
 

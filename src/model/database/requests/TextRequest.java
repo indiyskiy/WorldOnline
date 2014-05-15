@@ -8,6 +8,7 @@ import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.TextCardEntity;
 import model.database.worldonlinedb.TextEntity;
 import model.database.worldonlinedb.TextGroupEntity;
+import model.exception.DatabaseException;
 import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.intellij.lang.annotations.Language;
@@ -16,7 +17,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,11 +30,23 @@ public class TextRequest {
 
     public static void addText(TextEntity text) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
+            if (text.getTextGroup() == null) {
+                throw new DatabaseException("TextGroup is null");
+            }
             session.beginTransaction();
             session.save(text);
             session.getTransaction().commit();
+            TextEntity textEntityTest = findTextByText(text.getText());
+            if (textEntityTest.getTextGroup() == null) {
+                loggerFactory.error("text entity " + text.getText() + " was added without text group!");
+                throw new DatabaseException("TextGroup is null after adding");
+            }
+        } catch (DatabaseException e) {
+            loggerFactory.error(e.getMessage());
+            loggerFactory.error(e);
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
             if (session != null) {
                 session.close();
@@ -100,37 +112,6 @@ public class TextRequest {
         }
     }
 
-    public static HashMap<Long, CompleteTextGroupInfo> getCompleteTextGroupInfos() {
-        HashMap<Long, CompleteTextGroupInfo> textGroupInfos = new HashMap<Long, CompleteTextGroupInfo>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            Connection connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT * FROM TextGroup " +
-                    "JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID)";
-            ps = connection.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                CompleteTextGroupInfo textGroupInfo;
-                Long textGroupInfoID = rs.getLong("TextGroup.TextGroupID");
-                if (textGroupInfoID != 0 && !rs.wasNull()) {
-                    if (textGroupInfos.containsKey(textGroupInfoID) && textGroupInfos.get(textGroupInfoID) != null) {
-                        textGroupInfo = textGroupInfos.get(textGroupInfoID);
-                    } else {
-                        textGroupInfo = new CompleteTextGroupInfo(getTextGroupByResultSet(rs));
-                        textGroupInfos.put(textGroupInfoID, textGroupInfo);
-                    }
-                    getCompleteTextGroupInfo(rs, textGroupInfo, "Text");
-                }
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        return textGroupInfos;
-    }
 
     public static void getCompleteTextGroupInfo(ResultSet rs, CompleteTextGroupInfo textGroupInfo, String text) throws SQLException {
         Long textID = rs.getLong(text + ".TextID");
@@ -144,7 +125,6 @@ public class TextRequest {
 
     public static void addTextGroup(TextGroupEntity textGroup) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(textGroup);

@@ -2,7 +2,11 @@ package model.database.requests;
 
 import controller.phone.entity.GetAllMenusRequest;
 import controller.phone.entity.GetMenuRequest;
-import model.additionalentity.*;
+import model.additionalentity.CompleteTextGroupInfo;
+import model.additionalentity.MenuInfo;
+import model.additionalentity.SimpleMenu;
+import model.additionalentity.admin.CompleteMenuInfo;
+import model.additionalentity.phone.MenuCompleteInformation;
 import model.constants.Component;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
@@ -38,6 +42,25 @@ public class MenuRequest {
             session.beginTransaction();
             session.save(menuEntity);
             session.getTransaction().commit();
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public static void addMenu(ArrayList<MenuEntity> menuEntities) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            for (MenuEntity menuEntity : menuEntities) {
+                session.save(menuEntity);
+            }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            logger.error(e);
         } finally {
             if (session != null) {
                 session.close();
@@ -51,6 +74,8 @@ public class MenuRequest {
             session.beginTransaction();
             session.save(menuCardLinkEntity);
             session.getTransaction().commit();
+        } catch (Exception e) {
+            logger.error(e);
         } finally {
             if (session != null) {
                 session.close();
@@ -62,17 +87,19 @@ public class MenuRequest {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
         try {
             return (MenuEntity) session.get(MenuEntity.class, menuID);
+        } catch (Exception e) {
+            logger.error(e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
+        return null;
     }
 
     public static void setParent(MenuEntity menu) {
         DatabaseConnection dbConnection = new DatabaseConnection();
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             Connection connection = dbConnection.getConnection();
             @Language(value = "MySQL") String sql = "UPDATE Menu " +
@@ -85,7 +112,7 @@ public class MenuRequest {
         } catch (Exception e) {
             logger.error(e);
         } finally {
-            dbConnection.closeConnections(ps, rs);
+            dbConnection.closeConnections(ps, null);
         }
     }
 
@@ -282,7 +309,7 @@ public class MenuRequest {
         TextRequest.getCompleteTextGroupInfo(rs, completeTextGroupInfo, text);
     }
 
-    public static CompleteMenuInfo getMenuByName(String name) {
+    public static MenuEntity getMenuByName(String name) {
         DatabaseConnection dbConnection = new DatabaseConnection();
         CompleteMenuInfo completeMenuInfo = null;
         Connection connection;
@@ -291,48 +318,27 @@ public class MenuRequest {
         try {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT * FROM Menu " +
-                    "JOIN TextGroup ON (Text.TextGroupID=TextGroup.TextGroupID) " +
-                    "JOIN Text ON (Menu.NameTextGroupID=TextGroup.TextGroupID) " +
-                    "JOIN Image AS Img ON (Img.ImageID=Menu.IconImageID) " +
-                    "JOIN Menu AS ParentMenu ON (Menu.ParentMenuID=ParentMenu.MenuID) " +
-                    "JOIN TextGroup  AS ParentTextGroup ON (ParentMenu.NameTextGroupID=ParentTextGroup.TextGroupID) " +
-                    "JOIN Text AS ParentText ON (ParentTextGroup.TextGroupID=ParentText.TextGroupID) " +
-                    "JOIN Image AS ParentImg ON (ParentImg.ImageID=ParentMenu.IconImageID) " +
+                    "JOIN TextGroup ON (Menu.NameTextGroupID=TextGroup.TextGroupID) " +
+                    "JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
                     "WHERE Text.Text LIKE ?";
 
             ps = connection.prepareStatement(sql);
             ps.setString(1, name);
             rs = ps.executeQuery();
             if (rs.first()) {
-                MenuEntity menuEntity = new MenuEntity();
+                MenuEntity menuEntity;
                 Long menuID = rs.getLong("Menu.MenuID");
                 if (menuID != 0 && !rs.wasNull()) {
-                    parseMenuRs(rs, menuEntity, menuID);
-                    Long imageID = rs.getLong("Img.ImageID");
-                    Long parentMenuID = rs.getLong("ParentMenu.MenuID");
-                    completeMenuInfo = new CompleteMenuInfo(menuEntity);
-                    setAdditionalCompleteMenuInfo(completeMenuInfo, rs, "Text", "TextGroup");
-                    if (parentMenuID != 0 && !rs.wasNull()) {
-                        MenuEntity parentMenuEntity = new MenuEntity();
-                        parseMenuRs(rs, parentMenuEntity, parentMenuID, "ParentMenu");
-                        menuEntity.setParentMenu(parentMenuEntity);
-                        completeMenuInfo.setParentMenuInfo(new CompleteMenuInfo(parentMenuEntity));
-                        setAdditionalCompleteMenuInfo(completeMenuInfo, rs, "Text", "TextGroup");
-                    }
-                    while (rs.next()) {
-                        setAdditionalCompleteMenuInfo(completeMenuInfo, rs, "Text", "TextGroup");
-                        if (completeMenuInfo.getParentMenuInfo() != null) {
-                            setAdditionalCompleteMenuInfo(completeMenuInfo.getParentMenuInfo(), rs, "ParentText", "ParentTextGroup");
-                        }
-                    }
+                    menuEntity = MenuRequest.getMenu(menuID);
+                    return menuEntity;
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return completeMenuInfo;
+        return null;
     }
 
     private static void setIcons(ResultSet rs, MenuEntity menuEntity, Long imageID) throws SQLException {
@@ -342,29 +348,21 @@ public class MenuRequest {
         }
     }
 
-    private static void parseMenuRs(ResultSet rs, MenuEntity menuEntity, Long menuID) throws SQLException {
-        parseMenuRs(rs, menuEntity, menuID, "Menu");
-    }
-
-    public static void parseMenuRs(ResultSet rs, MenuEntity menuEntity, Long menuID, String menu) throws SQLException {
-        menuEntity.setMenuID(menuID);
-        menuEntity.setMenuType(rs.getInt(menu + ".MenuType"));
-        menuEntity.setNumber(rs.getInt(menu + ".Number"));
-    }
 
     public static void addMenuCardLink(ArrayList<MenuCardLinkEntity> menuCardLinkEntities) {
-        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-        try {
-            session.beginTransaction();
-            for (MenuCardLinkEntity menuCardLinkEntity : menuCardLinkEntities) {
-                session.merge(menuCardLinkEntity);
-            }
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            logger.error(e);
-        } finally {
-            if (session != null) {
-                session.close();
+
+        for (MenuCardLinkEntity menuCardLinkEntity : menuCardLinkEntities) {
+            Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+            try {
+                session.beginTransaction();
+                session.save(menuCardLinkEntity);
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                logger.error(e);
+            } finally {
+                if (session != null) {
+                    session.close();
+                }
             }
         }
     }
@@ -378,7 +376,6 @@ public class MenuRequest {
         try {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT Menu.MenuID FROM Menu";
-
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -475,5 +472,10 @@ public class MenuRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return menusCompleteInformation;
+    }
+
+
+    public static MenuEntity getPhotoMenu() {
+        return getMenuByName("Photo");
     }
 }

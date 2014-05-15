@@ -30,6 +30,18 @@ public class TextGroupEntity {
         this.textGroupName = textGroupName;
     }
 
+ /*   @OneToMany
+    @JoinColumn(name = "TextGroupID")
+    private Set<TextEntity> textEntities = new HashSet<>(0);
+*/
+  /*  public Set<TextEntity> getTextEntities() {
+        return textEntities;
+    }*/
+
+//    public void setTextEntities(Set<TextEntity> textEntities) {
+//        this.textEntities = textEntities;
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

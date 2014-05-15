@@ -1,5 +1,7 @@
-package model.additionalentity;
+package model.additionalentity.admin;
 
+import model.additionalentity.CompleteTextGroupInfo;
+import model.additionalentity.SimpleMenu;
 import model.constants.Component;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.worldonlinedb.ImageEntity;

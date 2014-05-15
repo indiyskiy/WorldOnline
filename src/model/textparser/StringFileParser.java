@@ -1,6 +1,6 @@
 package model.textparser;
 
-import model.FileReader;
+import helper.FileHelper;
 import model.constants.Component;
 import model.logger.LoggerFactory;
 
@@ -62,7 +62,7 @@ public class StringFileParser {
 
     public static HashMap<Integer, Integer> getIntIntMap(String fileRoot) {
         try {
-            String[] stringIntPairs = FileReader.readFileAsString(fileRoot).split("\n");
+            String[] stringIntPairs = FileHelper.readFileAsString(fileRoot).split("\n");
             HashMap<Integer, Integer> integerIntegerHashMap = new HashMap<Integer, Integer>();
             for (String stringIntPair : stringIntPairs) {
                 String[] strings = stringIntPair.split(";");

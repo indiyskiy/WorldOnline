@@ -6,7 +6,6 @@ import model.xmlparser.xmlview.photo.photocard.PhotoCard;
 import org.simpleframework.xml.core.Persister;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,8 +22,6 @@ public class PhotoParser {
             FileInputStream reader = new FileInputStream(root);
             Persister serializer = new Persister();
             return serializer.read(PhotoCard.class, reader, false);
-        } catch (FileNotFoundException e) {
-            loggerFactory.error(e);
         } catch (Exception e) {
             loggerFactory.error(e);
         }

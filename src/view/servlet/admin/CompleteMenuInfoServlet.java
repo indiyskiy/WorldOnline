@@ -1,6 +1,6 @@
 package view.servlet.admin;
 
-import model.additionalentity.CompleteMenuInfo;
+import model.additionalentity.admin.CompleteMenuInfo;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.database.requests.MenuRequest;

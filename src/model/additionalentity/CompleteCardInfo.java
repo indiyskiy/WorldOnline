@@ -1,5 +1,6 @@
 package model.additionalentity;
 
+import model.additionalentity.admin.CompleteMenuInfo;
 import model.constants.databaseenumeration.LanguageType;
 import model.constants.databaseenumeration.TextType;
 import model.database.worldonlinedb.*;

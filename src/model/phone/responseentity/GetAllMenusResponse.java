@@ -1,6 +1,6 @@
 package model.phone.responseentity;
 
-import model.additionalentity.MenuCompleteInformation;
+import model.additionalentity.phone.MenuCompleteInformation;
 import model.constants.Status;
 
 import java.util.ArrayList;

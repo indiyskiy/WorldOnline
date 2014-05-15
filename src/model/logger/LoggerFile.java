@@ -29,8 +29,7 @@ public class LoggerFile {
 
     public void open() {
         try {
-//            String currentDir = new File("").getAbsolutePath();
-            File newDir = new File(ServerConsts.home + ServerConsts.globalLogDir + root + "/" + date);
+            File newDir = new File(ServerConsts.home + ServerConsts.globalLogDir + date + "/" + root);
             if (!newDir.exists()) {
                 newDir.mkdirs();
             }

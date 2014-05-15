@@ -1,7 +1,7 @@
 package view.servlet.admin;
 
 import controller.parser.adminparser.LoginParser;
-import model.additionalentity.LoginRequest;
+import model.additionalentity.admin.LoginRequest;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.database.requests.AdminUserRequest;

@@ -1,7 +1,6 @@
 package model.logger;
 
 import model.constants.Component;
-import model.mailer.ErrorMailer;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -13,6 +13,7 @@ public class ServerConsts {
     public static final String newBase = home + "base/";
     public static final String newFileBase = newBase + "fileBase/";
     public static final String imageFolder = newFileBase + "imageData/";
+    public static final String tempFileStore = newFileBase + "tmpFileStore/";
     public static final String oldBase = home + "oldBase/";
     public static final String oldImageRoot = oldBase + "imageData/";
     public static final String oldIconsRoot = oldBase + "icon/";

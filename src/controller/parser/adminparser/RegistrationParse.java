@@ -1,8 +1,8 @@
 package controller.parser.adminparser;
 
-import model.Md5Hash;
-import model.ParameterValidator;
-import model.additionalentity.ParsedRegistrationRequest;
+import helper.Md5Hash;
+import helper.ParameterValidator;
+import model.additionalentity.admin.ParsedRegistrationRequest;
 import model.constants.databaseenumeration.DataType;
 import model.database.requests.AdminUserRequest;
 import model.database.worldonlinedb.AdminUserEntity;

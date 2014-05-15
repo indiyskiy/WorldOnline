@@ -1,6 +1,5 @@
 package model.xmlparser;
 
-import model.additionalentity.CompleteMenuInfo;
 import model.constants.Component;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.CardType;
@@ -34,22 +33,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 04.02.14
- * Time: 18:13
- * To change this template use File | Settings | File Templates.
- */
+
 public class MenuCardLinkParser {
     private final static String root = ServerConsts.root;
     public static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, MenuCardLinkParser.class);
     public ArrayList<MenuCardLinkEntity> menuCardLinkEntities = new ArrayList<MenuCardLinkEntity>();
     public HashMap<Integer, Integer> menuCardMap = StringFileParser.getIntIntMap(root + "addData/menuCardMap.txt");
     private MainMenuData mainMenuData = new MenuParser().getMainMenuData(root + "MainMenuData.xml");
+    private HashMap<String, MenuEntity> menuEntityHashMap = new HashMap<>();
 
     private MenuCardLinkEntity addLink(CardEntity cardEntity, MenuEntity menuEntity) {
         if (menuEntity != null && cardEntity != null) {
+            loggerFactory.debug("add link " + cardEntity.getCardID() + " " + menuEntity.getMenuID());
             MenuCardLinkEntity menuCardLinkEntity = new MenuCardLinkEntity();
             menuCardLinkEntity.setCard(cardEntity);
             menuCardLinkEntity.setMenu(menuEntity);
@@ -101,12 +96,14 @@ public class MenuCardLinkParser {
                     menuCardLinkEntity = saveCardAboutCity(cardAboutCity, names, cardEntity);
                 }
             } catch (Exception e) {
+                loggerFactory.error("THE ERROR OF DOOOOM1!!!");
                 loggerFactory.error(e);
             }
         }
         try {
             MenuRequest.addMenuCardLink(menuCardLinkEntities);
         } catch (Exception e) {
+            loggerFactory.error("THE ERROR OF DOOOOM2!!!");
             loggerFactory.error(e);
         }
     }
@@ -226,7 +223,6 @@ public class MenuCardLinkParser {
             try {
                 String nameEN = shopping.nameEN;
                 String nameRU = shopping.nameRU;
-//            loggerFactory.info(nameEN + " " + nameRU);
                 if (names.contains(nameEN) || names.contains(nameRU)) {
                     MenuEntity menuEntity = findMenu(shopping.id);
                     if (menuEntity != null) {
@@ -259,13 +255,38 @@ public class MenuCardLinkParser {
     }
 
     private MenuEntity findMenu(String cardID) {
-        Integer menuID = menuCardMap.get(Integer.parseInt(cardID));
-        for (Submenu submenu : mainMenuData.getSubmenus()) {
-            if (submenu.id.equals(String.valueOf(menuID))) {
-                CompleteMenuInfo completeMenuInfo = MenuRequest.getMenuByName(submenu.nameEN);
-                MenuEntity menuEntity = completeMenuInfo.getMenuEntity();
-                return menuEntity;
+        try {
+            if (cardID == null || cardID.isEmpty()) {
+                return null;
             }
+            if (menuEntityHashMap.containsKey(cardID)) {
+                return menuEntityHashMap.get(cardID);
+            }
+            Integer menuID = menuCardMap.get(Integer.parseInt(cardID));
+            if (menuID != null && menuID != 0) {
+                for (Submenu submenu : mainMenuData.getSubmenus()) {
+
+                    if (submenu != null && submenu.id.equals(String.valueOf(menuID))) {
+                        MenuEntity menuEntity = MenuRequest.getMenuByName(submenu.nameEN);
+                        if (menuEntity == null) {
+                            loggerFactory.error("menu with name " + submenu.nameEN + " not found");
+                            menuEntity = MenuRequest.getMenuByName(submenu.nameRU);
+                            if (menuEntity == null) {
+                                loggerFactory.error("menu with name " + submenu.nameRU + " not found");
+                            }
+                        }
+                        if (menuEntity != null) {
+                            loggerFactory.debug(cardID + " ; " + menuEntity.getMenuID());
+                            menuEntityHashMap.put(cardID, menuEntity);
+                            return menuEntity;
+                        }
+                    }
+                }
+            } else {
+                loggerFactory.debug("trying to get " + cardID + ". result from menucardmap is " + menuID);
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
         }
         return null;
     }

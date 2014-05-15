@@ -1,7 +1,7 @@
 package model.test;
 
-import model.HTTPRequestSender;
-import model.Md5Hash;
+import helper.HTTPRequestSender;
+import helper.Md5Hash;
 import model.constants.Component;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.LanguageType;

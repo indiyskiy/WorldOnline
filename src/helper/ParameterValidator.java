@@ -1,4 +1,4 @@
-package model;
+package helper;
 
 import model.constants.Component;
 import model.constants.databaseenumeration.DataType;

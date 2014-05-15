@@ -50,6 +50,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(AdminUserSessionEntity.class)
                 .addAnnotatedClass(MenuCardLinkEntity.class)
                 .addAnnotatedClass(CardChangeEntity.class)
+                .addAnnotatedClass(WeatherEntity.class)
                 .addAnnotatedClass(UserCardEntity.class);
         ac.configure();
         return ac;

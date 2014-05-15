@@ -1,8 +1,8 @@
 package model.xmlparser;
 
-import model.FileReader;
-import model.Md5Hash;
-import model.ParameterValidator;
+import helper.FileHelper;
+import helper.Md5Hash;
+import helper.ParameterValidator;
 import model.constants.Component;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.*;
@@ -28,6 +28,7 @@ import model.xmlparser.xmlview.card.cardshopping.Shopping;
 import model.xmlparser.xmlview.card.cardsights.CardSight;
 import model.xmlparser.xmlview.card.cardsights.Sight;
 import model.xmlparser.xmlview.people.peopleaboutcity.PeopleAboutCity;
+import model.xmlparser.xmlview.photo.photocard.Photo;
 import model.xmlparser.xmlview.photo.photocard.PhotoCard;
 import model.xmlparser.xmlview.route.routeroute.RouteRoute;
 import org.springframework.util.FileCopyUtils;
@@ -41,31 +42,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 21.11.13
- * Time: 11:51
- * To change this template use File | Settings | File Templates.
- */
+
 public class GlobalXmlParser implements Runnable {
 
     public static HashMap<Integer, CardEntity> restaurantChainMap;
     public static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, GlobalXmlParser.class);
+    private HashMap<String, CardEntity> cardEntityHashMap = new HashMap<>();
 
     public static void parse() {
-        loggerFactory.info("parse");
         new Thread(new GlobalXmlParser()).start();
-        loggerFactory.info("/parse");
     }
 
     public void globalParse() throws IOException, SQLException {
-        loggerFactory.info("globalParse");
-        ArrayList<StringIntPair> categories = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Categories.txt"), ";");
+
+        //main menu
+        MenuParser menuParser = new MenuParser();
+        menuParser.saveMenu();
+        HashMap<String, MenuEntity> menuEntityHashMap = menuParser.getMenuEntityHashMap();
+
+
+        ArrayList<StringIntPair> categories = StringFileParser.parseStandardStringIntPair(FileHelper.readFileAsString(ServerConsts.root + "app_data/Categories.txt"), ";");
         saveTags(categories, TagType.Categories);
-        ArrayList<StringIntPair> kitchens = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Kitchens.txt"), ";");
+        ArrayList<StringIntPair> kitchens = StringFileParser.parseStandardStringIntPair(FileHelper.readFileAsString(ServerConsts.root + "app_data/Kitchens.txt"), ";");
         saveTags(kitchens, TagType.Cuisine);
-        ArrayList<StringIntPair> ribbons = StringFileParser.parseStandardStringIntPair(FileReader.readFileAsString(ServerConsts.root + "app_data/Ribbons.txt"), ";");
+        ArrayList<StringIntPair> ribbons = StringFileParser.parseStandardStringIntPair(FileHelper.readFileAsString(ServerConsts.root + "app_data/Ribbons.txt"), ";");
         saveTags(ribbons, TagType.Ribbons);
         //cards
         CardsParser cardsParser = new CardsParser();
@@ -85,10 +85,6 @@ public class GlobalXmlParser implements Runnable {
         saveCardSight(cardSight);
         CardShopping cardShopping = cardsParser.getCardShopping(ServerConsts.root + "card_shopping.xml");
         saveCardShopping(cardShopping);
-        //main menu
-        MenuParser menuParser = new MenuParser();
-        menuParser.saveMenu();
-        HashMap<String, MenuEntity> menuEntityHashMap = menuParser.getMenuEntityHashMap();
 
         //people
         PeopleParser peopleParser = new PeopleParser();
@@ -96,17 +92,45 @@ public class GlobalXmlParser implements Runnable {
         //photo
         PhotoParser photoParser = new PhotoParser();
         PhotoCard photoCard = photoParser.getPhotoCard(ServerConsts.root + "photocards.xml");
+        savePhotoCards(photoCard);
         //root
         RouteParser routeParser = new RouteParser();
         RouteRoute routeRoute = routeParser.getRouteRoute(ServerConsts.root + "route_routes.xml");
         //menu card link
         MenuCardLinkParser menuCardLinkParser = new MenuCardLinkParser();
         menuCardLinkParser.parseMenuCardLink();
-        loggerFactory.info("/globalParse");
+    }
+
+    private void savePhotoCards(PhotoCard photoCard) {
+        List<Photo> photos = photoCard.photos;
+        for (Photo photo : photos) {
+            CardState cardState = CardState.Active;
+            CardEntity card = new CardEntity(CardType.CardPhoto, photo.nameEn, cardState);
+            CardRequest.addCard(card);
+            cardEntityHashMap.put(photo.id, card);
+            saveText(photo.nameRu, photo.nameEn, photo.nameRu, photo.nameEn, TextType.Name, card);
+            saveImages(photo.fileName, card, ImageType.PhotoCardImage);
+            if (photo.lat != null && !photo.lat.replaceAll(" ", "").isEmpty() && photo.lon != null && !photo.lon.replaceAll(" ", "").isEmpty()) {
+                saveCoordinate(photo.lat, photo.lon, card);
+            }
+            if (cardEntityHashMap.containsKey(photo.peopleCard)) {
+                addCardToCardLink(cardEntityHashMap.get(photo.peopleCard), card, CardToCardLinkType.Photographer);
+            }
+            if (cardEntityHashMap.containsKey(photo.peopleCard)) {
+                addCardToCardLink(cardEntityHashMap.get(photo.peopleCard), card, CardToCardLinkType.PlaceOnPhoto);
+            }
+            MenuEntity menuEntity = MenuRequest.getPhotoMenu();
+            if (menuEntity != null) {
+                MenuCardLinkEntity menuCardLinkEntity = new MenuCardLinkEntity();
+                menuCardLinkEntity.setCard(card);
+                menuCardLinkEntity.setMenu(menuEntity);
+                MenuRequest.addMenuCardLink(menuCardLinkEntity);
+            }
+//            photo.parentMenuID;
+        }
     }
 
     private void saveCardShopping(CardShopping cardShopping) throws IOException, SQLException {
-        loggerFactory.info("saveCardShopping");
         List<Shopping> shoppingList = cardShopping.shoppings;
         for (Shopping shopping : shoppingList) {
             CardState cardState;
@@ -117,7 +141,7 @@ public class GlobalXmlParser implements Runnable {
             }
             CardEntity card = new CardEntity(CardType.CardShopping, shopping.nameEN, cardState);
             CardRequest.addCard(card);
-
+            cardEntityHashMap.put(shopping.id, card);
             saveText(shopping.nameRU, shopping.nameEN, shopping.nameRU, shopping.nameEN, TextType.Name, card);
             saveText(shopping.addrRU, shopping.addrEN, shopping.nameRU, shopping.nameEN, TextType.Address, card);
             saveText(shopping.descrRU, shopping.descrEN, shopping.nameRU, shopping.nameEN, TextType.Description, card);
@@ -212,11 +236,9 @@ public class GlobalXmlParser implements Runnable {
 //            handBook.priceFile);
 //            handBook.metro);
 //            handBook.parentMenuID);
-        loggerFactory.info("/saveCardShopping");
     }
 
     private void addRestarauntChainLink(String restaurantChain, CardEntity card) {
-        loggerFactory.info("addRestarauntChainLink");
         if (restaurantChain != null && !restaurantChain.replaceAll(" ", "").isEmpty()) {
             Integer restChainID = Integer.parseInt(restaurantChain);
             CardEntity targetCard;
@@ -230,18 +252,14 @@ public class GlobalXmlParser implements Runnable {
                 addCardToCardLink(targetCard, card, CardToCardLinkType.RestaurantChain);
             }
         }
-        loggerFactory.info("addRestarauntChainLink");
     }
 
     private void addCardToCardLink(CardEntity targetCard, CardEntity card, CardToCardLinkType cardToCardLinkType) {
-        loggerFactory.info("addCardToCardLink");
         CardToCardLinkEntity cardToCardLinkEntity = new CardToCardLinkEntity(card, targetCard, cardToCardLinkType);
         LinkRequest.addCardToCardLinkRequest(cardToCardLinkEntity);
-        loggerFactory.info("/addCardToCardLink");
     }
 
     private void saveCardSight(CardSight cardSight) throws IOException, SQLException {
-        loggerFactory.info("saveCardSight");
         List<Sight> sights = cardSight.sights;
         for (Sight sight : sights) {
             CardState cardState;
@@ -252,7 +270,7 @@ public class GlobalXmlParser implements Runnable {
             }
             CardEntity card = new CardEntity(CardType.CardSight, sight.nameEN, cardState);
             CardRequest.addCard(card);
-
+            cardEntityHashMap.put(sight.id, card);
             saveText(sight.nameRU, sight.nameEN, sight.nameRU, sight.nameEN, TextType.Name, card);
             saveText(sight.addrRU, sight.addrEN, sight.nameRU, sight.nameEN, TextType.Address, card);
             saveText(sight.descrRU, sight.descrEN, sight.nameRU, sight.nameEN, TextType.Description, card);
@@ -347,11 +365,9 @@ public class GlobalXmlParser implements Runnable {
 //            handBook.priceFile);
 //            handBook.metro);
 //            handBook.parentMenuID);
-        loggerFactory.info("/saveCardSight");
     }
 
     private void saveCardRoute(CardRoute cardRoute) throws IOException, SQLException {
-        loggerFactory.info("saveCardRoute");
         List<Route> routes = cardRoute.routes;
         for (Route route : routes) {
             CardState cardState;
@@ -362,7 +378,7 @@ public class GlobalXmlParser implements Runnable {
             }
             CardEntity card = new CardEntity(CardType.CardRoute, route.nameEN, cardState);
             CardRequest.addCard(card);
-
+            cardEntityHashMap.put(route.id, card);
             saveText(route.nameRU, route.nameEN, route.nameRU, route.nameEN, TextType.Name, card);
             saveText(route.addrRU, route.addrEN, route.nameRU, route.nameEN, TextType.Address, card);
             saveText(route.descrRU, route.descrEN, route.nameRU, route.nameEN, TextType.Description, card);
@@ -455,11 +471,9 @@ public class GlobalXmlParser implements Runnable {
 //            handBook.priceFile);
 //            handBook.metro);
 //            handBook.parentMenuID);
-        loggerFactory.info("/saveCardRoute");
     }
 
     private void saveCardRelax(CardRelax cardRelax) throws IOException, SQLException {
-        loggerFactory.info("saveCardRelax");
         List<Relax> relaxes = cardRelax.relaxes;
         for (Relax relax : relaxes) {
             CardState cardState;
@@ -470,7 +484,7 @@ public class GlobalXmlParser implements Runnable {
             }
             CardEntity card = new CardEntity(CardType.CardRelax, relax.nameEN, cardState);
             CardRequest.addCard(card);
-
+            cardEntityHashMap.put(relax.id, card);
             saveText(relax.nameRU, relax.nameEN, relax.nameRU, relax.nameEN, TextType.Name, card);
             saveText(relax.addrRU, relax.addrEN, relax.nameRU, relax.nameEN, TextType.Address, card);
             saveText(relax.descrRU, relax.descrEN, relax.nameRU, relax.nameEN, TextType.Description, card);
@@ -565,11 +579,9 @@ public class GlobalXmlParser implements Runnable {
 //            handBook.metro);
 //            handBook.parentMenuID);
         }
-        loggerFactory.info("/saveCardRelax");
     }
 
     private void saveCardMeal(CardMeal cardMeal) throws SQLException, IOException {
-        loggerFactory.info("saveCardMeal");
         List<Meal> meals = cardMeal.meals;
         for (Meal meal : meals) {
             CardState cardState;
@@ -580,7 +592,7 @@ public class GlobalXmlParser implements Runnable {
             }
             CardEntity card = new CardEntity(CardType.CardMeal, meal.nameEN, cardState);
             CardRequest.addCard(card);
-
+            cardEntityHashMap.put(meal.id, card);
             saveText(meal.nameRU, meal.nameEN, meal.nameRU, meal.nameEN, TextType.Name, card);
             saveText(meal.addrRU, meal.addrEN, meal.nameRU, meal.nameEN, TextType.Address, card);
             saveText(meal.descrRU, meal.descrEN, meal.nameRU, meal.nameEN, TextType.Description, card);
@@ -676,11 +688,9 @@ public class GlobalXmlParser implements Runnable {
 //            handBook.metro);
 //            handBook.parentMenuID);
         }
-        loggerFactory.info("/saveCardMeal");
     }
 
     private void saveCardHotels(CardHotels cardHotels) throws SQLException, IOException {
-        loggerFactory.info("saveCardHotels");
         List<Hotel> hotels = cardHotels.hotels;
         for (Hotel hotel : hotels) {
             CardState cardState;
@@ -691,7 +701,7 @@ public class GlobalXmlParser implements Runnable {
             }
             CardEntity card = new CardEntity(CardType.CardHotel, hotel.nameEN, cardState);
             CardRequest.addCard(card);
-
+            cardEntityHashMap.put(hotel.id, card);
             saveText(hotel.nameRU, hotel.nameEN, hotel.nameRU, hotel.nameEN, TextType.Name, card);
             saveText(hotel.addrRU, hotel.addrEN, hotel.nameRU, hotel.nameEN, TextType.Address, card);
             saveText(hotel.descrRu, hotel.descrEN, hotel.nameRU, hotel.nameEN, TextType.Description, card);
@@ -732,11 +742,9 @@ public class GlobalXmlParser implements Runnable {
 
             addRestarauntChainLink(hotel.restaurantChain, card);
         }
-        loggerFactory.info("saveCardHotels");
     }
 
     private void saveCardHandBook(CardHandBook cardHandBook) throws SQLException, IOException {
-        loggerFactory.info("saveCardHandBook");
         List<HandBook> handBooks = cardHandBook.handBooks;
         for (HandBook handBook : handBooks) {
             CardState cardState;
@@ -747,7 +755,7 @@ public class GlobalXmlParser implements Runnable {
             }
             CardEntity card = new CardEntity(CardType.CardHandBook, handBook.nameEN, cardState);
             CardRequest.addCard(card);
-
+            cardEntityHashMap.put(handBook.id, card);
             saveText(handBook.nameRU, handBook.nameEN, handBook.nameRU, handBook.nameEN, TextType.Name, card);
             saveText(handBook.addrRU, handBook.addrEN, handBook.nameRU, handBook.nameEN, TextType.Address, card);
             saveText(handBook.descrRU, handBook.descrEN, handBook.nameRU, handBook.nameEN, TextType.Description, card);
@@ -791,11 +799,9 @@ public class GlobalXmlParser implements Runnable {
 //            handBook.metro);
 //            handBook.parentMenuID);
         }
-        loggerFactory.info("/saveCardHandBook");
     }
 
     private void saveCardsAboutCity(CardAboutCity cardAboutCity) throws SQLException, IOException {
-        loggerFactory.info("saveCardsAboutCity");
         List<AboutCity> aboutCityList = cardAboutCity.aboutCities;
         for (AboutCity aboutCity : aboutCityList) {
             CardState cardState;
@@ -806,6 +812,7 @@ public class GlobalXmlParser implements Runnable {
             }
             CardEntity card = new CardEntity(CardType.CardAboutCity, aboutCity.nameEN, cardState);
             CardRequest.addCard(card);
+            cardEntityHashMap.put(aboutCity.id, card);
             saveText(aboutCity.addrRU, aboutCity.addrEN, aboutCity.nameRU, aboutCity.nameEN, TextType.Address, card);
             saveText(aboutCity.nameRU, aboutCity.nameEN, aboutCity.nameRU, aboutCity.nameEN, TextType.Name, card);
             saveText(aboutCity.descrRU, aboutCity.descrEN, aboutCity.nameRU, aboutCity.nameEN, TextType.Description, card);
@@ -846,11 +853,9 @@ public class GlobalXmlParser implements Runnable {
             saveImages(aboutCity.cardImage, card, ImageType.CardImage);
 
         }
-        loggerFactory.info("/saveCardsAboutCity");
     }
 
     private void saveImages(String imageNames, CardEntity card, ImageType imageType) {
-        loggerFactory.info("saveImages");
         if (imageNames == null || imageNames.isEmpty()) {
             return;
         }
@@ -858,23 +863,21 @@ public class GlobalXmlParser implements Runnable {
         for (String imageName : imageNameArray) {
             saveImage(imageName, card, imageType, ServerConsts.oldImageRoot + imageName);
         }
-        loggerFactory.info("/saveImages");
     }
 
     private void saveCardTags(String stringOfTags, CardEntity card, TagType tagType) throws SQLException, IOException {
-        loggerFactory.info("saveCardTags");
         if (stringOfTags == null || stringOfTags.equals("") || stringOfTags.equals("null")) {
             return;
         }
         ArrayList<Integer> integers = StringFileParser.getIntegerListByString(stringOfTags, ",");
         String fileText = "";
         if (tagType.equals(TagType.Cuisine)) {
-            fileText = FileReader.readFileAsString(ServerConsts.root + "app_data/Kitchens.txt");
+            fileText = FileHelper.readFileAsString(ServerConsts.root + "app_data/Kitchens.txt");
         } else {
             if (tagType.equals(TagType.Categories)) {
-                fileText = FileReader.readFileAsString(ServerConsts.root + "app_data/Categories.txt");
+                fileText = FileHelper.readFileAsString(ServerConsts.root + "app_data/Categories.txt");
             } else {
-                fileText = FileReader.readFileAsString(ServerConsts.root + "app_data/Ribbons.txt");
+                fileText = FileHelper.readFileAsString(ServerConsts.root + "app_data/Ribbons.txt");
             }
         }
         ArrayList<StringIntPair> stringIntPairs = StringFileParser.parseStandardStringIntPair(fileText, ";");
@@ -889,21 +892,17 @@ public class GlobalXmlParser implements Runnable {
                 }
             }
         }
-        loggerFactory.info("/saveCardTags");
     }
 
     private void saveParameter(String parameter, CardEntity card, CardParameterType cardParameterType) {
-        loggerFactory.info("saveParameter");
         if (ParameterValidator.isValidParameter(parameter, cardParameterType.getDataType())) {
             CardParameterEntity cardParameterEntity = new CardParameterEntity(card, cardParameterType, cardParameterType.getDataType(), parameter);
             ParameterRequest.addCardParameter(cardParameterEntity);
         }
-        loggerFactory.info("/saveParameter");
     }
 
 
     private void saveText(String textRu, String textEn, String nameRu, String nameEn, TextType textType, CardEntity card) {
-        loggerFactory.info("saveText");
         TextGroupEntity textGroupEntity = null;
         String name;
         if (nameEn != null) {
@@ -913,6 +912,8 @@ public class GlobalXmlParser implements Runnable {
                 name = nameRu;
             } else {
                 name = "";
+//                loggerFactory.error("all texts are null");
+//                return;
             }
         }
         if (textEn != null && !textEn.isEmpty()) {
@@ -929,7 +930,7 @@ public class GlobalXmlParser implements Runnable {
         if (textEn != null && !textEn.isEmpty()) {
             translated = TextRequest.isTranslated(textEn, LanguageType.Russian);
         }
-        if (!translated)
+        if (!translated) {
             if (textRu != null && !textRu.isEmpty()) {
                 {
                     if (textGroupEntity == null) {
@@ -946,6 +947,7 @@ public class GlobalXmlParser implements Runnable {
                     }
                 }
             }
+        }
         if (textGroupEntity != null && textGroupEntity.getTextGroupID() == null) {
             TextRequest.addTextGroup(textGroupEntity);
         }
@@ -953,11 +955,9 @@ public class GlobalXmlParser implements Runnable {
             TextCardEntity textCardEntity = new TextCardEntity(textGroupEntity, card, textType);
             TextRequest.addTextCard(textCardEntity);
         }
-        loggerFactory.info("/saveText");
     }
 
     private void saveTags(ArrayList<StringIntPair> tagList, TagType tagType) {
-        loggerFactory.info("saveTags");
         try {
             for (StringIntPair tagItem : tagList) {
                 TextGroupEntity textGroup = new TextGroupEntity(tagType + "_" + tagItem.getString());
@@ -968,11 +968,9 @@ public class GlobalXmlParser implements Runnable {
         } catch (Exception e) {
             loggerFactory.error(e);
         }
-        loggerFactory.info("/saveTags");
     }
 
     private void saveCoordinate(String lat, String lon, CardEntity card) {
-        loggerFactory.info("saveCoordinate");
         try {
             if (ParameterValidator.isValidParameter(lat, DataType.DoubleType) && ParameterValidator.isValidParameter(lon, DataType.DoubleType)) {
                 double doubleLat = Double.parseDouble(lat);
@@ -982,13 +980,10 @@ public class GlobalXmlParser implements Runnable {
             }
         } catch (Exception e) {
             loggerFactory.error(e);
-//            loggerFactory.error(e);
         }
-        loggerFactory.info("/saveCoordinate");
     }
 
     private void saveImage(String imageName, CardEntity card, ImageType imageType, String root) {
-        loggerFactory.info("saveImage");
         try {
             if (imageName == null || imageName.isEmpty()) {
                 return;
@@ -1015,12 +1010,10 @@ public class GlobalXmlParser implements Runnable {
         } catch (Exception e) {
             loggerFactory.error(e);
         }
-        loggerFactory.info("/saveImage");
     }
 
     public static void saveFile(File file, String fileName, String path) throws IOException {
         try {
-            loggerFactory.info("saveFile");
             String mainRoot = path;
             File outFolder = new File(mainRoot);
             if (!outFolder.exists()) {
@@ -1031,26 +1024,21 @@ public class GlobalXmlParser implements Runnable {
         } catch (Exception e) {
             loggerFactory.error(e);
         }
-        loggerFactory.info("/saveFile");
     }
 
 
     @Override
     public void run() {
-        loggerFactory.info("run");
         try {
             restaurantChainMap = new HashMap<Integer, CardEntity>();
             GlobalXmlParser globalXmlParser = new GlobalXmlParser();
             globalXmlParser.globalParse();
 //            CompleteCardInfo completeCardInfo = CardRequest.getCompleteCardInfo(1);
-        } catch (IOException | SQLException e) {
-            loggerFactory.error(e);
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             restaurantChainMap = null;
         }
-        loggerFactory.info("/run");
     }
 }
 

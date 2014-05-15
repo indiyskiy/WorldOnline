@@ -1,7 +1,7 @@
 package view.servlet.admin;
 
 import controller.parser.adminparser.RegistrationParse;
-import model.additionalentity.ParsedRegistrationRequest;
+import model.additionalentity.admin.ParsedRegistrationRequest;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.database.requests.AdminUserRequest;

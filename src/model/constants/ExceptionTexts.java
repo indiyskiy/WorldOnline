@@ -23,6 +23,9 @@ public class ExceptionTexts {
     public static final String getMenuUserNotExistException = "phone.getMenu.UserID.NotExist";
     public static String getMenuMenuIDEmptyException = "phone.getMenu.MenuID.empty";
     public static final String getMenuMenuIDIncorrectException = "phone.getMenu.MenuID.Incorrect";
+    public static final String allCardsUserIDEmptyException = "phone.getAllCards.UserID.empty";
+    public static final String allCardsUserIDIncorrectException = "phone.getAllCards.UserID.Incorrect";
+    public static final String allCardsUserNotExistException = "phone.getAllCards.UserID.NotExist";
 
     private static HashSet<String> getMobileErrors() {
         HashSet<String> mobileErrors = new HashSet<String>();

@@ -23,6 +23,26 @@ public class CardEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cardID;
 
+    @javax.persistence.Column(name = "CardType")
+    @Basic
+    private Integer cardType;
+
+    @javax.persistence.Column(name = "CreationTimestamp")
+    @Basic
+    private Timestamp creationTimestamp;
+
+    @javax.persistence.Column(name = "LastUpdateTimestamp")
+    @Basic
+    private Timestamp lastUpdateTimestamp;
+
+    @javax.persistence.Column(name = "CardName")
+    @Basic
+    private String cardName;
+
+    @javax.persistence.Column(name = "CardState")
+    @Basic
+    private Integer cardState;
+
     public Long getCardID() {
         return cardID;
     }
@@ -30,10 +50,6 @@ public class CardEntity {
     public void setCardID(Long cardID) {
         this.cardID = cardID;
     }
-
-    @javax.persistence.Column(name = "CardType")
-    @Basic
-    private Integer cardType;
 
     public Integer getCardType() {
         return cardType;
@@ -43,10 +59,6 @@ public class CardEntity {
         this.cardType = cardType;
     }
 
-    @javax.persistence.Column(name = "CreationTimestamp")
-    @Basic
-    private Timestamp creationTimestamp;
-
     public Timestamp getCreationTimestamp() {
         return creationTimestamp;
     }
@@ -54,10 +66,6 @@ public class CardEntity {
     public void setCreationTimestamp(Timestamp creationTimestamp) {
         this.creationTimestamp = creationTimestamp;
     }
-
-    @javax.persistence.Column(name = "LastUpdateTimestamp")
-    @Basic
-    private Timestamp lastUpdateTimestamp;
 
     public Timestamp getLastUpdateTimestamp() {
         return lastUpdateTimestamp;
@@ -67,10 +75,6 @@ public class CardEntity {
         this.lastUpdateTimestamp = lastUpdateTimestamp;
     }
 
-    @javax.persistence.Column(name = "CardName")
-    @Basic
-    private String cardName;
-
     public String getCardName() {
         return cardName;
     }
@@ -78,10 +82,6 @@ public class CardEntity {
     public void setCardName(String cardName) {
         this.cardName = cardName;
     }
-
-    @javax.persistence.Column(name = "CardState")
-    @Basic
-    private Integer cardState;
 
     public Integer getCardState() {
         return cardState;

@@ -3,6 +3,9 @@ package model.database.requests;
 
 import controller.parser.adminparser.AllCardParser;
 import model.additionalentity.*;
+import model.additionalentity.admin.CompleteMenuInfo;
+import model.additionalentity.phone.MobileCardInfo;
+import model.additionalentity.phone.MobileText;
 import model.constants.Component;
 import model.constants.databaseenumeration.*;
 import model.database.session.DatabaseConnection;
@@ -636,4 +639,69 @@ public class CardRequest {
     }
 
 
+    public static LinkedList<MobileCardInfo> getAllMobileCards(Long userID) {
+        HashMap<Long, MobileCardInfo> cardMap = new HashMap<>();
+        HashMap<Long, MobileText> textMap = new HashMap<>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT Card.CardID, Card.CardType, " +
+                    "TextGroup.TextGroupID, TextCard.CardTextType, Text.Text, " +
+                    "Menu.MenuID " +
+                    "FROM Card " +
+                    "LEFT OUTER JOIN TextCard ON (TextCard.CardID=Card.CardID) " +
+                    "LEFT OUTER JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
+                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                    "JOIN User ON (User.UserID=?) " +
+                    "JOIN UserPersonalData ON (UserPersonalData.UserPersonalDataID=User.UserPersonalDataID) " +
+                    "JOIN MenuCardLink ON (MenuCardLink.CardID=Card.CardID) " +
+                    "JOIN Menu ON (MenuCardLink.MenuID=Menu.MenuID) " +
+                    "WHERE UserPersonalData.UserLanguage=Text.LanguageID";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, userID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Long cardID = rs.getLong("Card.CardID");
+                if (cardID != 0 && !rs.wasNull()) {
+                    MobileCardInfo mobileCardInfo;
+                    if (cardMap.containsKey(cardID)) {
+                        mobileCardInfo = cardMap.get(cardID);
+                    } else {
+                        mobileCardInfo = new MobileCardInfo();
+                        mobileCardInfo.setCardID(cardID);
+                        mobileCardInfo.setCardType(CardType.parseInt(rs.getInt("Card.CardType")));
+                        cardMap.put(cardID, mobileCardInfo);
+                    }
+                    if (mobileCardInfo != null) {
+                        Long textID = rs.getLong("TextGroup.TextGroupID");
+                        MobileText mobileText = null;
+                        if (textMap.containsKey(textID)) {
+                            mobileText = textMap.get(textID);
+                        } else {
+                            mobileText = new MobileText();
+                            mobileText.setTextGroupID(textID);
+                            mobileText.setText(rs.getString("Text.Text"));
+                            mobileText.setTextType(TextType.parseInt(rs.getInt("TextCard.CardTextType")));
+                            mobileCardInfo.getMobileTexts().add(mobileText);
+                            textMap.put(textID, mobileText);
+                        }
+                        Long menuID = rs.getLong("Menu.MenuID");
+                        if (menuID != 0 && !rs.wasNull()) {
+                            mobileCardInfo.getMenuIDs().add(menuID);
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        LinkedList<MobileCardInfo> mobileCardInfos = new LinkedList<>();
+        mobileCardInfos.addAll(cardMap.values());
+        return mobileCardInfos;
+    }
 }

@@ -1,5 +1,6 @@
 package model.additionalentity;
 
+import model.additionalentity.admin.CompleteTagInfo;
 import model.database.worldonlinedb.CardTagEntity;
 
 /**

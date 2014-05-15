@@ -4,7 +4,6 @@ import controller.phone.parser.MobileErrorParser;
 import model.constants.Component;
 import model.exception.ParseRequestException;
 import model.logger.LoggerFactory;
-import org.apache.http.HttpResponse;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

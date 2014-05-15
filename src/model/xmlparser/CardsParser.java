@@ -1,6 +1,7 @@
 package model.xmlparser;
 
 import model.constants.Component;
+import model.constants.ServerConsts;
 import model.logger.LoggerFactory;
 import model.xmlparser.xmlview.card.cardaboutcity.CardAboutCity;
 import model.xmlparser.xmlview.card.cardhandbook.CardHandBook;
@@ -13,7 +14,7 @@ import model.xmlparser.xmlview.card.cardsights.CardSight;
 import org.simpleframework.xml.core.Persister;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,106 +27,59 @@ public class CardsParser {
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, CardsParser.class);
 
     public CardAboutCity getCardAboutCity(String root) {
-        try {
-            FileInputStream reader = new FileInputStream(root);
-            Persister serializer = new Persister();
-            return serializer.read(CardAboutCity.class, reader, false);
-        } catch (FileNotFoundException e) {
-            loggerFactory.error(e);
-        } catch (Exception e) {
-            loggerFactory.error(e);
-        }
-        return null;
+        return (CardAboutCity) getXML(root, CardAboutCity.class);
     }
 
     public CardHandBook getCardHandBook(String root) {
-        try {
-            FileInputStream reader = new FileInputStream(root);
-            Persister serializer = new Persister();
-            return serializer.read(CardHandBook.class, reader, false);
-        } catch (FileNotFoundException e) {
-            loggerFactory.error(e);
-        } catch (Exception e) {
-            loggerFactory.error(e);
-        }
-        return null;
+        return (CardHandBook) getXML(root, CardHandBook.class);
     }
 
     public CardHotels getCardHotels(String root) {
-        try {
-            FileInputStream reader = new FileInputStream(root);
-            Persister serializer = new Persister();
-            return serializer.read(CardHotels.class, reader, false);
-        } catch (FileNotFoundException e) {
-            loggerFactory.error(e);
-        } catch (Exception e) {
-            loggerFactory.error(e);
-        }
-        return null;
+        return (CardHotels) getXML(root, CardHotels.class);
     }
 
     public CardMeal getCardMeal(String root) {
-        try {
-            FileInputStream reader = new FileInputStream(root);
-            Persister serializer = new Persister();
-            return serializer.read(CardMeal.class, reader, false);
-        } catch (FileNotFoundException e) {
-            loggerFactory.error(e);
-        } catch (Exception e) {
-            loggerFactory.error(e);
-        }
-        return null;
+        return (CardMeal) getXML(root, CardMeal.class);
     }
 
     public CardRelax getCardRelax(String root) {
-        try {
-            FileInputStream reader = new FileInputStream(root);
-            Persister serializer = new Persister();
-            return serializer.read(CardRelax.class, reader, false);
-        } catch (FileNotFoundException e) {
-            loggerFactory.error(e);
-        } catch (Exception e) {
-            loggerFactory.error(e);
-        }
-        return null;
+        return (CardRelax) getXML(root, CardRelax.class);
     }
 
     public CardRoute getCardRoute(String root) {
-        try {
-            FileInputStream reader = new FileInputStream(root);
-            Persister serializer = new Persister();
-            return serializer.read(CardRoute.class, reader, false);
-        } catch (FileNotFoundException e) {
-            loggerFactory.error(e);
-        } catch (Exception e) {
-            loggerFactory.error(e);
-        }
-        return null;
+        return (CardRoute) getXML(root, CardRoute.class);
     }
 
     public CardShopping getCardShopping(String root) {
+        return (CardShopping) getXML(root, CardShopping.class);
+    }
+
+    public CardSight getCardSight(String root) {
+        return (CardSight) getXML(root, CardSight.class);
+    }
+
+    public Object getXML(String root, Class objClass) {
+        FileInputStream reader = null;
         try {
-            FileInputStream reader = new FileInputStream(root);
+            reader = new FileInputStream(root);
             Persister serializer = new Persister();
-            return serializer.read(CardShopping.class, reader, false);
-        } catch (FileNotFoundException e) {
-            loggerFactory.error(e);
+            return serializer.read(objClass, reader, false);
         } catch (Exception e) {
             loggerFactory.error(e);
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    loggerFactory.error(e);
+                }
+            }
         }
         return null;
     }
 
-    public CardSight getCardSight(String root) {
-        try {
-            FileInputStream reader = new FileInputStream(root);
-            Persister serializer = new Persister();
-            return serializer.read(CardSight.class, reader, false);
-        } catch (FileNotFoundException e) {
-            loggerFactory.error(e);
-        } catch (Exception e) {
-            loggerFactory.error(e);
-        }
-        return null;
+    public static void main(String[] args) {
+        CardsParser cardsParser = new CardsParser();
+        cardsParser.getCardRoute(ServerConsts.root + "card_route.xml");
     }
 }

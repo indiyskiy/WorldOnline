@@ -1,7 +1,7 @@
 package view.servlet.admin;
 
 import controller.parser.adminparser.TagEditParser;
-import model.additionalentity.CompleteTagInfo;
+import model.additionalentity.admin.CompleteTagInfo;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.constants.databaseenumeration.TagType;

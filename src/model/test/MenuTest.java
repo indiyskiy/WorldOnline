@@ -1,13 +1,13 @@
 package model.test;
 
-import model.HTTPRequestSender;
+import helper.HTTPRequestSender;
 import model.constants.Component;
 import model.constants.ServerConsts;
 import model.database.requests.UserRequests;
 import model.database.worldonlinedb.UserEntity;
 import model.logger.LoggerFactory;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
 import java.util.Random;

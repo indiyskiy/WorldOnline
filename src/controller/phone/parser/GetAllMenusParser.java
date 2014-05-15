@@ -2,16 +2,13 @@ package controller.phone.parser;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import controller.phone.entity.GetAllMenuIDsRequest;
 import controller.phone.entity.GetAllMenusRequest;
-import controller.phone.entity.MobileRequest;
-import model.additionalentity.MenuCompleteInformation;
+import model.additionalentity.phone.MenuCompleteInformation;
 import model.constants.ExceptionTexts;
 import model.database.requests.UserRequests;
 import model.exception.IllegalTypeException;
 import model.exception.ParseRequestException;
 import model.phone.responseentity.GetAllMenusResponse;
-import model.phone.responseentity.GetMenuResponse;
 import model.phone.responseentity.MobileResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;

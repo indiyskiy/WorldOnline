@@ -3,7 +3,7 @@ package model.phone.requesthandler;
 import controller.phone.entity.GetAllMenuIDsRequest;
 import controller.phone.entity.GetAllMenusRequest;
 import controller.phone.entity.MobileRequest;
-import model.additionalentity.MenuCompleteInformation;
+import model.additionalentity.phone.MenuCompleteInformation;
 import model.database.requests.MenuRequest;
 import model.exception.IllegalTypeException;
 import model.phone.responseentity.GetAllMenusResponse;

@@ -10,7 +10,9 @@ package model.constants.databaseenumeration;
 public enum CardToCardLinkType {
     Unknown(0),
     Metro(1),
-    RestaurantChain(2);
+    RestaurantChain(2),
+    Photographer(3),
+    PlaceOnPhoto(4);
 
     private final int value;
 

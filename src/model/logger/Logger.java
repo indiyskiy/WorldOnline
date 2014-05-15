@@ -60,7 +60,6 @@ public class Logger implements Runnable {
     }
 
     private void printLoggerMessage(LoggerMessage loggerMessage) {
-//        loggerMessage.printMyself();
         LoggerFile loggerFile = new LoggerFile(loggerMessage.getComponent().toString(), loggerMessage.getDate());
         if (openedFiles.containsKey(loggerFile.getSignature())) {
             LoggerFile loggerFileTest = openedFiles.get(loggerFile.getSignature());
@@ -76,7 +75,6 @@ public class Logger implements Runnable {
             openedFiles.put(loggerFile.getSignature(), loggerFile);
         }
         loggerMessage.logMyself(loggerFile);
-//        loggerFile.printToFile(loggerMessage.getMessage());
     }
 
     public void addMessage(String text, LogLevel logLevel, Component component, Class callerClass) {

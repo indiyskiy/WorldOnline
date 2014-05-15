@@ -1,4 +1,4 @@
-package model.additionalentity;
+package model.additionalentity.phone;
 
 /**
  * Created by Илья on 11.04.14.

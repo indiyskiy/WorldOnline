@@ -3,7 +3,7 @@ package controller.phone.parser;
 import com.google.gson.JsonObject;
 import controller.phone.entity.GetMenuRequest;
 import controller.phone.entity.MobileRequest;
-import model.additionalentity.MenuCompleteInformation;
+import model.additionalentity.phone.MenuCompleteInformation;
 import model.constants.ExceptionTexts;
 import model.database.requests.UserRequests;
 import model.exception.IllegalTypeException;

@@ -21,11 +21,11 @@ public class GlobalBaseParseServlet extends ProtectedServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         if (CardRequest.getCardByID(1L) == null) {
-            GlobalXmlParser.parse();
             request.setAttribute("parse", "true");
         } else {
             request.setAttribute("parse", "false");
         }
+        GlobalXmlParser.parse();
         ServletHelper.sendForward("/globalbaseparse.jsp", this, request, response);
     }
 
