@@ -23,6 +23,8 @@
           <element id="library" level="project" name="javax.mail" />
           <element id="library" level="project" name="gson-2.2.4" />
           <element id="library" level="project" name="commons-codec-1.6" />
+          <element id="library" level="project" name="tomcat-dbcp-8.0.5" />
+          <element id="library" level="project" name="tomcat-jdbc-7.0.19" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="WorldOnline/javaeeApplication/javaEEApplication" />

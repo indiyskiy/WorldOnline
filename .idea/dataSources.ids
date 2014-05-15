@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
   <data-source source="LOCAL" name="Data Source" uuid="34f38d7b-cfb2-451e-9c30-8bd9e281b76d">
-    <database-info product="MySQL" version="5.5.35-0ubuntu0.12.04.2" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )">
+    <database-info product="MySQL" version="5.5.37-0ubuntu0.12.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
     </database-info>
@@ -17,7 +17,7 @@
       <column name="AdminRole" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="AdminUserName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <column name="AdminUserPassword" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="Confirmed" sqlType="BIT" length="0" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="Confirmed" sqlType="TINYINT" length="3" precision="0" nullable="true" jdbcType="-6"/>
       <column name="AdminUserAdditionalInfoID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="AdminUserID"/>
       <foreign-key name="FK_56verawt0sn0gnwyayuyhceap" columns="AdminUserAdditionalInfoID" ref-table="AdminUserAdditionalInfo" ref-schema="" ref-catalog="worldonline" ref-columns="AdminUserAdditionalInfoID" update-rule="3" delete-rule="3" deferrability="2"/>
@@ -71,8 +71,8 @@
       <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="ChangingAdminUser" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="CardChangeID"/>
-      <foreign-key name="FK_8ey9lpcspainsig2jt8hcqqsf" columns="CardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_ornsyiqjudhj594vc4p9p9k1x" columns="ChangingAdminUser" ref-table="AdminUser" ref-schema="" ref-catalog="worldonline" ref-columns="AdminUserID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_8ey9lpcspainsig2jt8hcqqsf" columns="CardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="CardCoordinate" schema="" catalog="worldonline" type="TABLE">
       <column name="CardCoordinateID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -90,8 +90,8 @@
       <column name="ImageID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="ImageDescriptionTextGroupID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="CardImageID"/>
-      <foreign-key name="FK_8fm246c7jttx9wgymof08lmen" columns="ImageID" ref-table="Image" ref-schema="" ref-catalog="worldonline" ref-columns="ImageID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_k506468098rw8ld5q0tlbv7ic" columns="ImageDescriptionTextGroupID" ref-table="TextGroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_8fm246c7jttx9wgymof08lmen" columns="ImageID" ref-table="Image" ref-schema="" ref-catalog="worldonline" ref-columns="ImageID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_kad18leo0yike87hf7oa63gi9" columns="CardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="CardParameter" schema="" catalog="worldonline" type="TABLE">
@@ -150,7 +150,6 @@
       <primary-key name="PRIMARY" columns="ImageID"/>
       <exported-key name="FK_8fm246c7jttx9wgymof08lmen" table="CardImage" schema="" catalog="worldonline" columns="ImageID"/>
       <exported-key name="FK_3w9m88r63m8v2x7ox85egtpxq" table="Menu" schema="" catalog="worldonline" columns="IconImageID"/>
-      <exported-key name="FK_5s7tsc3wh43o5vfb7nto88tk1" table="Menu" schema="" catalog="worldonline" columns="PushedIconImageID"/>
     </table>
     <table name="Menu" schema="" catalog="worldonline" type="TABLE">
       <column name="MenuID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -159,11 +158,9 @@
       <column name="IconImageID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="NameTextGroupID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="ParentMenuID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
-      <column name="PushedIconImageID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="MenuID"/>
-      <foreign-key name="FK_3w9m88r63m8v2x7ox85egtpxq" columns="IconImageID" ref-table="Image" ref-schema="" ref-catalog="worldonline" ref-columns="ImageID" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="FK_5s7tsc3wh43o5vfb7nto88tk1" columns="PushedIconImageID" ref-table="Image" ref-schema="" ref-catalog="worldonline" ref-columns="ImageID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_e8gah0u36h5rfomvwgn1uk440" columns="ParentMenuID" ref-table="Menu" ref-schema="" ref-catalog="worldonline" ref-columns="MenuID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_3w9m88r63m8v2x7ox85egtpxq" columns="IconImageID" ref-table="Image" ref-schema="" ref-catalog="worldonline" ref-columns="ImageID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_tgq8tlsqbv1wc2i3kod4h2cxx" columns="NameTextGroupID" ref-table="TextGroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="FK_e8gah0u36h5rfomvwgn1uk440" table="Menu" schema="" catalog="worldonline" columns="ParentMenuID"/>
       <exported-key name="FK_ndk8wns7hlpceawbienjf5j5t" table="MenuCardLink" schema="" catalog="worldonline" columns="MenuID"/>
@@ -228,8 +225,8 @@
       <column name="UserHardwareID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="UserPersonalDataID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="userID"/>
-      <foreign-key name="FK_brhus6h5p1pcopgtusn5d2uh5" columns="UserHardwareID" ref-table="UserHardware" ref-schema="" ref-catalog="worldonline" ref-columns="UserHardwareID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_hw73w84hod076vg7ua3ksbq9v" columns="UserPersonalDataID" ref-table="UserPersonalData" ref-schema="" ref-catalog="worldonline" ref-columns="UserPersonalDataID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_brhus6h5p1pcopgtusn5d2uh5" columns="UserHardwareID" ref-table="UserHardware" ref-schema="" ref-catalog="worldonline" ref-columns="UserHardwareID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_ni3wk87vu1n5d2jfhblui5veo" columns="UserContentID" ref-table="UserContent" ref-schema="" ref-catalog="worldonline" ref-columns="UserContentID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="UserCard" schema="" catalog="worldonline" type="TABLE">
@@ -239,8 +236,8 @@
       <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="UserContentID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="UserCardID"/>
-      <foreign-key name="FK_lv8j07r0w9oki3nwxvhiam6qm" columns="CardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_o9hm9i8tnmup36hqj1gougw8l" columns="UserContentID" ref-table="UserContent" ref-schema="" ref-catalog="worldonline" ref-columns="UserContentID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_lv8j07r0w9oki3nwxvhiam6qm" columns="CardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="UserContent" schema="" catalog="worldonline" type="TABLE">
       <column name="UserContentID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -266,6 +263,26 @@
       <column name="UserLanguage" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="UserPersonalDataID"/>
       <exported-key name="FK_hw73w84hod076vg7ua3ksbq9v" table="User" schema="" catalog="worldonline" columns="UserPersonalDataID"/>
+    </table>
+    <table name="Weather" schema="" catalog="worldonline" type="TABLE">
+      <column name="WeatherID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="Cloudiness" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="HeatMax" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="HeatMin" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="LightningPower" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="MaxTemperature" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="MinTemperature" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="Precipitation" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="PressureMax" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="PressureMin" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="RainPower" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="RelwetMax" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="RelwetMin" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="WeatherTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="WindDirection" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="WindMax" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="WindMin" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="WeatherID"/>
     </table>
   </data-source>
   <data-source source="LOCAL" name="hibernate.cfg.xml" uuid="a09cc10e-7f3a-432f-944b-00b65398186d">
