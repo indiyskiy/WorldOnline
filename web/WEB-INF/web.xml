@@ -5,6 +5,8 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
+
+
     <resource-ref>
         <res-ref-name>jdbc/worldOnLineDB</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
@@ -252,6 +254,18 @@
     <servlet-mapping>
         <servlet-name>GetAllMenusServlet</servlet-name>
         <url-pattern>/mobile/getallmenus</url-pattern>
+    </servlet-mapping>
+
+    <!--all cards-->
+    <servlet>
+        <display-name>GetAllCardsServlet</display-name>
+        <servlet-name>GetAllCardsServlet</servlet-name>
+        <servlet-class>view.servlet.phone.GetAllCardsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetAllCardsServlet</servlet-name>
+        <url-pattern>/mobile/getallcards</url-pattern>
     </servlet-mapping>
 
 
