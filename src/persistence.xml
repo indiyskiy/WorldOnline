@@ -166,15 +166,15 @@
         <class>model.database.worldonlinedb.MenuCardLinkEntity</class>
         <class>model.database.worldonlinedb.CardChangeEntity</class>
         <class>model.database.worldonlinedb.UserCardEntity</class>
-        <properties>
-            <property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/worldonline"/>
-            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-            <property name="hibernate.connection.username" value="root"/>
-            <property name="hibernate.connection.password" value="Djqysdrjcvjct!!!"/>
-            <property name="hibernate.archive.autodetection" value="class"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hbm2ddl.auto" value="update"/>
-        </properties>
+        <!-- <properties>
+             <property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/worldonline"/>
+             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+             <property name="hibernate.connection.username" value="root"/>
+             <property name="hibernate.connection.password" value="Djqysdrjcvjct!!!"/>
+             <property name="hibernate.archive.autodetection" value="class"/>
+             <property name="hibernate.show_sql" value="true"/>
+             <property name="hibernate.format_sql" value="true"/>
+             <property name="hbm2ddl.auto" value="update"/>
+         </properties>-->
     </persistence-unit>
 </persistence>
