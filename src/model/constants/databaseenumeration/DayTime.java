@@ -3,7 +3,7 @@ package model.constants.databaseenumeration;
 /**
  * Created by Илья on 13.05.14.
  */
-public enum WeatherDayTime {
+public enum DayTime {
     Night(0),
     Morning(1),
     Day(2),
@@ -11,7 +11,7 @@ public enum WeatherDayTime {
 
     private final int value;
 
-    private WeatherDayTime(int value) {
+    private DayTime(int value) {
         this.value = value;
     }
 
@@ -19,8 +19,9 @@ public enum WeatherDayTime {
         return value;
     }
 
-    public static WeatherDayTime parseInt(Integer value) {
-        WeatherDayTime[] weatherDayTimes = WeatherDayTime.values();
-        return weatherDayTimes[value];
+    public static DayTime parseInt(Integer value) {
+        DayTime[] dayTimes = DayTime.values();
+        return dayTimes[value];
     }
+
 }

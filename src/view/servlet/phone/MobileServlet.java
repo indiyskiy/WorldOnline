@@ -31,14 +31,7 @@ public abstract class MobileServlet extends HttpServlet {
             MobileResponseEntity mobileResponseEntity = mobileHandler.handleRequest(mobileRequest);
             String responseString = mobileParser.getResponse(mobileResponseEntity);
             ServletHelper.sendJson(response, responseString);
-
-        } catch (IllegalTypeException e) {
-            ServletHelper.sendMobileError(loggerFactory, e, response);
-        } catch (ParseRequestException e) {
-            ServletHelper.sendMobileError(loggerFactory, e, response);
-        } catch (IOException e) {
-            ServletHelper.sendMobileError(loggerFactory, e, response);
-        } catch (Exception e) {
+        } catch (IllegalTypeException | ParseRequestException | IOException e) {
             ServletHelper.sendMobileError(loggerFactory, e, response);
         }
     }

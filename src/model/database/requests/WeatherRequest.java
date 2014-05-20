@@ -35,8 +35,10 @@ public class WeatherRequest {
         ResultSet rs = null;
         try {
             Connection connection = dbConnection.getConnection();
-            @Language(value = "MySQL") String sql = "SELECT *, ABS(TIMESTAMPDIFF(SECOND, Weather.WeatherTimestamp, ?)) AS timediff FROM Weather " +
-                    "ORDER BY timediff LIMIT 1";
+            @Language(value = "MySQL") String sql = "SELECT *, " +
+                    "ABS(TIMESTAMPDIFF(SECOND, Weather.WeatherTimestamp, ?)) AS timediff " +
+                    "FROM Weather " +
+                    "ORDER BY timediff, Weather.WeatherID DESC LIMIT 1";
             ps = connection.prepareStatement(sql);
             ps.setTimestamp(1, timestamp);
             rs = ps.executeQuery();
@@ -70,3 +72,25 @@ public class WeatherRequest {
         return null;
     }
 }
+
+
+/*<!--<?xml version='1.0' encoding='utf-8'?>-->
+<!--<!DOCTYPE hibernate-configuration PUBLIC-->
+<!--"-//Hibernate/Hibernate Configuration DTD//EN"-->
+<!--"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">-->
+<!--<hibernate-configuration>-->
+<!--<session-factory>-->
+<!--<property name="connection.url">jdbc:mysql://127.0.0.1:3306/worldonline?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true</property>-->
+<!--<property name="connection.driver_class">com.mysql.jdbc.Driver</property>-->
+<!--<property name="connection.username">root</property>-->
+<!--<property name="connection.password">Djqysdrjcvjct!!!</property>-->
+<!--<property name="hibernate.archive.autodetection">class</property>-->
+<!--<property name="hibernate.show_sql">false</property>-->
+<!--<property name="hibernate.format_sql">true</property>-->
+<!--<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>-->
+<!--<property name="testWhileIdle">true</property>-->
+<!--<property name="timeBetweenEvictionRunsMillis">300000</property>-->
+
+<!--&lt;!&ndash;<class>model.database.AccountEntity&ndash;&gt;-->
+<!--</session-factory>-->
+<!--</hibernate-configuration>-->*/

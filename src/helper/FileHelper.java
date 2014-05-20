@@ -27,7 +27,11 @@ public class FileHelper {
     }
 
     public static File saveToFile(String text, String filePath, String fileName) throws FileNotFoundException {
-        File file = new File(filePath + "/" + fileName);
+        File newDir = new File(filePath.substring(0, filePath.length() - 1));
+        if (!newDir.exists()) {
+            newDir.mkdirs();
+        }
+        File file = new File(filePath + fileName);
         PrintWriter writer = new PrintWriter(file);
         writer.print(text);
         writer.flush();
@@ -41,6 +45,5 @@ public class FileHelper {
         int rnd = random.nextInt(10000);
         return saveToFile(text, ServerConsts.tempFileStore, String.valueOf(rnd));
     }
-
 
 }

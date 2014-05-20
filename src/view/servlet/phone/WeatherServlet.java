@@ -1,23 +1,26 @@
 package view.servlet.phone;
 
-import controller.phone.parser.GetAllCardsParser;
 import controller.phone.parser.MobileParser;
+import controller.phone.parser.WeatherParser;
 import model.constants.Component;
 import model.logger.LoggerFactory;
-import model.phone.requesthandler.GetAllCardsHandler;
 import model.phone.requesthandler.MobileHandler;
+import model.phone.requesthandler.WeatherHandler;
 
-public class GetAllCardsServlet extends MobileServlet {
-    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, GetAllCardsServlet.class);
+/**
+ * Created by Илья on 19.05.14.
+ */
+public class WeatherServlet extends MobileServlet {
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, MobileServlet.class);
 
     @Override
     protected MobileHandler getMobileHandler() {
-        return new GetAllCardsHandler();
+        return new WeatherHandler();
     }
 
     @Override
     public MobileParser getMobileParser() {
-        return new GetAllCardsParser();
+        return new WeatherParser();
     }
 
     @Override

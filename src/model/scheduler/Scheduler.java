@@ -9,15 +9,18 @@ import java.util.HashSet;
 public class Scheduler implements Runnable {
     //all time in seconds
     private static Scheduler scheduler = new Scheduler();
-    private static LoggerFactory logger = new LoggerFactory(Component.Global, Scheduler.class);
+    private static LoggerFactory logger;
     private ArrayList<Executable> executableList = new ArrayList<>();
     private int maxPeriod = 1;
 
     private Scheduler() {
+        logger = new LoggerFactory(Component.Global, Scheduler.class);
+        logger.debug("scheduler start");
         addTasksToList();
         countPeriod();
         Thread thread = new Thread(this);
         thread.start();
+        logger.debug("scheduler end");
     }
 
     private void countPeriod() {
@@ -31,7 +34,7 @@ public class Scheduler implements Runnable {
     }
 
     private void addTasksToList() {
-        //add all tasks here
+        executableList.add(new WeatherTask());
     }
 
     public static Scheduler getScheduler() {

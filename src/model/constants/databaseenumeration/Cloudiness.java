@@ -22,4 +22,20 @@ public enum Cloudiness {
         Cloudiness[] cloudiness = Cloudiness.values();
         return cloudiness[value];
     }
+
+    public String toStringHTML() {
+        switch (this) {
+            case Clear:
+                return "ясно";
+            case FewCloudy:
+                return "малооблачно";
+            case Cloudy:
+                return "облачно";
+            case VeryCloudy:
+                return "пасмурно";
+            default:
+                return "\"unknown value\"";
+        }
+    }
+
 }

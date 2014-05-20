@@ -1,6 +1,7 @@
 package helper;
 
 
+import model.constants.databaseenumeration.DayTime;
 import model.phone.weather.WeatherTime;
 
 import java.sql.Timestamp;
@@ -42,13 +43,26 @@ public class TimeManager {
         return Timestamp.valueOf(dateString);
     }
 
-    public static void main(String[] args) {
-        try {
-            WeatherTime weatherTime = getCurrentWeatherTime();
-            Timestamp timestamp = getTimestampFromWeatherTime(weatherTime);
-            System.out.println(timestamp);
-        } catch (ParseException e) {
-            e.printStackTrace();
+    public static DayTime parseTimestamp(Timestamp timestamp) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(timestamp.getTime());
+        int hour = (cal.get(Calendar.HOUR_OF_DAY));
+        if (hour >= 22 || hour <= 6) {
+            return DayTime.Night;
         }
+        if (hour >= 7 && hour <= 11) {
+            return DayTime.Morning;
+        }
+        if (hour >= 12 && hour <= 17) {
+            return DayTime.Day;
+        }
+        if (hour >= 18 && hour <= 21) {
+            return DayTime.Evening;
+        }
+        return DayTime.Day;
+    }
+
+    public static DayTime currentDayTime() {
+        return parseTimestamp(currentTime());
     }
 }

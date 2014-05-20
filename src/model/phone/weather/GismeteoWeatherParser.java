@@ -3,20 +3,17 @@ package model.phone.weather;
 import helper.FileHelper;
 import helper.WebPageGetter;
 import model.constants.Component;
+import model.constants.ServerConsts;
 import model.constants.databaseenumeration.Cloudiness;
-import model.constants.databaseenumeration.WeatherDayTime;
+import model.constants.databaseenumeration.DayTime;
 import model.database.requests.WeatherRequest;
 import model.database.worldonlinedb.WeatherEntity;
 import model.logger.LoggerFactory;
-import model.scheduler.WeatherTask;
 import org.simpleframework.xml.core.Persister;
 
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by Илья on 13.05.14.
- */
 public class GismeteoWeatherParser {
     private final String url = "http://xml.meteoservice.ru/export/gismeteo/point/";
     private final String spb = "69";
@@ -25,7 +22,7 @@ public class GismeteoWeatherParser {
     public File getGismeteoWeatherToFile() {
         try {
             String textFromPage = WebPageGetter.getTextFromPage(url + spb + ".xml");
-            File file = FileHelper.saveToFile(textFromPage, "D:", "weather.xml");
+            File file = FileHelper.saveToFile(textFromPage, ServerConsts.tempFileStore, "weather.xml");
             return file;
         } catch (IOException e) {
             loggerFactory.error(e);
@@ -51,9 +48,13 @@ public class GismeteoWeatherParser {
     }
 
     private void saveToDB(Mmweather mmweather) {
-        for (Forecast forecast : mmweather.report.town.forecasts) {
-            WeatherEntity weatherEntity = new WeatherEntity(forecast);
-            WeatherRequest.addWeather(weatherEntity);
+        try {
+            for (Forecast forecast : mmweather.report.town.forecasts) {
+                WeatherEntity weatherEntity = new WeatherEntity(forecast);
+                WeatherRequest.addWeather(weatherEntity);
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
         }
     }
 
@@ -61,7 +62,7 @@ public class GismeteoWeatherParser {
         GismeteoWeatherParser gismeteoWeatherParser = new GismeteoWeatherParser();
         Mmweather mmweather = gismeteoWeatherParser.saveGismeteoWeather();
         for (Forecast forecasts : mmweather.report.town.forecasts) {
-            loggerFactory.info(WeatherDayTime.parseInt(forecasts.tod) + " - " + forecasts.hour + " - " + Cloudiness.parseInt(forecasts.phenomena.cloudiness));
+            loggerFactory.info(DayTime.parseInt(forecasts.tod) + " - " + forecasts.hour + " - " + Cloudiness.parseInt(forecasts.phenomena.cloudiness));
         }
     }
 

@@ -26,6 +26,9 @@ public class ExceptionTexts {
     public static final String allCardsUserIDEmptyException = "phone.getAllCards.UserID.empty";
     public static final String allCardsUserIDIncorrectException = "phone.getAllCards.UserID.Incorrect";
     public static final String allCardsUserNotExistException = "phone.getAllCards.UserID.NotExist";
+    public static final String weatherUserIDEmptyException = "phone.weather.UserID.empty";
+    public static final String weatherUserIDIncorrectException = "phone.getAllCards.UserID.Incorrect";
+    public static String weatherUserNotExistException = "phone.weather.UserID.NotExist";
 
     private static HashSet<String> getMobileErrors() {
         HashSet<String> mobileErrors = new HashSet<String>();

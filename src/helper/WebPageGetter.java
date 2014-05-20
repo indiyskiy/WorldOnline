@@ -20,12 +20,4 @@ public class WebPageGetter {
         return result;
     }
 
-    public static void main(String[] args) {
-        try {
-            System.out.println(getTextFromPage("http://bash.im"));
-            FileHelper.saveToFile(getTextFromPage("http://bash.im"), "D:/", "name.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
