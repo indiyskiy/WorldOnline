@@ -171,6 +171,18 @@
         <url-pattern>/completeuserinfo</url-pattern>
     </servlet-mapping>
 
+    <!--Weather-->
+    <servlet>
+        <display-name>WeatherServlet</display-name>
+        <servlet-name>WeatherServlet</servlet-name>
+        <servlet-class>view.servlet.admin.WeatherServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>WeatherServlet</servlet-name>
+        <url-pattern>/weather</url-pattern>
+    </servlet-mapping>
+
     <!--Login-->
     <servlet>
         <display-name>LoginServlet</display-name>
@@ -266,6 +278,18 @@
     <servlet-mapping>
         <servlet-name>GetAllCardsServlet</servlet-name>
         <url-pattern>/mobile/getallcards</url-pattern>
+    </servlet-mapping>
+
+    <!--weather-->
+    <servlet>
+        <display-name>WeatherServlet</display-name>
+        <servlet-name>WeatherPhoneServlet</servlet-name>
+        <servlet-class>view.servlet.phone.WeatherServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>WeatherPhoneServlet</servlet-name>
+        <url-pattern>/mobile/weather</url-pattern>
     </servlet-mapping>
 
 
