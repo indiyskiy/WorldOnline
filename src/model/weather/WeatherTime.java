@@ -1,4 +1,4 @@
-package model.phone.weather;
+package model.weather;
 
 /**
  * Created by Илья on 14.05.14.

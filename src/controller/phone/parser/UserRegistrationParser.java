@@ -13,13 +13,6 @@ import model.phone.responseentity.RegistrationResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 28.02.14
- * Time: 15:17
- * To change this template use File | Settings | File Templates.
- */
 public class UserRegistrationParser implements MobileParser {
 
     public ParsedRegistrationRequest parse(HttpServletRequest request) throws ParseRequestException {
@@ -76,7 +69,7 @@ public class UserRegistrationParser implements MobileParser {
 
     public static String getResponse(RegistrationResponse registrationResponse) {
         JsonObject responseObj = new JsonObject();
-        responseObj.addProperty("status", registrationResponse.getStatus().toString());
+        responseObj.addProperty("status", registrationResponse.getStatus().getValue());
         responseObj.addProperty("id", registrationResponse.getUserID());
         return responseObj.toString();
     }

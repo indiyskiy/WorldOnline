@@ -1,7 +1,7 @@
 package model.additionalentity;
 
 import model.database.worldonlinedb.CardRootEntity;
-import model.database.worldonlinedb.RootElementEntity;
+import model.database.worldonlinedb.RouteElementEntity;
 
 import java.util.HashMap;
 
@@ -14,7 +14,7 @@ import java.util.HashMap;
  */
 public class CompleteCardRootInfo {
     private CardRootEntity cardRootEntity;
-    private HashMap<Long, RootElementEntity> rootElementEntityMap = new HashMap<Long, RootElementEntity>();
+    private HashMap<Long, RouteElementEntity> rootElementEntityMap = new HashMap<Long, RouteElementEntity>();
     private CompleteTextGroupInfo completeTextGroupInfo;
 
     public CompleteCardRootInfo(CardRootEntity cardRootEntity) {
@@ -37,11 +37,11 @@ public class CompleteCardRootInfo {
         this.cardRootEntity = cardRootEntity;
     }
 
-    public HashMap<Long, RootElementEntity> getRootElementEntityMap() {
+    public HashMap<Long, RouteElementEntity> getRootElementEntityMap() {
         return rootElementEntityMap;
     }
 
-    public void setRootElementEntityMap(HashMap<Long, RootElementEntity> rootElementEntityMap) {
+    public void setRootElementEntityMap(HashMap<Long, RouteElementEntity> rootElementEntityMap) {
         this.rootElementEntityMap = rootElementEntityMap;
     }
 }

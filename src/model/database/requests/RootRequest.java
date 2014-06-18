@@ -37,15 +37,15 @@ public class RootRequest {
         return cardRootEntity;
     }
 
-    public static RootElementEntity getRootElementByResultSet(ResultSet rs) throws SQLException {
+    public static RouteElementEntity getRootElementByResultSet(ResultSet rs) throws SQLException {
         Long rootElementID = rs.getLong("RootElement.RootElementID");
         if (rootElementID == 0 || rs.wasNull()) {
             return null;
         }
-        RootElementEntity rootElementEntity = new RootElementEntity();
-        rootElementEntity.setRootElementID(rootElementID);
-        rootElementEntity.setRootElementNumber(rs.getInt("RootElement.RootElementNumber"));
-        return rootElementEntity;
+        RouteElementEntity routeElementEntity = new RouteElementEntity();
+        routeElementEntity.setRootElementID(rootElementID);
+        routeElementEntity.setRootElementNumber(rs.getInt("RootElement.RootElementNumber"));
+        return routeElementEntity;
     }
 
     public static void addCardRoot(CardRootEntity cardRootEntity) {
@@ -62,12 +62,12 @@ public class RootRequest {
         }
     }
 
-    public static void addRootElement(RootElementEntity rootElementEntity) {
+    public static void addRootElement(RouteElementEntity routeElementEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
 //        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
-            session.save(rootElementEntity);
+            session.save(routeElementEntity);
             session.getTransaction().commit();
         } finally {
             if (session != null) {
@@ -214,21 +214,21 @@ public class RootRequest {
         //root element
         Long rootElementID = rs.getLong("RootElement.RootElementID");
         if (rootElementID != 0 && !rs.wasNull()) {
-            RootElementEntity rootElementEntity;
+            RouteElementEntity routeElementEntity;
             if (completeCardRootInfo.getRootElementEntityMap().containsKey(rootElementID) &&
                     completeCardRootInfo.getRootElementEntityMap().get(rootElementID) != null) {
-                rootElementEntity = completeCardRootInfo.getRootElementEntityMap().get(rootElementID);
+                routeElementEntity = completeCardRootInfo.getRootElementEntityMap().get(rootElementID);
             } else {
-                rootElementEntity = RootRequest.getRootElementByResultSet(rs);
-                rootElementEntity.setCardRoot(completeCardRootInfo.getCardRootEntity());
-                completeCardRootInfo.getRootElementEntityMap().put(rootElementID, rootElementEntity);
+                routeElementEntity = RootRequest.getRootElementByResultSet(rs);
+                routeElementEntity.setCardRoot(completeCardRootInfo.getCardRootEntity());
+                completeCardRootInfo.getRootElementEntityMap().put(rootElementID, routeElementEntity);
             }
-            if (rootElementEntity.getPlaceCard() == null) {
+            if (routeElementEntity.getPlaceCard() == null) {
                 //root element placeCard
                 Long rootCardID = rs.getLong(rootCard + ".CardID");
                 if (rootCardID != 0 && !rs.wasNull()) {
                     CardEntity cardEntity = CardRequest.getCardFromResultSet(rs, rootCard);
-                    rootElementEntity.setPlaceCard(cardEntity);
+                    routeElementEntity.setPlaceCard(cardEntity);
                 }
             }
         }

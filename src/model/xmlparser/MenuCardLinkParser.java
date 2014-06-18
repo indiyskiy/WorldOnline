@@ -71,7 +71,7 @@ public class MenuCardLinkParser {
             try {
                 HashSet<String> names = CardRequest.getAllCardNames(cardEntity.getCardID());
                 MenuCardLinkEntity menuCardLinkEntity = null;
-                if (cardEntity.getCardType() == (CardType.CardShopping.getValue())) {
+                if (cardEntity.getCardType() == (CardType.CardPlace.getValue())) {
                     menuCardLinkEntity = saveCardShopping(cardShopping, names, cardEntity);
                 }
                 if (cardEntity.getCardType() == (CardType.CardSight.getValue())) {
@@ -80,13 +80,13 @@ public class MenuCardLinkParser {
                 if (cardEntity.getCardType() == (CardType.CardRoute.getValue())) {
                     menuCardLinkEntity = saveCardRoute(cardRoute, names, cardEntity);
                 }
-                if (cardEntity.getCardType() == (CardType.CardRelax.getValue())) {
+                if (cardEntity.getCardType() == (CardType.CardPlace.getValue())) {
                     menuCardLinkEntity = saveCardRelax(cardRelax, names, cardEntity);
                 }
-                if (cardEntity.getCardType() == (CardType.CardMeal.getValue())) {
+                if (cardEntity.getCardType() == (CardType.CardPlace.getValue())) {
                     menuCardLinkEntity = saveCardMeal(cardMeal, names, cardEntity);
                 }
-                if (cardEntity.getCardType() == (CardType.CardHotel.getValue())) {
+                if (cardEntity.getCardType() == (CardType.CardPlace.getValue())) {
                     menuCardLinkEntity = saveCardHotels(cardHotels, names, cardEntity);
                 }
                 if (cardEntity.getCardType() == (CardType.CardHandBook.getValue())) {

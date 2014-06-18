@@ -1,4 +1,4 @@
-package model.phone.weather;
+package model.weather;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
@@ -6,10 +6,12 @@ import org.simpleframework.xml.Root;
 /**
  * Created by Илья on 13.05.14.
  */
-@Root(name = "RELWET")
-public class Relwet {
+@Root(name = "HEAT")
+public class Heat {
     @Attribute(name = "max")
-    public int max;
+    public
+    int max;
     @Attribute(name = "min")
-    public int min;
+    public
+    int min;
 }

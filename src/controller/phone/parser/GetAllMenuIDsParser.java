@@ -38,7 +38,7 @@ public class GetAllMenuIDsParser implements MobileParser {
 
     public static String getResponse(AllMenusResponse allMenusResponse) {
         JsonObject responseObj = new JsonObject();
-        responseObj.addProperty("status", allMenusResponse.getStatus().toString());
+        responseObj.addProperty("status", allMenusResponse.getStatus().getValue());
         JsonArray jsonArray = new JsonArray();
         for (Long id : allMenusResponse.getMenuIDs()) {
             jsonArray.add(new JsonPrimitive(id));

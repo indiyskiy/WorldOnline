@@ -1,19 +1,28 @@
 package view.servlet;
 
 import controller.phone.parser.MobileErrorParser;
+import helper.FileHelper;
+import model.additionalentity.admin.ParsedRequest;
 import model.constants.Component;
+import model.constants.ServerConsts;
 import model.exception.ParseRequestException;
 import model.logger.LoggerFactory;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FilenameUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -104,5 +113,41 @@ public class ServletHelper {
         } catch (Exception e) {
             ServletHelper.loggerFactory.error(e);
         }
+    }
+
+    public static ParsedRequest getParametersMap(HttpServletRequest request) throws FileUploadException {
+        HashMap<String, String> textMap = new HashMap<>();
+        HashMap<String, File> fileMap = new HashMap<>();
+        ParsedRequest parsedRequest = new ParsedRequest(textMap, fileMap);
+        try {
+            FileItemFactory factory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            List<FileItem> uploadItems = upload.parseRequest(request);
+            for (FileItem item : uploadItems) {
+                String fieldName = item.getFieldName();
+                if (item.isFormField()) {
+                    String value = item.getString();
+                    loggerFactory.debug(fieldName + " - " + value);
+                    textMap.put(fieldName, value);
+                } else {
+                    String filename = FilenameUtils.getName(item.getName());
+                    InputStream fileContent = item.getInputStream();
+                    File file = new File(ServerConsts.tempFileStore + "/" + filename);
+                    FileHelper.saveToFile(fileContent, file);
+                    fileMap.put(fieldName, file);
+                }
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        }
+        return parsedRequest;
+    }
+
+    public static void throwServletException(ArrayList<String> exceptions) throws ServletException {
+        String ex = "";
+        for (String e : exceptions) {
+            ex += e + "\n";
+        }
+        throw new ServletException(ex);
     }
 }

@@ -1,4 +1,4 @@
-package model.phone.weather;
+package model.weather;
 
 import helper.FileHelper;
 import helper.WebPageGetter;

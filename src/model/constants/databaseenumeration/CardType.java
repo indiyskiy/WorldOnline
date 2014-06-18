@@ -11,14 +11,11 @@ public enum CardType {
     Unknown(0),
     CardAboutCity(1),
     CardHandBook(2),
-    CardHotel(3),
-    CardMeal(4),
-    CardRelax(5),
-    CardRoute(6),
-    CardShopping(7),
-    CardSight(8),
-    RestaurantChainCard(9),
-    CardPhoto(10);
+    CardPlace(3),
+    CardRoute(4),
+    CardSight(5),
+    RestaurantChainCard(6),
+    CardPhoto(7);
 
     private final int value;
 
@@ -53,20 +50,11 @@ public enum CardType {
             case CardHandBook: {
                 return "из справочника";
             }
-            case CardHotel: {
-                return "отель";
-            }
-            case CardMeal: {
-                return "еда";
-            }
-            case CardRelax: {
-                return "отдых";
+            case CardPlace: {
+                return "место";
             }
             case CardRoute: {
                 return "маршрут";
-            }
-            case CardShopping: {
-                return "покупки";
             }
             case CardSight: {
                 return "достопремечательность";

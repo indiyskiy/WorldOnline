@@ -18,13 +18,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 02.11.13
- * Time: 2:49
- * To change this template use File | Settings | File Templates.
- */
 public class TextRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, TextRequest.class);
 
@@ -44,6 +37,9 @@ public class TextRequest {
             }
         } catch (DatabaseException e) {
             loggerFactory.error(e.getMessage());
+            loggerFactory.error(e);
+        } catch (NullPointerException e) {
+            loggerFactory.error("text not found " + text);
             loggerFactory.error(e);
         } catch (Exception e) {
             loggerFactory.error(e);

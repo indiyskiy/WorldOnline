@@ -14,14 +14,12 @@ import model.phone.responseentity.MobileResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Илья on 18.04.14.
- */
 public class GetAllCardsParser implements MobileParser {
     LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, GetAllCardsParser.class);
 
     @Override
     public GetAllCardsRequest parse(HttpServletRequest request) throws ParseRequestException {
+        GetAllCardsRequest getAllCardsRequest = new GetAllCardsRequest();
         String userIdString = request.getParameter("userID");
         if (userIdString == null || userIdString.isEmpty()) {
             throw new ParseRequestException(ExceptionTexts.allCardsUserIDEmptyException);
@@ -35,7 +33,26 @@ public class GetAllCardsParser implements MobileParser {
         if (!UserRequests.isUserExist(userID)) {
             throw new ParseRequestException(ExceptionTexts.allCardsUserNotExistException);
         }
-        GetAllCardsRequest getAllCardsRequest = new GetAllCardsRequest();
+        String limitString = request.getParameter("limit");
+        if (limitString != null && !limitString.isEmpty()) {
+            Integer limit;
+            try {
+                limit = Integer.parseInt(limitString);
+                getAllCardsRequest.setLimit(limit);
+            } catch (Exception e) {
+                throw new ParseRequestException(ExceptionTexts.allCardsLimitIncorrectException);
+            }
+        }
+        String offsetString = request.getParameter("offset");
+        if (offsetString != null && !offsetString.isEmpty()) {
+            Integer offset;
+            try {
+                offset = Integer.parseInt(offsetString);
+                getAllCardsRequest.setOffset(offset);
+            } catch (Exception e) {
+                throw new ParseRequestException(ExceptionTexts.allCardsOffsetIncorrectException);
+            }
+        }
         getAllCardsRequest.setUserID(userID);
         return getAllCardsRequest;
     }

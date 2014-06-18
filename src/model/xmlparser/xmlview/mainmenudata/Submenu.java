@@ -4,13 +4,6 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 21.10.13
- * Time: 16:21
- * To change this template use File | Settings | File Templates.
- */
 @Root(name = "Submenu")
 public class Submenu {
     @Attribute(name = "id", required = true)

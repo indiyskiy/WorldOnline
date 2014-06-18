@@ -1,7 +1,5 @@
-package model.phone.weather;
+package model.weather;
 
-import model.xmlparser.xmlview.card.cardaboutcity.AboutCity;
-import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 

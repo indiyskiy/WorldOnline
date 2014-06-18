@@ -1,12 +1,5 @@
 package model.constants.databaseenumeration;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 24.10.13
- * Time: 20:59
- * To change this template use File | Settings | File Templates.
- */
 public enum DataType {
     UnknownType(0),
     IntegerType(1),
@@ -16,7 +9,8 @@ public enum DataType {
     EmailType(5),
     PhoneNumberType(6),
     TimestampType(7),
-    Percent(8);
+    Percent(8),
+    Coast(9);
 
 
     private final int value;

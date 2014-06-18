@@ -21,14 +21,22 @@ public class ExceptionTexts {
     public static final String getMenuUserIDEmptyException = "phone.getMenu.UserID.empty";
     public static final String getMenuUserIDIncorrectException = "phone.getMenu.UserID.Incorrect";
     public static final String getMenuUserNotExistException = "phone.getMenu.UserID.NotExist";
-    public static String getMenuMenuIDEmptyException = "phone.getMenu.MenuID.empty";
+    public static final String getMenuMenuIDEmptyException = "phone.getMenu.MenuID.empty";
     public static final String getMenuMenuIDIncorrectException = "phone.getMenu.MenuID.Incorrect";
     public static final String allCardsUserIDEmptyException = "phone.getAllCards.UserID.empty";
     public static final String allCardsUserIDIncorrectException = "phone.getAllCards.UserID.Incorrect";
     public static final String allCardsUserNotExistException = "phone.getAllCards.UserID.NotExist";
+    public static final String allCardsLimitIncorrectException = "phone.getAllCards.Limit.Incorrect";
+    public static final String allCardsOffsetIncorrectException = "phone.getAllCards.Offset.Incorrect";
     public static final String weatherUserIDEmptyException = "phone.weather.UserID.empty";
-    public static final String weatherUserIDIncorrectException = "phone.getAllCards.UserID.Incorrect";
-    public static String weatherUserNotExistException = "phone.weather.UserID.NotExist";
+    public static final String weatherUserIDIncorrectException = "phone.weather.UserID.Incorrect";
+    public static final String weatherUserNotExistException = "phone.weather.UserID.NotExist";
+    public static final String getViewImagesUserIDEmptyException = "phone.getViewImages.UserID.empty";
+    public static final String getViewImagesUserIDIncorrectException = "phone.getViewImages.UserID.Incorrect";
+    public static final String getViewImagesUserNotExistException = "phone.getViewImages.UserID.NotExist";
+    public static final String restoreUserDeviceIDEmptyException = "phone.restoreUser.DeviceID.empty";
+    public static final String restoreUserDeviceNotFoundException = "phone.restoreUser.Device.notFound";
+
 
     private static HashSet<String> getMobileErrors() {
         HashSet<String> mobileErrors = new HashSet<String>();

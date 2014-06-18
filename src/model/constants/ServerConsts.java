@@ -19,4 +19,5 @@ public class ServerConsts {
     public static final String oldIconsRoot = oldBase + "icon/";
     public static final String root = oldBase + "base/";
     public static final String globalLogDir = "logs/";
+    public static final String staticFilesDirectory = newFileBase + "staticFiles/";
 }

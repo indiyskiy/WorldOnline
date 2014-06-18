@@ -2,7 +2,7 @@ package helper;
 
 
 import model.constants.databaseenumeration.DayTime;
-import model.phone.weather.WeatherTime;
+import model.weather.WeatherTime;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -54,15 +54,22 @@ public class TimeManager {
             return DayTime.Morning;
         }
         if (hour >= 12 && hour <= 17) {
+            System.out.println("ok " + hour);
             return DayTime.Day;
         }
         if (hour >= 18 && hour <= 21) {
             return DayTime.Evening;
         }
+        System.out.println("omg");
         return DayTime.Day;
     }
 
     public static DayTime currentDayTime() {
         return parseTimestamp(currentTime());
+    }
+
+    public static void main(String[] args) {
+        System.out.println(currentDayTime());
+        System.out.println(currentTime());
     }
 }

@@ -20,7 +20,6 @@ public class Scheduler implements Runnable {
         countPeriod();
         Thread thread = new Thread(this);
         thread.start();
-        logger.debug("scheduler end");
     }
 
     private void countPeriod() {

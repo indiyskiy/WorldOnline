@@ -4,13 +4,22 @@ package controller.phone.entity;
  * Created by Илья on 18.04.14.
  */
 public class GetAllCardsRequest extends MobileRequest {
-    private Long userID;
+    private Integer limit = null;
+    private Integer offset = null;
 
-    public Long getUserID() {
-        return userID;
+    public Integer getLimit() {
+        return limit;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
     }
 }

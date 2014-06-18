@@ -106,11 +106,11 @@ public class AllUsersParser {
     }
 
     public void parse(HttpServletRequest request) {
-//        if (request.getParameter("UserIDRe") != null && !request.getParameter("UserIDRe").isEmpty()) {
+//        if (request.getParametersMap("UserIDRe") != null && !request.getParametersMap("UserIDRe").isEmpty()) {
 //            userID = Long.parseLong(ServletHelper.getAndSetAttribute(request, "UserIDRe"));
 //        }
 //
-//        if (request.getParameter("MobilePlatformRe") != null && !request.getParameter("MobilePlatformRe").isEmpty()) {
+//        if (request.getParametersMap("MobilePlatformRe") != null && !request.getParametersMap("MobilePlatformRe").isEmpty()) {
 //            mobilePlatform = MobilePlatform.parseInt(Integer.parseInt(ServletHelper.getAndSetAttribute(request, "MobilePlatformRe")));
 //        }
         if (request.getParameter("Page") != null && !request.getParameter("Page").isEmpty()) {

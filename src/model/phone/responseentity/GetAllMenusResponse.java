@@ -5,9 +5,6 @@ import model.constants.Status;
 
 import java.util.ArrayList;
 
-/**
- * Created by Илья on 15.04.14.
- */
 public class GetAllMenusResponse extends MobileResponseEntity {
     private ArrayList<MenuCompleteInformation> menusCompleteInformation;
 

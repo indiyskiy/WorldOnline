@@ -135,4 +135,7 @@ public class CardEntity {
         setCardState(cardState.getValue());
     }
 
+    public void setCardState(CardState cardState) {
+        setCardState(cardState.getValue());
+    }
 }

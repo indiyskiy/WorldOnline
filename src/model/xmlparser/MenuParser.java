@@ -1,9 +1,10 @@
 package model.xmlparser;
 
+import helper.FileHelper;
 import helper.Md5Hash;
 import model.constants.Component;
 import model.constants.ServerConsts;
-import model.constants.databaseenumeration.ImageType;
+import model.constants.databaseenumeration.CardImageType;
 import model.constants.databaseenumeration.LanguageType;
 import model.constants.databaseenumeration.MenuType;
 import model.database.requests.ImageRequest;
@@ -23,10 +24,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 public class MenuParser {
+    public static final String MENU_ICON = "MenuIcon";
     private HashMap<Long, Long> downloadedMenuHash = new HashMap<>();
     private HashMap<String, MenuEntity> menuEntityHashMap = new HashMap<String, MenuEntity>();
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, MenuParser.class);
@@ -50,9 +53,7 @@ public class MenuParser {
                 secondLevel.add(submenu);
             }
         }
-        loggerFactory.debug("saveSubmenu");
         addMenusToDB(secondLevel, MenuType.StandardMenu);
-        loggerFactory.debug("/saveSubmenu");
         for (Submenu submenu : secondLevel) {
             String[] array = submenu.mainMenuID.split("_");
             Long rootMenuID = Long.parseLong(array[0]);
@@ -85,7 +86,6 @@ public class MenuParser {
             List<Submenu> firstLevel = new ArrayList<Submenu>();
             for (Submenu submenu : submenus) {
                 if (submenu.mainMenuID != null && !submenu.mainMenuID.contains("_")) {
-                    loggerFactory.debug("add to list " + submenu.nameRU + " " + submenu.nameEN);
                     firstLevel.add(submenu);
                 }
             }
@@ -98,9 +98,9 @@ public class MenuParser {
                     parentMenuID = Long.parseLong(submenu.mainMenuID);
                     Long id = downloadedMenuHash.get(parentMenuID);
                     MenuEntity parentMenu = MenuRequest.getMenu(id);
-                    MenuEntity menu = MenuRequest.getMenu(downloadedMenuHash.get(menuID));
-                    menu.setParentMenu(parentMenu);
                     if (parentMenu != null) {
+                        MenuEntity menu = MenuRequest.getMenu(downloadedMenuHash.get(menuID));
+                        menu.setParentMenu(parentMenu);
                         MenuRequest.setParent(menu);
                     }
                 }
@@ -146,9 +146,9 @@ public class MenuParser {
         return null;
     }
 
-    private void addMenusToDB(List<Submenu> submenus, MenuType menuType) {
+    private HashMap<String, MenuEntity> addMenusToDB(List<Submenu> submenus, MenuType menuType) {
+        HashMap<String, MenuEntity> menuEntities = new HashMap<>();
         for (Submenu submenu : submenus) {
-            loggerFactory.debug("save " + submenu.nameEN + " " + submenu.nameRU);
             try {
                 Long menuID = Long.parseLong(submenu.id);
                 TextGroupEntity textGroupEntity = new TextGroupEntity(submenu.nameEN);
@@ -164,12 +164,14 @@ public class MenuParser {
                     loggerFactory.error("NULL NUMBER!!! " + submenu.nameRU + " " + submenu.orderID);
                 }
                 MenuRequest.addMenu(menuEntity);
+                menuEntities.put(submenu.nameEN, menuEntity);
                 downloadedMenuHash.put(menuID, menuEntity.getMenuID());
                 put(submenu.id, menuEntity);
             } catch (Exception e) {
                 loggerFactory.error(e);
             }
         }
+        return menuEntities;
     }
 
     private ImageEntity getMenuImage(String imageName) {
@@ -189,9 +191,8 @@ public class MenuParser {
             String hash = Md5Hash.getMd5Hash(imageFile);
             ImageEntity imageEntity = ImageRequest.getImageByHash(hash);
             if (imageEntity == null) {
-                ImageType imageType = ImageType.MenuIcon;
-                GlobalXmlParser.saveFile(imageFile, imageName, ServerConsts.imageFolder + imageType);
-                String path = ServerConsts.imageFolder + imageType.toString() + "/" + imageName;
+                FileHelper.copyFile(imageFile, imageName, ServerConsts.imageFolder + MENU_ICON);
+                String path = ServerConsts.imageFolder + MENU_ICON + "/" + imageName;
                 imageEntity = new ImageEntity(path, height, width, size, hash);
             }
             return imageEntity;
@@ -206,7 +207,19 @@ public class MenuParser {
     }
 
     private void loadHardcodedMenues() {
-        List<Submenu> menu = new ArrayList<Submenu>();
+        List<Submenu> main = new ArrayList<>();
+        Submenu aboutCity = new Submenu("-3", null, "О городе", "About city", "icon-aboutCity.png", "1", null);
+        Submenu mainPlaces = new Submenu("-2", null, "Места", "Places", "icon-places.png", "2", null);
+        Submenu events = new Submenu("-1", null, "События", "Events", "icon-events.png", "3", null);
+        main.add(aboutCity);
+        main.add(mainPlaces);
+        main.add(events);
+        HashMap<String, MenuEntity> mainMenuEntities = addMenusToDB(main, MenuType.MainScreenMenu);
+
+        MenuEntity placeMenuEntity = mainMenuEntities.get(mainPlaces.nameEN);
+
+
+        List<Submenu> menu = new ArrayList<>();
         Submenu overview = new Submenu("0", null, "Обзор", "Overview", "icon-information.png", "1", null);
         Submenu places = new Submenu("1", null, "Места", "Places", "icon-places.png", "2", null);
         Submenu tours = new Submenu("2", null, "Маршруты", "Tours", "icon-tracks.png", "3", null);
@@ -225,7 +238,11 @@ public class MenuParser {
         menu.add(shopping);
         menu.add(tours);
         menu.add(places);
-        addMenusToDB(menu, MenuType.RootMenu);
+        Collection<MenuEntity> menuEntities = addMenusToDB(menu, MenuType.RootMenu).values();
+        for (MenuEntity menuEntity : menuEntities) {
+            menuEntity.setParentMenu(placeMenuEntity);
+            MenuRequest.setParent(menuEntity);
+        }
     }
 
     public HashMap<String, MenuEntity> getMenuEntityHashMap() {

@@ -11,9 +11,7 @@ import model.phone.responseentity.MobileResponseEntity;
 
 import java.util.ArrayList;
 
-/**
- * Created by Илья on 15.04.14.
- */
+
 public class GetAllMenusHandler implements MobileHandler {
     @Override
     public MobileResponseEntity handleRequest(MobileRequest mobileRequest) throws IllegalTypeException {

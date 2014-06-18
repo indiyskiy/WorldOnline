@@ -40,7 +40,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(CardTagEntity.class)
                 .addAnnotatedClass(CardImageEntity.class)
                 .addAnnotatedClass(CardRootEntity.class)
-                .addAnnotatedClass(RootElementEntity.class)
+                .addAnnotatedClass(RouteElementEntity.class)
                 .addAnnotatedClass(CardCoordinateEntity.class)
                 .addAnnotatedClass(ImageEntity.class)
                 .addAnnotatedClass(CardToCardLinkEntity.class)
@@ -51,7 +51,8 @@ public class HibernateUtil {
                 .addAnnotatedClass(MenuCardLinkEntity.class)
                 .addAnnotatedClass(CardChangeEntity.class)
                 .addAnnotatedClass(WeatherEntity.class)
-                .addAnnotatedClass(UserCardEntity.class);
+                .addAnnotatedClass(UserCardEntity.class)
+                .addAnnotatedClass(CardParameterTypeEntity.class);
         ac.configure();
         return ac;
     }

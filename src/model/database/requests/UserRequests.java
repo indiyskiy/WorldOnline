@@ -10,6 +10,7 @@ import model.database.worldonlinedb.UserEntity;
 import model.database.worldonlinedb.UserHardwareEntity;
 import model.database.worldonlinedb.UserPersonalDataEntity;
 import model.logger.LoggerFactory;
+import model.phone.responseentity.RestoreUserResponse;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
@@ -266,5 +267,57 @@ public class UserRequests {
             dbConnection.closeConnections(ps, rs);
         }
         return false;
+    }
+
+    public static RestoreUserResponse getUserByDeviceID(String deviceID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language(value = "MySQL") String sql = "SELECT User.UserID FROM User " +
+                    "JOIN UserHardware ON (User.UserHardwareID=UserHardware.UserHardwareID) " +
+                    "WHERE UserHardware.DeviceUniqueKey = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, deviceID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                RestoreUserResponse restoreUserResponse = new RestoreUserResponse();
+                restoreUserResponse.setUserID(rs.getLong("User.UserID"));
+                return restoreUserResponse;
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return null;
+    }
+
+    public static void deleteOldUserInfo(long userID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language(value = "MySQL") String sql = "DELETE FROM UserCard " +
+                    "WHERE UserCard.UserCardID IN ( " +
+                    "SELECT " +
+                    "ids " +
+                    "FROM ( " +
+                    "SELECT " +
+                    "temp.UserCardID AS ids " +
+                    "FROM UserCard AS temp " +
+                    "JOIN UserContent ON (temp.UserContentID = UserContent.UserContentID) " +
+                    "JOIN User ON (User.UserContentID = UserContent.UserContentID) " +
+                    "WHERE User.userID = ? " +
+                    ")AS additionalTable)";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, userID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
     }
 }

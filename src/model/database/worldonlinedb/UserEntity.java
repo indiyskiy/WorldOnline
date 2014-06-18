@@ -12,7 +12,7 @@ import javax.persistence.*;
 @javax.persistence.Table(name = "User", schema = "", catalog = "worldonline")
 @Entity
 public class UserEntity {
-    @javax.persistence.Column(name = "userID")
+    @javax.persistence.Column(name = "UserID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userID;

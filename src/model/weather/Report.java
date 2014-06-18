@@ -1,6 +1,5 @@
-package model.phone.weather;
+package model.weather;
 
-import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 

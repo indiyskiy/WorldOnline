@@ -9,6 +9,7 @@ public class MenuCompleteInformation {
     private Long parentMenuID;
     private String text;
     private Integer number;
+    private Integer cardCounter;
 
     public void setMenuID(Long menuID) {
         this.menuID = menuID;
@@ -49,5 +50,13 @@ public class MenuCompleteInformation {
 
     public Integer getNumber() {
         return number;
+    }
+
+    public void setCardCounter(Integer cardCounter) {
+        this.cardCounter = cardCounter;
+    }
+
+    public Integer getCardCounter() {
+        return cardCounter;
     }
 }

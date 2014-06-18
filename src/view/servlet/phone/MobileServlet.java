@@ -10,6 +10,7 @@ import model.phone.requesthandler.MobileHandler;
 import model.phone.responseentity.MobileResponseEntity;
 import view.servlet.ServletHelper;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +32,7 @@ public abstract class MobileServlet extends HttpServlet {
             MobileResponseEntity mobileResponseEntity = mobileHandler.handleRequest(mobileRequest);
             String responseString = mobileParser.getResponse(mobileResponseEntity);
             ServletHelper.sendJson(response, responseString);
-        } catch (IllegalTypeException | ParseRequestException | IOException e) {
+        } catch (IllegalTypeException | ParseRequestException | IOException | ServletException e) {
             ServletHelper.sendMobileError(loggerFactory, e, response);
         }
     }

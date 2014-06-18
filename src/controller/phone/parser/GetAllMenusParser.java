@@ -14,9 +14,6 @@ import model.phone.responseentity.MobileResponseEntity;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
-/**
- * Created by Илья on 14.04.14.
- */
 public class GetAllMenusParser implements MobileParser {
 
     public GetAllMenusRequest parse(HttpServletRequest request) throws ParseRequestException {
@@ -49,8 +46,9 @@ public class GetAllMenusParser implements MobileParser {
 
     public String getResponse(GetAllMenusResponse mobileResponseEntity) throws IllegalTypeException {
         JsonObject responseObj = new JsonObject();
-        responseObj.addProperty("status", mobileResponseEntity.getStatus().toString());
+        responseObj.addProperty("status", mobileResponseEntity.getStatus().getValue());
         ArrayList<MenuCompleteInformation> informationArrayList = mobileResponseEntity.getMenusCompleteInformation();
+        responseObj.addProperty("menuCounter", informationArrayList.size());
         JsonArray menusArray = new JsonArray();
         for (MenuCompleteInformation menuCompleteInformation : informationArrayList) {
             JsonObject menuObj = new JsonObject();
@@ -59,6 +57,7 @@ public class GetAllMenusParser implements MobileParser {
             menuObj.addProperty("number", menuCompleteInformation.getNumber());
             menuObj.addProperty("parentMenuID", menuCompleteInformation.getParentMenuID());
             menuObj.addProperty("text", menuCompleteInformation.getText());
+            menuObj.addProperty("cardCounter", menuCompleteInformation.getCardCounter());
             menusArray.add(menuObj);
         }
         responseObj.add("menus", menusArray);

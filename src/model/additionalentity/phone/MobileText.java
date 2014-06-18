@@ -32,7 +32,7 @@ public class MobileText {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("textID", textGroupID);
         jsonObject.addProperty("text", text);
-        jsonObject.addProperty("textType", textType.toString());
+        jsonObject.addProperty("textType", textType.getValue());
         return jsonObject;
     }
 

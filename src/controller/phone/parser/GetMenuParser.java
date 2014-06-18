@@ -51,7 +51,7 @@ public class GetMenuParser implements MobileParser {
 
     public String getResponse(GetMenuResponse getMenuResponse) {
         JsonObject responseObj = new JsonObject();
-        responseObj.addProperty("status", getMenuResponse.getStatus().toString());
+        responseObj.addProperty("status", getMenuResponse.getStatus().getValue());
         MenuCompleteInformation menuCompleteInformation = getMenuResponse.getMenuCompleteInformation();
         JsonObject menuObject = new JsonObject();
         menuObject.addProperty("menuID", menuCompleteInformation.getMenuID());

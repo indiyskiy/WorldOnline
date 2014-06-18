@@ -1,6 +1,6 @@
 package model.database.worldonlinedb;
 
-import model.constants.databaseenumeration.ImageType;
+import model.constants.databaseenumeration.CardImageType;
 
 import javax.persistence.*;
 
@@ -124,10 +124,10 @@ public class CardImageEntity {
     public CardImageEntity() {
     }
 
-    public CardImageEntity(CardEntity card, ImageEntity image, ImageType cardImageType) {
+    public CardImageEntity(CardEntity card, ImageEntity image, CardImageType cardCardImageType) {
         this.card = card;
         this.image = image;
-        this.cardImageType = cardImageType.getValue();
-        this.cardImageName = card.getCardName() + "-" + cardImageType;
+        this.cardImageType = cardCardImageType.getValue();
+        this.cardImageName = card.getCardName() + "-" + cardCardImageType;
     }
 }

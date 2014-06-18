@@ -45,9 +45,9 @@ public class WeatherParser implements MobileParser {
     public String getResponse(WeatherResponse weatherResponse) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("temperature", weatherResponse.getTemperature());
-        jsonObject.addProperty("cloudiness", weatherResponse.getCloudiness().toString());
-        jsonObject.addProperty("precipitation", weatherResponse.getPrecipitation().toString());
-        jsonObject.addProperty("dayTime", weatherResponse.getDayTime().toString());
+        jsonObject.addProperty("cloudiness", weatherResponse.getCloudiness().getValue());
+        jsonObject.addProperty("precipitation", weatherResponse.getPrecipitation().getValue());
+        jsonObject.addProperty("dayTime", weatherResponse.getDayTime().getValue());
         return jsonObject.toString();
     }
 }

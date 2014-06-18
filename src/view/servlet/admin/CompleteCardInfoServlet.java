@@ -31,7 +31,7 @@ public class CompleteCardInfoServlet extends ProtectedServlet {
             request.setAttribute("textTypes", TextType.values());
             request.setAttribute("tagTypes", TagType.values());
             request.setAttribute("cardToCardLinkTypes", CardToCardLinkType.values());
-            request.setAttribute("imageTypes", ImageType.values());
+            request.setAttribute("imageTypes", CardImageType.values());
             String cardIDString = request.getParameter("CardID");
             if (cardIDString != null) {
                 int cardID = Integer.parseInt(cardIDString);

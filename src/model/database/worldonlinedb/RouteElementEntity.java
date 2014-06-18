@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @javax.persistence.Table(name = "RootElement", schema = "", catalog = "worldonline")
 @Entity
-public class RootElementEntity {
+public class RouteElementEntity {
     @javax.persistence.Column(name = "RootElementID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -67,7 +67,7 @@ public class RootElementEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RootElementEntity that = (RootElementEntity) o;
+        RouteElementEntity that = (RouteElementEntity) o;
 
         if (rootElementID != null ? !rootElementID.equals(that.rootElementID) : that.rootElementID != null)
             return false;

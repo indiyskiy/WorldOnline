@@ -8,6 +8,7 @@ import model.additionalentity.SimpleMenu;
 import model.additionalentity.admin.CompleteMenuInfo;
 import model.additionalentity.phone.MenuCompleteInformation;
 import model.constants.Component;
+import model.constants.databaseenumeration.CardState;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
@@ -26,15 +27,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 20.01.14
- * Time: 13:24
- * To change this template use File | Settings | File Templates.
- */
 public class MenuRequest {
     private static LoggerFactory logger = new LoggerFactory(Component.Database, MenuRequest.class);
+
+    public static void addMenuSafe(MenuEntity menuEntity, String name) {
+        MenuEntity tmp = getMenuByName(name);
+        if (tmp == null) {
+            addMenu(menuEntity);
+        } else {
+            menuEntity.setAll(tmp);
+        }
+    }
 
     public static void addMenu(MenuEntity menuEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
@@ -51,22 +54,6 @@ public class MenuRequest {
         }
     }
 
-    public static void addMenu(ArrayList<MenuEntity> menuEntities) {
-        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-        try {
-            session.beginTransaction();
-            for (MenuEntity menuEntity : menuEntities) {
-                session.save(menuEntity);
-            }
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            logger.error(e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-    }
 
     public static void addMenuCardLink(MenuCardLinkEntity menuCardLinkEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
@@ -258,7 +245,7 @@ public class MenuRequest {
 
     public static CompleteMenuInfo getCompleteMenuInfo(Long menuId) {
         CompleteMenuInfo completeMenuInfo = null;
-        MenuInfo menuInfo = null;
+//        MenuInfo menuInfo = null;
         DatabaseConnection dbConnection = new DatabaseConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -405,7 +392,7 @@ public class MenuRequest {
                     "Menu.Number," +
                     "Text.Text " +
                     "FROM Menu " +
-                    "JOIN User ON(User.userID=?) " +
+                    "JOIN User ON(User.UserID=?) " +
                     "JOIN UserPersonalData ON(User.UserPersonalDataID=UserPersonalData.UserPersonalDataID) " +
                     "JOIN TextGroup ON (TextGroup.TextGroupID=Menu.NameTextGroupID) " +
                     "JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID AND Text.LanguageID=UserPersonalData.UserLanguage) " +
@@ -431,11 +418,13 @@ public class MenuRequest {
         Long parentMenuID = rs.getLong("Menu.ParentMenuID");
         String text = rs.getString("Text.Text");
         Integer number = rs.getInt("Menu.Number");
+        Integer cardCounter = rs.getInt("CardCounter");
         menuCompleteInformation.setMenuID(menuID);
         menuCompleteInformation.setIconImageID(iconImageID);
         menuCompleteInformation.setParentMenuID(parentMenuID);
         menuCompleteInformation.setText(text);
         menuCompleteInformation.setNumber(number);
+        menuCompleteInformation.setCardCounter(cardCounter);
     }
 
     public static ArrayList<MenuCompleteInformation> getAllMenusCompleteInformation(GetAllMenusRequest getAllMenusRequest) {
@@ -450,13 +439,19 @@ public class MenuRequest {
                     "Menu.IconImageID, " +
                     "Menu.MenuID, " +
                     "Menu.ParentMenuID, " +
-                    "Menu.Number," +
-                    "Text.Text " +
+                    "Menu.Number, " +
+                    "Text.Text, " +
+                    "Count(MenuCardLink.MenuCardLinkID) AS CardCounter " +
                     "FROM Menu " +
-                    "JOIN User ON(User.userID=?) " +
-                    "JOIN UserPersonalData ON(User.UserPersonalDataID=UserPersonalData.UserPersonalDataID) " +
-                    "JOIN TextGroup ON (TextGroup.TextGroupID=Menu.NameTextGroupID) " +
-                    "JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID AND Text.LanguageID=UserPersonalData.UserLanguage)";
+                    "JOIN User ON (User.UserID = ?) " +
+                    "JOIN UserPersonalData ON (User.UserPersonalDataID = UserPersonalData.UserPersonalDataID) " +
+                    "JOIN TextGroup ON (TextGroup.TextGroupID = Menu.NameTextGroupID) " +
+                    "JOIN Text ON (TextGroup.TextGroupID = Text.TextGroupID AND Text.LanguageID = UserPersonalData.UserLanguage) " +
+                    "LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.MenuID = Menu.MenuID) " +
+                    "LEFT OUTER JOIN Card " +
+                    "ON (Card.CardID = MenuCardLink.CardID) " +
+                    "WHERE (Card.CardState IN (" + CardState.Active.getValue() + ") OR Card.CardState IS NULL) " +
+                    "GROUP BY Menu.MenuID;";
 
             ps = connection.prepareStatement(sql);
             ps.setLong(1, getAllMenusRequest.getUserID());

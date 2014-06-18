@@ -1,17 +1,9 @@
 package model.database.worldonlinedb;
 
-import model.constants.databaseenumeration.CardParameterType;
 import model.constants.databaseenumeration.DataType;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 29.10.13
- * Time: 16:21
- * To change this template use File | Settings | File Templates.
- */
 @javax.persistence.Table(name = "CardParameter", schema = "", catalog = "worldonline")
 @Entity
 public class CardParameterEntity {
@@ -24,21 +16,17 @@ public class CardParameterEntity {
     @JoinColumn(name = "CardID")
     private CardEntity card;
 
-    @javax.persistence.Column(name = "CardParameterType")
-    @Basic
-    private Integer cardParameterType;
-
     @javax.persistence.Column(name = "CardParameterValue", columnDefinition = "TEXT")
     @Basic
     private String cardParameterValue;
 
-    @javax.persistence.Column(name = "CardParameterDataType")
-    @Basic
-    private Integer cardParameterDataType;
-
     @javax.persistence.Column(name = "CardParameterName")
     @Basic
     private String cardParameterName;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "CardParameterTypeID")
+    private CardParameterTypeEntity cardParameterType;
 
     public Long getCardParameterID() {
         return cardParameterID;
@@ -56,14 +44,6 @@ public class CardParameterEntity {
         this.card = card;
     }
 
-    public Integer getCardParameterType() {
-        return cardParameterType;
-    }
-
-    public void setCardParameterType(Integer cardParameterType) {
-        this.cardParameterType = cardParameterType;
-    }
-
     public String getCardParameterValue() {
         return cardParameterValue;
     }
@@ -72,20 +52,20 @@ public class CardParameterEntity {
         this.cardParameterValue = cardParameterValue;
     }
 
-    public Integer getCardParameterDataType() {
-        return cardParameterDataType;
-    }
-
-    public void setCardParameterDataType(Integer cardParameterDataType) {
-        this.cardParameterDataType = cardParameterDataType;
-    }
-
     public String getCardParameterName() {
         return cardParameterName;
     }
 
     public void setCardParameterName(String cardParameterName) {
         this.cardParameterName = cardParameterName;
+    }
+
+    public CardParameterTypeEntity getCardParameterType() {
+        return cardParameterType;
+    }
+
+    public void setCardParameterType(CardParameterTypeEntity cardParameterType) {
+        this.cardParameterType = cardParameterType;
     }
 
     @Override
@@ -103,7 +83,7 @@ public class CardParameterEntity {
             return false;
         if (cardParameterValue != null ? !cardParameterValue.equals(that.cardParameterValue) : that.cardParameterValue != null)
             return false;
-        if (cardParameterDataType != null ? !cardParameterDataType.equals(that.cardParameterDataType) : that.cardParameterDataType != null)
+        if (cardParameterType != null ? !cardParameterType.equals(that.cardParameterType) : that.cardParameterType != null)
             return false;
         if (cardParameterName != null ? !cardParameterName.equals(that.cardParameterName) : that.cardParameterName != null)
             return false;
@@ -116,7 +96,7 @@ public class CardParameterEntity {
         result = 31 * result + (card != null ? card.hashCode() : 0);
         result = 31 * result + (cardParameterType != null ? cardParameterType.hashCode() : 0);
         result = 31 * result + (cardParameterValue != null ? cardParameterValue.hashCode() : 0);
-        result = 31 * result + (cardParameterDataType != null ? cardParameterDataType.hashCode() : 0);
+        result = 31 * result + (cardParameterType != null ? cardParameterType.hashCode() : 0);
         result = 31 * result + (cardParameterName != null ? cardParameterName.hashCode() : 0);
         return result;
     }
@@ -124,11 +104,10 @@ public class CardParameterEntity {
     public CardParameterEntity() {
     }
 
-    public CardParameterEntity(CardEntity card, CardParameterType cardParameterType, DataType cardParameterDataType, String cardParameterValue) {
+    public CardParameterEntity(CardEntity card, CardParameterTypeEntity cardParameterType, String cardParameterValue) {
         this.card = card;
-        this.cardParameterType = cardParameterType.getValue();
         this.cardParameterValue = cardParameterValue;
-        this.cardParameterDataType = cardParameterDataType.getValue();
+        this.cardParameterType = cardParameterType;
         this.cardParameterName = card.getCardName() + "-" + cardParameterType;
     }
 }

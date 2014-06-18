@@ -3,9 +3,8 @@ package model.constants.databaseenumeration;
 public enum CardState {
     Unknown(0),
     Active(1),
-    Hidden(2),
-    NotActive(3),
-    Deleted(4);
+    NotActive(2),
+    Deleted(3);
 
     private final int value;
 

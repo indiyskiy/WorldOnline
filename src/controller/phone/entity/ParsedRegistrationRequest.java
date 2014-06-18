@@ -3,13 +3,6 @@ package controller.phone.entity;
 import model.constants.databaseenumeration.LanguageType;
 import model.constants.databaseenumeration.MobilePlatform;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 28.02.14
- * Time: 15:16
- * To change this template use File | Settings | File Templates.
- */
 public class ParsedRegistrationRequest extends MobileRequest {
     private String model;
     private String deviceID;
@@ -26,6 +19,10 @@ public class ParsedRegistrationRequest extends MobileRequest {
     }
 
     public void setDeviceID(String deviceID) {
+        this.deviceID = deviceID;
+    }
+
+    public void setUserID(String deviceID) {
         this.deviceID = deviceID;
     }
 

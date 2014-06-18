@@ -1,5 +1,6 @@
 package view.servlet.admin;
 
+import model.constants.AdminRule;
 import model.constants.Component;
 import model.constants.databaseenumeration.LanguageType;
 import model.constants.databaseenumeration.MobilePlatform;
@@ -18,7 +19,7 @@ import java.io.IOException;
 /**
  * Created by Илья on 18.03.14.
  */
-public class CompleteUserInfoServlet extends HttpServlet {
+public class CompleteUserInfoServlet extends ProtectedServlet {
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, CompleteUserInfoServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,6 +53,10 @@ public class CompleteUserInfoServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected AdminRule setAdminRule() {
+        return AdminRule.Moderator;
+    }
 }
 
 

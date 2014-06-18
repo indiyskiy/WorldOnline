@@ -101,4 +101,13 @@ public class MenuEntity {
             this.menuType = MenuType.RootMenu.getValue();
         }
     }
+
+    public void setAll(MenuEntity tmp) {
+        this.menuID = tmp.menuID;
+        this.iconImage = tmp.iconImage;
+        this.menuType = tmp.menuType;
+        this.nameTextGroup = tmp.nameTextGroup;
+        this.number = tmp.number;
+        this.parentMenu = tmp.parentMenu;
+    }
 }

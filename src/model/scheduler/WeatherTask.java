@@ -1,6 +1,6 @@
 package model.scheduler;
 
-import model.phone.weather.GismeteoWeatherParser;
+import model.weather.GismeteoWeatherParser;
 
 /**
  * Created by Илья on 14.05.14.

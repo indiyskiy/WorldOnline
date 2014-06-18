@@ -5,9 +5,6 @@ import model.constants.Status;
 
 import java.util.LinkedList;
 
-/**
- * Created by Илья on 18.04.14.
- */
 public class GetAllCardsResponse extends MobileResponseEntity {
     private LinkedList<MobileCardInfo> cardList;
 

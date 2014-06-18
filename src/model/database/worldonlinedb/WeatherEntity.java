@@ -1,8 +1,7 @@
 package model.database.worldonlinedb;
 
 import helper.TimeManager;
-import model.phone.weather.*;
-import org.simpleframework.xml.Attribute;
+import model.weather.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

@@ -3,12 +3,15 @@ package model.database.requests;
 import model.additionalentity.CompleteCardImageInfo;
 import model.additionalentity.CompleteTextGroupInfo;
 import model.constants.Component;
+import model.constants.databaseenumeration.CardImageType;
+import model.constants.databaseenumeration.CardState;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardImageEntity;
 import model.database.worldonlinedb.ImageEntity;
 import model.database.worldonlinedb.TextGroupEntity;
 import model.logger.LoggerFactory;
+import model.phone.responseentity.MobileViewImage;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.intellij.lang.annotations.Language;
@@ -20,6 +23,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -315,5 +319,49 @@ public class ImageRequest {
 
     private static File getFile(String imageFilePath) {
         return new File(imageFilePath);
+    }
+
+    public static LinkedList<MobileViewImage> getViewCardImages() {
+        LinkedList<MobileViewImage> mobileViewImages = new LinkedList<>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT Card.CardID, Image.ImageID " +
+                    "FROM Image " +
+                    "JOIN CardImage ON (Image.ImageID=CardImage.ImageID) " +
+                    "JOIN Card ON (CardImage.CardID = Card.CardID) " +
+                    "WHERE Card.CardState IN (" +
+                    CardState.Active.getValue() +
+                    ") AND CardImage.CardImageType=" + CardImageType.ViewImage.getValue();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                MobileViewImage mobileViewImage = new MobileViewImage();
+                mobileViewImage.setCardID(rs.getLong("Card.CardID"));
+                mobileViewImage.setImageID(rs.getLong("Image.ImageID"));
+                mobileViewImages.add(mobileViewImage);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return mobileViewImages;
+    }
+
+    public static ImageEntity getImageByResultSet(ResultSet rs, String cardParameterType) throws SQLException {
+        Long imageID = rs.getLong(cardParameterType + ".ImageID");
+        if (imageID != 0 && !rs.wasNull()) {
+            ImageEntity imageEntity = new ImageEntity();
+            imageEntity.setImageID(imageID);
+            imageEntity.setImageFilePath(rs.getString(cardParameterType + ".ImageFilePath"));
+            imageEntity.setImageFileSize(rs.getLong(cardParameterType + ".ImageFileSize"));
+            imageEntity.setImageHeight(rs.getInt(cardParameterType + ".ImageHeight"));
+            imageEntity.setImageMD5Hash(rs.getString(cardParameterType + ".ImageMD5Hash"));
+            imageEntity.setImageWidth(rs.getInt(cardParameterType + ".ImageWidth"));
+        }
+        return null;
     }
 }
