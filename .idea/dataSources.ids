@@ -96,13 +96,25 @@
     </table>
     <table name="CardParameter" schema="" catalog="worldonline" type="TABLE">
       <column name="CardParameterID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="CardParameterDataType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="CardParameterName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="CardParameterType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="CardParameterValue" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
       <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="CardParameterTypeID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="CardParameterID"/>
+      <foreign-key name="FK_qvqmg3u9a6ltpy5kl6fis7llo" columns="CardParameterTypeID" ref-table="CardParameterType" ref-schema="" ref-catalog="worldonline" ref-columns="CardParameterTypeID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_ic9fnltx16lm8nm7cbqnj6i14" columns="CardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="CardParameterType" schema="" catalog="worldonline" type="TABLE">
+      <column name="CardParameterTypeID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="Block" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="DataType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="Position" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="CardParameterTypeName" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="ImageID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="CardParameterTypeID"/>
+      <foreign-key name="FK_nt03r589j5eyhppfacw2lb103" columns="ImageID" ref-table="Image" ref-schema="" ref-catalog="worldonline" ref-columns="ImageID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_ftefs10dpu32c10qxf37n0eua" columns="CardParameterTypeName" ref-table="TextGroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_qvqmg3u9a6ltpy5kl6fis7llo" table="CardParameter" schema="" catalog="worldonline" columns="CardParameterTypeID"/>
     </table>
     <table name="CardRoot" schema="" catalog="worldonline" type="TABLE">
       <column name="CardRootID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -149,6 +161,7 @@
       <column name="ImageWidth" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="ImageID"/>
       <exported-key name="FK_8fm246c7jttx9wgymof08lmen" table="CardImage" schema="" catalog="worldonline" columns="ImageID"/>
+      <exported-key name="FK_nt03r589j5eyhppfacw2lb103" table="CardParameterType" schema="" catalog="worldonline" columns="ImageID"/>
       <exported-key name="FK_3w9m88r63m8v2x7ox85egtpxq" table="Menu" schema="" catalog="worldonline" columns="IconImageID"/>
     </table>
     <table name="Menu" schema="" catalog="worldonline" type="TABLE">
@@ -213,6 +226,7 @@
       <column name="TextGroupName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="TextGroupID"/>
       <exported-key name="FK_k506468098rw8ld5q0tlbv7ic" table="CardImage" schema="" catalog="worldonline" columns="ImageDescriptionTextGroupID"/>
+      <exported-key name="FK_ftefs10dpu32c10qxf37n0eua" table="CardParameterType" schema="" catalog="worldonline" columns="CardParameterTypeName"/>
       <exported-key name="FK_eh8iq6ak18r3cs4k9yiu1ctc2" table="CardRoot" schema="" catalog="worldonline" columns="RootDescriptionTextGroupID"/>
       <exported-key name="FK_tgq8tlsqbv1wc2i3kod4h2cxx" table="Menu" schema="" catalog="worldonline" columns="NameTextGroupID"/>
       <exported-key name="FK_2sksgsk24c5xcuo9ma2qwv5pc" table="Tag" schema="" catalog="worldonline" columns="TagTextGroupID"/>
@@ -220,11 +234,11 @@
       <exported-key name="FK_datml1sh78o7k342o0e0gn1uk" table="TextCard" schema="" catalog="worldonline" columns="TextGroupID"/>
     </table>
     <table name="User" schema="" catalog="worldonline" type="TABLE">
-      <column name="userID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="UserID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="UserContentID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="UserHardwareID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="UserPersonalDataID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="userID"/>
+      <primary-key name="PRIMARY" columns="UserID"/>
       <foreign-key name="FK_hw73w84hod076vg7ua3ksbq9v" columns="UserPersonalDataID" ref-table="UserPersonalData" ref-schema="" ref-catalog="worldonline" ref-columns="UserPersonalDataID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_brhus6h5p1pcopgtusn5d2uh5" columns="UserHardwareID" ref-table="UserHardware" ref-schema="" ref-catalog="worldonline" ref-columns="UserHardwareID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_ni3wk87vu1n5d2jfhblui5veo" columns="UserContentID" ref-table="UserContent" ref-schema="" ref-catalog="worldonline" ref-columns="UserContentID" update-rule="3" delete-rule="3" deferrability="2"/>
@@ -738,7 +752,7 @@
       <column name="QUERY" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="false" jdbcType="-1"/>
       <column name="TRACE" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="false" jdbcType="-1"/>
       <column name="MISSING_BYTES_BEYOND_MAX_MEM_SIZE" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA=="/>
-      <column name="INSUFFICIENT_PRIVILEGES" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="INSUFFICIENT_PRIVILEGES" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6" def="MA=="/>
     </table>
     <table name="PARAMETERS" schema="" catalog="information_schema" type="SYSTEM TABLE">
       <column name="SPECIFIC_CATALOG" sqlType="VARCHAR" length="512" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
@@ -1069,7 +1083,7 @@
     </table>
     <table name="func" schema="" catalog="mysql" type="TABLE">
       <column name="name" sqlType="CHAR" length="64" precision="0" nullable="false" jdbcType="1" def="Jyc="/>
-      <column name="ret" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="ret" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6" def="MA=="/>
       <column name="dl" sqlType="CHAR" length="128" precision="0" nullable="false" jdbcType="1" def="Jyc="/>
       <column name="type" sqlType="ENUM" length="9" precision="0" nullable="false" jdbcType="1"/>
       <primary-key name="PRIMARY" columns="name"/>
@@ -1189,7 +1203,7 @@
       <column name="User" sqlType="CHAR" length="16" precision="0" nullable="false" jdbcType="1" def="Jyc="/>
       <column name="Proxied_host" sqlType="CHAR" length="60" precision="0" nullable="false" jdbcType="1" def="Jyc="/>
       <column name="Proxied_user" sqlType="CHAR" length="16" precision="0" nullable="false" jdbcType="1" def="Jyc="/>
-      <column name="With_grant" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="With_grant" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6" def="MA=="/>
       <column name="Grantor" sqlType="CHAR" length="77" precision="0" nullable="false" jdbcType="1" def="Jyc="/>
       <column name="Timestamp" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
       <primary-key name="PRIMARY" columns="Host,User,Proxied_host,Proxied_user"/>
@@ -1216,13 +1230,13 @@
       <column name="User_password" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="VGhlIHBhc3N3b3JkIHVzZWQgdG8gY29ubmVjdCB0byB0aGUgbWFzdGVyLg=="/>
       <column name="Port" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" remarks="VGhlIG5ldHdvcmsgcG9ydCB1c2VkIHRvIGNvbm5lY3QgdG8gdGhlIG1hc3Rlci4="/>
       <column name="Connect_retry" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" remarks="VGhlIHBlcmlvZCAoaW4gc2Vjb25kcykgdGhhdCB0aGUgc2xhdmUgd2lsbCB3YWl0IGJlZm9yZSB0cnlpbmcgdG8gcmVjb25uZWN0IHRvIHRoZSBtYXN0ZXIu"/>
-      <column name="Enabled_ssl" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" remarks="SW5kaWNhdGVzIHdoZXRoZXIgdGhlIHNlcnZlciBzdXBwb3J0cyBTU0wgY29ubmVjdGlvbnMu"/>
+      <column name="Enabled_ssl" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6" remarks="SW5kaWNhdGVzIHdoZXRoZXIgdGhlIHNlcnZlciBzdXBwb3J0cyBTU0wgY29ubmVjdGlvbnMu"/>
       <column name="Ssl_ca" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="VGhlIGZpbGUgdXNlZCBmb3IgdGhlIENlcnRpZmljYXRlIEF1dGhvcml0eSAoQ0EpIGNlcnRpZmljYXRlLg=="/>
       <column name="Ssl_capath" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="VGhlIHBhdGggdG8gdGhlIENlcnRpZmljYXRlIEF1dGhvcml0eSAoQ0EpIGNlcnRpZmljYXRlcy4="/>
       <column name="Ssl_cert" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="VGhlIG5hbWUgb2YgdGhlIFNTTCBjZXJ0aWZpY2F0ZSBmaWxlLg=="/>
       <column name="Ssl_cipher" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="VGhlIG5hbWUgb2YgdGhlIGNpcGhlciBpbiB1c2UgZm9yIHRoZSBTU0wgY29ubmVjdGlvbi4="/>
       <column name="Ssl_key" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="VGhlIG5hbWUgb2YgdGhlIFNTTCBrZXkgZmlsZS4="/>
-      <column name="Ssl_verify_server_cert" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" remarks="V2hldGhlciB0byB2ZXJpZnkgdGhlIHNlcnZlciBjZXJ0aWZpY2F0ZS4="/>
+      <column name="Ssl_verify_server_cert" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6" remarks="V2hldGhlciB0byB2ZXJpZnkgdGhlIHNlcnZlciBjZXJ0aWZpY2F0ZS4="/>
       <column name="Heartbeat" sqlType="FLOAT" length="12" precision="0" nullable="false" jdbcType="7"/>
       <column name="Bind" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="RGlzcGxheXMgd2hpY2ggaW50ZXJmYWNlIGlzIGVtcGxveWVkIHdoZW4gY29ubmVjdGluZyB0byB0aGUgTXlTUUwgc2VydmVy"/>
       <column name="Ignored_server_ids" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="VGhlIG51bWJlciBvZiBzZXJ2ZXIgSURzIHRvIGJlIGlnbm9yZWQsIGZvbGxvd2VkIGJ5IHRoZSBhY3R1YWwgc2VydmVyIElEcw=="/>
@@ -1230,7 +1244,7 @@
       <column name="Retry_count" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="TnVtYmVyIG9mIHJlY29ubmVjdCBhdHRlbXB0cywgdG8gdGhlIG1hc3RlciwgYmVmb3JlIGdpdmluZyB1cC4="/>
       <column name="Ssl_crl" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="VGhlIGZpbGUgdXNlZCBmb3IgdGhlIENlcnRpZmljYXRlIFJldm9jYXRpb24gTGlzdCAoQ1JMKQ=="/>
       <column name="Ssl_crlpath" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="VGhlIHBhdGggdXNlZCBmb3IgQ2VydGlmaWNhdGUgUmV2b2NhdGlvbiBMaXN0IChDUkwpIGZpbGVz"/>
-      <column name="Enabled_auto_position" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" remarks="SW5kaWNhdGVzIHdoZXRoZXIgR1RJRHMgd2lsbCBiZSB1c2VkIHRvIHJldHJpZXZlIGV2ZW50cyBmcm9tIHRoZSBtYXN0ZXIu"/>
+      <column name="Enabled_auto_position" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6" remarks="SW5kaWNhdGVzIHdoZXRoZXIgR1RJRHMgd2lsbCBiZSB1c2VkIHRvIHJldHJpZXZlIGV2ZW50cyBmcm9tIHRoZSBtYXN0ZXIu"/>
       <primary-key name="PRIMARY" columns="Host,Port"/>
     </table>
     <table name="slave_relay_log_info" schema="" catalog="mysql" type="TABLE">
@@ -2321,7 +2335,7 @@
       <column name="last_name" sqlType="VARCHAR" length="45" precision="0" nullable="false" jdbcType="12"/>
       <column name="email" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
       <column name="address_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5"/>
-      <column name="active" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MQ=="/>
+      <column name="active" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6" def="MQ=="/>
       <column name="create_date" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
       <column name="last_update" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
       <primary-key name="PRIMARY" columns="customer_id"/>
@@ -2482,7 +2496,7 @@
       <column name="picture" sqlType="BLOB" length="65535" precision="0" nullable="true" jdbcType="-4"/>
       <column name="email" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
       <column name="store_id" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="false" jdbcType="-6"/>
-      <column name="active" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MQ=="/>
+      <column name="active" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6" def="MQ=="/>
       <column name="username" sqlType="VARCHAR" length="16" precision="0" nullable="false" jdbcType="12"/>
       <column name="password" sqlType="VARCHAR" length="40" precision="0" nullable="true" jdbcType="12"/>
       <column name="last_update" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
@@ -2562,7 +2576,7 @@
       <column name="AdminUserID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="AdminUserName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <column name="AdminUserPassword" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="Confirmed" sqlType="BIT" length="0" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="Confirmed" sqlType="TINYINT" length="3" precision="0" nullable="true" jdbcType="-6"/>
       <column name="AdminRoleID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="AdminUserAdditionalInfoID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="AdminUserID"/>
@@ -2844,7 +2858,7 @@
     <procedure name="inventory_in_stock" schema="" catalog="sakila" type="2">
       <prototype>
         <parameter name="p_inventory_id" sqlType="INT" length="10" precision="10" nullable="true" jdbcType="4" type="1" index="1"/>
-        <parameter name="" sqlType="BIT" length="0" precision="0" nullable="true" jdbcType="-7" type="5" index="0"/>
+        <parameter name="" sqlType="TINYINT" length="3" precision="3" nullable="true" jdbcType="-6" type="5" index="0"/>
       </prototype>
     </procedure>
     <procedure name="rewards_report" schema="" catalog="sakila" type="1" remarks="UHJvdmlkZXMgYSBjdXN0b21pemFibGUgcmVwb3J0IG9uIGJlc3QgY3VzdG9tZXJz">
