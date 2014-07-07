@@ -15,5 +15,5 @@ import java.util.List;
 @Root(name = "data")
 public class RouteRoute {
     @ElementList(inline = true, name = "Route")
-    List<Route> routes;
+    public List<Route> routes;
 }

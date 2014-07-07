@@ -7,13 +7,6 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 02.12.13
- * Time: 14:37
- * To change this template use File | Settings | File Templates.
- */
 @Root(name = "Dish")
 public class Dish {
     @Attribute(name = "id")
@@ -23,36 +16,13 @@ public class Dish {
     @Element(name = "NameEn", required = false)
     public String nameEn;
     @ElementList(inline = true, name = "Tags", type = Tag.class, required = false)
-    public ArrayList<Tag> tags = new ArrayList<Tag>();
+    public ArrayList<Tag> tags = new ArrayList<>();
     @Element(name = "Price", required = false)
     public String price;
     @Element(name = "RestID", required = false)
     public String restID;
     @Element(name = "Show", required = false)
     public boolean show;
-
-    public void deleteTag(int tagID) {
-        for (Tag tag : tags) {
-            if (tag.tagID == tagID) {
-                tags.remove(tag);
-                return;
-            }
-        }
-    }
-
-    public Dish getClone() {
-        Dish clone = new Dish();
-        clone.id = id;
-        clone.nameEn = nameEn;
-        clone.nameRu = nameRu;
-        clone.price = price;
-        clone.restID = restID;
-        clone.show = show;
-        for (Tag tag : tags) {
-            clone.tags.add(tag.getClone());
-        }
-        return clone;
-    }
 
     public boolean equals(Object obj) {
         if (obj.getClass() != Dish.class) {
@@ -83,9 +53,6 @@ public class Dish {
         if (this.price != null && !this.price.equals(that.price)) {
             return false;
         }
-       /* if(this.show!=that.show){
-            return false;
-        }*/
         return true;
     }
 

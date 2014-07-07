@@ -7,103 +7,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="[All] monthly commit">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/AllCardParameterTypesHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/AllCardParameterTypesResponse.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/AllMenuIDsHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/AllMenuIDsResponse.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/AllTagsHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/AllTagsResponse.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/dishes/CardPriceLinkEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/dishes/DishCategoryEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/dishes/DishEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/dishes/DishTagDishLinkEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/dishes/DishTagEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/GetAllCardsHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileParameterType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileTag.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileTagGroup.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/dishes/PriceEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/admin/SimpleTagGroup.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/TagGroupEntity.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/xmlparser/TagParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/ViewImageHandler.java" />
       <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\diagram.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\constants\databaseenumeration\ChangingDataType.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\phone\requesthandler\GetViewImageHandler.java" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\additionalentity\CompleteCardRootInfo.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/CompleteCardRouteInfo.java" />
-      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\database\requests\RootRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/RouteRequest.java" />
-      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\database\worldonlinedb\CardRootEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardRouteEntity.java" />
-      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\phone\requesthandler\GetAllMenusHandler.java" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/AllMenusHandler.java" />
-      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\phone\responseentity\GetAllCardsResponse.java" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/AllCardsResponse.java" />
-      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\phone\responseentity\GetAllMenusResponse.java" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/AllMenusResponse.java" />
-      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\phone\responseentity\GetViewImagesResponse.java" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/ViewImagesResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardaboutcity/AboutCity.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardaboutcity/AboutCity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/people/peopleaboutcity/AboutCity.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/people/peopleaboutcity/AboutCity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/AdminUserAdditionalInfoEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/AdminUserAdditionalInfoEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardImageEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardImageEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardParameterEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardParameterEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardParameterType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardParameterType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardParameterTypeEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardParameterTypeEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/CardUpdateInfo.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/CardUpdateInfo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/CardsParser.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/CardsParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/CompleteCardInfo.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/CompleteCardInfo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/menu/CompleteTag.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/menu/CompleteTag.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/CoordinateRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/CoordinateRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/DataBaseEntityType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/DataBaseEntityType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/DataType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/DataType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" afterPath="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/menu/Dish.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/menu/Dish.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" afterPath="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/phone/requesthandler/GetMenuHandler.java" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/GetMenuHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardhandbook/HandBook.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardhandbook/HandBook.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/session/HibernateUtil.java" afterPath="$PROJECT_DIR$/src/model/database/session/HibernateUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardhotel/Hotel.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardhotel/Hotel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/LinkRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/LinkRequest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardmeal/Meal.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardmeal/Meal.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/MenuCardLinkParser.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/MenuCardLinkParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/MenuParser.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/MenuParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/menu/MenuXML.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/menu/MenuXML.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardImage.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/phone/requesthandler/MobileHandler.java" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/MobileHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileParameter.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileParameter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/phone/responseentity/MobileResponseEntity.java" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/MobileResponseEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileText.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileText.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/ParameterRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/ParameterRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/ParametersEntity.java" afterPath="$PROJECT_DIR$/src/model/database/ParametersEntity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/PeopleParser.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/PeopleParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardrelax/Relax.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardrelax/Relax.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/phone/requesthandler/RestoreUserHandler.java" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/RestoreUserHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/phone/responseentity/RestoreUserResponse.java" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/RestoreUserResponse.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardroute/Route.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardroute/Route.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/route/routeroute/Route.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/route/routeroute/Route.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/RouteElementEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/RouteElementEntity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/RouteParser.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/RouteParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/route/routeroute/RouteRoute.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/route/routeroute/RouteRoute.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/ServerConsts.java" afterPath="$PROJECT_DIR$/src/model/constants/ServerConsts.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardshopping/Shopping.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardshopping/Shopping.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardsights/Sight.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/card/cardsights/Sight.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/textparser/StringFileParser.java" afterPath="$PROJECT_DIR$/src/model/textparser/StringFileParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/menu/Tag.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/menu/Tag.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/TagEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/TagEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/TagRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/TagRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/TagType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/TagType.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/xmlview/menu/TagsXML.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/xmlview/menu/TagsXML.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/TextCardEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/TextCardEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/TextRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/TextRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/TextType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/TextType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/phone/requesthandler/UserRegistrationHandler.java" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/UserRegistrationHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/UserRequests.java" afterPath="$PROJECT_DIR$/src/model/database/requests/UserRequests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/WeatherRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/WeatherRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WorldOnline.iws" />
@@ -411,6 +339,46 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phone" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1024,7 +992,7 @@
       <workItem from="1403701425140" duration="66644000" />
       <workItem from="1404286700376" duration="19978000" />
       <workItem from="1404372030409" duration="21351000" />
-      <workItem from="1404455132923" duration="28464000" />
+      <workItem from="1404455132923" duration="28548000" />
     </task>
     <task id="LOCAL-00001" summary="TestCommit">
       <created>1383271700462</created>
@@ -1374,11 +1342,35 @@
       <created>1404735329977</created>
       <updated>1404735329977</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="[All] monthly commit">
+      <created>1404735342939</created>
+      <updated>1404735342939</updated>
+    </task>
+    <task id="LOCAL-00089" summary="[All] monthly commit">
+      <created>1404735351686</created>
+      <updated>1404735351686</updated>
+    </task>
+    <task id="LOCAL-00090" summary="[All] monthly commit">
+      <created>1404735358887</created>
+      <updated>1404735358887</updated>
+    </task>
+    <task id="LOCAL-00091" summary="[All] monthly commit">
+      <created>1404735365528</created>
+      <updated>1404735365528</updated>
+    </task>
+    <task id="LOCAL-00092" summary="[All] monthly commit">
+      <created>1404735400961</created>
+      <updated>1404735400961</updated>
+    </task>
+    <task id="LOCAL-00093" summary="[All] monthly commit">
+      <created>1404735406700</created>
+      <updated>1404735406700</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1249121000" />
+    <option name="totallyTimeSpent" value="1249205000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1418,7 +1410,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740214" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289941" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.273021" sideWeight="0.742586" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.273021" sideWeight="0.742586" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36517534" sideWeight="0.4911147" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1490,6 +1482,7 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <confirmMoveToFailedCommit value="2" />
     <MESSAGE value="Simple jsp page test" />
     <MESSAGE value="Simple jsp page test 2" />
     <MESSAGE value="Xml parse to db 1" />

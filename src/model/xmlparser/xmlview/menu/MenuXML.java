@@ -14,13 +14,7 @@ import java.util.ArrayList;
 @Root(name = "data")
 public class MenuXML {
 
-    @ElementList(inline = true, name = "Dish", required = false)
+    @ElementList(inline = true, name = "DishEntity", required = false)
     public ArrayList<Dish> dishes = new ArrayList<Dish>();
 
-
-    public static MenuXML loadMenuXml() throws Exception {
-        Serializer serializer = new Persister(new Format("<?xml version=\"1.0\" encoding= \"UTF-8\" ?>"));
-        File file = new File("MenuXML.xml");
-        return serializer.read(MenuXML.class, file);
-    }
 }

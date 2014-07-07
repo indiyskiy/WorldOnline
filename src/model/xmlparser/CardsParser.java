@@ -11,18 +11,12 @@ import model.xmlparser.xmlview.card.cardrelax.CardRelax;
 import model.xmlparser.xmlview.card.cardroute.CardRoute;
 import model.xmlparser.xmlview.card.cardshopping.CardShopping;
 import model.xmlparser.xmlview.card.cardsights.CardSight;
+import model.xmlparser.xmlview.people.peopleaboutcity.PeopleAboutCity;
 import org.simpleframework.xml.core.Persister;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 18.10.13
- * Time: 17:09
- * To change this template use File | Settings | File Templates.
- */
 public class CardsParser {
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, CardsParser.class);
 
@@ -81,5 +75,9 @@ public class CardsParser {
     public static void main(String[] args) {
         CardsParser cardsParser = new CardsParser();
         cardsParser.getCardRoute(ServerConsts.root + "card_route.xml");
+    }
+
+    public PeopleAboutCity getPeopleAboutCity(String root) {
+        return (PeopleAboutCity) getXML(root, PeopleAboutCity.class);
     }
 }

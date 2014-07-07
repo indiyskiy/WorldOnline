@@ -4,13 +4,7 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 04.12.13
- * Time: 14:49
- * To change this template use File | Settings | File Templates.
- */
+
 @Root(name = "CompleteTag")
 public class CompleteTag {
     @Attribute(name = "id")

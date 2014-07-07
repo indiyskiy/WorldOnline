@@ -28,6 +28,7 @@ import model.xmlparser.xmlview.card.cardsights.CardSight;
 import model.xmlparser.xmlview.card.cardsights.Sight;
 import model.xmlparser.xmlview.mainmenudata.MainMenuData;
 import model.xmlparser.xmlview.mainmenudata.Submenu;
+import model.xmlparser.xmlview.people.peopleaboutcity.PeopleAboutCity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public class MenuCardLinkParser {
     private MainMenuData mainMenuData = new MenuParser().getMainMenuData(root + "MainMenuData.xml");
     private HashMap<String, MenuEntity> menuEntityHashMap = new HashMap<>();
 
-    private MenuCardLinkEntity addLink(CardEntity cardEntity, MenuEntity menuEntity) {
+    public MenuCardLinkEntity addLink(CardEntity cardEntity, MenuEntity menuEntity) {
         if (menuEntity != null && cardEntity != null) {
             loggerFactory.debug("add link " + cardEntity.getCardID() + " " + menuEntity.getMenuID());
             MenuCardLinkEntity menuCardLinkEntity = new MenuCardLinkEntity();
@@ -66,6 +67,7 @@ public class MenuCardLinkParser {
         CardRoute cardRoute = cardsParser.getCardRoute(root + "card_route.xml");
         CardSight cardSight = cardsParser.getCardSight(root + "card_sights.xml");
         CardShopping cardShopping = cardsParser.getCardShopping(root + "card_shopping.xml");
+        PeopleAboutCity peopleAboutCity = cardsParser.getPeopleAboutCity(ServerConsts.root + "people_aboutcity.xml");
         ArrayList<CardEntity> cardEntities = CardRequest.getAllCards();
         for (CardEntity cardEntity : cardEntities) {
             try {
@@ -95,6 +97,9 @@ public class MenuCardLinkParser {
                 if (cardEntity.getCardType() == (CardType.CardAboutCity.getValue())) {
                     menuCardLinkEntity = saveCardAboutCity(cardAboutCity, names, cardEntity);
                 }
+                if (cardEntity.getCardType() == (CardType.CardPerson.getValue())) {
+                    menuCardLinkEntity = savePeopleAboutCity(peopleAboutCity, names, cardEntity);
+                }
             } catch (Exception e) {
                 loggerFactory.error("THE ERROR OF DOOOOM1!!!");
                 loggerFactory.error(e);
@@ -106,6 +111,10 @@ public class MenuCardLinkParser {
             loggerFactory.error("THE ERROR OF DOOOOM2!!!");
             loggerFactory.error(e);
         }
+    }
+
+    private MenuCardLinkEntity savePeopleAboutCity(PeopleAboutCity peopleAboutCity, HashSet<String> names, CardEntity cardEntity) {
+        return new PeopleParser().savePeopleAboutCityMenuLinks(this, peopleAboutCity, names, cardEntity);
     }
 
     private MenuCardLinkEntity saveCardAboutCity(CardAboutCity cardAboutCity, HashSet<String> names, CardEntity cardEntity) {
@@ -254,7 +263,7 @@ public class MenuCardLinkParser {
         return null;
     }
 
-    private MenuEntity findMenu(String cardID) {
+    public MenuEntity findMenu(String cardID) {
         try {
             if (cardID == null || cardID.isEmpty()) {
                 return null;

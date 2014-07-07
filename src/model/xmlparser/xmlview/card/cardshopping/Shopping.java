@@ -4,13 +4,6 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 20.10.13
- * Time: 18:11
- * To change this template use File | Settings | File Templates.
- */
 @Root(name = "Shopping")
 public class Shopping {
     @Attribute(name = "id", required = true)
@@ -188,4 +181,40 @@ public class Shopping {
     public String reservationPhone;
     @Element(name = "RestaurantChain", required = false)
     public String restaurantChain;
+    @Element(name = "AdditionalPhone", required = false)
+    public String additionalPhone;
+    @Element(name = "AllCafe", required = false)
+    public String allCafe;
+    @Element(name = "FactsEn", required = false)
+    public String factsEn;
+    @Element(name = "LegendsEn", required = false)
+    public String legendsEn;
+    @Element(name = "LiteratureEn", required = false)
+    public String literatureEn;
+    @Element(name = "AnecdotesEn", required = false)
+    public String anecdotesEn;
+    @Element(name = "FilmsEn", required = false)
+    public String filmsEn;
+    @Element(name = "FamousPassersEn", required = false)
+    public String famousPassersEn;
+    @Element(name = "CitationsEn", required = false)
+    public String citationsEn;
+    @Element(name = "WikipediaEn", required = false)
+    public String wikipediaEn;
+    @Element(name = "WikimapiaRu", required = false)
+    public String wikimapiaRu;
+    @Element(name = "WikimapiaEn", required = false)
+    public String wikimapiaEn;
+    @Element(name = "EncspbRu", required = false)
+    public String encspbRu;
+    @Element(name = "EncspbEn", required = false)
+    public String encspbEn;
+    @Element(name = "Walkspb", required = false)
+    public String walkspb;
+    @Element(name = "Spbin", required = false)
+    public String spbin;
+    @Element(name = "EtovidetRu", required = false)
+    public String etovidetRu;
+    @Element(name = "NoBarriers", required = false)
+    public String noBarriers;
 }

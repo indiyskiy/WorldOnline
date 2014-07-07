@@ -56,7 +56,7 @@ public class StringFileParser {
     private static StringIntPair getStringIntPair(String subString, String spliter) {
         String[] pair = subString.split(spliter);
         int anInt = Integer.parseInt(pair[1]);
-        String string = pair[0];
+        String string = pair[0].replaceAll("\r", "").replaceAll("\n", "");
         return new StringIntPair(string, anInt);
     }
 

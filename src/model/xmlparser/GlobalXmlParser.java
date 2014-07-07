@@ -51,18 +51,13 @@ public class GlobalXmlParser implements Runnable {
     }
 
     public void globalParse() throws IOException, SQLException {
-
+        //tags
+        TagParser tagParser = new TagParser();
+        tagParser.parseTags();
         //main menu
         MenuParser menuParser = new MenuParser();
         menuParser.saveMenu();
         HashMap<String, MenuEntity> menuEntityHashMap = menuParser.getMenuEntityHashMap();
-
-        ArrayList<StringIntPair> categories = StringFileParser.parseStandardStringIntPair(FileHelper.readFileAsString(ServerConsts.root + "app_data/Categories.txt"), ";");
-        saveTags(categories, TagType.Categories);
-        ArrayList<StringIntPair> kitchens = StringFileParser.parseStandardStringIntPair(FileHelper.readFileAsString(ServerConsts.root + "app_data/Kitchens.txt"), ";");
-        saveTags(kitchens, TagType.Cuisine);
-        ArrayList<StringIntPair> ribbons = StringFileParser.parseStandardStringIntPair(FileHelper.readFileAsString(ServerConsts.root + "app_data/Ribbons.txt"), ";");
-        saveTags(ribbons, TagType.Ribbons);
         //parameter types
         ParameterParser.saveTypes();
         //cards
@@ -87,17 +82,20 @@ public class GlobalXmlParser implements Runnable {
         //people
         PeopleParser peopleParser = new PeopleParser();
         PeopleAboutCity peopleAboutCity = peopleParser.getPeopleAboutCity(ServerConsts.root + "people_aboutcity.xml");
+        peopleParser.savePeopleAboutCity(this, peopleAboutCity);
         //photo
         PhotoParser photoParser = new PhotoParser();
         PhotoCard photoCard = photoParser.getPhotoCard(ServerConsts.root + "photocards.xml");
         savePhotoCards(photoCard);
-        //root
+        //route
         RouteParser routeParser = new RouteParser();
         RouteRoute routeRoute = routeParser.getRouteRoute(ServerConsts.root + "route_routes.xml");
+        new RouteParser().saveRoute(this, routeRoute);
         //menu card link
         MenuCardLinkParser menuCardLinkParser = new MenuCardLinkParser();
         menuCardLinkParser.parseMenuCardLink();
     }
+
 
     private void savePhotoCards(PhotoCard photoCard) {
         List<Photo> photos = photoCard.photos;
@@ -149,12 +147,24 @@ public class GlobalXmlParser implements Runnable {
             saveText(shopping.descrRU, shopping.descrEN, shopping.nameRU, shopping.nameEN, TextType.Description, card);
             saveText(shopping.newsRu, shopping.newsEn, shopping.nameRU, shopping.nameEN, TextType.News, card);
             saveText(shopping.offersRu, shopping.offersEn, shopping.nameRU, shopping.nameEN, TextType.Offers, card);
+            saveText(shopping.facts, shopping.factsEn, shopping.nameRU, shopping.nameEN, TextType.Facts, card);
+            saveText(shopping.legends, shopping.legendsEn, shopping.nameRU, shopping.nameEN, TextType.Legends, card);
+            saveText(shopping.literature, shopping.literatureEn, shopping.nameRU, shopping.nameEN, TextType.Literature, card);
+            saveText(shopping.anecdotes, shopping.anecdotesEn, shopping.nameRU, shopping.nameEN, TextType.Anecdotes, card);
+            saveText(shopping.films, shopping.filmsEn, shopping.nameRU, shopping.nameEN, TextType.Films, card);
+            saveText(shopping.famousPassers, shopping.famousPassersEn, shopping.nameRU, shopping.nameEN, TextType.FamousPassers, card);
+            saveText(shopping.citations, shopping.citationsEn, shopping.nameRU, shopping.nameEN, TextType.Citations, card);
+            saveText(shopping.wikipedia, shopping.wikipediaEn, shopping.nameRU, shopping.nameEN, TextType.Wikipedia, card);
+            saveText(shopping.wikimapiaRu, shopping.wikimapiaEn, shopping.nameRU, shopping.nameEN, TextType.Wikimapia, card);
+            saveText(shopping.encspbRu, shopping.encspbEn, shopping.nameRU, shopping.nameEN, TextType.Encspb, card);
+
 
             if (shopping.lat != null && !shopping.lat.replaceAll(" ", "").isEmpty() && shopping.lon != null && !shopping.lon.replaceAll(" ", "").isEmpty()) {
                 saveCoordinate(shopping.lat, shopping.lon, card);
             }
 
             saveParameter(shopping.phone, card, CardParameterType.Phone);
+            saveParameter(shopping.additionalPhone, card, CardParameterType.Phone);
             saveParameter(shopping.openHours, card, CardParameterType.OpenHours);
             saveParameter(shopping.site, card, CardParameterType.Site);
             saveParameter(shopping.email, card, CardParameterType.Email);
@@ -208,21 +218,18 @@ public class GlobalXmlParser implements Runnable {
             }
             saveParameter(freePass, card, CardParameterType.FreePass);
 
-            saveParameter(shopping.facts, card, CardParameterType.Facts);
-            saveParameter(shopping.legends, card, CardParameterType.Legends);
-            saveParameter(shopping.literature, card, CardParameterType.Literature);
-            saveParameter(shopping.anecdotes, card, CardParameterType.Anecdotes);
-            saveParameter(shopping.films, card, CardParameterType.Films);
-            saveParameter(shopping.famousPassers, card, CardParameterType.FamousPassers);
-            saveParameter(shopping.citations, card, CardParameterType.Citations);
             saveParameter(shopping.borisStars, card, CardParameterType.BorisStars);
             saveParameter(shopping.restoclub, card, CardParameterType.Restoclub);
             saveParameter(shopping.afisha, card, CardParameterType.Afisha);
             saveParameter(shopping.timeout, card, CardParameterType.Timeout);
-            saveParameter(shopping.wikipedia, card, CardParameterType.Wikipedia);
             saveParameter(shopping.wikitravel, card, CardParameterType.Wikitravel);
             saveParameter(shopping.reservationDiscount, card, CardParameterType.ReservationDiscount);
             saveParameter(shopping.reservationPhone, card, CardParameterType.ReservationPhone);
+            saveParameter(shopping.allCafe, card, CardParameterType.AllCafe);
+            saveParameter(shopping.walkspb, card, CardParameterType.WalkSpb);
+            saveParameter(shopping.spbin, card, CardParameterType.Spbin);
+            saveParameter(shopping.noBarriers, card, CardParameterType.NoBarriers);
+
 
             saveCardTags(shopping.kitchen, card, TagType.Cuisine);
             saveCardTags(shopping.categories, card, TagType.Categories);
@@ -252,7 +259,6 @@ public class GlobalXmlParser implements Runnable {
                 loggerFactory.error("no cardImage image on card " + shopping.nameRU + "[" + shopping.id + "]");
                 loggerFactory.error(e);
             }*/
-
             addRestarauntChainLink(shopping.restaurantChain, card);
         }
 //            handBook.priceFile);
@@ -298,12 +304,23 @@ public class GlobalXmlParser implements Runnable {
             saveText(sight.descrRU, sight.descrEN, sight.nameRU, sight.nameEN, TextType.Description, card);
             saveText(sight.newsRu, sight.newsEn, sight.nameRU, sight.nameEN, TextType.News, card);
             saveText(sight.offersRu, sight.offersEn, sight.nameRU, sight.nameEN, TextType.Offers, card);
+            saveText(sight.facts, sight.factsEn, sight.nameRU, sight.nameEN, TextType.Facts, card);
+            saveText(sight.legends, sight.legendsEn, sight.nameRU, sight.nameEN, TextType.Legends, card);
+            saveText(sight.literature, sight.literatureEn, sight.nameRU, sight.nameEN, TextType.Literature, card);
+            saveText(sight.anecdotes, sight.anecdotesEn, sight.nameRU, sight.nameEN, TextType.Anecdotes, card);
+            saveText(sight.films, sight.filmsEn, sight.nameRU, sight.nameEN, TextType.Films, card);
+            saveText(sight.famousPassers, sight.famousPassersEn, sight.nameRU, sight.nameEN, TextType.FamousPassers, card);
+            saveText(sight.citations, sight.citationsEn, sight.nameRU, sight.nameEN, TextType.Citations, card);
+            saveText(sight.wikipedia, sight.wikipediaEn, sight.nameRU, sight.nameEN, TextType.Wikipedia, card);
+            saveText(sight.wikimapiaRu, sight.wikimapiaEn, sight.nameRU, sight.nameEN, TextType.Wikimapia, card);
+            saveText(sight.encspbRu, sight.encspbEn, sight.nameRU, sight.nameEN, TextType.Encspb, card);
 
             if (sight.lat != null && !sight.lat.replaceAll(" ", "").isEmpty() && sight.lon != null && !sight.lon.replaceAll(" ", "").isEmpty()) {
                 saveCoordinate(sight.lat, sight.lon, card);
             }
 
             saveParameter(sight.phone, card, CardParameterType.Phone);
+            saveParameter(sight.additionalPhone, card, CardParameterType.Phone);
             saveParameter(sight.openHours, card, CardParameterType.OpenHours);
             saveParameter(sight.site, card, CardParameterType.Site);
             saveParameter(sight.email, card, CardParameterType.Email);
@@ -357,21 +374,14 @@ public class GlobalXmlParser implements Runnable {
             }
             saveParameter(freePass, card, CardParameterType.FreePass);
 
-            saveParameter(sight.facts, card, CardParameterType.Facts);
-            saveParameter(sight.legends, card, CardParameterType.Legends);
-            saveParameter(sight.literature, card, CardParameterType.Literature);
-            saveParameter(sight.anecdotes, card, CardParameterType.Anecdotes);
-            saveParameter(sight.films, card, CardParameterType.Films);
-            saveParameter(sight.famousPassers, card, CardParameterType.FamousPassers);
-            saveParameter(sight.citations, card, CardParameterType.Citations);
             saveParameter(sight.borisStars, card, CardParameterType.BorisStars);
             saveParameter(sight.restoclub, card, CardParameterType.Restoclub);
             saveParameter(sight.afisha, card, CardParameterType.Afisha);
             saveParameter(sight.timeout, card, CardParameterType.Timeout);
-            saveParameter(sight.wikipedia, card, CardParameterType.Wikipedia);
             saveParameter(sight.wikitravel, card, CardParameterType.Wikitravel);
             saveParameter(sight.reservationDiscount, card, CardParameterType.ReservationDiscount);
             saveParameter(sight.reservationPhone, card, CardParameterType.ReservationPhone);
+            saveParameter(sight.allCafe, card, CardParameterType.AllCafe);
 
             saveCardTags(sight.kitchen, card, TagType.Cuisine);
             saveCardTags(sight.categories, card, TagType.Categories);
@@ -383,24 +393,6 @@ public class GlobalXmlParser implements Runnable {
                 loggerFactory.error("no photo image on card " + sight.nameRU + "[" + sight.id + "]");
                 loggerFactory.error(e);
             }
-            /*try {
-                ImageHelper.saveImages(sight.panoramaToList, card, CardImageType.PanoramaToList);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no panoramaToList image on card " + sight.nameRU + "[" + sight.id + "]");
-                loggerFactory.error(e);
-            }*/
-           /* try {
-                ImageHelper.saveImages(sight.panorama, card, CardImageType.Panorama);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no panorama image on card " + sight.nameRU + "[" + sight.id + "]");
-                loggerFactory.error(e);
-            }*/
-           /* try {
-                ImageHelper.saveImages(sight.cardImage, card, CardImageType.CardImage);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no cardImage image on card " + sight.nameRU + "[" + sight.id + "]");
-                loggerFactory.error(e);
-            }*/
             addRestarauntChainLink(sight.restaurantChain, card);
         }
 //            handBook.priceFile);
@@ -425,12 +417,23 @@ public class GlobalXmlParser implements Runnable {
             saveText(route.descrRU, route.descrEN, route.nameRU, route.nameEN, TextType.Description, card);
             saveText(route.newsRu, route.newsEn, route.nameRU, route.nameEN, TextType.News, card);
             saveText(route.offersRu, route.offersEn, route.nameRU, route.nameEN, TextType.Offers, card);
+            saveText(route.facts, route.factsEn, route.nameRU, route.nameEN, TextType.Facts, card);
+            saveText(route.legends, route.legendsEn, route.nameRU, route.nameEN, TextType.Legends, card);
+            saveText(route.literature, route.literatureEn, route.nameRU, route.nameEN, TextType.Literature, card);
+            saveText(route.anecdotes, route.anecdotesEn, route.nameRU, route.nameEN, TextType.Anecdotes, card);
+            saveText(route.films, route.filmsEn, route.nameRU, route.nameEN, TextType.Films, card);
+            saveText(route.famousPassers, route.famousPassersEn, route.nameRU, route.nameEN, TextType.FamousPassers, card);
+            saveText(route.citations, route.citationsEn, route.nameRU, route.nameEN, TextType.Citations, card);
+            saveText(route.wikipedia, route.wikipediaEn, route.nameRU, route.nameEN, TextType.Wikipedia, card);
+            saveText(route.wikimapiaRu, route.wikimapiaEn, route.nameRU, route.nameEN, TextType.Wikimapia, card);
+            saveText(route.encspbRu, route.encspbEn, route.nameRU, route.nameEN, TextType.Encspb, card);
 
             if (route.lat != null && !route.lat.replaceAll(" ", "").isEmpty() && route.lon != null && !route.lon.replaceAll(" ", "").isEmpty()) {
                 saveCoordinate(route.lat, route.lon, card);
             }
 
             saveParameter(route.phone, card, CardParameterType.Phone);
+            saveParameter(route.additionalPhone, card, CardParameterType.Phone);
             saveParameter(route.openHours, card, CardParameterType.OpenHours);
             saveParameter(route.site, card, CardParameterType.Site);
             saveParameter(route.email, card, CardParameterType.Email);
@@ -483,22 +486,14 @@ public class GlobalXmlParser implements Runnable {
                 freePass = "100";
             }
             saveParameter(freePass, card, CardParameterType.FreePass);
-
-            saveParameter(route.facts, card, CardParameterType.Facts);
-            saveParameter(route.legends, card, CardParameterType.Legends);
-            saveParameter(route.literature, card, CardParameterType.Literature);
-            saveParameter(route.anecdotes, card, CardParameterType.Anecdotes);
-            saveParameter(route.films, card, CardParameterType.Films);
-            saveParameter(route.famousPassers, card, CardParameterType.FamousPassers);
-            saveParameter(route.citations, card, CardParameterType.Citations);
             saveParameter(route.borisStars, card, CardParameterType.BorisStars);
             saveParameter(route.restoclub, card, CardParameterType.Restoclub);
             saveParameter(route.afisha, card, CardParameterType.Afisha);
             saveParameter(route.timeout, card, CardParameterType.Timeout);
-            saveParameter(route.wikipedia, card, CardParameterType.Wikipedia);
             saveParameter(route.wikitravel, card, CardParameterType.Wikitravel);
             saveParameter(route.reservationDiscount, card, CardParameterType.ReservationDiscount);
             saveParameter(route.reservationPhone, card, CardParameterType.ReservationPhone);
+            saveParameter(route.allCafe, card, CardParameterType.AllCafe);
 
             saveCardTags(route.kitchen, card, TagType.Cuisine);
             saveCardTags(route.categories, card, TagType.Categories);
@@ -510,24 +505,6 @@ public class GlobalXmlParser implements Runnable {
                 loggerFactory.error("no photo image on card " + route.nameRU + "[" + route.id + "]");
                 loggerFactory.error(e);
             }
-            /*try {
-                ImageHelper.saveImages(route.panoramaToList, card, CardImageType.PanoramaToList);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no panoramaToList image on card " + route.nameRU + "[" + route.id + "]");
-                loggerFactory.error(e);
-            }*/
-           /* try {
-                ImageHelper.saveImages(route.panorama, card, CardImageType.Panorama);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no panorama image on card " + route.nameRU + "[" + route.id + "]");
-                loggerFactory.error(e);
-            }*/
-         /*   try {
-                ImageHelper.saveImages(route.cardImage, card, CardImageType.CardImage);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no cardImage image on card " + route.nameRU + "[" + route.id + "]");
-                loggerFactory.error(e);
-            }*/
         }
 //            handBook.priceFile);
 //            handBook.metro);
@@ -551,12 +528,23 @@ public class GlobalXmlParser implements Runnable {
             saveText(relax.descrRU, relax.descrEN, relax.nameRU, relax.nameEN, TextType.Description, card);
             saveText(relax.newsRu, relax.newsEn, relax.nameRU, relax.nameEN, TextType.News, card);
             saveText(relax.offersRu, relax.offersEn, relax.nameRU, relax.nameEN, TextType.Offers, card);
+            saveText(relax.facts, relax.factsEn, relax.nameRU, relax.nameEN, TextType.Facts, card);
+            saveText(relax.legends, relax.legendsEn, relax.nameRU, relax.nameEN, TextType.Legends, card);
+            saveText(relax.literature, relax.literatureEn, relax.nameRU, relax.nameEN, TextType.Literature, card);
+            saveText(relax.anecdotes, relax.anecdotesEn, relax.nameRU, relax.nameEN, TextType.Anecdotes, card);
+            saveText(relax.films, relax.filmsEn, relax.nameRU, relax.nameEN, TextType.Films, card);
+            saveText(relax.famousPassers, relax.famousPassersEn, relax.nameRU, relax.nameEN, TextType.FamousPassers, card);
+            saveText(relax.citations, relax.citationsEn, relax.nameRU, relax.nameEN, TextType.Citations, card);
+            saveText(relax.wikipedia, relax.wikipediaEn, relax.nameRU, relax.nameEN, TextType.Wikipedia, card);
+            saveText(relax.wikimapiaRu, relax.wikimapiaEn, relax.nameRU, relax.nameEN, TextType.Wikimapia, card);
+            saveText(relax.encspbRu, relax.encspbEn, relax.nameRU, relax.nameEN, TextType.Encspb, card);
 
             if (relax.lat != null && !relax.lat.replaceAll(" ", "").isEmpty() && relax.lon != null && !relax.lon.replaceAll(" ", "").isEmpty()) {
                 saveCoordinate(relax.lat, relax.lon, card);
             }
 
             saveParameter(relax.phone, card, CardParameterType.Phone);
+            saveParameter(relax.additionalPhone, card, CardParameterType.Phone);
             saveParameter(relax.openHours, card, CardParameterType.OpenHours);
             saveParameter(relax.site, card, CardParameterType.Site);
             saveParameter(relax.email, card, CardParameterType.Email);
@@ -609,22 +597,14 @@ public class GlobalXmlParser implements Runnable {
                 freePass = "100";
             }
             saveParameter(freePass, card, CardParameterType.FreePass);
-
-            saveParameter(relax.facts, card, CardParameterType.Facts);
-            saveParameter(relax.legends, card, CardParameterType.Legends);
-            saveParameter(relax.literature, card, CardParameterType.Literature);
-            saveParameter(relax.anecdotes, card, CardParameterType.Anecdotes);
-            saveParameter(relax.films, card, CardParameterType.Films);
-            saveParameter(relax.famousPassers, card, CardParameterType.FamousPassers);
-            saveParameter(relax.citations, card, CardParameterType.Citations);
             saveParameter(relax.borisStars, card, CardParameterType.BorisStars);
             saveParameter(relax.restoclub, card, CardParameterType.Restoclub);
             saveParameter(relax.afisha, card, CardParameterType.Afisha);
             saveParameter(relax.timeout, card, CardParameterType.Timeout);
-            saveParameter(relax.wikipedia, card, CardParameterType.Wikipedia);
             saveParameter(relax.wikitravel, card, CardParameterType.Wikitravel);
             saveParameter(relax.reservationDiscount, card, CardParameterType.ReservationDiscount);
             saveParameter(relax.reservationPhone, card, CardParameterType.ReservationPhone);
+            saveParameter(relax.allCafe, card, CardParameterType.AllCafe);
 
             saveCardTags(relax.kitchen, card, TagType.Cuisine);
             saveCardTags(relax.categories, card, TagType.Categories);
@@ -636,25 +616,6 @@ public class GlobalXmlParser implements Runnable {
                 loggerFactory.error("no photo image on card " + relax.nameRU + "[" + relax.id + "]");
                 loggerFactory.error(e);
             }
-            /*try {
-                ImageHelper.saveImages(relax.panoramaToList, card, CardImageType.PanoramaToList);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no panoramaToList image on card " + relax.nameRU + "[" + relax.id + "]");
-                loggerFactory.error(e);
-            }*/
-            /*try {
-                ImageHelper.saveImages(relax.panorama, card, CardImageType.Panorama);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no panorama image on card " + relax.nameRU + "[" + relax.id + "]");
-                loggerFactory.error(e);
-            }*/
-           /* try {
-                ImageHelper.saveImages(relax.cardImage, card, CardImageType.CardImage);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no cardImage image on card " + relax.nameRU + "[" + relax.id + "]");
-                loggerFactory.error(e);
-            }*/
-
             addRestarauntChainLink(relax.restaurantChain, card);
 //            handBook.priceFile);
 //            handBook.metro);
@@ -679,12 +640,23 @@ public class GlobalXmlParser implements Runnable {
             saveText(meal.descrRU, meal.descrEN, meal.nameRU, meal.nameEN, TextType.Description, card);
             saveText(meal.newsRu, meal.newsEn, meal.nameRU, meal.nameEN, TextType.News, card);
             saveText(meal.offersRu, meal.offersEn, meal.nameRU, meal.nameEN, TextType.Offers, card);
+            saveText(meal.facts, meal.factsEn, meal.nameRU, meal.nameEN, TextType.Facts, card);
+            saveText(meal.legends, meal.legendsEn, meal.nameRU, meal.nameEN, TextType.Legends, card);
+            saveText(meal.literature, meal.literatureEn, meal.nameRU, meal.nameEN, TextType.Literature, card);
+            saveText(meal.anecdotes, meal.anecdotesEn, meal.nameRU, meal.nameEN, TextType.Anecdotes, card);
+            saveText(meal.films, meal.filmsEn, meal.nameRU, meal.nameEN, TextType.Films, card);
+            saveText(meal.famousPassers, meal.famousPassersEn, meal.nameRU, meal.nameEN, TextType.FamousPassers, card);
+            saveText(meal.citations, meal.citationsEn, meal.nameRU, meal.nameEN, TextType.Citations, card);
+            saveText(meal.wikipedia, meal.wikipediaEn, meal.nameRU, meal.nameEN, TextType.Wikipedia, card);
+            saveText(meal.wikimapiaRu, meal.wikimapiaEn, meal.nameRU, meal.nameEN, TextType.Wikimapia, card);
+            saveText(meal.encspbRu, meal.encspbEn, meal.nameRU, meal.nameEN, TextType.Encspb, card);
 
             if (meal.lat != null && !meal.lat.replaceAll(" ", "").isEmpty() && meal.lon != null && !meal.lon.replaceAll(" ", "").isEmpty()) {
                 saveCoordinate(meal.lat, meal.lon, card);
             }
 
             saveParameter(meal.phone, card, CardParameterType.Phone);
+            saveParameter(meal.additionalPhone, card, CardParameterType.Phone);
             saveParameter(meal.openHours, card, CardParameterType.OpenHours);
             saveParameter(meal.site, card, CardParameterType.Site);
             saveParameter(meal.email, card, CardParameterType.Email);
@@ -737,22 +709,14 @@ public class GlobalXmlParser implements Runnable {
                 freePass = "100";
             }
             saveParameter(freePass, card, CardParameterType.FreePass);
-
-            saveParameter(meal.facts, card, CardParameterType.Facts);
-            saveParameter(meal.legends, card, CardParameterType.Legends);
-            saveParameter(meal.literature, card, CardParameterType.Literature);
-            saveParameter(meal.anecdotes, card, CardParameterType.Anecdotes);
-            saveParameter(meal.films, card, CardParameterType.Films);
-            saveParameter(meal.famousPassers, card, CardParameterType.FamousPassers);
-            saveParameter(meal.citations, card, CardParameterType.Citations);
             saveParameter(meal.borisStars, card, CardParameterType.BorisStars);
             saveParameter(meal.restoclub, card, CardParameterType.Restoclub);
             saveParameter(meal.afisha, card, CardParameterType.Afisha);
             saveParameter(meal.timeout, card, CardParameterType.Timeout);
-            saveParameter(meal.wikipedia, card, CardParameterType.Wikipedia);
             saveParameter(meal.wikitravel, card, CardParameterType.Wikitravel);
             saveParameter(meal.reservationDiscount, card, CardParameterType.ReservationDiscount);
             saveParameter(meal.reservationPhone, card, CardParameterType.ReservationPhone);
+            saveParameter(meal.allCafe, card, CardParameterType.AllCafe);
 
             saveCardTags(meal.kitchen, card, TagType.Cuisine);
             saveCardTags(meal.categories, card, TagType.Categories);
@@ -764,25 +728,6 @@ public class GlobalXmlParser implements Runnable {
                 loggerFactory.error("no photo image on card " + meal.nameRU + "[" + meal.id + "]");
                 loggerFactory.error(e);
             }
-         /*   try {
-                ImageHelper.saveImages(meal.panoramaToList, card, CardImageType.PanoramaToList);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no panoramaToList image on card " + meal.nameRU + "[" + meal.id + "]");
-                loggerFactory.error(e);
-            }
-            try {
-                ImageHelper.saveImages(meal.panorama, card, CardImageType.Panorama);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no panorama image on card " + meal.nameRU + "[" + meal.id + "]");
-                loggerFactory.error(e);
-            }
-            try {
-                ImageHelper.saveImages(meal.cardImage, card, CardImageType.CardImage);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no cardImage image on card " + meal.nameRU + "[" + meal.id + "]");
-                loggerFactory.error(e);
-            }*/
-
             addRestarauntChainLink(meal.restaurantChain, card);
 
 //            handBook.priceFile);
@@ -805,15 +750,26 @@ public class GlobalXmlParser implements Runnable {
             cardEntityHashMap.put(hotel.id, card);
             saveText(hotel.nameRU, hotel.nameEN, hotel.nameRU, hotel.nameEN, TextType.Name, card);
             saveText(hotel.addrRU, hotel.addrEN, hotel.nameRU, hotel.nameEN, TextType.Address, card);
-            saveText(hotel.descrRu, hotel.descrEN, hotel.nameRU, hotel.nameEN, TextType.Description, card);
+            saveText(hotel.descrRU, hotel.descrEN, hotel.nameRU, hotel.nameEN, TextType.Description, card);
             saveText(hotel.newsRu, hotel.newsEn, hotel.nameRU, hotel.nameEN, TextType.News, card);
             saveText(hotel.offersRu, hotel.offersEn, hotel.nameRU, hotel.nameEN, TextType.Offers, card);
+            saveText(hotel.facts, hotel.factsEn, hotel.nameRU, hotel.nameEN, TextType.Facts, card);
+            saveText(hotel.legends, hotel.legendsEn, hotel.nameRU, hotel.nameEN, TextType.Legends, card);
+            saveText(hotel.literature, hotel.literatureEn, hotel.nameRU, hotel.nameEN, TextType.Literature, card);
+            saveText(hotel.anecdotes, hotel.anecdotesEn, hotel.nameRU, hotel.nameEN, TextType.Anecdotes, card);
+            saveText(hotel.films, hotel.filmsEn, hotel.nameRU, hotel.nameEN, TextType.Films, card);
+            saveText(hotel.famousPassers, hotel.famousPassersEn, hotel.nameRU, hotel.nameEN, TextType.FamousPassers, card);
+            saveText(hotel.citations, hotel.citationsEn, hotel.nameRU, hotel.nameEN, TextType.Citations, card);
+            saveText(hotel.wikipedia, hotel.wikipediaEn, hotel.nameRU, hotel.nameEN, TextType.Wikipedia, card);
+            saveText(hotel.wikimapiaRu, hotel.wikimapiaEn, hotel.nameRU, hotel.nameEN, TextType.Wikimapia, card);
+            saveText(hotel.encspbRu, hotel.encspbEn, hotel.nameRU, hotel.nameEN, TextType.Encspb, card);
 
             if (hotel.lat != null && !hotel.lat.replaceAll(" ", "").isEmpty() && hotel.lon != null && !hotel.lon.replaceAll(" ", "").isEmpty()) {
                 saveCoordinate(hotel.lat, hotel.lon, card);
             }
 
             saveParameter(hotel.phone, card, CardParameterType.Phone);
+            saveParameter(hotel.additionalPhone, card, CardParameterType.Phone);
             saveParameter(hotel.openHours, card, CardParameterType.OpenHours);
             saveParameter(hotel.site, card, CardParameterType.Site);
             saveParameter(hotel.email, card, CardParameterType.Email);
@@ -843,25 +799,6 @@ public class GlobalXmlParser implements Runnable {
                 loggerFactory.error("no photo image on card " + hotel.nameRU + "[" + hotel.id + "]");
                 loggerFactory.error(e);
             }
-            /*try {
-                ImageHelper.saveImages(hotel.panoramaToList, card, CardImageType.PanoramaToList);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no panoramaToList image on card " + hotel.nameRU + "[" + hotel.id + "]");
-                loggerFactory.error(e);
-            }
-            try {
-                ImageHelper.saveImages(hotel.panorama, card, CardImageType.Panorama);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no panorama image on card " + hotel.nameRU + "[" + hotel.id + "]");
-                loggerFactory.error(e);
-            }*/
-          /*  try {
-                ImageHelper.saveImages(hotel.cardImage, card, CardImageType.CardImage);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no cardImage image on card " + hotel.nameRU + "[" + hotel.id + "]");
-                loggerFactory.error(e);
-            }
-*/
             addRestarauntChainLink(hotel.restaurantChain, card);
         }
     }
@@ -883,12 +820,23 @@ public class GlobalXmlParser implements Runnable {
             saveText(handBook.descrRU, handBook.descrEN, handBook.nameRU, handBook.nameEN, TextType.Description, card);
             saveText(handBook.newsRu, handBook.newsEn, handBook.nameRU, handBook.nameEN, TextType.News, card);
             saveText(handBook.offersRu, handBook.offersEn, handBook.nameRU, handBook.nameEN, TextType.Offers, card);
+            saveText(handBook.facts, handBook.factsEn, handBook.nameRU, handBook.nameEN, TextType.Facts, card);
+            saveText(handBook.legends, handBook.legendsEn, handBook.nameRU, handBook.nameEN, TextType.Legends, card);
+            saveText(handBook.literature, handBook.literatureEn, handBook.nameRU, handBook.nameEN, TextType.Literature, card);
+            saveText(handBook.anecdotes, handBook.anecdotesEn, handBook.nameRU, handBook.nameEN, TextType.Anecdotes, card);
+            saveText(handBook.films, handBook.filmsEn, handBook.nameRU, handBook.nameEN, TextType.Films, card);
+            saveText(handBook.famousPassers, handBook.famousPassersEn, handBook.nameRU, handBook.nameEN, TextType.FamousPassers, card);
+            saveText(handBook.citations, handBook.citationsEn, handBook.nameRU, handBook.nameEN, TextType.Citations, card);
+            saveText(handBook.wikipedia, handBook.wikipediaEn, handBook.nameRU, handBook.nameEN, TextType.Wikipedia, card);
+            saveText(handBook.wikimapiaRu, handBook.wikimapiaEn, handBook.nameRU, handBook.nameEN, TextType.Wikimapia, card);
+            saveText(handBook.encspbRu, handBook.encspbEn, handBook.nameRU, handBook.nameEN, TextType.Encspb, card);
 
             if (handBook.lat != null && !handBook.lat.replaceAll(" ", "").isEmpty() && handBook.lon != null && !handBook.lon.replaceAll(" ", "").isEmpty()) {
                 saveCoordinate(handBook.lat, handBook.lon, card);
             }
 
             saveParameter(handBook.phone, card, CardParameterType.Phone);
+            saveParameter(handBook.additionalPhone, card, CardParameterType.Phone);
             saveParameter(handBook.openHours, card, CardParameterType.OpenHours);
             saveParameter(handBook.site, card, CardParameterType.Site);
             saveParameter(handBook.email, card, CardParameterType.Email);
@@ -939,17 +887,28 @@ public class GlobalXmlParser implements Runnable {
             saveText(aboutCity.descrRU, aboutCity.descrEN, aboutCity.nameRU, aboutCity.nameEN, TextType.Description, card);
             saveText(aboutCity.newsRu, aboutCity.newsEn, aboutCity.nameRU, aboutCity.nameEN, TextType.News, card);
             saveText(aboutCity.offersRu, aboutCity.offersEn, aboutCity.nameRU, aboutCity.nameEN, TextType.Offers, card);
+            saveText(aboutCity.facts, aboutCity.factsEn, aboutCity.nameRU, aboutCity.nameEN, TextType.Facts, card);
+            saveText(aboutCity.legends, aboutCity.legendsEn, aboutCity.nameRU, aboutCity.nameEN, TextType.Legends, card);
+            saveText(aboutCity.literature, aboutCity.literatureEn, aboutCity.nameRU, aboutCity.nameEN, TextType.Literature, card);
+            saveText(aboutCity.anecdotes, aboutCity.anecdotesEn, aboutCity.nameRU, aboutCity.nameEN, TextType.Anecdotes, card);
+            saveText(aboutCity.films, aboutCity.filmsEn, aboutCity.nameRU, aboutCity.nameEN, TextType.Films, card);
+            saveText(aboutCity.famousPassers, aboutCity.famousPassersEn, aboutCity.nameRU, aboutCity.nameEN, TextType.FamousPassers, card);
+            saveText(aboutCity.wikipedia, aboutCity.wikipediaEn, aboutCity.nameRU, aboutCity.nameEN, TextType.Wikipedia, card);
+            saveText(aboutCity.wikimapiaRu, aboutCity.wikimapiaEn, aboutCity.nameRU, aboutCity.nameEN, TextType.Wikimapia, card);
+            saveText(aboutCity.wikimapiaRu, aboutCity.wikimapiaEn, aboutCity.nameRU, aboutCity.nameEN, TextType.Wikimapia, card);
+            saveText(aboutCity.encspbRu, aboutCity.encspbEn, aboutCity.nameRU, aboutCity.nameEN, TextType.Encspb, card);
 
             if (aboutCity.lat != null && !aboutCity.lat.replaceAll(" ", "").isEmpty() && aboutCity.lon != null && !aboutCity.lon.replaceAll(" ", "").isEmpty()) {
                 saveCoordinate(aboutCity.lat, aboutCity.lon, card);
             }
 
             saveParameter(aboutCity.phone, card, CardParameterType.Phone);
+            saveParameter(aboutCity.additionalPhone, card, CardParameterType.Phone);
             saveParameter(aboutCity.openHours, card, CardParameterType.OpenHours);
             saveParameter(aboutCity.site, card, CardParameterType.Site);
             saveParameter(aboutCity.email, card, CardParameterType.Email);
-            saveParameter(aboutCity.vKcom, card, CardParameterType.Vkcom);
-            saveParameter(aboutCity.fBcom, card, CardParameterType.Fbcom);
+            saveParameter(aboutCity.vkCom, card, CardParameterType.Vkcom);
+            saveParameter(aboutCity.fbCom, card, CardParameterType.Fbcom);
             saveParameter(aboutCity.twitter, card, CardParameterType.Twitter);
             saveParameter(aboutCity.frsqr, card, CardParameterType.Frsqr);
             saveParameter(aboutCity.wifiLogin, card, CardParameterType.WifiLogin);
@@ -974,29 +933,10 @@ public class GlobalXmlParser implements Runnable {
                 loggerFactory.error("no photo image on card " + aboutCity.nameRU + "[" + aboutCity.id + "]");
                 loggerFactory.error(e);
             }
-          /*  try {
-                ImageHelper.saveImages(aboutCity.panoramaToList, card, CardImageType.PanoramaToList);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no panoramaToList image on card " + aboutCity.nameRU + "[" + aboutCity.id + "]");
-                loggerFactory.error(e);
-            }
-            try {
-                ImageHelper.saveImages(aboutCity.panorama, card, CardImageType.Panorama);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no panorama image on card " + aboutCity.nameRU + "[" + aboutCity.id + "]");
-                loggerFactory.error(e);
-            }
-            try {
-                ImageHelper.saveImages(aboutCity.cardImage, card, CardImageType.CardImage);
-            } catch (DataIsEmptyException e) {
-                loggerFactory.error("no cardImage image on card " + aboutCity.nameRU + "[" + aboutCity.id + "]");
-                loggerFactory.error(e);
-            }*/
-
         }
     }
 
-    private void saveCardTags(String stringOfTags, CardEntity card, TagType tagType) throws SQLException, IOException {
+    public void saveCardTags(String stringOfTags, CardEntity card, TagType tagType) throws SQLException, IOException {
         if (stringOfTags == null || stringOfTags.equals("") || stringOfTags.equals("null")) {
             return;
         }
@@ -1015,7 +955,7 @@ public class GlobalXmlParser implements Runnable {
         for (Integer integer : integers) {
             for (StringIntPair stringIntPair : stringIntPairs) {
                 if (integer == stringIntPair.getAnInt()) {
-                    TagEntity tagEntity = TagRequest.getTag(tagType, stringIntPair.getString());
+                    TagEntity tagEntity = TagRequest.getTag(stringIntPair.getString());
                     if (tagEntity != null) {
                         CardTagEntity cardTagEntity = new CardTagEntity(card, tagEntity);
                         TagRequest.addCardTag(cardTagEntity);
@@ -1025,8 +965,8 @@ public class GlobalXmlParser implements Runnable {
         }
     }
 
-    private void saveParameter(String parameter, CardEntity card, CardParameterType cardParameterType) {
-        if (ParameterValidator.isValidParameter(parameter, cardParameterType.getDataType())) {
+    public void saveParameter(String parameter, CardEntity card, CardParameterType cardParameterType) {
+        if (parameter != null && !parameter.replaceAll(" ", "").isEmpty() && ParameterValidator.isValidParameter(parameter, cardParameterType.getDataType())) {
             CardParameterTypeEntity cardParameterTypeEntity = ParameterRequest.getParameterTypeByName(cardParameterType.getEnglishName());
             CardParameterEntity cardParameterEntity = new CardParameterEntity(card, cardParameterTypeEntity, parameter);
             ParameterRequest.addCardParameter(cardParameterEntity);
@@ -1034,7 +974,7 @@ public class GlobalXmlParser implements Runnable {
     }
 
 
-    private void saveText(String textRu, String textEn, String nameRu, String nameEn, TextType textType, CardEntity card) {
+    public void saveText(String textRu, String textEn, String nameRu, String nameEn, TextType textType, CardEntity card) {
         TextGroupEntity textGroupEntity = null;
         String name;
         if (nameEn != null) {
@@ -1082,25 +1022,14 @@ public class GlobalXmlParser implements Runnable {
             TextRequest.addTextGroup(textGroupEntity);
         }
         if (textGroupEntity != null) {
-            TextCardEntity textCardEntity = new TextCardEntity(textGroupEntity, card, textType);
+            CardParameterTypeEntity cardParameterTypeEntity = ParameterRequest.getParameterTypeByName(textType.toString());
+            TextCardEntity textCardEntity = new TextCardEntity(textGroupEntity, card, cardParameterTypeEntity);
             TextRequest.addTextCard(textCardEntity);
         }
     }
 
-    private void saveTags(ArrayList<StringIntPair> tagList, TagType tagType) {
-        try {
-            for (StringIntPair tagItem : tagList) {
-                TextGroupEntity textGroup = new TextGroupEntity(tagType + "_" + tagItem.getString());
-                TagEntity tagEntity = new TagEntity(textGroup, tagType, tagItem.getString());
-                tagEntity.setTagID((long) tagItem.getAnInt());
-                TagRequest.addTag(tagEntity);
-            }
-        } catch (Exception e) {
-            loggerFactory.error(e);
-        }
-    }
 
-    private void saveCoordinate(String lat, String lon, CardEntity card) {
+    public void saveCoordinate(String lat, String lon, CardEntity card) {
         try {
             if (ParameterValidator.isValidParameter(lat, DataType.DoubleType) && ParameterValidator.isValidParameter(lon, DataType.DoubleType)) {
                 double doubleLat = Double.parseDouble(lat);
@@ -1126,9 +1055,39 @@ public class GlobalXmlParser implements Runnable {
             restaurantChainMap = null;
         }
     }
+
+    public HashMap<String, CardEntity> getCardEntityHashMap() {
+        return cardEntityHashMap;
+    }
+
+    public static void main(String[] args) {
+        try {
+            ArrayList<Integer> integers = StringFileParser.getIntegerListByString("1,2,3,4,5,6,7,8,9,10,11,12,13", ",");
+            TagType tagType = TagType.Cuisine;
+            String fileText;
+            if (tagType.equals(TagType.Cuisine)) {
+                fileText = FileHelper.readFileAsString(ServerConsts.root + "app_data/Kitchens.txt");
+            } else {
+                if (tagType.equals(TagType.Categories)) {
+                    fileText = FileHelper.readFileAsString(ServerConsts.root + "app_data/Categories.txt");
+                } else {
+                    fileText = FileHelper.readFileAsString(ServerConsts.root + "app_data/Ribbons.txt");
+                }
+            }
+            ArrayList<StringIntPair> stringIntPairs = StringFileParser.parseStandardStringIntPair(fileText, ";");
+            for (Integer integer : integers) {
+                for (StringIntPair stringIntPair : stringIntPairs) {
+                    if (integer == stringIntPair.getAnInt()) {
+                        System.out.println(stringIntPair.getString());
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
-
-
 
 /*
 priceFile;

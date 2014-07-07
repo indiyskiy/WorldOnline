@@ -4,13 +4,6 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 21.10.13
- * Time: 19:50
- * To change this template use File | Settings | File Templates.
- */
 @Root(name = "Route")
 public class Route {
     @Attribute(name = "id", required = true)
@@ -29,7 +22,7 @@ public class Route {
     @Element(name = "NameRu", required = false)
     public String nameRu;
     @Element(name = "Order", required = false)
-    public String Order;
+    public String order;
     @Element(name = "GeoPoints", required = false)
     public String geoPoints;
 }

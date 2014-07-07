@@ -4,7 +4,6 @@ import helper.FileHelper;
 import helper.Md5Hash;
 import model.constants.Component;
 import model.constants.ServerConsts;
-import model.constants.databaseenumeration.CardImageType;
 import model.constants.databaseenumeration.LanguageType;
 import model.constants.databaseenumeration.MenuType;
 import model.database.requests.ImageRequest;
