@@ -1,6 +1,5 @@
 package model.phone.requesthandler;
 
-import controller.phone.entity.GetAllMenuIDsRequest;
 import controller.phone.entity.MobileRequest;
 import controller.phone.entity.RestoreUserRequest;
 import model.constants.ExceptionTexts;
