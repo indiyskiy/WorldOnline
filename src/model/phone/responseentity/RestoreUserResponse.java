@@ -1,7 +1,6 @@
 package model.phone.responseentity;
 
 import model.constants.Status;
-import model.phone.responseentity.MobileResponseEntity;
 
 public class RestoreUserResponse extends MobileResponseEntity {
     private long userID;

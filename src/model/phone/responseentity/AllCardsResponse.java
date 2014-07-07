@@ -5,10 +5,10 @@ import model.constants.Status;
 
 import java.util.LinkedList;
 
-public class GetAllCardsResponse extends MobileResponseEntity {
+public class AllCardsResponse extends MobileResponseEntity {
     private LinkedList<MobileCardInfo> cardList;
 
-    public GetAllCardsResponse() {
+    public AllCardsResponse() {
         super(Status.OK);
     }
 

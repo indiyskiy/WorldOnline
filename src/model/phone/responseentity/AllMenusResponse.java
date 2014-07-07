@@ -1,25 +1,22 @@
 package model.phone.responseentity;
 
+import model.additionalentity.phone.MenuCompleteInformation;
 import model.constants.Status;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
-/**
- * Created by Илья on 09.04.14.
- */
 public class AllMenusResponse extends MobileResponseEntity {
-
-    private LinkedList<Long> menuIDs;
+    private ArrayList<MenuCompleteInformation> menusCompleteInformation;
 
     public AllMenusResponse() {
         super(Status.OK);
     }
 
-    public void setMenuIDs(LinkedList<Long> menuIDs) {
-        this.menuIDs = menuIDs;
+    public void setMenusCompleteInformation(ArrayList<MenuCompleteInformation> menusCompleteInformation) {
+        this.menusCompleteInformation = menusCompleteInformation;
     }
 
-    public LinkedList<Long> getMenuIDs() {
-        return menuIDs;
+    public ArrayList<MenuCompleteInformation> getMenusCompleteInformation() {
+        return menusCompleteInformation;
     }
 }

@@ -4,13 +4,10 @@ import model.constants.Status;
 
 import java.util.LinkedList;
 
-/**
- * Created by Илья on 22.05.14.
- */
-public class GetViewImagesResponse extends MobileResponseEntity {
+public class ViewImagesResponse extends MobileResponseEntity {
     private LinkedList<MobileViewImage> mobileViewImages = new LinkedList<>();
 
-    public GetViewImagesResponse() {
+    public ViewImagesResponse() {
         super(Status.OK);
     }
 
