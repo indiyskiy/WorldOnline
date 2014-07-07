@@ -1,16 +1,13 @@
 package model.additionalentity;
 
-import model.constants.databaseenumeration.ChangingDataType;
+import model.constants.databaseenumeration.DataBaseEntityType;
 import model.constants.databaseenumeration.UpdateStatus;
 import model.constants.databaseenumeration.UpdateType;
 
-/**
- * Created by Илья on 17.04.14.
- */
 public class CardUpdateInfo {
     private long cardID;
     private UpdateType updateType;
-    private ChangingDataType dataType;
+    private DataBaseEntityType dataType;
     private UpdateStatus updateStatus;
 
     public void setCardID(long cardID) {
@@ -29,11 +26,11 @@ public class CardUpdateInfo {
         return updateType;
     }
 
-    public void setDataType(ChangingDataType dataType) {
+    public void setDataType(DataBaseEntityType dataType) {
         this.dataType = dataType;
     }
 
-    public ChangingDataType getDataType() {
+    public DataBaseEntityType getDataType() {
         return dataType;
     }
 

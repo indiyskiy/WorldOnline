@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import model.constants.databaseenumeration.CardType;
-import model.database.requests.CoordinateRequest;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,6 +16,20 @@ public class MobileCardInfo {
     private ArrayList<MobileCardImage> images = new ArrayList<>();
     private ArrayList<MobileParameter> mobileParameters = new ArrayList<>();
     private MobileCoordinate coordinate;
+    private int order;
+    private HashSet<Long> tagIDs = new HashSet<>();
+
+    public MobileCoordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
 
     public Long getCardID() {
         return cardID;
@@ -29,7 +42,6 @@ public class MobileCardInfo {
     public ArrayList<MobileText> getMobileTexts() {
         return mobileTexts;
     }
-
 
     public HashSet<Long> getMenuIDs() {
         return menuIDs;
@@ -59,11 +71,9 @@ public class MobileCardInfo {
         this.mobileParameters = mobileParameters;
     }
 
-
     public void setCardType(CardType cardType) {
         this.cardType = cardType;
     }
-
 
     public ArrayList<MobileCardImage> getImages() {
         return images;
@@ -73,11 +83,19 @@ public class MobileCardInfo {
         this.coordinate = coordinate;
     }
 
+    public HashSet<Long> getTagIDs() {
+        return tagIDs;
+    }
+
+    public void setTagIDs(HashSet<Long> tagIDs) {
+        this.tagIDs = tagIDs;
+    }
 
     public JsonObject toJson() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("cardID", cardID);
         jsonObject.addProperty("cardType", cardType.getValue());
+        jsonObject.addProperty("order", order);
         JsonArray textArray = new JsonArray();
         for (MobileText mobileText : mobileTexts) {
             textArray.add(mobileText.toJson());
@@ -88,6 +106,11 @@ public class MobileCardInfo {
             menus.add(new JsonPrimitive(menuID));
         }
         jsonObject.add("menus", menus);
+        JsonArray tags = new JsonArray();
+        for (long tagId : tagIDs) {
+            tags.add(new JsonPrimitive(tagId));
+        }
+        jsonObject.add("tags", tags);
         JsonArray imagesJson = new JsonArray();
         for (MobileCardImage mobileCardImage : images) {
             imagesJson.add(mobileCardImage.toJson());

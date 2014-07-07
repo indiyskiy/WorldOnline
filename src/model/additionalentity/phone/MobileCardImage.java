@@ -3,9 +3,7 @@ package model.additionalentity.phone;
 import com.google.gson.JsonObject;
 import model.constants.databaseenumeration.CardImageType;
 
-/**
- * Created by Илья on 20.05.14.
- */
+
 public class MobileCardImage {
     private long imageID;
     private CardImageType cardImageType;

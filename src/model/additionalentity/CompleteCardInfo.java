@@ -1,6 +1,7 @@
 package model.additionalentity;
 
 import model.additionalentity.admin.CompleteMenuInfo;
+import model.constants.databaseenumeration.CardParameterType;
 import model.constants.databaseenumeration.LanguageType;
 import model.constants.databaseenumeration.TextType;
 import model.database.worldonlinedb.*;
@@ -20,7 +21,7 @@ public class CompleteCardInfo {
     private HashMap<Long, CompleteCardTagInfo> completeCardTagInfoMap = new HashMap<Long, CompleteCardTagInfo>();
     private HashMap<Long, CompleteCardImageInfo> completeCardImageInfoMap = new HashMap<Long, CompleteCardImageInfo>();
     private HashMap<Long, CardParameterEntity> cardParameterEntityMap = new HashMap<Long, CardParameterEntity>();
-    private CompleteCardRootInfo completeCardRootInfo;
+    private CompleteCardRouteInfo completeCardRouteInfo;
     private HashMap<Long, CompleteTextCardInfo> completeTextCardInfoMap = new HashMap<Long, CompleteTextCardInfo>();
     private CardCoordinateEntity cardCoordinateEntity;
     private HashMap<Long, CardToCardLinkEntity> cardToCardLinkEntityMap = new HashMap<Long, CardToCardLinkEntity>();
@@ -71,12 +72,12 @@ public class CompleteCardInfo {
         this.cardParameterEntityMap = cardParameterEntityMap;
     }
 
-    public CompleteCardRootInfo getCompleteCardRootInfo() {
-        return completeCardRootInfo;
+    public CompleteCardRouteInfo getCompleteCardRouteInfo() {
+        return completeCardRouteInfo;
     }
 
-    public void setCompleteCardRootInfo(CompleteCardRootInfo completeCardRootInfo) {
-        this.completeCardRootInfo = completeCardRootInfo;
+    public void setCompleteCardRouteInfo(CompleteCardRouteInfo completeCardRouteInfo) {
+        this.completeCardRouteInfo = completeCardRouteInfo;
     }
 
     public HashMap<Long, CompleteTextCardInfo> getCompleteTextCardInfoMap() {
@@ -116,7 +117,7 @@ public class CompleteCardInfo {
         simpleCard.setCardEntity(cardEntity);
         Collection<CompleteTextCardInfo> texts = completeTextCardInfoMap.values();
         for (CompleteTextCardInfo text : texts) {
-            if (text.getTextCardEntity().getCardTextType() == TextType.Address.getValue()) {
+          /*  if (text.getTextCardEntity().getCardParameterType() == CardParameterType.Adress) {
                 CompleteTextGroupInfo completeTextGroupInfo = text.getCompleteTextGroupInfo();
                 Collection<TextEntity> textEntities = completeTextGroupInfo.getTextEntityMap().values();
                 for (TextEntity textEntity : textEntities) {
@@ -145,7 +146,7 @@ public class CompleteCardInfo {
                         break;
                     }
                 }
-            }
+            }*/
         }
         return simpleCard;
     }
