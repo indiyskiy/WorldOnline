@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Servcer
-  Date: 29.11.13
-  Time: 14:16
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -65,13 +58,21 @@
             </c:if>
         </c:forEach>
         <br/>
-        Статус:
-        <c:forEach items="${cardStates}" var="cardState">
-            <c:if test="${cardState.value==card.cardState}">
-                ${cardState}.
-            </c:if>
-        </c:forEach>
-        <br/><br/>
+
+        <form action="changestatus" method="post">
+            Статус:
+            <select name="state">
+                <c:forEach items="${cardStates}" var="cardState">
+                    <option value="${cardState.value}"
+                            <c:if test="${cardState.value==card.cardState}">
+                                selected
+                            </c:if>
+                            >${cardState}</option>
+                </c:forEach>
+            </select>
+            <input name="submit" type="submit" title="изменить">
+            <input type="hidden" name="cardID" value="${card.cardID}">
+        </form>
         <c:choose>
             <c:when test="${! empty cardCoordinate}">
                 Координаты ${cardCoordinate.longitude} : ${cardCoordinate.latitude}.
@@ -104,33 +105,33 @@
                     ${cardText.completeTextGroupInfo.textGroup.textGroupName}
             </a>
             (
-            <c:forEach items="${textTypes}" var="textType">
-                <c:if test="${textType.value==cardText.textCardEntity.cardTextType}">
-                    ${textType}
-                </c:if>
-            </c:forEach>
+            <%--    <c:forEach items="${textTypes}" var="textType">
+                    <c:if test="${textType.value==cardText.textCardEntity.cardTextType}">
+                        ${textType}
+                    </c:if>
+                </c:forEach>--%>
             )
             <br/>
         </c:forEach>
     </dd>
 </dl>
 <br/>
-<dl class="spoiler" onclick="clickSpoiler(this);">
-    <dt>Тэги</dt>
-    <dd>
-        <br/>
-        <c:forEach items="${tags}" var="tag">
-            Текст [${tag.completeTagInfo.tagEntity.tagID}]${tag.completeTagInfo.tagEntity.tagName} (
-            <c:forEach items="${tagTypes}" var="tagType">
-                <c:if test="${tagType.value==tag.completeTagInfo.tagEntity.tagType}">
-                    ${tagType}
-                </c:if>
-            </c:forEach>
-            )
-            <br/>
-        </c:forEach>
-    </dd>
-</dl>
+<%--  <dl class="spoiler" onclick="clickSpoiler(this);">
+      <dt>Тэги</dt>
+      <dd>
+          <br/>
+          <c:forEach items="${tags}" var="tag">
+              Текст [${tag.completeTagInfo.tagEntity.tagID}]${tag.completeTagInfo.tagEntity.tagName} (
+              <c:forEach items="${tagTypes}" var="tagType">
+                  <c:if test="${tagType.value==tag.completeTagInfo.tagEntity.tagType}">
+                      ${tagType}
+                  </c:if>
+              </c:forEach>
+              )
+              <br/>
+          </c:forEach>
+      </dd>
+  </dl>--%>
 <br/>
 <dl class="spoiler" onclick="clickSpoiler(this);">
     <dt>Ссылки</dt>
@@ -173,14 +174,14 @@
 </dl>
 <br/>
 <dl class="spoiler" onclick="clickSpoiler(this);">
-    <dt>Картинки</dt>
+    <dt>Картинки <a href="imagecardupload?cardID=${card.cardID}">добавить</a></dt>
     <dd>
         <br/>
         <c:forEach items="${images}" var="image">
             [${image.cardImageEntity.image.imageID}]${image.cardImageEntity.cardImageName} (
-            <c:forEach items="${imageTypes}" var="imageType">
-                <c:if test="${imageType.value==image.cardImageEntity.cardImageType}">
-                    ${imageType}
+            <c:forEach items="${cardImageTypes}" var="cardImageType">
+                <c:if test="${cardImageType.value==image.cardImageEntity.cardCardImageType}">
+                    ${cardImageType}
                 </c:if>
             </c:forEach>
             )

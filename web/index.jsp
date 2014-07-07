@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Servcer
@@ -13,13 +14,20 @@
 <body>
 Добро пожаловать в админку Петербурга на ладони!
 <br/>
-<br/>
-<a href="allcards">Все карточки</a>
-<br/>
-<a href="alltags">Все тэги</a>
-<br/>
-<a href="allmenus">Все категории</a>
-<br/>
-<a href="logout">Выход</a>
+<c:if test="${registered==true}">
+    <br/>
+    <a href="allcards">Все карточки</a>
+    <br/>
+    <a href="alltags">Все тэги</a>
+    <br/>
+    <a href="allmenus">Все категории</a>
+    <br/>
+    <a href="logout">Вход</a>
+    <br/>
+    <a href="logout">Выход</a>
+</c:if>
+<c:if test="${registered==false}">
+    <a href="login">Вход</a>
+</c:if>
 </body>
 </html>

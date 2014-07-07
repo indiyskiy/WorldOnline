@@ -17,18 +17,18 @@
     <br/>
     Имя тета <input type="text" name="TagName" size="20" value="${tag.tagName}"/>
     <br/>
-    Тип тега <select name="TagType">
-    <c:forEach var="tagType" items="${TagTypes}">
-        <option value="${tagType.value}"
-                <c:if test="${tagType.value==tag.tagType}">
-                    selected
-                </c:if>
-                >
-            <c:out value="${tagType}"/>
-        </option>
-    </c:forEach>
-    </value>
-</select>
+    <%--  Тип тега <select name="TagType">
+      <c:forEach var="tagType" items="${TagTypes}">
+          <option value="${tagType.value}"
+                  <c:if test="${tagType.value==tag.tagType}">
+                      selected
+                  </c:if>
+                  >
+              <c:out value="${tagType}"/>
+          </option>
+      </c:forEach>
+     --%>
+    </select>
     <br/>
     Группа текстов тега [ID${tag.tagTextGroup.textGroupID}]${tag.tagTextGroup.textGroupName} ( <a
         href="texteroupedit?TextGroupID=${tag.tagTextGroup.textGroupID}">Редактировать</a>)

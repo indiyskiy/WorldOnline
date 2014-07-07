@@ -86,6 +86,18 @@
         <url-pattern>/completecardinfo</url-pattern>
     </servlet-mapping>
 
+    <!-- staticfile -->
+    <servlet>
+        <display-name>GetStaticFileServlet</display-name>
+        <servlet-name>GetStaticFileServlet</servlet-name>
+        <servlet-class>view.servlet.admin.GetStaticFileServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetStaticFileServlet</servlet-name>
+        <url-pattern>/staticfile/*</url-pattern>
+    </servlet-mapping>
+
     <!-- image -->
     <servlet>
         <display-name>ImageServlet</display-name>
@@ -96,6 +108,17 @@
     <servlet-mapping>
         <servlet-name>ImageServlet</servlet-name>
         <url-pattern>/image/*</url-pattern>
+    </servlet-mapping>
+    <!-- image card upload-->
+    <servlet>
+        <display-name>ImageCardUploadServlet</display-name>
+        <servlet-name>ImageCardUploadServlet</servlet-name>
+        <servlet-class>view.servlet.admin.ImageCardUploadServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ImageCardUploadServlet</servlet-name>
+        <url-pattern>/imagecardupload/*</url-pattern>
     </servlet-mapping>
 
     <!-- text group info -->
@@ -183,6 +206,18 @@
         <url-pattern>/weather</url-pattern>
     </servlet-mapping>
 
+    <!--Create Card-->
+    <servlet>
+        <display-name>CreateCardServlet</display-name>
+        <servlet-name>CreateCardServlet</servlet-name>
+        <servlet-class>view.servlet.admin.CreateCardServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateCardServlet</servlet-name>
+        <url-pattern>/createcard</url-pattern>
+    </servlet-mapping>
+
     <!--Login-->
     <servlet>
         <display-name>LoginServlet</display-name>
@@ -219,6 +254,35 @@
         <url-pattern>/mailConfirm/*</url-pattern>
     </servlet-mapping>
 
+
+    <!--change status-->
+    <servlet>
+        <display-name>ChangeStatusServlet</display-name>
+        <servlet-name>ChangeStatusServlet</servlet-name>
+        <servlet-class>view.servlet.admin.ChangeStatusServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ChangeStatusServlet</servlet-name>
+        <url-pattern>/changestatus</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <display-name>IndexServlet</display-name>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>view.servlet.admin.IndexServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
+
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
+
     <!--MOBILE-->
     <!--registration-->
     <servlet>
@@ -236,48 +300,48 @@
     <servlet>
         <display-name>GetAllMenusIdsServlet</display-name>
         <servlet-name>GetAllMenusIdsServlet</servlet-name>
-        <servlet-class>view.servlet.phone.GetAllMenusIdsServlet</servlet-class>
+        <servlet-class>view.servlet.phone.AllMenusIdsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>GetAllMenusIdsServlet</servlet-name>
-        <url-pattern>/mobile/getallmenusids</url-pattern>
+        <url-pattern>/mobile/allmenusids</url-pattern>
     </servlet-mapping>
 
     <!--all menu ids-->
     <servlet>
         <display-name>GetMenuServlet</display-name>
         <servlet-name>GetMenuServlet</servlet-name>
-        <servlet-class>view.servlet.phone.GetMenuServlet</servlet-class>
+        <servlet-class>view.servlet.phone.MenuServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>GetMenuServlet</servlet-name>
-        <url-pattern>/mobile/getmenu</url-pattern>
+        <url-pattern>/mobile/menu</url-pattern>
     </servlet-mapping>
 
     <!--all menus-->
     <servlet>
         <display-name>GetAllMenusServlet</display-name>
         <servlet-name>GetAllMenusServlet</servlet-name>
-        <servlet-class>view.servlet.phone.GetAllMenusServlet</servlet-class>
+        <servlet-class>view.servlet.phone.AllMenusServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>GetAllMenusServlet</servlet-name>
-        <url-pattern>/mobile/getallmenus</url-pattern>
+        <url-pattern>/mobile/allmenus</url-pattern>
     </servlet-mapping>
 
     <!--all cards-->
     <servlet>
         <display-name>GetAllCardsServlet</display-name>
         <servlet-name>GetAllCardsServlet</servlet-name>
-        <servlet-class>view.servlet.phone.GetAllCardsServlet</servlet-class>
+        <servlet-class>view.servlet.admin.GetAllCardsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>GetAllCardsServlet</servlet-name>
-        <url-pattern>/mobile/getallcards</url-pattern>
+        <url-pattern>/mobile/allcards</url-pattern>
     </servlet-mapping>
 
     <!--weather-->
@@ -290,6 +354,57 @@
     <servlet-mapping>
         <servlet-name>WeatherPhoneServlet</servlet-name>
         <url-pattern>/mobile/weather</url-pattern>
+    </servlet-mapping>
+
+    <!--Get All Card Parameter Types-->
+    <servlet>
+        <display-name>GetAllCardParameterTypesServlet</display-name>
+        <servlet-name>GetAllCardParameterTypesServlet</servlet-name>
+        <servlet-class>view.servlet.phone.AllCardParameterTypesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetAllCardParameterTypesServlet</servlet-name>
+        <url-pattern>/mobile/allcardparametertypes</url-pattern>
+    </servlet-mapping>
+
+
+    <!--Get All Card Parameter Types-->
+    <servlet>
+        <display-name>AllTagsMobileServlet</display-name>
+        <servlet-name>AllTagsMobileServlet</servlet-name>
+        <servlet-class>view.servlet.phone.AllTagsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AllTagsMobileServlet</servlet-name>
+        <url-pattern>/mobile/alltags</url-pattern>
+    </servlet-mapping>
+
+
+    <!--viewimages-->
+    <servlet>
+        <display-name>GetViewImagesServlet</display-name>
+        <servlet-name>GetViewImagesServlet</servlet-name>
+        <servlet-class>view.servlet.phone.ViewImagesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetViewImagesServlet</servlet-name>
+        <url-pattern>/mobile/viewimages</url-pattern>
+    </servlet-mapping>
+
+
+    <!--restore user-->
+    <servlet>
+        <display-name>RestoreUserServlet</display-name>
+        <servlet-name>RestoreUserServlet</servlet-name>
+        <servlet-class>view.servlet.phone.RestoreUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RestoreUserServlet</servlet-name>
+        <url-pattern>/mobile/restoreuser</url-pattern>
     </servlet-mapping>
 
 

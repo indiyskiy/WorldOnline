@@ -14,5 +14,10 @@
 hi hi!
 <br/>
 parse status is ${parse}
+<br>
+
+<form name="parse" action="globalbaseparse" method="post">
+    <input type="submit">
+</form>
 </body>
 </html>

@@ -8,6 +8,8 @@
     <title>All cards</title>
 </head>
 <body>
+<a href="index">Главная страница.</a> <a href="createcard">Создать карточку.</a>
+<br/>
 Страница <c:forEach var="i" begin="0" end="${pages}">
     <c:choose>
         <c:when test="${i==0 && (''.equals(page) || empty  page )}">
@@ -22,13 +24,12 @@
             </a>
         </c:otherwise>
     </c:choose>
-
 </c:forEach>
 <br/>
 
 <form action="allcards" method="GET">
-    Имя карточки <input type="text" name="CardNameRe"
-                        value="${cardNameRe}"/>
+    Текст <input type="text" name="CardNameRe"
+                 value="${cardNameRe}"/>
     ID карточки <input type="text" name="CardIDRe"
                        value="${cardIDRe}"/>
     Тип карточки <select name="CardTypeRe">
