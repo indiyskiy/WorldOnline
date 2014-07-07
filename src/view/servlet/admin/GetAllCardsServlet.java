@@ -13,11 +13,13 @@ public class GetAllCardsServlet extends MobileServlet {
 
     @Override
     protected MobileHandler getMobileHandler() {
+        loggerFactory.debug("GetAllCardsServlet getMobileHandler");
         return new GetAllCardsHandler();
     }
 
     @Override
     public MobileParser getMobileParser() {
+        loggerFactory.debug("GetAllCardsServlet getMobileParser");
         return new GetAllCardsParser();
     }
 

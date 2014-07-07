@@ -5,16 +5,15 @@ import helper.ImageHelper;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardImageType;
-
 import model.database.worldonlinedb.CardEntity;
 import model.logger.LoggerFactory;
-
 import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
 public class ImageCardUploadServlet extends ProtectedServlet {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, ImageCardUploadServlet.class);

@@ -7,10 +7,8 @@ import model.database.requests.CardRequest;
 import model.database.worldonlinedb.CardEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
-import view.servlet.admin.ProtectedServlet;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

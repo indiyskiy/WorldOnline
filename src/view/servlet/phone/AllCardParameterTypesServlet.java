@@ -1,24 +1,24 @@
 package view.servlet.phone;
 
-import controller.phone.parser.GetAllMenuIDsParser;
+import controller.phone.parser.AllCardParameterTypesParser;
 import controller.phone.parser.MobileParser;
 import model.constants.Component;
 import model.logger.LoggerFactory;
-import model.phone.requesthandler.AllMenusHandler;
+import model.phone.requesthandler.AllCardParameterTypesHandler;
 import model.phone.requesthandler.MobileHandler;
 
 
-public class GetAllMenusIdsServlet extends MobileServlet {
+public class AllCardParameterTypesServlet extends MobileServlet {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, UserRegistrationServlet.class);
 
     @Override
     protected MobileHandler getMobileHandler() {
-        return new AllMenusHandler();
+        return new AllCardParameterTypesHandler();
     }
 
     @Override
     public MobileParser getMobileParser() {
-        return new GetAllMenuIDsParser();
+        return new AllCardParameterTypesParser();
     }
 
     @Override

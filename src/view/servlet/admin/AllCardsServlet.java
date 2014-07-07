@@ -4,6 +4,7 @@ import controller.parser.adminparser.AllCardParser;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardType;
+import model.constants.databaseenumeration.TextType;
 import model.database.requests.CardRequest;
 import model.database.worldonlinedb.CardEntity;
 import model.logger.LoggerFactory;
@@ -44,6 +45,7 @@ public class AllCardsServlet extends ProtectedServlet {
             request.setAttribute("pages", pages);
             request.setAttribute("cardList", cardEntities);
             request.setAttribute("cardTypes", CardType.values());
+            request.setAttribute("textType", TextType.values());
             ServletHelper.sendForward("/allcards.jsp", this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

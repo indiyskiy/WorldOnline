@@ -1,23 +1,23 @@
 package view.servlet.phone;
 
-import controller.phone.parser.GetViewImagesParser;
+import controller.phone.parser.GetAllMenusParser;
 import controller.phone.parser.MobileParser;
 import model.constants.Component;
 import model.logger.LoggerFactory;
-import model.phone.requesthandler.GetViewImageHandler;
+import model.phone.requesthandler.AllMenusHandler;
 import model.phone.requesthandler.MobileHandler;
 
-public class GetViewImagesServlet extends MobileServlet {
-    public static LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, GetViewImagesServlet.class);
+public class AllMenusServlet extends MobileServlet {
+    private static final LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, AllMenusServlet.class);
 
     @Override
     protected MobileHandler getMobileHandler() {
-        return new GetViewImageHandler();
+        return new AllMenusHandler();
     }
 
     @Override
     public MobileParser getMobileParser() {
-        return new GetViewImagesParser();
+        return new GetAllMenusParser();
     }
 
     @Override

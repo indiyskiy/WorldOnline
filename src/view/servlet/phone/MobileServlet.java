@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public abstract class MobileServlet extends HttpServlet {
     private final MobileParser mobileParser = getMobileParser();
@@ -32,7 +33,7 @@ public abstract class MobileServlet extends HttpServlet {
             MobileResponseEntity mobileResponseEntity = mobileHandler.handleRequest(mobileRequest);
             String responseString = mobileParser.getResponse(mobileResponseEntity);
             ServletHelper.sendJson(response, responseString);
-        } catch (IllegalTypeException | ParseRequestException | IOException | ServletException e) {
+        } catch (IllegalTypeException | ParseRequestException | IOException | ServletException | SQLException e) {
             ServletHelper.sendMobileError(loggerFactory, e, response);
         }
     }
