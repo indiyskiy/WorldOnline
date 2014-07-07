@@ -155,7 +155,7 @@
         <class>model.database.worldonlinedb.TagEntity</class>
         <class>model.database.worldonlinedb.CardImageEntity</class>
         <class>model.database.worldonlinedb.ImageEntity</class>
-        <class>model.database.worldonlinedb.CardRootEntity</class>
+        <class>model.database.worldonlinedb.CardRouteEntity</class>
         <class>model.database.worldonlinedb.RouteElementEntity</class>
         <class>model.database.worldonlinedb.CardCoordinateEntity</class>
         <class>model.database.worldonlinedb.CardToCardLinkEntity</class>
@@ -167,6 +167,7 @@
         <class>model.database.worldonlinedb.CardChangeEntity</class>
         <class>model.database.worldonlinedb.UserCardEntity</class>
         <class>model.database.worldonlinedb.CardParameterTypeEntity</class>
+        <class>model.database.worldonlinedb.TagGroupEntity</class>
         <!-- <properties>
              <property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/worldonline"/>
              <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
