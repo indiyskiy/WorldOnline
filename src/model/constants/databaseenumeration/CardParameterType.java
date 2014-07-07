@@ -20,7 +20,7 @@ public enum CardParameterType {
     Tripadviser(17, DataType.LinkType, ApplicationBlock.Reviews),
     Instagramm(18, DataType.LinkType, ApplicationBlock.Social),
     Booking(19, DataType.LinkType, ApplicationBlock.Reviews),
-    MiddlePrice(20, DataType.IntegerType, ApplicationBlock.Main),
+    MiddlePrice(20, DataType.Coast, ApplicationBlock.Main),
     Billboard(21, DataType.LinkType, ApplicationBlock.Main),
     Apoi(22, DataType.LinkType, ApplicationBlock.Reviews),
     Ayda(23, DataType.LinkType, ApplicationBlock.Reviews),
@@ -64,7 +64,21 @@ public enum CardParameterType {
     Wikipedia(61, DataType.LinkType, ApplicationBlock.Main),
     Wikitravel(62, DataType.LinkType, ApplicationBlock.Main),
     ReservationDiscount(63, DataType.Percent, ApplicationBlock.Main),
-    ReservationPhone(64, DataType.PhoneNumberType, ApplicationBlock.Main);
+    ReservationPhone(64, DataType.PhoneNumberType, ApplicationBlock.Main),
+    AllCafe(65, DataType.LinkType, ApplicationBlock.Reviews),
+    WalkSpb(66, DataType.LinkType, ApplicationBlock.Reviews),
+    Spbin(67, DataType.LinkType, ApplicationBlock.Reviews),
+    NoBarriers(68, DataType.Boolean, ApplicationBlock.Main),
+    Name(69, DataType.StringType, ApplicationBlock.Main),
+    Address(70, DataType.StringType, ApplicationBlock.Main),
+    Description(71, DataType.StringType, ApplicationBlock.Main),
+    News(72, DataType.StringType, ApplicationBlock.Main),
+    Offers(73, DataType.StringType, ApplicationBlock.Main),
+    Biography(74, DataType.StringType, ApplicationBlock.Main),
+    Story(75, DataType.StringType, ApplicationBlock.Main),
+    Recomend(76, DataType.LinkType, ApplicationBlock.Main),
+    Wikimapia(77, DataType.LinkType, ApplicationBlock.Main),
+    Encspb(78, DataType.LinkType, ApplicationBlock.Reviews);
 
     private final int value;
     private final DataType dataType;
@@ -222,8 +236,37 @@ public enum CardParameterType {
                 return "Скидка при бронировании";
             case ReservationPhone:
                 return "Бронирование столика";
+            case AllCafe:
+                return "AllCafe";
+            case WalkSpb:
+                return "WalkSpb";
+            case Spbin:
+                return "Spbin";
+            case NoBarriers:
+                return "NoBarriers";
+            case Name:
+                return "Name";
+            case Address:
+                return "Address";
+            case Description:
+                return "Description";
+            case News:
+                return "News";
+            case Offers:
+                return "Offers";
+            case Biography:
+                return "Biography";
+            case Story:
+                return "Story";
+            case Recomend:
+                return "Recomend";
+            case Wikimapia:
+                return "Wikimapia";
+            case Encspb:
+                return "Encspd";
+            default:
+                return "";
         }
-        return null;
     }
 
 
@@ -353,7 +396,36 @@ public enum CardParameterType {
                 return "Reservation discount";
             case ReservationPhone:
                 return "Reservation phone number";
+            case AllCafe:
+                return "AllCafe";
+            case WalkSpb:
+                return "WalkSpb";
+            case Spbin:
+                return "Spbin";
+            case NoBarriers:
+                return "NoBarriers";
+            case Name:
+                return "Имя";
+            case Address:
+                return "Адрес";
+            case Description:
+                return "Описание";
+            case News:
+                return "Новости";
+            case Offers:
+                return "Предложения";
+            case Biography:
+                return "Биография";
+            case Story:
+                return "История";
+            case Recomend:
+                return "Recomend";
+            case Wikimapia:
+                return "Wikimapia";
+            case Encspb:
+                return "Encspd";
+            default:
+                return "";
         }
-        return null;
     }
 }

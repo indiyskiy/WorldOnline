@@ -5,14 +5,15 @@ package model.constants.databaseenumeration;
  */
 public enum DataBaseEntityType {
     Unknown(0),
-    Card(1),
+    Card(0),
     Text(2),
-    Tag(3),
-    Coordinate(4),
-    Image(5),
-    Root(6),
-    CardToCardLink(7),
-    Menu(8);
+    Parameter(3),
+    Image(4),
+    Route(5),
+    CardToCardLink(6),
+    Menu(7),
+    Tag(8),
+    Coordinate(9);
 
 
     private final int value;

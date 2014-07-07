@@ -1,22 +1,16 @@
 package model.constants.databaseenumeration;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 04.11.13
- * Time: 1:11
- * To change this template use File | Settings | File Templates.
- */
 public enum TagType {
-    Unknown(0),
-    Cuisine(1),
-    Categories(2),
-    Ribbons(3);
+    Cuisine(0, "Кухня"),
+    Categories(1, "Категории"),
+    Ribbons(2, "Ленточки");
 
     private final int value;
+    private String russianName;
 
-    private TagType(int value) {
+    private TagType(int value, String russianName) {
         this.value = value;
+        this.russianName = russianName;
     }
 
     public int getValue() {
@@ -28,10 +22,14 @@ public enum TagType {
             return null;
         }
         TagType[] tagTypes = TagType.values();
-        if (value <= 0 || value >= tagTypes.length) {
-            return Unknown;
-        } else {
-            return tagTypes[value];
-        }
+        return tagTypes[value];
+    }
+
+    public String getRussianName() {
+        return russianName;
+    }
+
+    public void setRussianName(String russianName) {
+        this.russianName = russianName;
     }
 }

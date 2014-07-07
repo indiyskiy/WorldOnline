@@ -2,13 +2,15 @@ package model.constants;
 
 
 public class ServerConsts {
-    public static final String LocalServerURL = "http://127.0.0.1:8090/";
-    public static final String GlobalServerURL = "http://148.251.42.117:8090/";
+    //ip
+    public static final int port = 8090;
+    public static final String globalIP = "148.251.42.117";
+    public static final String loopbackIP = "127.0.0.1";
+    public static final String LocalServerURL = "http://" + loopbackIP + ":" + port + "/";
+    public static final String GlobalServerURL = "http://" + globalIP + ":" + port + "/";
     public static final String worldOnlineModule = "worldOnline/";
     public static final String mobileModule = "mobile/";
-//  public static final String worldOnlineFileModule="WorldOnlineFileServer/";
-
-    //  public static final String home = "C:/home/";
+    //storage
     public static final String home = "/home/";
     public static final String newBase = home + "base/";
     public static final String newFileBase = newBase + "fileBase/";

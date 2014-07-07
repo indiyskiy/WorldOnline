@@ -1,12 +1,5 @@
 package model.constants.databaseenumeration;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 24.10.13
- * Time: 20:20
- * To change this template use File | Settings | File Templates.
- */
 public enum CardType {
     Unknown(0),
     CardAboutCity(1),
@@ -15,7 +8,8 @@ public enum CardType {
     CardRoute(4),
     CardSight(5),
     RestaurantChainCard(6),
-    CardPhoto(7);
+    CardPhoto(7),
+    CardPerson(8);
 
     private final int value;
 
@@ -63,7 +57,11 @@ public enum CardType {
                 return "сеть заведений";
             }
             case CardPhoto: {
-                return "Фото объекта";
+                return "фото объекта";
+            }
+
+            case CardPerson: {
+                return "человек";
             }
             default: {
                 return "неизвестно";

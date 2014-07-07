@@ -36,6 +36,12 @@ public class ExceptionTexts {
     public static final String getViewImagesUserNotExistException = "phone.getViewImages.UserID.NotExist";
     public static final String restoreUserDeviceIDEmptyException = "phone.restoreUser.DeviceID.empty";
     public static final String restoreUserDeviceNotFoundException = "phone.restoreUser.Device.notFound";
+    public static String getAllCardParameterTypesUserIDEmptyException = "phone.getAllCardParameterTypes.UserID.empty";
+    public static String getAllCardParameterTypesIncorrectException = "phone.getAllCardParameterTypes.UserID.Incorrect";
+    public static String getAllCardParameterTypesUserNotExistException = "phone.getAllCardParameterTypes.UserID.NotExist";
+    public static final String allTagsUserIDEmptyException = "phone.allTags.UserID.empty";
+    public static final String allTagsUserIDIncorrectException = "phone.allTags.UserID.Incorrect";
+    public static final String allTagsUserNotExistException = "phone.allTags.UserID.NotExist";
 
 
     private static HashSet<String> getMobileErrors() {

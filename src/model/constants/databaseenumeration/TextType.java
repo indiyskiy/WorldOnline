@@ -1,12 +1,24 @@
 package model.constants.databaseenumeration;
 
 public enum TextType {
-    Unknown(0),
     Name(1),
     Address(2),
     Description(3),
     News(4),
-    Offers(5);
+    Offers(5),
+    Biography(6),
+    Story(7),
+    Recomend(8),
+    Facts(9),
+    Legends(10),
+    Literature(11),
+    Anecdotes(12),
+    Films(13),
+    FamousPassers(14),
+    Citations(15),
+    Wikipedia(16),
+    Wikimapia(17),
+    Encspb(18);
 
 
     private final int value;
@@ -24,10 +36,11 @@ public enum TextType {
             return null;
         }
         TextType[] textTypes = TextType.values();
-        if (value <= 0 || value >= textTypes.length) {
-            return Unknown;
-        } else {
-            return textTypes[value];
-        }
+        return textTypes[value];
     }
+
+    public CardParameterType getType() {
+        return CardParameterType.valueOf(this.toString());
+    }
+
 }
