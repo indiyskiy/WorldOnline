@@ -2,27 +2,20 @@ package model.database.worldonlinedb;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 31.10.13
- * Time: 5:50
- * To change this template use File | Settings | File Templates.
- */
-@javax.persistence.Table(name = "RootElement", schema = "", catalog = "worldonline")
+@javax.persistence.Table(name = "RouteElement", schema = "", catalog = "worldonline")
 @Entity
 public class RouteElementEntity {
-    @javax.persistence.Column(name = "RootElementID")
+    @javax.persistence.Column(name = "RouteElementID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long rootElementID;
+    private Long routeElementID;
 
-    public Long getRootElementID() {
-        return rootElementID;
+    public Long getRouteElementID() {
+        return routeElementID;
     }
 
-    public void setRootElementID(Long rootElementID) {
-        this.rootElementID = rootElementID;
+    public void setRouteElementID(Long routeElementID) {
+        this.routeElementID = routeElementID;
     }
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -38,27 +31,27 @@ public class RouteElementEntity {
     }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "CardRootID")
-    private CardRootEntity cardRoot;
+    @JoinColumn(name = "CardRouteID")
+    private CardRouteEntity cardRoute;
 
-    public CardRootEntity getCardRoot() {
-        return cardRoot;
+    public CardRouteEntity getCardRoute() {
+        return cardRoute;
     }
 
-    public void setCardRoot(CardRootEntity cardRoot) {
-        this.cardRoot = cardRoot;
+    public void setCardRoute(CardRouteEntity cardRoute) {
+        this.cardRoute = cardRoute;
     }
 
-    @javax.persistence.Column(name = "RootElementNumber")
+    @javax.persistence.Column(name = "RouteElementNumber")
     @Basic
-    private Integer rootElementNumber;
+    private Integer routeElementNumber;
 
-    public Integer getRootElementNumber() {
-        return rootElementNumber;
+    public Integer getRouteElementNumber() {
+        return routeElementNumber;
     }
 
-    public void setRootElementNumber(Integer rootElementNumber) {
-        this.rootElementNumber = rootElementNumber;
+    public void setRouteElementNumber(Integer routeElementNumber) {
+        this.routeElementNumber = routeElementNumber;
     }
 
 
@@ -69,23 +62,23 @@ public class RouteElementEntity {
 
         RouteElementEntity that = (RouteElementEntity) o;
 
-        if (rootElementID != null ? !rootElementID.equals(that.rootElementID) : that.rootElementID != null)
+        if (routeElementID != null ? !routeElementID.equals(that.routeElementID) : that.routeElementID != null)
             return false;
         if (placeCard != null ? !placeCard.equals(that.placeCard) : that.placeCard != null)
             return false;
-        if (cardRoot != null ? !cardRoot.equals(that.cardRoot) : that.cardRoot != null)
+        if (cardRoute != null ? !cardRoute.equals(that.cardRoute) : that.cardRoute != null)
             return false;
-        if (rootElementNumber != null ? !rootElementNumber.equals(that.rootElementNumber) : that.rootElementNumber != null)
+        if (routeElementNumber != null ? !routeElementNumber.equals(that.routeElementNumber) : that.routeElementNumber != null)
             return false;
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = rootElementID != null ? rootElementID.hashCode() : 0;
+        int result = routeElementID != null ? routeElementID.hashCode() : 0;
         result = 31 * result + (placeCard != null ? placeCard.hashCode() : 0);
-        result = 31 * result + (cardRoot != null ? cardRoot.hashCode() : 0);
-        result = 31 * result + (rootElementNumber != null ? rootElementNumber.hashCode() : 0);
+        result = 31 * result + (cardRoute != null ? cardRoute.hashCode() : 0);
+        result = 31 * result + (routeElementNumber != null ? routeElementNumber.hashCode() : 0);
         return result;
     }
 }

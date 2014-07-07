@@ -42,7 +42,7 @@ public class UserRequests {
             session.update(userEntity);
             session.getTransaction().commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -57,7 +57,7 @@ public class UserRequests {
             userEntity = (ArrayList<UserEntity>) session.createCriteria(UserEntity.class).list();
             transaction.commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -98,7 +98,7 @@ public class UserRequests {
         try {
             return (UserEntity) session.get(UserEntity.class, userID);
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -113,7 +113,7 @@ public class UserRequests {
             session.getTransaction().commit();
             return true;
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -146,7 +146,7 @@ public class UserRequests {
             }
             session.getTransaction().commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -184,7 +184,7 @@ public class UserRequests {
             userEntities = (ArrayList<UserEntity>) session.createCriteria(UserEntity.class).setFirstResult(firstElem).setMaxResults(maxElems).list();
             transaction.commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -251,6 +251,7 @@ public class UserRequests {
         DatabaseConnection dbConnection = new DatabaseConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
+        boolean b = false;
         try {
             Connection connection = dbConnection.getConnection();
             @Language(value = "MySQL") String sql = "SELECT User.UserID FROM User " +
@@ -259,14 +260,14 @@ public class UserRequests {
             ps.setLong(1, userID);
             rs = ps.executeQuery();
             if (rs.first()) {
-                return true;
+                b = true;
             }
         } catch (SQLException e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return false;
+        return b;
     }
 
     public static RestoreUserResponse getUserByDeviceID(String deviceID) {

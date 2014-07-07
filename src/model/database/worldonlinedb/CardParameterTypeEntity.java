@@ -1,7 +1,6 @@
 package model.database.worldonlinedb;
 
 import model.constants.ApplicationBlock;
-import model.constants.databaseenumeration.CardParameterType;
 import model.constants.databaseenumeration.DataType;
 
 import javax.persistence.*;

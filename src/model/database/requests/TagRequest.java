@@ -3,14 +3,14 @@ package model.database.requests;
 import model.additionalentity.CompleteCardTagInfo;
 import model.additionalentity.CompleteTextGroupInfo;
 import model.additionalentity.admin.CompleteTagInfo;
+import model.additionalentity.admin.SimpleTagGroup;
+import model.additionalentity.phone.MobileTag;
+import model.additionalentity.phone.MobileTagGroup;
 import model.constants.Component;
-import model.constants.databaseenumeration.TagType;
+import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
-import model.database.worldonlinedb.CardEntity;
-import model.database.worldonlinedb.CardTagEntity;
-import model.database.worldonlinedb.TagEntity;
-import model.database.worldonlinedb.TextGroupEntity;
+import model.database.worldonlinedb.*;
 import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.intellij.lang.annotations.Language;
@@ -22,15 +22,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 01.11.13
- * Time: 12:46
- * To change this template use File | Settings | File Templates.
- */
 public class TagRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, TagRequest.class);
+    @Language("MySQL")
+    private static final String cardTagText = "SELECT * FROM  CardTag " +
+            "LEFT OUTER JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
+            "LEFT OUTER JOIN TextGroup AS TagIcon ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Image AS TagIcon ON (TagIcon.ImageID=Tag.IconID) " +
+            "LEFT OUTER JOIN TagGroup ON (Tag.TagGroupID=TagGroup.TagGroupID) " +
+            "LEFT OUTER JOIN TextGroup AS TagGroupTextGroup ON (TagGroupTextGroup.TextGroupID=TagGroup.TagGroupTextGroupID) " +
+            "LEFT OUTER JOIN Text AS TagGroupText ON (TagGroupText.TextGroupID=TagGroupTextGroup.TextGroupID) ";
+
+    @Language("MySQL")
+    private static final String tagText = "SELECT * FROM Tag  " +
+            "LEFT OUTER JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Image AS TagIcon ON (TagIcon.ImageID=Tag.IconID) " +
+            "LEFT OUTER JOIN TagGroup ON (Tag.TagGroupID=TagGroup.TagGroupID) " +
+            "LEFT OUTER JOIN TextGroup AS TagGroupTextGroup ON (TagGroupTextGroup.TextGroupID=TagGroup.TagGroupTextGroupID) " +
+            "LEFT OUTER JOIN Text AS TagGroupText ON (TagGroupText.TextGroupID=TagGroupTextGroup.TextGroupID) ";
 
     public static CardTagEntity getCardTagByResultSet(ResultSet rs) throws SQLException {
         CardTagEntity cardTagEntity = null;
@@ -41,47 +52,61 @@ public class TagRequest {
         return cardTagEntity;
     }
 
+
+    public static void addTagGroup(TagGroupEntity tagGroupEntity) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.save(tagGroupEntity);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
     public static TagEntity getTagByResultSet(ResultSet rs) throws SQLException {
         TagEntity tagEntity = null;
-        if (rs.getLong("Tag.TagID") != 0 && !rs.wasNull()) {
+        Long tagID = rs.getLong("Tag.TagID");
+        if (tagID != 0 && !rs.wasNull()) {
             tagEntity = new TagEntity();
-            tagEntity.setTagID(rs.getLong("Tag.TagID"));
+            tagEntity.setTagID(tagID);
             tagEntity.setTagName(rs.getString("Tag.TagName"));
-            tagEntity.setTagType(rs.getInt("Tag.TagType"));
+            tagEntity.setIcon(ImageRequest.getImageByResultSet(rs, "TagIcon"));
+            tagEntity.setTagTextGroup(TextRequest.getTextGroupByResultSet(rs));
         }
         return tagEntity;
     }
 
-    public static TagEntity getTag(TagType tagType, String tagName) throws SQLException {
-        TagEntity tag = null;
+    public static TagEntity getTag(String tagName) throws SQLException {
         ResultSet rs = null;
         PreparedStatement ps = null;
         DatabaseConnection dbConnection = new DatabaseConnection();
         try {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL")
-            String sql = "SELECT * FROM Tag " +
-                    "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
-                    "WHERE Tag.TagType=? AND Tag.TagName=?";
+            String sql = tagText +
+                    "WHERE  Tag.TagName LIKE ?";
             ps = connection.prepareStatement(sql);
-            ps.setInt(1, tagType.getValue());
-            ps.setString(2, tagName);
+//            ps.setLong(1, tagGroupID);
+            ps.setString(1, tagName);
             rs = ps.executeQuery();
             if (rs.first()) {
-                tag = getTagByResultSet(rs);
-                TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs);
-                tag.setTagTextGroup(textGroupEntity);
+                Long id = rs.getLong("Tag.TagID");
+                return getTag(id);
             }
         } catch (SQLException e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return tag;
+        return null;
     }
 
-    public static ArrayList<TagEntity> getTags(TagType tagType) throws SQLException {
+    public static ArrayList<TagEntity> getTags(Long tagGroupID) throws SQLException {
         ArrayList<TagEntity> tags = new ArrayList<TagEntity>();
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -89,13 +114,11 @@ public class TagRequest {
         try {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL")
-            String sql = "SELECT * FROM Tag " +
-                    "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
-                    "WHERE Tag.TagType=?";
+            String sql = tagText +
+                    "WHERE Tag.TagGroupID=?";
 
             ps = connection.prepareStatement(sql);
-            ps.setInt(1, tagType.getValue());
+            ps.setLong(1, tagGroupID);
             rs = ps.executeQuery();
             while (rs.next()) {
                 TagEntity tag = getTagByResultSet(rs);
@@ -111,7 +134,38 @@ public class TagRequest {
         return tags;
     }
 
-    public static CardTagEntity getCardTag(long cardTagID) throws SQLException {
+    public static ArrayList<TagEntity> getTags() throws SQLException {
+        ArrayList<TagEntity> tags = new ArrayList<TagEntity>();
+        HashMap<Long, TagEntity> hashMap = new HashMap<>();
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL")
+            String sql = tagText +
+                    "ORDER BY Tag.TagGroupID DESC";
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Long id = rs.getLong("Tag.TagID");
+                if (id != 0 && !rs.wasNull() && !hashMap.containsKey(id)) {
+                    TagEntity tag = getTagByResultSet(rs);
+                    TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs);
+                    tag.setTagTextGroup(textGroupEntity);
+                    tags.add(tag);
+                    hashMap.put(id, tag);
+                }
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return tags;
+    }
+
+  /*  public static CardTagEntity getCardTag(long cardTagID) throws SQLException {
         CardTagEntity cardTag = null;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -119,10 +173,7 @@ public class TagRequest {
         try {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL")
-            String sql = "SELECT * FROM CardTag " +
-                    "JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
-                    "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+            String sql = cardTagText +
                     "WHERE CardTag.CardTagID=?";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, cardTagID);
@@ -140,45 +191,28 @@ public class TagRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return cardTag;
-    }
+    }*/
 
     public static TagEntity getTag(long tagID) throws SQLException {
-        TagEntity tag = null;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
-            Connection connection = dbConnection.getConnection();
-            @Language("MySQL")
-            String sql = "SELECT * FROM Tag " +
-                    "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
-                    "WHERE Tag.TagID=?";
-            ps = connection.prepareStatement(sql);
-            ps.setLong(1, tagID);
-            rs = ps.executeQuery();
-            if (rs.first()) {
-                tag = getTagByResultSet(rs);
-                TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs);
-                tag.setTagTextGroup(textGroupEntity);
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
+            return (TagEntity) session.get(TagEntity.class, tagID);
         } finally {
-            dbConnection.closeConnections(ps, rs);
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
         }
-        return tag;
     }
 
     public static void addCardTag(CardTagEntity cardTagEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(cardTagEntity);
             session.getTransaction().commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -186,13 +220,12 @@ public class TagRequest {
 
     public static void addTag(TagEntity tagEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(tagEntity);
             session.getTransaction().commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -206,7 +239,7 @@ public class TagRequest {
             session.update(tagEntity);
             session.getTransaction().commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -219,11 +252,7 @@ public class TagRequest {
         ResultSet rs = null;
         try {
             Connection connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT * FROM CardTag " +
-                    "JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
-                    "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Card ON(Card.CardID=CardTag.CardID)";
+            @Language("MySQL") String sql = cardTagText;
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -268,16 +297,14 @@ public class TagRequest {
         }
     }
 
-    public static HashMap<Long, CompleteTagInfo> getCompleteTags() {
+   /* public static HashMap<Long, CompleteTagInfo> getCompleteTags() {
         HashMap<Long, CompleteTagInfo> tags = new HashMap<Long, CompleteTagInfo>();
         DatabaseConnection dbConnection = new DatabaseConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             Connection connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT * FROM Tag " +
-                    "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) ";
+            @Language("MySQL") String sql = tagText;
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -299,7 +326,7 @@ public class TagRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return tags;
-    }
+    }*/
 
     public static void getCompleteTag(ResultSet rs, CompleteTagInfo tagInfo, String textGroupName, String textName) throws SQLException {
         Long tagTextGroupID = rs.getLong(textGroupName + ".TextGroupID");
@@ -324,9 +351,7 @@ public class TagRequest {
         ResultSet rs = null;
         try {
             Connection connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT * FROM Tag " +
-                    "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+            @Language("MySQL") String sql = tagText +
                     "WHERE Tag.TagID=?";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, tagID);
@@ -349,5 +374,114 @@ public class TagRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return tag;
+    }
+
+    public static ArrayList<SimpleTagGroup> getAllSimpleTagGroups(LanguageType languageType) {
+        ArrayList<SimpleTagGroup> simpleTagGroups = new ArrayList<>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT TagGroup.TagGroupID," +
+                    "Text.Text " +
+                    "FROM TagGroup " +
+                    "JOIN TextGroup ON (TagGroup.TagGroupTextGroupID=TextGroup.TextGroupID) " +
+                    "JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                    "WHERE Text.LanguageID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, languageType.getValue());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SimpleTagGroup simpleTagGroup = new SimpleTagGroup();
+                simpleTagGroup.setID(rs.getLong("TagGroup.TagGroupID"));
+                simpleTagGroup.setText(rs.getString("Text.Text"));
+                simpleTagGroups.add(simpleTagGroup);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return simpleTagGroups;
+    }
+
+    public static ArrayList<MobileTagGroup> getMobileTagGroups(Long userID) throws SQLException {
+        ArrayList<MobileTagGroup> mobileTagGroups = new ArrayList<>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        HashMap<Long, MobileTagGroup> mobileTagGroupHashMap = new HashMap<>();
+        HashMap<Long, MobileTag> mobileTagHashMap = new HashMap<>();
+        loggerFactory.debug("user id " + userID);
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT DISTINCT " +
+                    "TagGroup.TagGroupID," +
+                    "TagGroupText.Text," +
+                    "TagGroup.CardID," +
+                    "TagGroup.Position, " +
+                    "Tag.TagID," +
+                    "Tag.IconID," +
+                    "Text.Text " +
+                    "FROM Tag " +
+                    "LEFT OUTER JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Image AS TagIcon ON (TagIcon.ImageID=Tag.IconID) " +
+                    "LEFT OUTER JOIN TagGroup ON (Tag.TagGroupID=TagGroup.TagGroupID) " +
+                    "LEFT OUTER JOIN TextGroup AS TagGroupTextGroup ON (TagGroupTextGroup.TextGroupID=TagGroup.TagGroupTextGroupID) " +
+                    "LEFT OUTER JOIN Text AS TagGroupText ON (TagGroupText.TextGroupID=TagGroupTextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN User ON (User.UserID=?) " +
+                    "LEFT OUTER JOIN UserPersonalData ON (User.UserPersonalDataID=UserPersonalData.UserPersonalDataID) " +
+                    "WHERE (Text.LanguageID=UserPersonalData.UserLanguage OR Text.LanguageID IS NULL) AND " +
+                    "(TagGroupText.LanguageID=UserPersonalData.UserLanguage OR TagGroupText.LanguageID IS NULL)";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, userID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Long mobileTagGroupID = rs.getLong("TagGroup.TagGroupID");
+                loggerFactory.debug("mobileTagGroupID " + mobileTagGroupID);
+                if (mobileTagGroupID != 0 && !rs.wasNull()) {
+                    MobileTagGroup mobileTagGroup;
+                    if (mobileTagGroupHashMap.containsKey(mobileTagGroupID)) {
+                        mobileTagGroup = mobileTagGroupHashMap.get(mobileTagGroupID);
+                    } else {
+                        mobileTagGroup = new MobileTagGroup();
+                        mobileTagGroup.setId(mobileTagGroupID);
+                        Long cardID = rs.getLong("TagGroup.CardID");
+                        if (!rs.wasNull() && cardID != 0) {
+                            mobileTagGroup.setCardID(cardID);
+                        }
+                        String text = rs.getString("TagGroupText.Text");
+                        if (text != null && !text.isEmpty() && !rs.wasNull()) {
+                            mobileTagGroup.setName(text);
+                        }
+                        Integer position = rs.getInt("TagGroup.Position");
+                        if (position != 0 && !rs.wasNull()) {
+                            mobileTagGroup.setPosition(position);
+                        }
+                        mobileTagGroups.add(mobileTagGroup);
+                        mobileTagGroupHashMap.put(mobileTagGroupID, mobileTagGroup);
+                    }
+                    Long tagID = rs.getLong("Tag.TagID");
+                    if (!rs.wasNull() && tagID != 0) {
+                        if (!mobileTagHashMap.containsKey(tagID)) {
+                            MobileTag mobileTag = new MobileTag();
+                            mobileTag.setTagID(tagID);
+                            mobileTag.setIconID(rs.getLong("Tag.IconID"));
+                            mobileTag.setName(rs.getLong("Text.Text"));
+                            mobileTagHashMap.put(tagID, mobileTag);
+                            mobileTagGroup.getMobileTags().add(mobileTag);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+            throw e;
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return mobileTagGroups;
     }
 }

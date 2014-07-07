@@ -26,7 +26,7 @@ public class LinkRequest {
             cardToCardLinkEntities = (ArrayList<CardToCardLinkEntity>) session.createCriteria(CardToCardLinkEntity.class).list();
             transaction.commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -39,7 +39,7 @@ public class LinkRequest {
         try {
             return (CardToCardLinkEntity) session.get(CardToCardLinkEntity.class, cardToCardLinkID);
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -53,7 +53,7 @@ public class LinkRequest {
             session.save(cardToCardLinkEntity);
             session.getTransaction().commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }

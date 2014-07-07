@@ -1,16 +1,7 @@
 package model.database.worldonlinedb;
 
-import model.constants.databaseenumeration.TagType;
-
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 30.10.13
- * Time: 22:03
- * To change this template use File | Settings | File Templates.
- */
 @javax.persistence.Table(name = "Tag", schema = "", catalog = "worldonline")
 @Entity
 public class TagEntity {
@@ -18,6 +9,22 @@ public class TagEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long tagID;
+
+    @javax.persistence.Column(name = "TagName")
+    @Basic
+    private String tagName;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "TagTextGroupID")
+    private TextGroupEntity tagTextGroup;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "TagGroupID")
+    private TagGroupEntity tagGroup;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "IconID")
+    private ImageEntity icon;
 
     public Long getTagID() {
         return tagID;
@@ -27,10 +34,6 @@ public class TagEntity {
         this.tagID = tagID;
     }
 
-    @javax.persistence.Column(name = "TagName")
-    @Basic
-    private String tagName;
-
     public String getTagName() {
         return tagName;
     }
@@ -39,10 +42,6 @@ public class TagEntity {
         this.tagName = tagName;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "TagTextGroupID")
-    private TextGroupEntity tagTextGroup;
-
     public TextGroupEntity getTagTextGroup() {
         return tagTextGroup;
     }
@@ -50,19 +49,6 @@ public class TagEntity {
     public void setTagTextGroup(TextGroupEntity tagTextGroup) {
         this.tagTextGroup = tagTextGroup;
     }
-
-    @javax.persistence.Column(name = "TagType")
-    @Basic
-    private Integer tagType;
-
-    public Integer getTagType() {
-        return tagType;
-    }
-
-    public void setTagType(Integer tagType) {
-        this.tagType = tagType;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -77,8 +63,6 @@ public class TagEntity {
             return false;
         if (tagTextGroup != null ? !tagTextGroup.equals(that.tagTextGroup) : that.tagTextGroup != null)
             return false;
-        if (tagType != null ? !tagType.equals(that.tagType) : that.tagType != null)
-            return false;
         return true;
     }
 
@@ -87,7 +71,6 @@ public class TagEntity {
         int result = tagID != null ? tagID.hashCode() : 0;
         result = 31 * result + (tagName != null ? tagName.hashCode() : 0);
         result = 31 * result + (tagTextGroup != null ? tagTextGroup.hashCode() : 0);
-        result = 31 * result + (tagType != null ? tagType.hashCode() : 0);
         return result;
     }
 
@@ -95,13 +78,26 @@ public class TagEntity {
 
     }
 
-    public TagEntity(TextGroupEntity tagTextGroup, TagType tagType, String tagName) {
+    public TagEntity(TextGroupEntity tagTextGroup, String tagName, TagGroupEntity tagGroup, ImageEntity imageEntity) {
         setTagTextGroup(tagTextGroup);
-        setTagType(tagType.getValue());
         setTagName(tagName);
+        setTagGroup(tagGroup);
+        setIcon(imageEntity);
     }
 
-    public void setTagType(TagType tagType) {
-        setTagType(tagType.getValue());
+    public TagGroupEntity getTagGroup() {
+        return tagGroup;
+    }
+
+    public void setTagGroup(TagGroupEntity tagGroupEntity) {
+        this.tagGroup = tagGroupEntity;
+    }
+
+    public ImageEntity getIcon() {
+        return icon;
+    }
+
+    public void setIcon(ImageEntity image) {
+        this.icon = image;
     }
 }

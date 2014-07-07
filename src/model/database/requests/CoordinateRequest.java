@@ -22,7 +22,7 @@ public class CoordinateRequest {
             session.getTransaction().commit();
             return true;
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }

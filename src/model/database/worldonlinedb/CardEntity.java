@@ -7,13 +7,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 29.10.13
- * Time: 15:58
- * To change this template use File | Settings | File Templates.
- */
 @javax.persistence.Table(name = "Card", schema = "", catalog = "worldonline")
 @Entity
 public class CardEntity {
@@ -42,6 +35,10 @@ public class CardEntity {
     @javax.persistence.Column(name = "CardState")
     @Basic
     private Integer cardState;
+
+    @javax.persistence.Column(name = "NumberInList")
+    @Basic
+    private Integer numberInList;
 
     public Long getCardID() {
         return cardID;
@@ -91,6 +88,14 @@ public class CardEntity {
         this.cardState = cardState;
     }
 
+    public Integer getNumberInList() {
+        return numberInList;
+    }
+
+    public void setNumberInList(Integer order) {
+        this.numberInList = order;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,17 +115,20 @@ public class CardEntity {
             return false;
         if (cardState != null ? !cardState.equals(that.cardState) : that.cardState != null)
             return false;
+        if (numberInList != null ? !numberInList.equals(that.numberInList) : that.numberInList != null)
+            return false;
         return true;
     }
 
     @Override
     public int hashCode() {
         int result = cardID != null ? cardID.hashCode() : 0;
-        result = 31 * result + (cardType != null ? cardType.hashCode() : 0);
-        result = 31 * result + (creationTimestamp != null ? creationTimestamp.hashCode() : 0);
-        result = 31 * result + (lastUpdateTimestamp != null ? lastUpdateTimestamp.hashCode() : 0);
-        result = 31 * result + (cardName != null ? cardName.hashCode() : 0);
-        result = 31 * result + (cardState != null ? cardState.hashCode() : 0);
+        result = 13 * result + (cardType != null ? cardType.hashCode() : 0);
+        result = 13 * result + (creationTimestamp != null ? creationTimestamp.hashCode() : 0);
+        result = 13 * result + (lastUpdateTimestamp != null ? lastUpdateTimestamp.hashCode() : 0);
+        result = 13 * result + (cardName != null ? cardName.hashCode() : 0);
+        result = 13 * result + (cardState != null ? cardState.hashCode() : 0);
+        result = 13 * result + (numberInList != null ? numberInList.hashCode() : 0);
         return result;
     }
 
@@ -133,6 +141,7 @@ public class CardEntity {
         setCardType(cardType.getValue());
         setCardName(cardName);
         setCardState(cardState.getValue());
+        this.numberInList = 0;
     }
 
     public void setCardState(CardState cardState) {

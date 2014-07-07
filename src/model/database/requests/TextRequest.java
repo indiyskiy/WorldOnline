@@ -44,7 +44,7 @@ public class TextRequest {
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -78,7 +78,7 @@ public class TextRequest {
         }
         TextCardEntity textCardEntity = new TextCardEntity();
         textCardEntity.setTextCardID(textCardID);
-        textCardEntity.setCardTextType(rs.getInt(textCard + ".CardTextType"));
+        textCardEntity.setCardParameterType(ParameterRequest.getCardParameterTypeByResultSet(textCard, rs));
         return textCardEntity;
     }
 
@@ -102,7 +102,7 @@ public class TextRequest {
             session.save(textCardEntity);
             session.getTransaction().commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -126,7 +126,7 @@ public class TextRequest {
             session.save(textGroup);
             session.getTransaction().commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }

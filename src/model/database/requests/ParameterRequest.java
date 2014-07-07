@@ -1,6 +1,10 @@
 package model.database.requests;
 
+import controller.phone.entity.AllCardParameterTypesRequest;
+import model.additionalentity.phone.MobileParameterType;
+import model.constants.ApplicationBlock;
 import model.constants.Component;
+import model.constants.databaseenumeration.DataType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardParameterEntity;
@@ -13,6 +17,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class ParameterRequest {
@@ -31,19 +36,23 @@ public class ParameterRequest {
         return cardParameterEntity;
     }
 
-    private static CardParameterTypeEntity getCardParameterTypeByResultSet(ResultSet rs) throws SQLException {
-        Long cardParameterTypeEntityID = rs.getLong("CardParameterType.CardParameterTypeID");
+    public static CardParameterTypeEntity getCardParameterTypeByResultSet(String cardParameterType, ResultSet rs) throws SQLException {
+        Long cardParameterTypeEntityID = rs.getLong(cardParameterType + ".CardParameterTypeID");
         CardParameterTypeEntity cardParameterTypeEntity = null;
         if (!rs.wasNull() && cardParameterTypeEntityID != 0) {
             cardParameterTypeEntity = new CardParameterTypeEntity();
             cardParameterTypeEntity.setCardParameterTypeID(cardParameterTypeEntityID);
-            cardParameterTypeEntity.setBlock(rs.getInt("CardParameterType.Block"));
-            cardParameterTypeEntity.setCardParameterTypeName(TextRequest.getTextGroupByResultSet(rs, "CardParameterTypeTextGroup"));
-            cardParameterTypeEntity.setDataType(rs.getInt("CardParameterType.DataType"));
+            cardParameterTypeEntity.setBlock(rs.getInt(cardParameterType + ".Block"));
+            cardParameterTypeEntity.setCardParameterTypeName(TextRequest.getTextGroupByResultSet(rs, cardParameterType + "TextGroup"));
+            cardParameterTypeEntity.setDataType(rs.getInt(cardParameterType + ".DataType"));
             cardParameterTypeEntity.setImage(ImageRequest.getImageByResultSet(rs, "CardParameterTypeImage"));
-            cardParameterTypeEntity.setPosition(rs.getInt("CardParameterType.Position"));
+            cardParameterTypeEntity.setPosition(rs.getInt(cardParameterType + ".Position"));
         }
         return cardParameterTypeEntity;
+    }
+
+    public static CardParameterTypeEntity getCardParameterTypeByResultSet(ResultSet rs) throws SQLException {
+        return getCardParameterTypeByResultSet("CardParameterType", rs);
     }
 
     public static void addCardParameter(CardParameterEntity cardParameterEntity) {
@@ -53,7 +62,7 @@ public class ParameterRequest {
             session.save(cardParameterEntity);
             session.getTransaction().commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -66,14 +75,13 @@ public class ParameterRequest {
             session.save(cardParameterTypeEntity);
             session.getTransaction().commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
     }
 
     public static CardParameterTypeEntity getParameterTypeByName(String name) {
-        loggerFactory.info("getParameterTypeByName");
         DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
         ResultSet rs = null;
@@ -93,18 +101,8 @@ public class ParameterRequest {
                 Long cardID = rs.getLong("CardParameterType.CardParameterTypeID");
                 if (cardID != 0 && !rs.wasNull()) {
                     CardParameterTypeEntity cardParameterTypeEntity = getCardParameterTypeByResultSet(rs);
-                    loggerFactory.info("getParameterTypeByName " + name + " " + cardParameterTypeEntity);
-                    if (cardParameterTypeEntity != null) {
-                        loggerFactory.info("cardParameterTypeEntity" + cardParameterTypeEntity.getCardParameterTypeID());
-                    } else {
-                        loggerFactory.info("cardParameterTypeEntity" + "null");
-                    }
                     return getCardParameterTypeByResultSet(rs);
-                } else {
-                    loggerFactory.info("result from rs not found =(");
                 }
-            } else {
-                loggerFactory.info("result set is empty");
             }
         } catch (SQLException e) {
             loggerFactory.error(e);
@@ -114,4 +112,51 @@ public class ParameterRequest {
         return null;
     }
 
+    public static ArrayList<MobileParameterType> getAllMobileParameterTypes(AllCardParameterTypesRequest allCardParameterTypesRequest) {
+        Long userID = allCardParameterTypesRequest.getUserID();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        ArrayList<MobileParameterType> mobileParameterTypes = new ArrayList<>();
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT " +
+                    "CardParameterType.CardParameterTypeID, " +
+                    "CardParameterType.Block, " +
+                    "CardParameterType.DataType," +
+                    "CardParameterType.Position," +
+                    "Text.Text," +
+                    "Image.ImageID " +
+                    "FROM CardParameterType " +
+                    "LEFT OUTER JOIN TextGroup ON (CardParameterType.CardParameterTypeName=TextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID) " +
+                    "LEFT OUTER JOIN UserPersonalData ON (UserPersonalData.UserLanguage=Text.LanguageID) " +
+                    "LEFT OUTER JOIN User ON (User.UserPersonalDataID=UserPersonalData.UserPersonalDataID) " +
+                    "LEFT OUTER JOIN Image ON (CardParameterType.ImageID=Image.ImageID) " +
+                    "WHERE User.UserID=?";
+
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, userID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Long parameterTypeID = rs.getLong("CardParameterType.CardParameterTypeID");
+                if (parameterTypeID != 0 && !rs.wasNull()) {
+                    MobileParameterType mobileParameterType = new MobileParameterType();
+                    mobileParameterType.setCardParameterTypeID(parameterTypeID);
+                    mobileParameterType.setBlock(ApplicationBlock.parseInt(rs.getInt("CardParameterType.Block")));
+                    mobileParameterType.setDataType(DataType.parseInt(rs.getInt("CardParameterType.DataType")));
+                    mobileParameterType.setPosition(rs.getInt("CardParameterType.Position"));
+                    mobileParameterType.setName(rs.getString("Text.Text"));
+                    mobileParameterType.setIconID(rs.getLong("Image.ImageID"));
+                    mobileParameterTypes.add(mobileParameterType);
+                }
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return mobileParameterTypes;
+    }
 }

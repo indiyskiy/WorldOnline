@@ -1,6 +1,5 @@
 package model.database.requests;
 
-
 import controller.parser.adminparser.AllCardParser;
 import model.additionalentity.*;
 import model.additionalentity.admin.CompleteMenuInfo;
@@ -23,21 +22,65 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-
 public class CardRequest {
+    @Language("MySQL")
+    private static String sql = "SELECT DISTINCT * FROM Card " +
+            "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
+            //card image      \/
+            "LEFT OUTER JOIN CardImage ON(Card.CardID=CardImage.CardID) " +
+            "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
+            "LEFT OUTER JOIN TextGroup AS CardImageTextGroup ON (CardImage.ImageDescriptionTextGroupID=CardImageTextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Text AS CardImageText ON (CardImageText.TextGroupID=CardImageTextGroup.TextGroupID) " +
+            //card parameter  \/
+            "LEFT OUTER JOIN CardParameter ON (Card.CardID=CardParameter.CardID) " +
+            "LEFT OUTER JOIN CardParameterType ON (CardParameter.CardParameterTypeID=CardParameterType.CardParameterTypeID) " +
+            "LEFT OUTER JOIN TextGroup AS CardParameterTypeTextGroup ON(CardParameterTypeTextGroup.TextGroupID=CardParameterType.CardParameterTypeName) " +
+            "LEFT OUTER JOIN Text AS CardParameterTypeText ON (CardParameterTypeTextGroup.TextGroupID=CardParameterTypeText.TextGroupID) " +
+            "LEFT OUTER JOIN Image AS CardParameterTypeImage ON (CardParameterType.ImageID=Image.ImageID) " +
+            //card route        \/
+            "LEFT OUTER JOIN CardRoute ON (Card.CardID=CardRoute.CardID) " +
+            "LEFT OUTER JOIN RouteElement ON (RouteElement.CardRouteID=CardRoute.CardRouteID) " +
+            "LEFT OUTER JOIN Card AS RouteCard ON (RouteCard.CardID=RouteElement.PlaceCardID) " +
+            "LEFT OUTER JOIN TextGroup AS RouteTextGroup ON(CardRoute.RouteDescriptionTextGroupID=RouteTextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Text AS RouteText ON (RouteText.TextGroupID=RouteTextGroup.TextGroupID) " +
+            //card tag   \/
+            "LEFT OUTER JOIN CardTag ON (Card.CardID=CardTag.CardID) " +
+            "LEFT OUTER JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
+            "LEFT OUTER JOIN TextGroup AS TagTextGroup ON (Tag.TagTextGroupID=TagTextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Text AS TagText ON (TagText.TextGroupID=TagTextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Image AS TagIcon ON (TagIcon.ImageID=Tag.IconID) " +
+            "LEFT OUTER JOIN TagGroup ON (Tag.TagGroupID=TagGroup.TagGroupID) " +
+            "LEFT OUTER JOIN TextGroup AS TagGroupTextGroup ON (TagGroupTextGroup.TextGroupID=TagGroup.TagGroupTextGroupID) " +
+            "LEFT OUTER JOIN Text AS TagGroupText ON (TagGroupText.TextGroupID=TagGroupTextGroup.TextGroupID) " +
+            //card text
+            "LEFT OUTER JOIN TextCard ON (Card.CardID=TextCard.CardID) " +
+            "LEFT OUTER JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
+            "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+            //card menu
+            "LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.CardID=Card.CardID) " +
+            "LEFT OUTER JOIN Menu ON (MenuCardLink.MenuID=Menu.MenuID) " +
+            "LEFT OUTER JOIN TextGroup AS MenuTextGroup ON (MenuTextGroup.TextGroupID=Menu.NameTextGroupID) " +
+            "LEFT OUTER JOIN Text AS MenuText ON (MenuTextGroup.TextGroupID=MenuText.TextGroupID)";
+
     @Language("MySQL")
     private static final String MobileCardSql = "SELECT Card.CardID, " +
             "Card.CardType, TextGroup.TextGroupID, " +
-            "TextCard.CardTextType, " +
-            "Text.Text, Menu.MenuID, " +
-            "CardImage.CardImageType, Image.ImageID, " +
-            "Image.ImageWidth, Image.ImageFileSize, " +
-            "Image.ImageHeight, CardParameter.CardParameterValue, " +
-            "CardParameter.CardParameterTypeID, CardParameter.CardParameterID, " +
-            "CardParameterType.DataType, CardParameterType.Block, " +
-            "CardParameterType.ImageID, CardParameterType.Position, " +
-            "CardParameterTypeText.Text, CardCoordinate.CardCoordinateID, " +
-            "CardCoordinate.Latitude, CardCoordinate.Longitude " +
+            "Card.NumberInList, " +
+            "Text.Text, " +
+            "TextCard.CardParameterTypeID, " +
+            "Menu.MenuID, " +
+            "CardImage.CardImageType, " +
+            "Image.ImageID, " +
+            "Image.ImageWidth, " +
+            "Image.ImageFileSize, " +
+            "Image.ImageHeight, " +
+            "CardParameter.CardParameterValue, " +
+            "CardParameter.CardParameterID, " +
+            "CardParameter.CardParameterTypeID, " +
+            "CardCoordinate.CardCoordinateID, " +
+            "CardCoordinate.Latitude, " +
+            "CardCoordinate.Longitude, " +
+            "Tag.TagID " +
             "FROM Card " +
             "LEFT OUTER JOIN TextCard ON (TextCard.CardID=Card.CardID) " +
             "LEFT OUTER JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
@@ -47,14 +90,12 @@ public class CardRequest {
             "LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.CardID=Card.CardID) " +
             "LEFT OUTER JOIN Menu ON (MenuCardLink.MenuID=Menu.MenuID) " +
             "LEFT OUTER JOIN CardImage ON (Card.CardID=CardImage.CardID) " +
-            "LEFT OUTER JOIN Image ON (CardImage.ImageID=Image.ImageID)" +
+            "LEFT OUTER JOIN Image ON (CardImage.ImageID=Image.ImageID) " +
             "LEFT OUTER JOIN CardParameter ON (Card.CardID=CardParameter.CardID) " +
-            "LEFT OUTER JOIN CardParameterType ON (CardParameterType.CardParameterTypeID=CardParameter.CardParameterTypeID) " +
-            "LEFT OUTER JOIN TextGroup AS CardParameterTypeTextGroup ON " +
-            "(CardParameterTypeTextGroup.TextGroupID=CardParameterType.CardParameterTypeName) " +
-            "LEFT OUTER JOIN Text AS CardParameterTypeText ON (CardParameterTypeText.TextGroupID=CardParameterTypeTextGroup.TextGroupID) " +
-            "LEFT OUTER JOIN Image AS CardParameterTypeImage ON (CardParameterTypeImage.ImageID=CardParameterType.ImageID) " +
-            "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) ";
+            "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
+            "LEFT OUTER JOIN CardRoute ON (CardRoute.CardID) " +
+            "LEFT OUTER JOIN CardTag ON (Card.CardID=CardTag.CardID) " +
+            "LEFT OUTER JOIN Tag ON (Tag.TagID=CardTag.TagID) ";
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, CardRequest.class);
 
     public static ArrayList<CardEntity> getAllCards(int firstElem, int maxElems) {
@@ -65,8 +106,10 @@ public class CardRequest {
             Transaction transaction = session.beginTransaction();
             cardEntities = (ArrayList<CardEntity>) session.createCriteria(CardEntity.class).setFirstResult(firstElem).setMaxResults(maxElems).list();
             transaction.commit();
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -82,7 +125,7 @@ public class CardRequest {
             cardEntities = (ArrayList<CardEntity>) session.createCriteria(CardEntity.class).list();
             transaction.commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -95,7 +138,7 @@ public class CardRequest {
         try {
             return (CardEntity) session.get(CardEntity.class, cardID);
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -127,7 +170,7 @@ public class CardRequest {
             session.getTransaction().commit();
             b = true;
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -143,7 +186,7 @@ public class CardRequest {
             session.getTransaction().commit();
             b = true;
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -169,7 +212,7 @@ public class CardRequest {
             }
             session.getTransaction().commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -182,39 +225,7 @@ public class CardRequest {
         ResultSet rs = null;
         try {
             Connection connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT DISTINCT * FROM Card " +
-                    "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
-                    //card image      \/
-                    "LEFT OUTER JOIN CardImage ON(Card.CardID=CardImage.CardID) " +
-                    "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
-                    "LEFT OUTER JOIN TextGroup AS CardImageTextGroup ON (CardImage.ImageDescriptionTextGroupID=CardImageTextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text AS CardImageText ON (CardImageText.TextGroupID=CardImageTextGroup.TextGroupID) " +
-                    //card parameter  \/
-                    "LEFT OUTER JOIN CardParameter ON (Card.CardID=CardParameter.CardID) " +
-                    "LEFT OUTER JOIN CardParameterType ON (CardParameter.CardParameterTypeID=CardParameterType.CardParameterTypeID) " +
-                    "LEFT OUTER JOIN TextGroup AS CardParameterTypeTextGroup ON(CardParameterTypeTextGroup.TextGroupID=CardParameterType.CardParameterTypeName) " +
-                    "LEFT OUTER JOIN Text AS CardParameterTypeText ON (CardParameterTypeTextGroup.TextGroupID=CardParameterTypeText.TextGroupID) " +
-                    "LEFT OUTER JOIN Image AS CardParameterTypeImage ON (CardParameterType.ImageID=Image.ImageID) " +
-                    //card root        \/
-                    "LEFT OUTER JOIN CardRoot ON (Card.CardID=CardRoot.CardID) " +
-                    "LEFT OUTER JOIN RootElement ON (RootElement.CardRootID=CardRoot.CardRootID) " +
-                    "LEFT OUTER JOIN Card AS RootCard ON (RootCard.CardID=RootElement.PlaceCardID) " +
-                    "LEFT OUTER JOIN TextGroup AS RootTextGroup ON(CardRoot.RootDescriptionTextGroupID=RootTextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text AS RootText ON (RootText.TextGroupID=RootTextGroup.TextGroupID) " +
-                    //card tag   \/
-                    "LEFT OUTER JOIN CardTag ON (Card.CardID=CardTag.CardID) " +
-                    "LEFT OUTER JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
-                    "LEFT OUTER JOIN TextGroup AS TagTextGroup ON (Tag.TagTextGroupID=TagTextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text AS TagText ON (TagText.TextGroupID=TagTextGroup.TextGroupID) " +
-                    //card text
-                    "LEFT OUTER JOIN TextCard ON (Card.CardID=TextCard.CardID) " +
-                    "LEFT OUTER JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
-                    //card menu
-                    "LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.CardID=Card.CardID) " +
-                    "LEFT OUTER JOIN Menu ON (MenuCardLink.MenuID=Menu.MenuID) " +
-                    "LEFT OUTER JOIN TextGroup AS MenuTextGroup ON (MenuTextGroup.TextGroupID=Menu.NameTextGroupID) " +
-                    "LEFT OUTER JOIN Text AS MenuText ON (MenuTextGroup.TextGroupID=MenuText.TextGroupID)";
+
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -244,47 +255,9 @@ public class CardRequest {
         PreparedStatement ps = null;
         try {
             connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT DISTINCT * FROM Card " +
-                    "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
-                    //card image      \/
-                    "LEFT OUTER JOIN CardImage ON(Card.CardID=CardImage.CardID) " +
-                    "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
-                    "LEFT OUTER JOIN TextGroup AS CardImageTextGroup ON (CardImage.ImageDescriptionTextGroupID=CardImageTextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text AS CardImageText ON (CardImageText.TextGroupID=CardImageTextGroup.TextGroupID) " +
-                    //card parameter  \/
-                    "LEFT OUTER JOIN CardParameter ON (Card.CardID=CardParameter.CardID) " +
-                    "LEFT OUTER JOIN CardParameterType ON (CardParameter.CardParameterTypeID=CardParameterType.CardParameterTypeID) " +
-                    "LEFT OUTER JOIN TextGroup AS CardParameterTypeTextGroup ON(CardParameterTypeTextGroup.TextGroupID=CardParameterType.CardParameterTypeName) " +
-                    "LEFT OUTER JOIN Text AS CardParameterTypeText ON (CardParameterTypeTextGroup.TextGroupID=CardParameterTypeText.TextGroupID) " +
-                    "LEFT OUTER JOIN Image AS CardParameterTypeImage ON (CardParameterType.ImageID=Image.ImageID) " +
-                    //card root        \/
-                    "LEFT OUTER JOIN CardRoot ON (Card.CardID=CardRoot.CardID) " +
-                    "LEFT OUTER JOIN RootElement ON (RootElement.CardRootID=CardRoot.CardRootID) " +
-                    "LEFT OUTER JOIN Card AS RootCard ON (RootCard.CardID=RootElement.PlaceCardID) " +
-                    "LEFT OUTER JOIN TextGroup AS RootTextGroup ON(CardRoot.RootDescriptionTextGroupID=RootTextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text AS RootText ON (RootText.TextGroupID=RootTextGroup.TextGroupID) " +
-                    //card tag   \/
-                    "LEFT OUTER JOIN CardTag ON (Card.CardID=CardTag.CardID) " +
-                    "LEFT OUTER JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
-                    "LEFT OUTER JOIN TextGroup AS TagTextGroup ON (Tag.TagTextGroupID=TagTextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text AS TagText ON (TagText.TextGroupID=TagTextGroup.TextGroupID) " +
-                    //card text
-                    "LEFT OUTER JOIN TextCard ON (Card.CardID=TextCard.CardID) " +
-                    "LEFT OUTER JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
-                    //card to card link
-                    "LEFT OUTER JOIN CardToCardLink ON (CardToCardLink.SourceCardID=Card.CardID) " +
-                    "LEFT OUTER JOIN Card AS TargetCard ON (CardToCardLink.TargetCardID=TargetCard.CardID) " +
-                    //linket at
-                    "LEFT OUTER JOIN CardToCardLink AS CardToCardLinkedOn ON (CardToCardLinkedOn.TargetCardID=Card.CardID) " +
-                    "LEFT OUTER JOIN Card AS SourceCard ON (CardToCardLinkedOn.SourceCardID=SourceCard.CardID) " +
-                    //card menu
-                    "LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.CardID=Card.CardID) " +
-                    "LEFT OUTER JOIN Menu ON (MenuCardLink.MenuID=Menu.MenuID) " +
-                    "LEFT OUTER JOIN TextGroup AS MenuTextGroup ON (MenuTextGroup.TextGroupID=Menu.NameTextGroupID) " +
-                    "LEFT OUTER JOIN Text AS MenuText ON (MenuTextGroup.TextGroupID=MenuText.TextGroupID)" +
+            @Language("MySQL") String sqlString = sql +
                     "WHERE Card.CardID=?";
-            ps = connection.prepareStatement(sql);
+            ps = connection.prepareStatement(sqlString);
             ps.setLong(1, cardID);
             rs = ps.executeQuery();
             if (rs.first()) {
@@ -343,24 +316,24 @@ public class CardRequest {
                 cardParameterEntityMap.put(cardParameterID, cardParameterEntity);
             }
         }
-        //card root
-        Long cardRootID = rs.getLong("CardRoot.CardRootID");
-        if (cardRootID != 0 && !rs.wasNull()) {
-            CompleteCardRootInfo completeCardRootInfo;
-            if (completeCardInfo.getCompleteCardRootInfo() != null) {
-                completeCardRootInfo = completeCardInfo.getCompleteCardRootInfo();
+        //card route
+        Long cardRouteID = rs.getLong("CardRoute.CardRouteID");
+        if (cardRouteID != 0 && !rs.wasNull()) {
+            CompleteCardRouteInfo completeCardRouteInfo;
+            if (completeCardInfo.getCompleteCardRouteInfo() != null) {
+                completeCardRouteInfo = completeCardInfo.getCompleteCardRouteInfo();
             } else {
-                completeCardRootInfo = new CompleteCardRootInfo(RootRequest.getCardRootByResultSet(rs));
-                RootRequest.getCardRootByResultSet(rs);
-                completeCardInfo.setCompleteCardRootInfo(completeCardRootInfo);
+                completeCardRouteInfo = new CompleteCardRouteInfo(RouteRequest.getCardRouteByResultSet(rs));
+                RouteRequest.getCardRouteByResultSet(rs);
+                completeCardInfo.setCompleteCardRouteInfo(completeCardRouteInfo);
             }
-            //root element
-            RootRequest.getCompleteCardRoot(rs, completeCardRootInfo, "RootCard", "TextGroup", "RootText");
+            //route element
+            RouteRequest.getCompleteCardRoute(rs, completeCardRouteInfo, "RouteCard", "TextGroup", "RouteText");
         }
         Long cardCoordinate = rs.getLong("CardCoordinate.CardCoordinateID");
         if (cardCoordinate != 0 && !rs.wasNull()) {
             if (completeCardInfo.getCardCoordinateEntity() == null) {
-                CardCoordinateEntity cardCoordinateEntity = RootRequest.getCardCoordinateByResultSet(rs);
+                CardCoordinateEntity cardCoordinateEntity = RouteRequest.getCardCoordinateByResultSet(rs);
                 cardCoordinateEntity.setCard(completeCardInfo.getCardEntity());
                 completeCardInfo.setCardCoordinateEntity(cardCoordinateEntity);
             }
@@ -476,7 +449,7 @@ public class CardRequest {
                 sql += "AND (Card.CardID=?) ";
             }
             if (parser.getCardName() != null && !parser.getCardName().isEmpty()) {
-                sql += "AND (Card.CardName Like ? OR (Text.Text Like ? AND TextCard.CardTextType=? )) ";
+                sql += "AND (Card.CardName Like ? OR (Text.Text Like ?)) ";
             }
             if (parser.getCardType() != null) {
                 sql += "AND (Card.CardType=?) ";
@@ -492,8 +465,6 @@ public class CardRequest {
                 ps.setString(i, "%" + parser.getCardName() + "%");
                 i++;
                 ps.setString(i, "%" + parser.getCardName() + "%");
-                i++;
-                ps.setInt(i, TextType.Name.getValue());
                 i++;
             }
             if (parser.getCardType() != null) {
@@ -628,11 +599,9 @@ public class CardRequest {
                     "JOIN TextGroup ON (Text.TextGroupID=TextGroup.TextGroupID) " +
                     "JOIN TextCard ON (TextCard.TextGroupID=TextGroup.TextGroupID) " +
                     "JOIN Card ON (Card.CardID=TextCard.CardID) " +
-                    "WHERE Card.CardID=? " +
-                    "AND TextCard.CardTextType=?";
+                    "WHERE Card.CardID=? ";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, cardID);
-            ps.setInt(2, TextType.Name.getValue());
             rs = ps.executeQuery();
             while (rs.next()) {
                 res.add(rs.getString("Text.Text"));
@@ -655,7 +624,7 @@ public class CardRequest {
                 session.getTransaction().commit();
             }
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -715,7 +684,7 @@ public class CardRequest {
                 CardUpdateInfo cardUpdateInfo = new CardUpdateInfo();
                 cardUpdateInfo.setCardID(rs.getLong("Card.CardID"));
                 cardUpdateInfo.setUpdateType(UpdateType.parseInt(rs.getInt("CardChange.UpdateType")));
-                cardUpdateInfo.setDataType(ChangingDataType.parseInt(rs.getInt("CardChange.DataType")));
+                cardUpdateInfo.setDataType(DataBaseEntityType.parseInt(rs.getInt("CardChange.DataType")));
                 cardUpdateInfo.setUpdateStatus(UpdateStatus.parseInt(rs.getInt("CardChange.UpdateStatus")));
                 res.add(cardUpdateInfo);
             }
@@ -747,37 +716,46 @@ public class CardRequest {
 
 
     public static LinkedList<MobileCardInfo> getAllMobileCards(Long userID) {
+        // loggerFactory.debug("1");
         HashMap<Long, MobileCardInfo> cardMap = new HashMap<>();
         HashSet<Long> textSet = new HashSet<>();
         HashSet<Long> imageSet = new HashSet<>();
         HashSet<Long> parameterSet = new HashSet<>();
+        // loggerFactory.debug("2");
         DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
+        // loggerFactory.debug("3");
         try {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = MobileCardSql +
                     "WHERE (UserPersonalData.UserLanguage=Text.LanguageID OR Text.LanguageID IS NULL) " +
-                    "AND (UserPersonalData.UserLanguage=CardParameterTypeText.LanguageID OR CardParameterTypeText.LanguageID IS NULL) " +
                     "AND (Card.CardState IN (" + CardState.Active.getValue() + "))";
-
+            // loggerFactory.debug("4");
             ps = connection.prepareStatement(sql);
+            // loggerFactory.debug("5");
             ps.setLong(1, userID);
+            // loggerFactory.debug("6");
             rs = ps.executeQuery();
+            // loggerFactory.debug("7");
             parseMobileCardSQLRequest(cardMap, textSet, imageSet, parameterSet, rs);
+            // loggerFactory.debug("8");
         } catch (SQLException e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
+        // loggerFactory.debug("9");
         LinkedList<MobileCardInfo> mobileCardInfos = new LinkedList<>();
         mobileCardInfos.addAll(cardMap.values());
+        // loggerFactory.debug("10");
         return mobileCardInfos;
     }
 
 
     public static LinkedList<MobileCardInfo> getAllMobileCards(Long userID, Integer limit, Integer offset) {
+        // loggerFactory.debug("1");
         HashMap<Long, MobileCardInfo> cardMap = new HashMap<>();
         HashSet<Long> textSet = new HashSet<>();
         HashSet<Long> imageSet = new HashSet<>();
@@ -786,19 +764,22 @@ public class CardRequest {
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
+        // loggerFactory.debug("2");
         try {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = MobileCardSql +
                     "JOIN (SELECT FilterCard.CardID FROM Card AS FilterCard WHERE (FilterCard.CardState IN (" + CardState.Active.getValue() + ")) ORDER BY FilterCard.CardID LIMIT " + offset + "," + limit + ")" +
                     "AS T ON (Card.CardID=T.CardID)" +
                     "WHERE (UserPersonalData.UserLanguage=Text.LanguageID OR Text.LanguageID IS NULL) " +
-                    "AND (UserPersonalData.UserLanguage=CardParameterTypeText.LanguageID OR CardParameterTypeText.LanguageID IS NULL) " +
                     "AND (Card.CardState IN (" + CardState.Active.getValue() + "))";
 
             ps = connection.prepareStatement(sql);
             ps.setLong(1, userID);
+            // loggerFactory.debug("3");
             rs = ps.executeQuery();
+            // loggerFactory.debug("4");
             parseMobileCardSQLRequest(cardMap, textSet, imageSet, parameterSet, rs);
+            // loggerFactory.debug("5");
         } catch (SQLException e) {
             loggerFactory.error(e);
         } finally {
@@ -806,6 +787,7 @@ public class CardRequest {
         }
         LinkedList<MobileCardInfo> mobileCardInfos = new LinkedList<>();
         mobileCardInfos.addAll(cardMap.values());
+        // loggerFactory.debug("6");
         return mobileCardInfos;
     }
 
@@ -820,6 +802,7 @@ public class CardRequest {
                     mobileCardInfo = new MobileCardInfo();
                     mobileCardInfo.setCardID(cardID);
                     mobileCardInfo.setCardType(CardType.parseInt(rs.getInt("Card.CardType")));
+                    mobileCardInfo.setOrder(rs.getInt("Card.NumberInList"));
                     cardMap.put(cardID, mobileCardInfo);
                 }
                 if (mobileCardInfo != null) {
@@ -829,13 +812,17 @@ public class CardRequest {
                         mobileText = new MobileText();
                         mobileText.setTextGroupID(textID);
                         mobileText.setText(rs.getString("Text.Text"));
-                        mobileText.setTextType(TextType.parseInt(rs.getInt("TextCard.CardTextType")));
+                        mobileText.setCardParameterTypeID(rs.getLong("TextCard.CardParameterTypeID"));
                         mobileCardInfo.getMobileTexts().add(mobileText);
                         textSet.add(textID);
                     }
                     Long menuID = rs.getLong("Menu.MenuID");
                     if (menuID != 0 && !rs.wasNull()) {
                         mobileCardInfo.getMenuIDs().add(menuID);
+                    }
+                    Long tagID = rs.getLong("Tag.TagID");
+                    if (tagID != 0 && !rs.wasNull()) {
+                        mobileCardInfo.getTagIDs().add(tagID);
                     }
                     Long imageID = rs.getLong("Image.ImageID");
                     if (imageID != 0 && !rs.wasNull()) {
@@ -854,13 +841,9 @@ public class CardRequest {
                     if (!rs.wasNull() && parameterID != 0) {
                         if (!parameterSet.contains(parameterID)) {
                             MobileParameter mobileParameter = new MobileParameter();
-                            mobileParameter.setApplicationBlock(ApplicationBlock.parseInt(rs.getInt("CardParameterType.Block")));
-                            mobileParameter.setDataType(DataType.parseInt(rs.getInt("CardParameterType.DataType")));
-                            mobileParameter.setImageID(rs.getLong("CardParameterType.ImageID"));
-                            mobileParameter.setName(rs.getString("CardParameterTypeText.Text"));
-                            mobileParameter.setValue(rs.getString("CardParameter.CardParameterValue"));
-                            mobileParameter.setPosition(rs.getInt("CardParameterType.Position"));
                             mobileParameter.setParameterID(parameterID);
+                            mobileParameter.setParameterTypeID(rs.getLong("CardParameter.CardParameterTypeID"));
+                            mobileParameter.setValue(rs.getString("CardParameter.CardParameterValue"));
                             mobileCardInfo.getMobileParameters().add(mobileParameter);
                             parameterSet.add(parameterID);
                         }
@@ -878,9 +861,9 @@ public class CardRequest {
     }
 
     public static ArrayList<String> checkCardStatus(CardEntity cardEntity, CardState cardState) {
+        ArrayList<String> errors = new ArrayList<String>();
         switch (cardState) {
             case Unknown: {
-                ArrayList<String> errors = new ArrayList<String>();
                 errors.add("unknown card state");
                 return errors;
             }
@@ -888,15 +871,12 @@ public class CardRequest {
                 return checkCardForActivate(cardEntity);
             }
             case NotActive: {
-                ArrayList<String> errors = new ArrayList<String>();
                 return errors;
             }
             case Deleted: {
-                ArrayList<String> errors = new ArrayList<String>();
                 return errors;
             }
             default:
-                ArrayList<String> errors = new ArrayList<String>();
                 errors.add("unknown card state");
                 return errors;
         }
@@ -905,4 +885,5 @@ public class CardRequest {
     private static ArrayList<String> checkCardForActivate(CardEntity cardEntity) {
         return new ArrayList<String>();
     }
+
 }

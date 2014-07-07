@@ -3,13 +3,7 @@ package model.database;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 15.10.13
- * Time: 3:06
- * To change this template use File | Settings | File Templates.
- */
+
 @javax.persistence.Table(name = "PARAMETERS", schema = "", catalog = "information_schema")
 @Entity
 public class ParametersEntity {

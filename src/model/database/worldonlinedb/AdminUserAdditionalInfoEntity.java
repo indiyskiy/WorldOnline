@@ -3,9 +3,6 @@ package model.database.worldonlinedb;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-/**
- * Created by Илья on 04.04.14.
- */
 @javax.persistence.Table(name = "AdminUserAdditionalInfo", schema = "", catalog = "worldonline")
 @Entity
 public class AdminUserAdditionalInfoEntity {

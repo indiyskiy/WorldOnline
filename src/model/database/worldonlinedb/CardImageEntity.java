@@ -4,13 +4,7 @@ import model.constants.databaseenumeration.CardImageType;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 31.10.13
- * Time: 1:43
- * To change this template use File | Settings | File Templates.
- */
+
 @javax.persistence.Table(name = "CardImage", schema = "", catalog = "worldonline")
 @Entity
 public class CardImageEntity {

@@ -14,6 +14,7 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     private Connection connection = null;
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Database, DatabaseConnection.class);
+    private static long connectionCounter = 0;
 
     public DatabaseConnection() {
         try {
@@ -21,6 +22,10 @@ public class DatabaseConnection {
             Context envCtx = (Context) initCtx.lookup("java:comp/env/");
             DataSource ds = (DataSource) envCtx.lookup("jdbc/worldOnLineDB");
             connection = ds.getConnection();
+            connectionCounter++;
+            if (connectionCounter > 50) {
+                loggerFactory.error("connectionCounter overvalued " + connectionCounter);
+            }
         } catch (SQLException e) {
             loggerFactory.error(e);
             throw new RuntimeException("Cannot connect the database!", e);
@@ -43,7 +48,8 @@ public class DatabaseConnection {
 
     public void closeConnections(PreparedStatement ps, ResultSet rs) {
         try {
-            if (connection != null) {
+            if (connection != null && !connection.isClosed()) {
+                connectionCounter--;
                 connection.close();
             }
             if (ps != null) {

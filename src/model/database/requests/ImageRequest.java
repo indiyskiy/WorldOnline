@@ -43,7 +43,7 @@ public class ImageRequest {
             session.save(image);
             session.getTransaction().commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -57,7 +57,7 @@ public class ImageRequest {
             session.save(imageEntity);
             session.getTransaction().commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -72,7 +72,7 @@ public class ImageRequest {
             imageEntities = (ArrayList<ImageEntity>) session.createCriteria(ImageEntity.class).list();
             transaction.commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -88,7 +88,7 @@ public class ImageRequest {
             cardImageEntities = (ArrayList<CardImageEntity>) session.createCriteria(CardImageEntity.class).list();
             transaction.commit();
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -101,7 +101,7 @@ public class ImageRequest {
         try {
             return (ImageEntity) session.get(ImageEntity.class, imageID);
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -113,7 +113,7 @@ public class ImageRequest {
         try {
             return (CardImageEntity) session.get(CardImageEntity.class, cardImageID);
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }

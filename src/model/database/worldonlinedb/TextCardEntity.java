@@ -20,9 +20,9 @@ public class TextCardEntity {
     @JoinColumn(name = "CardID")
     private CardEntity card;
 
-    @javax.persistence.Column(name = "CardTextType")
-    @Basic
-    private Integer cardTextType;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "CardParameterTypeID")
+    private CardParameterTypeEntity cardParameterType;
 
     public Long getTextCardID() {
         return textCardID;
@@ -48,14 +48,14 @@ public class TextCardEntity {
         this.card = card;
     }
 
-    public Integer getCardTextType() {
-        return cardTextType;
+
+    public CardParameterTypeEntity getCardParameterType() {
+        return cardParameterType;
     }
 
-    public void setCardTextType(Integer cardTextType) {
-        this.cardTextType = cardTextType;
+    public void setCardParameterType(CardParameterTypeEntity cardParameterType) {
+        this.cardParameterType = cardParameterType;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -70,7 +70,7 @@ public class TextCardEntity {
             return false;
         if (card != null ? !card.equals(that.card) : that.card != null)
             return false;
-        if (cardTextType != null ? !cardTextType.equals(that.cardTextType) : that.cardTextType != null)
+        if (cardParameterType != null ? !cardParameterType.equals(that.cardParameterType) : that.cardParameterType != null)
             return false;
         return true;
     }
@@ -80,16 +80,16 @@ public class TextCardEntity {
         int result = textCardID != null ? textCardID.hashCode() : 0;
         result = 31 * result + (textGroup != null ? textGroup.hashCode() : 0);
         result = 31 * result + (card != null ? card.hashCode() : 0);
-        result = 31 * result + (cardTextType != null ? cardTextType.hashCode() : 0);
+        result = 31 * result + (cardParameterType != null ? cardParameterType.hashCode() : 0);
         return result;
     }
 
     public TextCardEntity() {
     }
 
-    public TextCardEntity(TextGroupEntity textGroup, CardEntity card, TextType cardTextType) {
+    public TextCardEntity(TextGroupEntity textGroup, CardEntity card, CardParameterTypeEntity cardParameterType) {
         setTextGroup(textGroup);
         setCard(card);
-        setCardTextType(cardTextType.getValue());
+        setCardParameterType(cardParameterType);
     }
 }

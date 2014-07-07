@@ -1,7 +1,6 @@
 package model.database.requests;
 
-import controller.phone.entity.GetAllMenusRequest;
-import controller.phone.entity.GetMenuRequest;
+import controller.phone.entity.AllMenusRequest;
 import model.additionalentity.CompleteTextGroupInfo;
 import model.additionalentity.MenuInfo;
 import model.additionalentity.SimpleMenu;
@@ -48,7 +47,7 @@ public class MenuRequest {
         } catch (Exception e) {
             logger.error(e);
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -64,7 +63,7 @@ public class MenuRequest {
         } catch (Exception e) {
             logger.error(e);
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -77,7 +76,7 @@ public class MenuRequest {
         } catch (Exception e) {
             logger.error(e);
         } finally {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -316,7 +315,7 @@ public class MenuRequest {
                 MenuEntity menuEntity;
                 Long menuID = rs.getLong("Menu.MenuID");
                 if (menuID != 0 && !rs.wasNull()) {
-                    menuEntity = MenuRequest.getMenu(menuID);
+                    menuEntity = model.database.requests.MenuRequest.getMenu(menuID);
                     return menuEntity;
                 }
             }
@@ -347,7 +346,7 @@ public class MenuRequest {
             } catch (Exception e) {
                 logger.error(e);
             } finally {
-                if (session != null) {
+                if (session != null && session.isOpen()) {
                     session.close();
                 }
             }
@@ -377,7 +376,7 @@ public class MenuRequest {
         return menuIDList;
     }
 
-    public static MenuCompleteInformation getMenuCompleteInformation(GetMenuRequest getMenuRequest) {
+    public static MenuCompleteInformation getMenuCompleteInformation(controller.phone.entity.MenuRequest menuRequest) {
         MenuCompleteInformation menuCompleteInformation = new MenuCompleteInformation();
         DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
@@ -398,8 +397,8 @@ public class MenuRequest {
                     "JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID AND Text.LanguageID=UserPersonalData.UserLanguage) " +
                     "WHERE Menu.MenuID=?";
             ps = connection.prepareStatement(sql);
-            ps.setLong(1, getMenuRequest.getUserID());
-            ps.setLong(2, getMenuRequest.getMenuID());
+            ps.setLong(1, menuRequest.getUserID());
+            ps.setLong(2, menuRequest.getMenuID());
             rs = ps.executeQuery();
             if (rs.first()) {
                 parseCompleteMenu(menuCompleteInformation, rs);
@@ -427,7 +426,7 @@ public class MenuRequest {
         menuCompleteInformation.setCardCounter(cardCounter);
     }
 
-    public static ArrayList<MenuCompleteInformation> getAllMenusCompleteInformation(GetAllMenusRequest getAllMenusRequest) {
+    public static ArrayList<MenuCompleteInformation> getAllMenusCompleteInformation(AllMenusRequest allMenusRequest) {
         ArrayList<MenuCompleteInformation> menusCompleteInformation = new ArrayList<MenuCompleteInformation>();
         DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
@@ -454,7 +453,7 @@ public class MenuRequest {
                     "GROUP BY Menu.MenuID;";
 
             ps = connection.prepareStatement(sql);
-            ps.setLong(1, getAllMenusRequest.getUserID());
+            ps.setLong(1, allMenusRequest.getUserID());
             rs = ps.executeQuery();
             while (rs.next()) {
                 MenuCompleteInformation menuCompleteInformation = new MenuCompleteInformation();
