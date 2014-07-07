@@ -3,17 +3,9 @@ package helper;
 import model.constants.Component;
 import model.constants.ServerConsts;
 import model.logger.LoggerFactory;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.util.FileCopyUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.util.List;
 import java.util.Random;
 
 public class FileHelper {
