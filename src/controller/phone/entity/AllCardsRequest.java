@@ -1,9 +1,6 @@
 package controller.phone.entity;
 
-/**
- * Created by Илья on 18.04.14.
- */
-public class GetAllCardsRequest extends MobileRequest {
+public class AllCardsRequest extends MobileRequest {
     private Integer limit = null;
     private Integer offset = null;
 

@@ -2,13 +2,13 @@ package controller.phone.parser;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import controller.phone.entity.GetAllMenusRequest;
+import controller.phone.entity.AllMenusRequest;
 import model.additionalentity.phone.MenuCompleteInformation;
 import model.constants.ExceptionTexts;
 import model.database.requests.UserRequests;
 import model.exception.IllegalTypeException;
 import model.exception.ParseRequestException;
-import model.phone.responseentity.GetAllMenusResponse;
+import model.phone.responseentity.AllMenusResponse;
 import model.phone.responseentity.MobileResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class GetAllMenusParser implements MobileParser {
 
-    public GetAllMenusRequest parse(HttpServletRequest request) throws ParseRequestException {
-        GetAllMenusRequest getAllMenusRequest = new GetAllMenusRequest();
+    public AllMenusRequest parse(HttpServletRequest request) throws ParseRequestException {
+        AllMenusRequest allMenusRequest = new AllMenusRequest();
         String userIdString = request.getParameter("userID");
         if (userIdString == null || userIdString.isEmpty()) {
             throw new ParseRequestException(ExceptionTexts.allMenusUserIDEmptyException);
@@ -31,20 +31,20 @@ public class GetAllMenusParser implements MobileParser {
         if (!UserRequests.isUserExist(userID)) {
             throw new ParseRequestException(ExceptionTexts.allMenusUserNotExistException);
         }
-        getAllMenusRequest.setUserID(userID);
-        return getAllMenusRequest;
+        allMenusRequest.setUserID(userID);
+        return allMenusRequest;
     }
 
     @Override
     public String getResponse(MobileResponseEntity mobileResponseEntity) throws IllegalTypeException {
-        if (mobileResponseEntity.getClass() != GetAllMenusResponse.class) {
-            throw new IllegalTypeException(MobileResponseEntity.class, GetAllMenusResponse.class);
+        if (mobileResponseEntity.getClass() != AllMenusResponse.class) {
+            throw new IllegalTypeException(MobileResponseEntity.class, AllMenusResponse.class);
         }
-        GetAllMenusResponse getAllMenusResponse = (GetAllMenusResponse) mobileResponseEntity;
-        return getResponse(getAllMenusResponse);
+        AllMenusResponse allMenusResponse = (AllMenusResponse) mobileResponseEntity;
+        return getResponse(allMenusResponse);
     }
 
-    public String getResponse(GetAllMenusResponse mobileResponseEntity) throws IllegalTypeException {
+    public String getResponse(AllMenusResponse mobileResponseEntity) throws IllegalTypeException {
         JsonObject responseObj = new JsonObject();
         responseObj.addProperty("status", mobileResponseEntity.getStatus().getValue());
         ArrayList<MenuCompleteInformation> informationArrayList = mobileResponseEntity.getMenusCompleteInformation();

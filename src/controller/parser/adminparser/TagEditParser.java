@@ -1,19 +1,11 @@
 package controller.parser.adminparser;
 
-import model.constants.databaseenumeration.TagType;
 import model.database.requests.TagRequest;
 import model.database.worldonlinedb.TagEntity;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 20.11.13
- * Time: 17:21
- * To change this template use File | Settings | File Templates.
- */
 public class TagEditParser {
     private String errors = null;
 
@@ -39,10 +31,6 @@ public class TagEditParser {
             } else {
                 oldTag.setTagName(tagName);
             }
-            String tagTypeString = request.getParameter("TagType");
-            int tagTypeID = Integer.parseInt(tagTypeString);
-            TagType tagType = TagType.parseInt(tagTypeID);
-            oldTag.setTagType(tagType);
             return oldTag;
         } catch (SQLException e) {
             addError("Tag with id=" + tagID + " was not found");

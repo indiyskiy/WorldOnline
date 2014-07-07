@@ -3,11 +3,11 @@ package controller.phone.parser;
 
 import com.google.gson.JsonObject;
 import controller.phone.entity.RestoreUserRequest;
-import model.phone.responseentity.RestoreUserResponse;
 import model.constants.ExceptionTexts;
 import model.exception.IllegalTypeException;
 import model.exception.ParseRequestException;
 import model.phone.responseentity.MobileResponseEntity;
+import model.phone.responseentity.RestoreUserResponse;
 
 import javax.servlet.http.HttpServletRequest;
 

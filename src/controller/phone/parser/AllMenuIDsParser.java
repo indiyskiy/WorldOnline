@@ -3,22 +3,19 @@ package controller.phone.parser;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import controller.phone.entity.GetAllMenuIDsRequest;
+import controller.phone.entity.AllMenuIDsRequest;
 import model.constants.ExceptionTexts;
 import model.database.requests.UserRequests;
 import model.exception.IllegalTypeException;
 import model.exception.ParseRequestException;
-import model.phone.responseentity.AllMenusResponse;
+import model.phone.responseentity.AllMenuIDsResponse;
 import model.phone.responseentity.MobileResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Илья on 09.04.14.
- */
-public class GetAllMenuIDsParser implements MobileParser {
-    public GetAllMenuIDsRequest parse(HttpServletRequest request) throws ParseRequestException {
-        GetAllMenuIDsRequest getAllMenuIDsRequest = new GetAllMenuIDsRequest();
+public class AllMenuIDsParser implements MobileParser {
+    public AllMenuIDsRequest parse(HttpServletRequest request) throws ParseRequestException {
+        AllMenuIDsRequest allMenuIDsRequest = new AllMenuIDsRequest();
         String userIdString = request.getParameter("userID");
         if (userIdString == null || userIdString.isEmpty()) {
             throw new ParseRequestException(ExceptionTexts.allMenusUserIDEmptyException);
@@ -32,15 +29,15 @@ public class GetAllMenuIDsParser implements MobileParser {
         if (!UserRequests.isUserExist(userID)) {
             throw new ParseRequestException(ExceptionTexts.allMenusUserNotExistException);
         }
-        getAllMenuIDsRequest.setUserID(userID);
-        return getAllMenuIDsRequest;
+        allMenuIDsRequest.setUserID(userID);
+        return allMenuIDsRequest;
     }
 
-    public static String getResponse(AllMenusResponse allMenusResponse) {
+    public static String getResponse(AllMenuIDsResponse allMenuIDsResponse) {
         JsonObject responseObj = new JsonObject();
-        responseObj.addProperty("status", allMenusResponse.getStatus().getValue());
+        responseObj.addProperty("status", allMenuIDsResponse.getStatus().getValue());
         JsonArray jsonArray = new JsonArray();
-        for (Long id : allMenusResponse.getMenuIDs()) {
+        for (Long id : allMenuIDsResponse.getMenuIDs()) {
             jsonArray.add(new JsonPrimitive(id));
         }
         responseObj.add("menuIDs", jsonArray);
@@ -49,10 +46,10 @@ public class GetAllMenuIDsParser implements MobileParser {
 
     @Override
     public String getResponse(MobileResponseEntity mobileResponseEntity) throws IllegalTypeException {
-        if (mobileResponseEntity.getClass() != AllMenusResponse.class) {
-            throw new IllegalTypeException(MobileResponseEntity.class, AllMenusResponse.class);
+        if (mobileResponseEntity.getClass() != AllMenuIDsResponse.class) {
+            throw new IllegalTypeException(MobileResponseEntity.class, AllMenuIDsResponse.class);
         }
-        AllMenusResponse allMenusResponse = (AllMenusResponse) mobileResponseEntity;
-        return getResponse(allMenusResponse);
+        AllMenuIDsResponse allMenuIDsResponse = (AllMenuIDsResponse) mobileResponseEntity;
+        return getResponse(allMenuIDsResponse);
     }
 }

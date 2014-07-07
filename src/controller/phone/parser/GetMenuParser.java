@@ -1,7 +1,7 @@
 package controller.phone.parser;
 
 import com.google.gson.JsonObject;
-import controller.phone.entity.GetMenuRequest;
+import controller.phone.entity.MenuRequest;
 import controller.phone.entity.MobileRequest;
 import model.additionalentity.phone.MenuCompleteInformation;
 import model.constants.ExceptionTexts;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 public class GetMenuParser implements MobileParser {
     @Override
     public MobileRequest parse(HttpServletRequest request) throws ParseRequestException {
-        GetMenuRequest getMenuRequest = new GetMenuRequest();
+        MenuRequest menuRequest = new MenuRequest();
         String idString = request.getParameter("userID");
         if (idString == null || idString.isEmpty()) {
             throw new ParseRequestException(ExceptionTexts.getMenuUserIDEmptyException);
@@ -33,7 +33,7 @@ public class GetMenuParser implements MobileParser {
         if (!UserRequests.isUserExist(userID)) {
             throw new ParseRequestException(ExceptionTexts.getMenuUserNotExistException);
         }
-        getMenuRequest.setUserID(userID);
+        menuRequest.setUserID(userID);
 
         String menuIdString = request.getParameter("menuID");
         if (menuIdString == null || menuIdString.isEmpty()) {
@@ -45,8 +45,8 @@ public class GetMenuParser implements MobileParser {
         } catch (Exception e) {
             throw new ParseRequestException(ExceptionTexts.getMenuMenuIDIncorrectException);
         }
-        getMenuRequest.setMenuID(menuID);
-        return getMenuRequest;
+        menuRequest.setMenuID(menuID);
+        return menuRequest;
     }
 
     public String getResponse(GetMenuResponse getMenuResponse) {

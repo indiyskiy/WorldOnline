@@ -1,6 +1,5 @@
 package controller.parser.adminparser;
 
-import helper.FileHelper;
 import model.additionalentity.admin.ParsedRequest;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardImageType;
