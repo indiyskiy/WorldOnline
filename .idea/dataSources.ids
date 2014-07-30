@@ -54,6 +54,7 @@
       <exported-key name="FK_55sp0hs3nhgu8yq0xlp3s84d4" table="CardCoordinate" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_kad18leo0yike87hf7oa63gi9" table="CardImage" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_ic9fnltx16lm8nm7cbqnj6i14" table="CardParameter" schema="" catalog="worldonline" columns="CardID"/>
+      <exported-key name="FK_tf8uon5iprk0h7eov1uk8ydrp" table="CardPriceLink" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_s1epm55r239fsl5u41bp19rwm" table="CardRoute" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_d5988m03oyar0cmc1rrehabop" table="CardTag" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_d26ian9314gtlpkc64pm04qdx" table="CardToCardLink" schema="" catalog="worldonline" columns="TargetCardID"/>
@@ -119,6 +120,14 @@
       <exported-key name="FK_qvqmg3u9a6ltpy5kl6fis7llo" table="CardParameter" schema="" catalog="worldonline" columns="CardParameterTypeID"/>
       <exported-key name="FK_lulcmfpaovrudbepfjpkj7b2u" table="TextCard" schema="" catalog="worldonline" columns="CardParameterTypeID"/>
     </table>
+    <table name="CardPriceLink" schema="" catalog="worldonline" type="TABLE">
+      <column name="CardPriceLinkID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="PriceID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="CardPriceLinkID"/>
+      <foreign-key name="FK_2o4f85e9oev5ekd4utf09hm6e" columns="PriceID" ref-table="Price" ref-schema="" ref-catalog="worldonline" ref-columns="PriceID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_tf8uon5iprk0h7eov1uk8ydrp" columns="CardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
     <table name="CardRoute" schema="" catalog="worldonline" type="TABLE">
       <column name="CardRouteID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="CardRouteName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
@@ -145,6 +154,41 @@
       <primary-key name="PRIMARY" columns="CardToCardLinkID"/>
       <foreign-key name="FK_d26ian9314gtlpkc64pm04qdx" columns="TargetCardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_nd7l1a14umsae1dvncv3juko7" columns="SourceCardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="Dish" schema="" catalog="worldonline" type="TABLE">
+      <column name="DishID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="cost" sqlType="DOUBLE" length="22" precision="0" nullable="true" jdbcType="8"/>
+      <column name="DishCategoryID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="DishNameID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="PriceID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="DishID"/>
+      <foreign-key name="FK_5a0wiynpumll3pmlqfsj5mfrn" columns="PriceID" ref-table="Price" ref-schema="" ref-catalog="worldonline" ref-columns="PriceID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_eqo04yek9oxldlenjogi1ce5u" columns="DishCategoryID" ref-table="DishCategory" ref-schema="" ref-catalog="worldonline" ref-columns="DishCategoryID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_n17n1e1qrvcb9rk3bbu82p0p2" columns="DishNameID" ref-table="TextGroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_dqdcbobqiw2cvva5c3j0h4cko" table="DishTagDishLink" schema="" catalog="worldonline" columns="DishID"/>
+    </table>
+    <table name="DishCategory" schema="" catalog="worldonline" type="TABLE">
+      <column name="DishCategoryID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="Position" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="NameID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="DishCategoryID"/>
+      <foreign-key name="FK_d0kqpwalhb6mtplissxjwx8g9" columns="NameID" ref-table="TextGroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_eqo04yek9oxldlenjogi1ce5u" table="Dish" schema="" catalog="worldonline" columns="DishCategoryID"/>
+    </table>
+    <table name="DishTag" schema="" catalog="worldonline" type="TABLE">
+      <column name="DishTagID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="NameID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="DishTagID"/>
+      <foreign-key name="FK_68wlx472oigvhkowpr072g656" columns="NameID" ref-table="TextGroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_7tvjdyx91gpjm882hqqxhapnh" table="DishTagDishLink" schema="" catalog="worldonline" columns="DishTagID"/>
+    </table>
+    <table name="DishTagDishLink" schema="" catalog="worldonline" type="TABLE">
+      <column name="DishTagDishLinkID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="DishID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="DishTagID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="DishTagDishLinkID"/>
+      <foreign-key name="FK_7tvjdyx91gpjm882hqqxhapnh" columns="DishTagID" ref-table="DishTag" ref-schema="" ref-catalog="worldonline" ref-columns="DishTagID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_dqdcbobqiw2cvva5c3j0h4cko" columns="DishID" ref-table="Dish" ref-schema="" ref-catalog="worldonline" ref-columns="DishID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="GlobalVersion" schema="" catalog="worldonline" type="TABLE">
       <column name="GlobalVersionID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -190,6 +234,12 @@
       <foreign-key name="FK_ndk8wns7hlpceawbienjf5j5t" columns="MenuID" ref-table="Menu" ref-schema="" ref-catalog="worldonline" ref-columns="MenuID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_q9w7t32uurt9fgvs7opfm7u64" columns="CardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
+    <table name="Price" schema="" catalog="worldonline" type="TABLE">
+      <column name="PriceID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <primary-key name="PRIMARY" columns="PriceID"/>
+      <exported-key name="FK_2o4f85e9oev5ekd4utf09hm6e" table="CardPriceLink" schema="" catalog="worldonline" columns="PriceID"/>
+      <exported-key name="FK_5a0wiynpumll3pmlqfsj5mfrn" table="Dish" schema="" catalog="worldonline" columns="PriceID"/>
+    </table>
     <table name="RouteElement" schema="" catalog="worldonline" type="TABLE">
       <column name="RouteElementID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="RouteElementNumber" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
@@ -202,7 +252,6 @@
     <table name="Tag" schema="" catalog="worldonline" type="TABLE">
       <column name="TagID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="TagName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="TagType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="IconID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="TagGroupID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="TagTextGroupID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
@@ -247,6 +296,9 @@
       <exported-key name="FK_k506468098rw8ld5q0tlbv7ic" table="CardImage" schema="" catalog="worldonline" columns="ImageDescriptionTextGroupID"/>
       <exported-key name="FK_ftefs10dpu32c10qxf37n0eua" table="CardParameterType" schema="" catalog="worldonline" columns="CardParameterTypeName"/>
       <exported-key name="FK_9hsvn0pwsgl68xnpahc4ea69j" table="CardRoute" schema="" catalog="worldonline" columns="RouteDescriptionTextGroupID"/>
+      <exported-key name="FK_n17n1e1qrvcb9rk3bbu82p0p2" table="Dish" schema="" catalog="worldonline" columns="DishNameID"/>
+      <exported-key name="FK_d0kqpwalhb6mtplissxjwx8g9" table="DishCategory" schema="" catalog="worldonline" columns="NameID"/>
+      <exported-key name="FK_68wlx472oigvhkowpr072g656" table="DishTag" schema="" catalog="worldonline" columns="NameID"/>
       <exported-key name="FK_tgq8tlsqbv1wc2i3kod4h2cxx" table="Menu" schema="" catalog="worldonline" columns="NameTextGroupID"/>
       <exported-key name="FK_2sksgsk24c5xcuo9ma2qwv5pc" table="Tag" schema="" catalog="worldonline" columns="TagTextGroupID"/>
       <exported-key name="FK_cjglwoukgb6lv3rlksxqy630s" table="TagGroup" schema="" catalog="worldonline" columns="TagGroupTextGroupID"/>
