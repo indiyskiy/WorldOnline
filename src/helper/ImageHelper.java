@@ -27,15 +27,14 @@ public class ImageHelper {
     }
 
     public static void saveImage(String imageName, CardEntity card, CardImageType cardImageType) {
-        loggerFactory.debug("save image " + imageName + " " + card.getCardID());
         String root = ServerConsts.oldImageRoot + imageName;
         try {
-            if (imageName == null || imageName.isEmpty()) {
-                throw new DataIsEmptyException();
+            if (imageName == null || imageName.replaceAll(" ", "").isEmpty() || imageName.equals("null")) {
+                throw new DataIsEmptyException(imageName);
             }
             File imageFile = new File(root);
             if (!imageFile.exists()) {
-                throw new DataIsEmptyException();
+                throw new DataIsEmptyException(imageName);
             }
             BufferedImage bimg = ImageIO.read(imageFile);
             int width = bimg.getWidth();
@@ -52,13 +51,14 @@ public class ImageHelper {
             CardImageEntity cardImageEntity = new CardImageEntity(card, imageEntity, cardImageType);
             cardImageEntity.setCardImageName(imageName);
             ImageRequest.addCardImage(cardImageEntity);
+        } catch (DataIsEmptyException e) {
+            loggerFactory.error("data is empty, image name is " + String.valueOf(e.getImageName()));
         } catch (Exception e) {
             loggerFactory.error(e);
         }
     }
 
     public static void saveImage(File file, CardEntity card, CardImageType cardImageType) {
-        loggerFactory.debug("save image " + file.getName() + " " + card.getCardID());
         try {
             if (file == null) {
                 throw new DataIsEmptyException();

@@ -4,21 +4,24 @@ import model.constants.Component;
 import model.constants.databaseenumeration.DataType;
 import model.logger.LoggerFactory;
 
-/**
- * Created by Илья on 07.04.14.
- */
 public class ParameterValidator {
     static LoggerFactory loggerFactory = new LoggerFactory(Component.Global, ParameterValidator.class);
 
-    public static boolean isValidParameter(String parameter, DataType cardParameterDataType) {
+    public static String isValidParameter(String parameter, DataType cardParameterDataType) {
         try {
-            if (parameter == null || parameter.isEmpty()) {
-                return false;
+            if (parameter == null || parameter.replaceAll(" ", "").isEmpty()) {
+                return null;
             }
             switch (cardParameterDataType) {
                 case DoubleType: {
-                    Double.parseDouble(parameter);
-                    break;
+                    parameter = parameter.replaceAll("\"", "");
+                    parameter = parameter.replaceAll(",", "");
+                    parameter = parameter.replaceAll(" ", "");
+                    parameter = parameter.replaceAll("в", "");
+                    parameter = parameter.replaceAll("Ђ", "");
+                    parameter = parameter.replaceAll("`", "");
+//                    parameter = parameter.replaceAll("/", "");
+                    return String.valueOf(Double.parseDouble(parameter));
                 }
                 case EmailType: {
                     //todo validator
@@ -27,8 +30,7 @@ public class ParameterValidator {
                     break;
                 }
                 case IntegerType: {
-                    Integer.parseInt(parameter);
-                    break;
+                    return String.valueOf(Integer.parseInt(parameter));
                 }
                 case LinkType: {
                     //todo validator
@@ -39,14 +41,17 @@ public class ParameterValidator {
                         parameter = parameter.substring(1, parameter.length());
                     }
                     parameter = parameter.replaceAll("-", "");
+                    parameter = parameter.replaceAll("\"", "");
                     parameter = parameter.replaceAll(" ", "");
                     parameter = parameter.replaceAll("\\(", "");
                     parameter = parameter.replaceAll("\\)", "");
+                    parameter = parameter.replaceAll("\\\\", "");
+                    parameter = parameter.replaceAll("", "");
+                    parameter = parameter.replaceAll("/", "");
                     if (parameter.length() < 3) {
-                        return false;
+                        return null;
                     }
-                    Long.parseLong(parameter);
-                    break;
+                    return String.valueOf(Long.parseLong(parameter));
                 }
                 case StringType: {
                     break;
@@ -60,9 +65,13 @@ public class ParameterValidator {
             }
 
         } catch (Exception e) {
+            loggerFactory.error("invalid parameter " + parameter);
             loggerFactory.error(e);
-            return false;
+            return null;
         }
-        return true;
+        return parameter;
     }
+
 }
+
+
