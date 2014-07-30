@@ -948,7 +948,7 @@
       <workItem from="1405953130046" duration="3185000" />
       <workItem from="1406018512404" duration="37075000" />
       <workItem from="1406196565550" duration="12827000" />
-      <workItem from="1406269045594" duration="49601000" />
+      <workItem from="1406269045594" duration="49613000" />
     </task>
     <task id="LOCAL-00001" summary="TestCommit">
       <created>1383271700462</created>
@@ -1354,11 +1354,15 @@
       <created>1406703365811</created>
       <updated>1406703365811</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="[Mobile] card counting">
+      <created>1406703378747</created>
+      <updated>1406703378747</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1484809000" />
+    <option name="totallyTimeSpent" value="1484821000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
