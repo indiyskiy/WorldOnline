@@ -168,6 +168,12 @@
         <class>model.database.worldonlinedb.UserCardEntity</class>
         <class>model.database.worldonlinedb.CardParameterTypeEntity</class>
         <class>model.database.worldonlinedb.TagGroupEntity</class>
+        <class>model.database.worldonlinedb.dishes.PriceEntity</class>
+        <class>model.database.worldonlinedb.dishes.DishCategoryEntity</class>
+        <class>model.database.worldonlinedb.dishes.DishTagEntity</class>
+        <class>model.database.worldonlinedb.dishes.CardPriceLinkEntity</class>
+        <class>model.database.worldonlinedb.dishes.DishEntity</class>
+        <class>model.database.worldonlinedb.dishes.DishTagDishLinkEntity</class>
         <!-- <properties>
              <property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/worldonline"/>
              <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
