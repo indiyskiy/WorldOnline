@@ -22,7 +22,6 @@ public class ChangeStatusServlet extends ProtectedServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            loggerFactory.debug("do post");
             long cardID;
             CardEntity cardEntity;
             try {
@@ -48,7 +47,6 @@ public class ChangeStatusServlet extends ProtectedServlet {
             } else {
                 ServletHelper.throwServletException(exceptions);
             }
-            loggerFactory.debug("/do post");
             ServletHelper.sendForward("/completecardinfo?CardID=" + cardID, this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
@@ -57,14 +55,12 @@ public class ChangeStatusServlet extends ProtectedServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            loggerFactory.debug("do get");
             long cardID;
             try {
                 cardID = Long.parseLong(request.getParameter("cardID"));
             } catch (Exception e) {
                 throw new ServletException("incorrect card ID");
             }
-            loggerFactory.debug("/do get");
             ServletHelper.sendForward("/completecardinfo.jsp?CardID=" + cardID, this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
