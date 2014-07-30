@@ -298,13 +298,13 @@
 
     <!--all menu ids-->
     <servlet>
-        <display-name>GetAllMenusIdsServlet</display-name>
-        <servlet-name>GetAllMenusIdsServlet</servlet-name>
+        <display-name>AllMenusIdsServlet</display-name>
+        <servlet-name>AllMenusIdsServlet</servlet-name>
         <servlet-class>view.servlet.phone.AllMenusIdsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>GetAllMenusIdsServlet</servlet-name>
+        <servlet-name>AllMenusIdsServlet</servlet-name>
         <url-pattern>/mobile/allmenusids</url-pattern>
     </servlet-mapping>
 
@@ -358,13 +358,13 @@
 
     <!--Get All Card Parameter Types-->
     <servlet>
-        <display-name>GetAllCardParameterTypesServlet</display-name>
-        <servlet-name>GetAllCardParameterTypesServlet</servlet-name>
+        <display-name>AllCardParameterTypesServlet</display-name>
+        <servlet-name>AllCardParameterTypesServlet</servlet-name>
         <servlet-class>view.servlet.phone.AllCardParameterTypesServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>GetAllCardParameterTypesServlet</servlet-name>
+        <servlet-name>AllCardParameterTypesServlet</servlet-name>
         <url-pattern>/mobile/allcardparametertypes</url-pattern>
     </servlet-mapping>
 
@@ -412,14 +412,14 @@
 
     <!--add user request-->
     <servlet>
-        <display-name>UserTestServlet</display-name>
-        <servlet-name>UserTestServlet</servlet-name>
-        <servlet-class>view.servlet.test.UserTestServlet</servlet-class>
+        <display-name>TestServlet</display-name>
+        <servlet-name>TestServlet</servlet-name>
+        <servlet-class>view.servlet.test.TestServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>UserTestServlet</servlet-name>
-        <url-pattern>/test/usertest</url-pattern>
+        <servlet-name>TestServlet</servlet-name>
+        <url-pattern>/test</url-pattern>
     </servlet-mapping>
 
 </web-app>
