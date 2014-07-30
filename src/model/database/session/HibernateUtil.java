@@ -2,6 +2,7 @@ package model.database.session;
 
 import model.constants.Component;
 import model.database.worldonlinedb.*;
+import model.database.worldonlinedb.dishes.*;
 import model.logger.LoggerFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -53,7 +54,13 @@ public class HibernateUtil {
                 .addAnnotatedClass(CardChangeEntity.class)
                 .addAnnotatedClass(WeatherEntity.class)
                 .addAnnotatedClass(UserCardEntity.class)
-                .addAnnotatedClass(CardParameterTypeEntity.class);
+                .addAnnotatedClass(CardParameterTypeEntity.class)
+                .addAnnotatedClass(CardPriceLinkEntity.class)
+                .addAnnotatedClass(DishCategoryEntity.class)
+                .addAnnotatedClass(DishEntity.class)
+                .addAnnotatedClass(DishTagDishLinkEntity.class)
+                .addAnnotatedClass(DishTagEntity.class)
+                .addAnnotatedClass(PriceEntity.class);
         ac.configure();
         return ac;
     }

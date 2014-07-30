@@ -413,7 +413,6 @@ public class TagRequest {
         ResultSet rs = null;
         HashMap<Long, MobileTagGroup> mobileTagGroupHashMap = new HashMap<>();
         HashMap<Long, MobileTag> mobileTagHashMap = new HashMap<>();
-        loggerFactory.debug("user id " + userID);
         try {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT DISTINCT " +
@@ -440,7 +439,6 @@ public class TagRequest {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Long mobileTagGroupID = rs.getLong("TagGroup.TagGroupID");
-                loggerFactory.debug("mobileTagGroupID " + mobileTagGroupID);
                 if (mobileTagGroupID != 0 && !rs.wasNull()) {
                     MobileTagGroup mobileTagGroup;
                     if (mobileTagGroupHashMap.containsKey(mobileTagGroupID)) {

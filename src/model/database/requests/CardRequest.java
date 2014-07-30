@@ -56,6 +56,16 @@ public class CardRequest {
             "LEFT OUTER JOIN TextCard ON (Card.CardID=TextCard.CardID) " +
             "LEFT OUTER JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
             "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN CardParameterType AS TextCardParameterType ON (TextCardParameterType.CardParameterTypeID=TextCard.CardParameterTypeID) " +
+            "LEFT OUTER JOIN TextGroup AS TextCardParameterTypeTextGroup ON (TextCardParameterType.CardParameterTypeName=TextCardParameterTypeTextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Text AS TextCardParameterTypeText ON (TextCardParameterTypeText.TextGroupID=TextCardParameterTypeTextGroup.TextGroupID) " +
+            //card to card link
+            "LEFT OUTER JOIN CardToCardLink ON (CardToCardLink.SourceCardID=Card.CardID) " +
+            "LEFT OUTER JOIN Card AS TargetCard ON (CardToCardLink.TargetCardID=TargetCard.CardID) " +
+            //linket at
+            "LEFT OUTER JOIN CardToCardLink AS CardToCardLinkedOn ON (CardToCardLinkedOn.TargetCardID=Card.CardID) " +
+            "LEFT OUTER JOIN Card AS SourceCard ON (CardToCardLinkedOn.SourceCardID=SourceCard.CardID) " +
+
             //card menu
             "LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.CardID=Card.CardID) " +
             "LEFT OUTER JOIN Menu ON (MenuCardLink.MenuID=Menu.MenuID) " +
@@ -546,6 +556,7 @@ public class CardRequest {
                     "WHERE Text.Text LIKE ? || Card.CardName LIKE ?";
             ps = connection.prepareStatement(sql);
             ps.setString(1, name);
+            ps.setString(2, name);
             rs = ps.executeQuery();
             if (rs.first()) {
                 Long cardID = rs.getLong("Card.CardID");
@@ -716,55 +727,39 @@ public class CardRequest {
 
 
     public static LinkedList<MobileCardInfo> getAllMobileCards(Long userID) {
-        // loggerFactory.debug("1");
-        HashMap<Long, MobileCardInfo> cardMap = new HashMap<>();
-        HashSet<Long> textSet = new HashSet<>();
-        HashSet<Long> imageSet = new HashSet<>();
-        HashSet<Long> parameterSet = new HashSet<>();
-        // loggerFactory.debug("2");
+        HashMap<Long, MobileCardInfo> cardMap = null;
         DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
-        // loggerFactory.debug("3");
         try {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = MobileCardSql +
                     "WHERE (UserPersonalData.UserLanguage=Text.LanguageID OR Text.LanguageID IS NULL) " +
                     "AND (Card.CardState IN (" + CardState.Active.getValue() + "))";
-            // loggerFactory.debug("4");
             ps = connection.prepareStatement(sql);
-            // loggerFactory.debug("5");
             ps.setLong(1, userID);
-            // loggerFactory.debug("6");
             rs = ps.executeQuery();
-            // loggerFactory.debug("7");
-            parseMobileCardSQLRequest(cardMap, textSet, imageSet, parameterSet, rs);
-            // loggerFactory.debug("8");
+            cardMap = parseMobileCardSQLRequest(rs);
         } catch (SQLException e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        // loggerFactory.debug("9");
         LinkedList<MobileCardInfo> mobileCardInfos = new LinkedList<>();
-        mobileCardInfos.addAll(cardMap.values());
-        // loggerFactory.debug("10");
+        if (cardMap != null) {
+            mobileCardInfos.addAll(cardMap.values());
+        }
         return mobileCardInfos;
     }
 
 
     public static LinkedList<MobileCardInfo> getAllMobileCards(Long userID, Integer limit, Integer offset) {
-        // loggerFactory.debug("1");
-        HashMap<Long, MobileCardInfo> cardMap = new HashMap<>();
-        HashSet<Long> textSet = new HashSet<>();
-        HashSet<Long> imageSet = new HashSet<>();
-        HashSet<Long> parameterSet = new HashSet<>();
+        HashMap<Long, MobileCardInfo> cardMap = null;
         DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
-        // loggerFactory.debug("2");
         try {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = MobileCardSql +
@@ -775,23 +770,28 @@ public class CardRequest {
 
             ps = connection.prepareStatement(sql);
             ps.setLong(1, userID);
-            // loggerFactory.debug("3");
             rs = ps.executeQuery();
-            // loggerFactory.debug("4");
-            parseMobileCardSQLRequest(cardMap, textSet, imageSet, parameterSet, rs);
-            // loggerFactory.debug("5");
+            cardMap = parseMobileCardSQLRequest(rs);
         } catch (SQLException e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
         LinkedList<MobileCardInfo> mobileCardInfos = new LinkedList<>();
-        mobileCardInfos.addAll(cardMap.values());
-        // loggerFactory.debug("6");
+        if (cardMap != null) {
+            mobileCardInfos.addAll(cardMap.values());
+        }
         return mobileCardInfos;
     }
 
-    private static void parseMobileCardSQLRequest(HashMap<Long, MobileCardInfo> cardMap, HashSet<Long> textSet, HashSet<Long> imageSet, HashSet<Long> parameterSet, ResultSet rs) throws SQLException {
+    private static HashMap<Long, MobileCardInfo> parseMobileCardSQLRequest(ResultSet rs) throws SQLException {
+        HashMap<Long, HashSet<Long>> textSets = new HashMap<>();
+        HashMap<Long, HashSet<Long>> imageSets = new HashMap<>();
+        HashMap<Long, HashSet<Long>> parameterSets = new HashMap<>();
+//        HashSet<Long> textSet = new HashSet<>();
+//        HashSet<Long> imageSet = new HashSet<>();
+//        HashSet<Long> parameterSet = new HashSet<>();
+        HashMap<Long, MobileCardInfo> cardMap = new HashMap<>();
         while (rs.next()) {
             Long cardID = rs.getLong("Card.CardID");
             if (cardID != 0 && !rs.wasNull()) {
@@ -806,8 +806,29 @@ public class CardRequest {
                     cardMap.put(cardID, mobileCardInfo);
                 }
                 if (mobileCardInfo != null) {
+                    HashSet<Long> textSet;
+                    if (textSets.containsKey(cardID)) {
+                        textSet = textSets.get(cardID);
+                    } else {
+                        textSet = new HashSet<>();
+                        textSets.put(cardID, textSet);
+                    }
+                    HashSet<Long> imageSet;
+                    if (imageSets.containsKey(cardID)) {
+                        imageSet = imageSets.get(cardID);
+                    } else {
+                        imageSet = new HashSet<>();
+                        imageSets.put(cardID, imageSet);
+                    }
+                    HashSet<Long> parameterSet;
+                    if (parameterSets.containsKey(cardID)) {
+                        parameterSet = parameterSets.get(cardID);
+                    } else {
+                        parameterSet = new HashSet<>();
+                        parameterSets.put(cardID, parameterSet);
+                    }
                     Long textID = rs.getLong("TextGroup.TextGroupID");
-                    MobileText mobileText = null;
+                    MobileText mobileText;
                     if (!textSet.contains(textID)) {
                         mobileText = new MobileText();
                         mobileText.setTextGroupID(textID);
@@ -858,6 +879,7 @@ public class CardRequest {
                 }
             }
         }
+        return cardMap;
     }
 
     public static ArrayList<String> checkCardStatus(CardEntity cardEntity, CardState cardState) {

@@ -1,8 +1,5 @@
 package model.additionalentity.phone;
 
-/**
- * Created by Илья on 11.04.14.
- */
 public class MenuCompleteInformation {
     private Long menuID;
     private Long iconImageID;
@@ -10,6 +7,10 @@ public class MenuCompleteInformation {
     private String text;
     private Integer number;
     private Integer cardCounter;
+    //значение было пребавлено родителю
+    private boolean counted = false;
+    //узел готов быть пребавленным родителю(все дети были прибавлены)
+    private boolean readyForCounting = true;
 
     public void setMenuID(Long menuID) {
         this.menuID = menuID;
@@ -58,5 +59,21 @@ public class MenuCompleteInformation {
 
     public Integer getCardCounter() {
         return cardCounter;
+    }
+
+    public boolean isCounted() {
+        return counted;
+    }
+
+    public void setCounted(boolean counted) {
+        this.counted = counted;
+    }
+
+    public boolean isReadyForCounting() {
+        return readyForCounting;
+    }
+
+    public void setReadyForCounting(boolean readyForCounting) {
+        this.readyForCounting = readyForCounting;
     }
 }

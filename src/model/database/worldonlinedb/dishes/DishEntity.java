@@ -1,6 +1,8 @@
 package model.database.worldonlinedb.dishes;
 
 
+import model.database.worldonlinedb.TextGroupEntity;
+
 import javax.persistence.*;
 
 @javax.persistence.Table(name = "Dish", schema = "", catalog = "worldonline")
@@ -16,13 +18,17 @@ public class DishEntity {
     private DishCategoryEntity dishCategory;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "DishNameID")
+    private TextGroupEntity dishName;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "PriceID")
     private PriceEntity price;
 
 
-    @javax.persistence.Column(name = "coast")
+    @javax.persistence.Column(name = "cost")
     @Basic
-    private Float coast;
+    private Double cost;
 
     public Long getDishID() {
         return dishID;
@@ -46,5 +52,21 @@ public class DishEntity {
 
     public void setDishCategory(DishCategoryEntity dishCategory) {
         this.dishCategory = dishCategory;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
+    }
+
+    public Double getCost() {
+        return cost;
+    }
+
+    public TextGroupEntity getDishName() {
+        return dishName;
+    }
+
+    public void setDishName(TextGroupEntity dishName) {
+        this.dishName = dishName;
     }
 }

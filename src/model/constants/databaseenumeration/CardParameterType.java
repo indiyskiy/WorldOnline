@@ -3,25 +3,25 @@ package model.constants.databaseenumeration;
 import model.constants.ApplicationBlock;
 
 public enum CardParameterType {
-    Phone(3, DataType.PhoneNumberType, ApplicationBlock.Main),
-    OpenHours(4, DataType.StringType, ApplicationBlock.Main),
-    Site(5, DataType.LinkType, ApplicationBlock.Main),
-    Email(6, DataType.EmailType, ApplicationBlock.Main),
+    Phone(3, DataType.PhoneNumberType, ApplicationBlock.Description),
+    OpenHours(4, DataType.StringType, ApplicationBlock.Description),
+    Site(5, DataType.LinkType, ApplicationBlock.Description),
+    Email(6, DataType.EmailType, ApplicationBlock.Description),
     Vkcom(7, DataType.LinkType, ApplicationBlock.Social),
     Fbcom(8, DataType.LinkType, ApplicationBlock.Social),
     Twitter(9, DataType.LinkType, ApplicationBlock.Social),
     Frsqr(10, DataType.LinkType, ApplicationBlock.Social),
-    Youtube(11, DataType.LinkType, ApplicationBlock.Main),
-    WifiLogin(12, DataType.StringType, ApplicationBlock.Main),
-    WifiPass(13, DataType.StringType, ApplicationBlock.Main),
+    Youtube(11, DataType.LinkType, ApplicationBlock.Details),
+    WifiLogin(12, DataType.StringType, ApplicationBlock.WiFi),
+    WifiPass(13, DataType.StringType, ApplicationBlock.WiFi),
     LiveJournal(14, DataType.LinkType, ApplicationBlock.Social),
     AppStore(15, DataType.LinkType, ApplicationBlock.Main),
     GooglePlay(16, DataType.LinkType, ApplicationBlock.Main),
     Tripadviser(17, DataType.LinkType, ApplicationBlock.Reviews),
     Instagramm(18, DataType.LinkType, ApplicationBlock.Social),
     Booking(19, DataType.LinkType, ApplicationBlock.Reviews),
-    MiddlePrice(20, DataType.Coast, ApplicationBlock.Main),
-    Billboard(21, DataType.LinkType, ApplicationBlock.Main),
+    //   todo MiddlePrice(20, DataType.Cost, ApplicationBlock.Main), to tag
+    Billboard(21, DataType.LinkType, ApplicationBlock.Details),
     Apoi(22, DataType.LinkType, ApplicationBlock.Reviews),
     Ayda(23, DataType.LinkType, ApplicationBlock.Reviews),
     BlogFcsSpb(24, DataType.LinkType, ApplicationBlock.Reviews),
@@ -49,36 +49,36 @@ public enum CardParameterType {
     Wrestorane(46, DataType.LinkType, ApplicationBlock.Reviews),
     Yell(47, DataType.LinkType, ApplicationBlock.Reviews),
     Zoon(48, DataType.LinkType, ApplicationBlock.Reviews),
-    FreePass(49, DataType.Percent, ApplicationBlock.Main),
-    Facts(50, DataType.StringType, ApplicationBlock.Main),
-    Legends(51, DataType.StringType, ApplicationBlock.Main),
-    Literature(52, DataType.StringType, ApplicationBlock.Main),
-    Anecdotes(53, DataType.StringType, ApplicationBlock.Main),
-    Films(54, DataType.StringType, ApplicationBlock.Main),
-    FamousPassers(55, DataType.StringType, ApplicationBlock.Main),
-    Citations(56, DataType.StringType, ApplicationBlock.Main),
-    BorisStars(57, DataType.LinkType, ApplicationBlock.Main),
+    //  todo  FreePass(49, DataType.Percent, ApplicationBlock.Main), to tag
+    Facts(50, DataType.StringType, ApplicationBlock.Facts),
+    Legends(51, DataType.StringType, ApplicationBlock.Facts),
+    Literature(52, DataType.StringType, ApplicationBlock.Facts),
+    Anecdotes(53, DataType.StringType, ApplicationBlock.Facts),
+    Films(54, DataType.StringType, ApplicationBlock.Facts),
+    FamousPassers(55, DataType.StringType, ApplicationBlock.Facts),
+    Citations(56, DataType.StringType, ApplicationBlock.Facts),
+    BorisStars(57, DataType.LinkType, ApplicationBlock.Reviews),
     Restoclub(58, DataType.LinkType, ApplicationBlock.Reviews),
     Afisha(59, DataType.LinkType, ApplicationBlock.Reviews),
     Timeout(60, DataType.LinkType, ApplicationBlock.Reviews),
-    Wikipedia(61, DataType.LinkType, ApplicationBlock.Main),
-    Wikitravel(62, DataType.LinkType, ApplicationBlock.Main),
-    ReservationDiscount(63, DataType.Percent, ApplicationBlock.Main),
-    ReservationPhone(64, DataType.PhoneNumberType, ApplicationBlock.Main),
+    Wikipedia(61, DataType.LinkType, ApplicationBlock.Encyclopedia),
+    Wikitravel(62, DataType.LinkType, ApplicationBlock.Encyclopedia),
+    //    ReservationDiscount(63, DataType.Percent, ApplicationBlock.Main),
+//    ReservationPhone(64, DataType.PhoneNumberType, ApplicationBlock.Main),
     AllCafe(65, DataType.LinkType, ApplicationBlock.Reviews),
     WalkSpb(66, DataType.LinkType, ApplicationBlock.Reviews),
     Spbin(67, DataType.LinkType, ApplicationBlock.Reviews),
-    NoBarriers(68, DataType.Boolean, ApplicationBlock.Main),
-    Name(69, DataType.StringType, ApplicationBlock.Main),
-    Address(70, DataType.StringType, ApplicationBlock.Main),
-    Description(71, DataType.StringType, ApplicationBlock.Main),
-    News(72, DataType.StringType, ApplicationBlock.Main),
-    Offers(73, DataType.StringType, ApplicationBlock.Main),
-    Biography(74, DataType.StringType, ApplicationBlock.Main),
-    Story(75, DataType.StringType, ApplicationBlock.Main),
-    Recomend(76, DataType.LinkType, ApplicationBlock.Main),
-    Wikimapia(77, DataType.LinkType, ApplicationBlock.Main),
-    Encspb(78, DataType.LinkType, ApplicationBlock.Reviews);
+    //  todo  NoBarriers(68, DataType.Boolean, ApplicationBlock.Main), to tag
+    Name(69, DataType.StringType, ApplicationBlock.Header),
+    Address(70, DataType.StringType, ApplicationBlock.Header),
+    Description(71, DataType.StringType, ApplicationBlock.Description),
+    News(72, DataType.StringType, ApplicationBlock.Details),
+    Offers(73, DataType.StringType, ApplicationBlock.Details),
+    Biography(74, DataType.StringType, ApplicationBlock.Details),
+    Story(75, DataType.StringType, ApplicationBlock.Details),
+    Recomend(76, DataType.LinkType, ApplicationBlock.Details),
+    Wikimapia(77, DataType.LinkType, ApplicationBlock.Encyclopedia),
+    Encspb(78, DataType.LinkType, ApplicationBlock.Encyclopedia);
 
     private final int value;
     private final DataType dataType;
@@ -146,8 +146,8 @@ public enum CardParameterType {
                 return "Instagramm";
             case Booking:
                 return "Booking";
-            case MiddlePrice:
-                return "Средняя цена";
+//            case MiddlePrice:
+//                return "Средняя цена";
             case Billboard:
                 return "Billboard";
             case Apoi:
@@ -204,8 +204,8 @@ public enum CardParameterType {
                 return "Yell";
             case Zoon:
                 return "Zoon";
-            case FreePass:
-                return "Свободный вход";
+//            case FreePass:
+//                return "Свободный вход";
             case Facts:
                 return "Факты";
             case Legends:
@@ -232,18 +232,18 @@ public enum CardParameterType {
                 return "Wikipedia";
             case Wikitravel:
                 return "Wikitravel";
-            case ReservationDiscount:
-                return "Скидка при бронировании";
-            case ReservationPhone:
-                return "Бронирование столика";
+//            case ReservationDiscount:
+//                return "Скидка при бронировании";
+//            case ReservationPhone:
+//                return "Бронирование столика";
             case AllCafe:
                 return "AllCafe";
             case WalkSpb:
                 return "WalkSpb";
             case Spbin:
                 return "Spbin";
-            case NoBarriers:
-                return "NoBarriers";
+//            case NoBarriers:
+//                return "NoBarriers";
             case Name:
                 return "Name";
             case Address:
@@ -306,8 +306,8 @@ public enum CardParameterType {
                 return "Instagramm";
             case Booking:
                 return "Booking";
-            case MiddlePrice:
-                return "Middle price";
+//            case MiddlePrice:
+//                return "Middle price";
             case Billboard:
                 return "Billboard";
             case Apoi:
@@ -364,8 +364,8 @@ public enum CardParameterType {
                 return "Yell";
             case Zoon:
                 return "Zoon";
-            case FreePass:
-                return "Free pass";
+//            case FreePass:
+//                return "Free pass";
             case Facts:
                 return "Facts";
             case Legends:
@@ -392,18 +392,18 @@ public enum CardParameterType {
                 return "Wikipedia";
             case Wikitravel:
                 return "Wikitravel";
-            case ReservationDiscount:
-                return "Reservation discount";
-            case ReservationPhone:
-                return "Reservation phone number";
+//            case ReservationDiscount:
+//                return "Reservation discount";
+//            case ReservationPhone:
+//                return "Reservation phone number";
             case AllCafe:
                 return "AllCafe";
             case WalkSpb:
                 return "WalkSpb";
             case Spbin:
                 return "Spbin";
-            case NoBarriers:
-                return "NoBarriers";
+//            case NoBarriers:
+//                return "NoBarriers";
             case Name:
                 return "Имя";
             case Address:

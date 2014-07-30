@@ -9,13 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 25.11.13
- * Time: 18:05
- * To change this template use File | Settings | File Templates.
- */
 public class LinkRequest {
     public static ArrayList<CardToCardLinkEntity> getAllCardToCardLink() {
         ArrayList<CardToCardLinkEntity> cardToCardLinkEntities = new ArrayList<CardToCardLinkEntity>();

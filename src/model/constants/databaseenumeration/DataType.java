@@ -10,7 +10,7 @@ public enum DataType {
     PhoneNumberType(6),
     TimestampType(7),
     Percent(8),
-    Coast(9),
+    Cost(9),
     Boolean(10);
 
 

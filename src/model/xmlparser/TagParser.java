@@ -35,10 +35,6 @@ public class TagParser {
                 TagEntity tagEntity = new TagEntity(textGroup, tagItem.getString(), tagGroupEntity, null);
 //                tagEntity.setTagID((long) tagItem.getAnInt());
                 TagRequest.addTag(tagEntity);
-                TagEntity tagEntitySaved = TagRequest.getTag(tagEntity.getTagID());
-                loggerFactory.debug("tagEntity " + tagEntity.getTagID() + " " + tagEntity.getTagGroup().getTagGroupID());
-                loggerFactory.debug("tagEntitySaved " + tagEntitySaved.getTagID());
-                loggerFactory.debug("tagGroupEntitySaved " + " " + tagEntitySaved.getTagGroup().getTagGroupID());
             }
         } catch (Exception e) {
             loggerFactory.error(e);

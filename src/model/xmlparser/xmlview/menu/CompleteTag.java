@@ -10,7 +10,7 @@ public class CompleteTag {
     @Attribute(name = "id")
     public Integer id;
 
-    @Element(name = "NameRu", required = false)
+    @Element(name = "NameRu", required = true)
     public String nameRu;
 
 

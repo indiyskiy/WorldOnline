@@ -30,11 +30,6 @@ public class TextRequest {
             session.beginTransaction();
             session.save(text);
             session.getTransaction().commit();
-            TextEntity textEntityTest = findTextByText(text.getText());
-            if (textEntityTest.getTextGroup() == null) {
-                loggerFactory.error("text entity " + text.getText() + " was added without text group!");
-                throw new DatabaseException("TextGroup is null after adding");
-            }
         } catch (DatabaseException e) {
             loggerFactory.error(e.getMessage());
             loggerFactory.error(e);
@@ -71,19 +66,19 @@ public class TextRequest {
         return textEntity;
     }
 
-    public static TextCardEntity getTextCardByResultSet(ResultSet rs, String textCard) throws SQLException {
+    public static TextCardEntity getTextCardByResultSet(ResultSet rs, String textCard, String cardParameterType) throws SQLException {
         Long textCardID = rs.getLong(textCard + ".TextCardID");
         if (textCardID == 0 || rs.wasNull()) {
             return null;
         }
         TextCardEntity textCardEntity = new TextCardEntity();
         textCardEntity.setTextCardID(textCardID);
-        textCardEntity.setCardParameterType(ParameterRequest.getCardParameterTypeByResultSet(textCard, rs));
+        textCardEntity.setCardParameterType(ParameterRequest.getCardParameterTypeByResultSet(cardParameterType, rs));
         return textCardEntity;
     }
 
     public static TextCardEntity getTextCardByResultSet(ResultSet rs) throws SQLException {
-        return getTextCardByResultSet(rs, "TextCard");
+        return getTextCardByResultSet(rs, "TextCard", "TextCardParameterType");
     }
 
     public static TextGroupEntity getTextGroupByResultSet(ResultSet rs) throws SQLException {
@@ -195,7 +190,7 @@ public class TextRequest {
             @Language("MySQL") String sql = "SELECT * FROM Text AS defText " +
                     "JOIN TextGroup ON (TextGroup.TextGroupID=defText.TextGroupID) " +
                     "JOIN Text AS targetText ON(TextGroup.TextGroupID=targetText.TextGroupID) " +
-                    "WHERE defText.Text like ? AND targetText.LanguageID=?";
+                    "WHERE defText.Text LIKE ? AND targetText.LanguageID=?";
             ps = connection.prepareStatement(sql);
             ps.setString(1, text);
             ps.setLong(2, language.getValue());

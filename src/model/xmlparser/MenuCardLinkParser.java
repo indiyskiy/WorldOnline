@@ -45,7 +45,6 @@ public class MenuCardLinkParser {
 
     public MenuCardLinkEntity addLink(CardEntity cardEntity, MenuEntity menuEntity) {
         if (menuEntity != null && cardEntity != null) {
-            loggerFactory.debug("add link " + cardEntity.getCardID() + " " + menuEntity.getMenuID());
             MenuCardLinkEntity menuCardLinkEntity = new MenuCardLinkEntity();
             menuCardLinkEntity.setCard(cardEntity);
             menuCardLinkEntity.setMenu(menuEntity);
@@ -58,16 +57,16 @@ public class MenuCardLinkParser {
 
     public void parseMenuCardLink() {
         menuCardLinkEntities.clear();
-        CardsParser cardsParser = new CardsParser();
-        CardAboutCity cardAboutCity = cardsParser.getCardAboutCity(root + "card_aboutcity.xml");
-        CardHandBook cardHandBook = cardsParser.getCardHandBook(root + "card_handbook.xml");
-        CardHotels cardHotels = cardsParser.getCardHotels(root + "card_hotels.xml");
-        CardMeal cardMeal = cardsParser.getCardMeal(root + "card_meals.xml");
-        CardRelax cardRelax = cardsParser.getCardRelax(root + "card_relax.xml");
-        CardRoute cardRoute = cardsParser.getCardRoute(root + "card_route.xml");
-        CardSight cardSight = cardsParser.getCardSight(root + "card_sights.xml");
-        CardShopping cardShopping = cardsParser.getCardShopping(root + "card_shopping.xml");
-        PeopleAboutCity peopleAboutCity = cardsParser.getPeopleAboutCity(ServerConsts.root + "people_aboutcity.xml");
+        SimpleXmlHelper simpleXmlHelper = new SimpleXmlHelper();
+        CardAboutCity cardAboutCity = simpleXmlHelper.getCardAboutCity(root + "card_aboutcity.xml");
+        CardHandBook cardHandBook = simpleXmlHelper.getCardHandBook(root + "card_handbook.xml");
+        CardHotels cardHotels = simpleXmlHelper.getCardHotels(root + "card_hotels.xml");
+        CardMeal cardMeal = simpleXmlHelper.getCardMeal(root + "card_meals.xml");
+        CardRelax cardRelax = simpleXmlHelper.getCardRelax(root + "card_relax.xml");
+        CardRoute cardRoute = simpleXmlHelper.getCardRoute(root + "card_route.xml");
+        CardSight cardSight = simpleXmlHelper.getCardSight(root + "card_sights.xml");
+        CardShopping cardShopping = simpleXmlHelper.getCardShopping(root + "card_shopping.xml");
+        PeopleAboutCity peopleAboutCity = simpleXmlHelper.getPeopleAboutCity(ServerConsts.root + "people_aboutcity.xml");
         ArrayList<CardEntity> cardEntities = CardRequest.getAllCards();
         for (CardEntity cardEntity : cardEntities) {
             try {
@@ -285,14 +284,11 @@ public class MenuCardLinkParser {
                             }
                         }
                         if (menuEntity != null) {
-                            loggerFactory.debug(cardID + " ; " + menuEntity.getMenuID());
                             menuEntityHashMap.put(cardID, menuEntity);
                             return menuEntity;
                         }
                     }
                 }
-            } else {
-                loggerFactory.debug("trying to get " + cardID + ". result from menucardmap is " + menuID);
             }
         } catch (Exception e) {
             loggerFactory.error(e);

@@ -15,7 +15,6 @@ public class Scheduler implements Runnable {
 
     private Scheduler() {
         logger = new LoggerFactory(Component.Global, Scheduler.class);
-        logger.debug("scheduler start");
         addTasksToList();
         countPeriod();
         Thread thread = new Thread(this);

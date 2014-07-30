@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @Root(name = "data")
 public class TagsXML {
-    @ElementList(inline = true, name = "Tags", required = false)
+    @ElementList(inline = true, name = "Tags", required = true)
     public ArrayList<CompleteTag> tags = new ArrayList<CompleteTag>();
 
 }

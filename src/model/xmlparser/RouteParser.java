@@ -38,7 +38,7 @@ public class RouteParser {
                 card.setNumberInList(Integer.parseInt(route.order));
             }
             CardRequest.addCardSafe(card);
-            globalXmlParser.getCardEntityHashMap().put(route.id, card);
+            globalXmlParser.getCardEntityHashMap().put(Long.parseLong(route.id), card);
             String[] cards = route.cards.split(",");
             CardRouteEntity cardRouteEntity = new CardRouteEntity(route.nameEn, card);
             RouteRequest.addCardRoute(cardRouteEntity);
@@ -49,7 +49,7 @@ public class RouteParser {
                     if (cardID != 0) {
                         RouteElementEntity routeElementEntity = new RouteElementEntity();
                         routeElementEntity.setCardRoute(cardRouteEntity);
-                        routeElementEntity.setPlaceCard(globalXmlParser.getCardEntityHashMap().get(cardID));
+                        routeElementEntity.setPlaceCard(globalXmlParser.getCardEntityHashMap().get(Long.valueOf(cardID)));
                         routeElementEntity.setRouteElementNumber(i);
                         RouteRequest.addRouteElement(routeElementEntity);
                         i++;

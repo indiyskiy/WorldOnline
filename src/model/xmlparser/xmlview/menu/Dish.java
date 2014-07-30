@@ -20,7 +20,7 @@ public class Dish {
     @Element(name = "Price", required = false)
     public String price;
     @Element(name = "RestID", required = false)
-    public String restID;
+    public Integer restID;
     @Element(name = "Show", required = false)
     public boolean show;
 

@@ -12,14 +12,6 @@ public class DishTagDishLinkEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long dishTagDishLinkID;
 
-    public Long getDishTagDishLinkID() {
-        return dishTagDishLinkID;
-    }
-
-    public void setDishTagDishLinkID(Long dishTagDishLinkID) {
-        this.dishTagDishLinkID = dishTagDishLinkID;
-    }
-
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "DishID")
     private DishEntity dish;
@@ -27,6 +19,14 @@ public class DishTagDishLinkEntity {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "DishTagID")
     private DishTagEntity dishTag;
+
+    public Long getDishTagDishLinkID() {
+        return dishTagDishLinkID;
+    }
+
+    public void setDishTagDishLinkID(Long dishTagDishLinkID) {
+        this.dishTagDishLinkID = dishTagDishLinkID;
+    }
 
     public DishEntity getDish() {
         return dish;

@@ -11,14 +11,22 @@ import model.xmlparser.xmlview.card.cardrelax.CardRelax;
 import model.xmlparser.xmlview.card.cardroute.CardRoute;
 import model.xmlparser.xmlview.card.cardshopping.CardShopping;
 import model.xmlparser.xmlview.card.cardsights.CardSight;
+import model.xmlparser.xmlview.menu.MenuXML;
+import model.xmlparser.xmlview.menu.TagsXML;
 import model.xmlparser.xmlview.people.peopleaboutcity.PeopleAboutCity;
+import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+import org.simpleframework.xml.stream.Format;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class CardsParser {
-    private LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, CardsParser.class);
+public class SimpleXmlHelper {
+    private LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, SimpleXmlHelper.class);
+
+    public TagsXML getTagsXML(String root) {
+        return (TagsXML) getXML(root, TagsXML.class);
+    }
 
     public CardAboutCity getCardAboutCity(String root) {
         return (CardAboutCity) getXML(root, CardAboutCity.class);
@@ -56,7 +64,8 @@ public class CardsParser {
         FileInputStream reader = null;
         try {
             reader = new FileInputStream(root);
-            Persister serializer = new Persister();
+//            Persister serializer = new Persister();
+            Serializer serializer = new Persister(new Format("<?xml version=\"1.0\" encoding= \"UTF-8\" ?>"));
             return serializer.read(objClass, reader, false);
         } catch (Exception e) {
             loggerFactory.error(e);
@@ -72,12 +81,12 @@ public class CardsParser {
         return null;
     }
 
-    public static void main(String[] args) {
-        CardsParser cardsParser = new CardsParser();
-        cardsParser.getCardRoute(ServerConsts.root + "card_route.xml");
-    }
 
     public PeopleAboutCity getPeopleAboutCity(String root) {
         return (PeopleAboutCity) getXML(root, PeopleAboutCity.class);
+    }
+
+    public MenuXML getMenuXML(String root) {
+        return (MenuXML) getXML(root, MenuXML.class);
     }
 }

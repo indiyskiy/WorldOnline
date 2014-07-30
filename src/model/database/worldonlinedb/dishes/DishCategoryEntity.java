@@ -1,10 +1,11 @@
 package model.database.worldonlinedb.dishes;
 
 import model.database.worldonlinedb.TextEntity;
+import model.database.worldonlinedb.TextGroupEntity;
 
 import javax.persistence.*;
 
-@javax.persistence.Table(name = "DishTagDishLink", schema = "", catalog = "worldonline")
+@javax.persistence.Table(name = "DishCategory", schema = "", catalog = "worldonline")
 @Entity
 public class DishCategoryEntity {
     @javax.persistence.Column(name = "DishCategoryID")
@@ -14,9 +15,9 @@ public class DishCategoryEntity {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "NameID")
-    private TextEntity name;
+    private TextGroupEntity name;
 
-    @javax.persistence.Column(name = "AdminUserEmail")
+    @javax.persistence.Column(name = "Position")
     @Basic
     private Integer position;
 
@@ -28,11 +29,11 @@ public class DishCategoryEntity {
         this.dishCategoryID = dishCategoryID;
     }
 
-    public TextEntity getName() {
+    public TextGroupEntity getName() {
         return name;
     }
 
-    public void setName(TextEntity name) {
+    public void setName(TextGroupEntity name) {
         this.name = name;
     }
 
