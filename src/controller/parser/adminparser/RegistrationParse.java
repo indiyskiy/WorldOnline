@@ -10,9 +10,6 @@ import model.exception.ParseRequestException;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Илья on 07.04.14.
- */
 public class RegistrationParse {
     public static ParsedRegistrationRequest parse(HttpServletRequest request) throws ParseRequestException {
         ParsedRegistrationRequest parsedRegistrationRequest = new ParsedRegistrationRequest();
@@ -41,7 +38,8 @@ public class RegistrationParse {
         if (email == null || email.isEmpty()) {
             throw new ParseRequestException("email is empty");
         }
-        if (!ParameterValidator.isValidParameter(email, DataType.EmailType)) {
+        String validParameter = ParameterValidator.isValidParameter(email, DataType.EmailType);
+        if (validParameter == null) {
             throw new ParseRequestException("email is incorrect");
         }
         parsedRegistrationRequest.setLogin(login);

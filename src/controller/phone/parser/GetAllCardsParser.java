@@ -19,15 +19,11 @@ public class GetAllCardsParser implements MobileParser {
 
     @Override
     public AllCardsRequest parse(HttpServletRequest request) throws ParseRequestException {
-        loggerFactory.debug("GetAllCardsParser parse");
-        loggerFactory.debug("GetAllCardsParser 1");
         AllCardsRequest allCardsRequest = new AllCardsRequest();
         String userIdString = request.getParameter("userID");
-        loggerFactory.debug("GetAllCardsParser 2");
         if (userIdString == null || userIdString.isEmpty()) {
             throw new ParseRequestException(ExceptionTexts.allCardsUserIDEmptyException);
         }
-        loggerFactory.debug("GetAllCardsParser 3");
         Long userID;
         try {
             userID = Long.parseLong(userIdString);
@@ -37,11 +33,9 @@ public class GetAllCardsParser implements MobileParser {
             loggerFactory.error(e);
             throw new ParseRequestException(ExceptionTexts.allCardsUserIDIncorrectException);
         }
-        loggerFactory.debug("GetAllCardsParser 4");
         if (!UserRequests.isUserExist(userID)) {
             throw new ParseRequestException(ExceptionTexts.allCardsUserNotExistException);
         }
-        loggerFactory.debug("GetAllCardsParser 5");
         String limitString = request.getParameter("limit");
         if (limitString != null && !limitString.isEmpty()) {
             Integer limit;
@@ -52,7 +46,6 @@ public class GetAllCardsParser implements MobileParser {
                 throw new ParseRequestException(ExceptionTexts.allCardsLimitIncorrectException);
             }
         }
-        loggerFactory.debug("GetAllCardsParser 6");
         String offsetString = request.getParameter("offset");
         if (offsetString != null && !offsetString.isEmpty()) {
             Integer offset;
@@ -62,11 +55,8 @@ public class GetAllCardsParser implements MobileParser {
             } catch (Exception e) {
                 throw new ParseRequestException(ExceptionTexts.allCardsOffsetIncorrectException);
             }
-            loggerFactory.debug("GetAllCardsParser 7");
         }
-        loggerFactory.debug("GetAllCardsParser 8");
         allCardsRequest.setUserID(userID);
-        loggerFactory.debug("/GetAllCardsParser parse");
         return allCardsRequest;
     }
 
@@ -80,12 +70,10 @@ public class GetAllCardsParser implements MobileParser {
     }
 
     public String getResponse(AllCardsResponse allCardsResponse) throws IllegalTypeException {
-        loggerFactory.debug("GetAllCardsParser getResponse");
         JsonArray jsonArray = new JsonArray();
         for (MobileCardInfo mobileCardInfo : allCardsResponse.getCardList()) {
             jsonArray.add(mobileCardInfo.toJson());
         }
-        loggerFactory.debug("/GetAllCardsParser getResponse");
         return jsonArray.toString();
     }
 }
