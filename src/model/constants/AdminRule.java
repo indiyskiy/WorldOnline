@@ -2,9 +2,6 @@ package model.constants;
 
 import java.util.HashSet;
 
-/**
- * Created by Илья on 31.03.14.
- */
 public enum AdminRule {
     All,
     Registered,

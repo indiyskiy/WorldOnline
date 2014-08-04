@@ -1,21 +1,14 @@
 package model.additionalentity;
 
 import model.additionalentity.admin.CompleteMenuInfo;
-import model.constants.databaseenumeration.CardParameterType;
-import model.constants.databaseenumeration.LanguageType;
-import model.constants.databaseenumeration.TextType;
-import model.database.worldonlinedb.*;
+import model.database.worldonlinedb.CardCoordinateEntity;
+import model.database.worldonlinedb.CardEntity;
+import model.database.worldonlinedb.CardParameterEntity;
+import model.database.worldonlinedb.CardToCardLinkEntity;
 
 import java.util.Collection;
 import java.util.HashMap;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 02.11.13
- * Time: 5:13
- * To change this template use File | Settings | File Templates.
- */
 public class CompleteCardInfo {
     private CardEntity cardEntity;
     private HashMap<Long, CompleteCardTagInfo> completeCardTagInfoMap = new HashMap<Long, CompleteCardTagInfo>();

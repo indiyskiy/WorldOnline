@@ -1,7 +1,6 @@
 package model.xmlparser;
 
 import model.constants.Component;
-import model.constants.ServerConsts;
 import model.logger.LoggerFactory;
 import model.xmlparser.xmlview.card.cardaboutcity.CardAboutCity;
 import model.xmlparser.xmlview.card.cardhandbook.CardHandBook;

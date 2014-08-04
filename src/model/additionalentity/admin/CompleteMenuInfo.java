@@ -12,13 +12,6 @@ import model.logger.LoggerFactory;
 import java.util.Collection;
 import java.util.HashMap;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 20.01.14
- * Time: 17:26
- * To change this template use File | Settings | File Templates.
- */
 public class CompleteMenuInfo {
     private MenuEntity menuEntity;
     private HashMap<Long, CompleteMenuInfo> kids = new HashMap<Long, CompleteMenuInfo>();

@@ -2,9 +2,6 @@ package model.additionalentity.admin;
 
 import helper.Md5Hash;
 
-/**
- * Created by Илья on 31.03.14.
- */
 public class LoginRequest {
     private String login;
     private String password;

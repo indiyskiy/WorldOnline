@@ -3,13 +3,6 @@ package model.database.worldonlinedb;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 28.10.13
- * Time: 18:23
- * To change this template use File | Settings | File Templates.
- */
 @javax.persistence.Table(name = "GlobalVersion", schema = "", catalog = "worldonline")
 @Entity
 public class GlobalVersionEntity {

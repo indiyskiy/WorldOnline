@@ -10,7 +10,10 @@ import model.constants.Component;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
-import model.database.worldonlinedb.*;
+import model.database.worldonlinedb.ImageEntity;
+import model.database.worldonlinedb.MenuCardLinkEntity;
+import model.database.worldonlinedb.MenuEntity;
+import model.database.worldonlinedb.TextGroupEntity;
 import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.intellij.lang.annotations.Language;
@@ -19,7 +22,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class MenuRequest {
     private static LoggerFactory logger = new LoggerFactory(Component.Database, MenuRequest.class);

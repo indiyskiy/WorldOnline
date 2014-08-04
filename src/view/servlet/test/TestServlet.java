@@ -2,7 +2,6 @@ package view.servlet.test;
 
 import model.constants.AdminRule;
 import model.constants.Component;
-import model.database.requests.DishRequest;
 import model.logger.LoggerFactory;
 import view.servlet.admin.ProtectedServlet;
 

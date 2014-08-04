@@ -1,8 +1,5 @@
 package model.weather;
 
-/**
- * Created by Илья on 14.05.14.
- */
 public class WeatherTime {
     private int day;
     private int hour;

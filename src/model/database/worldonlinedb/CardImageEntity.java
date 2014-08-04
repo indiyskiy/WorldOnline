@@ -4,7 +4,6 @@ import model.constants.databaseenumeration.CardImageType;
 
 import javax.persistence.*;
 
-
 @javax.persistence.Table(name = "CardImage", schema = "", catalog = "worldonline")
 @Entity
 public class CardImageEntity {

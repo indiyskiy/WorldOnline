@@ -1,5 +1,6 @@
 package model.additionalentity.phone;
 
+import com.google.gson.JsonObject;
 import model.constants.ApplicationBlock;
 import model.constants.databaseenumeration.DataType;
 
@@ -57,5 +58,16 @@ public class MobileParameterType {
 
     public long getIconID() {
         return iconID;
+    }
+
+    public JsonObject toJson() {
+        JsonObject mobileParameterObj = new JsonObject();
+        mobileParameterObj.addProperty("cardParameterTypeID", cardParameterTypeID);
+        mobileParameterObj.addProperty("iconID", iconID);
+        mobileParameterObj.addProperty("name", name);
+        mobileParameterObj.addProperty("position", position);
+        mobileParameterObj.addProperty("block", block.getValue());
+        mobileParameterObj.addProperty("dataType", dataType.getValue());
+        return mobileParameterObj;
     }
 }

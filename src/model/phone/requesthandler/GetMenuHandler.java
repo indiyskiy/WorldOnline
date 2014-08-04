@@ -4,16 +4,16 @@ import controller.phone.entity.MenuRequest;
 import controller.phone.entity.MobileRequest;
 import model.additionalentity.phone.MenuCompleteInformation;
 import model.exception.IllegalTypeException;
-import model.phone.responseentity.GetMenuResponse;
+import model.phone.responseentity.MenuResponse;
 import model.phone.responseentity.MobileResponseEntity;
 
 public class GetMenuHandler implements MobileHandler {
 
-    public GetMenuResponse handleRequest(MenuRequest menuRequest) {
-        GetMenuResponse getMenuResponse = new GetMenuResponse();
+    public MenuResponse handleRequest(MenuRequest menuRequest) {
+        MenuResponse menuResponse = new MenuResponse();
         MenuCompleteInformation menuCompleteInformation = model.database.requests.MenuRequest.getMenuCompleteInformation(menuRequest);
-        getMenuResponse.setMenuCompleteInformation(menuCompleteInformation);
-        return getMenuResponse;
+        menuResponse.setMenuCompleteInformation(menuCompleteInformation);
+        return menuResponse;
     }
 
     @Override

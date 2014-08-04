@@ -29,9 +29,13 @@ public abstract class MobileServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
+//            TimeCounter mobileServletTimeCounter=new TimeCounter();
             MobileRequest mobileRequest = mobileParser.parse(request);
+//            mobileServletTimeCounter.logTime(loggerFactory,"parse request");
             MobileResponseEntity mobileResponseEntity = mobileHandler.handleRequest(mobileRequest);
+//            mobileServletTimeCounter.logTime(loggerFactory,"handle request");
             String responseString = mobileParser.getResponse(mobileResponseEntity);
+//            mobileServletTimeCounter.logTime(loggerFactory,"getResponse");
             ServletHelper.sendJson(response, responseString);
         } catch (IllegalTypeException | ParseRequestException | IOException | ServletException | SQLException e) {
             ServletHelper.sendMobileError(loggerFactory, e, response);

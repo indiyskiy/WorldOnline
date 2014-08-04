@@ -2,13 +2,6 @@ package model.database.worldonlinedb;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 04.02.14
- * Time: 17:59
- * To change this template use File | Settings | File Templates.
- */
 @javax.persistence.Table(name = "MenuCardLink", schema = "", catalog = "worldonline")
 @Entity
 public class MenuCardLinkEntity {

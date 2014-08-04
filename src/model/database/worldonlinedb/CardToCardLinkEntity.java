@@ -4,13 +4,6 @@ import model.constants.databaseenumeration.CardToCardLinkType;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 25.11.13
- * Time: 17:35
- * To change this template use File | Settings | File Templates.
- */
 @javax.persistence.Table(name = "CardToCardLink", schema = "", catalog = "worldonline")
 @Entity
 public class CardToCardLinkEntity {

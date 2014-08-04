@@ -3,9 +3,6 @@ package model.additionalentity.admin;
 import helper.Md5Hash;
 import model.database.requests.AdminUserRequest;
 
-/**
- * Created by Илья on 07.04.14.
- */
 public class ParsedRegistrationRequest {
 
     private String login;

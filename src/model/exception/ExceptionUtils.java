@@ -7,13 +7,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 26.12.13
- * Time: 17:18
- * To change this template use File | Settings | File Templates.
- */
 public class ExceptionUtils {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Global, ExceptionUtils.class);
 

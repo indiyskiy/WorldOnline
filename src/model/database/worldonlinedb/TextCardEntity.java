@@ -1,7 +1,5 @@
 package model.database.worldonlinedb;
 
-import model.constants.databaseenumeration.TextType;
-
 import javax.persistence.*;
 
 @javax.persistence.Table(name = "TextCard", schema = "", catalog = "worldonline")

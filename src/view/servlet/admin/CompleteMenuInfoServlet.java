@@ -12,13 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 23.01.14
- * Time: 12:53
- * To change this template use File | Settings | File Templates.
- */
 public class CompleteMenuInfoServlet extends ProtectedServlet {
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, CompleteMenuInfoServlet.class);
 

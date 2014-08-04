@@ -1,6 +1,5 @@
 package model.database.worldonlinedb.dishes;
 
-import model.database.worldonlinedb.AdminUserAdditionalInfoEntity;
 import model.database.worldonlinedb.CardEntity;
 
 import javax.persistence.*;

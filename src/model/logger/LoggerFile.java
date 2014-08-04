@@ -5,13 +5,6 @@ import model.constants.ServerConsts;
 
 import java.io.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 25.12.13
- * Time: 15:32
- * To change this template use File | Settings | File Templates.
- */
 public class LoggerFile {
     private final String root;
     private final String date;

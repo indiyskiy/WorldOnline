@@ -1,8 +1,5 @@
 package model.additionalentity;
 
-/**
- * Created by Илья on 19.03.14.
- */
 public class CardUserStat {
     private Long userID;
     private Long cardID;

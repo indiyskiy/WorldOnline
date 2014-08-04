@@ -1,22 +1,13 @@
 package controller.phone.parser;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import controller.phone.entity.ViewImagesRequest;
 import model.constants.ExceptionTexts;
 import model.database.requests.UserRequests;
-import model.exception.IllegalTypeException;
 import model.exception.ParseRequestException;
-import model.phone.responseentity.ViewImagesResponse;
-import model.phone.responseentity.MobileResponseEntity;
-import model.phone.responseentity.MobileViewImage;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Илья on 21.05.14.
- */
-public class ViewImagesParser implements MobileParser {
+public class ViewImagesParser extends MobileParser {
 
     @Override
     public ViewImagesRequest parse(HttpServletRequest request) throws ParseRequestException {
@@ -38,24 +29,4 @@ public class ViewImagesParser implements MobileParser {
         return viewImagesRequest;
     }
 
-    public String getResponse(ViewImagesResponse viewImagesResponse) {
-        JsonArray jsonArray = new JsonArray();
-        for (MobileViewImage mobileViewImage : viewImagesResponse.getMobileViewImages()) {
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("imageID", mobileViewImage.getImageID());
-            jsonObject.addProperty("cardID", mobileViewImage.getCardID());
-            jsonArray.add(jsonObject);
-        }
-        return jsonArray.toString();
-    }
-
-
-    @Override
-    public String getResponse(MobileResponseEntity mobileResponseEntity) throws IllegalTypeException {
-        if (mobileResponseEntity.getClass() != ViewImagesResponse.class) {
-            throw new IllegalTypeException(MobileResponseEntity.class, ViewImagesResponse.class);
-        }
-        ViewImagesResponse viewImagesResponse = (ViewImagesResponse) mobileResponseEntity;
-        return getResponse(viewImagesResponse);
-    }
 }

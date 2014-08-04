@@ -1,12 +1,5 @@
 package model.logger;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 25.12.13
- * Time: 14:33
- * To change this template use File | Settings | File Templates.
- */
 public enum LogLevel {
     Default(0),
     Debug(1),

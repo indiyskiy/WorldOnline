@@ -14,13 +14,6 @@ import java.security.Security;
 import java.util.Date;
 import java.util.Properties;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 26.12.13
- * Time: 15:00
- * To change this template use File | Settings | File Templates.
- */
 public class MailSender {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Global, MailSender.class);
 

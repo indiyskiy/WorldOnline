@@ -4,13 +4,6 @@ import model.constants.databaseenumeration.MenuType;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 28.11.13
- * Time: 17:42
- * To change this template use File | Settings | File Templates.
- */
 @javax.persistence.Table(name = "Menu", schema = "", catalog = "worldonline")
 @Entity
 public class MenuEntity {

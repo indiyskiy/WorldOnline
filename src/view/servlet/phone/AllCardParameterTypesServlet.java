@@ -7,7 +7,6 @@ import model.logger.LoggerFactory;
 import model.phone.requesthandler.AllCardParameterTypesHandler;
 import model.phone.requesthandler.MobileHandler;
 
-
 public class AllCardParameterTypesServlet extends MobileServlet {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, UserRegistrationServlet.class);
 

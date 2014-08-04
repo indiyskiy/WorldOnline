@@ -27,21 +27,29 @@ public class ExceptionTexts {
     public static final String allCardsUserIDIncorrectException = "phone.getAllCards.UserID.Incorrect";
     public static final String allCardsUserNotExistException = "phone.getAllCards.UserID.NotExist";
     public static final String allCardsLimitIncorrectException = "phone.getAllCards.Limit.Incorrect";
+    public static final String allCardsLimitTooSmallException = "phone.getAllCards.Limit.TooBig";
+    public static final String allCardsLimitEmptyException = "phone.getAllCards.Limit.Empty";
     public static final String allCardsOffsetIncorrectException = "phone.getAllCards.Offset.Incorrect";
     public static final String weatherUserIDEmptyException = "phone.weather.UserID.empty";
     public static final String weatherUserIDIncorrectException = "phone.weather.UserID.Incorrect";
     public static final String weatherUserNotExistException = "phone.weather.UserID.NotExist";
-    public static final String getViewImagesUserIDEmptyException = "phone.getViewImages.UserID.empty";
+    public static final String getViewImagesUserIDEmptyException = "phone.getViewImages.UserID.Empty";
     public static final String getViewImagesUserIDIncorrectException = "phone.getViewImages.UserID.Incorrect";
     public static final String getViewImagesUserNotExistException = "phone.getViewImages.UserID.NotExist";
-    public static final String restoreUserDeviceIDEmptyException = "phone.restoreUser.DeviceID.empty";
-    public static final String restoreUserDeviceNotFoundException = "phone.restoreUser.Device.notFound";
-    public static String getAllCardParameterTypesUserIDEmptyException = "phone.getAllCardParameterTypes.UserID.empty";
-    public static String getAllCardParameterTypesIncorrectException = "phone.getAllCardParameterTypes.UserID.Incorrect";
-    public static String getAllCardParameterTypesUserNotExistException = "phone.getAllCardParameterTypes.UserID.NotExist";
-    public static final String allTagsUserIDEmptyException = "phone.allTags.UserID.empty";
+    public static final String restoreUserDeviceIDEmptyException = "phone.restoreUser.DeviceID.Empty";
+    public static final String restoreUserDeviceNotFoundException = "phone.restoreUser.Device.NotFound";
+    public static final String getAllCardParameterTypesUserIDEmptyException = "phone.getAllCardParameterTypes.UserID.Empty";
+    public static final String getAllCardParameterTypesIncorrectException = "phone.getAllCardParameterTypes.UserID.Incorrect";
+    public static final String getAllCardParameterTypesUserNotExistException = "phone.getAllCardParameterTypes.UserID.NotExist";
+    public static final String allTagsUserIDEmptyException = "phone.allTags.UserID.Empty";
     public static final String allTagsUserIDIncorrectException = "phone.allTags.UserID.Incorrect";
     public static final String allTagsUserNotExistException = "phone.allTags.UserID.NotExist";
+    public static final String getAllDishCategoriesUserIDEmptyException = "phone.getAllDishCategories.UserID.Empty";
+    public static final String getAllDishCategoriesIncorrectException = "phone.getAllDishCategories.UserID.Incorrect";
+    public static final String getAllDishCategoriesUserNotExistException = "phone.getAllDishCategories.UserID.NotExist";
+    public static String getAllDishTagsUserIDEmptyException = "phone.getAllDishTags.UserID.Empty";
+    public static String getAllDishTagsIncorrectException = "phone.getAllDishTags.UserID.Incorrect";
+    public static String getAllDishTagsUserNotExistException = "phone.getAllDishTags.UserID.NotExist";
 
 
     private static HashSet<String> getMobileErrors() {

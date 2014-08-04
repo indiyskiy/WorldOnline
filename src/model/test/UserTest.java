@@ -14,9 +14,6 @@ import org.apache.http.message.BasicNameValuePair;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by Илья on 14.03.14.
- */
 public class UserTest {
     private static final String url = ServerConsts.GlobalServerURL + ServerConsts.worldOnlineModule + ServerConsts.mobileModule + "userregistration";
     private static final LoggerFactory loggerFactory = new LoggerFactory(Component.Test, UserTest.class);

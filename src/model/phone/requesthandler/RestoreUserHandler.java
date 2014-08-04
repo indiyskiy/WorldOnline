@@ -12,7 +12,6 @@ import javax.servlet.ServletException;
 
 public class RestoreUserHandler implements MobileHandler {
 
-
     public RestoreUserResponse handleRequest(RestoreUserRequest restoreUserRequest) throws IllegalTypeException, ServletException {
         RestoreUserResponse restoreUserResponse = UserRequests.getUserByDeviceID(restoreUserRequest.getDeviceID());
         if (restoreUserResponse == null) {

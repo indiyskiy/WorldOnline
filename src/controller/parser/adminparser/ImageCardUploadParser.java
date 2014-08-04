@@ -15,9 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-/**
- * Created by Илья on 27.05.14.
- */
 public class ImageCardUploadParser {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, ImageCardUploadParser.class);
 

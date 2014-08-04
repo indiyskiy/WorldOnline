@@ -5,13 +5,6 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 30.10.13
- * Time: 19:14
- * To change this template use File | Settings | File Templates.
- */
 @javax.persistence.Table(name = "Text", schema = "", catalog = "worldonline")
 @Entity
 public class TextEntity {

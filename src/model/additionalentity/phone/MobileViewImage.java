@@ -1,10 +1,7 @@
-package model.phone.responseentity;
+package model.additionalentity.phone;
 
 import com.google.gson.JsonObject;
 
-/**
- * Created by Илья on 21.05.14.
- */
 public class MobileViewImage {
     private long cardID;
     private long imageID;

@@ -2,9 +2,6 @@ package model.scheduler;
 
 import model.weather.GismeteoWeatherParser;
 
-/**
- * Created by Илья on 14.05.14.
- */
 public class WeatherTask extends ExecutableTask {
     public WeatherTask() {
         super(60 * 12);

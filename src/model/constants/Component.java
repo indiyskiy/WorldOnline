@@ -1,12 +1,5 @@
 package model.constants;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 25.12.13
- * Time: 15:03
- * To change this template use File | Settings | File Templates.
- */
 public enum Component {
     Global(0),
     Admin(1),

@@ -408,6 +408,43 @@
     </servlet-mapping>
 
 
+    <!--All Prices -->
+    <servlet>
+        <display-name>AllPricesServlet</display-name>
+        <servlet-name>AllPricesServlet</servlet-name>
+        <servlet-class>view.servlet.phone.AllPricesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AllPricesServlet</servlet-name>
+        <url-pattern>/mobile/allprices</url-pattern>
+    </servlet-mapping>
+
+    <!--All dish categories -->
+    <servlet>
+        <display-name>AllDishCategoriesServlet</display-name>
+        <servlet-name>AllDishCategoriesServlet</servlet-name>
+        <servlet-class>view.servlet.phone.AllDishCategoriesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AllDishCategoriesServlet</servlet-name>
+        <url-pattern>/mobile/alldishcategories</url-pattern>
+    </servlet-mapping>
+
+    <!--All dish tags -->
+    <servlet>
+        <display-name>AllDishTagsServlet</display-name>
+        <servlet-name>AllDishTagsServlet</servlet-name>
+        <servlet-class>view.servlet.phone.AllDishTagsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AllDishTagsServlet</servlet-name>
+        <url-pattern>/mobile/alldishtags</url-pattern>
+    </servlet-mapping>
+
+
     <!--test servlets-->
 
     <!--add user request-->

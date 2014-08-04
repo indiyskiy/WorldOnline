@@ -1,5 +1,7 @@
 package model.additionalentity.phone;
 
+import com.google.gson.JsonObject;
+
 public class MenuCompleteInformation {
     private Long menuID;
     private Long iconImageID;
@@ -75,5 +77,16 @@ public class MenuCompleteInformation {
 
     public void setReadyForCounting(boolean readyForCounting) {
         this.readyForCounting = readyForCounting;
+    }
+
+    public JsonObject toJson() {
+        JsonObject menuObj = new JsonObject();
+        menuObj.addProperty("menuID", menuID);
+        menuObj.addProperty("iconImageID", iconImageID);
+        menuObj.addProperty("number", number);
+        menuObj.addProperty("parentMenuID", parentMenuID);
+        menuObj.addProperty("text", text);
+        menuObj.addProperty("cardCounter", cardCounter);
+        return menuObj;
     }
 }

@@ -1,8 +1,5 @@
 package model.exception;
 
-/**
- * Created by Илья on 10.04.14.
- */
 public class IllegalTypeException extends Exception {
     private Class from;
     private Class to;

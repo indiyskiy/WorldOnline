@@ -15,7 +15,7 @@ import model.phone.responseentity.RegistrationResponse;
 
 public class UserRegistrationHandler implements MobileHandler {
 
-    public RegistrationResponse handleRequest(ParsedRegistrationRequest parsedRegistrationRequest) {
+    public static RegistrationResponse handleRequest(ParsedRegistrationRequest parsedRegistrationRequest) {
         UserPersonalDataEntity userPersonalData = new UserPersonalDataEntity(parsedRegistrationRequest.getLanguage());
         UserHardwareEntity userHardware = new UserHardwareEntity(parsedRegistrationRequest.getDeviceID(),
                 parsedRegistrationRequest.getDeviceToken(),

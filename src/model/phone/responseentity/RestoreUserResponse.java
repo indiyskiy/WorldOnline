@@ -1,5 +1,6 @@
 package model.phone.responseentity;
 
+import com.google.gson.JsonObject;
 import model.constants.Status;
 
 public class RestoreUserResponse extends MobileResponseEntity {
@@ -15,5 +16,12 @@ public class RestoreUserResponse extends MobileResponseEntity {
 
     public long getUserID() {
         return userID;
+    }
+
+    @Override
+    protected JsonObject toJson() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("userID", getUserID());
+        return jsonObject;
     }
 }

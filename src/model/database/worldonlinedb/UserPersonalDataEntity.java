@@ -4,13 +4,6 @@ import model.constants.databaseenumeration.LanguageType;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 25.10.13
- * Time: 16:08
- * To change this template use File | Settings | File Templates.
- */
 @javax.persistence.Table(name = "UserPersonalData", schema = "", catalog = "worldonline")
 @Entity
 public class UserPersonalDataEntity {

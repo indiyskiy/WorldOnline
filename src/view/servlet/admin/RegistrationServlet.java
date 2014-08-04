@@ -15,9 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by Илья on 03.04.14.
- */
 public class RegistrationServlet extends ProtectedServlet {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, RegistrationServlet.class);
 

@@ -1,8 +1,6 @@
 package model.additionalentity.phone;
 
 import com.google.gson.JsonObject;
-import model.constants.ApplicationBlock;
-import model.constants.databaseenumeration.DataType;
 
 public class MobileParameter {
     private String value;

@@ -1,22 +1,14 @@
 package controller.phone.parser;
 
-import com.google.gson.JsonObject;
 import controller.phone.entity.MenuRequest;
 import controller.phone.entity.MobileRequest;
-import model.additionalentity.phone.MenuCompleteInformation;
 import model.constants.ExceptionTexts;
 import model.database.requests.UserRequests;
-import model.exception.IllegalTypeException;
 import model.exception.ParseRequestException;
-import model.phone.responseentity.GetMenuResponse;
-import model.phone.responseentity.MobileResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Илья on 11.04.14.
- */
-public class GetMenuParser implements MobileParser {
+public class GetMenuParser extends MobileParser {
     @Override
     public MobileRequest parse(HttpServletRequest request) throws ParseRequestException {
         MenuRequest menuRequest = new MenuRequest();
@@ -47,28 +39,5 @@ public class GetMenuParser implements MobileParser {
         }
         menuRequest.setMenuID(menuID);
         return menuRequest;
-    }
-
-    public String getResponse(GetMenuResponse getMenuResponse) {
-        JsonObject responseObj = new JsonObject();
-        responseObj.addProperty("status", getMenuResponse.getStatus().getValue());
-        MenuCompleteInformation menuCompleteInformation = getMenuResponse.getMenuCompleteInformation();
-        JsonObject menuObject = new JsonObject();
-        menuObject.addProperty("menuID", menuCompleteInformation.getMenuID());
-        menuObject.addProperty("iconImageID", menuCompleteInformation.getIconImageID());
-        menuObject.addProperty("number", menuCompleteInformation.getNumber());
-        menuObject.addProperty("parentMenuID", menuCompleteInformation.getParentMenuID());
-        menuObject.addProperty("text", menuCompleteInformation.getText());
-        responseObj.add("menu", menuObject);
-        return responseObj.toString();
-    }
-
-    @Override
-    public String getResponse(MobileResponseEntity mobileResponseEntity) throws IllegalTypeException {
-        if (mobileResponseEntity.getClass() != GetMenuResponse.class) {
-            throw new IllegalTypeException(MobileResponseEntity.class, GetMenuResponse.class);
-        }
-        GetMenuResponse getMenuResponse = (GetMenuResponse) mobileResponseEntity;
-        return getResponse(getMenuResponse);
     }
 }

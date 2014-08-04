@@ -2,6 +2,7 @@ package model.database.requests;
 
 import model.additionalentity.CompleteCardImageInfo;
 import model.additionalentity.CompleteTextGroupInfo;
+import model.additionalentity.phone.MobileViewImage;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardImageType;
 import model.constants.databaseenumeration.CardState;
@@ -11,7 +12,6 @@ import model.database.worldonlinedb.CardImageEntity;
 import model.database.worldonlinedb.ImageEntity;
 import model.database.worldonlinedb.TextGroupEntity;
 import model.logger.LoggerFactory;
-import model.phone.responseentity.MobileViewImage;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.intellij.lang.annotations.Language;
@@ -25,13 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 05.11.13
- * Time: 21:43
- * To change this template use File | Settings | File Templates.
- */
 public class ImageRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, ImageRequest.class);
 

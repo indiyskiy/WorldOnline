@@ -3,9 +3,6 @@ package model.additionalentity.admin;
 import java.io.File;
 import java.util.HashMap;
 
-/**
- * Created by Илья on 27.05.14.
- */
 public class ParsedRequest {
     private HashMap<String, String> textMap = new HashMap<>();
     private HashMap<String, File> fileMap = new HashMap<>();

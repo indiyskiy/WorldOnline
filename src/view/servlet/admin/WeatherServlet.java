@@ -15,9 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by Илья on 16.05.14.
- */
 public class WeatherServlet extends ProtectedServlet {
     private final int MAX_ITEMS = 50;
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, AllUsersServlet.class);

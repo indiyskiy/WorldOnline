@@ -26,7 +26,7 @@ public class DishEntity {
     private PriceEntity price;
 
 
-    @javax.persistence.Column(name = "cost")
+    @javax.persistence.Column(name = "Cost")
     @Basic
     private Double cost;
 

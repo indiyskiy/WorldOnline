@@ -7,7 +7,6 @@ import model.logger.LoggerFactory;
 import model.phone.requesthandler.AllMenuIDsHandler;
 import model.phone.requesthandler.MobileHandler;
 
-
 public class AllMenusIdsServlet extends MobileServlet {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, UserRegistrationServlet.class);
 

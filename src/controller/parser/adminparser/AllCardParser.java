@@ -5,13 +5,6 @@ import view.servlet.ServletHelper;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 13.01.14
- * Time: 18:13
- * To change this template use File | Settings | File Templates.
- */
 public class AllCardParser {
     Long cardID = null;
     String cardName = null;

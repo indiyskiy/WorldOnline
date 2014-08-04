@@ -1,13 +1,11 @@
 package model.phone.responseentity;
 
+import com.google.gson.JsonObject;
 import model.constants.Status;
 import model.constants.databaseenumeration.Cloudiness;
 import model.constants.databaseenumeration.DayTime;
 import model.constants.databaseenumeration.Precipitation;
 
-/**
- * Created by Илья on 19.05.14.
- */
 public class WeatherResponse extends MobileResponseEntity {
     private int temperature;
     private Cloudiness cloudiness;
@@ -48,5 +46,15 @@ public class WeatherResponse extends MobileResponseEntity {
 
     public WeatherResponse() {
         super(Status.OK);
+    }
+
+    @Override
+    protected JsonObject toJson() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("temperature", getTemperature());
+        jsonObject.addProperty("cloudiness", getCloudiness().getValue());
+        jsonObject.addProperty("precipitation", getPrecipitation().getValue());
+        jsonObject.addProperty("dayTime", getDayTime().getValue());
+        return jsonObject;
     }
 }

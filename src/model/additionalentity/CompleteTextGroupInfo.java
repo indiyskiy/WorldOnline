@@ -5,13 +5,6 @@ import model.database.worldonlinedb.TextGroupEntity;
 
 import java.util.HashMap;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 02.11.13
- * Time: 7:09
- * To change this template use File | Settings | File Templates.
- */
 public class CompleteTextGroupInfo {
     private TextGroupEntity textGroup;
     private HashMap<Long, TextEntity> textEntityMap;

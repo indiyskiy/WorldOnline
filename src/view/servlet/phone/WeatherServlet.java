@@ -7,9 +7,6 @@ import model.logger.LoggerFactory;
 import model.phone.requesthandler.MobileHandler;
 import model.phone.requesthandler.WeatherHandler;
 
-/**
- * Created by Илья on 19.05.14.
- */
 public class WeatherServlet extends MobileServlet {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, MobileServlet.class);
 

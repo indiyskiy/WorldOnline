@@ -2,7 +2,6 @@ package model.additionalentity.phone;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import model.constants.databaseenumeration.TextType;
 
 public class MobileText {
     String text;

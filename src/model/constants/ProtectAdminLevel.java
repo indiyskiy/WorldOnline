@@ -1,8 +1,5 @@
 package model.constants;
 
-/**
- * Created by Илья on 28.03.14.
- */
 public enum ProtectAdminLevel {
     Unregistered(0),
     Registered(1),

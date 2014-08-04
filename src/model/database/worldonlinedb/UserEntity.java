@@ -2,13 +2,6 @@ package model.database.worldonlinedb;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 15.10.13
- * Time: 3:10
- * To change this template use File | Settings | File Templates.
- */
 @javax.persistence.Table(name = "User", schema = "", catalog = "worldonline")
 @Entity
 public class UserEntity {

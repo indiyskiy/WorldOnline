@@ -2,13 +2,6 @@ package model.additionalentity;
 
 import model.database.worldonlinedb.CardEntity;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 04.02.14
- * Time: 15:57
- * To change this template use File | Settings | File Templates.
- */
 public class SimpleCard {
     private CardEntity cardEntity;
     private String name;

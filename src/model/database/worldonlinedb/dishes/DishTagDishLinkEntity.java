@@ -1,7 +1,5 @@
 package model.database.worldonlinedb.dishes;
 
-import model.database.worldonlinedb.CardEntity;
-
 import javax.persistence.*;
 
 @javax.persistence.Table(name = "DishTagDishLink", schema = "", catalog = "worldonline")

@@ -7,9 +7,6 @@ import model.logger.LoggerFactory;
 import model.phone.requesthandler.MobileHandler;
 import model.phone.requesthandler.RestoreUserHandler;
 
-/**
- * Created by Илья on 11.06.14.
- */
 public class RestoreUserServlet extends MobileServlet {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, RestoreUserServlet.class);
 

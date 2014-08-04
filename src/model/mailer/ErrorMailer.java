@@ -8,7 +8,6 @@ import model.logger.LoggerMessage;
 import javax.mail.MessagingException;
 import java.util.HashMap;
 
-
 public class ErrorMailer {
     private static final String sender = "worldOnLineError";
     private static final String password = "djqysdrjcvjct111";

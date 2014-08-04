@@ -5,9 +5,6 @@ import model.additionalentity.admin.LoginRequest;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Илья on 31.03.14.
- */
 public class LoginParser {
     public LoginRequest parse(HttpServletRequest request) throws ServletException {
         LoginRequest loginRequest = new LoginRequest();

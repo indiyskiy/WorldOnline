@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 
 public class StringCrypter {
 
-
     private static final Random random = new Random(System.currentTimeMillis());
     private Cipher ecipher;
     private Cipher dcipher;

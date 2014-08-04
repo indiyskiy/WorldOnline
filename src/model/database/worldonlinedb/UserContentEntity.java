@@ -4,13 +4,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 28.10.13
- * Time: 17:28
- * To change this template use File | Settings | File Templates.
- */
 @javax.persistence.Table(name = "UserContent", schema = "", catalog = "worldonline")
 @Entity
 public class UserContentEntity {

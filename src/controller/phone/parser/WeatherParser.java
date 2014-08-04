@@ -1,18 +1,14 @@
 package controller.phone.parser;
 
-import com.google.gson.JsonObject;
 import controller.phone.entity.WeatherRequest;
 import model.constants.ExceptionTexts;
 import model.database.requests.UserRequests;
-import model.exception.IllegalTypeException;
 import model.exception.ParseRequestException;
-import model.phone.responseentity.MobileResponseEntity;
-import model.phone.responseentity.WeatherResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
 
-public class WeatherParser implements MobileParser {
+public class WeatherParser extends MobileParser {
     @Override
     public WeatherRequest parse(HttpServletRequest request) throws ParseRequestException {
         WeatherRequest weatherRequest = new WeatherRequest();
@@ -31,23 +27,5 @@ public class WeatherParser implements MobileParser {
         }
         weatherRequest.setUserID(userID);
         return weatherRequest;
-    }
-
-    @Override
-    public String getResponse(MobileResponseEntity mobileResponseEntity) throws IllegalTypeException {
-        if (mobileResponseEntity.getClass() != WeatherResponse.class) {
-            throw new IllegalTypeException(MobileResponseEntity.class, WeatherResponse.class);
-        }
-        WeatherResponse weatherResponse = (WeatherResponse) mobileResponseEntity;
-        return getResponse(weatherResponse);
-    }
-
-    public String getResponse(WeatherResponse weatherResponse) {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("temperature", weatherResponse.getTemperature());
-        jsonObject.addProperty("cloudiness", weatherResponse.getCloudiness().getValue());
-        jsonObject.addProperty("precipitation", weatherResponse.getPrecipitation().getValue());
-        jsonObject.addProperty("dayTime", weatherResponse.getDayTime().getValue());
-        return jsonObject.toString();
     }
 }

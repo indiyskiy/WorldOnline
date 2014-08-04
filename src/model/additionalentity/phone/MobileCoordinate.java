@@ -2,9 +2,6 @@ package model.additionalentity.phone;
 
 import com.google.gson.JsonObject;
 
-/**
- * Created by Илья on 10.06.14.
- */
 public class MobileCoordinate {
     private double latitude;
     private double longitude;

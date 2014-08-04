@@ -7,13 +7,6 @@ import model.logger.LoggerFactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 21.10.13
- * Time: 21:51
- * To change this template use File | Settings | File Templates.
- */
 public class StringFileParser {
     public static LoggerFactory loggerFactory = new LoggerFactory(Component.Global, StringFileParser.class);
 

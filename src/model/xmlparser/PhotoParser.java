@@ -7,13 +7,6 @@ import org.simpleframework.xml.core.Persister;
 
 import java.io.FileInputStream;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 21.10.13
- * Time: 18:23
- * To change this template use File | Settings | File Templates.
- */
 public class PhotoParser {
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, PhotoParser.class);
 

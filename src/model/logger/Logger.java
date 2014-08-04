@@ -5,13 +5,6 @@ import model.constants.Component;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 25.12.13
- * Time: 13:00
- * To change this template use File | Settings | File Templates.
- */
 public class Logger implements Runnable {
     private static Logger instance = new Logger();
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Global, Logger.class);

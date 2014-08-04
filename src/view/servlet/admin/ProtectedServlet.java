@@ -49,7 +49,7 @@ public abstract class ProtectedServlet extends HttpServlet {
                     return isPassedForUnLoggined();
                 } else {
                     registered = true;
-                    if (adminRule == AdminRule.Unregistered && protectAdminLevel != ProtectAdminLevel.Unregistered) {
+                    if (adminRule == AdminRule.Unregistered) {
                         return AccessStatus.TooRegistered;
                     }
                     if (!adminRule.getAccessStatusMap().contains(protectAdminLevel)) {

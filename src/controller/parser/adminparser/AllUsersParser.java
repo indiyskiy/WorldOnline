@@ -6,9 +6,6 @@ import view.servlet.ServletHelper;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Timestamp;
 
-/**
- * Created by Илья on 13.03.14.
- */
 public class AllUsersParser {
     private int maxItems = 0;
     int firstElem = 0;

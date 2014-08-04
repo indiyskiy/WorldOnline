@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class AllCardsServlet extends ProtectedServlet {
     private final int MAX_ITEMS = 50;
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, AllCardsServlet.class);

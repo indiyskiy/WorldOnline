@@ -1,6 +1,5 @@
 package model.database.worldonlinedb.dishes;
 
-import model.database.worldonlinedb.TextEntity;
 import model.database.worldonlinedb.TextGroupEntity;
 
 import javax.persistence.*;

@@ -7,9 +7,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.text.ParseException;
 
-/**
- * Created by Илья on 14.05.14.
- */
 @javax.persistence.Table(name = "Weather", schema = "", catalog = "worldonline")
 @Entity
 public class WeatherEntity {

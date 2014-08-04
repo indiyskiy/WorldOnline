@@ -5,13 +5,6 @@ import model.constants.Component;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 25.12.13
- * Time: 13:04
- * To change this template use File | Settings | File Templates.
- */
 public class LoggerMessage {
     private final static LogLevel lowestMailLevel = LogLevel.Warning;
     private final String text;
@@ -66,8 +59,8 @@ public class LoggerMessage {
     public void logMyself(LoggerFile loggerFile) {
         loggerFile.printToFile(getMessage());
         System.out.println(getMessage());
-        System.out.println("ErrorMailer " + logLevel + " " + lowestMailLevel);
         if (logLevel.isBigger(lowestMailLevel)) {
+            System.out.println("ErrorMailer " + logLevel + " " + lowestMailLevel);
 //            ErrorMailer.sendError(this);
         }
     }

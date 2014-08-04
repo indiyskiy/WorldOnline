@@ -19,13 +19,12 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 
-
 public class DishParser {
     private static final String menuXmlRoute = ServerConsts.root + "MenuXML.xml";
     private static final String tagsXmlRoute = ServerConsts.root + "TagsXML.xml";
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, DishParser.class);
     public static HashMap<String, DishAdditionalInfo> menuCardMap = parseDishAdditionalInfo(ServerConsts.root + "addData/additionalDishInfo.txt");
-    private static HashMap<Integer, DishCategoryEntity> dishCategoryMap = new HashMap<>();
+    private static HashMap<String, DishCategoryEntity> dishCategoryMap = new HashMap<>();
 
     private static HashMap<String, DishAdditionalInfo> parseDishAdditionalInfo(String root) {
         HashMap<String, DishAdditionalInfo> dishAdditionalInfoHashMap = new HashMap<>();
@@ -142,14 +141,20 @@ public class DishParser {
     }
 
     private void setCategory(DishEntity dishEntity, String nameRu) {
+        loggerFactory.debug("setCategory of " + nameRu);
         if (menuCardMap.containsKey(nameRu)) {
+            loggerFactory.debug("nameru " + nameRu + " was found");
             DishAdditionalInfo dishAdditionalInfo = menuCardMap.get(nameRu);
             if (dishAdditionalInfo.getCatID() != null) {
-                Integer categoryID = dishAdditionalInfo.getCatID();
+                loggerFactory.debug("getCatID not null");
+                String catNameRu = dishAdditionalInfo.getCategoryNameRus();
+//                Integer categoryID = dishAdditionalInfo.getCatID();
                 DishCategoryEntity dishCategoryEntity = null;
-                if (dishCategoryMap.containsKey(categoryID)) {
-                    dishCategoryEntity = dishCategoryMap.get(categoryID);
+                if (dishCategoryMap.containsKey(catNameRu)) {
+                    loggerFactory.debug(catNameRu + " categoryID found");
+                    dishCategoryEntity = dishCategoryMap.get(catNameRu);
                 } else {
+                    loggerFactory.debug(catNameRu + " categoryID not found");
                     TextGroupEntity textGroupEntity = new TextGroupEntity("DishCategoryName" + dishAdditionalInfo.getCategoryNameEng());
                     TextEntity textEntityRu = new TextEntity(LanguageType.Russian, dishAdditionalInfo.getCategoryNameRus(), textGroupEntity);
                     TextEntity textEntityEn = new TextEntity(LanguageType.English, dishAdditionalInfo.getCategoryNameEng(), textGroupEntity);
@@ -159,8 +164,8 @@ public class DishParser {
                     dishCategoryEntity.setName(textGroupEntity);
                     dishCategoryEntity.setName(textGroupEntity);
                     DishRequest.addDishCategory(dishCategoryEntity);
-                    dishCategoryMap.put(categoryID, dishCategoryEntity);
-                    loggerFactory.debug("added category " + dishCategoryMap.get(categoryID));
+                    dishCategoryMap.put(catNameRu, dishCategoryEntity);
+                    loggerFactory.debug("added category " + catNameRu + " (" + textEntityRu.getText() + ") " + dishCategoryMap.get(catNameRu));
                 }
                 dishEntity.setDishCategory(dishCategoryEntity);
             }

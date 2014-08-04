@@ -16,7 +16,6 @@ import org.simpleframework.xml.core.Persister;
 import java.io.FileInputStream;
 import java.util.HashSet;
 
-
 public class PeopleParser {
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, PeopleParser.class);
 

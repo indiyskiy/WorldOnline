@@ -12,9 +12,6 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by Илья on 14.04.14.
- */
 public class MenuTest {
     private static final String url = ServerConsts.GlobalServerURL + ServerConsts.worldOnlineModule + ServerConsts.mobileModule + "userregistration";
     private static final LoggerFactory loggerFactory = new LoggerFactory(Component.Test, UserTest.class);

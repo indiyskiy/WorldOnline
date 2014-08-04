@@ -3,13 +3,6 @@ package model.additionalentity;
 import model.additionalentity.admin.CompleteTagInfo;
 import model.database.worldonlinedb.CardTagEntity;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 02.11.13
- * Time: 22:09
- * To change this template use File | Settings | File Templates.
- */
 public class CompleteCardTagInfo {
     private CardTagEntity cardTagEntity;
     private CompleteTagInfo completeTagInfo;

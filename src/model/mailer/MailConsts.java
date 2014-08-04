@@ -1,8 +1,5 @@
 package model.mailer;
 
-/**
- * Created by Илья on 07.04.14.
- */
 public enum MailConsts {
     GMail("smtp.gmail.com", 465, "gmail.com"),
     Yandex("smtp.yandex.ru", 465, "yandex.ru");

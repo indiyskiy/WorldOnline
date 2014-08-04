@@ -1,10 +1,10 @@
 package model.database.requests;
 
 import controller.parser.adminparser.AllCardParser;
+import helper.TimeCounter;
 import model.additionalentity.*;
 import model.additionalentity.admin.CompleteMenuInfo;
 import model.additionalentity.phone.*;
-import model.constants.ApplicationBlock;
 import model.constants.Component;
 import model.constants.databaseenumeration.*;
 import model.database.session.DatabaseConnection;
@@ -755,6 +755,7 @@ public class CardRequest {
 
 
     public static LinkedList<MobileCardInfo> getAllMobileCards(Long userID, Integer limit, Integer offset) {
+        TimeCounter timeCounter = new TimeCounter();
         HashMap<Long, MobileCardInfo> cardMap = null;
         DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
@@ -770,8 +771,11 @@ public class CardRequest {
 
             ps = connection.prepareStatement(sql);
             ps.setLong(1, userID);
+            timeCounter.logTime(loggerFactory, "create request");
             rs = ps.executeQuery();
+            timeCounter.logTime(loggerFactory, "execute request");
             cardMap = parseMobileCardSQLRequest(rs);
+            timeCounter.logTime(loggerFactory, "parse request");
         } catch (SQLException e) {
             loggerFactory.error(e);
         } finally {
@@ -781,6 +785,7 @@ public class CardRequest {
         if (cardMap != null) {
             mobileCardInfos.addAll(cardMap.values());
         }
+        timeCounter.logTime(loggerFactory, "request done");
         return mobileCardInfos;
     }
 

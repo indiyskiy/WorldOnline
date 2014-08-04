@@ -1,12 +1,12 @@
 package model.phone.requesthandler;
 
-import controller.phone.entity.ViewImagesRequest;
 import controller.phone.entity.MobileRequest;
+import controller.phone.entity.ViewImagesRequest;
+import model.additionalentity.phone.MobileViewImage;
 import model.database.requests.ImageRequest;
 import model.exception.IllegalTypeException;
-import model.phone.responseentity.ViewImagesResponse;
 import model.phone.responseentity.MobileResponseEntity;
-import model.phone.responseentity.MobileViewImage;
+import model.phone.responseentity.ViewImagesResponse;
 
 import java.util.LinkedList;
 

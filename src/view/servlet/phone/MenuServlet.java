@@ -7,9 +7,6 @@ import model.logger.LoggerFactory;
 import model.phone.requesthandler.GetMenuHandler;
 import model.phone.requesthandler.MobileHandler;
 
-/**
- * Created by Илья on 10.04.14.
- */
 public class MenuServlet extends MobileServlet {
     @Override
     protected MobileHandler getMobileHandler() {

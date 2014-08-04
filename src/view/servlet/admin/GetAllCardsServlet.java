@@ -1,6 +1,6 @@
 package view.servlet.admin;
 
-import controller.phone.parser.GetAllCardsParser;
+import controller.phone.parser.AllCardsParser;
 import controller.phone.parser.MobileParser;
 import model.constants.Component;
 import model.logger.LoggerFactory;
@@ -18,7 +18,7 @@ public class GetAllCardsServlet extends MobileServlet {
 
     @Override
     public MobileParser getMobileParser() {
-        return new GetAllCardsParser();
+        return new AllCardsParser();
     }
 
     @Override

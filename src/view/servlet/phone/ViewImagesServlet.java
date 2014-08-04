@@ -1,11 +1,11 @@
 package view.servlet.phone;
 
-import controller.phone.parser.ViewImagesParser;
 import controller.phone.parser.MobileParser;
+import controller.phone.parser.ViewImagesParser;
 import model.constants.Component;
 import model.logger.LoggerFactory;
-import model.phone.requesthandler.ViewImageHandler;
 import model.phone.requesthandler.MobileHandler;
+import model.phone.requesthandler.ViewImageHandler;
 
 public class ViewImagesServlet extends MobileServlet {
     public static LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, ViewImagesServlet.class);

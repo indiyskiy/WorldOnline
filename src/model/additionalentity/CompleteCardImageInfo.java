@@ -2,13 +2,6 @@ package model.additionalentity;
 
 import model.database.worldonlinedb.CardImageEntity;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 05.11.13
- * Time: 22:22
- * To change this template use File | Settings | File Templates.
- */
 public class CompleteCardImageInfo {
     private CardImageEntity cardImageEntity;
     private CompleteTextGroupInfo completeTextGroupInfo;
