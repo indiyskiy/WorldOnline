@@ -22,7 +22,7 @@ public class AllPricesHandler implements MobileHandler {
 
     private AllPricesResponse handleRequest(AllPricesRequest allCardParameterTypesRequest) {
         AllPricesResponse allPricesResponse = new AllPricesResponse();
-        allPricesResponse.setMobilePrices(DishRequest.getAllMobilePrices(allCardParameterTypesRequest.getUserID()));
+        allPricesResponse.setMobilePrices(DishRequest.getAllMobilePrices(allCardParameterTypesRequest.getUserID(), allCardParameterTypesRequest.getLimit(), allCardParameterTypesRequest.getOffset()));
         return allPricesResponse;
 
     }

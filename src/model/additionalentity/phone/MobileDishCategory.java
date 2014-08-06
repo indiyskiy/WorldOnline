@@ -26,6 +26,6 @@ public class MobileDishCategory {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("dishCategoryID", dishCategoryID);
         jsonObject.addProperty("name", name);
-        return null;
+        return jsonObject;
     }
 }

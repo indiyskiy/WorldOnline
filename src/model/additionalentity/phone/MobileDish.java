@@ -11,7 +11,7 @@ public class MobileDish {
     private double cost;
     private long dishCategoryID;
     private String name;
-    private HashSet<Long> tagSet;
+    private HashSet<Long> tagSet = new HashSet<>();
 
     public JsonObject toJson() {
         JsonObject jsonObject = new JsonObject();

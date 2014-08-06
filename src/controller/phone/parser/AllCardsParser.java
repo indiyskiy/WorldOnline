@@ -39,7 +39,7 @@ public class AllCardsParser extends MobileParser {
                 limit = Integer.parseInt(limitString);
                 allCardsRequest.setLimit(limit);
                 if (limit > MaxLimit) {
-                    throw new ParseRequestException(ExceptionTexts.allCardsLimitTooSmallException);
+                    throw new ParseRequestException(ExceptionTexts.allCardsLimitTooBigException);
                 }
             } catch (ParseRequestException e) {
                 throw e;

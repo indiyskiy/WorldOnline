@@ -27,7 +27,7 @@ public class ExceptionTexts {
     public static final String allCardsUserIDIncorrectException = "phone.getAllCards.UserID.Incorrect";
     public static final String allCardsUserNotExistException = "phone.getAllCards.UserID.NotExist";
     public static final String allCardsLimitIncorrectException = "phone.getAllCards.Limit.Incorrect";
-    public static final String allCardsLimitTooSmallException = "phone.getAllCards.Limit.TooBig";
+    public static final String allCardsLimitTooBigException = "phone.getAllCards.Limit.TooBig";
     public static final String allCardsLimitEmptyException = "phone.getAllCards.Limit.Empty";
     public static final String allCardsOffsetIncorrectException = "phone.getAllCards.Offset.Incorrect";
     public static final String weatherUserIDEmptyException = "phone.weather.UserID.empty";
@@ -50,6 +50,10 @@ public class ExceptionTexts {
     public static String getAllDishTagsUserIDEmptyException = "phone.getAllDishTags.UserID.Empty";
     public static String getAllDishTagsIncorrectException = "phone.getAllDishTags.UserID.Incorrect";
     public static String getAllDishTagsUserNotExistException = "phone.getAllDishTags.UserID.NotExist";
+    public static String allPricesLimitTooBigException = "phone.allPrices.Limit.TooBig";
+    public static String allPricesLimitIncorrectException = "phone.allPrices.Limit.Incorrect";
+    public static String allPricesLimitEmptyException = "phone.allPrices.Offset.Empty";
+    public static String allPricesOffsetIncorrectException = "phone.allPrices.Offset.Incorrect";
 
 
     private static HashSet<String> getMobileErrors() {

@@ -26,7 +26,7 @@ public class AllMenusResponse extends MobileResponseEntity {
     protected JsonObject toJson() {
         JsonObject responseObj = new JsonObject();
         ArrayList<MenuCompleteInformation> informationArrayList = getMenusCompleteInformation();
-        responseObj.addProperty("menuCounter", informationArrayList.size());
+//        responseObj.addProperty("menuCounter", informationArrayList.size());
         JsonArray menusArray = new JsonArray();
         for (MenuCompleteInformation menuCompleteInformation : informationArrayList) {
             JsonObject menuObj = menuCompleteInformation.toJson();

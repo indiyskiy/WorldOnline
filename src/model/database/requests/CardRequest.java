@@ -90,6 +90,7 @@ public class CardRequest {
             "CardCoordinate.CardCoordinateID, " +
             "CardCoordinate.Latitude, " +
             "CardCoordinate.Longitude, " +
+            "Price.PriceID, " +
             "Tag.TagID " +
             "FROM Card " +
             "LEFT OUTER JOIN TextCard ON (TextCard.CardID=Card.CardID) " +
@@ -105,7 +106,9 @@ public class CardRequest {
             "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
             "LEFT OUTER JOIN CardRoute ON (CardRoute.CardID) " +
             "LEFT OUTER JOIN CardTag ON (Card.CardID=CardTag.CardID) " +
-            "LEFT OUTER JOIN Tag ON (Tag.TagID=CardTag.TagID) ";
+            "LEFT OUTER JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
+            "LEFT OUTER JOIN CardPriceLink ON (Card.CardID=CardPriceLink.CardID) " +
+            "LEFT OUTER JOIN Price ON (Price.PriceID=CardPriceLink.PriceID) ";
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, CardRequest.class);
 
     public static ArrayList<CardEntity> getAllCards(int firstElem, int maxElems) {
@@ -764,8 +767,12 @@ public class CardRequest {
         try {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = MobileCardSql +
-                    "JOIN (SELECT FilterCard.CardID FROM Card AS FilterCard WHERE (FilterCard.CardState IN (" + CardState.Active.getValue() + ")) ORDER BY FilterCard.CardID LIMIT " + offset + "," + limit + ")" +
-                    "AS T ON (Card.CardID=T.CardID)" +
+                    "JOIN (" +
+                    "SELECT FilterCard.CardID " +
+                    "FROM Card AS FilterCard " +
+                    "WHERE (FilterCard.CardState IN ("
+                    + CardState.Active.getValue() + ")) ORDER BY FilterCard.CardID LIMIT " + offset + "," + limit + ") " +
+                    "AS T ON (Card.CardID=T.CardID) " +
                     "WHERE (UserPersonalData.UserLanguage=Text.LanguageID OR Text.LanguageID IS NULL) " +
                     "AND (Card.CardState IN (" + CardState.Active.getValue() + "))";
 
@@ -880,6 +887,10 @@ public class CardRequest {
                         mobileCoordinate.setLatitude(rs.getDouble("CardCoordinate.Latitude"));
                         mobileCoordinate.setLongitude(rs.getDouble("CardCoordinate.Longitude"));
                         mobileCardInfo.setCoordinate(mobileCoordinate);
+                    }
+                    Long priceID = rs.getLong("Price.PriceID");
+                    if (priceID != 0 && !rs.wasNull()) {
+                        mobileCardInfo.setPriceID(priceID);
                     }
                 }
             }

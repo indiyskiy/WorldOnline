@@ -5,6 +5,7 @@ import model.additionalentity.phone.MobileDishCategory;
 import model.additionalentity.phone.MobileDishTag;
 import model.additionalentity.phone.MobilePrice;
 import model.constants.Component;
+import model.constants.databaseenumeration.CardState;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.dishes.*;
@@ -130,7 +131,7 @@ public class DishRequest {
         return b;
     }
 
-    public static ArrayList<MobilePrice> getAllMobilePrices(Long userID) {
+    public static ArrayList<MobilePrice> getAllMobilePrices(Long userID, int limit, int offset) {
         ArrayList<MobilePrice> mobilePrices = new ArrayList<>();
         HashMap<Long, MobilePrice> mobilePriceHashMap = new HashMap<>();
         HashMap<Long, HashMap<Long, MobileDish>> dishesMap = new HashMap<>();
@@ -153,11 +154,20 @@ public class DishRequest {
                             "JOIN Text AS DishText ON (DishTextGroup.TextGroupID=DishText.TextGroupID) " +
                             "LEFT OUTER JOIN DishTagDishLink ON (DishTagDishLink.DishID=Dish.DishID) " +
                             "LEFT OUTER JOIN DishTag ON (DishTagDishLink.DishTagID=DishTag.DishTagID) " +
-                            "JOIN UserPersonalData ON (UserPersonalData.UserLanguage=Text.LanguageID) " +
+                            "JOIN UserPersonalData ON (UserPersonalData.UserLanguage=DishText.LanguageID) " +
                             "JOIN User ON (User.UserPersonalDataID=UserPersonalData.UserPersonalDataID) " +
+                            "JOIN (SELECT FilterPrice.PriceID FROM Price AS FilterPrice " +
+                            "JOIN CardPriceLink ON (FilterPrice.PriceID=CardPriceLink.PriceID) " +
+                            "JOIN Card ON (Card.CardID=CardPriceLink.CardID) " +
+                            "WHERE Card.CardState=" + CardState.Active.getValue() + " " +
+                            "ORDER BY FilterPrice.PriceID LIMIT ?,?) " +
+                            "AS T ON (Price.PriceID=T.PriceID) " +
                             "WHERE User.UserID=?";
+
             ps = connection.prepareStatement(sql);
-            ps.setLong(1, userID);
+            ps.setLong(3, userID);
+            ps.setLong(1, offset);
+            ps.setLong(2, limit);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Long priceID = rs.getLong("Price.PriceID");

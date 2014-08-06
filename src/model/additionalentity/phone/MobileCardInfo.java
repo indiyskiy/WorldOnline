@@ -18,6 +18,7 @@ public class MobileCardInfo {
     private MobileCoordinate coordinate;
     private int order;
     private HashSet<Long> tagIDs = new HashSet<>();
+    private Long priceID;
 
     public MobileCoordinate getCoordinate() {
         return coordinate;
@@ -125,6 +126,17 @@ public class MobileCardInfo {
             JsonObject coordinateJson = coordinate.toJson();
             jsonObject.add("coordinate", coordinateJson);
         }
+        if (priceID != null && priceID != 0) {
+            jsonObject.addProperty("priceID", priceID);
+        }
         return jsonObject;
+    }
+
+    public void setPriceID(Long priceID) {
+        this.priceID = priceID;
+    }
+
+    public Long getPriceID() {
+        return priceID;
     }
 }
