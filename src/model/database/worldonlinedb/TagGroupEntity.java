@@ -1,5 +1,8 @@
 package model.database.worldonlinedb;
 
+import model.constants.ApplicationBlock;
+import model.constants.databaseenumeration.TagViewType;
+
 import javax.persistence.*;
 
 @javax.persistence.Table(name = "TagGroup", schema = "", catalog = "worldonline")
@@ -21,6 +24,14 @@ public class TagGroupEntity {
     @javax.persistence.Column(name = "Position")
     @Basic
     private Integer position;
+
+    @javax.persistence.Column(name = "ApplicationBlock")
+    @Basic
+    private Integer applicationBlock;
+
+    @javax.persistence.Column(name = "TagViewType")
+    @Basic
+    private Integer tagViewType;
 
     public Long getTagGroupID() {
         return TagGroupID;
@@ -54,12 +65,33 @@ public class TagGroupEntity {
         this.position = position;
     }
 
-    public TagGroupEntity(TextGroupEntity tagGroupTextGroup, CardEntity card, Integer position) {
+
+    public Integer getApplicationBlock() {
+        return applicationBlock;
+    }
+
+    public void setApplicationBlock(Integer applicationBlock) {
+        this.applicationBlock = applicationBlock;
+    }
+
+    public Integer getTagViewType() {
+        return tagViewType;
+    }
+
+    public void setTagViewType(Integer tagViewType) {
+        this.tagViewType = tagViewType;
+    }
+
+    public TagGroupEntity(TextGroupEntity tagGroupTextGroup, CardEntity card, Integer position, ApplicationBlock applicationBlock, TagViewType tagViewType) {
         this.tagGroupTextGroup = tagGroupTextGroup;
         this.card = card;
         this.position = position;
+        this.applicationBlock = applicationBlock.getValue();
+        this.tagViewType = tagViewType.getValue();
     }
 
     public TagGroupEntity() {
     }
+
+
 }

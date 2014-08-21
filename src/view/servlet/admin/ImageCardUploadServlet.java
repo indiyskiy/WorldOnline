@@ -4,7 +4,7 @@ import controller.parser.adminparser.ImageCardUploadParser;
 import helper.ImageHelper;
 import model.constants.AdminRule;
 import model.constants.Component;
-import model.constants.databaseenumeration.CardImageType;
+import model.constants.databaseenumeration.ImageType;
 import model.database.worldonlinedb.CardEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
@@ -25,16 +25,16 @@ public class ImageCardUploadServlet extends ProtectedServlet {
             imageCardUploadParser.parse(request);
 
             CardEntity cardEntity = imageCardUploadParser.getCardEntity();
-            CardImageType cardImageType = imageCardUploadParser.getCardImageType();
+            ImageType imageType = imageCardUploadParser.getImageType();
             boolean isLoaded = false;
             for (File file : imageCardUploadParser.getFileMap().values()) {
-                ImageHelper.saveImage(file, cardEntity, cardImageType);
+                ImageHelper.saveImage(file, cardEntity, imageType);
                 isLoaded = true;
             }
             long cardID = imageCardUploadParser.getCardID();
             request.setAttribute("isLoaded", isLoaded);
             request.setAttribute("cardID", cardID);
-            request.setAttribute("cardImageTypes", CardImageType.values());
+            request.setAttribute("cardImageTypes", ImageType.values());
             ServletHelper.sendForward("/imagecardupload.jsp?cardID=" + cardID, this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
@@ -45,7 +45,7 @@ public class ImageCardUploadServlet extends ProtectedServlet {
         ServletHelper.setUTF8(request, response);
         try {
             long cardID;
-            request.setAttribute("cardImageTypes", CardImageType.values());
+            request.setAttribute("cardImageTypes", ImageType.values());
             try {
                 cardID = Long.parseLong(request.getParameter("cardID"));
                 request.setAttribute("cardID", cardID);

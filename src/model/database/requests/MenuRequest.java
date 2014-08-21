@@ -4,6 +4,8 @@ import controller.phone.entity.AllMenusRequest;
 import model.additionalentity.CompleteTextGroupInfo;
 import model.additionalentity.MenuInfo;
 import model.additionalentity.SimpleMenu;
+import model.additionalentity.admin.CardMenu;
+import model.additionalentity.admin.CompleteCardInfo;
 import model.additionalentity.admin.CompleteMenuInfo;
 import model.additionalentity.phone.MenuCompleteInformation;
 import model.constants.Component;
@@ -567,12 +569,41 @@ public class MenuRequest {
                 }
             }
         }
-
-//все карты помечаются как готовые для того, чтобы быть сложеными.
-        //если карта готова к сложению
     }
 
     public static MenuEntity getPhotoMenu() {
         return getMenuByName("Photo");
+    }
+
+    public static void setCardMenus(CompleteCardInfo card, long cardID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        ArrayList<CardMenu> cardMenus = new ArrayList<>();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT * FROM Card " +
+                            "JOIN MenuCardLink ON (Card.CardID=MenuCardLink.CardID) " +
+                            "JOIN Menu ON (Menu.MenuID=MenuCardLink.MenuID) " +
+                            "JOIN TextGroup ON (Menu.NameTextGroupID=TextGroup.TextGroupID) " +
+                            "JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                            "WHERE Card.CardID=? AND Text.LanguageID=" + LanguageType.Russian.getValue();
+            ps = connection.prepareStatement(sqlString);
+            ps.setLong(1, cardID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CardMenu cardMenu = new CardMenu();
+                cardMenu.setMenuID(rs.getLong("Menu.MenuID"));
+                cardMenu.setName(rs.getString("Text.Text"));
+                cardMenus.add(cardMenu);
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        card.setCardMenuArrayList(cardMenus);
     }
 }

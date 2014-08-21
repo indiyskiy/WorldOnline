@@ -11,7 +11,8 @@ public enum DataType {
     TimestampType(7),
     Percent(8),
     Cost(9),
-    Boolean(10);
+    Boolean(10),
+    Header(11);
 
 
     private final int value;

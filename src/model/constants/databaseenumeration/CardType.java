@@ -9,7 +9,8 @@ public enum CardType {
     CardSight(5),
     RestaurantChainCard(6),
     CardPhoto(7),
-    CardPerson(8);
+    CardPerson(8),
+    CardNews(9);
 
     private final int value;
 
@@ -62,6 +63,9 @@ public enum CardType {
 
             case CardPerson: {
                 return "человек";
+            }
+            case CardNews: {
+                return "новость";
             }
             default: {
                 return "неизвестно";

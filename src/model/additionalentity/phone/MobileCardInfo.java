@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import model.constants.databaseenumeration.CardType;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -19,6 +20,8 @@ public class MobileCardInfo {
     private int order;
     private HashSet<Long> tagIDs = new HashSet<>();
     private Long priceID;
+    private ArrayList<MobileCardToCardLink> sourceLinks = new ArrayList<>();
+    private ArrayList<MobileCardToCardLink> targetLinks = new ArrayList<>();
 
     public MobileCoordinate getCoordinate() {
         return coordinate;
@@ -129,6 +132,16 @@ public class MobileCardInfo {
         if (priceID != null && priceID != 0) {
             jsonObject.addProperty("priceID", priceID);
         }
+        JsonArray sourceLinksJson = new JsonArray();
+        for (MobileCardToCardLink sourceLink : sourceLinks) {
+            sourceLinksJson.add(sourceLink.toJson());
+        }
+        jsonObject.add("sourceLinks", sourceLinksJson);
+        JsonArray targetLinksJson = new JsonArray();
+        for (MobileCardToCardLink targetLink : targetLinks) {
+            targetLinksJson.add(targetLink.toJson());
+        }
+        jsonObject.add("targetLinks", targetLinksJson);
         return jsonObject;
     }
 
@@ -138,5 +151,22 @@ public class MobileCardInfo {
 
     public Long getPriceID() {
         return priceID;
+    }
+
+
+    public ArrayList<MobileCardToCardLink> getSourceLinks() {
+        return sourceLinks;
+    }
+
+    public void setSourceLinks(ArrayList<MobileCardToCardLink> sourceLinks) {
+        this.sourceLinks = sourceLinks;
+    }
+
+    public ArrayList<MobileCardToCardLink> getTargetLinks() {
+        return targetLinks;
+    }
+
+    public void setTargetLinks(ArrayList<MobileCardToCardLink> targetLinks) {
+        this.targetLinks = targetLinks;
     }
 }

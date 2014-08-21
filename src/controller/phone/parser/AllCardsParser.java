@@ -58,6 +58,8 @@ public class AllCardsParser extends MobileParser {
             } catch (Exception e) {
                 throw new ParseRequestException(ExceptionTexts.allCardsOffsetIncorrectException);
             }
+        } else {
+            throw new ParseRequestException(ExceptionTexts.allCardsOffsetEmptyException);
         }
         allCardsRequest.setUserID(userID);
         return allCardsRequest;

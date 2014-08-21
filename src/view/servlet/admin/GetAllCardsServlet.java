@@ -4,7 +4,7 @@ import controller.phone.parser.AllCardsParser;
 import controller.phone.parser.MobileParser;
 import model.constants.Component;
 import model.logger.LoggerFactory;
-import model.phone.requesthandler.GetAllCardsHandler;
+import model.phone.requesthandler.AllCardsHandler;
 import model.phone.requesthandler.MobileHandler;
 import view.servlet.phone.MobileServlet;
 
@@ -13,7 +13,7 @@ public class GetAllCardsServlet extends MobileServlet {
 
     @Override
     protected MobileHandler getMobileHandler() {
-        return new GetAllCardsHandler();
+        return new AllCardsHandler();
     }
 
     @Override

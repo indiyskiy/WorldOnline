@@ -6,12 +6,13 @@ import com.google.gson.JsonObject;
 public class MobileTag {
     private Long iconID;
     private Long tagID;
-    private long name;
+    private String name;
 
     public JsonElement toJson() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("iconID", iconID);
         jsonObject.addProperty("tagID", tagID);
+        jsonObject.addProperty("name", name);
         return jsonObject;
     }
 
@@ -31,11 +32,11 @@ public class MobileTag {
         this.tagID = tagID;
     }
 
-    public void setName(long name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public long getName() {
+    public String getName() {
         return name;
     }
 }

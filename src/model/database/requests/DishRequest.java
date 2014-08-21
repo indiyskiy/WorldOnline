@@ -147,7 +147,8 @@ public class DishRequest {
                             "Dish.Cost, " +
                             "Dish.DishCategoryID, " +
                             "DishText.Text, " +
-                            "DishTag.DishTagID " +
+                            "DishTag.DishTagID," +
+                            "PriceName.Text " +
                             "FROM Price " +
                             "JOIN Dish ON (Dish.PriceID=Price.PriceID) " +
                             "JOIN TextGroup AS DishTextGroup ON (Dish.DishNameID=DishTextGroup.TextGroupID) " +
@@ -156,6 +157,8 @@ public class DishRequest {
                             "LEFT OUTER JOIN DishTag ON (DishTagDishLink.DishTagID=DishTag.DishTagID) " +
                             "JOIN UserPersonalData ON (UserPersonalData.UserLanguage=DishText.LanguageID) " +
                             "JOIN User ON (User.UserPersonalDataID=UserPersonalData.UserPersonalDataID) " +
+                            "LEFT OUTER JOIN TextGroup AS PriceNameGroup ON (Price.PriceNameID=PriceNameGroup.TextGroupID) " +
+                            "LEFT OUTER JOIN Text AS PriceName ON (PriceNameGroup.TextGroupID=PriceName.TextGroupID AND PriceName.LanguageID=UserPersonalData.UserLanguage) " +
                             "JOIN (SELECT FilterPrice.PriceID FROM Price AS FilterPrice " +
                             "JOIN CardPriceLink ON (FilterPrice.PriceID=CardPriceLink.PriceID) " +
                             "JOIN Card ON (Card.CardID=CardPriceLink.CardID) " +
@@ -178,6 +181,7 @@ public class DishRequest {
                     } else {
                         mobilePrice = new MobilePrice();
                         mobilePrice.setPriceID(priceID);
+                        mobilePrice.setName(rs.getString("PriceName.Text"));
                         mobilePriceHashMap.put(priceID, mobilePrice);
                         mobilePrices.add(mobilePrice);
                     }
@@ -227,6 +231,7 @@ public class DishRequest {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT DISTINCT " +
                     "DishCategory.DishCategoryID, " +
+                    "DishCategory.Position, " +
                     "Text.Text " +
                     "FROM DishCategory " +
                     "JOIN TextGroup ON (DishCategory.NameID=TextGroup.TextGroupID) " +
@@ -241,6 +246,7 @@ public class DishRequest {
                 MobileDishCategory mobileDishCategory = new MobileDishCategory();
                 mobileDishCategory.setDishCategoryID(rs.getLong("DishCategory.DishCategoryID"));
                 mobileDishCategory.setName(rs.getString("Text.Text"));
+                mobileDishCategory.setPosition(rs.getInt("DishCategory.Position"));
                 mobileDishCategories.add(mobileDishCategory);
             }
         } catch (SQLException e) {

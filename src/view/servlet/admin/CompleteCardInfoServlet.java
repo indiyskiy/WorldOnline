@@ -1,9 +1,10 @@
 package view.servlet.admin;
 
-import model.additionalentity.CompleteCardInfo;
+import model.additionalentity.admin.CompleteCardInfo;
 import model.constants.AdminRule;
+import model.constants.ApplicationBlock;
 import model.constants.Component;
-import model.constants.databaseenumeration.*;
+import model.constants.databaseenumeration.CardState;
 import model.database.requests.CardRequest;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
@@ -19,42 +20,36 @@ public class CompleteCardInfoServlet extends ProtectedServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
             request.setCharacterEncoding("UTF-8");
-            request.setAttribute("cardTypes", CardType.values());
+//            request.setAttribute("cardTypes", CardType.values());
             request.setAttribute("cardStates", CardState.values());
-            request.setAttribute("textTypes", TextType.values());
-            request.setAttribute("tagTypes", TagType.values());
-            request.setAttribute("cardToCardLinkTypes", CardToCardLinkType.values());
-            request.setAttribute("imageTypes", CardImageType.values());
+//            request.setAttribute("textTypes", TextType.values());
+//            request.setAttribute("tagTypes", TagType.values());
+//            request.setAttribute("cardToCardLinkTypes", CardToCardLinkType.values());
+//            request.setAttribute("imageTypes", ImageType.values());
+            request.setAttribute("parameterBlocks", ApplicationBlock.values());
             String cardIDString = request.getParameter("CardID");
             if (cardIDString != null) {
                 int cardID = Integer.parseInt(cardIDString);
                 CompleteCardInfo completeCardInfo = CardRequest.getCompleteCardInfo(cardID);
                 if (completeCardInfo != null) {
-                    if (completeCardInfo.getCardEntity() != null) {
-                        request.setAttribute("card", completeCardInfo.getCardEntity());
-                        request.setAttribute("simpleCard", completeCardInfo.getSimpleCard());
+                    request.setAttribute("cardInfo", completeCardInfo.getCardInfo());
+                    request.setAttribute("coordinate", completeCardInfo.getCardCoordinate());
+                    request.setAttribute("price", completeCardInfo.getCardPrice());
+                    if (completeCardInfo.getSourceCardLinks() != null && !completeCardInfo.getSourceCardLinks().isEmpty()) {
+                        request.setAttribute("sourceCardLinks", completeCardInfo.getSourceCardLinks());
                     }
-                    if (completeCardInfo.getCardCoordinateEntity() != null) {
-                        request.setAttribute("cardCoordinate", completeCardInfo.getCardCoordinateEntity());
+                    if (completeCardInfo.getTargetCardLinks() != null && !completeCardInfo.getTargetCardLinks().isEmpty()) {
+                        request.setAttribute("targetCardLinks", completeCardInfo.getTargetCardLinks());
                     }
-                    if (completeCardInfo.getCompleteTextCardInfoMap() != null && !completeCardInfo.getCompleteTextCardInfoMap().isEmpty()) {
-                        request.setAttribute("cardTexts", completeCardInfo.getCompleteTextCardInfoMap().values());
+                    if (completeCardInfo.getCardMenuArrayList() != null && !completeCardInfo.getCardMenuArrayList().isEmpty()) {
+                        request.setAttribute("menus", completeCardInfo.getCardMenuArrayList());
                     }
-                    if (completeCardInfo.getCompleteCardTagInfoMap() != null && !completeCardInfo.getCompleteCardTagInfoMap().isEmpty()) {
-                        request.setAttribute("tags", completeCardInfo.getCompleteCardTagInfoMap().values());
+                    if (completeCardInfo.getCardImages() != null && !completeCardInfo.getCardImages().isEmpty()) {
+                        request.setAttribute("images", completeCardInfo.getCardImages());
                     }
-                    if (completeCardInfo.getCardToCardLinkEntityMap() != null && !completeCardInfo.getCardToCardLinkEntityMap().isEmpty()) {
-                        request.setAttribute("links", completeCardInfo.getCardToCardLinkEntityMap().values());
+                    if (completeCardInfo.getCardParameterArrayList() != null && !completeCardInfo.getCardParameterArrayList().isEmpty()) {
+                        request.setAttribute("parameters", completeCardInfo.getCardParameterArrayList());
                     }
-                    if (completeCardInfo.getCardToCardLinkedOnEntityMap() != null && !completeCardInfo.getCardToCardLinkedOnEntityMap().isEmpty()) {
-                        request.setAttribute("linkedOn", completeCardInfo.getCardToCardLinkedOnEntityMap().values());
-                    }
-                    if (completeCardInfo.getCompleteCardImageInfoMap() != null && !completeCardInfo.getCompleteCardImageInfoMap().isEmpty()) {
-                        request.setAttribute("images", completeCardInfo.getCompleteCardImageInfoMap().values());
-                    }
-//                    if (completeCardInfo.getCompleteMenuInfoMap() != null && !completeCardInfo.getCompleteMenuInfoMap().isEmpty()) {
-                    request.setAttribute("menus", completeCardInfo.getCompleteMenuInfoMap().values());
-//                    }
                 }
                 ServletHelper.sendForward("/completecardinfo.jsp?CardID=" + cardID, this, request, response);
             }

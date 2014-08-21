@@ -20,7 +20,6 @@ public enum CardParameterType {
     Tripadviser(17, DataType.LinkType, ApplicationBlock.Reviews),
     Instagramm(18, DataType.LinkType, ApplicationBlock.Social),
     Booking(19, DataType.LinkType, ApplicationBlock.Reviews),
-    //   todo MiddlePrice(20, DataType.Cost, ApplicationBlock.Main), to tag
     Billboard(21, DataType.LinkType, ApplicationBlock.Details),
     Apoi(22, DataType.LinkType, ApplicationBlock.Reviews),
     Ayda(23, DataType.LinkType, ApplicationBlock.Reviews),
@@ -49,7 +48,6 @@ public enum CardParameterType {
     Wrestorane(46, DataType.LinkType, ApplicationBlock.Reviews),
     Yell(47, DataType.LinkType, ApplicationBlock.Reviews),
     Zoon(48, DataType.LinkType, ApplicationBlock.Reviews),
-    //  todo  FreePass(49, DataType.Percent, ApplicationBlock.Main), to tag
     Facts(50, DataType.StringType, ApplicationBlock.Facts),
     Legends(51, DataType.StringType, ApplicationBlock.Facts),
     Literature(52, DataType.StringType, ApplicationBlock.Facts),
@@ -68,8 +66,7 @@ public enum CardParameterType {
     AllCafe(65, DataType.LinkType, ApplicationBlock.Reviews),
     WalkSpb(66, DataType.LinkType, ApplicationBlock.Reviews),
     Spbin(67, DataType.LinkType, ApplicationBlock.Reviews),
-    //  todo  NoBarriers(68, DataType.Boolean, ApplicationBlock.Main), to tag
-    Name(69, DataType.StringType, ApplicationBlock.Header),
+    Name(69, DataType.Header, ApplicationBlock.Header),
     Address(70, DataType.StringType, ApplicationBlock.Header),
     Description(71, DataType.StringType, ApplicationBlock.Description),
     News(72, DataType.StringType, ApplicationBlock.Details),
@@ -78,7 +75,9 @@ public enum CardParameterType {
     Story(75, DataType.StringType, ApplicationBlock.Details),
     Recomend(76, DataType.LinkType, ApplicationBlock.Details),
     Wikimapia(77, DataType.LinkType, ApplicationBlock.Encyclopedia),
-    Encspb(78, DataType.LinkType, ApplicationBlock.Encyclopedia);
+    Encspb(78, DataType.LinkType, ApplicationBlock.Encyclopedia),
+    AfishaBuyTicket(79, DataType.LinkType, ApplicationBlock.Selling),
+    TimeOfEvent(80, DataType.TimestampType, ApplicationBlock.Details);
 
     private final int value;
     private final DataType dataType;
@@ -225,7 +224,7 @@ public enum CardParameterType {
             case Restoclub:
                 return "Restoclub";
             case Afisha:
-                return "Afisha";
+                return "Афиша";
             case Timeout:
                 return "Timeout";
             case Wikipedia:
@@ -251,19 +250,21 @@ public enum CardParameterType {
             case Description:
                 return "Description";
             case News:
-                return "News";
+                return "Новости";
             case Offers:
-                return "Offers";
+                return "Акции";
             case Biography:
-                return "Biography";
+                return "Биография";
             case Story:
-                return "Story";
+                return "Истории";
             case Recomend:
                 return "Recomend";
             case Wikimapia:
                 return "Wikimapia";
             case Encspb:
                 return "Encspd";
+            case AfishaBuyTicket:
+                return "Афиша";
             default:
                 return "";
         }
@@ -405,25 +406,27 @@ public enum CardParameterType {
 //            case NoBarriers:
 //                return "NoBarriers";
             case Name:
-                return "Имя";
+                return "Name";
             case Address:
                 return "Адрес";
             case Description:
-                return "Описание";
+                return "Description";
             case News:
-                return "Новости";
+                return "News";
             case Offers:
-                return "Предложения";
+                return "Offers";
             case Biography:
-                return "Биография";
+                return "Biography";
             case Story:
-                return "История";
+                return "Story";
             case Recomend:
                 return "Recomend";
             case Wikimapia:
                 return "Wikimapia";
             case Encspb:
                 return "Encspd";
+            case AfishaBuyTicket:
+                return "Afisha";
             default:
                 return "";
         }

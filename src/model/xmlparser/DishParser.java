@@ -79,6 +79,11 @@ public class DishParser {
     public void parseDishes(HashMap<Long, CardEntity> cardEntityHashMap, HashMap<Integer, DishTagEntity> dishTagEntityHashMap) {
         MenuXML menuXML = new SimpleXmlHelper().getMenuXML(menuXmlRoute);
         HashMap<Integer, PriceEntity> priceEntityHashMap = new HashMap<>();
+        TextGroupEntity nameGroup = new TextGroupEntity("MenuPriceName");
+        TextEntity menuEnName = new TextEntity(LanguageType.English, "Menu", nameGroup);
+        TextEntity menuRuName = new TextEntity(LanguageType.Russian, "Меню", nameGroup);
+        TextRequest.addText(menuEnName);
+        TextRequest.addText(menuRuName);
         for (Dish dish : menuXML.dishes) {
             try {
                 loggerFactory.debug("parsing dish " + dish.nameRu);
@@ -87,6 +92,7 @@ public class DishParser {
                     priceEntity = priceEntityHashMap.get(dish.restID);
                 } else {
                     priceEntity = new PriceEntity();
+                    priceEntity.setPriceName(nameGroup);
                     CardEntity cardEntity = cardEntityHashMap.get(Long.valueOf(dish.restID));
                     DishRequest.addPrice(priceEntity);
                     CardPriceLinkEntity cardPriceLinkEntity = new CardPriceLinkEntity();
@@ -149,7 +155,7 @@ public class DishParser {
                 loggerFactory.debug("getCatID not null");
                 String catNameRu = dishAdditionalInfo.getCategoryNameRus();
 //                Integer categoryID = dishAdditionalInfo.getCatID();
-                DishCategoryEntity dishCategoryEntity = null;
+                DishCategoryEntity dishCategoryEntity;
                 if (dishCategoryMap.containsKey(catNameRu)) {
                     loggerFactory.debug(catNameRu + " categoryID found");
                     dishCategoryEntity = dishCategoryMap.get(catNameRu);
@@ -163,6 +169,7 @@ public class DishParser {
                     dishCategoryEntity = new DishCategoryEntity();
                     dishCategoryEntity.setName(textGroupEntity);
                     dishCategoryEntity.setName(textGroupEntity);
+                    dishCategoryEntity.setPosition(dishAdditionalInfo.getOrder());
                     DishRequest.addDishCategory(dishCategoryEntity);
                     dishCategoryMap.put(catNameRu, dishCategoryEntity);
                     loggerFactory.debug("added category " + catNameRu + " (" + textEntityRu.getText() + ") " + dishCategoryMap.get(catNameRu));

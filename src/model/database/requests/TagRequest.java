@@ -420,8 +420,10 @@ public class TagRequest {
                     "TagGroupText.Text," +
                     "TagGroup.CardID," +
                     "TagGroup.Position, " +
+                    "TagGroup.ApplicationBlock, " +
+                    "TagGroup.TagViewType, " +
                     "Tag.TagID," +
-                    "Tag.IconID," +
+                    "Tag.IconID, " +
                     "Text.Text " +
                     "FROM Tag " +
                     "LEFT OUTER JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
@@ -458,6 +460,14 @@ public class TagRequest {
                         if (position != 0 && !rs.wasNull()) {
                             mobileTagGroup.setPosition(position);
                         }
+                        Integer block = rs.getInt("TagGroup.ApplicationBlock");
+                        if (block != 0 && !rs.wasNull()) {
+                            mobileTagGroup.setBlock(block);
+                        }
+                        Integer viewType = rs.getInt("TagGroup.TagViewType");
+                        if (block != 0 && !rs.wasNull()) {
+                            mobileTagGroup.setViewType(viewType);
+                        }
                         mobileTagGroups.add(mobileTagGroup);
                         mobileTagGroupHashMap.put(mobileTagGroupID, mobileTagGroup);
                     }
@@ -467,7 +477,7 @@ public class TagRequest {
                             MobileTag mobileTag = new MobileTag();
                             mobileTag.setTagID(tagID);
                             mobileTag.setIconID(rs.getLong("Tag.IconID"));
-                            mobileTag.setName(rs.getLong("Text.Text"));
+                            mobileTag.setName(rs.getString("Text.Text"));
                             mobileTagHashMap.put(tagID, mobileTag);
                             mobileTagGroup.getMobileTags().add(mobileTag);
                         }
@@ -481,5 +491,21 @@ public class TagRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return mobileTagGroups;
+    }
+
+    public static void addCardTag(String tagName, CardEntity cardEntity) {
+        try {
+            TagEntity tagEntity = getTag(tagName);
+            if (tagEntity != null) {
+                addCardTag(tagEntity, cardEntity);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        }
+    }
+
+    private static void addCardTag(TagEntity tagEntity, CardEntity cardEntity) {
+        CardTagEntity cardTagEntity = new CardTagEntity(cardEntity, tagEntity);
+        addCardTag(cardTagEntity);
     }
 }

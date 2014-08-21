@@ -21,11 +21,14 @@ public class WeatherRequest {
             session.save(weather);
             session.getTransaction().commit();
             return true;
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
+        return false;
     }
 
     public static WeatherEntity getCurrentWeather() {

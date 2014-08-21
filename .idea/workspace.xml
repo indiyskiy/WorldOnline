@@ -7,19 +7,73 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="[Mobile] dishes">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/AllCardsHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/admin/CardCoordinate.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/admin/CardImage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/admin/CardInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/admin/CardLink.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/admin/CardMenu.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/admin/CardParameter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/admin/CardPrice.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/admin/CompleteCardInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/MiddlePrice.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardToCardLink.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/requests/NewsRequest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/NewsTag.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/NoBarrierTag.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/TagEnum.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/TagViewType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/UrgencyTimeEntity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/helpFilesAndMans/sql" />
+      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\additionalentity\CompleteCardInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\additionalentity\CompleteTextCardInfo.java" afterPath="" />
+      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\constants\databaseenumeration\CardImageType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/ImageType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/phone/parser/AllCardsParser.java" afterPath="$PROJECT_DIR$/src/controller/phone/parser/AllCardsParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/phone/responseentity/AllMenusResponse.java" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/AllMenusResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/phone/requesthandler/AllPricesHandler.java" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/AllPricesHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/phone/parser/AllPricesParser.java" afterPath="$PROJECT_DIR$/src/controller/phone/parser/AllPricesParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/phone/entity/AllPricesRequest.java" afterPath="$PROJECT_DIR$/src/controller/phone/entity/AllPricesRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/ApplicationBlock.java" afterPath="$PROJECT_DIR$/src/model/constants/ApplicationBlock.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardImageEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/CardImageEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardParameterType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardParameterType.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardState.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardToCardLinkType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardToCardLinkType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/DataType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/DataType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/DishParser.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/DishParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/DishRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/DishRequest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" afterPath="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/GetAllCardsServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/GetAllCardsServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/session/HibernateUtil.java" afterPath="$PROJECT_DIR$/src/model/database/session/HibernateUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/parser/adminparser/ImageCardUploadParser.java" afterPath="$PROJECT_DIR$/src/controller/parser/adminparser/ImageCardUploadParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/ImageCardUploadServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/ImageCardUploadServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helper/ImageHelper.java" afterPath="$PROJECT_DIR$/src/helper/ImageHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/ImageServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/ImageServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/LinkRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/LinkRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardImage.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardImage.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileDish.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileDish.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileDishCategory.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileDishCategory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobilePrice.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobilePrice.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileTag.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileTag.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileTagGroup.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileTagGroup.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/ParameterRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/ParameterRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/PeopleParser.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/PeopleParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/dishes/PriceEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/dishes/PriceEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/scheduler/Scheduler.java" afterPath="$PROJECT_DIR$/src/model/scheduler/Scheduler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/ServerInit.java" afterPath="$PROJECT_DIR$/src/model/ServerInit.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/TagEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/TagEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/TagGroupEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/TagGroupEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/xmlparser/TagParser.java" afterPath="$PROJECT_DIR$/src/model/xmlparser/TagParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/TagRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/TagRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/TagType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/TagType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/WeatherRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/WeatherRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/Weekday.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/Weekday.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/completecardinfo.jsp" afterPath="$PROJECT_DIR$/web/completecardinfo.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/src/hibernate.cfg.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/persistence.xml" afterPath="$PROJECT_DIR$/src/persistence.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WorldOnline.iws" />
@@ -89,42 +143,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AllPricesRequest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/AllPricesRequest.java">
+      <file leaf-file-name="CompleteCardInfoServlet.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="22" selection-start="56" selection-end="56" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
-              <folding>
-                <element signature="e#162#163#0" expanded="true" />
-                <element signature="e#190#191#0" expanded="true" />
-                <element signature="e#229#230#0" expanded="true" />
-                <element signature="e#263#264#0" expanded="true" />
-                <element signature="e#293#294#0" expanded="true" />
-                <element signature="e#322#323#0" expanded="true" />
-                <element signature="e#363#364#0" expanded="true" />
-                <element signature="e#399#400#0" expanded="true" />
-              </folding>
+            <state line="49" column="123" selection-start="3051" selection-end="3051" vertical-scroll-proportion="0.0" vertical-offset="237" max-vertical-offset="1054">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AllPricesParser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/AllPricesParser.java">
+      <file leaf-file-name="completecardinfo.jsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/completecardinfo.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="72" selection-start="1596" selection-end="1596" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1105">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AllPricesHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/phone/requesthandler/AllPricesHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="59" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
+            <state line="155" column="8" selection-start="4626" selection-end="4626" vertical-scroll-proportion="-14.730769" vertical-offset="2252" max-vertical-offset="3043">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -132,56 +164,51 @@
       <file leaf-file-name="CardRequest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/database/requests/CardRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="773" column="20" selection-start="36644" selection-end="36644" vertical-scroll-proportion="0.0" vertical-offset="12518" max-vertical-offset="15504">
+            <state line="242" column="36" selection-start="10652" selection-end="10652" vertical-scroll-proportion="-10.56" vertical-offset="3527" max-vertical-offset="11475">
               <folding>
-                <marker date="1407307331319" expanded="true" signature="868:5020" placeholder="SELECT DISTI..Card..." />
-                <marker date="1407307331319" expanded="true" signature="5096:7138" placeholder="SELECT Card...Card..." />
-                <marker date="1407307331319" expanded="true" signature="23058:23336" placeholder="SELECT DISTI..Card..." />
-                <marker date="1407307331319" expanded="true" signature="25786:25857" placeholder="SELECT count..Card..." />
-                <marker date="1407307331319" expanded="true" signature="27384:27713" placeholder="SELECT * FRO..Text..." />
-                <marker date="1407307331319" expanded="true" signature="28530:28859" placeholder="SELECT * FRO..Text..." />
-                <marker date="1407307331319" expanded="true" signature="29671:29981" placeholder="SELECT Text...Text..." />
-                <marker date="1407307331319" expanded="true" signature="31279:31757" placeholder="SELECT Card...Card..." />
-                <marker date="1407307331319" expanded="true" signature="32587:33318" placeholder="SELECT Card...Card..." />
-                <marker date="1407307331319" expanded="true" signature="34483:34503" placeholder="DELETE FROM ..." />
-                <marker date="1407307331319" expanded="true" signature="35224:35391" placeholder="SELECT Card...Card..." />
-                <marker date="1407307331319" expanded="true" signature="36460:36991" placeholder="SELECT Card...Card..." />
-                <marker date="1407307331319" expanded="true" signature="36491:36728" placeholder="SELECT Filte..Card..." />
+                <marker date="1408630496291" expanded="true" signature="905:3421" placeholder="SELECT Card...Card..." />
+                <marker date="1408630496291" expanded="true" signature="8234:8605" placeholder="SELECT * FRO..Card..." />
+                <marker date="1408630496291" expanded="true" signature="12223:12501" placeholder="SELECT DISTI..Card..." />
+                <marker date="1408630496291" expanded="true" signature="14951:15022" placeholder="SELECT count..Card..." />
+                <marker date="1408630496291" expanded="true" signature="16549:16878" placeholder="SELECT * FRO..Text..." />
+                <marker date="1408630496291" expanded="true" signature="17695:18024" placeholder="SELECT * FRO..Text..." />
+                <marker date="1408630496291" expanded="true" signature="18836:19146" placeholder="SELECT Text...Text..." />
+                <marker date="1408630496291" expanded="true" signature="20082:20613" placeholder="SELECT Card...Card..." />
+                <marker date="1408630496291" expanded="true" signature="20113:20350" placeholder="SELECT Filte..Card..." />
+                <marker date="1408630496291" expanded="true" signature="30614:30705" placeholder="SELECT count..Card..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DishRequest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/database/requests/DishRequest.java">
+      <file leaf-file-name="ParameterRequest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/model/database/requests/ParameterRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="159" column="63" selection-start="6188" selection-end="6188" vertical-scroll-proportion="-13.96" vertical-offset="2048" max-vertical-offset="4675">
+            <state line="174" column="31" selection-start="8811" selection-end="8811" vertical-scroll-proportion="0.29776248" vertical-offset="2785" max-vertical-offset="3604">
               <folding>
-                <marker date="1407251322152" expanded="true" signature="4997:6586" placeholder="SELECT Price..Price..." />
-                <marker date="1407251322152" expanded="true" signature="4997:6583" placeholder="SELECT Price..Price..." />
-                <marker date="1407251322152" expanded="true" signature="4997:6462" placeholder="SELECT Price..Price..." />
-                <marker date="1407251322152" expanded="true" signature="4997:6585" placeholder="SELECT Price..Price..." />
-                <marker date="1407251322152" expanded="true" signature="6068:6461" placeholder="SELECT Filte..Price..." />
-                <marker date="1407251322152" expanded="true" signature="6068:6429" placeholder="SELECT Filte..Price..." />
-                <marker date="1407251322152" expanded="true" signature="6068:6152" placeholder="SELECT Filte..Price..." />
-                <marker date="1407251322152" expanded="true" signature="6068:6152" placeholder="SELECT Filte..Price..." />
-                <marker date="1407251322152" expanded="true" signature="6068:6462" placeholder="SELECT Filte..Price..." />
-                <marker date="1407251322152" expanded="true" signature="9561:10117" placeholder="SELECT DISTI..DishCategory..." />
-                <marker date="1407251322152" expanded="true" signature="11223:11759" placeholder="SELECT DISTI..DishTag..." />
+                <element signature="imports" expanded="true" />
+                <marker date="1408633334409" expanded="true" signature="4425:4948" placeholder="SELECT * FRO..Text..." />
+                <marker date="1408633334409" expanded="true" signature="6183:7094" placeholder="SELECT CardP..CardParameterType..." />
+                <marker date="1408633334409" expanded="true" signature="8801:9734" placeholder="SELECT CardP..Card..." />
+                <marker date="1408633334409" expanded="true" signature="8801:9842" placeholder="SELECT CardP..Card..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="worldonline.Price" pinned="false" current="true" current-in-tab="true">
-        <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..Price">
-          <provider editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
-              <folding />
+      <file leaf-file-name="CardParameter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CardParameter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="31" selection-start="525" selection-end="525" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
+              <folding>
+                <element signature="e#533#534#0" expanded="true" />
+                <element signature="e#567#568#0" expanded="true" />
+                <element signature="e#603#604#0" expanded="true" />
+                <element signature="e#637#638#0" expanded="true" />
+                <element signature="e#689#690#0" expanded="true" />
+                <element signature="e#735#736#0" expanded="true" />
+              </folding>
             </state>
-          </provider>
-          <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-            <state />
           </provider>
         </entry>
       </file>
@@ -209,57 +236,57 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/model/constants/Status.java" />
-        <option value="$PROJECT_DIR$/src/model/constants/SendingType.java" />
-        <option value="$PROJECT_DIR$/src/model/constants/ProtectAdminLevel.java" />
-        <option value="$PROJECT_DIR$/src/model/constants/MailConsts.java" />
-        <option value="$PROJECT_DIR$/src/model/constants/Component.java" />
-        <option value="$PROJECT_DIR$/src/model/constants/AdminRule.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/SimpleMenu.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/SimpleCard.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/MenuInfo.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/CompleteTextGroupInfo.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/CompleteTextCardInfo.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/CompleteCardTagInfo.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/CompleteCardInfo.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/CompleteCardImageInfo.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/CardUserStat.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/phone/MobileViewImage.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCoordinate.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardImage.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/ParsedRequest.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/ParsedRegistrationRequest.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/LoginRequest.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/CompleteTagInfo.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/CompleteMenuInfo.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/parser/ViewImagesParser.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/parser/UserRegistrationParser.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/parser/MobileErrorParser.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/parser/GetMenuParser.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/entity/WeatherRequest.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/entity/AllMenusRequest.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/entity/AllDishTagsRequest.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/entity/AllDishCategoriesRequest.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/entity/AllCardParameterTypesRequest.java" />
-        <option value="$PROJECT_DIR$/src/controller/parser/adminparser/LoginParser.java" />
-        <option value="$PROJECT_DIR$/src/controller/parser/adminparser/ImageCardUploadParser.java" />
-        <option value="$PROJECT_DIR$/src/controller/parser/adminparser/AllUsersParser.java" />
-        <option value="$PROJECT_DIR$/src/controller/parser/adminparser/AllCardParser.java" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/phone/MobileDish.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/phone/MobileDishCategory.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java" />
-        <option value="$PROJECT_DIR$/src/model/phone/responseentity/AllMenusResponse.java" />
-        <option value="db-console:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/" />
-        <option value="$PROJECT_DIR$/web/completecardinfo.jsp" />
-        <option value="$PROJECT_DIR$/src/controller/phone/entity/AllPricesRequest.java" />
-        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/AllPricesHandler.java" />
-        <option value="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/GetAllCardsHandler.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/AllCardsHandler.java" />
         <option value="$PROJECT_DIR$/src/controller/phone/parser/AllCardsParser.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/parser/AllPricesParser.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/ImageType.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/TagEnum.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/NoBarrierTag.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/MiddlePrice.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/NewsTag.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/NewsRequest.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/WeatherRequest.java" />
+        <option value="$PROJECT_DIR$/src/model/scheduler/Scheduler.java" />
+        <option value="$PROJECT_DIR$/src/model/ServerInit.java" />
+        <option value="$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardToCardLink.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/CompleteCardInfo.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/CardCoordinate.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/CardPrice.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardState.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/CardInfo.java" />
+        <option value="$PROJECT_DIR$/src/persistence.xml" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/CardLink.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardToCardLinkType.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/DataType.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardParameterType.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/TagViewType.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/TagType.java" />
+        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/TagEntity.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/phone/MobileTagGroup.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/AllTagsServlet.java" />
+        <option value="$PROJECT_DIR$/src/model/xmlparser/TagParser.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/TagRequest.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/phone/MobileTag.java" />
+        <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
+        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/TagGroupEntity.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/LinkRequest.java" />
+        <option value="$PROJECT_DIR$/helpFilesAndMans/sql" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/CardMenu.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/CardImage.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/ApplicationBlock.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/CompleteCardInfo.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java" />
+        <option value="$PROJECT_DIR$/web/completecardinfo.jsp" />
         <option value="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
-        <option value="$PROJECT_DIR$/src/model/database/requests/DishRequest.java" />
+        <option value="db-console:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/CardParameter.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/ParameterRequest.java" />
       </list>
     </option>
   </component>
@@ -326,1136 +353,7 @@
       <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="servlet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="servlet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="servlet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="servlet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="routeroute" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="peopleaboutcity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mainmenudata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="card" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cardsights" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="card" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cardshopping" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="card" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cardroute" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="card" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cardrelax" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="card" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cardmeal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="card" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cardhotel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="card" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cardhandbook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xmlview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="card" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cardaboutcity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="weather" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="textparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scheduler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="responseentity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="requesthandler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mailer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="exception" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="worldonlinedb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="worldonlinedb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dishes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="session" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="requests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constants" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="additionalentity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="additionalentity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="additionalentity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="helper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="entity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WorldOnline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="adminparser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
+        <subPane />
       </pane>
     </panes>
   </component>
@@ -1508,21 +406,11 @@
       <recent name="model.database.requests.CardRequest" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="model.additionalentity.admin" />
+      <recent name="model.constants.databaseenumeration" />
+      <recent name="model.database.requests" />
       <recent name="model.additionalentity.phone" />
       <recent name="controller.phone.parser" />
-      <recent name="model.phone.requesthandler" />
-      <recent name="model.phone.responseentity" />
-      <recent name="controller.phone.entity" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="model.additionalentity.phone" />
-      <recent name="controller.parser" />
-      <recent name="controller" />
-      <recent name="controller.parser.edit.phone" />
-      <recent name="model.phone" />
-    </key>
-    <key name="ImportMappingsDialog.RecentPackages">
-      <recent name="database" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\lib" />
@@ -1530,6 +418,16 @@
       <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\src\model\xmlparser\" />
       <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\lib" />
       <recent name="C:\Users\Graf_D\IdeaProjects\WorldOnline\web" />
+    </key>
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="database" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="model.additionalentity.phone" />
+      <recent name="controller.parser" />
+      <recent name="controller" />
+      <recent name="controller.parser.edit.phone" />
+      <recent name="model.phone" />
     </key>
   </component>
   <component name="RunManager" selected="Application.DishParser">
@@ -1896,31 +794,6 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
-      <option name="VM_PARAMETERS" value="" />
-      <option name="USER_CFG_CLASS" />
-      <option name="CONTEXT_PROVIDER" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
-      <module name="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Remote" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="">
       <option name="LOCAL" value="false" />
       <deployment />
@@ -1944,6 +817,31 @@
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
       <method />
     </configuration>
     <configuration default="false" name="Unnamed" type="TomeeConfiguration" factoryName="Remote" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="">
@@ -2119,7 +1017,12 @@
       <workItem from="1406196565550" duration="12827000" />
       <workItem from="1406269045594" duration="55388000" />
       <workItem from="1406713378632" duration="69171000" />
-      <workItem from="1407236407386" duration="8283000" />
+      <workItem from="1407236407386" duration="27129000" />
+      <workItem from="1407504020058" duration="35913000" />
+      <workItem from="1407856648228" duration="35387000" />
+      <workItem from="1408023025194" duration="4805000" />
+      <workItem from="1408085534717" duration="71588000" />
+      <workItem from="1408603836921" duration="16541000" />
     </task>
     <task id="LOCAL-00001" summary="TestCommit">
       <created>1383271700462</created>
@@ -2537,11 +1440,15 @@
       <created>1407155119348</created>
       <updated>1407155119348</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="[Mobile] dishes">
+      <created>1407307388653</created>
+      <updated>1407307388653</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1568050000" />
+    <option name="totallyTimeSpent" value="1751130000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -2564,42 +1471,42 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <editor active="true" />
     <layout>
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4282325" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20516963" sideWeight="0.78613394" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878837" sideWeight="0.8014101" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18659128" sideWeight="0.78613394" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2064057" sideWeight="0.5072698" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39952996" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15802269" sideWeight="0.67215043" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21589561" sideWeight="0.50807756" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15751211" sideWeight="0.67215043" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740214" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20521945" sideWeight="0.4927302" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.273021" sideWeight="0.34456354" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289941" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25040388" sideWeight="0.65543646" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36417556" sideWeight="0.4911147" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.430605" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24911033" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39952996" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20521945" sideWeight="0.4927302" order="16" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.273021" sideWeight="0.34456354" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.64629847" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21589561" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -2608,12 +1515,12 @@
       <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878837" sideWeight="0.8014101" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18659128" sideWeight="0.78613394" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20516963" sideWeight="0.78613394" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2064057" sideWeight="0.5072698" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21589561" sideWeight="0.50807756" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15802269" sideWeight="0.67215043" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15751211" sideWeight="0.67215043" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740214" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2621,14 +1528,14 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25040388" sideWeight="0.65543646" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36417556" sideWeight="0.4911147" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.430605" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4282325" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.64629847" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24911033" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21589561" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39952996" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20521945" sideWeight="0.4927302" order="16" side_tool="false" content_ui="tabs" />
@@ -2706,399 +1613,406 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/AllDishTagsParser.java">
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="276" selection-end="276" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3570" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/AllCardParameterTypesParser.java">
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CardPrice.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="286" selection-end="286" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/WeatherRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="33" selection-end="33" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/ViewImagesRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/RestoreUserRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="13" selection-start="48" selection-end="48" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/ParsedRegistrationRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/MobileRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="22" selection-start="56" selection-end="56" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/MenuRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/AllTagsRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/AllMenusRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="33" selection-end="33" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/AllMenuIDsRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/AllDishTagsRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/AllCardsRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/AllCardParameterTypesRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="34" selection-end="34" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/parser/adminparser/TagEditParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="13" selection-start="221" selection-end="221" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1003" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/parser/adminparser/RegistrationParse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="13" selection-start="422" selection-end="422" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/parser/adminparser/LoginParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="176" selection-end="176" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/parser/adminparser/ImageCardUploadParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="564" selection-end="564" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986">
+        <state line="6" column="42" selection-start="134" selection-end="134" vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="340">
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2207#2208#0" expanded="false" />
-            <element signature="e#2243#2244#0" expanded="false" />
-            <element signature="e#2284#2285#0" expanded="false" />
-            <element signature="e#2317#2318#0" expanded="false" />
-            <element signature="e#2348#2349#0" expanded="false" />
-            <element signature="e#2377#2378#0" expanded="false" />
-            <element signature="e#2426#2427#0" expanded="false" />
-            <element signature="e#2456#2457#0" expanded="false" />
+            <element signature="e#171#172#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/parser/adminparser/CreateCardParser.java">
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/CardState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="295" selection-end="295" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#998#999#0" expanded="false" />
-            <element signature="e#1025#1026#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/parser/adminparser/AllUsersParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1785" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3281">
+        <state line="2" column="12" selection-start="58" selection-end="58" vertical-scroll-proportion="0.04161567" vertical-offset="0" max-vertical-offset="817">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/parser/adminparser/AllCardParser.java">
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CardInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="969">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..AdminUserSession">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="792" selection-end="792" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/phone/MobileServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="5" selection-start="1086" selection-end="1086" vertical-scroll-proportion="0.2562814" vertical-offset="0" max-vertical-offset="796" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/phone/MobileDish.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="47" selection-start="355" selection-end="355" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/phone/AllDishCategoriesServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="34" selection-start="586" selection-end="586" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/phone/MobileDishCategory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="25" selection-start="704" selection-end="704" vertical-scroll-proportion="0.5802048" vertical-offset="0" max-vertical-offset="586">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/AllDishCategoriesParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="328" selection-end="328" vertical-scroll-proportion="0.11604095" vertical-offset="0" max-vertical-offset="586">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/AllDishCategoriesRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="47" selection-end="47" vertical-scroll-proportion="0.058020476" vertical-offset="0" max-vertical-offset="586">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/responseentity/AllDishCategoriesResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="25" selection-start="588" selection-end="588" vertical-scroll-proportion="0.39209226" vertical-offset="0" max-vertical-offset="607">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/requesthandler/AllDishCategoriesHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="64" selection-start="547" selection-end="547" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="434" column="25" selection-start="14092" selection-end="14092" vertical-scroll-proportion="0.52577317" vertical-offset="7072" max-vertical-offset="7939">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..Dish">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="dbDummy://db-console:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="41" selection-start="600" selection-end="600" vertical-scroll-proportion="0.33246416" vertical-offset="0" max-vertical-offset="767">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/CardType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="23" selection-start="778" selection-end="778" vertical-scroll-proportion="0.22888617" vertical-offset="391" max-vertical-offset="1292">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/responseentity/AllMenusResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="47" selection-start="1058" selection-end="1058" vertical-scroll-proportion="0.42288557" vertical-offset="0" max-vertical-offset="804">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="9" selection-start="3511" selection-end="3511" vertical-scroll-proportion="0.45899633" vertical-offset="1699" max-vertical-offset="2516">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="34" selection-start="4133" selection-end="4133" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="18598">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/xmlparser/PeopleParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="62" selection-start="1616" selection-end="1616" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="1309">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/completecardinfo.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="14" selection-start="809" selection-end="809" vertical-scroll-proportion="0.42983565" vertical-offset="0" max-vertical-offset="918">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="72" selection-start="1478" selection-end="1478" vertical-scroll-proportion="0.33830845" vertical-offset="51" max-vertical-offset="1156">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/AllPricesRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="22" selection-start="56" selection-end="56" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
-          <folding>
-            <element signature="e#162#163#0" expanded="true" />
-            <element signature="e#190#191#0" expanded="true" />
-            <element signature="e#229#230#0" expanded="true" />
-            <element signature="e#263#264#0" expanded="true" />
-            <element signature="e#293#294#0" expanded="true" />
-            <element signature="e#322#323#0" expanded="true" />
-            <element signature="e#363#364#0" expanded="true" />
-            <element signature="e#399#400#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/constants/ExceptionTexts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="92" selection-start="4845" selection-end="4845" vertical-scroll-proportion="-17.16" vertical-offset="472" max-vertical-offset="1309">
-          <folding>
-            <element signature="e#5140#5148#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/AllCardsParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="48" selection-start="1731" selection-end="1731" vertical-scroll-proportion="0.31658292" vertical-offset="292" max-vertical-offset="1088">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/AllPricesParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="72" selection-start="1596" selection-end="1596" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1105">
+        <state line="63" column="0" selection-start="1423" selection-end="1423" vertical-scroll-proportion="0.7711138" vertical-offset="101" max-vertical-offset="918">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/requesthandler/AllPricesHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CardCoordinate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="59" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+        <state line="4" column="28" selection-start="117" selection-end="126" vertical-scroll-proportion="0.08323134" vertical-offset="0" max-vertical-offset="817">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="181" column="86" selection-start="11586" selection-end="11586" vertical-scroll-proportion="0.64006513" vertical-offset="2684" max-vertical-offset="3298">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="28" selection-start="1316" selection-end="1319" vertical-scroll-proportion="-10.672051" vertical-offset="7320" max-vertical-offset="7939">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/CardParameterType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="28" selection-start="4132" selection-end="4132" vertical-scroll-proportion="-0.5260586" vertical-offset="1479" max-vertical-offset="7361">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helper/ParameterValidator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="21" selection-start="2533" selection-end="2533" vertical-scroll-proportion="0.0" vertical-offset="697" max-vertical-offset="1377" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/DataType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="12" selection-start="58" selection-end="58" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/TagViewType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="27" selection-start="238" selection-end="238" vertical-scroll-proportion="0.35993487" vertical-offset="0" max-vertical-offset="614" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TagEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="115" selection-start="2402" selection-end="2402" vertical-scroll-proportion="0.0" vertical-offset="1018" max-vertical-offset="1632" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="927" column="75" selection-start="62941" selection-end="62941" vertical-scroll-proportion="0.5873544" vertical-offset="14777" max-vertical-offset="18904">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/TagType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="8" selection-start="118" selection-end="118" vertical-scroll-proportion="0.13385826" vertical-offset="0" max-vertical-offset="952">
+          <folding>
+            <element signature="e#1723#1724#0" expanded="false" />
+            <element signature="e#1762#1763#0" expanded="false" />
+            <element signature="e#1805#1806#0" expanded="false" />
+            <element signature="e#1839#1840#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..Text">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/textparser/StringIntPair.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="40" selection-end="40" vertical-scroll-proportion="0.04161567" vertical-offset="0" max-vertical-offset="817" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/xmlparser/TagParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="96" column="91" selection-start="4845" selection-end="4845" vertical-scroll-proportion="1.7894737" vertical-offset="0" max-vertical-offset="3230" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/TagGroupEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="40" selection-start="1731" selection-end="1731" vertical-scroll-proportion="0.4381885" vertical-offset="526" max-vertical-offset="1343" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/phone/MobileTag.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="17" selection-start="832" selection-end="832" vertical-scroll-proportion="0.6034272" vertical-offset="0" max-vertical-offset="817" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/phone/MobileTagGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="44" selection-start="732" selection-end="737" vertical-scroll-proportion="0.38188493" vertical-offset="28" max-vertical-offset="1258">
+          <folding>
+            <element signature="e#1704#1705#0" expanded="false" />
+            <element signature="e#1744#1745#0" expanded="false" />
+            <element signature="e#1773#1774#0" expanded="false" />
+            <element signature="e#1801#1802#0" expanded="false" />
+            <element signature="e#1840#1841#0" expanded="false" />
+            <element signature="e#1874#1875#0" expanded="false" />
+            <element signature="e#1906#1907#0" expanded="false" />
+            <element signature="e#1937#1938#0" expanded="false" />
+            <element signature="e#1982#1983#0" expanded="false" />
+            <element signature="e#2022#2023#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/MiddlePrice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="18" selection-start="731" selection-end="731" vertical-scroll-proportion="0.45777234" vertical-offset="0" max-vertical-offset="817" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/TagEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="18" selection-start="153" selection-end="153" vertical-scroll-proportion="0.1872705" vertical-offset="0" max-vertical-offset="817" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/TagRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="495" column="56" selection-start="22155" selection-end="22157" vertical-scroll-proportion="1.0" vertical-offset="7283" max-vertical-offset="8432">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AllTagsServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/responseentity/AllPricesResponse.java">
+    <entry file="file://$PROJECT_DIR$/web/allcards.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="16" selection-start="722" selection-end="722" vertical-scroll-proportion="0.45777234" vertical-offset="0" max-vertical-offset="817">
+        <state line="26" column="8" selection-start="887" selection-end="891" vertical-scroll-proportion="-0.02866779" vertical-offset="459" max-vertical-offset="1785" />
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..CardToCardLink">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..CardPriceLink">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/CardToCardLinkType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="33" selection-start="722" selection-end="733" vertical-scroll-proportion="1.1385682" vertical-offset="0" max-vertical-offset="986" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helpFilesAndMans/sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="23" selection-start="4277" selection-end="4289" vertical-scroll-proportion="1.8503401" vertical-offset="0" max-vertical-offset="1071" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/CardType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="27" selection-start="184" selection-end="209" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/LinkRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="105" column="49" selection-start="3374" selection-end="4791" vertical-scroll-proportion="0.72827417" vertical-offset="901" max-vertical-offset="2176">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CardLink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="13" selection-start="116" selection-end="116" vertical-scroll-proportion="0.05773672" vertical-offset="43" max-vertical-offset="476">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..UrgencyTime">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..AdminUserSession">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/MenuRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="606" column="45" selection-start="25919" selection-end="27337" vertical-scroll-proportion="0.78740156" vertical-offset="9360" max-vertical-offset="10013">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CardMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="52" selection-end="52" vertical-scroll-proportion="0.053543307" vertical-offset="0" max-vertical-offset="635">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helper/TimeCounter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="20" selection-start="354" selection-end="354" vertical-scroll-proportion="0.26771653" vertical-offset="0" max-vertical-offset="635" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/databaseenumeration/ImageType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CardImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="28" selection-start="197" selection-end="206" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <folding>
+            <element signature="e#250#251#0" expanded="false" />
+            <element signature="e#288#289#0" expanded="false" />
+            <element signature="e#320#321#0" expanded="false" />
+            <element signature="e#350#351#0" expanded="false" />
+            <element signature="e#403#404#0" expanded="false" />
+            <element signature="e#445#446#0" expanded="false" />
+            <element signature="e#484#485#0" expanded="false" />
+            <element signature="e#516#517#0" expanded="false" />
+            <element signature="e#566#567#0" expanded="false" />
+            <element signature="e#608#609#0" expanded="false" />
+            <element signature="e#644#645#0" expanded="false" />
+            <element signature="e#676#677#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/constants/ApplicationBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="51" selection-start="1031" selection-end="1031" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="1241">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="22" selection-start="763" selection-end="763" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/E4X.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="18" selection-start="636" selection-end="636" vertical-scroll-proportion="0.33291456" vertical-offset="364" max-vertical-offset="5372">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CompleteCardInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="65" selection-start="2144" selection-end="2144" vertical-scroll-proportion="0.9155447" vertical-offset="0" max-vertical-offset="986">
+          <folding>
+            <element signature="e#2188#2189#0" expanded="true" />
+            <element signature="e#2282#2283#0" expanded="true" />
+            <element signature="e#2350#2351#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="123" selection-start="3051" selection-end="3051" vertical-scroll-proportion="0.0" vertical-offset="237" max-vertical-offset="1054">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/completecardinfo.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="155" column="8" selection-start="4626" selection-end="4626" vertical-scroll-proportion="-14.730769" vertical-offset="2252" max-vertical-offset="3043">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/CardEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="13" selection-start="329" selection-end="329" vertical-scroll-proportion="0.0624235" vertical-offset="51" max-vertical-offset="2091">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/requests/CardRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="773" column="20" selection-start="36644" selection-end="36644" vertical-scroll-proportion="0.0" vertical-offset="12518" max-vertical-offset="15504">
+        <state line="242" column="36" selection-start="10652" selection-end="10652" vertical-scroll-proportion="-10.56" vertical-offset="3527" max-vertical-offset="11475">
           <folding>
-            <marker date="1407307331319" expanded="true" signature="868:5020" placeholder="SELECT DISTI..Card..." />
-            <marker date="1407307331319" expanded="true" signature="5096:7138" placeholder="SELECT Card...Card..." />
-            <marker date="1407307331319" expanded="true" signature="23058:23336" placeholder="SELECT DISTI..Card..." />
-            <marker date="1407307331319" expanded="true" signature="25786:25857" placeholder="SELECT count..Card..." />
-            <marker date="1407307331319" expanded="true" signature="27384:27713" placeholder="SELECT * FRO..Text..." />
-            <marker date="1407307331319" expanded="true" signature="28530:28859" placeholder="SELECT * FRO..Text..." />
-            <marker date="1407307331319" expanded="true" signature="29671:29981" placeholder="SELECT Text...Text..." />
-            <marker date="1407307331319" expanded="true" signature="31279:31757" placeholder="SELECT Card...Card..." />
-            <marker date="1407307331319" expanded="true" signature="32587:33318" placeholder="SELECT Card...Card..." />
-            <marker date="1407307331319" expanded="true" signature="34483:34503" placeholder="DELETE FROM ..." />
-            <marker date="1407307331319" expanded="true" signature="35224:35391" placeholder="SELECT Card...Card..." />
-            <marker date="1407307331319" expanded="true" signature="36460:36991" placeholder="SELECT Card...Card..." />
-            <marker date="1407307331319" expanded="true" signature="36491:36728" placeholder="SELECT Filte..Card..." />
+            <marker date="1408630496291" expanded="true" signature="905:3421" placeholder="SELECT Card...Card..." />
+            <marker date="1408630496291" expanded="true" signature="8234:8605" placeholder="SELECT * FRO..Card..." />
+            <marker date="1408630496291" expanded="true" signature="12223:12501" placeholder="SELECT DISTI..Card..." />
+            <marker date="1408630496291" expanded="true" signature="14951:15022" placeholder="SELECT count..Card..." />
+            <marker date="1408630496291" expanded="true" signature="16549:16878" placeholder="SELECT * FRO..Text..." />
+            <marker date="1408630496291" expanded="true" signature="17695:18024" placeholder="SELECT * FRO..Text..." />
+            <marker date="1408630496291" expanded="true" signature="18836:19146" placeholder="SELECT Text...Text..." />
+            <marker date="1408630496291" expanded="true" signature="20082:20613" placeholder="SELECT Card...Card..." />
+            <marker date="1408630496291" expanded="true" signature="20113:20350" placeholder="SELECT Filte..Card..." />
+            <marker date="1408630496291" expanded="true" signature="30614:30705" placeholder="SELECT count..Card..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/requests/DishRequest.java">
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/ImageRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="159" column="63" selection-start="6188" selection-end="6188" vertical-scroll-proportion="-13.96" vertical-offset="2048" max-vertical-offset="4675">
+        <state line="363" column="7" selection-start="16514" selection-end="18012" vertical-scroll-proportion="0.18849449" vertical-offset="5592" max-vertical-offset="6409">
           <folding>
-            <marker date="1407251322152" expanded="true" signature="4997:6586" placeholder="SELECT Price..Price..." />
-            <marker date="1407251322152" expanded="true" signature="4997:6583" placeholder="SELECT Price..Price..." />
-            <marker date="1407251322152" expanded="true" signature="4997:6462" placeholder="SELECT Price..Price..." />
-            <marker date="1407251322152" expanded="true" signature="4997:6585" placeholder="SELECT Price..Price..." />
-            <marker date="1407251322152" expanded="true" signature="6068:6461" placeholder="SELECT Filte..Price..." />
-            <marker date="1407251322152" expanded="true" signature="6068:6429" placeholder="SELECT Filte..Price..." />
-            <marker date="1407251322152" expanded="true" signature="6068:6152" placeholder="SELECT Filte..Price..." />
-            <marker date="1407251322152" expanded="true" signature="6068:6152" placeholder="SELECT Filte..Price..." />
-            <marker date="1407251322152" expanded="true" signature="6068:6462" placeholder="SELECT Filte..Price..." />
-            <marker date="1407251322152" expanded="true" signature="9561:10117" placeholder="SELECT DISTI..DishCategory..." />
-            <marker date="1407251322152" expanded="true" signature="11223:11759" placeholder="SELECT DISTI..DishTag..." />
+            <marker date="1408547475689" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..CardImage..." />
+            <marker date="1408547475689" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..CardImage..." />
+            <marker date="1408547475689" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..CardImage..." />
+            <marker date="1408547475689" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Image..." />
+            <marker date="1408547475689" expanded="true" signature="-1:-1" placeholder="SELECT Card...Image..." />
+            <marker date="1408547475689" expanded="true" signature="-1:-1" placeholder="SELECT Image..Card..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..Price">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+    <entry file="dbDummy://db-console:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="0" selection-start="2946" selection-end="3608" vertical-scroll-proportion="-4.7586207" vertical-offset="1698" max-vertical-offset="2159">
           <folding />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CardParameter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="31" selection-start="525" selection-end="525" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
+          <folding>
+            <element signature="e#533#534#0" expanded="true" />
+            <element signature="e#567#568#0" expanded="true" />
+            <element signature="e#603#604#0" expanded="true" />
+            <element signature="e#637#638#0" expanded="true" />
+            <element signature="e#689#690#0" expanded="true" />
+            <element signature="e#735#736#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/ParameterRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="174" column="31" selection-start="8811" selection-end="8811" vertical-scroll-proportion="0.29776248" vertical-offset="2785" max-vertical-offset="3604">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1408633334409" expanded="true" signature="4425:4948" placeholder="SELECT * FRO..Text..." />
+            <marker date="1408633334409" expanded="true" signature="6183:7094" placeholder="SELECT CardP..CardParameterType..." />
+            <marker date="1408633334409" expanded="true" signature="8801:9734" placeholder="SELECT CardP..Card..." />
+            <marker date="1408633334409" expanded="true" signature="8801:9842" placeholder="SELECT CardP..Card..." />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

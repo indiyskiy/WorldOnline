@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 public class MobileDishCategory {
     private long dishCategoryID;
     private String name;
+    private int position;
 
     public void setDishCategoryID(long dishCategoryID) {
         this.dishCategoryID = dishCategoryID;
@@ -26,6 +27,15 @@ public class MobileDishCategory {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("dishCategoryID", dishCategoryID);
         jsonObject.addProperty("name", name);
+        jsonObject.addProperty("position", position);
         return jsonObject;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public int getPosition() {
+        return position;
     }
 }

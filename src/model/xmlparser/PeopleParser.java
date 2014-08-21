@@ -54,7 +54,7 @@ public class PeopleParser {
                 globalXmlParser.saveParameter(aboutCity.fbCom, card, CardParameterType.Fbcom);
 
                 try {
-                    ImageHelper.saveImages(aboutCity.photo, card, CardImageType.Photo);
+                    ImageHelper.saveImages(aboutCity.photo, card, ImageType.Photo);
                 } catch (DataIsEmptyException e) {
                     loggerFactory.error("no photo image on card " + aboutCity.nameRu + "[" + aboutCity.id + "]");
                     loggerFactory.error(e);

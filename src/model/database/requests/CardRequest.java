@@ -2,75 +2,26 @@ package model.database.requests;
 
 import controller.parser.adminparser.AllCardParser;
 import helper.TimeCounter;
-import model.additionalentity.*;
-import model.additionalentity.admin.CompleteMenuInfo;
+import model.additionalentity.admin.CardCoordinate;
+import model.additionalentity.admin.CardInfo;
+import model.additionalentity.admin.CardPrice;
+import model.additionalentity.admin.CompleteCardInfo;
 import model.additionalentity.phone.*;
 import model.constants.Component;
 import model.constants.databaseenumeration.*;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
-import model.database.worldonlinedb.*;
+import model.database.worldonlinedb.CardEntity;
 import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.intellij.lang.annotations.Language;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 
 public class CardRequest {
-    @Language("MySQL")
-    private static String sql = "SELECT DISTINCT * FROM Card " +
-            "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
-            //card image      \/
-            "LEFT OUTER JOIN CardImage ON(Card.CardID=CardImage.CardID) " +
-            "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
-            "LEFT OUTER JOIN TextGroup AS CardImageTextGroup ON (CardImage.ImageDescriptionTextGroupID=CardImageTextGroup.TextGroupID) " +
-            "LEFT OUTER JOIN Text AS CardImageText ON (CardImageText.TextGroupID=CardImageTextGroup.TextGroupID) " +
-            //card parameter  \/
-            "LEFT OUTER JOIN CardParameter ON (Card.CardID=CardParameter.CardID) " +
-            "LEFT OUTER JOIN CardParameterType ON (CardParameter.CardParameterTypeID=CardParameterType.CardParameterTypeID) " +
-            "LEFT OUTER JOIN TextGroup AS CardParameterTypeTextGroup ON(CardParameterTypeTextGroup.TextGroupID=CardParameterType.CardParameterTypeName) " +
-            "LEFT OUTER JOIN Text AS CardParameterTypeText ON (CardParameterTypeTextGroup.TextGroupID=CardParameterTypeText.TextGroupID) " +
-            "LEFT OUTER JOIN Image AS CardParameterTypeImage ON (CardParameterType.ImageID=Image.ImageID) " +
-            //card route        \/
-            "LEFT OUTER JOIN CardRoute ON (Card.CardID=CardRoute.CardID) " +
-            "LEFT OUTER JOIN RouteElement ON (RouteElement.CardRouteID=CardRoute.CardRouteID) " +
-            "LEFT OUTER JOIN Card AS RouteCard ON (RouteCard.CardID=RouteElement.PlaceCardID) " +
-            "LEFT OUTER JOIN TextGroup AS RouteTextGroup ON(CardRoute.RouteDescriptionTextGroupID=RouteTextGroup.TextGroupID) " +
-            "LEFT OUTER JOIN Text AS RouteText ON (RouteText.TextGroupID=RouteTextGroup.TextGroupID) " +
-            //card tag   \/
-            "LEFT OUTER JOIN CardTag ON (Card.CardID=CardTag.CardID) " +
-            "LEFT OUTER JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
-            "LEFT OUTER JOIN TextGroup AS TagTextGroup ON (Tag.TagTextGroupID=TagTextGroup.TextGroupID) " +
-            "LEFT OUTER JOIN Text AS TagText ON (TagText.TextGroupID=TagTextGroup.TextGroupID) " +
-            "LEFT OUTER JOIN Image AS TagIcon ON (TagIcon.ImageID=Tag.IconID) " +
-            "LEFT OUTER JOIN TagGroup ON (Tag.TagGroupID=TagGroup.TagGroupID) " +
-            "LEFT OUTER JOIN TextGroup AS TagGroupTextGroup ON (TagGroupTextGroup.TextGroupID=TagGroup.TagGroupTextGroupID) " +
-            "LEFT OUTER JOIN Text AS TagGroupText ON (TagGroupText.TextGroupID=TagGroupTextGroup.TextGroupID) " +
-            //card text
-            "LEFT OUTER JOIN TextCard ON (Card.CardID=TextCard.CardID) " +
-            "LEFT OUTER JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
-            "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
-            "LEFT OUTER JOIN CardParameterType AS TextCardParameterType ON (TextCardParameterType.CardParameterTypeID=TextCard.CardParameterTypeID) " +
-            "LEFT OUTER JOIN TextGroup AS TextCardParameterTypeTextGroup ON (TextCardParameterType.CardParameterTypeName=TextCardParameterTypeTextGroup.TextGroupID) " +
-            "LEFT OUTER JOIN Text AS TextCardParameterTypeText ON (TextCardParameterTypeText.TextGroupID=TextCardParameterTypeTextGroup.TextGroupID) " +
-            //card to card link
-            "LEFT OUTER JOIN CardToCardLink ON (CardToCardLink.SourceCardID=Card.CardID) " +
-            "LEFT OUTER JOIN Card AS TargetCard ON (CardToCardLink.TargetCardID=TargetCard.CardID) " +
-            //linket at
-            "LEFT OUTER JOIN CardToCardLink AS CardToCardLinkedOn ON (CardToCardLinkedOn.TargetCardID=Card.CardID) " +
-            "LEFT OUTER JOIN Card AS SourceCard ON (CardToCardLinkedOn.SourceCardID=SourceCard.CardID) " +
-
-            //card menu
-            "LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.CardID=Card.CardID) " +
-            "LEFT OUTER JOIN Menu ON (MenuCardLink.MenuID=Menu.MenuID) " +
-            "LEFT OUTER JOIN TextGroup AS MenuTextGroup ON (MenuTextGroup.TextGroupID=Menu.NameTextGroupID) " +
-            "LEFT OUTER JOIN Text AS MenuText ON (MenuTextGroup.TextGroupID=MenuText.TextGroupID)";
 
     @Language("MySQL")
     private static final String MobileCardSql = "SELECT Card.CardID, " +
@@ -91,7 +42,13 @@ public class CardRequest {
             "CardCoordinate.Latitude, " +
             "CardCoordinate.Longitude, " +
             "Price.PriceID, " +
-            "Tag.TagID " +
+            "Tag.TagID," +
+            "TargetCard.SourceCardID," +
+            "TargetCard.CardToCardLinkID," +
+            "TargetCard.CardToCardLinkType," +
+            "SourceCard.TargetCardID, " +
+            "SourceCard.CardToCardLinkID, " +
+            "SourceCard.CardToCardLinkType " +
             "FROM Card " +
             "LEFT OUTER JOIN TextCard ON (TextCard.CardID=Card.CardID) " +
             "LEFT OUTER JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
@@ -108,7 +65,9 @@ public class CardRequest {
             "LEFT OUTER JOIN CardTag ON (Card.CardID=CardTag.CardID) " +
             "LEFT OUTER JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
             "LEFT OUTER JOIN CardPriceLink ON (Card.CardID=CardPriceLink.CardID) " +
-            "LEFT OUTER JOIN Price ON (Price.PriceID=CardPriceLink.PriceID) ";
+            "LEFT OUTER JOIN Price ON (Price.PriceID=CardPriceLink.PriceID) " +
+            "LEFT OUTER JOIN CardToCardLink AS SourceCard ON (SourceCard.SourceCardID=Card.CardID) " +
+            "LEFT OUTER JOIN CardToCardLink AS TargetCard ON (TargetCard.TargetCardID=Card.CardID) ";
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, CardRequest.class);
 
     public static ArrayList<CardEntity> getAllCards(int firstElem, int maxElems) {
@@ -231,55 +190,58 @@ public class CardRequest {
         }
     }
 
-    public static HashMap<Long, CompleteCardInfo> getCompleteCardInfo() {
-        HashMap<Long, CompleteCardInfo> cards = new HashMap<Long, CompleteCardInfo>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            Connection connection = dbConnection.getConnection();
-
-            ps = connection.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                CompleteCardInfo card;
-                Long cardID = rs.getLong("Card.CardID");
-                if (cards.containsKey(cardID) && cards.get(cardID) != null && !rs.wasNull()) {
-                    card = cards.get(cardID);
-                } else {
-                    card = new CompleteCardInfo(getCardFromResultSet(rs));
-                    cards.put(cardID, card);
-                }
-                getCompleteCardInfo(card, rs);
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        return cards;
-    }
-
     public static CompleteCardInfo getCompleteCardInfo(long cardID) throws SQLException {
         CompleteCardInfo card = null;
         DatabaseConnection dbConnection = new DatabaseConnection();
-        Connection connection = null;
+        Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
         try {
             connection = dbConnection.getConnection();
-            @Language("MySQL") String sqlString = sql +
-                    "WHERE Card.CardID=?";
+            @Language("MySQL") String sqlString =
+                    "SELECT * FROM Card " +
+                            "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
+                            "LEFT OUTER JOIN CardPriceLink ON (Card.CardID=CardPriceLink.CardID) " +
+                            "LEFT OUTER JOIN Price ON (CardPriceLink.PriceID=Price.PriceID) " +
+                            "WHERE Card.CardID=?";
             ps = connection.prepareStatement(sqlString);
             ps.setLong(1, cardID);
             rs = ps.executeQuery();
             if (rs.first()) {
-                CardEntity cardEntity = getCardFromResultSet(rs);
-                card = new CompleteCardInfo(cardEntity);
-                card = getCompleteCardInfo(card, rs);
-                while (rs.next()) {
-                    card = getCompleteCardInfo(card, rs);
+                card = new CompleteCardInfo();
+                String cardName = rs.getString("Card.CardName");
+                CardState cardState = CardState.parseInt(rs.getInt("Card.CardState"));
+                CardType cardType = CardType.parseInt(rs.getInt("Card.CardType"));
+                Timestamp creationTime = rs.getTimestamp("Card.CreationTimestamp");
+                Timestamp updateTimestamp = rs.getTimestamp("Card.LastUpdateTimestamp");
+                CardInfo cardInfo = new CardInfo();
+                cardInfo.setCardID(cardID);
+                cardInfo.setName(cardName);
+                cardInfo.setCardState(cardState);
+                cardInfo.setCardType(cardType);
+                cardInfo.setCreationTime(creationTime);
+                cardInfo.setUpdateTime(updateTimestamp);
+                card.setCardInfo(cardInfo);
+                //coordinate
+                Long cardCoordinateID = rs.getLong("CardCoordinate.CardCoordinateID");
+                if (cardCoordinateID != 0 && !rs.wasNull()) {
+                    CardCoordinate cardCoordinate = new CardCoordinate();
+                    cardCoordinate.setLatitude(rs.getDouble("CardCoordinate.Latitude"));
+                    cardCoordinate.setLongitude(rs.getDouble("CardCoordinate.Longitude"));
+                    card.setCardCoordinate(cardCoordinate);
                 }
+                //price
+                Long priceID = rs.getLong("Price.PriceID");
+                if (priceID != 0 && !rs.wasNull()) {
+                    CardPrice cardPrice = new CardPrice();
+                    cardPrice.setPriceID(priceID);
+                    card.setCardPrice(cardPrice);
+                }
+                LinkRequest.setSourceCardLinks(card, cardID);
+                LinkRequest.setTargetCardLinks(card, cardID);
+                MenuRequest.setCardMenus(card, cardID);
+                ImageRequest.setCardImages(card, cardID);
+                ParameterRequest.setCardParameters(card, cardID);
             }
         } catch (SQLException e) {
             loggerFactory.error(e);
@@ -287,136 +249,6 @@ public class CardRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return card;
-    }
-
-    private static CompleteCardInfo getCompleteCardInfo(CompleteCardInfo completeCardInfo, ResultSet rs) throws SQLException {
-        //card tag
-        Long cardTagID = rs.getLong("CardTag.CardTagID");
-        if (!rs.wasNull()) {
-            CompleteCardTagInfo cardTagInfo;
-            if (completeCardInfo.getCompleteCardTagInfoMap().containsKey(cardTagID)) {
-                cardTagInfo = completeCardInfo.getCompleteCardTagInfoMap().get(cardTagID);
-            } else {
-                cardTagInfo = new CompleteCardTagInfo(TagRequest.getCardTagByResultSet(rs));
-                cardTagInfo.getCardTagEntity().setCard(completeCardInfo.getCardEntity());
-                completeCardInfo.getCompleteCardTagInfoMap().put(cardTagID, cardTagInfo);
-            }
-            //tag
-            TagRequest.getCompleteCardTag(rs, cardTagInfo, "TagTextGroup", "TagText");
-        }
-        //card Image
-        Long cardImageID = rs.getLong("CardImage.CardImageID");
-        if (cardImageID != 0 && !rs.wasNull()) {
-            CompleteCardImageInfo completeCardImageInfo;
-            if (!completeCardInfo.getCompleteCardImageInfoMap().containsKey(cardImageID) && completeCardInfo.getCompleteCardImageInfoMap().get(cardImageID) != null) {
-                completeCardImageInfo = completeCardInfo.getCompleteCardImageInfoMap().get(cardImageID);
-            } else {
-                CardImageEntity cardImageEntity = ImageRequest.getCardImageByResultSet(rs);
-                completeCardImageInfo = new CompleteCardImageInfo(cardImageEntity);
-                cardImageEntity.setCard(completeCardInfo.getCardEntity());
-                completeCardInfo.getCompleteCardImageInfoMap().put(cardImageID, completeCardImageInfo);
-            }
-            ImageRequest.getCompleteCardImage(rs, completeCardImageInfo, "CardImageTextGroup", "CardImageText");
-        }
-        //card parameter
-        Long cardParameterID = rs.getLong("CardParameter.CardParameterID");
-        if (cardParameterID != 0 && !rs.wasNull()) {
-            CardParameterEntity cardParameterEntity;
-            HashMap<Long, CardParameterEntity> cardParameterEntityMap = completeCardInfo.getCardParameterEntityMap();
-            if (!cardParameterEntityMap.containsKey(cardImageID) || cardParameterEntityMap.get(cardImageID) == null) {
-                cardParameterEntity = ParameterRequest.getCardParameterByResultSet(rs);
-                cardParameterEntity.setCard(completeCardInfo.getCardEntity());
-                cardParameterEntityMap.put(cardParameterID, cardParameterEntity);
-            }
-        }
-        //card route
-        Long cardRouteID = rs.getLong("CardRoute.CardRouteID");
-        if (cardRouteID != 0 && !rs.wasNull()) {
-            CompleteCardRouteInfo completeCardRouteInfo;
-            if (completeCardInfo.getCompleteCardRouteInfo() != null) {
-                completeCardRouteInfo = completeCardInfo.getCompleteCardRouteInfo();
-            } else {
-                completeCardRouteInfo = new CompleteCardRouteInfo(RouteRequest.getCardRouteByResultSet(rs));
-                RouteRequest.getCardRouteByResultSet(rs);
-                completeCardInfo.setCompleteCardRouteInfo(completeCardRouteInfo);
-            }
-            //route element
-            RouteRequest.getCompleteCardRoute(rs, completeCardRouteInfo, "RouteCard", "TextGroup", "RouteText");
-        }
-        Long cardCoordinate = rs.getLong("CardCoordinate.CardCoordinateID");
-        if (cardCoordinate != 0 && !rs.wasNull()) {
-            if (completeCardInfo.getCardCoordinateEntity() == null) {
-                CardCoordinateEntity cardCoordinateEntity = RouteRequest.getCardCoordinateByResultSet(rs);
-                cardCoordinateEntity.setCard(completeCardInfo.getCardEntity());
-                completeCardInfo.setCardCoordinateEntity(cardCoordinateEntity);
-            }
-        }
-        Long textCardID = rs.getLong("TextCard.TextCardID");
-        if (textCardID != 0 && !rs.wasNull()) {
-            HashMap<Long, CompleteTextCardInfo> cardInfoHashMap = completeCardInfo.getCompleteTextCardInfoMap();
-            CompleteTextCardInfo completeTextCardInfo = cardInfoHashMap.get(textCardID);
-            if (completeTextCardInfo == null) {
-                TextCardEntity textCardEntity = TextRequest.getTextCardByResultSet(rs);
-                completeTextCardInfo = new CompleteTextCardInfo(textCardEntity);
-                cardInfoHashMap.put(textCardID, completeTextCardInfo);
-            }
-            if (completeTextCardInfo.getCompleteTextGroupInfo() == null) {
-                CompleteTextGroupInfo completeTextGroupInfo = new CompleteTextGroupInfo(TextRequest.getTextGroupByResultSet(rs));
-                completeTextCardInfo.setCompleteTextGroupInfo(completeTextGroupInfo);
-            }
-            TextRequest.getCompleteTextGroupInfo(rs, completeTextCardInfo.getCompleteTextGroupInfo(), "Text");
-        }
-        //card links
-        Long cardToCardLinkID = rs.getLong("CardToCardLink.CardToCardLinkID");
-        if (cardToCardLinkID != 0 && !rs.wasNull()) {
-            HashMap<Long, CardToCardLinkEntity> cardToCardLinkEntityMap = completeCardInfo.getCardToCardLinkEntityMap();
-            CardToCardLinkEntity cardToCardLinkEntity = cardToCardLinkEntityMap.get(cardToCardLinkID);
-            if (cardToCardLinkEntity == null) {
-                cardToCardLinkEntity = LinkRequest.getCardToCardLinkByResultSet(rs, "CardToCardLink");
-                cardToCardLinkEntityMap.put(cardToCardLinkID, cardToCardLinkEntity);
-                cardToCardLinkEntity.setSourceCard(completeCardInfo.getCardEntity());
-            }
-            if (cardToCardLinkEntity.getTargetCard() == null) {
-                Long targetCardID = rs.getLong("TargetCard.CardID");
-                if (targetCardID != 0 && !rs.wasNull()) {
-                    CardEntity cardEntity = getCardFromResultSet(rs, "TargetCard");
-                    cardToCardLinkEntity.setTargetCard(cardEntity);
-                }
-            }
-        }
-        //card linked on
-        Long cardToCardLinkedOnID = rs.getLong("CardToCardLinkedOn.CardToCardLinkID");
-        if (cardToCardLinkedOnID != 0 && !rs.wasNull()) {
-            HashMap<Long, CardToCardLinkEntity> cardToCardLinkedOnEntityMap = completeCardInfo.getCardToCardLinkedOnEntityMap();
-            CardToCardLinkEntity cardToCardLinkedOnEntity = cardToCardLinkedOnEntityMap.get(cardToCardLinkedOnID);
-            if (cardToCardLinkedOnEntity == null) {
-                cardToCardLinkedOnEntity = LinkRequest.getCardToCardLinkByResultSet(rs, "CardToCardLinkedOn");
-                cardToCardLinkedOnEntityMap.put(cardToCardLinkedOnID, cardToCardLinkedOnEntity);
-                cardToCardLinkedOnEntity.setTargetCard(completeCardInfo.getCardEntity());
-            }
-            if (cardToCardLinkedOnEntity.getSourceCard() == null) {
-                Long targetCardID = rs.getLong("SourceCard.CardID");
-                if (targetCardID != 0 && !rs.wasNull()) {
-                    CardEntity cardEntity = getCardFromResultSet(rs, "SourceCard");
-                    cardToCardLinkedOnEntity.setSourceCard(cardEntity);
-                }
-            }
-        }
-
-        Long menuCardID = rs.getLong("Menu.MenuID");
-        if (menuCardID != 0 && !rs.wasNull()) {
-            HashMap<Long, CompleteMenuInfo> completeMenuInfoMap = completeCardInfo.getCompleteMenuInfoMap();
-            CompleteMenuInfo completeMenuInfo = completeMenuInfoMap.get(menuCardID);
-            if (completeMenuInfo == null) {
-                MenuEntity menuEntity = MenuRequest.getMenu(rs);
-                completeMenuInfo = new CompleteMenuInfo(menuEntity);
-                MenuRequest.setAdditionalCompleteMenuInfo(completeMenuInfo, rs, "MenuText", "MenuTextGroup");
-                completeMenuInfoMap.put(menuCardID, completeMenuInfo);
-            } else {
-                MenuRequest.setAdditionalCompleteMenuInfo(completeMenuInfo, rs, "MenuText", "MenuTextGroup");
-            }
-        }
-        return completeCardInfo;
     }
 
     public static CardEntity getCardFromResultSet(ResultSet rs) throws SQLException {
@@ -628,137 +460,8 @@ public class CardRequest {
         return res;
     }
 
-
-    public static void editCards(Collection<CardEntity> cards) {
-        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-        try {
-            for (CardEntity card : cards) {
-                session.beginTransaction();
-                session.update(card);
-                session.getTransaction().commit();
-            }
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-    }
-
-    public static ArrayList<Long> getActualCards(Long userID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        Connection connection;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        ArrayList<Long> res = new ArrayList<Long>();
-        try {
-            connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT Card.CardID FROM Card " +
-                    "JOIN UserCard ON (UserCard.CardID=Card.CardID) " +
-                    "JOIN UserContent ON(UserContent.UserContentID=UserCard.UserContentID) " +
-                    "JOIN User ON (User.UserContentID=UserContent.UserContentID) " +
-                    "LEFT OUTER JOIN CardChange ON(CardChange.CardID=Card.CardID) " +
-                    "WHERE UserCard.CardVersion=Card.CardVersion " +
-                    "AND User.UserID=?";
-            ps = connection.prepareStatement(sql);
-            ps.setLong(1, userID);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                res.add(rs.getLong("Card.CardID"));
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        return res;
-    }
-
-    public static ArrayList<CardUpdateInfo> getUnActualCards(Long userID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        Connection connection;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        ArrayList<CardUpdateInfo> res = new ArrayList<CardUpdateInfo>();
-        try {
-            connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT Card.CardID, " +
-                    "CardChange.DataType,CardChange.UpdateType,CardChange.UpdateStatus " +
-                    "FROM Card " +
-                    "LEFT OUTER JOIN CardChange ON(CardChange.CardID=Card.CardID) " +
-                    "LEFT OUTER JOIN UserCard ON (UserCard.CardID=Card.CardID) " +
-                    "LEFT OUTER JOIN UserContent ON(UserContent.UserContentID=UserCard.UserContentID) " +
-                    "LEFT OUTER JOIN User ON (User.UserContentID=UserContent.UserContentID) " +
-                    "WHERE (UserCard.LastUpdateTimeStamp<CardChange.ChangingTimestamp " +
-                    "OR UserCard.UserCardID IS NULL) " +
-                    "AND (User.UserID=? OR User.UserID IS NULL)";
-            ps = connection.prepareStatement(sql);
-            ps.setLong(1, userID);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                CardUpdateInfo cardUpdateInfo = new CardUpdateInfo();
-                cardUpdateInfo.setCardID(rs.getLong("Card.CardID"));
-                cardUpdateInfo.setUpdateType(UpdateType.parseInt(rs.getInt("CardChange.UpdateType")));
-                cardUpdateInfo.setDataType(DataBaseEntityType.parseInt(rs.getInt("CardChange.DataType")));
-                cardUpdateInfo.setUpdateStatus(UpdateStatus.parseInt(rs.getInt("CardChange.UpdateStatus")));
-                res.add(cardUpdateInfo);
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        return res;
-    }
-
-    public static int deleteAllCardUsers() {
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        Connection connection;
-        PreparedStatement ps = null;
-        int res = 0;
-        try {
-            connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "DELETE FROM UserCard";
-            ps = connection.prepareStatement(sql);
-            res = ps.executeUpdate();
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, null);
-        }
-        return res;
-    }
-
-
-    public static LinkedList<MobileCardInfo> getAllMobileCards(Long userID) {
-        HashMap<Long, MobileCardInfo> cardMap = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        Connection connection;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        try {
-            connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = MobileCardSql +
-                    "WHERE (UserPersonalData.UserLanguage=Text.LanguageID OR Text.LanguageID IS NULL) " +
-                    "AND (Card.CardState IN (" + CardState.Active.getValue() + "))";
-            ps = connection.prepareStatement(sql);
-            ps.setLong(1, userID);
-            rs = ps.executeQuery();
-            cardMap = parseMobileCardSQLRequest(rs);
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        LinkedList<MobileCardInfo> mobileCardInfos = new LinkedList<>();
-        if (cardMap != null) {
-            mobileCardInfos.addAll(cardMap.values());
-        }
-        return mobileCardInfos;
-    }
-
-
     public static LinkedList<MobileCardInfo> getAllMobileCards(Long userID, Integer limit, Integer offset) {
-        TimeCounter timeCounter = new TimeCounter();
+//        TimeCounter timeCounter = new TimeCounter();
         HashMap<Long, MobileCardInfo> cardMap = null;
         DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
@@ -778,11 +481,11 @@ public class CardRequest {
 
             ps = connection.prepareStatement(sql);
             ps.setLong(1, userID);
-            timeCounter.logTime(loggerFactory, "create request");
+//            timeCounter.logTime(loggerFactory, "create request");
             rs = ps.executeQuery();
-            timeCounter.logTime(loggerFactory, "execute request");
+//            timeCounter.logTime(loggerFactory, "execute request");
             cardMap = parseMobileCardSQLRequest(rs);
-            timeCounter.logTime(loggerFactory, "parse request");
+//            timeCounter.logTime(loggerFactory, "parse request");
         } catch (SQLException e) {
             loggerFactory.error(e);
         } finally {
@@ -792,7 +495,7 @@ public class CardRequest {
         if (cardMap != null) {
             mobileCardInfos.addAll(cardMap.values());
         }
-        timeCounter.logTime(loggerFactory, "request done");
+//        timeCounter.logTime(loggerFactory, "request done");
         return mobileCardInfos;
     }
 
@@ -800,9 +503,9 @@ public class CardRequest {
         HashMap<Long, HashSet<Long>> textSets = new HashMap<>();
         HashMap<Long, HashSet<Long>> imageSets = new HashMap<>();
         HashMap<Long, HashSet<Long>> parameterSets = new HashMap<>();
-//        HashSet<Long> textSet = new HashSet<>();
-//        HashSet<Long> imageSet = new HashSet<>();
-//        HashSet<Long> parameterSet = new HashSet<>();
+        HashMap<Long, HashSet<Long>> sourceLinks = new HashMap<>();
+        HashMap<Long, HashSet<Long>> targetLinks = new HashMap<>();
+
         HashMap<Long, MobileCardInfo> cardMap = new HashMap<>();
         while (rs.next()) {
             Long cardID = rs.getLong("Card.CardID");
@@ -839,6 +542,20 @@ public class CardRequest {
                         parameterSet = new HashSet<>();
                         parameterSets.put(cardID, parameterSet);
                     }
+                    HashSet<Long> sourceLinkSet;
+                    if (sourceLinks.containsKey(cardID)) {
+                        sourceLinkSet = sourceLinks.get(cardID);
+                    } else {
+                        sourceLinkSet = new HashSet<>();
+                        sourceLinks.put(cardID, sourceLinkSet);
+                    }
+                    HashSet<Long> targetLinkSet;
+                    if (targetLinks.containsKey(cardID)) {
+                        targetLinkSet = targetLinks.get(cardID);
+                    } else {
+                        targetLinkSet = new HashSet<>();
+                        targetLinks.put(cardID, targetLinkSet);
+                    }
                     Long textID = rs.getLong("TextGroup.TextGroupID");
                     MobileText mobileText;
                     if (!textSet.contains(textID)) {
@@ -848,6 +565,30 @@ public class CardRequest {
                         mobileText.setCardParameterTypeID(rs.getLong("TextCard.CardParameterTypeID"));
                         mobileCardInfo.getMobileTexts().add(mobileText);
                         textSet.add(textID);
+                    }
+                    Long sourceID = rs.getLong("SourceCard.CardToCardLinkID");
+                    if (sourceID != 0 && !rs.wasNull()) {
+                        MobileCardToCardLink mobileCardToCardLinkSource;
+                        if (!sourceLinkSet.contains(sourceID)) {
+                            mobileCardToCardLinkSource = new MobileCardToCardLink();
+                            mobileCardToCardLinkSource.setLinkID(sourceID);
+                            mobileCardToCardLinkSource.setCardID(rs.getString("SourceCard.TargetCardID"));
+                            mobileCardToCardLinkSource.setLinkType(rs.getString("SourceCard.CardToCardLinkType"));
+                            mobileCardInfo.getSourceLinks().add(mobileCardToCardLinkSource);
+                            sourceLinkSet.add(sourceID);
+                        }
+                    }
+                    Long targetID = rs.getLong("TargetCard.CardToCardLinkID");
+                    if (targetID != 0 && !rs.wasNull()) {
+                        MobileCardToCardLink mobileCardToCardLinkTarget;
+                        if (!targetLinkSet.contains(targetID)) {
+                            mobileCardToCardLinkTarget = new MobileCardToCardLink();
+                            mobileCardToCardLinkTarget.setLinkID(targetID);
+                            mobileCardToCardLinkTarget.setCardID(rs.getString("TargetCard.SourceCardID"));
+                            mobileCardToCardLinkTarget.setLinkType(rs.getString("TargetCard.CardToCardLinkType"));
+                            mobileCardInfo.getTargetLinks().add(mobileCardToCardLinkTarget);
+                            targetLinkSet.add(targetID);
+                        }
                     }
                     Long menuID = rs.getLong("Menu.MenuID");
                     if (menuID != 0 && !rs.wasNull()) {
@@ -862,7 +603,7 @@ public class CardRequest {
                         if (!imageSet.contains(imageID)) {
                             MobileCardImage mobileCardImage = new MobileCardImage();
                             mobileCardImage.setImageID(imageID);
-                            mobileCardImage.setCardImageType(CardImageType.parseInt(rs.getInt("CardImage.CardImageType")));
+                            mobileCardImage.setImageType(ImageType.parseInt(rs.getInt("CardImage.CardImageType")));
                             mobileCardImage.setImageHeight(rs.getInt("Image.ImageHeight"));
                             mobileCardImage.setImageSize(rs.getInt("Image.ImageFileSize"));
                             mobileCardImage.setImageWidth(rs.getInt("Image.ImageWidth"));
@@ -924,4 +665,25 @@ public class CardRequest {
         return new ArrayList<String>();
     }
 
+    public static Long countCard(CardType cardType) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT count(1) AS results FROM Card " +
+                    "WHERE 1=1 AND Card.CardType=?";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, cardType.getValue());
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                return rs.getLong("results");
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return 0L;
+    }
 }

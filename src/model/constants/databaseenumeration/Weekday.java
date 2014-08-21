@@ -1,8 +1,5 @@
 package model.constants.databaseenumeration;
 
-/**
- * Created by Илья on 13.05.14.
- */
 public enum Weekday {
     Sunday(0),
     Monday(1),

@@ -1,18 +1,13 @@
 package model.constants.databaseenumeration;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 25.11.13
- * Time: 18:00
- * To change this template use File | Settings | File Templates.
- */
 public enum CardToCardLinkType {
     Unknown(0),
     Metro(1),
     RestaurantChain(2),
     Photographer(3),
-    PlaceOnPhoto(4);
+    PlaceOnPhoto(4),
+    LinkedPlace(5),
+    Venue(6);
 
     private final int value;
 
@@ -29,6 +24,26 @@ public enum CardToCardLinkType {
             return Unknown;
         } else {
             return cardToCardLinkTypes[value];
+        }
+    }
+
+    public String getRussianValue() {
+        switch (this) {
+
+            case Metro:
+                return "Метро";
+            case RestaurantChain:
+                return "Сеть заведений";
+            case Photographer:
+                return "Фотограф";
+            case PlaceOnPhoto:
+                return "Место на фотографии";
+            case LinkedPlace:
+                return "Связанное место";
+            case Venue:
+                return "Место проведения";
+            default:
+                return "Подозрительный тип-сообщите о нём программистам!";
         }
     }
 

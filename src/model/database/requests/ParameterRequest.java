@@ -1,10 +1,13 @@
 package model.database.requests;
 
 import controller.phone.entity.AllCardParameterTypesRequest;
+import model.additionalentity.admin.CardParameter;
+import model.additionalentity.admin.CompleteCardInfo;
 import model.additionalentity.phone.MobileParameterType;
 import model.constants.ApplicationBlock;
 import model.constants.Component;
 import model.constants.databaseenumeration.DataType;
+import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardParameterEntity;
@@ -158,5 +161,46 @@ public class ParameterRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return mobileParameterTypes;
+    }
+
+    public static void setCardParameters(CompleteCardInfo card, long cardID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        ArrayList<CardParameter> cardParameters = new ArrayList<>();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT " +
+                            "CardParameter.CardParameterID, " +
+                            "CardParameter.CardParameterValue, " +
+                            "CardParameterType.Block, " +
+                            "ParameterTypeText.Text " +
+                            "FROM Card " +
+                            "JOIN CardParameter ON (CardParameter.CardID = Card.CardID) " +
+                            "JOIN CardParameterType ON (CardParameter.CardParameterTypeID = CardParameterType.CardParameterTypeID) " +
+                            "JOIN TextGroup AS ParameterTypeTextGroup " +
+                            "ON (ParameterTypeTextGroup.TextGroupID = CardParameterType.CardParameterTypeName) " +
+                            "JOIN Text AS ParameterTypeText ON (ParameterTypeText.TextGroupID=ParameterTypeTextGroup.TextGroupID) " +
+                            "WHERE Card.CardID = ? AND ParameterTypeText.LanguageID=" + LanguageType.Russian.getValue() + " " +
+                            "ORDER BY CardParameterType.Position";
+            ps = connection.prepareStatement(sqlString);
+            ps.setLong(1, cardID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CardParameter cardParameter = new CardParameter();
+                cardParameter.setParameterID(rs.getLong("CardParameter.CardParameterID"));
+                cardParameter.setBlock(rs.getInt("CardParameterType.Block"));
+                cardParameter.setName(rs.getString("ParameterTypeText.Text"));
+                cardParameter.setValue(rs.getString("CardParameter.CardParameterValue"));
+                cardParameters.add(cardParameter);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        card.setCardParameterArrayList(cardParameters);
     }
 }

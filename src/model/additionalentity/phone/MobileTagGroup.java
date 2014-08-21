@@ -13,6 +13,8 @@ public class MobileTagGroup {
     private Long cardID;
     private String name;
     private int position;
+    private int block;
+    private int viewType;
 
     public JsonElement toJSON() {
         JsonObject jsonObject = new JsonObject();
@@ -20,6 +22,8 @@ public class MobileTagGroup {
         jsonObject.addProperty("cardID", cardID);
         jsonObject.addProperty("name", name);
         jsonObject.addProperty("position", position);
+        jsonObject.addProperty("block", block);
+        jsonObject.addProperty("viewType", viewType);
         JsonArray jsonArray = new JsonArray();
         for (MobileTag mobileTag : mobileTags) {
             jsonArray.add(mobileTag.toJson());
@@ -66,5 +70,21 @@ public class MobileTagGroup {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public int getBlock() {
+        return block;
+    }
+
+    public void setBlock(int block) {
+        this.block = block;
+    }
+
+    public int getViewType() {
+        return viewType;
+    }
+
+    public void setViewType(int viewType) {
+        this.viewType = viewType;
     }
 }

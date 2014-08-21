@@ -1,0 +1,57 @@
+delete card and links
+DELETE FROM CardParameter WHERE CardParameter.CardID IN(Select Card.CardID From Card where Card.CardType=9);
+DELETE FROM CardTag WHERE CardTag.CardID IN(Select Card.CardID From Card where Card.CardType=9);
+DELETE FROM TextCard WHERE TextCard.CardID IN(Select Card.CardID From Card where Card.CardType=9);
+DELETE FROM CardToCardLink WHERE CardToCardLink.SourceCardID IN(Select Card.CardID From Card where Card.CardType=9);
+DELETE FROM CardToCardLink WHERE CardToCardLink.TargetCardID IN(Select Card.CardID From Card where Card.CardType=9);
+DELETE FROM CardImage WHERE CardImage.CardID IN(Select Card.CardID From Card where Card.CardType=9);
+DELETE FROM Card Where Card.CardType=9;
+
+ @Language("MySQL")
+    private static String sql = "SELECT DISTINCT * FROM Card " +
+            "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
+            //card image      \/
+            "LEFT OUTER JOIN CardImage ON(Card.CardID=CardImage.CardID) " +
+            "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
+            "LEFT OUTER JOIN TextGroup AS CardImageTextGroup ON (CardImage.ImageDescriptionTextGroupID=CardImageTextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Text AS CardImageText ON (CardImageText.TextGroupID=CardImageTextGroup.TextGroupID) " +
+            //card parameter  \/
+            "LEFT OUTER JOIN CardParameter ON (Card.CardID=CardParameter.CardID) " +
+            "LEFT OUTER JOIN CardParameterType ON (CardParameter.CardParameterTypeID=CardParameterType.CardParameterTypeID) " +
+            "LEFT OUTER JOIN TextGroup AS CardParameterTypeTextGroup ON(CardParameterTypeTextGroup.TextGroupID=CardParameterType.CardParameterTypeName) " +
+            "LEFT OUTER JOIN Text AS CardParameterTypeText ON (CardParameterTypeTextGroup.TextGroupID=CardParameterTypeText.TextGroupID) " +
+            "LEFT OUTER JOIN Image AS CardParameterTypeImage ON (CardParameterType.ImageID=Image.ImageID) " +
+            //card route        \/
+            "LEFT OUTER JOIN CardRoute ON (Card.CardID=CardRoute.CardID) " +
+            "LEFT OUTER JOIN RouteElement ON (RouteElement.CardRouteID=CardRoute.CardRouteID) " +
+            "LEFT OUTER JOIN Card AS RouteCard ON (RouteCard.CardID=RouteElement.PlaceCardID) " +
+            "LEFT OUTER JOIN TextGroup AS RouteTextGroup ON(CardRoute.RouteDescriptionTextGroupID=RouteTextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Text AS RouteText ON (RouteText.TextGroupID=RouteTextGroup.TextGroupID) " +
+            //card tag   \/
+            "LEFT OUTER JOIN CardTag ON (Card.CardID=CardTag.CardID) " +
+            "LEFT OUTER JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
+            "LEFT OUTER JOIN TextGroup AS TagTextGroup ON (Tag.TagTextGroupID=TagTextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Text AS TagText ON (TagText.TextGroupID=TagTextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Image AS TagIcon ON (TagIcon.ImageID=Tag.IconID) " +
+            "LEFT OUTER JOIN TagGroup ON (Tag.TagGroupID=TagGroup.TagGroupID) " +
+            "LEFT OUTER JOIN TextGroup AS TagGroupTextGroup ON (TagGroupTextGroup.TextGroupID=TagGroup.TagGroupTextGroupID) " +
+            "LEFT OUTER JOIN Text AS TagGroupText ON (TagGroupText.TextGroupID=TagGroupTextGroup.TextGroupID) " +
+            //card text
+            "LEFT OUTER JOIN TextCard ON (Card.CardID=TextCard.CardID) " +
+            "LEFT OUTER JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
+            "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN CardParameterType AS TextCardParameterType ON (TextCardParameterType.CardParameterTypeID=TextCard.CardParameterTypeID) " +
+            "LEFT OUTER JOIN TextGroup AS TextCardParameterTypeTextGroup ON (TextCardParameterType.CardParameterTypeName=TextCardParameterTypeTextGroup.TextGroupID) " +
+            "LEFT OUTER JOIN Text AS TextCardParameterTypeText ON (TextCardParameterTypeText.TextGroupID=TextCardParameterTypeTextGroup.TextGroupID) " +
+            //card to card link
+            "LEFT OUTER JOIN CardToCardLink ON (CardToCardLink.SourceCardID=Card.CardID) " +
+            "LEFT OUTER JOIN Card AS TargetCard ON (CardToCardLink.TargetCardID=TargetCard.CardID) " +
+            //linket at
+            "LEFT OUTER JOIN CardToCardLink AS CardToCardLinkedOn ON (CardToCardLinkedOn.TargetCardID=Card.CardID) " +
+            "LEFT OUTER JOIN Card AS SourceCard ON (CardToCardLinkedOn.SourceCardID=SourceCard.CardID) " +
+
+            //card menu
+            "LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.CardID=Card.CardID) " +
+            "LEFT OUTER JOIN Menu ON (MenuCardLink.MenuID=Menu.MenuID) " +
+            "LEFT OUTER JOIN TextGroup AS MenuTextGroup ON (MenuTextGroup.TextGroupID=Menu.NameTextGroupID) " +
+            "LEFT OUTER JOIN Text AS MenuText ON (MenuTextGroup.TextGroupID=MenuText.TextGroupID)";

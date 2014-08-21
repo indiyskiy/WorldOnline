@@ -2,7 +2,7 @@ package controller.parser.adminparser;
 
 import model.additionalentity.admin.ParsedRequest;
 import model.constants.Component;
-import model.constants.databaseenumeration.CardImageType;
+import model.constants.databaseenumeration.ImageType;
 import model.database.requests.CardRequest;
 import model.database.worldonlinedb.CardEntity;
 import model.logger.LoggerFactory;
@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class ImageCardUploadParser {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, ImageCardUploadParser.class);
 
-    private CardImageType cardImageType;
+    private ImageType imageType;
     private CardEntity cardEntity;
     private long cardID;
     HashMap<String, File> fileMap;
@@ -35,12 +35,12 @@ public class ImageCardUploadParser {
             throw new ServletException("incorrect card id");
         }
         try {
-            cardImageType = CardImageType.parseInt(Integer.parseInt(textMap.get("cardImageType")));
+            imageType = ImageType.parseInt(Integer.parseInt(textMap.get("cardImageType")));
         } catch (Exception e) {
             loggerFactory.warning(e);
             throw new ServletException("incorrect card image type");
         }
-        if (cardImageType == null) {
+        if (imageType == null) {
             loggerFactory.warning("type null");
             throw new ServletException("incorrect card image type");
         }
@@ -55,8 +55,8 @@ public class ImageCardUploadParser {
         }
     }
 
-    public CardImageType getCardImageType() {
-        return cardImageType;
+    public ImageType getImageType() {
+        return imageType;
     }
 
     public CardEntity getCardEntity() {

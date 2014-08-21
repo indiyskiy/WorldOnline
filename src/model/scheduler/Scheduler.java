@@ -52,17 +52,22 @@ public class Scheduler implements Runnable {
         try {
             int periodTimer = 0;
             do {
-                for (Executable executable : executableList) {
-                    if (periodTimer % executable.getPeriod() == 0) {
-                        executable.execute();
+                try {
+                    for (Executable executable : executableList) {
+                        if (periodTimer % executable.getPeriod() == 0) {
+                            executable.execute();
+                        }
                     }
+                    periodTimer++;
+                    if (periodTimer >= maxPeriod) {
+                        periodTimer = 0;
+                    }
+                    System.out.println(String.valueOf(periodTimer));
+                    Thread.sleep(1000 * 60);
+                } catch (Exception e) {
+                    logger.error("Attention! Error at endless cycle!");
+                    logger.error(e);
                 }
-                periodTimer++;
-                if (periodTimer >= maxPeriod) {
-                    periodTimer = 0;
-                }
-                System.out.println(String.valueOf(periodTimer));
-                Thread.sleep(1000 * 60);
             } while (true);
         } catch (Exception e) {
             logger.error("The Endless Cycle was stopped");

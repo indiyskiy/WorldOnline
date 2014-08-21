@@ -1,5 +1,8 @@
 package model.database.worldonlinedb;
 
+import model.constants.ApplicationBlock;
+import model.constants.databaseenumeration.TagViewType;
+
 import javax.persistence.*;
 
 @javax.persistence.Table(name = "Tag", schema = "", catalog = "worldonline")
@@ -25,6 +28,7 @@ public class TagEntity {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "IconID")
     private ImageEntity icon;
+
 
     public Long getTagID() {
         return tagID;
@@ -83,6 +87,7 @@ public class TagEntity {
         setTagName(tagName);
         setTagGroup(tagGroup);
         setIcon(imageEntity);
+
     }
 
     public TagGroupEntity getTagGroup() {
@@ -100,4 +105,6 @@ public class TagEntity {
     public void setIcon(ImageEntity image) {
         this.icon = image;
     }
+
+
 }

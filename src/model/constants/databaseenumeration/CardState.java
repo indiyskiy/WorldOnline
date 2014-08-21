@@ -27,4 +27,17 @@ public enum CardState {
             return changingTypes[value];
         }
     }
+
+    public String getRussianValue() {
+        switch (this) {
+            case Active:
+                return "Активна";
+            case NotActive:
+                return "Не активна";
+            case Deleted:
+                return "Удалена";
+            default:
+                return "Карточка шрёдингера - расскажите об этом занимательном факте программисту!";
+        }
+    }
 }

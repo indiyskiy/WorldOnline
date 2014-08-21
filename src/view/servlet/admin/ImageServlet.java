@@ -15,7 +15,7 @@ public class ImageServlet extends ProtectedServlet {
 
         File image = ImageRequest.getImage(imageID);
         if (image == null) {
-            throw new ServletException(imageID + "");
+            throw new ServletException(imageID + " is null");
         }
         String mimeType = getServletContext().getMimeType(image.getAbsolutePath());
         if (mimeType == null) {

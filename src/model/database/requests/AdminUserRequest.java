@@ -7,6 +7,7 @@ import model.additionalentity.admin.ParsedRegistrationRequest;
 import model.constants.Component;
 import model.constants.MailConsts;
 import model.constants.ProtectAdminLevel;
+import model.constants.databaseenumeration.CardState;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.AdminUserAdditionalInfoEntity;
@@ -21,6 +22,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AdminUserRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, AdminUserRequest.class);
@@ -180,16 +182,18 @@ public class AdminUserRequest {
 
     private static boolean addSession(AdminUserSessionEntity adminUserSessionEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        boolean b = false;
         try {
             session.beginTransaction();
             session.save(adminUserSessionEntity);
             session.getTransaction().commit();
-            return true;
+            b = true;
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
+        return b;
     }
 
     public static void registUser(ParsedRegistrationRequest parsedRegistrationRequest) {

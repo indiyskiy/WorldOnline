@@ -1,12 +1,14 @@
 package model.constants.databaseenumeration;
 
-public enum CardImageType {
+public enum ImageType {
     Photo(1),
-    ViewImage(2);
+    ViewImage(2),
+    Tag(3),
+    MenuPhoto(4);
 
     private final int value;
 
-    private CardImageType(int value) {
+    private ImageType(int value) {
         this.value = value;
     }
 
@@ -14,12 +16,12 @@ public enum CardImageType {
         return value;
     }
 
-    public static CardImageType parseInt(Integer value) {
+    public static ImageType parseInt(Integer value) {
         if (value == null) {
             return null;
         }
-        CardImageType[] cardImageTypes = CardImageType.values();
-        return cardImageTypes[value - 1];
+        ImageType[] imageTypes = ImageType.values();
+        return imageTypes[value - 1];
     }
 
     public String getText() {
@@ -28,6 +30,8 @@ public enum CardImageType {
                 return "Фото";
             case ViewImage:
                 return "Вид города";
+            case Tag:
+                return "Тэг";
             default:
                 return "Неизвестно";
         }

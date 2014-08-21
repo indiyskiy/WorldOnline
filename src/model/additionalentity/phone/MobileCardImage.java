@@ -1,11 +1,11 @@
 package model.additionalentity.phone;
 
 import com.google.gson.JsonObject;
-import model.constants.databaseenumeration.CardImageType;
+import model.constants.databaseenumeration.ImageType;
 
 public class MobileCardImage {
     private long imageID;
-    private CardImageType cardImageType;
+    private ImageType imageType;
     private int imageSize;
     private int imageHeight;
     private int imageWidth;
@@ -18,12 +18,12 @@ public class MobileCardImage {
         this.imageID = imageID;
     }
 
-    public CardImageType getCardImageType() {
-        return cardImageType;
+    public ImageType getImageType() {
+        return imageType;
     }
 
-    public void setCardImageType(CardImageType cardImageType) {
-        this.cardImageType = cardImageType;
+    public void setImageType(ImageType imageType) {
+        this.imageType = imageType;
     }
 
     public int getImageSize() {
@@ -53,7 +53,7 @@ public class MobileCardImage {
     public JsonObject toJson() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("imageID", imageID);
-        jsonObject.addProperty("cardImageType", cardImageType.getValue());
+        jsonObject.addProperty("cardImageType", imageType.getValue());
 //        jsonObject.addProperty("imageSize", imageSize);
 //        jsonObject.addProperty("imageHeight", imageHeight);
 //        jsonObject.addProperty("imageWidth", imageWidth);

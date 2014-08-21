@@ -2,10 +2,12 @@ package model.database.requests;
 
 import model.additionalentity.CompleteCardImageInfo;
 import model.additionalentity.CompleteTextGroupInfo;
+import model.additionalentity.admin.CardImage;
+import model.additionalentity.admin.CompleteCardInfo;
 import model.additionalentity.phone.MobileViewImage;
 import model.constants.Component;
-import model.constants.databaseenumeration.CardImageType;
 import model.constants.databaseenumeration.CardState;
+import model.constants.databaseenumeration.ImageType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardImageEntity;
@@ -327,7 +329,7 @@ public class ImageRequest {
                     "JOIN Card ON (CardImage.CardID = Card.CardID) " +
                     "WHERE Card.CardState IN (" +
                     CardState.Active.getValue() +
-                    ") AND CardImage.CardImageType=" + CardImageType.ViewImage.getValue();
+                    ") AND CardImage.CardImageType=" + ImageType.ViewImage.getValue();
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -356,5 +358,39 @@ public class ImageRequest {
             imageEntity.setImageWidth(rs.getInt(cardParameterType + ".ImageWidth"));
         }
         return null;
+    }
+
+    public static void setCardImages(CompleteCardInfo card, long cardID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        ArrayList<CardImage> cardImages = new ArrayList<>();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT Image.ImageID," +
+                            "CardImage.CardImageType, " +
+                            "CardImage.CardImageName " +
+                            "FROM Card " +
+                            "JOIN CardImage ON (Card.CardID=CardImage.CardID) " +
+                            "JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
+                            "WHERE Card.CardID=? ORDER BY CardImage.CardImageType";
+            ps = connection.prepareStatement(sqlString);
+            ps.setLong(1, cardID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CardImage cardImage = new CardImage();
+                cardImage.setImageID(rs.getLong("Image.ImageID"));
+                cardImage.setImageType(ImageType.parseInt(rs.getInt("CardImage.CardImageType")));
+                cardImage.setImageName(rs.getString("CardImage.CardImageName"));
+                cardImages.add(cardImage);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        card.setCardImages(cardImages);
     }
 }

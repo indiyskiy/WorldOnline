@@ -2,6 +2,7 @@ package model;
 
 import model.database.requests.AdminUserRequest;
 import model.database.requests.CardRequest;
+import model.database.requests.NewsRequest;
 import model.scheduler.Scheduler;
 
 public class ServerInit {

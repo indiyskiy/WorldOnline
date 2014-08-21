@@ -30,6 +30,7 @@ public class ExceptionTexts {
     public static final String allCardsLimitTooBigException = "phone.getAllCards.Limit.TooBig";
     public static final String allCardsLimitEmptyException = "phone.getAllCards.Limit.Empty";
     public static final String allCardsOffsetIncorrectException = "phone.getAllCards.Offset.Incorrect";
+    public static String allCardsOffsetEmptyException = "phone.getAllCards.Offset.Empty";
     public static final String weatherUserIDEmptyException = "phone.weather.UserID.empty";
     public static final String weatherUserIDIncorrectException = "phone.weather.UserID.Incorrect";
     public static final String weatherUserNotExistException = "phone.weather.UserID.NotExist";

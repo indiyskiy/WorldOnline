@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
   <data-source source="LOCAL" name="Data Source" uuid="34f38d7b-cfb2-451e-9c30-8bd9e281b76d">
-    <database-info product="MySQL" version="5.5.37-0ubuntu0.12.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )">
+    <database-info product="MySQL" version="5.5.38-0ubuntu0.14.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
     </database-info>
@@ -63,6 +63,7 @@
       <exported-key name="FK_s9ydgplfrhc8u7wjao1n475fc" table="RouteElement" schema="" catalog="worldonline" columns="PlaceCardID"/>
       <exported-key name="FK_5882m7f2hh8oacjyqt8vr3fu0" table="TagGroup" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_ldbgpy6a9uyuawvm6yfnyni4" table="TextCard" schema="" catalog="worldonline" columns="CardID"/>
+      <exported-key name="FK_dxceql6ir6ppr6tmk8fi7pan8" table="UrgencyTime" schema="" catalog="worldonline" columns="cardID"/>
       <exported-key name="FK_lv8j07r0w9oki3nwxvhiam6qm" table="UserCard" schema="" catalog="worldonline" columns="CardID"/>
     </table>
     <table name="CardChange" schema="" catalog="worldonline" type="TABLE">
@@ -157,7 +158,7 @@
     </table>
     <table name="Dish" schema="" catalog="worldonline" type="TABLE">
       <column name="DishID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="cost" sqlType="DOUBLE" length="22" precision="0" nullable="true" jdbcType="8"/>
+      <column name="Cost" sqlType="DOUBLE" length="22" precision="0" nullable="true" jdbcType="8"/>
       <column name="DishCategoryID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="DishNameID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="PriceID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
@@ -236,7 +237,9 @@
     </table>
     <table name="Price" schema="" catalog="worldonline" type="TABLE">
       <column name="PriceID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="PriceNameID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="PriceID"/>
+      <foreign-key name="FK_8unfdqvxv1016ycflbh8gdmd9" columns="PriceNameID" ref-table="TextGroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="FK_2o4f85e9oev5ekd4utf09hm6e" table="CardPriceLink" schema="" catalog="worldonline" columns="PriceID"/>
       <exported-key name="FK_5a0wiynpumll3pmlqfsj5mfrn" table="Dish" schema="" catalog="worldonline" columns="PriceID"/>
     </table>
@@ -263,7 +266,9 @@
     </table>
     <table name="TagGroup" schema="" catalog="worldonline" type="TABLE">
       <column name="TagGroupID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="ApplicationBlock" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="Position" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="TagViewType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="TagGroupTextGroupID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="TagGroupID"/>
@@ -300,10 +305,19 @@
       <exported-key name="FK_d0kqpwalhb6mtplissxjwx8g9" table="DishCategory" schema="" catalog="worldonline" columns="NameID"/>
       <exported-key name="FK_68wlx472oigvhkowpr072g656" table="DishTag" schema="" catalog="worldonline" columns="NameID"/>
       <exported-key name="FK_tgq8tlsqbv1wc2i3kod4h2cxx" table="Menu" schema="" catalog="worldonline" columns="NameTextGroupID"/>
+      <exported-key name="FK_8unfdqvxv1016ycflbh8gdmd9" table="Price" schema="" catalog="worldonline" columns="PriceNameID"/>
       <exported-key name="FK_2sksgsk24c5xcuo9ma2qwv5pc" table="Tag" schema="" catalog="worldonline" columns="TagTextGroupID"/>
       <exported-key name="FK_cjglwoukgb6lv3rlksxqy630s" table="TagGroup" schema="" catalog="worldonline" columns="TagGroupTextGroupID"/>
       <exported-key name="FK_2cb0751w8jmy1jmf7rgqkrib5" table="Text" schema="" catalog="worldonline" columns="TextGroupID"/>
       <exported-key name="FK_datml1sh78o7k342o0e0gn1uk" table="TextCard" schema="" catalog="worldonline" columns="TextGroupID"/>
+    </table>
+    <table name="UrgencyTime" schema="" catalog="worldonline" type="TABLE">
+      <column name="UrgencyTimeID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="OffTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="OnTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="cardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="UrgencyTimeID"/>
+      <foreign-key name="FK_dxceql6ir6ppr6tmk8fi7pan8" columns="cardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="User" schema="" catalog="worldonline" type="TABLE">
       <column name="UserID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
