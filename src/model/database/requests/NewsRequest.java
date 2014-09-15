@@ -5,7 +5,6 @@ import model.constants.databaseenumeration.*;
 import model.database.worldonlinedb.CardEntity;
 import model.database.worldonlinedb.CardToCardLinkEntity;
 import model.xmlparser.GlobalXmlParser;
-import model.xmlparser.TagParser;
 
 public class NewsRequest {
 
@@ -36,10 +35,10 @@ public class NewsRequest {
             ImageHelper.saveImage(menuPhoto, cardEntity, ImageType.MenuPhoto);
             CardEntity linkedPlace = CardRequest.getCardByName(placeCardName);
             CardToCardLinkEntity cardToCardLinkEntity = new CardToCardLinkEntity(cardEntity, linkedPlace, CardToCardLinkType.LinkedPlace);
-            LinkRequest.addCardToCardLinkRequest(cardToCardLinkEntity);
+            LinkRequest.addCardToCardLink(cardToCardLinkEntity);
             CardEntity venue = CardRequest.getCardByName(venueCardName);
             cardToCardLinkEntity = new CardToCardLinkEntity(cardEntity, venue, CardToCardLinkType.Venue);
-            LinkRequest.addCardToCardLinkRequest(cardToCardLinkEntity);
+            LinkRequest.addCardToCardLink(cardToCardLinkEntity);
             GlobalXmlParser.saveParameter("2014-08-22 15:35:00.0", cardEntity, CardParameterType.TimeOfEvent);
             GlobalXmlParser.saveParameter("https://ru-ru.facebook.com/", cardEntity, CardParameterType.Fbcom);
             GlobalXmlParser.saveParameter("http://vk.com/feed", cardEntity, CardParameterType.Vkcom);

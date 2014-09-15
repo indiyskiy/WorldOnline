@@ -33,6 +33,30 @@ public class CardParameterTypeEntity {
     @Basic
     private Integer position;
 
+    @javax.persistence.Column(name = "Translatable")
+    @Basic
+    private boolean translatable;
+
+    @javax.persistence.Column(name = "Multiply")
+    @Basic
+    private boolean multiply;
+
+    public boolean isTranslatable() {
+        return translatable;
+    }
+
+    public void setTranslatable(boolean translatable) {
+        this.translatable = translatable;
+    }
+
+    public boolean isMultiply() {
+        return multiply;
+    }
+
+    public void setMultiply(boolean multiply) {
+        this.multiply = multiply;
+    }
+
     public Long getCardParameterTypeID() {
         return cardParameterTypeID;
     }
@@ -84,11 +108,13 @@ public class CardParameterTypeEntity {
         this.position = position;
     }
 
-    public CardParameterTypeEntity(TextGroupEntity cardParameterTypeName, ImageEntity image, DataType dataType, ApplicationBlock block, Integer position) {
+    public CardParameterTypeEntity(TextGroupEntity cardParameterTypeName, ImageEntity image, DataType dataType, ApplicationBlock block, Integer position, boolean translatable, boolean multiply) {
         this.cardParameterTypeName = cardParameterTypeName;
         this.image = image;
         this.dataType = dataType.getValue();
         this.block = block.getValue();
         this.position = position;
+        this.translatable = translatable;
+        this.multiply = multiply;
     }
 }

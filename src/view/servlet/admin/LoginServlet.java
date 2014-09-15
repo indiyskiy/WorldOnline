@@ -31,6 +31,10 @@ public class LoginServlet extends ProtectedServlet {
             LoginParser loginParser = new LoginParser();
             LoginRequest loginRequest = loginParser.parse(request);
             String key = AdminUserRequest.getKey(loginRequest);
+            String pageTo = (String) request.getSession().getAttribute("pageFrom");
+            if (pageTo == null || pageTo.isEmpty()) {
+                pageTo = "index";
+            }
             if (key == null) {
                 request.setAttribute("exception", "incorrect username or password");
                 ServletHelper.sendForward("/login.jsp", this, request, response);
@@ -39,7 +43,7 @@ public class LoginServlet extends ProtectedServlet {
                 AdminUserRequest.addSession(key, loginRequest.getLogin());
                 request.getSession().setAttribute("sessionKey", key);
             }
-            ServletHelper.sendForward("/index", this, request, response);
+            ServletHelper.sendForward("/" + pageTo, this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
@@ -49,6 +53,11 @@ public class LoginServlet extends ProtectedServlet {
     @Override
     protected AdminRule setAdminRule() {
         return AdminRule.Unregistered;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Вход";
     }
 
 

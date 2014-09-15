@@ -7,6 +7,10 @@
          version="2.5">
 
 
+    <session-config>
+        <session-timeout>4320</session-timeout>
+    </session-config>
+
     <resource-ref>
         <res-ref-name>jdbc/worldOnLineDB</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
@@ -28,7 +32,7 @@
     <servlet>
         <display-name>GlobalBaseParseServlet</display-name>
         <servlet-name>GlobalBaseParseServlet</servlet-name>
-        <servlet-class>view.servlet.GlobalBaseParseServlet</servlet-class>
+        <servlet-class>view.servlet.admin.GlobalBaseParseServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -109,6 +113,7 @@
         <servlet-name>ImageServlet</servlet-name>
         <url-pattern>/image/*</url-pattern>
     </servlet-mapping>
+
     <!-- image card upload-->
     <servlet>
         <display-name>ImageCardUploadServlet</display-name>
@@ -118,7 +123,7 @@
 
     <servlet-mapping>
         <servlet-name>ImageCardUploadServlet</servlet-name>
-        <url-pattern>/imagecardupload/*</url-pattern>
+        <url-pattern>/imagecardupload</url-pattern>
     </servlet-mapping>
 
     <!-- text group info -->
@@ -259,7 +264,7 @@
     <servlet>
         <display-name>ChangeStatusServlet</display-name>
         <servlet-name>ChangeStatusServlet</servlet-name>
-        <servlet-class>view.servlet.admin.ChangeStatusServlet</servlet-class>
+        <servlet-class>view.servlet.admin.ChangeCardStatusServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -276,6 +281,174 @@
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <display-name>TextGroupEditServlet</display-name>
+        <servlet-name>TextGroupEditServlet</servlet-name>
+        <servlet-class>view.servlet.admin.TextGroupEditServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TextGroupEditServlet</servlet-name>
+        <url-pattern>/textgroupedit</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>EditCardParametersServlet</display-name>
+        <servlet-name>EditCardParametersServlet</servlet-name>
+        <servlet-class>view.servlet.admin.EditCardParametersServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditCardParametersServlet</servlet-name>
+        <url-pattern>/editcardparameters</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>DeleteTextCardServlet</display-name>
+        <servlet-name>DeleteTextCardServlet</servlet-name>
+        <servlet-class>view.servlet.admin.DeleteTextCardServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteTextCardServlet</servlet-name>
+        <url-pattern>/deletetextcard</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>DeleteCardParameterServlet</display-name>
+        <servlet-name>DeleteCardParameterServlet</servlet-name>
+        <servlet-class>view.servlet.admin.DeleteCardParameterServlet</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>DeleteCardParameterServlet</servlet-name>
+        <url-pattern>/deleteCardParameter</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AddCardElementServlet</servlet-name>
+        <url-pattern>/addcardelement</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>AddCardElementServlet</display-name>
+        <servlet-name>AddCardElementServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddCardElementServlet</servlet-class>
+    </servlet>
+
+
+    <servlet>
+        <display-name>AddCardParameterServlet</display-name>
+        <servlet-name>AddCardParameterServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddCardParameterServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddCardParameterServlet</servlet-name>
+        <url-pattern>/addcardparameter</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>EditCardCoordinateServlet</display-name>
+        <servlet-name>EditCardCoordinateServlet</servlet-name>
+        <servlet-class>view.servlet.admin.EditCardCoordinateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditCardCoordinateServlet</servlet-name>
+        <url-pattern>/editcardcoordinate</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>CreateCardCoordinateServlet</display-name>
+        <servlet-name>CreateCardCoordinateServlet</servlet-name>
+        <servlet-class>view.servlet.admin.CreateCardCoordinateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateCardCoordinateServlet</servlet-name>
+        <url-pattern>/createcardcoordinate</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>DeleteCardImageServlet</display-name>
+        <servlet-name>DeleteCardImageServlet</servlet-name>
+        <servlet-class>view.servlet.admin.DeleteCardImageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteCardImageServlet</servlet-name>
+        <url-pattern>/deletecardimage</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>AddCardToCardLinkServlet</display-name>
+        <servlet-name>AddCardToCardLinkServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddCardToCardLinkServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddCardToCardLinkServlet</servlet-name>
+        <url-pattern>/addcardtocardlink</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>DeleteCardToCardLinkServlet</display-name>
+        <servlet-name>DeleteCardToCardLinkServlet</servlet-name>
+        <servlet-class>view.servlet.admin.DeleteCardToCardLinkServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteCardToCardLinkServlet</servlet-name>
+        <url-pattern>/deletecardtocardlink</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>AddCardMenuServlet</display-name>
+        <servlet-name>AddCardMenuServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddCardMenuServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddCardMenuServlet</servlet-name>
+        <url-pattern>/addcardmenu</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>DeleteCardMenuServlet</display-name>
+        <servlet-name>DeleteCardMenuServlet</servlet-name>
+        <servlet-class>view.servlet.admin.DeleteCardMenuServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteCardMenuServlet</servlet-name>
+        <url-pattern>/deletecardmenu</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>AddTagToCardServlet</display-name>
+        <servlet-name>AddTagToCardServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddTagToCardServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddTagToCardServlet</servlet-name>
+        <url-pattern>/addtagtocard</url-pattern>
     </servlet-mapping>
 
 
@@ -336,7 +509,7 @@
     <servlet>
         <display-name>GetAllCardsServlet</display-name>
         <servlet-name>GetAllCardsServlet</servlet-name>
-        <servlet-class>view.servlet.admin.GetAllCardsServlet</servlet-class>
+        <servlet-class>view.servlet.phone.GetAllCardsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

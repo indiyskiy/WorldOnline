@@ -3,90 +3,94 @@ package model.constants.databaseenumeration;
 import model.constants.ApplicationBlock;
 
 public enum CardParameterType {
-    Phone(3, DataType.PhoneNumberType, ApplicationBlock.Description),
-    OpenHours(4, DataType.StringType, ApplicationBlock.Description),
-    Site(5, DataType.LinkType, ApplicationBlock.Description),
-    Email(6, DataType.EmailType, ApplicationBlock.Description),
-    Vkcom(7, DataType.LinkType, ApplicationBlock.Social),
-    Fbcom(8, DataType.LinkType, ApplicationBlock.Social),
-    Twitter(9, DataType.LinkType, ApplicationBlock.Social),
-    Frsqr(10, DataType.LinkType, ApplicationBlock.Social),
-    Youtube(11, DataType.LinkType, ApplicationBlock.Details),
-    WifiLogin(12, DataType.StringType, ApplicationBlock.WiFi),
-    WifiPass(13, DataType.StringType, ApplicationBlock.WiFi),
-    LiveJournal(14, DataType.LinkType, ApplicationBlock.Social),
-    AppStore(15, DataType.LinkType, ApplicationBlock.Main),
-    GooglePlay(16, DataType.LinkType, ApplicationBlock.Main),
-    Tripadviser(17, DataType.LinkType, ApplicationBlock.Reviews),
-    Instagramm(18, DataType.LinkType, ApplicationBlock.Social),
-    Booking(19, DataType.LinkType, ApplicationBlock.Reviews),
-    Billboard(21, DataType.LinkType, ApplicationBlock.Details),
-    Apoi(22, DataType.LinkType, ApplicationBlock.Reviews),
-    Ayda(23, DataType.LinkType, ApplicationBlock.Reviews),
-    BlogFcsSpb(24, DataType.LinkType, ApplicationBlock.Reviews),
-    CafeSpb(25, DataType.LinkType, ApplicationBlock.Reviews),
-    DpRu(26, DataType.LinkType, ApplicationBlock.Reviews),
-    Flamp(27, DataType.LinkType, ApplicationBlock.Reviews),
-    ImhoNet(28, DataType.LinkType, ApplicationBlock.Reviews),
-    IRecommend(29, DataType.LinkType, ApplicationBlock.Reviews),
-    Komandirovka(30, DataType.LinkType, ApplicationBlock.Reviews),
-    MenuRu(31, DataType.LinkType, ApplicationBlock.Reviews),
-    Otzovik(32, DataType.LinkType, ApplicationBlock.Reviews),
-    PeterburgRu(33, DataType.LinkType, ApplicationBlock.Reviews),
-    Restlook(34, DataType.LinkType, ApplicationBlock.Reviews),
-    Restop(35, DataType.LinkType, ApplicationBlock.Reviews),
-    Restoran(36, DataType.LinkType, ApplicationBlock.Reviews),
-    Restozoom(37, DataType.LinkType, ApplicationBlock.Reviews),
-    Spbrestoran(38, DataType.LinkType, ApplicationBlock.Reviews),
-    SzoSpr(39, DataType.LinkType, ApplicationBlock.Reviews),
-    TheVillage(40, DataType.LinkType, ApplicationBlock.Reviews),
-    Tourprom(41, DataType.LinkType, ApplicationBlock.Reviews),
-    Traveltipz(42, DataType.LinkType, ApplicationBlock.Reviews),
-    Tulp(43, DataType.LinkType, ApplicationBlock.Reviews),
-    Turbina(44, DataType.LinkType, ApplicationBlock.Reviews),
-    Uvoice(45, DataType.LinkType, ApplicationBlock.Reviews),
-    Wrestorane(46, DataType.LinkType, ApplicationBlock.Reviews),
-    Yell(47, DataType.LinkType, ApplicationBlock.Reviews),
-    Zoon(48, DataType.LinkType, ApplicationBlock.Reviews),
-    Facts(50, DataType.StringType, ApplicationBlock.Facts),
-    Legends(51, DataType.StringType, ApplicationBlock.Facts),
-    Literature(52, DataType.StringType, ApplicationBlock.Facts),
-    Anecdotes(53, DataType.StringType, ApplicationBlock.Facts),
-    Films(54, DataType.StringType, ApplicationBlock.Facts),
-    FamousPassers(55, DataType.StringType, ApplicationBlock.Facts),
-    Citations(56, DataType.StringType, ApplicationBlock.Facts),
-    BorisStars(57, DataType.LinkType, ApplicationBlock.Reviews),
-    Restoclub(58, DataType.LinkType, ApplicationBlock.Reviews),
-    Afisha(59, DataType.LinkType, ApplicationBlock.Reviews),
-    Timeout(60, DataType.LinkType, ApplicationBlock.Reviews),
-    Wikipedia(61, DataType.LinkType, ApplicationBlock.Encyclopedia),
-    Wikitravel(62, DataType.LinkType, ApplicationBlock.Encyclopedia),
-    //    ReservationDiscount(63, DataType.Percent, ApplicationBlock.Main),
-//    ReservationPhone(64, DataType.PhoneNumberType, ApplicationBlock.Main),
-    AllCafe(65, DataType.LinkType, ApplicationBlock.Reviews),
-    WalkSpb(66, DataType.LinkType, ApplicationBlock.Reviews),
-    Spbin(67, DataType.LinkType, ApplicationBlock.Reviews),
-    Name(69, DataType.Header, ApplicationBlock.Header),
-    Address(70, DataType.StringType, ApplicationBlock.Header),
-    Description(71, DataType.StringType, ApplicationBlock.Description),
-    News(72, DataType.StringType, ApplicationBlock.Details),
-    Offers(73, DataType.StringType, ApplicationBlock.Details),
-    Biography(74, DataType.StringType, ApplicationBlock.Details),
-    Story(75, DataType.StringType, ApplicationBlock.Details),
-    Recomend(76, DataType.LinkType, ApplicationBlock.Details),
-    Wikimapia(77, DataType.LinkType, ApplicationBlock.Encyclopedia),
-    Encspb(78, DataType.LinkType, ApplicationBlock.Encyclopedia),
-    AfishaBuyTicket(79, DataType.LinkType, ApplicationBlock.Selling),
-    TimeOfEvent(80, DataType.TimestampType, ApplicationBlock.Details);
+    Phone(3, DataType.PhoneNumberType, ApplicationBlock.Description, true, false),
+    OpenHours(4, DataType.StringType, ApplicationBlock.Description, false, false),
+    Site(5, DataType.LinkType, ApplicationBlock.Description, false, false),
+    Email(6, DataType.EmailType, ApplicationBlock.Description, false, false),
+    Vkcom(7, DataType.LinkType, ApplicationBlock.Social, false, false),
+    Fbcom(8, DataType.LinkType, ApplicationBlock.Social, false, false),
+    Twitter(9, DataType.LinkType, ApplicationBlock.Social, false, false),
+    Frsqr(10, DataType.LinkType, ApplicationBlock.Social, false, false),
+    Youtube(11, DataType.LinkType, ApplicationBlock.Details, false, false),
+    WifiLogin(12, DataType.StringType, ApplicationBlock.WiFi, false, false),
+    WifiPass(13, DataType.StringType, ApplicationBlock.WiFi, false, false),
+    LiveJournal(14, DataType.LinkType, ApplicationBlock.Social, false, false),
+    AppStore(15, DataType.LinkType, ApplicationBlock.Store, false, false),
+    GooglePlay(16, DataType.LinkType, ApplicationBlock.Store, false, false),
+    Tripadviser(17, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Instagramm(18, DataType.LinkType, ApplicationBlock.Social, false, false),
+    Booking(19, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Billboard(21, DataType.LinkType, ApplicationBlock.Details, false, false),
+    Apoi(22, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Ayda(23, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    BlogFcsSpb(24, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    CafeSpb(25, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    DpRu(26, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Flamp(27, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    ImhoNet(28, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    IRecommend(29, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Komandirovka(30, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    MenuRu(31, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Otzovik(32, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    PeterburgRu(33, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Restlook(34, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Restop(35, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Restoran(36, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Restozoom(37, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Spbrestoran(38, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    SzoSpr(39, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    TheVillage(40, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Tourprom(41, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Traveltipz(42, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Tulp(43, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Turbina(44, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Uvoice(45, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Wrestorane(46, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Yell(47, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Zoon(48, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Facts(50, DataType.StringType, ApplicationBlock.Facts, true, false),
+    Legends(51, DataType.StringType, ApplicationBlock.Facts, true, false),
+    Literature(52, DataType.StringType, ApplicationBlock.Facts, true, false),
+    Anecdotes(53, DataType.StringType, ApplicationBlock.Facts, true, true),
+    Films(54, DataType.StringType, ApplicationBlock.Facts, true, true),
+    FamousPassers(55, DataType.StringType, ApplicationBlock.Facts, true, true),
+    Citations(56, DataType.StringType, ApplicationBlock.Facts, true, true),
+    BorisStars(57, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Restoclub(58, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Afisha(59, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Timeout(60, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Wikipedia(61, DataType.LinkType, ApplicationBlock.Encyclopedia, false, true),
+    Wikitravel(62, DataType.LinkType, ApplicationBlock.Encyclopedia, false, true),
+    //    ReservationDiscount(63, DataType.Percent, ApplicationBlock.Store,false,false),
+//    ReservationPhone(64, DataType.PhoneNumberType, ApplicationBlock.Store,false,false),
+    AllCafe(65, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    WalkSpb(66, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Spbin(67, DataType.LinkType, ApplicationBlock.Reviews, false, false),
+    Name(69, DataType.Header, ApplicationBlock.Header, false, true),
+    Address(70, DataType.StringType, ApplicationBlock.Header, false, true),
+    Description(71, DataType.StringType, ApplicationBlock.Description, false, true),
+    News(72, DataType.StringType, ApplicationBlock.Details, false, true),
+    Offers(73, DataType.StringType, ApplicationBlock.Details, false, true),
+    Biography(74, DataType.StringType, ApplicationBlock.Details, false, true),
+    Story(75, DataType.StringType, ApplicationBlock.Details, false, true),
+    Recomend(76, DataType.LinkType, ApplicationBlock.Details, false, true),
+    Wikimapia(77, DataType.LinkType, ApplicationBlock.Encyclopedia, false, false),
+    Encspb(78, DataType.LinkType, ApplicationBlock.Encyclopedia, false, true),
+    AfishaBuyTicket(79, DataType.LinkType, ApplicationBlock.Selling, false, false),
+    TimeOfEvent(80, DataType.TimestampType, ApplicationBlock.Details, false, false);
 
     private final int value;
     private final DataType dataType;
-    private ApplicationBlock block;
+    private final ApplicationBlock block;
+    private final boolean multiply;
+    private final boolean translatable;
 
-    private CardParameterType(int value, DataType dataType, ApplicationBlock applicationBlock) {
+    private CardParameterType(int value, DataType dataType, ApplicationBlock applicationBlock, boolean multiply, boolean translatable) {
         this.value = value;
         this.dataType = dataType;
         this.block = applicationBlock;
+        this.multiply = multiply;
+        this.translatable = translatable;
     }
 
     public static CardParameterType parseInt(Integer value) {
@@ -107,6 +111,14 @@ public enum CardParameterType {
 
     public ApplicationBlock getBlock() {
         return block;
+    }
+
+    public boolean isMultiply() {
+        return multiply;
+    }
+
+    public boolean isTranslatable() {
+        return translatable;
     }
 
     public String getRussianName() {
@@ -244,11 +256,11 @@ public enum CardParameterType {
 //            case NoBarriers:
 //                return "NoBarriers";
             case Name:
-                return "Name";
+                return "Название";
             case Address:
-                return "Address";
+                return "Адрес";
             case Description:
-                return "Description";
+                return "Описание";
             case News:
                 return "Новости";
             case Offers:
@@ -408,7 +420,7 @@ public enum CardParameterType {
             case Name:
                 return "Name";
             case Address:
-                return "Адрес";
+                return "Address";
             case Description:
                 return "Description";
             case News:

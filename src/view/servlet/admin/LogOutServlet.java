@@ -36,4 +36,9 @@ public class LogOutServlet extends ProtectedServlet {
     protected AdminRule setAdminRule() {
         return AdminRule.Registered;
     }
+
+    @Override
+    public String getTitle() {
+        return null;
+    }
 }

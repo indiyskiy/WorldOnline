@@ -5,6 +5,7 @@ import helper.ImageHelper;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.constants.databaseenumeration.ImageType;
+import model.database.requests.CardRequest;
 import model.database.worldonlinedb.CardEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
@@ -35,6 +36,10 @@ public class ImageCardUploadServlet extends ProtectedServlet {
             request.setAttribute("isLoaded", isLoaded);
             request.setAttribute("cardID", cardID);
             request.setAttribute("cardImageTypes", ImageType.values());
+            request.setAttribute("title", cutTitle("Загрузка картинки для карточки[" +
+                    cardID +
+                    "]" +
+                    cardEntity.getCardName()));
             ServletHelper.sendForward("/imagecardupload.jsp?cardID=" + cardID, this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
@@ -45,11 +50,18 @@ public class ImageCardUploadServlet extends ProtectedServlet {
         ServletHelper.setUTF8(request, response);
         try {
             long cardID;
-            request.setAttribute("cardImageTypes", ImageType.values());
+            request.setAttribute("cardImageTypes", ImageType.cardTypes());
             try {
                 cardID = Long.parseLong(request.getParameter("cardID"));
-                request.setAttribute("cardID", cardID);
-                ServletHelper.sendForward("/imagecardupload.jsp?cardID=" + cardID, this, request, response);
+                CardEntity cardEntity = CardRequest.getCardByID(cardID);
+                if (cardEntity != null) {
+                    request.setAttribute("cardID", cardID);
+                    request.setAttribute("title", cutTitle("Загрузка картинки для карточки[" +
+                            cardID +
+                            "]" +
+                            cardEntity.getCardName()));
+                    ServletHelper.sendForward("/imagecardupload.jsp?cardID=" + cardID, this, request, response);
+                }
             } catch (Exception e) {
                 throw new ServletException("incorrect card id");
             }
@@ -62,6 +74,11 @@ public class ImageCardUploadServlet extends ProtectedServlet {
     @Override
     protected AdminRule setAdminRule() {
         return AdminRule.Moderator;
+    }
+
+    @Override
+    public String getTitle() {
+        return null;
     }
 
 }

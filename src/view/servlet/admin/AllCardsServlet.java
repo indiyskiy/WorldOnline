@@ -1,6 +1,7 @@
 package view.servlet.admin;
 
 import controller.parser.adminparser.AllCardParser;
+import model.additionalentity.admin.PagesArray;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardType;
@@ -25,23 +26,36 @@ public class AllCardsServlet extends ProtectedServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        ServletHelper.setUTF8(request, response);
-        AllCardParser parser = new AllCardParser(MAX_ITEMS);
-        parser.parse(request);
         try {
             ServletHelper.setUTF8(request, response);
+            AllCardParser parser = new AllCardParser(MAX_ITEMS);
+            parser.parse(request);
+            ServletHelper.setUTF8(request, response);
             ArrayList<CardEntity> cardEntities;
-            long pages;
+            int pages;
             if (!parser.haveMatter()) {
                 cardEntities = CardRequest.getAllCards(parser.getFirstElem(), MAX_ITEMS);
                 long results = CardRequest.countCard();
-                pages = (results / MAX_ITEMS);
+                pages = (int) (results / MAX_ITEMS);
             } else {
                 cardEntities = CardRequest.getAllCards(parser);
                 Long results = CardRequest.countCard(parser);
-                pages = (results / MAX_ITEMS);
+                pages = (int) (results / MAX_ITEMS);
             }
-            request.setAttribute("pages", pages);
+//            request.setAttribute("pages", pages);
+            String prefix = "";
+            prefix += "<a href=\"allcards?Page=${i}";
+            if (parser.getCardName() != null) {
+                prefix += "&CardNameRe=" + parser.getCardName();
+            }
+            if (parser.getCardID() != null) {
+                prefix += "&CardIDRe=" + parser.getCardID();
+            }
+            if (parser.getCardType() != null) {
+                prefix += "&CardTypeRe=" + parser.getCardType().getValue();
+            }
+            prefix += "\"> ";
+            request.setAttribute("pagesString", new PagesArray(pages, parser.getPage()).print(prefix, "</a> "));
             request.setAttribute("cardList", cardEntities);
             request.setAttribute("cardTypes", CardType.values());
             request.setAttribute("textType", TextType.values());
@@ -54,5 +68,10 @@ public class AllCardsServlet extends ProtectedServlet {
     @Override
     protected AdminRule setAdminRule() {
         return AdminRule.Moderator;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Все карточки";
     }
 }

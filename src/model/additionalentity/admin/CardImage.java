@@ -3,6 +3,7 @@ package model.additionalentity.admin;
 import model.constants.databaseenumeration.ImageType;
 
 public class CardImage {
+    private long cardImageID;
     private long imageID;
     private ImageType imageType;
     private String imageName;
@@ -29,5 +30,13 @@ public class CardImage {
 
     public String getImageName() {
         return imageName;
+    }
+
+    public long getCardImageID() {
+        return cardImageID;
+    }
+
+    public void setCardImageID(long cardImageID) {
+        this.cardImageID = cardImageID;
     }
 }

@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class MenuRequest {
-    private static LoggerFactory logger = new LoggerFactory(Component.Database, MenuRequest.class);
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, MenuRequest.class);
 
     public static void addMenuSafe(MenuEntity menuEntity, String name) {
         MenuEntity tmp = getMenuByName(name);
@@ -47,7 +47,7 @@ public class MenuRequest {
             session.save(menuEntity);
             session.getTransaction().commit();
         } catch (Exception e) {
-            logger.error(e);
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -58,9 +58,9 @@ public class MenuRequest {
     public static void addMenuCardLinkSafe(MenuCardLinkEntity menuCardLinkEntity) {
         if (!cardMenuLinkExist(menuCardLinkEntity.getCard().getCardID(), menuCardLinkEntity.getMenu().getMenuID())) {
             addMenuCardLink(menuCardLinkEntity);
-            logger.debug(("link added"));
+            loggerFactory.debug(("link added"));
         } else {
-            logger.debug("link duplicated");
+            loggerFactory.debug("link duplicated");
         }
     }
 
@@ -78,15 +78,15 @@ public class MenuRequest {
             ps.setLong(2, cardID);
             rs = ps.executeQuery();
             if (rs.first()) {
-                logger.debug("menuCardLink" + menuID + "-" + cardID + " exist");
+                loggerFactory.debug("menuCardLink" + menuID + "-" + cardID + " exist");
                 return true;
             }
         } catch (SQLException e) {
-            logger.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        logger.debug("menuCardLink" + menuID + "-" + cardID + " not exist");
+        loggerFactory.debug("menuCardLink" + menuID + "-" + cardID + " not exist");
         return false;
     }
 
@@ -98,7 +98,7 @@ public class MenuRequest {
             session.save(menuCardLinkEntity);
             session.getTransaction().commit();
         } catch (Exception e) {
-            logger.error(e);
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -111,7 +111,7 @@ public class MenuRequest {
         try {
             return (MenuEntity) session.get(MenuEntity.class, menuID);
         } catch (Exception e) {
-            logger.error(e);
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -133,7 +133,7 @@ public class MenuRequest {
             ps.setLong(2, menu.getMenuID());
             ps.executeUpdate();
         } catch (Exception e) {
-            logger.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
         }
@@ -186,7 +186,7 @@ public class MenuRequest {
                 getMenuInfo(menuInfo, rs);
             }
         } catch (Exception e) {
-            logger.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -272,7 +272,7 @@ public class MenuRequest {
                 getRootMenuInfo(menuInfo, rs);
             }
         } catch (Exception e) {
-            logger.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -300,7 +300,7 @@ public class MenuRequest {
             rs = ps.executeQuery();
             completeMenuInfo = getCompleteMenuInfo(rs);
         } catch (Exception e) {
-            logger.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -357,7 +357,7 @@ public class MenuRequest {
                 }
             }
         } catch (Exception e) {
-            logger.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -374,16 +374,16 @@ public class MenuRequest {
 
     public static void addMenuCardLink(ArrayList<MenuCardLinkEntity> menuCardLinkEntities) {
         for (MenuCardLinkEntity menuCardLinkEntity : menuCardLinkEntities) {
-            logger.debug("adding menuCardLink" + menuCardLinkEntity.getMenu().getMenuID() + "-" + menuCardLinkEntity.getCard().getCardID());
+            loggerFactory.debug("adding menuCardLink" + menuCardLinkEntity.getMenu().getMenuID() + "-" + menuCardLinkEntity.getCard().getCardID());
             if (!cardMenuLinkExist(menuCardLinkEntity.getCard().getCardID(), menuCardLinkEntity.getMenu().getMenuID())) {
                 Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
                 try {
                     session.beginTransaction();
                     session.save(menuCardLinkEntity);
                     session.getTransaction().commit();
-                    logger.debug(menuCardLinkEntity.getMenu().getMenuID() + "-" + menuCardLinkEntity.getCard().getCardID() + " added");
+                    loggerFactory.debug(menuCardLinkEntity.getMenu().getMenuID() + "-" + menuCardLinkEntity.getCard().getCardID() + " added");
                 } catch (Exception e) {
-                    logger.error(e);
+                    loggerFactory.error(e);
                 } finally {
                     if (session != null && session.isOpen()) {
                         session.close();
@@ -409,7 +409,7 @@ public class MenuRequest {
                 menuIDList.add(menuID);
             }
         } catch (SQLException e) {
-            logger.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -444,7 +444,7 @@ public class MenuRequest {
                 parseCompleteMenu(menuCompleteInformation, rs);
             }
         } catch (SQLException e) {
-            logger.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -476,12 +476,29 @@ public class MenuRequest {
         try {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "(SELECT DISTINCT  " +
-                    "  Menu.MenuID AS MenuID, " +
-                    "  Menu.IconImageID AS IconImageID, " +
-                    "  Menu.ParentMenuID AS ParentMenuID, " +
-                    "  Menu.Number AS Number, " +
-                    "  Text.Text AS Text, " +
-                    "  Count(MenuCardLink.MenuCardLinkID) AS CardCounter  " +
+                    "Menu.MenuID AS MenuID, " +
+                    "Menu.IconImageID AS IconImageID, " +
+                    "Menu.ParentMenuID AS ParentMenuID, " +
+                    "Menu.Number AS Number, " +
+                    "Text.Text AS Text, " +
+                    "Count(MenuCardLink.MenuCardLinkID) AS CardCounter  " +
+                    "FROM Menu " +
+                    "JOIN User ON (User.UserID = ?) " +
+                    "JOIN UserPersonalData ON (User.UserPersonalDataID = UserPersonalData.UserPersonalDataID) " +
+                    "JOIN TextGroup ON (TextGroup.TextGroupID = Menu.NameTextGroupID) " +
+                    "JOIN Text ON (TextGroup.TextGroupID = Text.TextGroupID AND Text.LanguageID = UserPersonalData.UserLanguage) " +
+                    "LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.MenuID = Menu.MenuID) " +
+                    "LEFT OUTER JOIN Card ON (Card.CardID = MenuCardLink.CardID) " +
+                    "WHERE (Card.CardState = 1 OR Card.CardID IS NULL) " +
+                    "GROUP BY Menu.MenuID) " +
+                    " UNION " +
+                    "(SELECT DISTINCT  " +
+                    "Menu.MenuID AS MenuID, " +
+                    "Menu.IconImageID AS IconImageID, " +
+                    "Menu.ParentMenuID AS ParentMenuID, " +
+                    "Menu.Number AS Number, " +
+                    "Text.Text AS Text, " +
+                    "  0 AS CardCounter " +
                     "FROM Menu " +
                     "  JOIN User ON (User.UserID = ?) " +
                     "  JOIN UserPersonalData ON (User.UserPersonalDataID = UserPersonalData.UserPersonalDataID) " +
@@ -489,31 +506,14 @@ public class MenuRequest {
                     "  JOIN Text ON (TextGroup.TextGroupID = Text.TextGroupID AND Text.LanguageID = UserPersonalData.UserLanguage) " +
                     "  LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.MenuID = Menu.MenuID) " +
                     "  LEFT OUTER JOIN Card ON (Card.CardID = MenuCardLink.CardID) " +
-                    "  WHERE (Card.CardState = 1 OR Card.CardID IS NULL) " +
-                    "GROUP BY Menu.MenuID) " +
-                    " UNION " +
-                    "(SELECT DISTINCT  " +
-                    "  Menu.MenuID AS MenuID, " +
-                    "  Menu.IconImageID AS IconImageID, " +
-                    "  Menu.ParentMenuID AS ParentMenuID, " +
-                    "  Menu.Number AS Number, " +
-                    "  Text.Text AS Text, " +
-                    "    0 AS CardCounter " +
-                    "  FROM Menu " +
-                    "    JOIN User ON (User.UserID = ?) " +
-                    "    JOIN UserPersonalData ON (User.UserPersonalDataID = UserPersonalData.UserPersonalDataID) " +
-                    "    JOIN TextGroup ON (TextGroup.TextGroupID = Menu.NameTextGroupID) " +
-                    "    JOIN Text ON (TextGroup.TextGroupID = Text.TextGroupID AND Text.LanguageID = UserPersonalData.UserLanguage) " +
-                    "    LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.MenuID = Menu.MenuID) " +
-                    "    LEFT OUTER JOIN Card ON (Card.CardID = MenuCardLink.CardID) " +
-                    "  WHERE (Menu.MenuID NOT IN(SELECT DISTINCT " +
-                    "                              Menu.MenuID " +
-                    "                            FROM Menu " +
-                    "                              LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.MenuID = Menu.MenuID) " +
-                    "                              LEFT OUTER JOIN Card ON (Card.CardID = MenuCardLink.CardID) " +
-                    "                            WHERE (Card.CardState = 1 OR Card.CardID IS NULL) " +
-                    "                            GROUP BY Menu.MenuID " +
-                    "  )))";
+                    "WHERE (Menu.MenuID NOT IN(SELECT DISTINCT " +
+                    "                            Menu.MenuID " +
+                    "                          FROM Menu " +
+                    "                            LEFT OUTER JOIN MenuCardLink ON (MenuCardLink.MenuID = Menu.MenuID) " +
+                    "                            LEFT OUTER JOIN Card ON (Card.CardID = MenuCardLink.CardID) " +
+                    "                          WHERE (Card.CardState = 1 OR Card.CardID IS NULL) " +
+                    "                          GROUP BY Menu.MenuID " +
+                    ")))";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, allMenusRequest.getUserID());
             ps.setLong(2, allMenusRequest.getUserID());
@@ -526,7 +526,7 @@ public class MenuRequest {
             }
             recountMenus(menuCompleteInformationHashMap);
         } catch (Exception e) {
-            logger.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
@@ -597,13 +597,68 @@ public class MenuRequest {
                 CardMenu cardMenu = new CardMenu();
                 cardMenu.setMenuID(rs.getLong("Menu.MenuID"));
                 cardMenu.setName(rs.getString("Text.Text"));
+                cardMenu.setCardMenuID(rs.getLong("MenuCardLink.MenuCardLinkID"));
                 cardMenus.add(cardMenu);
             }
         } catch (SQLException e) {
-            logger.error(e);
+            loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
         card.setCardMenuArrayList(cardMenus);
     }
+
+    public static ArrayList<SimpleMenu> getLastLevelMenus() {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        ArrayList<SimpleMenu> menus = new ArrayList<>();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT DISTINCT " +
+                            "Menu.MenuID, " +
+                            "Text.Text, " +
+                            "tmp.MenuID " +
+                            "FROM Menu " +
+                            "JOIN TextGroup ON (Menu.NameTextGroupID = TextGroup.TextGroupID) " +
+                            "JOIN Text ON (Text.TextGroupID = TextGroup.TextGroupID) " +
+                            "LEFT OUTER JOIN Menu AS tmp ON (tmp.ParentMenuID = Menu.MenuID) " +
+                            "WHERE " +
+                            "tmp.MenuID IS NULL AND Text.LanguageID =" + LanguageType.Russian.getValue();
+            ps = connection.prepareStatement(sqlString);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SimpleMenu menu = new SimpleMenu();
+                menu.setMenuID(rs.getLong("Menu.MenuID"));
+                menu.setMenuName(rs.getString("Text.Text"));
+                menus.add(menu);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return menus;
+    }
+
+    public static void deleteCardMenu(Long cardMenuID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "DELETE FROM MenuCardLink WHERE MenuCardLink.MenuCardLinkID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardMenuID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+    }
+
 }
+

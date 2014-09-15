@@ -10,7 +10,7 @@ public class TagEditParser {
     private String errors = null;
 
     public TagEntity parse(HttpServletRequest request) {
-        String tagIDString = request.getParameter("TagID");
+        String tagIDString = request.getParameter("tagID");
         if (tagIDString == null || tagIDString.isEmpty()) {
             addError("Tag id(" + tagIDString + ") is incorrect");
             return null;

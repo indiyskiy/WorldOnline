@@ -28,4 +28,9 @@ public class TestServlet extends ProtectedServlet {
     protected AdminRule setAdminRule() {
         return AdminRule.AdminOnly;
     }
+
+    @Override
+    public String getTitle() {
+        return null;
+    }
 }

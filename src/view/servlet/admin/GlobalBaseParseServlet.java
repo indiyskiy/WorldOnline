@@ -1,11 +1,11 @@
-package view.servlet;
+package view.servlet.admin;
 
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.database.requests.CardRequest;
 import model.logger.LoggerFactory;
 import model.xmlparser.GlobalXmlParser;
-import view.servlet.admin.ProtectedServlet;
+import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -32,5 +32,10 @@ public class GlobalBaseParseServlet extends ProtectedServlet {
     @Override
     protected AdminRule setAdminRule() {
         return AdminRule.AdminOnly;
+    }
+
+    @Override
+    public String getTitle() {
+        return null;
     }
 }

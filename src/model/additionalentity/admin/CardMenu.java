@@ -1,6 +1,7 @@
 package model.additionalentity.admin;
 
 public class CardMenu {
+    private long cardMenuID;
     private long menuID;
     private String name;
 
@@ -18,5 +19,13 @@ public class CardMenu {
 
     public String getName() {
         return name;
+    }
+
+    public long getCardMenuID() {
+        return cardMenuID;
+    }
+
+    public void setCardMenuID(long cardMenuID) {
+        this.cardMenuID = cardMenuID;
     }
 }

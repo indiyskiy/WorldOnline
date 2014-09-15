@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginParser {
     public LoginRequest parse(HttpServletRequest request) throws ServletException {
         LoginRequest loginRequest = new LoginRequest();
-        if (request.getParameter("login") != null && !request.getParameter("login").equals("")) {
-            throw new ServletException("The try of autologining detected");
-        }
         String login = request.getParameter("firstField");
         String password = request.getParameter("secondField");
         if (login == null || password == null || login.equals("") || password.equals("")) {

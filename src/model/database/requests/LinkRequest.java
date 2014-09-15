@@ -17,7 +17,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class LinkRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, LinkRequest.class);
@@ -25,10 +24,10 @@ public class LinkRequest {
     public static ArrayList<CardToCardLinkEntity> getAllCardToCardLink() {
         ArrayList<CardToCardLinkEntity> cardToCardLinkEntities = new ArrayList<CardToCardLinkEntity>();
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             Transaction transaction = session.beginTransaction();
-            cardToCardLinkEntities = (ArrayList<CardToCardLinkEntity>) session.createCriteria(CardToCardLinkEntity.class).list();
+            cardToCardLinkEntities = (ArrayList<CardToCardLinkEntity>)
+                    session.createCriteria(CardToCardLinkEntity.class).list();
             transaction.commit();
         } finally {
             if (session != null && session.isOpen()) {
@@ -50,9 +49,8 @@ public class LinkRequest {
         }
     }
 
-    public static void addCardToCardLinkRequest(CardToCardLinkEntity cardToCardLinkEntity) {
+    public static void addCardToCardLink(CardToCardLinkEntity cardToCardLinkEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(cardToCardLinkEntity);
@@ -94,6 +92,7 @@ public class LinkRequest {
             while (rs.next()) {
                 CardLink cardLink = new CardLink();
                 cardLink.setCardID(rs.getLong("SourceCard.CardID"));
+                cardLink.setCardToCardLinkID(rs.getLong("CardToCardLink.CardToCardLinkID"));
                 cardLink.setCardName(rs.getString("SourceCard.CardName"));
                 cardLink.setLinkType(CardToCardLinkType.parseInt(rs.getInt("CardToCardLink.CardToCardLinkType")));
                 sourceCardLinks.add(cardLink);
@@ -125,6 +124,7 @@ public class LinkRequest {
             while (rs.next()) {
                 CardLink cardLink = new CardLink();
                 cardLink.setCardID(rs.getLong("TargetCard.CardID"));
+                cardLink.setCardToCardLinkID(rs.getLong("CardToCardLink.CardToCardLinkID"));
                 cardLink.setCardName(rs.getString("TargetCard.CardName"));
                 cardLink.setLinkType(CardToCardLinkType.parseInt(rs.getInt("CardToCardLink.CardToCardLinkType")));
                 targetCardLinks.add(cardLink);
@@ -136,5 +136,52 @@ public class LinkRequest {
             dbConnection.closeConnections(ps, rs);
         }
         card.setTargetCardLinks(targetCardLinks);
+    }
+
+    public static boolean isLinkExist(Long sourceCardID, Long targetCardID, CardToCardLinkType cardToCardLinkType) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT * FROM  CardToCardLink " +
+                            "WHERE CardToCardLink.SourceCardID=? " +
+                            "AND CardToCardLink.TargetCardID=? " +
+                            "AND CardToCardLink.CardToCardLinkType=?";
+            ps = connection.prepareStatement(sqlString);
+            ps.setLong(1, sourceCardID);
+            ps.setLong(2, targetCardID);
+            ps.setLong(3, cardToCardLinkType.getValue());
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return false;
+    }
+
+    public static void deleteCardToCardLink(Long cardToCardLinkID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "DELETE FROM  CardToCardLink " +
+                            "WHERE CardToCardLink.CardToCardLinkID=?";
+            ps = connection.prepareStatement(sqlString);
+            ps.setLong(1, cardToCardLinkID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
     }
 }

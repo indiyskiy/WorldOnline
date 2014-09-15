@@ -21,4 +21,9 @@ public class IndexServlet extends ProtectedServlet {
     protected AdminRule setAdminRule() {
         return AdminRule.All;
     }
+
+    @Override
+    public String getTitle() {
+        return "Главная";
+    }
 }

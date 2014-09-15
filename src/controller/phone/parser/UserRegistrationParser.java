@@ -33,7 +33,7 @@ public class UserRegistrationParser extends MobileParser {
             throw new ParseRequestException(ExceptionTexts.registrationNoLanguageException);
         }
         LanguageType languageType = LanguageType.parse(languageValue);
-        if (languageType == null || languageType == LanguageType.Unknown) {
+        if (languageType == null) {
             throw new ParseRequestException(ExceptionTexts.registrationIllegalLanguageException);
         }
         parsedRegistrationRequest.setLanguage(languageType);

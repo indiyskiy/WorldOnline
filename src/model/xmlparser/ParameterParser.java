@@ -23,7 +23,7 @@ public class ParameterParser {
             DataType dataType = cardParameterType.getDataType();
             ApplicationBlock block = cardParameterType.getBlock();
             int position = cardParameterType.getValue();
-            CardParameterTypeEntity cardParameterTypeEntity = new CardParameterTypeEntity(cardParameterTypeName, null, dataType, block, position);
+            CardParameterTypeEntity cardParameterTypeEntity = new CardParameterTypeEntity(cardParameterTypeName, null, dataType, block, position, cardParameterType.isTranslatable(), cardParameterType.isMultiply());
             ParameterRequest.addCardParameterType(cardParameterTypeEntity);
         }
     }

@@ -21,18 +21,35 @@ public abstract class ProtectedServlet extends HttpServlet {
     private AdminRule adminRule;
     private boolean registered = false;
     private ServerInit serverInit = ServerInit.getInstance();
+    protected String pageFrom;
+    private HttpServletRequest request;
+    private final int MAX_TITLE_LENGTH = 43;
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.request = request;
+        this.pageFrom = request.getRequestURI().substring(1);
+        this.pageFrom = pageFrom.substring(pageFrom.indexOf("/")) + "?" + request.getQueryString();
         this.adminRule = setAdminRule();
         HttpSession session = request.getSession(false);
         AccessStatus isPassed;
         isPassed = getIsPassed(session);
         request.setAttribute("registered", registered);
+        request.setAttribute("pageFrom", pageFrom);
         if (isPassed != AccessStatus.Accept) {
             forward(getPageName(isPassed), request, response);
             return;
         }
+        if (getTitle() != null) {
+            request.setAttribute("title", cutTitle(getTitle()));
+        }
         super.service(request, response);
+    }
+
+    protected String cutTitle(String title) {
+        if (title.length() >= 43) {
+            return title.substring(0, 20) + "..." + title.substring(title.length() - 20, title.length());
+        }
+        return "<a href=\"\">" + title + "</a>";
     }
 
     private AccessStatus getIsPassed(HttpSession session) {
@@ -123,6 +140,7 @@ public abstract class ProtectedServlet extends HttpServlet {
             case Denied:
                 return "/denied.jsp";
             case NotLoggedIn:
+                request.getSession().setAttribute("pageFrom", pageFrom);
                 return "/login";
             case TooRegistered:
                 return "/index";
@@ -134,4 +152,7 @@ public abstract class ProtectedServlet extends HttpServlet {
     public boolean isRegistered() {
         return registered;
     }
+
+    abstract public String getTitle();
+
 }

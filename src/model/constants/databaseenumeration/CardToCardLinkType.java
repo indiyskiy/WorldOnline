@@ -1,7 +1,6 @@
 package model.constants.databaseenumeration;
 
 public enum CardToCardLinkType {
-    Unknown(0),
     Metro(1),
     RestaurantChain(2),
     Photographer(3),
@@ -20,11 +19,7 @@ public enum CardToCardLinkType {
             return null;
         }
         CardToCardLinkType[] cardToCardLinkTypes = CardToCardLinkType.values();
-        if (value <= 0 || value >= cardToCardLinkTypes.length) {
-            return Unknown;
-        } else {
-            return cardToCardLinkTypes[value];
-        }
+        return cardToCardLinkTypes[value - 1];
     }
 
     public String getRussianValue() {

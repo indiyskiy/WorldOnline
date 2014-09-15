@@ -2,6 +2,7 @@ package view.servlet;
 
 import controller.phone.parser.MobileErrorParser;
 import helper.FileHelper;
+import model.additionalentity.admin.PagesArray;
 import model.additionalentity.admin.ParsedRequest;
 import model.constants.Component;
 import model.constants.ServerConsts;
@@ -24,13 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 17.10.13
- * Time: 18:24
- * To change this template use File | Settings | File Templates.
- */
 public class ServletHelper {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, ServletHelper.class);
 
@@ -150,4 +144,5 @@ public class ServletHelper {
         }
         throw new ServletException(ex);
     }
+
 }

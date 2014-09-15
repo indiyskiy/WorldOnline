@@ -1,18 +1,30 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Илья
-  Date: 02.04.14
-  Time: 18:40
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="css/main.css">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/spoiler.css" type="text/css"/>
     <title>Access denied!</title>
 </head>
 <body>
-Access denied!
-<br/>
-I am sorry, I am really really sorry!
+<header>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="span8">
+                    <span class="brand">Ошибка прав доступа</span>
+                </div>
+                <ul class="nav">
+                    <li><a href="index">На главную</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container container-lower">
+    Доступ запрещён-недостаточно прав для просмотра страницы.
+</div>
 </body>
 </html>

@@ -24,6 +24,11 @@ public class WeatherServlet extends ProtectedServlet {
         return AdminRule.All;
     }
 
+    @Override
+    public String getTitle() {
+        return "Прогноз погоды";
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }

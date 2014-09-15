@@ -7,6 +7,7 @@ public class CardLink {
     private long cardID;
     private String cardName;
     private CardToCardLinkType linkType;
+    private long cardToCardLinkID;
 
     public void setCardID(long cardID) {
         this.cardID = cardID;
@@ -30,5 +31,13 @@ public class CardLink {
 
     public CardToCardLinkType getLinkType() {
         return linkType;
+    }
+
+    public long getCardToCardLinkID() {
+        return cardToCardLinkID;
+    }
+
+    public void setCardToCardLinkID(long cardToCardLinkID) {
+        this.cardToCardLinkID = cardToCardLinkID;
     }
 }

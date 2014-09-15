@@ -10,14 +10,14 @@ public class CardToCardLinkEntity {
     @javax.persistence.Column(name = "CardToCardLinkID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long CardToCardLinkID;
+    private Long cardToCardLinkID;
 
     public Long getCardToCardLinkID() {
-        return CardToCardLinkID;
+        return cardToCardLinkID;
     }
 
     public void setCardToCardLinkID(Long cardToCardLinkID) {
-        CardToCardLinkID = cardToCardLinkID;
+        cardToCardLinkID = cardToCardLinkID;
     }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -63,7 +63,7 @@ public class CardToCardLinkEntity {
 
         CardToCardLinkEntity that = (CardToCardLinkEntity) o;
 
-        if (CardToCardLinkID != null ? !CardToCardLinkID.equals(that.CardToCardLinkID) : that.CardToCardLinkID != null)
+        if (cardToCardLinkID != null ? !cardToCardLinkID.equals(that.cardToCardLinkID) : that.cardToCardLinkID != null)
             return false;
         if (sourceCard != null ? !sourceCard.equals(that.sourceCard) : that.sourceCard != null)
             return false;
@@ -76,7 +76,7 @@ public class CardToCardLinkEntity {
 
     @Override
     public int hashCode() {
-        int result = CardToCardLinkID != null ? CardToCardLinkID.hashCode() : 0;
+        int result = cardToCardLinkID != null ? cardToCardLinkID.hashCode() : 0;
         result = 31 * result + (sourceCard != null ? sourceCard.hashCode() : 0);
         result = 31 * result + (targetCard != null ? targetCard.hashCode() : 0);
         result = 31 * result + (cardToCardLinkType != null ? cardToCardLinkType.hashCode() : 0);

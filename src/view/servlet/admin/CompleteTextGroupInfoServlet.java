@@ -26,6 +26,10 @@ public class CompleteTextGroupInfoServlet extends ProtectedServlet {
                 CompleteTextGroupInfo completeTextGroupInfo = TextRequest.getCompleteTextGroupInfo(textGroupID);
                 request.setAttribute("textGroup", completeTextGroupInfo.getTextGroup());
                 request.setAttribute("textes", completeTextGroupInfo.getTextEntityMap().values());
+                request.setAttribute("title", cutTitle("Группа текстов [" +
+                        completeTextGroupInfo.getTextGroup().getTextGroupID() +
+                        "]" +
+                        completeTextGroupInfo.getTextGroup().getTextGroupName()));
                 ServletHelper.sendForward("/completetextgroupinfo.jsp?TextGroupID=" + textGroupID, this, request, response);
             }
         } catch (Exception e) {
@@ -42,5 +46,10 @@ public class CompleteTextGroupInfoServlet extends ProtectedServlet {
     @Override
     protected AdminRule setAdminRule() {
         return AdminRule.Moderator;
+    }
+
+    @Override
+    public String getTitle() {
+        return null;
     }
 }

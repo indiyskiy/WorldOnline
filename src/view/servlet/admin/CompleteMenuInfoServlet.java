@@ -24,8 +24,8 @@ public class CompleteMenuInfoServlet extends ProtectedServlet {
         try {
             ServletHelper.setUTF8(request, response);
             Long menuId = null;
-            if (request.getParameter("MenuID") != null && !request.getParameter("MenuID").isEmpty()) {
-                menuId = Long.parseLong(request.getParameter("MenuID"));
+            if (request.getParameter("menuID") != null && !request.getParameter("menuID").isEmpty()) {
+                menuId = Long.parseLong(request.getParameter("menuID"));
             }
             if (menuId != null) {
                 CompleteMenuInfo menuInfo = MenuRequest.getCompleteMenuInfo(menuId);
@@ -33,12 +33,16 @@ public class CompleteMenuInfoServlet extends ProtectedServlet {
                     request.setAttribute("menu", menuInfo.getMenuEntity());
                     request.setAttribute("textGroup", menuInfo.getCompleteTextGroupInfo().getTextGroup());
                     request.setAttribute("image", menuInfo.getImage());
+                    request.setAttribute("title", cutTitle("Меню [" +
+                            menuInfo.getSimpleMenu().getMenuID() +
+                            "]" +
+                            menuInfo.getSimpleMenu().getMenuName()));
 //                    request.setAttribute("texts",menuInfo.getCompleteTextGroupInfo().getTextEntityMap().values());
 //                    request.setAttribute("menu", menuInfo.getMenu());
 //                    request.setAttribute("submenus", menuInfo.getSubmenus());
 //                    request.setAttribute("parent", menuInfo.getParentMenu());
                 }
-                ServletHelper.sendForward("/completemenuinfo.jsp?MenuId=" + menuId, this, request, response);
+                ServletHelper.sendForward("/completemenuinfo.jsp?menuId=" + menuId, this, request, response);
             }
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
@@ -48,5 +52,10 @@ public class CompleteMenuInfoServlet extends ProtectedServlet {
     @Override
     protected AdminRule setAdminRule() {
         return AdminRule.Moderator;
+    }
+
+    @Override
+    public String getTitle() {
+        return null;
     }
 }

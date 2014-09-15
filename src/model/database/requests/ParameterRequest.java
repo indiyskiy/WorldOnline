@@ -3,6 +3,7 @@ package model.database.requests;
 import controller.phone.entity.AllCardParameterTypesRequest;
 import model.additionalentity.admin.CardParameter;
 import model.additionalentity.admin.CompleteCardInfo;
+import model.additionalentity.admin.ParameterType;
 import model.additionalentity.phone.MobileParameterType;
 import model.constants.ApplicationBlock;
 import model.constants.Component;
@@ -10,6 +11,7 @@ import model.constants.databaseenumeration.DataType;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
+import model.database.worldonlinedb.CardEntity;
 import model.database.worldonlinedb.CardParameterEntity;
 import model.database.worldonlinedb.CardParameterTypeEntity;
 import model.logger.LoggerFactory;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 
 public class ParameterRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, ParameterRequest.class);
+
 
     public static CardParameterEntity getCardParameterByResultSet(ResultSet rs) throws SQLException {
         Long cardParameterEntityID = rs.getLong("CardParameter.CardParameterID");
@@ -202,5 +205,133 @@ public class ParameterRequest {
             dbConnection.closeConnections(ps, rs);
         }
         card.setCardParameterArrayList(cardParameters);
+    }
+
+    public static CardParameterEntity getCardParameter(Long parameterID) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            return (CardParameterEntity) session.get(CardParameterEntity.class, parameterID);
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return null;
+    }
+
+    public static boolean updateCardParameter(CardParameterEntity cardParameter) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        boolean b = false;
+        try {
+            session.beginTransaction();
+            session.update(cardParameter);
+            session.getTransaction().commit();
+            b = true;
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return b;
+    }
+
+    public static void deleteCardParameter(CardParameterEntity cardParameterEntity) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "DELETE FROM CardParameter WHERE CardParameter.CardParameterID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardParameterEntity.getCardParameterID());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+    }
+
+    public static ArrayList<ParameterType> getAllTypes() {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        ArrayList<ParameterType> parameterTypes = new ArrayList<>();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT Text.Text, " +
+                            "CardParameterType.Block," +
+                            "CardParameterType.CardParameterTypeID," +
+                            "CardParameterType.Translatable," +
+                            "CardParameterType.Multiply " +
+                            "FROM CardParameterType " +
+                            "JOIN TextGroup ON (CardParameterType.CardParameterTypeName =TextGroup.TextGroupID) " +
+                            "JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                            "WHERE Text.LanguageID=" + LanguageType.Russian.getValue();
+            ps = connection.prepareStatement(sqlString);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ParameterType parameterType = new ParameterType();
+                parameterType.setParameterTypeID(rs.getLong("CardParameterType.CardParameterTypeID"));
+                parameterType.setName(rs.getString("Text.Text"));
+                parameterType.setBlock(rs.getInt("CardParameterType.Block"));
+                parameterType.setMultiply(rs.getBoolean("CardParameterType.Multiply"));
+                parameterType.setTranslatable(rs.getBoolean("CardParameterType.Translatable"));
+                parameterTypes.add(parameterType);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return parameterTypes;
+    }
+
+    public static CardParameterTypeEntity getCardParameterType(long cardParameterTypeID) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            return (CardParameterTypeEntity) session.get(CardParameterTypeEntity.class, cardParameterTypeID);
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return null;
+    }
+
+    public static boolean isCardParameterExist(long cardID, long cardParameterTypeID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT CardParameter.CardParameterID FROM CardParameter " +
+                    "JOIN Card ON (Card.CardID=CardParameter.CardID) " +
+                    "JOIN CardParameterType ON (CardParameter.CardParameterTypeID=CardParameterType.CardParameterTypeID)" +
+                    "WHERE Card.CardID=? AND CardParameterType.CardParameterTypeID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardID);
+            ps.setLong(2, cardParameterTypeID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return false;
+    }
+
+    public static void addEmptyCardParameter(CardEntity cardEntity, CardParameterTypeEntity cardParameterTypeEntity) {
+        CardParameterEntity cardParameter = new CardParameterEntity(cardEntity, cardParameterTypeEntity, "");
+        addCardParameter(cardParameter);
     }
 }

@@ -11,6 +11,7 @@ public class AllCardParser {
     CardType cardType = null;
     int firstElem = 0;
     int maxItems = 0;
+    private int page;
 
     public AllCardParser(int maxItems) {
         this.maxItems = maxItems;
@@ -25,7 +26,11 @@ public class AllCardParser {
             cardType = CardType.parseInt(Integer.parseInt(ServletHelper.getAndSetAttribute(request, "CardTypeRe")));
         }
         if (request.getParameter("Page") != null && !request.getParameter("Page").isEmpty()) {
-            firstElem = maxItems * Integer.parseInt((ServletHelper.getAndSetAttribute(request, "Page")));
+            page = Integer.parseInt(ServletHelper.getAndSetAttribute(request, "Page"));
+            firstElem = maxItems * page;
+        } else {
+            page = 0;
+            firstElem = maxItems * page;
         }
     }
 
@@ -47,6 +52,34 @@ public class AllCardParser {
 
     public int getMaxItems() {
         return maxItems;
+    }
+
+    public void setCardID(Long cardID) {
+        this.cardID = cardID;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+
+    public void setCardType(CardType cardType) {
+        this.cardType = cardType;
+    }
+
+    public void setFirstElem(int firstElem) {
+        this.firstElem = firstElem;
+    }
+
+    public void setMaxItems(int maxItems) {
+        this.maxItems = maxItems;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 
     public boolean haveMatter() {

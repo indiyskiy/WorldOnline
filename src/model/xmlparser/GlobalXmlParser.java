@@ -1,6 +1,5 @@
 package model.xmlparser;
 
-import helper.FileHelper;
 import helper.ImageHelper;
 import helper.ParameterValidator;
 import model.constants.Component;
@@ -10,8 +9,6 @@ import model.database.requests.*;
 import model.database.worldonlinedb.*;
 import model.exception.DataIsEmptyException;
 import model.logger.LoggerFactory;
-import model.textparser.StringFileParser;
-import model.textparser.StringIntPair;
 import model.xmlparser.xmlview.card.cardaboutcity.AboutCity;
 import model.xmlparser.xmlview.card.cardaboutcity.CardAboutCity;
 import model.xmlparser.xmlview.card.cardhandbook.CardHandBook;
@@ -35,7 +32,6 @@ import model.xmlparser.xmlview.route.routeroute.RouteRoute;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -1129,7 +1125,7 @@ public class GlobalXmlParser implements Runnable {
 
     private void addCardToCardLink(CardEntity targetCard, CardEntity card, CardToCardLinkType cardToCardLinkType) {
         CardToCardLinkEntity cardToCardLinkEntity = new CardToCardLinkEntity(card, targetCard, cardToCardLinkType);
-        LinkRequest.addCardToCardLinkRequest(cardToCardLinkEntity);
+        LinkRequest.addCardToCardLink(cardToCardLinkEntity);
     }
 
     public HashMap<Long, CardEntity> getCardEntityHashMap() {

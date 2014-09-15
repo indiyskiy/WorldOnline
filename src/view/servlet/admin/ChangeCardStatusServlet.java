@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ChangeStatusServlet extends ProtectedServlet {
+public class ChangeCardStatusServlet extends ProtectedServlet {
     private LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, ProtectedServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,7 +44,7 @@ public class ChangeStatusServlet extends ProtectedServlet {
             } else {
                 ServletHelper.throwServletException(exceptions);
             }
-            ServletHelper.sendForward("/completecardinfo?CardID=" + cardID, this, request, response);
+            ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
@@ -58,7 +58,7 @@ public class ChangeStatusServlet extends ProtectedServlet {
             } catch (Exception e) {
                 throw new ServletException("incorrect card ID");
             }
-            ServletHelper.sendForward("/completecardinfo.jsp?CardID=" + cardID, this, request, response);
+            ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
@@ -67,5 +67,10 @@ public class ChangeStatusServlet extends ProtectedServlet {
     @Override
     protected AdminRule setAdminRule() {
         return AdminRule.Moderator;
+    }
+
+    @Override
+    public String getTitle() {
+        return null;
     }
 }

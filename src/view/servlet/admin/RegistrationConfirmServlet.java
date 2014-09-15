@@ -19,6 +19,11 @@ public class RegistrationConfirmServlet extends ProtectedServlet {
         return AdminRule.All;
     }
 
+    @Override
+    public String getTitle() {
+        return null;
+    }
+
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     }
 

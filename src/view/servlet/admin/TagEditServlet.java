@@ -15,13 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Servcer
- * Date: 20.11.13
- * Time: 12:57
- * To change this template use File | Settings | File Templates.
- */
 public class TagEditServlet extends ProtectedServlet {
     LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, TagEditServlet.class);
 
@@ -29,14 +22,18 @@ public class TagEditServlet extends ProtectedServlet {
         try {
             request.setCharacterEncoding("UTF-8");
             request.setAttribute("TagTypes", TagType.values());
-            String tagIDString = request.getParameter("TagID");
+            String tagIDString = request.getParameter("tagID");
             if (tagIDString != null) {
                 int tagID = Integer.parseInt(tagIDString);
                 CompleteTagInfo tagInfo = TagRequest.getCompleteTag(tagID);
                 if (tagInfo != null && tagInfo.getTagEntity() != null) {
                     request.setAttribute("tag", tagInfo.getTagEntity());
+                    request.setAttribute("title", cutTitle("Тэг [" +
+                            tagInfo.getTagEntity().getTagID() +
+                            "] " +
+                            tagInfo.getTagEntity().getTagName()));
                 }
-                ServletHelper.sendForward("/tagedit.jsp?TagID=" + tagIDString, this, request, response);
+                ServletHelper.sendForward("/tagedit.jsp?tagID=" + tagIDString, this, request, response);
             }
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
@@ -62,5 +59,10 @@ public class TagEditServlet extends ProtectedServlet {
     @Override
     protected AdminRule setAdminRule() {
         return AdminRule.HeightModerator;
+    }
+
+    @Override
+    public String getTitle() {
+        return null;
     }
 }

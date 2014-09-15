@@ -53,4 +53,9 @@ public class AllUsersServlet extends ProtectedServlet {
     protected AdminRule setAdminRule() {
         return AdminRule.Moderator;
     }
+
+    @Override
+    public String getTitle() {
+        return "Все пользователи";
+    }
 }

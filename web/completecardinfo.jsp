@@ -4,71 +4,114 @@
 <fmt:requestEncoding value="UTF-8"/>
 <html>
 <head>
+    <link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="css/main.css">
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/spoiler.css" type="text/css"/>
+    <title>complete card information</title>
     <SCRIPT LANGUAGE="JavaScript">
-        function clickSpoiler(el) {//клик по dl, dt, dd
+        function clickSpoilerCustom(el, className) {//клик по dl, dt, dd
+            el = el.parentNode;
             var m, k, s;
             s = el.getElementsByTagName("dd")[0].style.display;
-//            m = document.getElementsByTagName("dl");
-//            k = m.length;
-            //
-            /* while (k--) {
-             if (m[k].className == "spoiler") {
-             m[k].getElementsByTagName("dd")[0].style.display = "none";
-             }
-             }*/
-            //
+            m = document.getElementsByTagName("dl");
+            k = m.length;
+
+            while (k--) {
+                if (m[k].className == className) {//
+                    m[k].getElementsByTagName("dd")[0].style.display = "none";
+                }
+            }
             if (s == "none" || s == "") {
                 el.getElementsByTagName("dd")[0].style.display = "block";
+//
             }
-            /* else {
-             el.getElementsByTagName("dd")[0].style.display = "none";
-             }*/
+            else {
+                el.getElementsByTagName("dd")[0].style.display = "none";
+            }
+        }
 
+        function clickSpoilerSub(el) {//клик по dl, dt, dd
+            clickSpoilerCustom(el, "spoilerSub")
+        }
+
+        function clickSpoiler(el) {
+            clickSpoilerCustom(el, "spoiler")
         }
     </SCRIPT>
-    <title>complete card information</title>
 </head>
 <body>
 <header>
-    <h1>
-        Карточка [${cardInfo.cardID}]-${cardInfo.name}
-    </h1>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="span6">
+                    <span class="brand">${title}</span>
+                </div>
+                <ul class="nav">
+                    <li><a href="index">На главную</a></li>
+                    <li><a href="allcards">Все карточки</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </header>
-<br/>
+<div class="container container-lower">
 <%--общее инфо--%>
-<dl class="spoiler" onclick="clickSpoiler(this);">
-    <dt>Общая информация</dt>
+<dl class="spoiler">
+    <dt onclick="clickSpoiler(this);">Общая информация</dt>
     <dd>
-        <%--Имя ${cardInfo.name}--%>
-        <%--<br>--%>
-        Состояние ${cardInfo.cardState.russianValue}
-        <br>
-        Тип карточки ${cardInfo.cardType.text}
-        <br>
-        Дата создания ${cardInfo.creationTime}
-        <br>
-        Последнее изменение ${cardInfo.updateTime}
+        <form method="post" action="changestatus">
+            <%--Имя ${cardInfo.name}--%>
+            <%--<br>--%>
+            Состояние:
+            <select name="state">
+                <c:forEach var="state" items="${cardStates}">
+                    <option value="${state.value}"
+                            <c:if test="${state.value==cardInfo.cardState.value}">
+                                selected
+                            </c:if>
+                            > ${state.russianValue}
+                    </option>
+                </c:forEach>
+            </select>
+            <%--${cardInfo.cardState.russianValue}--%>
+            <br>
+            Тип карточки: ${cardInfo.cardType.text}
+            <br>
+            Дата создания: ${cardInfo.creationTime}
+            <br>
+            Последнее изменение: ${cardInfo.updateTime}
+            <br>
+            <input type="hidden" value="${cardInfo.cardID}" name="cardID">
+            <input type="submit" value="Сохранить"/>
+        </form>
     </dd>
 </dl>
 <%--Координаты--%>
-<c:if test="${not empty coordinate}">
-    <dl class="spoiler" onclick="clickSpoiler(this);">
-        <dt>Координаты</dt>
-        <dd>
-                ${coordinate.latitude}:${coordinate.longitude}
-            <br>
-        </dd>
-    </dl>
-</c:if>
-<c:if test="${empty coordinate}">
-    Добавить координаты
-</c:if>
+<dl class="spoiler">
+    <dt onclick="clickSpoiler(this);">Координаты</dt>
+    <dd>
+        <c:if test="${not empty coordinate}">
+            <form action="editcardcoordinate" method="post">
+                <input type="text" name="latitude" value="${coordinate.latitude}">
+                :
+                <input type="text" name="longitude" value="${coordinate.longitude}">
+                <input type="hidden" name="cardID" value="${cardInfo.cardID}">
+                    <%--<br/>--%>
+                <input type="submit" value="Сохранить"/>
+            </form>
+        </c:if>
+        <c:if test="${empty coordinate}">
+            <a href="createcardcoordinate?cardID=${cardInfo.cardID}">Добавить координаты</a>
+        </c:if>
+    </dd>
+</dl>
 <%--Прайс--%>
 <c:if test="${not empty price}">
-    <dl class="spoiler" onclick="clickSpoiler(this);">
-        <dt>Прайс</dt>
+    <dl class="spoiler">
+        <dt onclick="clickSpoiler(this);">Прайс</dt>
         <dd>
                 ${price.priceID}
             <br>
@@ -76,8 +119,8 @@
     </dl>
 </c:if>
 <c:if test="${empty price}">
-    <dl class="spoiler" onclick="clickSpoiler(this);">
-        <dt>Прайс</dt>
+    <dl class="spoiler">
+        <dt onclick="clickSpoiler(this);">Прайс</dt>
         <dd>
             Добавить прайс
             <br>
@@ -85,90 +128,153 @@
     </dl>
 </c:if>
 <%--target link--%>
-<dl class="spoiler" onclick="clickSpoiler(this);">
-    <dt>Ссылается на</dt>
+<dl class="spoiler">
+    <dt onclick="clickSpoiler(this);">Ссылается на</dt>
     <dd>
-        <c:if test="${not empty targetCardLinks}">
-            <c:forEach var="linkedCard" items="${targetCardLinks}">
-                <a href="completecardinfo?CardID=${linkedCard.cardID}">[${linkedCard.cardID}]${linkedCard.cardName}</a> - ${linkedCard.linkType.russianValue}
-                <br>
-            </c:forEach>
-        </c:if>
-        <c:if test="${empty targetCardLinks}">
-            Добавить ссылку
-        </c:if>
+        <form method="post" action="addcardtocardlink">
+            ID карты <input type="text" name="targetCardID"/>
+            <br/>
+            Тип связи
+            <select name="cardToCardLinkType">
+                <c:forEach var="cardToCardLinkType" items="${cardToCardLinkTypes}">
+                    <option value="${cardToCardLinkType.value}">${cardToCardLinkType.russianValue}</option>
+                </c:forEach>
+            </select>
+            <br/>
+            <input type="hidden" name="sourceCardID" value="${cardInfo.cardID}"/>
+            <input type="hidden" name="from" value="target"/>
+            <input type="submit" value="Добавить">
+        </form>
+        <%--<br/>--%>
+        <c:forEach var="linkedCard" items="${targetCardLinks}">
+            <a href="completecardinfo?cardID=${linkedCard.cardID}">
+                [${linkedCard.cardID}]${linkedCard.cardName}
+            </a>
+            - ${linkedCard.linkType.russianValue}
+            (<a href="deletecardtocardlink?cardToCardLinkID=${linkedCard.cardToCardLinkID}&cardID=${cardInfo.cardID}">удалить</a>)
+            <br>
+        </c:forEach>
     </dd>
 </dl>
 <%--source links--%>
-<dl class="spoiler" onclick="clickSpoiler(this);">
-    <dt>Имеет ссылки с</dt>
+<dl class="spoiler">
+    <dt onclick="clickSpoiler(this);">Имеет ссылки с</dt>
     <dd>
-        <c:if test="${not empty sourceCardLinks}">
-            <c:forEach var="linkedCard" items="${sourceCardLinks}">
-                <a href="completecardinfo?CardID=${linkedCard.cardID}">[${linkedCard.cardID}]${linkedCard.cardName}</a> - ${linkedCard.linkType.russianValue}
-                <br>
-            </c:forEach>
-        </c:if>
-        <c:if test="${empty sourceCardLinks}">
-            Добавить ссылку
-        </c:if>
+        <form method="post" action="addcardtocardlink">
+            ID карты <input type="text" name="sourceCardID"/>
+            <br/>
+            Тип связи
+            <select name="cardToCardLinkType">
+                <c:forEach var="cardToCardLinkType" items="${cardToCardLinkTypes}">
+                    <option value="${cardToCardLinkType.value}">${cardToCardLinkType.russianValue}</option>
+                </c:forEach>
+            </select>
+            <br/>
+            <input type="hidden" name="targetCardID" value="${cardInfo.cardID}"/>
+            <input type="hidden" name="from" value="source"/>
+            <input type="submit" value="Добавить">
+        </form>
+        <c:forEach var="linkedCard" items="${sourceCardLinks}">
+            <a href="completecardinfo?cardID=${linkedCard.cardID}">
+                [${linkedCard.cardID}]${linkedCard.cardName}
+            </a>
+            - ${linkedCard.linkType.russianValue}
+            (<a href="deletecardtocardlink?cardToCardLinkID=${linkedCard.cardToCardLinkID}&cardID=${cardInfo.cardID}">удалить</a>)
+            <br>
+        </c:forEach>
     </dd>
 </dl>
 
 <%--menus--%>
-<dl class="spoiler" onclick="clickSpoiler(this);">
-    <dt>Категории</dt>
+<dl class="spoiler">
+    <dt onclick="clickSpoiler(this);">Категории</dt>
     <dd>
-        <c:if test="${not empty menus}">
-            <c:forEach var="menu" items="${menus}">
-                <a href="completemenuinfo?MenuID=${menu.menuID}">[${menu.menuID}]${menu.name}</a>
-                <br>
+        <form method="post" action="addcardmenu">
+            Категория <select name="menuID">
+            <c:forEach var="cardMenu" items="${cardMenus}">
+                <option value="${cardMenu.menuID}">${cardMenu.menuName}</option>
             </c:forEach>
-        </c:if>
-        <c:if test="${empty menus}">
-            Добавить категорию
-        </c:if>
+        </select>
+            <input type="hidden" value="${cardInfo.cardID}" name="cardID">
+            <input value="Добавить" type="submit">
+        </form>
+        <br/>
+        <c:forEach var="menu" items="${menus}">
+            <a href="completemenuinfo?menuID=${menu.menuID}">[${menu.menuID}]${menu.name}</a>
+            (<a href="deletecardmenu?cardMenuID=${menu.cardMenuID}&cardID=${cardInfo.cardID}">удалить</a> )
+            <br>
+        </c:forEach>
     </dd>
 </dl>
 
 <%--images--%>
-<dl class="spoiler" onclick="clickSpoiler(this);">
-    <dt>Картинки</dt>
+<dl class="spoiler">
+    <dt onclick="clickSpoiler(this);">Картинки</dt>
     <dd>
-        <c:if test="${not empty images}">
-            <c:forEach var="image" items="${images}">
-                ${image.imageName}(${image.imageType.text})
-                <br>
-                <img src='http://148.251.42.117:8090/worldOnline/image/${image.imageID}'/>
-                <br>
-                <br>
-            </c:forEach>
-        </c:if>
-        <c:if test="${empty images}">
-            Добавить картинку
-        </c:if>
-    </dd>
-</dl>
-
-<%--Parameters and texts--%>
-<dl class="spoiler" onclick="clickSpoiler(this);">
-    <dt>Параметры</dt>
-    <dd>
-        <c:forEach var="block" items="${parameterBlocks}">
-            <dl class="spoiler" onclick="clickSpoiler(this);">
-                <dt>${block.rusText}</dt>
-                <dd>
-                    <c:forEach items="${parameters}" var="parameter">
-                        <c:if test="${block.value==parameter.block}">
-                            ${parameter.name} - ${parameter.value}
-                            <br>
-                        </c:if>
-                    </c:forEach>
-                    <br>
-                </dd>
-            </dl>
+        <a href="imagecardupload?cardID=${cardInfo.cardID}">Добавить картинку</a>
+        <br/>
+        <c:forEach var="image" items="${images}">
+            ${image.imageName}(${image.imageType.text})
+            <a href="deletecardimage?cardID=${cardInfo.cardID}&cardImageID=${image.cardImageID}">Удалить</a>
+            <br>
+            <img src='image/${image.imageID}'/>
+            <%--http://148.251.42.117:8090/worldOnline/--%>
+            <br>
+            <br>
         </c:forEach>
     </dd>
 </dl>
+
+<%--Parameters and texts 2.0 --%>
+<dl class="spoiler">
+    <dt onclick="clickSpoiler(this);">Параметры</dt>
+    <dd>
+        <a href="addcardelement?cardID=${cardInfo.cardID}">Добавить</a>
+        <br>
+
+        <form method="POST" action="editcardparameters">
+            <c:forEach var="block" items="${cardBlocks}">
+                <c:if test="${not block.isEmpty}">
+                    <dl class="spoilerSub">
+                        <dt onclick="clickSpoilerSub(this);">${block.name}</dt>
+                        <dd>
+                            <c:forEach items="${block.cardParameters}" var="parameter">
+                                ${parameter.name} - <input type="text" value="${parameter.value}"
+                                                           name="parameter${parameter.parameterID}"/>
+                                (<a href="deleteCardParameter?cardParameterID=${parameter.parameterID}&cardID=${cardInfo.cardID}">удалить</a>)
+                                <br>
+                            </c:forEach>
+                            <c:forEach items="${block.cardTexts}" var="text">
+                                <a href="completetextgroupinfo?TextGroupID=${text.textID}">[${text.textID}]${text.typeName}</a>
+                                (<a href="deletetextcard?textCardID=${text.textCardID}&cardID=${cardInfo.cardID}">удалить</a>)
+                                <br>
+                            </c:forEach>
+                        </dd>
+                    </dl>
+                </c:if>
+            </c:forEach>
+            <c:if test="${not empty parameters or not empty texts}">
+            <br>
+            <input type="hidden" name="cardID" value="${cardInfo.cardID}">
+            <input type="submit" value="Сохранить"/>
+        </form>
+    </c:if>
+    </dd>
+</dl>
+
+<%--tags--%>
+<dl class="spoiler">
+    <dt onclick="clickSpoiler(this);">Тэги</dt>
+    <dd>
+        <a href="addtagtocard?cardID=${cardInfo.cardID}">Добавить</a>
+        <br/>
+        <c:forEach var="tag" items="${tags}">
+            <a href="tagedit?tagID=${tag.tagID}">${tag.tagGroup} - ${tag.tagName}</a>
+            (<a href="deletecardtag?cardTagID=${tag.cardTagID}">удалить</a>)
+            <br>
+        </c:forEach>
+    </dd>
+</dl>
+</div>
 </body>
 </html>

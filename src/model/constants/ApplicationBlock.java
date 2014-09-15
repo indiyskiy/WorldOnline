@@ -1,24 +1,30 @@
 package model.constants;
 
 public enum ApplicationBlock {
-    Main(0),
-    Social(1),
-    Reviews(2),
-    AdditionalInformation(3),
-    Details(4),
-    WiFi(5),
-    Facts(6),
-    Encyclopedia(7),
-    Header(8),
-    Selling(9),
-    Description(10),
-    Cuisine(11),
-    AdditionalTags(12);
+    Store(0, 10),
+    Social(1, 4),
+    Reviews(2, 9),
+    AdditionalInformation(3, 3),
+    Details(4, 6),
+    WiFi(5, 2),
+    Facts(6, 7),
+    Encyclopedia(7, 8),
+    Header(8, 0),
+    Selling(9, 11),
+    Description(10, 1),
+    Cuisine(11, 5),
+    AdditionalTags(12, 12);
 
     private final int value;
+    private final int position;
 
-    private ApplicationBlock(int value) {
+    private ApplicationBlock(int value, int position) {
         this.value = value;
+        this.position = position;
+    }
+
+    public int getPosition() {
+        return position;
     }
 
     public int getValue() {
@@ -27,7 +33,7 @@ public enum ApplicationBlock {
 
     public static ApplicationBlock parseInt(Integer value) {
         if (value == null) {
-            return Main;
+            return Store;
         }
         ApplicationBlock[] applicationBlocks = ApplicationBlock.values();
         return applicationBlocks[value];
@@ -35,8 +41,8 @@ public enum ApplicationBlock {
 
     public String getRusText() {
         switch (this) {
-            case Main:
-                return "основной";
+            case Store:
+                return "Ссылки на приложения";
             case Social:
                 return "Социальные сети";
             case Reviews:
@@ -50,7 +56,7 @@ public enum ApplicationBlock {
             case Facts:
                 return "Факты";
             case Encyclopedia:
-                return "Инцеклопедия";
+                return "Энциклопедия";
             case Header:
                 return "Заголовок";
             case Selling:

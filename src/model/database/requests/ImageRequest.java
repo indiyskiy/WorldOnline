@@ -92,7 +92,6 @@ public class ImageRequest {
 
     public static ImageEntity getImageByID(Long imageID) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             return (ImageEntity) session.get(ImageEntity.class, imageID);
         } finally {
@@ -104,7 +103,6 @@ public class ImageRequest {
 
     public static CardImageEntity getCardImageByID(Long cardImageID) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             return (CardImageEntity) session.get(CardImageEntity.class, cardImageID);
         } finally {
@@ -304,7 +302,7 @@ public class ImageRequest {
         return image;
     }
 
-    public static File getImage(long imageID) {
+    public static File getImageFile(long imageID) {
         ImageEntity imageEntity = getImageByID(imageID);
         if (imageEntity != null) {
             return getFile(imageEntity.getImageFilePath());
@@ -371,7 +369,8 @@ public class ImageRequest {
             @Language("MySQL") String sqlString =
                     "SELECT Image.ImageID," +
                             "CardImage.CardImageType, " +
-                            "CardImage.CardImageName " +
+                            "CardImage.CardImageName, " +
+                            "CardImage.CardImageID " +
                             "FROM Card " +
                             "JOIN CardImage ON (Card.CardID=CardImage.CardID) " +
                             "JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
@@ -382,6 +381,7 @@ public class ImageRequest {
             while (rs.next()) {
                 CardImage cardImage = new CardImage();
                 cardImage.setImageID(rs.getLong("Image.ImageID"));
+                cardImage.setCardImageID(rs.getLong("CardImage.CardImageID"));
                 cardImage.setImageType(ImageType.parseInt(rs.getInt("CardImage.CardImageType")));
                 cardImage.setImageName(rs.getString("CardImage.CardImageName"));
                 cardImages.add(cardImage);
@@ -392,5 +392,33 @@ public class ImageRequest {
             dbConnection.closeConnections(ps, rs);
         }
         card.setCardImages(cardImages);
+    }
+
+    public static ImageEntity getImage(Long imageID) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            return (ImageEntity) session.get(ImageEntity.class, imageID);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static void deleteCardImage(Long cardImageID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "DELETE FROM CardImage WHERE CardImage.CardImageID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardImageID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
     }
 }

@@ -1,7 +1,6 @@
 package model.constants.databaseenumeration;
 
 public enum LanguageType {
-    Unknown(0),
     Russian(1),
     English(2);
 
@@ -20,11 +19,8 @@ public enum LanguageType {
             return null;
         }
         LanguageType[] languageTypes = LanguageType.values();
-        if (value <= 0 || value >= languageTypes.length) {
-            return Unknown;
-        } else {
-            return languageTypes[value];
-        }
+        return languageTypes[value - 1];
+
     }
 
     public static LanguageType parse(String languageValue) {

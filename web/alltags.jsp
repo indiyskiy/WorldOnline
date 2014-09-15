@@ -4,43 +4,62 @@
 <fmt:requestEncoding value="UTF-8"/>
 <html>
 <head>
+    <link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="css/main.css">
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/spoiler.css" type="text/css"/>
     <title>All tags list</title>
 </head>
 
 <body>
-
-<table border="" width="70%" align="center">
-    <tr>
-        <td width="3%">
-            ID
-        </td>
-        <td>
-            Имя тега
-        </td>
-        <td>
-            Тип тега
-        </td>
-        <td width="15%">
-
-        </td>
-    </tr>
-    <c:forEach items="${tags}" var="tag">
+<header>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="span8">
+                    <span class="brand">${title}</span>
+                </div>
+                <ul class="nav">
+                    <li><a href="index">На главную</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container container-lower">
+    <table border="" width="70%" align="center">
         <tr>
-            <td>
-                    ${tag.tagID}
+            <td width="3%">
+                ID
             </td>
             <td>
-                    ${tag.tagName}
+                Имя тега
             </td>
             <td>
-                    <%--${tag.tagType} - unknown--%>
+                Тип тега
             </td>
-            <td>
-                <a href='tagedit?TagID=${tag.tagID}'>Редактировать</a>
+            <td width="15%">
+
             </td>
         </tr>
-    </c:forEach>
-</table>
+        <c:forEach items="${tags}" var="tag">
+            <tr>
+                <td>
+                        ${tag.tagID}
+                </td>
+                <td>
+                        ${tag.tagName}
+                </td>
+                <td>
+                        <%--${tag.tagType} - unknown--%>
+                </td>
+                <td>
+                    <a href='tagedit?tagID=${tag.tagID}'>Редактировать</a>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 </body>
 </html>

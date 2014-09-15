@@ -10,7 +10,7 @@ public class TextCardEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long textCardID;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "TextGroupID")
     private TextGroupEntity textGroup;
 

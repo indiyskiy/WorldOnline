@@ -1,15 +1,17 @@
 package model.constants.databaseenumeration;
 
 public enum ImageType {
-    Photo(1),
-    ViewImage(2),
-    Tag(3),
-    MenuPhoto(4);
+    Photo(1, "Фото"),
+    ViewImage(2, "Вид города"),
+    Tag(3, "Тэг"),
+    MenuPhoto(4, "Фото иконки в меню");
 
     private final int value;
+    private final String text;
 
-    private ImageType(int value) {
+    private ImageType(int value, String text) {
         this.value = value;
+        this.text = text;
     }
 
     public int getValue() {
@@ -25,17 +27,12 @@ public enum ImageType {
     }
 
     public String getText() {
-        switch (this) {
-            case Photo:
-                return "Фото";
-            case ViewImage:
-                return "Вид города";
-            case Tag:
-                return "Тэг";
-            default:
-                return "Неизвестно";
-        }
+        return text;
     }
 
 
+    public static ImageType[] cardTypes() {
+        return new ImageType[]{Photo, ViewImage, MenuPhoto};
+    }
 }
+

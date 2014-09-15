@@ -27,6 +27,11 @@ public class ExampleServlet extends ProtectedServlet {
 
     @Override
     protected AdminRule setAdminRule() {
-        return AdminRule.AdminOnly;
+        return AdminRule.All;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Тестовая страница";
     }
 }

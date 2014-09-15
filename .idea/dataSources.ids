@@ -112,7 +112,9 @@
       <column name="CardParameterTypeID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="Block" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="DataType" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="Multiply" sqlType="TINYINT" length="3" precision="0" nullable="true" jdbcType="-6"/>
       <column name="Position" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="Translatable" sqlType="TINYINT" length="3" precision="0" nullable="true" jdbcType="-6"/>
       <column name="CardParameterTypeName" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="ImageID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="CardParameterTypeID"/>

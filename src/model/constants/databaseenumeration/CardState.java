@@ -40,4 +40,8 @@ public enum CardState {
                 return "Карточка шрёдингера - расскажите об этом занимательном факте программисту!";
         }
     }
+
+    public static CardState[] getValues() {
+        return new CardState[]{Active, NotActive, Deleted};
+    }
 }

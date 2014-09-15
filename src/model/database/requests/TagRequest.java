@@ -1,9 +1,9 @@
 package model.database.requests;
 
+import helper.StringHelper;
 import model.additionalentity.CompleteCardTagInfo;
 import model.additionalentity.CompleteTextGroupInfo;
-import model.additionalentity.admin.CompleteTagInfo;
-import model.additionalentity.admin.SimpleTagGroup;
+import model.additionalentity.admin.*;
 import model.additionalentity.phone.MobileTag;
 import model.additionalentity.phone.MobileTagGroup;
 import model.constants.Component;
@@ -19,8 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public class TagRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, TagRequest.class);
@@ -35,7 +34,7 @@ public class TagRequest {
             "LEFT OUTER JOIN Text AS TagGroupText ON (TagGroupText.TextGroupID=TagGroupTextGroup.TextGroupID) ";
 
     @Language("MySQL")
-    private static final String tagText = "SELECT * FROM Tag  " +
+    private static final String tagText = "SELECT * FROM Tag " +
             "LEFT OUTER JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
             "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
             "LEFT OUTER JOIN Image AS TagIcon ON (TagIcon.ImageID=Tag.IconID) " +
@@ -174,7 +173,7 @@ public class TagRequest {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL")
             String sql = cardTagText +
-                    "WHERE CardTag.CardTagID=?";
+                   "WHERE CardTag.CardTagID=?";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, cardTagID);
             rs = ps.executeQuery();
@@ -507,5 +506,192 @@ public class TagRequest {
     private static void addCardTag(TagEntity tagEntity, CardEntity cardEntity) {
         CardTagEntity cardTagEntity = new CardTagEntity(cardEntity, tagEntity);
         addCardTag(cardTagEntity);
+    }
+
+    public static void setCardTags(CompleteCardInfo card, long cardID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        ArrayList<CardTag> cardTags = new ArrayList<>();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT TagGT.Text, " +
+                            "Text.Text, " +
+                            "Tag.TagID, " +
+                            "CardTag.CardTagID, " +
+                            "TagGroup.TagGroupID " +
+                            "FROM Card " +
+                            "JOIN CardTag ON (Card.CardID=CardTag.CardID) " +
+                            "JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
+                            "JOIN TextGroup ON (Tag.TagTextGroupID=TextGroup.TextGroupID) " +
+                            "JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                            "JOIN TagGroup ON (TagGroup.TagGroupID=Tag.TagGroupID) " +
+                            "JOIN TextGroup AS TagGG ON (TagGG.TextGroupID=TagGroup.TagGroupTextGroupID) " +
+                            "JOIN Text AS TagGT ON (TagGT.TextGroupID=TagGG.TextGroupID) " +
+                            "WHERE Card.CardID=? " +
+                            "AND Text.LanguageID=" + LanguageType.Russian.getValue() + " " +
+                            "AND TagGT.LanguageID=" + LanguageType.Russian.getValue() + " " +
+                            "ORDER BY TagGroup.TagGroupID";
+            ps = connection.prepareStatement(sqlString);
+            ps.setLong(1, cardID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CardTag cardTag = new CardTag();
+                cardTag.setTagGroup(rs.getString("TagGT.Text"));
+                cardTag.setTagName(rs.getString("Text.Text"));
+                cardTag.setTagID(rs.getLong("Tag.TagID"));
+                cardTag.setCardTagID(rs.getLong("CardTag.CardTagID"));
+                cardTag.setTagGroupID(rs.getLong("TagGroup.TagGroupID"));
+                cardTag.setAdded(true);
+                cardTags.add(cardTag);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        card.setCardTagArrayList(cardTags);
+    }
+
+    public static Collection<TagGroup> getAllTagGroups(long cardID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        HashMap<Long, TagGroup> tagGroups = new HashMap<>();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT " +
+                            "Tag.TagID, " +
+                            "TagGroup.TagGroupID, " +
+                            "GroupText.Text AS GroupName, " +
+                            "Text.Text      AS TagName, " +
+                            "T.tagID " +
+                            "FROM TagGroup " +
+                            "JOIN TextGroup AS GroupTextGroup ON (TagGroup.TagGroupTextGroupID = GroupTextGroup.TextGroupID) " +
+                            "JOIN Text AS GroupText ON (GroupText.TextGroupID = GroupTextGroup.TextGroupID) " +
+                            "JOIN Tag ON (Tag.TagGroupID = TagGroup.TagGroupID) " +
+                            "JOIN TextGroup ON (Tag.TagTextGroupID = TextGroup.TextGroupID) " +
+                            "JOIN Text ON (Text.TextGroupID = TextGroup.TextGroupID) " +
+                            "LEFT OUTER JOIN ( " +
+                            "SELECT Tag.TagID AS tagID FROM Tag " +
+                            "LEFT OUTER JOIN CardTag ON (CardTag.TagID = Tag.TagID) " +
+                            "LEFT OUTER JOIN Card ON (CardTag.CardID = Card.CardID) " +
+                            "WHERE Card.CardID=? " +
+                            ") AS T ON (T.tagID=Tag.TagID) " +
+                            "WHERE " +
+                            "Text.LanguageID = 1 " +
+                            "AND GroupText.LanguageID = 1 " +
+                            "ORDER BY GroupText.Text, Text.Text";
+            ps = connection.prepareStatement(sqlString);
+            ps.setLong(1, cardID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Long tagGroupID = rs.getLong("TagGroup.TagGroupID");
+                TagGroup tagGroup;
+                if (tagGroups.containsKey(tagGroupID)) {
+                    tagGroup = tagGroups.get(tagGroupID);
+                } else {
+                    tagGroup = new TagGroup();
+                    tagGroup.setName(rs.getString("GroupName"));
+                    tagGroups.put(tagGroupID, tagGroup);
+                    tagGroup.setTagGroupID(tagGroupID);
+                }
+                ArrayList<CardTag> cardTags = tagGroup.getTagList();
+                Long tagID = rs.getLong("Tag.TagID");
+                CardTag cardTag = new CardTag();
+                cardTag.setTagID(tagID);
+                cardTag.setTagName(rs.getString("TagName"));
+                cardTag.setTagGroup(tagGroup.getName());
+                cardTag.setTagGroupID(tagGroup.getTagGroupID());
+                long t = rs.getLong("T.tagID");
+                if (rs.wasNull() || t == 0L) {
+                    cardTag.setAdded(false);
+                } else {
+                    cardTag.setAdded(true);
+                }
+                cardTags.add(cardTag);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return tagGroups.values();
+    }
+
+    public static HashSet<Long> getCardTagIDs(long cardID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        HashSet<Long> tagIDs = new HashSet<>();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT Tag.TagID FROM Tag " +
+                            "JOIN CardTag ON (Tag.TagID=CardTag.TagID) " +
+                            "JOIN Card ON (CardTag.CardID=Card.CardID) " +
+                            "WHERE Card.CardID=?";
+            ps = connection.prepareStatement(sqlString);
+            ps.setLong(1, cardID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                tagIDs.add(rs.getLong("Tag.TagID"));
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return tagIDs;
+    }
+
+    public static void deleteTagsFromCard(long cardID, ArrayList<Long> idsToDelete) {
+        if (idsToDelete.isEmpty()) {
+            return;
+        }
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            String ids = StringHelper.getStringFromArray((List) idsToDelete);
+            @Language("MySQL") String sqlString =
+                    "DELETE FROM CardTag " +
+                            "WHERE Card.CardID=? AND CardTag.TagID IN(" + ids + ")";
+            ps = connection.prepareStatement(sqlString);
+            ps.setLong(1, cardID);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+    }
+
+    public static void addTagsToCard(long cardID, ArrayList<Long> idsToAdd) {
+        if (idsToAdd.isEmpty()) {
+            return;
+        }
+        try {
+            CardEntity cardEntity = CardRequest.getCardByID(cardID);
+            if (cardEntity != null) {
+                for (Long tagId : idsToAdd) {
+                    TagEntity tagEntity = TagRequest.getTag(tagId);
+                    if (tagEntity != null) {
+                        CardTagEntity cardTagEntity = new CardTagEntity(cardEntity, tagEntity);
+                        TagRequest.addCardTag(cardTagEntity);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        }
     }
 }

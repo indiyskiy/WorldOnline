@@ -52,4 +52,9 @@ public class CreateCardServlet extends ProtectedServlet {
     protected AdminRule setAdminRule() {
         return AdminRule.Moderator;
     }
+
+    @Override
+    public String getTitle() {
+        return "Создание карточки";
+    }
 }

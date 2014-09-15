@@ -4,97 +4,88 @@
 <fmt:requestEncoding value="UTF-8"/>
 <html>
 <head>
+    <link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="css/main.css">
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/spoiler.css" type="text/css"/>
     <title>All cards</title>
 </head>
 <body>
-<a href="index">Главная страница.</a> <a href="createcard">Создать карточку.</a>
-<br/>
-Страница <c:forEach var="i" begin="0" end="${pages}">
-    <c:choose>
-        <c:when test="${i==0 && (''.equals(page) || empty  page )}">
-            <b> ${i} </b>
-        </c:when>
-        <c:when test="${i==page}">
-            <b> ${i} </b>
-        </c:when>
-        <c:otherwise>
-            <a href="allcards?Page=${i}&CardNameRe=${cardNameRe}&CardIDRe=${cardIDRe}&CardTypeRe=${cardTypeRe}">
-                    ${i}
-            </a>
-        </c:otherwise>
-    </c:choose>
-</c:forEach>
-<br/>
+<header>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="span8">
+                    <span class="brand">${title}</span>
+                </div>
+                <ul class="nav">
+                    <li><a href="index">На главную</a></li>
+                    <li><a href="createcard">Создать карточку</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container container-lower">
+    ${pagesString}
+    <br/>
 
-<form action="allcards" method="GET">
-    Текст <input type="text" name="CardNameRe"
-                 value="${cardNameRe}"/>
-    ID карточки <input type="text" name="CardIDRe"
-                       value="${cardIDRe}"/>
-    Тип карточки <select name="CardTypeRe">
-    <option value=""
-            <c:if test="${''==cardTypeRe}">
-                selected
-            </c:if>
-            >Любой
-    </option>
-    <c:forEach items="${cardTypes}" var="cardType">
-        <option value="${cardType.value}"
-                <c:if test="${cardType.value==cardTypeRe}">
+    <form action="allcards" method="GET">
+        Текст <input type="text" name="CardNameRe"
+                     value="${cardNameRe}"/>
+        ID карточки <input type="text" name="CardIDRe"
+                           value="${cardIDRe}"/>
+        Тип карточки <select name="CardTypeRe">
+        <option value=""
+                <c:if test="${''==cardTypeRe}">
                     selected
                 </c:if>
-                >${cardType.text}</option>
-    </c:forEach>
-</select>
-    <input type="submit" value="Найти"/>
-</form>
-
-<table border="" width="70%" align="center">
-    <tr>
-        <td width="3%">
-            ID
-        </td>
-        <td>
-            Имя карточки
-        </td>
-        <td>
-            Тип карточки
-        </td>
-    </tr>
-    <c:forEach items="${cardList}" var="card">
-        <tr>
-            <td>
-                <a href='completecardinfo?CardID=${card.cardID}'> ${card.cardID}</a>
-            </td>
-            <td>
-                    ${card.cardName}
-            </td>
-            <td>
-                <c:forEach items="${cardTypes}" var="cardType">
-                    <c:if test="${cardType.value==card.cardType}">
-                        ${cardType.text}
+                >Любой
+        </option>
+        <c:forEach items="${cardTypes}" var="cardType">
+            <option value="${cardType.value}"
+                    <c:if test="${cardType.value==cardTypeRe}">
+                        selected
                     </c:if>
-                </c:forEach>
+                    >${cardType.text}</option>
+        </c:forEach>
+    </select>
+        <input type="submit" value="Найти"/>
+    </form>
+
+    <table border="" width="70%" align="center">
+        <tr>
+            <td width="3%">
+                ID
+            </td>
+            <td>
+                Имя карточки
+            </td>
+            <td>
+                Тип карточки
             </td>
         </tr>
-    </c:forEach>
-</table>
-<br/>
-Страница <c:forEach var="i" begin="0" end="${pages}">
-    <c:choose>
-        <c:when test="${i==0 && (''.equals(page) || empty  page )}">
-            <b> ${i} </b>
-        </c:when>
-        <c:when test="${i==page}">
-            <b> ${i} </b>
-        </c:when>
-        <c:otherwise>
-            <a href="allcards?Page=${i}&CardNameRe=${cardNameRe}&CardIDRe=${cardIDRe}&CardTypeRe=${cardTypeRe}">
-                    ${i}
-            </a>
-        </c:otherwise>
-    </c:choose>
-</c:forEach>
+        <c:forEach items="${cardList}" var="card">
+            <tr>
+                <td>
+                    <a href='completecardinfo?cardID=${card.cardID}'> ${card.cardID}</a>
+                </td>
+                <td>
+                        ${card.cardName}
+                </td>
+                <td>
+                    <c:forEach items="${cardTypes}" var="cardType">
+                        <c:if test="${cardType.value==card.cardType}">
+                            ${cardType.text}
+                        </c:if>
+                    </c:forEach>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+    <br/>
+    ${pagesString}
+</div>
 </body>
 </html>

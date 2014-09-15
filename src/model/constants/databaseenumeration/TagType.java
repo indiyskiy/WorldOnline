@@ -9,7 +9,7 @@ public enum TagType {
     NoBarriers(3, "БезБарьеров", "No Barriers", ApplicationBlock.AdditionalTags, TagViewType.Icons),
     MiddlePrice(4, "Средний чек", "Middle Price", ApplicationBlock.Cuisine, TagViewType.MenuIcon),
     PetersburgCard(5, "Карта гостя", "", ApplicationBlock.AdditionalTags, TagViewType.Icons),
-    NewsTag(6, "", "NewsTag", ApplicationBlock.AdditionalTags, TagViewType.Icons);
+    NewsTag(6, "Тэги новостей", "NewsTag", ApplicationBlock.AdditionalTags, TagViewType.Icons);
 
     private final int value;
     private final String russianName;

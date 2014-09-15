@@ -10,9 +10,6 @@ public class ParsedRegistrationRequest extends MobileRequest {
     private String deviceToken;
     private MobilePlatform mobilePlatform;
 
-    public ParsedRegistrationRequest() {
-        this.language = LanguageType.Unknown;
-    }
 
     public String getDeviceID() {
         return deviceID;

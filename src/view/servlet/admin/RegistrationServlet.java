@@ -42,4 +42,9 @@ public class RegistrationServlet extends ProtectedServlet {
         return AdminRule.Unregistered;
     }
 
+    @Override
+    public String getTitle() {
+        return "Регистрация";
+    }
+
 }

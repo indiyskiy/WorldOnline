@@ -43,6 +43,7 @@ public class CompleteUserInfoServlet extends ProtectedServlet {
             request.setAttribute("user", user);
             request.setAttribute("mobilePlatforms", MobilePlatform.values());
             request.setAttribute("languages", LanguageType.values());
+            request.setAttribute("title", cutTitle("Пользователь ID[${user.userID}]"));
             ServletHelper.sendForward("/completeuserinfo.jsp", this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
@@ -52,6 +53,11 @@ public class CompleteUserInfoServlet extends ProtectedServlet {
     @Override
     protected AdminRule setAdminRule() {
         return AdminRule.Moderator;
+    }
+
+    @Override
+    public String getTitle() {
+        return null;
     }
 }
 

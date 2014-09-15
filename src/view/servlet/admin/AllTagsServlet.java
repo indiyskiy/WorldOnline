@@ -46,4 +46,9 @@ public class AllTagsServlet extends ProtectedServlet {
     protected AdminRule setAdminRule() {
         return AdminRule.Moderator;
     }
+
+    @Override
+    public String getTitle() {
+        return "Все тэги";
+    }
 }

@@ -13,7 +13,7 @@ public class ImageServlet extends ProtectedServlet {
 
         Long imageID = Long.valueOf(request.getPathInfo().substring(1)); // 123
 
-        File image = ImageRequest.getImage(imageID);
+        File image = ImageRequest.getImageFile(imageID);
         if (image == null) {
             throw new ServletException(imageID + " is null");
         }
@@ -59,5 +59,10 @@ public class ImageServlet extends ProtectedServlet {
     @Override
     protected AdminRule setAdminRule() {
         return AdminRule.All;
+    }
+
+    @Override
+    public String getTitle() {
+        return null;
     }
 }

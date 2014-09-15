@@ -7,7 +7,6 @@ import model.additionalentity.admin.ParsedRegistrationRequest;
 import model.constants.Component;
 import model.constants.MailConsts;
 import model.constants.ProtectAdminLevel;
-import model.constants.databaseenumeration.CardState;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.AdminUserAdditionalInfoEntity;
@@ -22,7 +21,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class AdminUserRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, AdminUserRequest.class);
@@ -117,20 +115,55 @@ public class AdminUserRequest {
 
 
     public static void addRootAdminUser() {
-        if (AdminUserRequest.countUsers() == 0) {
-            AdminUserEntity adminUserEntity = new AdminUserEntity();
-            adminUserEntity.setAdminUserName("root");
-            adminUserEntity.setAdminUserPassword(Md5Hash.getMd5Hash("eva01hashin"));
-            adminUserEntity.setConfirmed(true);
-            adminUserEntity.setAdminRole(ProtectAdminLevel.Administrator.getValue());
-            AdminUserAdditionalInfoEntity adminUserAdditionalInfo = new AdminUserAdditionalInfoEntity();
-            adminUserAdditionalInfo.setAdminUserEmail(MailConsts.Evdokimov);
-            adminUserAdditionalInfo.setAdminUserFirstName("root");
-            adminUserAdditionalInfo.setAdminUserSecondName("root");
-            adminUserAdditionalInfo.setAdminUserRegistrationTimestamp(TimeManager.currentTime());
-            adminUserEntity.setAdminUserAdditionalInfo(adminUserAdditionalInfo);
-            AdminUserRequest.addAdminUser(adminUserEntity);
+        if (AdminUserRequest.countUsers(ProtectAdminLevel.Administrator) == 0) {
+            addUser("root", "eva01hashin", true, ProtectAdminLevel.Administrator, MailConsts.Evdokimov, "root", "root");
         }
+        if (AdminUserRequest.countUsers(ProtectAdminLevel.HeightModerator) == 0) {
+            addUser("hModerator", "ufkfrnbrfjgfcyjcnt", true, ProtectAdminLevel.HeightModerator, MailConsts.Evdokimov, "Height", "Moderator");
+        }
+        if (AdminUserRequest.countUsers(ProtectAdminLevel.HeightModerator) == 0) {
+            addUser("moderator", "sudoaptgetinstall", true, ProtectAdminLevel.LowModerator, MailConsts.Evdokimov, "Low", "Moderator");
+        }
+    }
+
+    private static int countUsers(ProtectAdminLevel protectAdminLevel) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT count(*) AS counter " +
+                    "FROM AdminUser " +
+                    "JOIN AdminRole ON (AdminRole.AdminRoleID=AdminUser.AdminRoleID) " +
+                    "WHERE AdminRole.AdminRoleName=?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, protectAdminLevel.toString());
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                return rs.getInt("counter");
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return 0;
+    }
+
+    public static void addUser(String name, String pass, boolean confirmed, ProtectAdminLevel protectAdminLevel, String mail, String firstName, String lastName) {
+        AdminUserEntity adminUserEntity = new AdminUserEntity();
+        adminUserEntity.setAdminUserName(name);
+        adminUserEntity.setAdminUserPassword(Md5Hash.getMd5Hash(pass));
+        adminUserEntity.setConfirmed(confirmed);
+        adminUserEntity.setAdminRole(protectAdminLevel.getValue());
+        AdminUserAdditionalInfoEntity adminUserAdditionalInfo = new AdminUserAdditionalInfoEntity();
+        adminUserAdditionalInfo.setAdminUserEmail(mail);
+        adminUserAdditionalInfo.setAdminUserFirstName(firstName);
+        adminUserAdditionalInfo.setAdminUserSecondName(lastName);
+        adminUserAdditionalInfo.setAdminUserRegistrationTimestamp(TimeManager.currentTime());
+        adminUserEntity.setAdminUserAdditionalInfo(adminUserAdditionalInfo);
+        AdminUserRequest.addAdminUser(adminUserEntity);
     }
 
     public static void addSession(String key, String login) {

@@ -25,14 +25,14 @@ public class AllMenusServlet extends ProtectedServlet {
         try {
             ServletHelper.setUTF8(request, response);
             Long menuId = null;
-            if (request.getParameter("MenuID") != null && !request.getParameter("MenuID").isEmpty()) {
-                menuId = Long.parseLong(request.getParameter("MenuID"));
+            if (request.getParameter("menuID") != null && !request.getParameter("menuID").isEmpty()) {
+                menuId = Long.parseLong(request.getParameter("menuID"));
             }
             MenuInfo menuInfo;
             String redirect = "/allmenus.jsp";
             if (menuId != null) {
                 menuInfo = MenuRequest.getMenuInfo(menuId, LanguageType.Russian);
-                redirect += "?MenuID=" + menuId;
+                redirect += "?menuID=" + menuId;
             } else {
                 menuInfo = MenuRequest.getRootMenuInfo(LanguageType.Russian);
             }
@@ -50,5 +50,10 @@ public class AllMenusServlet extends ProtectedServlet {
     @Override
     protected AdminRule setAdminRule() {
         return AdminRule.Moderator;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Все меню деревом";
     }
 }

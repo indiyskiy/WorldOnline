@@ -1,7 +1,6 @@
 package model.database.requests;
 
 import controller.parser.adminparser.AllCardParser;
-import helper.TimeCounter;
 import model.additionalentity.admin.CardCoordinate;
 import model.additionalentity.admin.CardInfo;
 import model.additionalentity.admin.CardPrice;
@@ -242,6 +241,9 @@ public class CardRequest {
                 MenuRequest.setCardMenus(card, cardID);
                 ImageRequest.setCardImages(card, cardID);
                 ParameterRequest.setCardParameters(card, cardID);
+                TextRequest.setCardTexts(card, cardID);
+                TagRequest.setCardTags(card, cardID);
+                card.uploadCardBlocks();
             }
         } catch (SQLException e) {
             loggerFactory.error(e);
@@ -662,7 +664,7 @@ public class CardRequest {
     }
 
     private static ArrayList<String> checkCardForActivate(CardEntity cardEntity) {
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
 
     public static Long countCard(CardType cardType) {
