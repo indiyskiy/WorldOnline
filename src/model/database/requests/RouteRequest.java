@@ -48,6 +48,7 @@ public class RouteRequest {
             session.beginTransaction();
             session.save(cardRouteEntity);
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -62,6 +63,7 @@ public class RouteRequest {
             session.beginTransaction();
             session.save(routeElementEntity);
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -88,6 +90,7 @@ public class RouteRequest {
             session.beginTransaction();
             session.save(cardCoordinateEntity);
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -228,16 +231,8 @@ public class RouteRequest {
         //Route Text Group
         Long routeTextGroupID = rs.getLong(textGroup + ".TextGroupID");
         if (routeTextGroupID != 0 && !rs.wasNull()) {
-            CompleteTextGroupInfo completeTextGroupInfo;
-            if (completeCardRouteInfo.getCompleteTextGroupInfo() == null) {
-                TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs, textGroup);
-                completeTextGroupInfo = new CompleteTextGroupInfo(textGroupEntity);
-                completeCardRouteInfo.setCompleteTextGroupInfo(completeTextGroupInfo);
-                completeCardRouteInfo.getCardRouteEntity().setRouteDescriptionTextGroup(textGroupEntity);
-            } else {
-                completeTextGroupInfo = completeCardRouteInfo.getCompleteTextGroupInfo();
-            }
-            TextRequest.getCompleteTextGroupInfo(rs, completeTextGroupInfo, text);
+            TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs, textGroup);
+            completeCardRouteInfo.getCardRouteEntity().setRouteDescriptionTextGroup(textGroupEntity);
         }
     }
 }

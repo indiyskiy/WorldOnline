@@ -3,6 +3,7 @@ package view.servlet.admin;
 import model.additionalentity.MenuInfo;
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.constants.databaseenumeration.CardState;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.requests.MenuRequest;
 import model.logger.LoggerFactory;
@@ -24,15 +25,19 @@ public class AllMenusServlet extends ProtectedServlet {
         ServletHelper.setUTF8(request, response);
         try {
             ServletHelper.setUTF8(request, response);
-            Long menuId = null;
+            Long menuID = null;
             if (request.getParameter("menuID") != null && !request.getParameter("menuID").isEmpty()) {
-                menuId = Long.parseLong(request.getParameter("menuID"));
+                menuID = Long.parseLong(request.getParameter("menuID"));
             }
             MenuInfo menuInfo;
             String redirect = "/allmenus.jsp";
-            if (menuId != null) {
-                menuInfo = MenuRequest.getMenuInfo(menuId, LanguageType.Russian);
-                redirect += "?menuID=" + menuId;
+            if (menuID != null) {
+                menuInfo = MenuRequest.getMenuInfo(menuID, LanguageType.Russian);
+                if (menuInfo == null) {
+                    throw new ServletException("menu info is null. Incorrect menu ID mb?");
+                }
+                menuInfo.setCards(MenuRequest.getAllSimpleCardsOfMenu(menuID));
+                redirect += "?menuID=" + menuID;
             } else {
                 menuInfo = MenuRequest.getRootMenuInfo(LanguageType.Russian);
             }
@@ -40,6 +45,10 @@ public class AllMenusServlet extends ProtectedServlet {
                 request.setAttribute("menu", menuInfo.getMenu());
                 request.setAttribute("submenus", menuInfo.getSubmenus());
                 request.setAttribute("parent", menuInfo.getParentMenu());
+                request.setAttribute("cards", menuInfo.getCards());
+                request.setAttribute("active", CardState.Active);
+                request.setAttribute("active", CardState.NotActive);
+                request.setAttribute("active", CardState.Deleted);
             }
             ServletHelper.sendForward(redirect, this, request, response);
         } catch (Exception e) {

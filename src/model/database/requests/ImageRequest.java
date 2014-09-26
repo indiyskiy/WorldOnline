@@ -46,11 +46,13 @@ public class ImageRequest {
 
     public static void addImage(ImageEntity imageEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(imageEntity);
             session.getTransaction().commit();
+            session.flush();
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -146,139 +148,6 @@ public class ImageRequest {
         return imageEntity;
     }
 
-    public static HashMap<Long, CompleteCardImageInfo> getCompleteCardImages() {
-        HashMap<Long, CompleteCardImageInfo> cardImages = new HashMap<Long, CompleteCardImageInfo>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            Connection connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT * FROM CardImage " +
-                    "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
-                    "LEFT OUTER JOIN TextGroup  ON (CardImage.ImageDescriptionTextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID)";
-            ps = connection.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                CompleteCardImageInfo cardImage;
-                Long cardImageID = rs.getLong("CardImage.CardImageID");
-                if (cardImageID != 0 && !rs.wasNull()) {
-                    if (cardImages.containsKey(cardImageID) && cardImages.get(cardImageID) != null) {
-                        cardImage = cardImages.get(cardImageID);
-                    } else {
-                        cardImage = new CompleteCardImageInfo(getCardImageByResultSet(rs));
-                        cardImages.put(cardImageID, cardImage);
-                    }
-                    getCompleteCardImage(rs, cardImage, "TextGroup", "Text");
-                }
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        return cardImages;
-    }
-
-    public static HashMap<Long, CompleteCardImageInfo> getCompleteCardImagesByCard(long cardID) {
-        HashMap<Long, CompleteCardImageInfo> cardImages = new HashMap<Long, CompleteCardImageInfo>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            Connection connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT * FROM CardImage " +
-                    "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
-                    "LEFT OUTER JOIN TextGroup  ON (CardImage.ImageDescriptionTextGroupID=TextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text  ON (TextGroup.TextGroupID=Text.TextGroupID) " +
-                    "WHERE CardImage.CardID=?";
-            ps = connection.prepareStatement(sql);
-            ps.setLong(1, cardID);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                CompleteCardImageInfo cardImage;
-                Long cardImageID = rs.getLong("CardImage.CardImageID");
-                if (cardImageID != 0 && !rs.wasNull()) {
-                    if (cardImages.containsKey(cardImageID) && cardImages.get(cardImageID) != null) {
-                        cardImage = cardImages.get(cardImageID);
-                    } else {
-                        cardImage = new CompleteCardImageInfo(getCardImageByResultSet(rs));
-                        cardImages.put(cardImageID, cardImage);
-                    }
-                    getCompleteCardImage(rs, cardImage, "TextGroup", "Text");
-                }
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        return cardImages;
-    }
-
-    public static CompleteCardImageInfo getCompleteCardImageByCardImage(long cardImageID) {
-        CompleteCardImageInfo cardImage = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            Connection connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT * FROM CardImage " +
-                    "LEFT OUTER JOIN Image ON (Image.ImageID=CardImage.ImageID) " +
-                    "LEFT OUTER JOIN TextGroup  ON (CardImage.ImageDescriptionTextGroupID=CardImageTextGroup.TextGroupID) " +
-                    "LEFT OUTER JOIN Text  ON (TextGroup.TextGroupID=Text.TextGroupID) " +
-                    "WHERE CardImage.CardImageID=?";
-            ps = connection.prepareStatement(sql);
-            ps.setLong(1, cardImageID);
-            rs = ps.executeQuery();
-            if (rs.first()) {
-                Long cardImageID2 = rs.getLong("CardImage.CardImageID");
-                if (cardImageID2 != 0 && !rs.wasNull() && cardImageID == cardImageID2) {
-                    cardImage = new CompleteCardImageInfo(getCardImageByResultSet(rs));
-                    getCompleteCardImage(rs, cardImage, "TextGroup", "Text");
-                }
-            }
-            while (rs.next()) {
-                Long cardImageID2 = rs.getLong("CardImage.CardImageID");
-                if (cardImageID2 != 0 && !rs.wasNull() && cardImageID == cardImageID2) {
-                    getCompleteCardImage(rs, cardImage, "TextGroup", "Text");
-                }
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        return cardImage;
-    }
-
-    public static void getCompleteCardImage(ResultSet rs, CompleteCardImageInfo cardImage, String textGroup, String text) throws SQLException {
-        if (cardImage.getCardImageEntity().getImage() == null) {
-            //image
-            Long imageID = rs.getLong("Image.ImageID");
-            if (rs.getLong("Image.ImageID") != 0 && !rs.wasNull()) {
-                if (imageID != 0 && !rs.wasNull()) {
-                    ImageEntity imageEntity = ImageRequest.getImageFromResultSet(rs);
-                    cardImage.getCardImageEntity().setImage(imageEntity);
-                }
-            }
-        }
-        //card image text group
-        Long imageTextGroupID = rs.getLong(textGroup + ".TextGroupID");
-        if (imageTextGroupID != 0 && !rs.wasNull()) {
-            CompleteTextGroupInfo completeTextGroupInfo;
-            if (cardImage.getCompleteTextGroupInfo() == null) {
-                TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs, textGroup);
-                completeTextGroupInfo = new CompleteTextGroupInfo(textGroupEntity);
-                cardImage.setCompleteTextGroupInfo(completeTextGroupInfo);
-                cardImage.getCardImageEntity().setImageDescriptionTextGroup(textGroupEntity);
-            } else {
-                completeTextGroupInfo = cardImage.getCompleteTextGroupInfo();
-            }
-            TextRequest.getCompleteTextGroupInfo(rs, completeTextGroupInfo, text);
-        }
-    }
-
     public static ImageEntity getImageByHash(String hash) {
         ImageEntity image = null;
         DatabaseConnection dbConnection = new DatabaseConnection();
@@ -286,13 +155,13 @@ public class ImageRequest {
         ResultSet rs = null;
         try {
             Connection connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT * FROM Image " +
+            @Language("MySQL") String sql = "SELECT Image.ImageID FROM Image " +
                     "WHERE Image.ImageMD5Hash=?";
             ps = connection.prepareStatement(sql);
             ps.setString(1, hash);
             rs = ps.executeQuery();
             if (rs.first()) {
-                image = getImageFromResultSet(rs);
+                image = getImage(rs.getLong("Image.ImageID"));
             }
         } catch (SQLException e) {
             loggerFactory.error(e);

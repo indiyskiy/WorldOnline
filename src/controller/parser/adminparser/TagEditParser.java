@@ -25,12 +25,6 @@ public class TagEditParser {
                 addError("Tag with id " + tagID + " was not found");
                 return null;
             }
-            String tagName = request.getParameter("TagName");
-            if (tagName == null || tagName.replaceAll(" ", "").isEmpty()) {
-                addError("Tag name can't be empty");
-            } else {
-                oldTag.setTagName(tagName);
-            }
             return oldTag;
         } catch (SQLException e) {
             addError("Tag with id=" + tagID + " was not found");

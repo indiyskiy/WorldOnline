@@ -45,21 +45,19 @@
             <c:forEach items="${textes}" var="text">
                 <tr>
                     <td width="5%">
-                            ${text.textID}<input type="hidden" value="${text.textID}" name="id${text.textID}">
+                            ${text.textID}<input type="hidden" value="${text.textID}" name="id${text.languageType}">
                     </td>
                     <td>
-                        <textarea name="text${text.textID}">${text.text}</textarea>
+                        <textarea name="text${text.languageType}">${text.text}</textarea>
                     </td>
                     <td width="15%">
-                        <c:forEach items="${languages}" var="language">
-                            <c:if test="${language.value==text.languageID}">
-                                ${language}
-                            </c:if>
-                        </c:forEach>
+                            ${text.languageType.stringValue}
                     </td>
                 </tr>
             </c:forEach>
         </table>
+        <input type="hidden" value="${textGroup.textGroupID}" name="textGroupID"/>
+        ${hidden}
         <input type="submit" value="Сохранить"/>
     </form>
 </div>

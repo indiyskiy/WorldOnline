@@ -1,20 +1,8 @@
 package model.additionalentity;
 
-import model.database.worldonlinedb.CardEntity;
-
 public class SimpleCard {
-    private CardEntity cardEntity;
     private String name;
-    private String description;
-    private String address;
-
-    public CardEntity getCardEntity() {
-        return cardEntity;
-    }
-
-    public void setCardEntity(CardEntity cardEntity) {
-        this.cardEntity = cardEntity;
-    }
+    private Long cardID;
 
     public String getName() {
         return name;
@@ -24,19 +12,11 @@ public class SimpleCard {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public Long getCardID() {
+        return cardID;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCardID(Long cardID) {
+        this.cardID = cardID;
     }
 }

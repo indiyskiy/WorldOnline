@@ -1,58 +1,93 @@
 package controller.parser.adminparser;
 
+import model.additionalentity.CompleteTextGroupInfo;
+import model.additionalentity.CompleteTextInfo;
 import model.constants.Component;
+import model.constants.databaseenumeration.LanguageType;
 import model.database.requests.TextRequest;
 import model.database.worldonlinedb.TextEntity;
+import model.database.worldonlinedb.TextGroupEntity;
 import model.logger.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashSet;
+import java.util.HashMap;
 
 public class TextGroupEditParser {
     LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, TextGroupEditParser.class);
-    ArrayList<TextEntity> textEntityArrayList = new ArrayList<>();
+    Long textGroupID;
+    ArrayList<CompleteTextInfo> completeTextInfos = new ArrayList<>();
+    private ArrayList<TextEntity> textEntityUpdateArrayList = new ArrayList<>();
+    private ArrayList<TextEntity> textEntityCreateArrayList = new ArrayList<>();
+    private ArrayList<Long> textEntityDeleteArrayList = new ArrayList<>();
 
     public TextGroupEditParser(HttpServletRequest request) throws ServletException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
-        Enumeration<String> names = request.getParameterNames();
-        HashSet<Long> ids = new HashSet<>();
-        while (names.hasMoreElements()) {
-            String name = names.nextElement();
-            loggerFactory.debug("parse " + name);
-            if (name.contains("id")) {
-                ids.add(Long.parseLong(name.replaceAll("id", "")));
+        textGroupID = Long.parseLong(request.getParameter("textGroupID"));
+        for (LanguageType languageType : LanguageType.values()) {
+            String postfix = languageType.toString();
+            String idString = request.getParameter("id" + postfix);
+            CompleteTextInfo completeTextInfo = new CompleteTextInfo();
+            if (idString != null && !idString.isEmpty()) {
+                Long textID = Long.parseLong(idString);
+                completeTextInfo.setTextID(textID);
             }
+            String text = request.getParameter("text" + postfix);
+            completeTextInfo.setText(text);
+            completeTextInfo.setLanguageType(languageType);
+            loggerFactory.debug("parsed text " + completeTextInfo.getTextID() + " " + completeTextInfo.getText());
+            completeTextInfos.add(completeTextInfo);
         }
-        Long textGroupID = null;
-        for (Long id : ids) {
-            TextEntity textEntity = TextRequest.getText(id);
-            if (textEntity == null) {
-                throw new ServletException("invalid text id " + id);
-            }
-            if (textEntity.getTextGroup() == null || textEntity.getTextGroup().getTextGroupID() == null) {
-                throw new ServletException("invalid text group id " + id);
-            }
-
-            if (textGroupID != null) {
-                if (!textGroupID.equals(textEntity.getTextGroup().getTextGroupID())) {
-                    throw new ServletException("unstable text group id");
-                }
-            }
-            if (textGroupID == null) {
-                textGroupID = textEntity.getTextGroup().getTextGroupID();
-            }
-            String value = request.getParameter("text" + id);
-            textEntity.setText(value);
-            textEntityArrayList.add(textEntity);
-            loggerFactory.debug("add " + value);
-        }
+        loggerFactory.debug("completeTextInfos size " + completeTextInfos.size());
     }
 
-    public ArrayList<TextEntity> getTextEntityArrayList() {
-        return textEntityArrayList;
+
+    public ArrayList<TextEntity> getTextEntityUpdateArrayList() {
+        return textEntityUpdateArrayList;
+    }
+
+    public ArrayList<TextEntity> getTextEntityCreateArrayList() {
+        return textEntityCreateArrayList;
+    }
+
+
+    public ArrayList<Long> getTextEntityDeleteArrayList() {
+        return textEntityDeleteArrayList;
+    }
+
+    public void formLists() throws ServletException {
+        CompleteTextGroupInfo completeTextGroupInfo = TextRequest.getCompleteTextGroupInfo(textGroupID);
+        if (completeTextGroupInfo != null) {
+            TextGroupEntity textGroupEntity = TextRequest.addTextGroup(textGroupID);
+            HashMap<Integer, CompleteTextInfo> completeTextInfoHashMap = completeTextGroupInfo.getTextMap();
+            for (CompleteTextInfo completeTextInfo : completeTextInfos) {
+                loggerFactory.debug("formLists text " + completeTextInfo.getTextID() + " " + completeTextInfo.getText());
+                if (completeTextInfo.getTextID() == null || completeTextInfo.getTextID() == 0) {
+                    if (completeTextInfoHashMap.get(completeTextInfo.getLanguageType().getValue()) != null) {
+                        throw new ServletException("text id is null but text is exist");
+                    } else {
+                        if (completeTextInfo.getText() != null && !completeTextInfo.getText().isEmpty()) {
+                            TextEntity textEntity = new TextEntity(completeTextInfo.getLanguageType(), completeTextInfo.getText(), textGroupEntity);
+                            textEntityCreateArrayList.add(textEntity);
+                        }
+                    }
+                } else {
+                    Long textID = completeTextInfo.getTextID();
+                    TextEntity textEntity = TextRequest.getText(textID);
+                    if (completeTextInfo.getText() == null || completeTextInfo.getText().isEmpty()) {
+                        textEntityDeleteArrayList.add(textEntity.getTextID());
+                        loggerFactory.debug("a text " + completeTextInfo.getText());
+                    } else {
+                        if (!textEntity.getText().equals(completeTextInfo.getText())) {
+                            textEntity.setText(completeTextInfo.getText());
+                            textEntityUpdateArrayList.add(textEntity);
+                            loggerFactory.debug("edit text " + textEntity.getTextID() + " to " + completeTextInfo.getText());
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,11 +1,14 @@
 package model.database.requests;
 
+import model.additionalentity.admin.CompletePriceInfo;
+import model.additionalentity.admin.SimpleDish;
 import model.additionalentity.phone.MobileDish;
 import model.additionalentity.phone.MobileDishCategory;
 import model.additionalentity.phone.MobileDishTag;
 import model.additionalentity.phone.MobilePrice;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardState;
+import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.dishes.*;
@@ -30,6 +33,7 @@ public class DishRequest {
             session.beginTransaction();
             session.save(dishTagEntity);
             session.getTransaction().commit();
+            session.flush();
             b = true;
         } catch (Exception e) {
             loggerFactory.error(e);
@@ -48,6 +52,7 @@ public class DishRequest {
             session.beginTransaction();
             session.save(priceEntity);
             session.getTransaction().commit();
+            session.flush();
             b = true;
         } catch (Exception e) {
             loggerFactory.error(e);
@@ -66,6 +71,7 @@ public class DishRequest {
             session.beginTransaction();
             session.save(cardPriceLinkEntity);
             session.getTransaction().commit();
+            session.flush();
             b = true;
         } catch (Exception e) {
             loggerFactory.error(e);
@@ -84,6 +90,7 @@ public class DishRequest {
             session.beginTransaction();
             session.save(dishTagDishLinkEntity);
             session.getTransaction().commit();
+            session.flush();
             b = true;
         } catch (Exception e) {
             loggerFactory.error(e);
@@ -102,6 +109,7 @@ public class DishRequest {
             session.beginTransaction();
             session.save(dishEntity);
             session.getTransaction().commit();
+            session.flush();
             b = true;
         } catch (Exception e) {
             loggerFactory.error(e);
@@ -120,6 +128,7 @@ public class DishRequest {
             session.beginTransaction();
             session.save(dishCategoryEntity);
             session.getTransaction().commit();
+            session.flush();
             b = true;
         } catch (Exception e) {
             loggerFactory.error(e);
@@ -289,5 +298,36 @@ public class DishRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return mobileDishTags;
+    }
+
+    public static CompletePriceInfo getCompletePriceInfo(Long priceID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT Price.PriceID,TextGroup.TextGroupID,Text.Text FROM Price " +
+                    "LEFT OUTER JOIN TextGroup ON (Price.PriceNameID=TextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID) " +
+                    "WHERE (Text.LanguageID IS NULL OR Text.LanguageID=" + LanguageType.Russian.getValue() + ")";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, priceID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                CompletePriceInfo completePriceInfo = new CompletePriceInfo();
+                completePriceInfo.setPriceID(rs.getLong("Price.PriceID"));
+                completePriceInfo.setName(rs.getString("Text.Text"));
+                completePriceInfo.setTextGroupID(rs.getLong("TextGroup.TextGroupID"));
+                ArrayList<SimpleDish> simpleDishes = getPriceDishes(priceID);
+                completePriceInfo.setCategories(simpleDishes);
+                completePriceInfo.setCards(CardRequest.getAllPriceCards(priceID));
+                return completePriceInfo;
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
     }
 }

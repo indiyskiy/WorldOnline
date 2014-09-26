@@ -24,6 +24,7 @@ public class CoordinateRequest {
             session.beginTransaction();
             session.save(cardCoordinateEntity);
             session.getTransaction().commit();
+            session.flush();
             return true;
         } finally {
             if (session != null && session.isOpen()) {
@@ -71,6 +72,7 @@ public class CoordinateRequest {
             session.beginTransaction();
             session.update(cardCoordinate);
             session.getTransaction().commit();
+            session.flush();
             b = true;
         } finally {
             if (session != null && session.isOpen()) {

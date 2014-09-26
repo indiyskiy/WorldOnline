@@ -1,9 +1,11 @@
 package model.xmlparser;
 
 import helper.FileHelper;
+import helper.ImageHelper;
 import helper.Md5Hash;
 import model.constants.Component;
 import model.constants.ServerConsts;
+import model.constants.databaseenumeration.ImageType;
 import model.constants.databaseenumeration.LanguageType;
 import model.constants.databaseenumeration.MenuType;
 import model.database.requests.ImageRequest;
@@ -156,7 +158,7 @@ public class MenuParser {
                 TextEntity enText = new TextEntity(LanguageType.English, submenu.nameEN, textGroupEntity);
                 TextRequest.addText(ruText);
                 TextRequest.addText(enText);
-                ImageEntity menuImage = getMenuImage(submenu.image);
+                ImageEntity menuImage = ImageHelper.saveImage(submenu.image, ImageType.MenuIcon);
                 MenuEntity menuEntity = new MenuEntity(null, textGroupEntity, menuImage, menuType);
                 menuEntity.setNumber(Integer.parseInt(submenu.orderID));
                 if (menuEntity.getNumber() == null) {
@@ -173,33 +175,6 @@ public class MenuParser {
         return menuEntities;
     }
 
-    private ImageEntity getMenuImage(String imageName) {
-        try {
-            if (imageName == null || imageName.isEmpty()) {
-                return null;
-            }
-            String root = ServerConsts.oldIconsRoot + imageName;
-            File imageFile = new File(root);
-            if (!imageFile.exists()) {
-                return null;
-            }
-            BufferedImage bimg = ImageIO.read(imageFile);
-            int width = bimg.getWidth();
-            int height = bimg.getHeight();
-            long size = imageFile.length();
-            String hash = Md5Hash.getMd5Hash(imageFile);
-            ImageEntity imageEntity = ImageRequest.getImageByHash(hash);
-            if (imageEntity == null) {
-                FileHelper.copyFile(imageFile, imageName, ServerConsts.imageFolder + MENU_ICON);
-                String path = ServerConsts.imageFolder + MENU_ICON + "/" + imageName;
-                imageEntity = new ImageEntity(path, height, width, size, hash);
-            }
-            return imageEntity;
-        } catch (Exception e) {
-            loggerFactory.error(e);
-        }
-        return null;
-    }
 
     private void put(String menuID, MenuEntity menuEntity) {
         menuEntityHashMap.put(menuID, menuEntity);

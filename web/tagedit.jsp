@@ -1,14 +1,36 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <title>edit tag ${tag.tagID}-"${tag.tagName}"</title>
     <link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
     <link href="css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" media="screen" href="css/main.css">
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/spoiler.css" type="text/css"/>
-    <title>edit tag ${tag.tagID}-"${tag.tagName}"</title>
+    <SCRIPT LANGUAGE="JavaScript">
+        function clickSpoiler(el) {//клик по dl, dt, dd
+            el = el.parentNode;
+            var m, k, s;
+            s = el.getElementsByTagName("dd")[0].style.display;
+            m = document.getElementsByTagName("dl");
+            k = m.length;
+
+            while (k--) {
+                if (m[k].className == "spoiler") {
+                    m[k].getElementsByTagName("dd")[0].style.display = "none";
+                }
+            }
+            if (s == "none" || s == "") {
+                el.getElementsByTagName("dd")[0].style.display = "block";
+            }
+            else {
+                el.getElementsByTagName("dd")[0].style.display = "none";
+            }
+        }
+    </SCRIPT>
 </head>
 <body>
 <header>
@@ -27,29 +49,44 @@
     </div>
 </header>
 <div class="container container-lower">
-    <form method="POST">
-        ID= <input type="text" name="tagID" size="20" value="${tag.tagID}" disabled/>
-        <br/>
-        Имя тета <input type="text" name="TagName" size="20" value="${tag.tagName}"/>
-        <br/>
-        <%--  Тип тега <select name="TagType">
-          <c:forEach var="tagType" items="${TagTypes}">
-              <option value="${tagType.value}"
-                      <c:if test="${tagType.value==tag.tagType}">
-                          selected
-                      </c:if>
-                      >
-                  <c:out value="${tagType}"/>
-              </option>
-          </c:forEach>
-         --%>
-        </select>
-        <br/>
-        Группа текстов тега [ID${tag.tagTextGroup.textGroupID}]${tag.tagTextGroup.textGroupName} ( <a
-            href="completetextgroupinfo?TextGroupID=${tag.tagTextGroup.textGroupID}">Редактировать</a>)
-        <br/>
-        <input type="submit" value="Submit" name="action"/>
-    </form>
+    <dl class="spoiler">
+        <dt onclick="clickSpoiler(this);">Основная информация</dt>
+        <dd>
+            Группа текстов тега ( <a
+                href="completetextgroupinfo?textGroupID=${tag.textGroupID}&tagID=${tag.tagID}">Редактировать</a>)
+            <br/>
+            Группа тегов <a
+                href="completetaggroupinfo?tagGroupID=${tag.tagGroupID}">[${tag.tagGroupID}]${tag.tagGroupName}</a>
+            <br/>
+
+        </dd>
+    </dl>
+
+    <dl class="spoiler">
+        <dt onclick="clickSpoiler(this);">Иконка</dt>
+        <dd>
+            <c:if test="${not empty tag.iconID && tag.iconID!=0}">
+                Иконка тэга [${tag.iconID}] <a href="edittagimage?tagID=${tag.tagID}">Изменить</a>
+                <br/>
+                <img src='image/${tag.iconID}'/>
+            </c:if>
+            <c:if test="${empty tag.iconID || tag.iconID==0}">
+                <a href="edittagimage?tagID=${tag.tagID}">Загрузить иконку тега</a>
+            </c:if>
+        </dd>
+    </dl>
+
+
+    <dl class="spoiler">
+        <dt onclick="clickSpoiler(this);">Карточки (${fn:length(tag.cards)})</dt>
+        <dd>
+            <c:forEach items="${tag.cards}" var="card">
+                <a href="completecardinfo?cardID=${card.cardID}"> [${card.cardID}]${card.name}</a>
+                <br/>
+            </c:forEach>
+        </dd>
+    </dl>
+
 </div>
 </body>
 </html>

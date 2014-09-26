@@ -1,26 +1,42 @@
 package model.additionalentity.admin;
 
+import model.constants.ApplicationBlock;
+
 public class SimpleTagGroup {
-    private long id;
-    private String text;
+    private long tagGroupID;
+    private String name;
+    private int position;
+    private ApplicationBlock block;
 
-    public void setID(long id) {
-        this.id = id;
+    public long getTagGroupID() {
+        return tagGroupID;
     }
 
-    public long getId() {
-        return id;
+    public void setTagGroupID(long tagGroupID) {
+        this.tagGroupID = tagGroupID;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public String getName() {
+        return name;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getText() {
-        return text;
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public ApplicationBlock getBlock() {
+        return block;
+    }
+
+    public void setBlock(ApplicationBlock block) {
+        this.block = block;
     }
 }

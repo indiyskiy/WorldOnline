@@ -31,7 +31,7 @@ public class TagParser {
         try {
             for (StringIntPair tagItem : tagList) {
                 TextGroupEntity textGroup = new TextGroupEntity(tagType + "_" + tagItem.getString());
-                TagEntity tagEntity = new TagEntity(textGroup, tagItem.getString(), tagGroupEntity, null);
+                TagEntity tagEntity = new TagEntity(textGroup, tagGroupEntity, null);
                 TextEntity nameRu = new TextEntity(LanguageType.Russian, tagItem.getString(), textGroup);
                 TextEntity nameEn = new TextEntity(LanguageType.English, tagItem.getString(), textGroup);
                 TextRequest.addText(nameRu);
@@ -92,7 +92,7 @@ public class TagParser {
             for (TagEnum tagEnumValue : tagEnum.allValues()) {
                 TextGroupEntity textGroup = new TextGroupEntity(tagType + "_" + tagEnumValue);
                 ImageEntity imageEntity = ImageHelper.saveImage(tagEnumValue.getImageName(), ImageType.Tag);
-                TagEntity tagEntity = new TagEntity(textGroup, tagEnumValue.getNameEn(), tagGroupEntity, imageEntity);
+                TagEntity tagEntity = new TagEntity(textGroup, tagGroupEntity, imageEntity);
                 TextEntity tagNameRu = new TextEntity(LanguageType.Russian, tagEnumValue.getNameRu(), textGroup);
                 TextEntity tagNameEn = new TextEntity(LanguageType.English, tagEnumValue.getNameEn(), textGroup);
                 TextRequest.addText(tagNameEn);

@@ -45,6 +45,7 @@
         </c:forEach>
     </select>
         <br/>
+        ${hidden}
         <input type="submit" value="Сохранить"/>
     </form>
 </div>

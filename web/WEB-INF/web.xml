@@ -452,6 +452,138 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <display-name>DeleteCardTagServlet</display-name>
+        <servlet-name>DeleteCardTagServlet</servlet-name>
+        <servlet-class>view.servlet.admin.DeleteCardTagServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteCardTagServlet</servlet-name>
+        <url-pattern>/deletecardtag</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>UpDownMenuServlet</display-name>
+        <servlet-name>UpDownMenuServlet</servlet-name>
+        <servlet-class>view.servlet.admin.UpDownMenuServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpDownMenuServlet</servlet-name>
+        <url-pattern>/updownmenu</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>ChangeParentServlet</display-name>
+        <servlet-name>ChangeParentServlet</servlet-name>
+        <servlet-class>view.servlet.admin.ChangeParentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ChangeParentServlet</servlet-name>
+        <url-pattern>/changeparent</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>EditMenuIconServlet</display-name>
+        <servlet-name>EditMenuIconServlet</servlet-name>
+        <servlet-class>view.servlet.admin.EditMenuIconServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditMenuIconServlet</servlet-name>
+        <url-pattern>/editmenuicon</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>CreateSubMenuServlet</display-name>
+        <servlet-name>CreateSubMenuServlet</servlet-name>
+        <servlet-class>view.servlet.admin.CreateSubMenuServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateSubMenuServlet</servlet-name>
+        <url-pattern>/createsubmenu</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>AllTagGroupsServlet</display-name>
+        <servlet-name>AllTagGroupsServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AllTagGroupsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AllTagGroupsServlet</servlet-name>
+        <url-pattern>/alltaggroups</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>CompleteTagGroupInfoServlet</display-name>
+        <servlet-name>CompleteTagGroupInfoServlet</servlet-name>
+        <servlet-class>view.servlet.admin.CompleteTagGroupInfoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CompleteTagGroupInfoServlet</servlet-name>
+        <url-pattern>/completetaggroupinfo</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>TagGroupCardEditServlet</display-name>
+        <servlet-name>TagGroupCardEditServlet</servlet-name>
+        <servlet-class>view.servlet.admin.TagGroupCardEditServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TagGroupCardEditServlet</servlet-name>
+        <url-pattern>/taggroupcardedit</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>CreateNewTagGroupServlet</display-name>
+        <servlet-name>CreateNewTagGroupServlet</servlet-name>
+        <servlet-class>view.servlet.admin.CreateNewTagGroupServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateNewTagGroupServlet</servlet-name>
+        <url-pattern>/createnewtaggroup</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>EditTagImageServlet</display-name>
+        <servlet-name>EditTagImageServlet</servlet-name>
+        <servlet-class>view.servlet.admin.EditTagImageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditTagImageServlet</servlet-name>
+        <url-pattern>/edittagimage</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>CompletePriceInfoServlet</display-name>
+        <servlet-name>CompletePriceInfoServlet</servlet-name>
+        <servlet-class>view.servlet.admin.CompletePriceInfoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CompletePriceInfoServlet</servlet-name>
+        <url-pattern>/completepriceinfo</url-pattern>
+    </servlet-mapping>
+
+
     <welcome-file-list>
         <welcome-file>index</welcome-file>
     </welcome-file-list>

@@ -27,11 +27,10 @@ public class AddCardParameterServlet extends ProtectedServlet {
             if (addCardParameterParser.getCardEntity() != null && addCardParameterParser.getCardParameterTypeEntity() != null) {
                 if (addCardParameterParser.getCardParameterTypeEntity().isTranslatable()) {
                     TextCardEntity textCardEntity = TextRequest.addEmptyCardText(addCardParameterParser.getCardEntity(), addCardParameterParser.getCardParameterTypeEntity());
-                    ServletHelper.sendForward("/completecardinfo?cardID=" + addCardParameterParser.getCardEntity().getCardID(), this, request, response);
                 } else {
                     ParameterRequest.addEmptyCardParameter(addCardParameterParser.getCardEntity(), addCardParameterParser.getCardParameterTypeEntity());
-                    ServletHelper.sendForward("/completecardinfo?cardID=" + addCardParameterParser.getCardEntity().getCardID(), this, request, response);
                 }
+                ServletHelper.sendForward("/completecardinfo?cardID=" + addCardParameterParser.getCardEntity().getCardID(), this, request, response);
             }
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

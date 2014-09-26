@@ -53,6 +53,8 @@ public class ParameterRequest {
             cardParameterTypeEntity.setDataType(rs.getInt(cardParameterType + ".DataType"));
             cardParameterTypeEntity.setImage(ImageRequest.getImageByResultSet(rs, "CardParameterTypeImage"));
             cardParameterTypeEntity.setPosition(rs.getInt(cardParameterType + ".Position"));
+            cardParameterTypeEntity.setMultiply(rs.getBoolean(cardParameterType + ".Multiply"));
+            cardParameterTypeEntity.setTranslatable(rs.getBoolean(cardParameterType + ".Translatable"));
         }
         return cardParameterTypeEntity;
     }
@@ -67,6 +69,7 @@ public class ParameterRequest {
             session.beginTransaction();
             session.save(cardParameterEntity);
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -80,6 +83,7 @@ public class ParameterRequest {
             session.beginTransaction();
             session.save(cardParameterTypeEntity);
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -228,6 +232,7 @@ public class ParameterRequest {
             session.beginTransaction();
             session.update(cardParameter);
             session.getTransaction().commit();
+            session.flush();
             b = true;
         } finally {
             if (session != null && session.isOpen()) {
@@ -252,6 +257,7 @@ public class ParameterRequest {
         } finally {
             dbConnection.closeConnections(ps, null);
         }
+
     }
 
     public static ArrayList<ParameterType> getAllTypes() {

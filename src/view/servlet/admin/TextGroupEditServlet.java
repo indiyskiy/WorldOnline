@@ -22,13 +22,45 @@ public class TextGroupEditServlet extends ProtectedServlet {
         try {
             loggerFactory.debug("TextGroupEditServlet");
             TextGroupEditParser textGroupEditParser = new TextGroupEditParser(request);
-            ArrayList<TextEntity> textEntities = textGroupEditParser.getTextEntityArrayList();
-            for (TextEntity textEntity : textEntities) {
-//            ParameterValidator.isValidParameter(textEntity.getText(),textEntities.get)
+            textGroupEditParser.formLists();
+            ArrayList<TextEntity> textEntitiesUpdate = textGroupEditParser.getTextEntityUpdateArrayList();
+            for (TextEntity textEntity : textEntitiesUpdate) {
                 TextRequest.updateText(textEntity);
             }
-            loggerFactory.debug("send forward " + request.getParameter("textGroupID"));
-            ServletHelper.sendForward("/completetextgroupinfo?TextGroupID=" + request.getParameter("textGroupID"), this, request, response);
+
+            ArrayList<TextEntity> textEntitiesCreate = textGroupEditParser.getTextEntityCreateArrayList();
+            for (TextEntity textEntity : textEntitiesCreate) {
+                TextRequest.addText(textEntity);
+            }
+            TextRequest.deleteText(textGroupEditParser.getTextEntityDeleteArrayList());
+            boolean redirected = false;
+            if (!redirected) {
+                String cardID = request.getParameter("cardID");
+                if (cardID != null && !cardID.isEmpty()) {
+                    ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
+                    redirected = true;
+                }
+            }
+
+            if (!redirected) {
+                String tagID = request.getParameter("tagID");
+                if (tagID != null && !tagID.isEmpty()) {
+                    ServletHelper.sendForward("/tagedit?tagID=" + tagID, this, request, response);
+                    redirected = true;
+                }
+            }
+
+            if (!redirected) {
+                String menuID = request.getParameter("menuID");
+                if (menuID != null && !menuID.isEmpty()) {
+                    ServletHelper.sendForward("/completemenuinfo?tagID=" + menuID, this, request, response);
+                    redirected = true;
+                }
+            }
+
+            if (!redirected) {
+                ServletHelper.sendForward("/completetextgroupinfo?textGroupID=" + request.getParameter("textGroupID"), this, request, response);
+            }
         } catch (Exception e) {
             loggerFactory.error(e.toString());
             ServletHelper.sendError(e, request, response, this, loggerFactory);

@@ -13,10 +13,6 @@ public class TagEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long tagID;
 
-    @javax.persistence.Column(name = "TagName")
-    @Basic
-    private String tagName;
-
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "TagTextGroupID")
     private TextGroupEntity tagTextGroup;
@@ -38,14 +34,6 @@ public class TagEntity {
         this.tagID = tagID;
     }
 
-    public String getTagName() {
-        return tagName;
-    }
-
-    public void setTagName(String tagName) {
-        this.tagName = tagName;
-    }
-
     public TextGroupEntity getTagTextGroup() {
         return tagTextGroup;
     }
@@ -63,8 +51,6 @@ public class TagEntity {
 
         if (tagID != null ? !tagID.equals(that.tagID) : that.tagID != null)
             return false;
-        if (tagName != null ? !tagName.equals(that.tagName) : that.tagName != null)
-            return false;
         if (tagTextGroup != null ? !tagTextGroup.equals(that.tagTextGroup) : that.tagTextGroup != null)
             return false;
         return true;
@@ -73,7 +59,6 @@ public class TagEntity {
     @Override
     public int hashCode() {
         int result = tagID != null ? tagID.hashCode() : 0;
-        result = 31 * result + (tagName != null ? tagName.hashCode() : 0);
         result = 31 * result + (tagTextGroup != null ? tagTextGroup.hashCode() : 0);
         return result;
     }
@@ -82,9 +67,8 @@ public class TagEntity {
 
     }
 
-    public TagEntity(TextGroupEntity tagTextGroup, String tagName, TagGroupEntity tagGroup, ImageEntity imageEntity) {
+    public TagEntity(TextGroupEntity tagTextGroup, TagGroupEntity tagGroup, ImageEntity imageEntity) {
         setTagTextGroup(tagTextGroup);
-        setTagName(tagName);
         setTagGroup(tagGroup);
         setIcon(imageEntity);
 

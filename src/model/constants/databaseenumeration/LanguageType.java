@@ -1,13 +1,15 @@
 package model.constants.databaseenumeration;
 
 public enum LanguageType {
-    Russian(1),
-    English(2);
+    Russian(1, "Русский"),
+    English(2, "Английский");
 
     private final int value;
+    private final String stringValue;
 
-    private LanguageType(int value) {
+    private LanguageType(int value, String stringValue) {
         this.value = value;
+        this.stringValue = stringValue;
     }
 
     public int getValue() {
@@ -25,5 +27,9 @@ public enum LanguageType {
 
     public static LanguageType parse(String languageValue) {
         return LanguageType.valueOf(languageValue);
+    }
+
+    public String getStringValue() {
+        return stringValue;
     }
 }

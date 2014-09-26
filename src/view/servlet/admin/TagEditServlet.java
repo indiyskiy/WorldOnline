@@ -26,12 +26,12 @@ public class TagEditServlet extends ProtectedServlet {
             if (tagIDString != null) {
                 int tagID = Integer.parseInt(tagIDString);
                 CompleteTagInfo tagInfo = TagRequest.getCompleteTag(tagID);
-                if (tagInfo != null && tagInfo.getTagEntity() != null) {
-                    request.setAttribute("tag", tagInfo.getTagEntity());
+                if (tagInfo != null) {
+                    request.setAttribute("tag", tagInfo);
                     request.setAttribute("title", cutTitle("Тэг [" +
-                            tagInfo.getTagEntity().getTagID() +
+                            tagInfo.getTagID() +
                             "] " +
-                            tagInfo.getTagEntity().getTagName()));
+                            tagInfo.getTagName()));
                 }
                 ServletHelper.sendForward("/tagedit.jsp?tagID=" + tagIDString, this, request, response);
             }
@@ -41,19 +41,20 @@ public class TagEditServlet extends ProtectedServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        try {
-            request.setCharacterEncoding("UTF-8");
-            TagEditParser parser = new TagEditParser();
-            TagEntity tagEntity = parser.parse(request);
-            if (parser.hasNoErrors()) {
-                TagRequest.editTag(tagEntity);
-            } else {
-                throw new ServletException(parser.getErrorsForHTML());
-            }
-            doGet(request, response);
-        } catch (Exception e) {
-            ServletHelper.sendError(e, request, response, this, loggerFactory);
-        }
+//        try {
+//            request.setCharacterEncoding("UTF-8");
+//            TagEditParser parser = new TagEditParser();
+//            TagEntity tagEntity = parser.parse(request);
+//            if (parser.hasNoErrors()) {
+//                TagRequest.editTag(tagEntity);
+//            } else {
+//                throw new ServletException(parser.getErrorsForHTML());
+//            }
+//            doGet(request, response);
+//        } catch (Exception e) {
+//            ServletHelper.sendError(e, request, response, this, loggerFactory);
+//        }
+        doGet(request, response);
     }
 
     @Override

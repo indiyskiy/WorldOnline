@@ -2,10 +2,10 @@ package model.database.requests;
 
 import helper.StringHelper;
 import model.additionalentity.CompleteCardTagInfo;
-import model.additionalentity.CompleteTextGroupInfo;
 import model.additionalentity.admin.*;
 import model.additionalentity.phone.MobileTag;
 import model.additionalentity.phone.MobileTagGroup;
+import model.constants.ApplicationBlock;
 import model.constants.Component;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
@@ -58,6 +58,7 @@ public class TagRequest {
             session.beginTransaction();
             session.save(tagGroupEntity);
             session.getTransaction().commit();
+            session.flush();
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
@@ -73,7 +74,6 @@ public class TagRequest {
         if (tagID != 0 && !rs.wasNull()) {
             tagEntity = new TagEntity();
             tagEntity.setTagID(tagID);
-            tagEntity.setTagName(rs.getString("Tag.TagName"));
             tagEntity.setIcon(ImageRequest.getImageByResultSet(rs, "TagIcon"));
             tagEntity.setTagTextGroup(TextRequest.getTextGroupByResultSet(rs));
         }
@@ -88,9 +88,8 @@ public class TagRequest {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL")
             String sql = tagText +
-                    "WHERE  Tag.TagName LIKE ?";
+                    "WHERE  Text.Text LIKE ?";
             ps = connection.prepareStatement(sql);
-//            ps.setLong(1, tagGroupID);
             ps.setString(1, tagName);
             rs = ps.executeQuery();
             if (rs.first()) {
@@ -133,9 +132,8 @@ public class TagRequest {
         return tags;
     }
 
-    public static ArrayList<TagEntity> getTags() throws SQLException {
-        ArrayList<TagEntity> tags = new ArrayList<TagEntity>();
-        HashMap<Long, TagEntity> hashMap = new HashMap<>();
+    public static ArrayList<CompleteTagInfo> getTags() throws SQLException {
+        ArrayList<CompleteTagInfo> tags = new ArrayList<>();
         ResultSet rs = null;
         PreparedStatement ps = null;
         DatabaseConnection dbConnection = new DatabaseConnection();
@@ -143,17 +141,28 @@ public class TagRequest {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL")
             String sql = tagText +
-                    "ORDER BY Tag.TagGroupID DESC";
+                    "WHERE " +
+                    "(Text.LanguageID=? OR Text.LanguageID IS NULL) " +
+                    "AND (TagGroupText.LanguageID=? OR TagGroupText.LanguageID IS NULL) " +
+                    "ORDER BY TagGroup.ApplicationBlock, TagGroup.Position, Tag.TagID";
             ps = connection.prepareStatement(sql);
+            ps.setInt(1, LanguageType.Russian.getValue());
+            ps.setInt(2, LanguageType.Russian.getValue());
             rs = ps.executeQuery();
             while (rs.next()) {
                 Long id = rs.getLong("Tag.TagID");
-                if (id != 0 && !rs.wasNull() && !hashMap.containsKey(id)) {
-                    TagEntity tag = getTagByResultSet(rs);
-                    TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs);
-                    tag.setTagTextGroup(textGroupEntity);
-                    tags.add(tag);
-                    hashMap.put(id, tag);
+                if (id != 0 && !rs.wasNull()) {
+                    CompleteTagInfo completeTagInfo = new CompleteTagInfo();
+                    completeTagInfo.setTagID(rs.getLong("Tag.TagID"));
+                    completeTagInfo.setTextGroupID(rs.getLong("TextGroup.TextGroupID"));
+                    Long imageID = rs.getLong("Tag.IconID");
+                    if (imageID != 0 && !rs.wasNull()) {
+                        completeTagInfo.setIconID(imageID);
+                    }
+                    completeTagInfo.setTagGroupID(rs.getLong("TagGroup.TagGroupID"));
+                    completeTagInfo.setTagGroupName(rs.getString("TagGroupText.Text"));
+                    completeTagInfo.setTagName(rs.getString("Text.Text"));
+                    tags.add(completeTagInfo);
                 }
             }
         } catch (SQLException e) {
@@ -164,37 +173,8 @@ public class TagRequest {
         return tags;
     }
 
-  /*  public static CardTagEntity getCardTag(long cardTagID) throws SQLException {
-        CardTagEntity cardTag = null;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        try {
-            Connection connection = dbConnection.getConnection();
-            @Language("MySQL")
-            String sql = cardTagText +
-                   "WHERE CardTag.CardTagID=?";
-            ps = connection.prepareStatement(sql);
-            ps.setLong(1, cardTagID);
-            rs = ps.executeQuery();
-            if (rs.first()) {
-                cardTag = getCardTagByResultSet(rs);
-                TagEntity tag = getTagByResultSet(rs);
-                TextGroupEntity textGroupEntity = TextRequest.getTextGroupByResultSet(rs);
-                tag.setTagTextGroup(textGroupEntity);
-                cardTag.setTag(tag);
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        return cardTag;
-    }*/
-
     public static TagEntity getTag(long tagID) throws SQLException {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             return (TagEntity) session.get(TagEntity.class, tagID);
         } finally {
@@ -210,6 +190,7 @@ public class TagRequest {
             session.beginTransaction();
             session.save(cardTagEntity);
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -223,6 +204,7 @@ public class TagRequest {
             session.beginTransaction();
             session.save(tagEntity);
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -237,6 +219,7 @@ public class TagRequest {
             session.beginTransaction();
             session.update(tagEntity);
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -259,12 +242,12 @@ public class TagRequest {
                 Long cardTagID = rs.getLong("CardTag.CardTagID");
                 if (cardTagID != 0 && !rs.wasNull()) {
                     if (cardTags.containsKey(cardTagID) && cardTags.get(cardTagID) != null) {
-                        cardTag = cardTags.get(cardTagID);
+//                        cardTag = cardTags.get(cardTagID);
                     } else {
                         cardTag = new CompleteCardTagInfo(getCardTagByResultSet(rs));
                         cardTags.put(cardTagID, cardTag);
                     }
-                    getCompleteCardTag(rs, cardTag, "TextGroup", "Text");
+//                    getCompleteCardTag(rs, cardTag, "TextGroup", "Text");
                 }
             }
         } catch (SQLException e) {
@@ -275,104 +258,39 @@ public class TagRequest {
         return cardTags;
     }
 
-    public static void getCompleteCardTag(ResultSet rs, CompleteCardTagInfo cardTagInfo, String textGroupName, String textName) throws SQLException {
-        Long tagID = rs.getLong("Tag.TagID");
-        if (tagID != 0 && !rs.wasNull()) {
-            CompleteTagInfo tagInfo;
-            if (cardTagInfo.getCompleteTagInfo() == null) {
-                tagInfo = new CompleteTagInfo(TagRequest.getTagByResultSet(rs));
-                cardTagInfo.setCompleteTagInfo(tagInfo);
-                cardTagInfo.getCardTagEntity().setTag(tagInfo.getTagEntity());
-            } else {
-                tagInfo = cardTagInfo.getCompleteTagInfo();
-            }
-            //tag text group
-            getCompleteTag(rs, tagInfo, textGroupName, textName);
-        }
-        Long cardID = rs.getLong("Card.CardID");
-        if (cardID != 0 && !rs.wasNull() && cardTagInfo.getCardTagEntity().getCard() == null) {
-            CardEntity cardEntity = CardRequest.getCardFromResultSet(rs);
-            cardTagInfo.getCardTagEntity().setCard(cardEntity);
-        }
-    }
-
-   /* public static HashMap<Long, CompleteTagInfo> getCompleteTags() {
-        HashMap<Long, CompleteTagInfo> tags = new HashMap<Long, CompleteTagInfo>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            Connection connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = tagText;
-            ps = connection.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                CompleteTagInfo tag;
-                Long tagID = rs.getLong("Tag.TagID");
-                if (tagID != 0 && !rs.wasNull()) {
-                    if (tags.containsKey(tagID) && tags.get(tagID) != null) {
-                        tag = tags.get(tagID);
-                    } else {
-                        tag = new CompleteTagInfo(getTagByResultSet(rs));
-                        tags.put(tagID, tag);
-                    }
-                    getCompleteTag(rs, tag, "TextGroup", "Text");
-                }
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        return tags;
-    }*/
-
-    public static void getCompleteTag(ResultSet rs, CompleteTagInfo tagInfo, String textGroupName, String textName) throws SQLException {
-        Long tagTextGroupID = rs.getLong(textGroupName + ".TextGroupID");
-        if (!rs.wasNull()) {
-            CompleteTextGroupInfo textGroup;
-            if (tagInfo.getCompleteTextGroupInfoMap().containsKey(tagTextGroupID) && tagInfo.getCompleteTextGroupInfoMap().get(tagTextGroupID) != null) {
-                textGroup = tagInfo.getCompleteTextGroupInfoMap().get(tagTextGroupID);
-            } else {
-                textGroup = new CompleteTextGroupInfo(TextRequest.getTextGroupByResultSet(rs, textGroupName));
-                tagInfo.getTagEntity().setTagTextGroup(textGroup.getTextGroup());
-                tagInfo.getCompleteTextGroupInfoMap().put(tagTextGroupID, textGroup);
-            }
-            //tag text
-            TextRequest.getCompleteTextGroupInfo(rs, textGroup, textName);
-        }
-    }
 
     public static CompleteTagInfo getCompleteTag(long tagID) {
-        CompleteTagInfo tag = null;
         DatabaseConnection dbConnection = new DatabaseConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = tagText +
-                    "WHERE Tag.TagID=?";
+                    "WHERE Tag.TagID=? " +
+                    "AND (Text.LanguageID=? OR Text.LanguageID IS NULL) " +
+                    "AND (TagGroupText.LanguageID=? OR TagGroupText.LanguageID IS NULL)";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, tagID);
+            ps.setLong(2, LanguageType.Russian.getValue());
+            ps.setLong(3, LanguageType.Russian.getValue());
             rs = ps.executeQuery();
             if (rs.first()) {
-                Long tagID2 = rs.getLong("Tag.TagID");
-                if (tagID2 != 0 && tagID == tagID2 && !rs.wasNull()) {
-                    tag = new CompleteTagInfo(getTagByResultSet(rs));
-                    getCompleteTag(rs, tag, "TextGroup", "Text");
-                } else {
-                    return null;
-                }
-                while (rs.next()) {
-                    getCompleteTag(rs, tag, "TextGroup", "Text");
-                }
+                CompleteTagInfo completeTagInfo = new CompleteTagInfo();
+                completeTagInfo.setTagID(rs.getLong("Tag.TagID"));
+                completeTagInfo.setTextGroupID(rs.getLong("TextGroup.TextGroupID"));
+                completeTagInfo.setIconID(rs.getLong("Tag.IconID"));
+                completeTagInfo.setTagGroupID(rs.getLong("TagGroup.TagGroupID"));
+                completeTagInfo.setTagGroupName(rs.getString("TagGroupText.Text"));
+                completeTagInfo.setTagName(rs.getString("Text.Text"));
+                completeTagInfo.setCards(CardRequest.getAllCardsByTag(completeTagInfo.getTagID()));
+                return completeTagInfo;
             }
         } catch (SQLException e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return tag;
+        return null;
     }
 
     public static ArrayList<SimpleTagGroup> getAllSimpleTagGroups(LanguageType languageType) {
@@ -383,18 +301,22 @@ public class TagRequest {
         try {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT TagGroup.TagGroupID," +
-                    "Text.Text " +
+                    "Text.Text, " +
+                    "TagGroup.ApplicationBlock, " +
+                    "TagGroup.Position " +
                     "FROM TagGroup " +
                     "JOIN TextGroup ON (TagGroup.TagGroupTextGroupID=TextGroup.TextGroupID) " +
                     "JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
-                    "WHERE Text.LanguageID=?";
+                    "WHERE Text.LanguageID=? ORDER BY TagGroup.ApplicationBlock,TagGroup.Position";
             ps = connection.prepareStatement(sql);
             ps.setInt(1, languageType.getValue());
             rs = ps.executeQuery();
             while (rs.next()) {
                 SimpleTagGroup simpleTagGroup = new SimpleTagGroup();
-                simpleTagGroup.setID(rs.getLong("TagGroup.TagGroupID"));
-                simpleTagGroup.setText(rs.getString("Text.Text"));
+                simpleTagGroup.setTagGroupID(rs.getLong("TagGroup.TagGroupID"));
+                simpleTagGroup.setName(rs.getString("Text.Text"));
+                simpleTagGroup.setBlock(ApplicationBlock.parseInt(rs.getInt("TagGroup.ApplicationBlock")));
+                simpleTagGroup.setPosition(rs.getInt("TagGroup.Position"));
                 simpleTagGroups.add(simpleTagGroup);
             }
         } catch (SQLException e) {
@@ -583,8 +505,8 @@ public class TagRequest {
                             "WHERE Card.CardID=? " +
                             ") AS T ON (T.tagID=Tag.TagID) " +
                             "WHERE " +
-                            "Text.LanguageID = 1 " +
-                            "AND GroupText.LanguageID = 1 " +
+                            "Text.LanguageID = " + LanguageType.Russian.getValue() + " " +
+                            "AND GroupText.LanguageID = " + LanguageType.Russian.getValue() + " " +
                             "ORDER BY GroupText.Text, Text.Text";
             ps = connection.prepareStatement(sqlString);
             ps.setLong(1, cardID);
@@ -663,7 +585,7 @@ public class TagRequest {
             String ids = StringHelper.getStringFromArray((List) idsToDelete);
             @Language("MySQL") String sqlString =
                     "DELETE FROM CardTag " +
-                            "WHERE Card.CardID=? AND CardTag.TagID IN(" + ids + ")";
+                            "WHERE CardTag.CardID=? AND CardTag.TagID IN(" + ids + ")";
             ps = connection.prepareStatement(sqlString);
             ps.setLong(1, cardID);
             ps.executeUpdate();
@@ -692,6 +614,204 @@ public class TagRequest {
             }
         } catch (SQLException e) {
             loggerFactory.error(e);
+        }
+    }
+
+    public static CardTagEntity getCardTag(Long cardTagID) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            return (CardTagEntity) session.get(CardTagEntity.class, cardTagID);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static void deleteCardTag(CardTagEntity cardTagEntity) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "DELETE FROM CardTag WHERE CardTag.CardTagID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardTagEntity.getCardTagID());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+    }
+
+    public static ArrayList<SimpleTagGroup> getAllSimpleTagGroups() {
+        return getAllSimpleTagGroups(LanguageType.Russian);
+    }
+
+    public static CompleteTagGroupInfo getCompleteTagGroupInfo(Long tagGroupID) {
+        CompleteTagGroupInfo completeTagGroupInfo = getSimplePartOfCompleteTagGroupInfo(tagGroupID);
+        completeTagGroupInfo.setTagCard(CardRequest.getTagGroupCard(tagGroupID));
+        completeTagGroupInfo.setSimpleTags(getTagGroupTags(tagGroupID));
+        return completeTagGroupInfo;
+    }
+
+    private static ArrayList<SimpleTag> getTagGroupTags(Long tagGroupID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        ArrayList<SimpleTag> simpleTags = new ArrayList<>();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT Tag.TagID,Text.Text FROM TagGroup " +
+                            "JOIN Tag ON (Tag.TagGroupID=TagGroup.TagGroupID) " +
+                            "JOIN TextGroup ON (TextGroup.TextGroupID=Tag.TagTextGroupID) " +
+                            "JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                            "WHERE TagGroup.TagGroupID=? " +
+                            "AND Text.LanguageID=" + LanguageType.Russian.getValue();
+            ps = connection.prepareStatement(sqlString);
+            ps.setLong(1, tagGroupID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SimpleTag simpleTag = new SimpleTag();
+                simpleTag.setName(rs.getString("Text.Text"));
+                simpleTag.setTagID(rs.getLong("Tag.TagID"));
+                simpleTags.add(simpleTag);
+//                loggerFactory.debug("add " + simpleTags.get(simpleTags.size() - 1).getName());
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return simpleTags;
+    }
+
+    private static CompleteTagGroupInfo getSimplePartOfCompleteTagGroupInfo(Long tagGroupID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT TagGroup.TagGroupID, " +
+                            "Text.Text, " +
+                            "TextGroup.TextGroupID " +
+                            "FROM TagGroup " +
+                            "JOIN TextGroup ON (TextGroup.TextGroupID=TagGroup.TagGroupTextGroupID) " +
+                            "JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                            "WHERE TagGroup.TagGroupID=? " +
+                            "AND Text.LanguageID=" + LanguageType.Russian.getValue();
+            ps = connection.prepareStatement(sqlString);
+            ps.setLong(1, tagGroupID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                CompleteTagGroupInfo completeTagGroupInfo = new CompleteTagGroupInfo();
+                completeTagGroupInfo.setName(rs.getString("Text.Text"));
+                completeTagGroupInfo.setTagGroupID(rs.getLong("TagGroup.TagGroupID"));
+                completeTagGroupInfo.setTextGroupID(rs.getLong("TextGroup.TextGroupID"));
+                return completeTagGroupInfo;
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return null;
+    }
+
+    public static void setTagGroupCard(TagGroupEntity tagGroup, CardEntity card) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language(value = "MySQL") String sql = "UPDATE TagGroup " +
+                    "SET TagGroup.CardID=? " +
+                    "WHERE TagGroup.TagGroupID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, card.getCardID());
+            ps.setLong(2, tagGroup.getTagGroupID());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+    }
+
+    public static void deleteTagGroupCard(TagGroupEntity tagGroup) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language(value = "MySQL") String sql = "UPDATE TagGroup " +
+                    "SET TagGroup.CardID=NULL " +
+                    "WHERE TagGroup.TagGroupID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, tagGroup.getTagGroupID());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+    }
+
+    public static TagGroupEntity getTagGroup(Long tagGroupID) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            return (TagGroupEntity) session.get(TagGroupEntity.class, tagGroupID);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static Integer getMaxApplicationBlockPosition(ApplicationBlock applicationBlock) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT MAX(TagGroup.Position) AS maxValue " +
+                            "FROM TagGroup " +
+                            "WHERE TagGroup.ApplicationBlock=? ";
+            ps = connection.prepareStatement(sqlString);
+            ps.setLong(1, applicationBlock.getValue());
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                return rs.getInt("maxValue");
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return 0;
+    }
+
+    public static void updateTagIcon(TagEntity tagEntity) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language(value = "MySQL") String sql = "UPDATE Tag " +
+                    "SET Tag.IconID=? " +
+                    "WHERE Tag.TagID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, tagEntity.getIcon().getImageID());
+            ps.setLong(2, tagEntity.getTagID());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
         }
     }
 }

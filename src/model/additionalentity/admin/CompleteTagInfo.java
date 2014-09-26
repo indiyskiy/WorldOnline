@@ -1,31 +1,76 @@
 package model.additionalentity.admin;
 
 import model.additionalentity.CompleteTextGroupInfo;
+import model.additionalentity.SimpleCard;
 import model.database.worldonlinedb.TagEntity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CompleteTagInfo {
-    private TagEntity tagEntity;
-    private HashMap<Long, CompleteTextGroupInfo> completeTextGroupInfoMap = new HashMap<Long, CompleteTextGroupInfo>();
+    private String tagName;
+    private Long tagID;
+    private Long textGroupID;
 
-    public CompleteTagInfo(TagEntity tagEntity) {
-        this.tagEntity = tagEntity;
+    private Long tagGroupID;
+    private String tagGroupName;
+
+    private Long iconID;
+    private ArrayList<SimpleCard> cards;
+
+    public String getTagName() {
+        return tagName;
     }
 
-    public TagEntity getTagEntity() {
-        return tagEntity;
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
     }
 
-    public void setTagEntity(TagEntity tagEntity) {
-        this.tagEntity = tagEntity;
+    public Long getTagID() {
+        return tagID;
     }
 
-    public HashMap<Long, CompleteTextGroupInfo> getCompleteTextGroupInfoMap() {
-        return completeTextGroupInfoMap;
+    public void setTagID(Long tagID) {
+        this.tagID = tagID;
     }
 
-    public void setCompleteTextGroupInfoMap(HashMap<Long, CompleteTextGroupInfo> completeTextGroupInfoMap) {
-        this.completeTextGroupInfoMap = completeTextGroupInfoMap;
+    public Long getTextGroupID() {
+        return textGroupID;
+    }
+
+    public void setTextGroupID(Long textGroupID) {
+        this.textGroupID = textGroupID;
+    }
+
+    public Long getTagGroupID() {
+        return tagGroupID;
+    }
+
+    public void setTagGroupID(Long tagGroupID) {
+        this.tagGroupID = tagGroupID;
+    }
+
+    public String getTagGroupName() {
+        return tagGroupName;
+    }
+
+    public void setTagGroupName(String tagGroupName) {
+        this.tagGroupName = tagGroupName;
+    }
+
+    public Long getIconID() {
+        return iconID;
+    }
+
+    public void setIconID(Long iconID) {
+        this.iconID = iconID;
+    }
+
+    public void setCards(ArrayList<SimpleCard> cards) {
+        this.cards = cards;
+    }
+
+    public ArrayList<SimpleCard> getCards() {
+        return cards;
     }
 }

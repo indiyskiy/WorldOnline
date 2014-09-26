@@ -9,7 +9,7 @@
     <link rel="stylesheet" media="screen" href="css/main.css">
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/spoiler.css" type="text/css"/>
-    <title>All menus</title>
+    <title>Меню деревом</title>
 </head>
 <body>
 <header>
@@ -49,8 +49,25 @@
 
     <div style="margin-left:60px">
         <c:forEach var="submenu" items="${submenus}">
+            <a href="updownmenu?menuID=${submenu.menuID}&reposition=DOWN&rootMenuID=${menu.menuID}">
+                <img src="images/Down_arrow.png"/>
+            </a>
+            <a href="updownmenu?menuID=${submenu.menuID}&reposition=UP&rootMenuID=${menu.menuID}">
+                <img src="images/Up_arrow.png"/>
+            </a>
             <a href="allmenus?menuID=${submenu.menuID}">
                 [${submenu.menuID}]${submenu.menuName}
+            </a>
+            <br/>
+        </c:forEach>
+    </div>
+
+    <div style="margin-left:60px">
+        <c:forEach var="card" items="${cards}">
+            <a href="completecardinfo?cardID=${card.cardID}">
+                    <%--<c:if test="${card.cardState eq }">--%>
+                [${card.cardID}]${card.name} (${card.cardState.russianValue})
+
             </a>
             <br/>
         </c:forEach>

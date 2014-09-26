@@ -57,14 +57,8 @@
             <dd>
                 <c:forEach items="${parameterTypes}" var="parameterType">
                     <c:if test="${parameterType.block==block.value}">
-                        <c:if test="${parameterType.translatable}">
-                            <a href="addcardparameter?cardParameterType=${parameterType.parameterTypeID}&cardID=${cardID}">${parameterType.name}</a>
-                            <br>
-                        </c:if>
-                        <c:if test="${not parameterType.translatable}">
-                            <a href="addcardparameter?cardParameterType=${parameterType.parameterTypeID}&cardID=${cardID}">${parameterType.name}</a>
-                            <br>
-                        </c:if>
+                        <a href="addcardparameter?cardParameterType=${parameterType.parameterTypeID}&cardID=${cardID}">${parameterType.name}</a>
+                        <br>
                     </c:if>
                 </c:forEach>
             </dd>

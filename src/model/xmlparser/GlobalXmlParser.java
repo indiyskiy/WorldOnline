@@ -106,7 +106,7 @@ public class GlobalXmlParser implements Runnable {
                     cardEntityHashMap.put(Long.parseLong(photo.id), oldCard);
                 } else {
                     CardState cardState = CardState.Active;
-                    CardEntity card = new CardEntity(CardType.CardPhoto, photo.nameEn, cardState);
+                    CardEntity card = new CardEntity(CardType.CardPhoto, photo.nameRu, cardState);
                     CardRequest.addCardSafe(card);
                     cardEntityHashMap.put(Long.parseLong(photo.id), card);
                     saveText(photo.nameRu, photo.nameEn, photo.nameRu, photo.nameEn, TextType.Name, card);
@@ -153,7 +153,7 @@ public class GlobalXmlParser implements Runnable {
                     } else {
                         cardState = CardState.Active;
                     }
-                    CardEntity card = new CardEntity(CardType.CardPlace, shopping.nameEN, cardState);
+                    CardEntity card = new CardEntity(CardType.CardPlace, shopping.nameRU, cardState);
                     CardRequest.addCardSafe(card);
                     cardEntityHashMap.put(Long.parseLong(shopping.id), card);
                     saveText(shopping.nameRU, shopping.nameEN, shopping.nameRU, shopping.nameEN, TextType.Name, card);
@@ -296,7 +296,7 @@ public class GlobalXmlParser implements Runnable {
                     } else {
                         cardState = CardState.Active;
                     }
-                    CardEntity card = new CardEntity(CardType.CardSight, sight.nameEN, cardState);
+                    CardEntity card = new CardEntity(CardType.CardSight, sight.nameRU, cardState);
                     CardRequest.addCardSafe(card);
                     cardEntityHashMap.put(Long.parseLong(sight.id), card);
                     saveText(sight.nameRU, sight.nameEN, sight.nameRU, sight.nameEN, TextType.Name, card);
@@ -418,7 +418,7 @@ public class GlobalXmlParser implements Runnable {
                     } else {
                         cardState = CardState.Active;
                     }
-                    CardEntity card = new CardEntity(CardType.CardRoute, route.nameEN, cardState);
+                    CardEntity card = new CardEntity(CardType.CardRoute, route.nameRU, cardState);
                     CardRequest.addCardSafe(card);
                     cardEntityHashMap.put(Long.parseLong(route.id), card);
                     saveText(route.nameRU, route.nameEN, route.nameRU, route.nameEN, TextType.Name, card);
@@ -537,7 +537,7 @@ public class GlobalXmlParser implements Runnable {
                     } else {
                         cardState = CardState.Active;
                     }
-                    CardEntity card = new CardEntity(CardType.CardPlace, relax.nameEN, cardState);
+                    CardEntity card = new CardEntity(CardType.CardPlace, relax.nameRU, cardState);
                     CardRequest.addCardSafe(card);
                     cardEntityHashMap.put(Long.parseLong(relax.id), card);
                     saveText(relax.nameRU, relax.nameEN, relax.nameRU, relax.nameEN, TextType.Name, card);
@@ -657,7 +657,7 @@ public class GlobalXmlParser implements Runnable {
                     } else {
                         cardState = CardState.Active;
                     }
-                    CardEntity card = new CardEntity(CardType.CardPlace, meal.nameEN, cardState);
+                    CardEntity card = new CardEntity(CardType.CardPlace, meal.nameRU, cardState);
                     CardRequest.addCardSafe(card);
                     cardEntityHashMap.put(Long.parseLong(meal.id), card);
                     saveText(meal.nameRU, meal.nameEN, meal.nameRU, meal.nameEN, TextType.Name, card);
@@ -777,7 +777,7 @@ public class GlobalXmlParser implements Runnable {
                     } else {
                         cardState = CardState.Active;
                     }
-                    CardEntity card = new CardEntity(CardType.CardPlace, hotel.nameEN, cardState);
+                    CardEntity card = new CardEntity(CardType.CardPlace, hotel.nameRU, cardState);
                     CardRequest.addCardSafe(card);
                     cardEntityHashMap.put(Long.parseLong(hotel.id), card);
                     saveText(hotel.nameRU, hotel.nameEN, hotel.nameRU, hotel.nameEN, TextType.Name, card);
@@ -878,7 +878,7 @@ public class GlobalXmlParser implements Runnable {
                     } else {
                         cardState = CardState.Active;
                     }
-                    CardEntity card = new CardEntity(CardType.CardHandBook, handBook.nameEN, cardState);
+                    CardEntity card = new CardEntity(CardType.CardHandBook, handBook.nameRU, cardState);
                     CardRequest.addCardSafe(card);
                     cardEntityHashMap.put(Long.parseLong(handBook.id), card);
                     saveText(handBook.nameRU, handBook.nameEN, handBook.nameRU, handBook.nameEN, TextType.Name, card);
@@ -955,7 +955,7 @@ public class GlobalXmlParser implements Runnable {
                     } else {
                         cardState = CardState.Active;
                     }
-                    CardEntity card = new CardEntity(CardType.CardAboutCity, aboutCity.nameEN, cardState);
+                    CardEntity card = new CardEntity(CardType.CardAboutCity, aboutCity.nameRU, cardState);
                     CardRequest.addCardSafe(card);
                     cardEntityHashMap.put(Long.parseLong(aboutCity.id), card);
                     saveText(aboutCity.addrRU, aboutCity.addrEN, aboutCity.nameRU, aboutCity.nameEN, TextType.Address, card);

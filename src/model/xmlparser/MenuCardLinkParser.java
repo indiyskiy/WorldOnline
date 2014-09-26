@@ -267,12 +267,12 @@ public class MenuCardLinkParser {
                 return null;
             }
             if (menuEntityHashMap.containsKey(cardID)) {
+                loggerFactory.debug("what it was now?!? 0_o Double cards with same ids");
                 return menuEntityHashMap.get(cardID);
             }
             Integer menuID = menuCardMap.get(Integer.parseInt(cardID));
             if (menuID != null && menuID != 0) {
                 for (Submenu submenu : mainMenuData.getSubmenus()) {
-
                     if (submenu != null && submenu.id.equals(String.valueOf(menuID))) {
                         MenuEntity menuEntity = MenuRequest.getMenuByName(submenu.nameEN);
                         if (menuEntity == null) {
@@ -281,8 +281,12 @@ public class MenuCardLinkParser {
                             if (menuEntity == null) {
                                 loggerFactory.error("menu with name " + submenu.nameRU + " not found");
                             }
-                        }
-                        if (menuEntity != null) {
+                        } else {
+                            loggerFactory.debug("card id=" + cardID +
+                                    " menuID=" + menuID +
+                                    " submenu id=" + submenu.id +
+                                    " submenu name=" + submenu.nameRU +
+                                    " menuEntityID=" + menuEntity.getMenuID());
                             menuEntityHashMap.put(cardID, menuEntity);
                             return menuEntity;
                         }

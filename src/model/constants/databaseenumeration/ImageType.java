@@ -4,7 +4,8 @@ public enum ImageType {
     Photo(1, "Фото"),
     ViewImage(2, "Вид города"),
     Tag(3, "Тэг"),
-    MenuPhoto(4, "Фото иконки в меню");
+    MenuPhoto(4, "Фото иконки в меню"),
+    MenuIcon(5, "Иконка меню");
 
     private final int value;
     private final String text;

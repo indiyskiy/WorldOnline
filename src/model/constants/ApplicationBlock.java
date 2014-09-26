@@ -72,4 +72,7 @@ public enum ApplicationBlock {
         }
     }
 
+    public static ApplicationBlock[] getTagBlocks() {
+        return new ApplicationBlock[]{Cuisine, AdditionalTags};
+    }
 }

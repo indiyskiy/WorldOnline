@@ -41,6 +41,7 @@ public class UserRequests {
             session.beginTransaction();
             session.update(userEntity);
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -111,6 +112,7 @@ public class UserRequests {
             session.beginTransaction();
             session.save(user);
             session.getTransaction().commit();
+            session.flush();
             return true;
         } finally {
             if (session != null && session.isOpen()) {
@@ -145,6 +147,7 @@ public class UserRequests {
                 session.save(user);
             }
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

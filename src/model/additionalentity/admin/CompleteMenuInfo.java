@@ -1,82 +1,79 @@
 package model.additionalentity.admin;
 
-import model.additionalentity.CompleteTextGroupInfo;
-import model.additionalentity.SimpleMenu;
 import model.constants.Component;
-import model.constants.databaseenumeration.LanguageType;
-import model.database.worldonlinedb.ImageEntity;
-import model.database.worldonlinedb.MenuEntity;
-import model.database.worldonlinedb.TextEntity;
 import model.logger.LoggerFactory;
 
-import java.util.Collection;
-import java.util.HashMap;
-
 public class CompleteMenuInfo {
-    private MenuEntity menuEntity;
-    private HashMap<Long, CompleteMenuInfo> kids = new HashMap<Long, CompleteMenuInfo>();
-    private CompleteTextGroupInfo completeTextGroupInfo;
-    private ImageEntity image;
-    private CompleteMenuInfo parentMenuInfo;
-    private LoggerFactory loggerFactory = new LoggerFactory(Component.Global, CompleteMenuInfo.class);
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Global, CompleteMenuInfo.class);
+    private Long menuID;
+    private String name;
+    private Long textGroupID;
+    private Long parentID;
+    private String parentName;
+    private Long iconID;
+    private int number;
 
-    public CompleteMenuInfo(MenuEntity menuEntity) {
-        this.menuEntity = menuEntity;
+    public static LoggerFactory getLoggerFactory() {
+        return loggerFactory;
     }
 
-    public MenuEntity getMenuEntity() {
-        return menuEntity;
+    public static void setLoggerFactory(LoggerFactory loggerFactory) {
+        CompleteMenuInfo.loggerFactory = loggerFactory;
     }
 
-    public void setMenuEntity(MenuEntity menuEntity) {
-        this.menuEntity = menuEntity;
+    public Long getMenuID() {
+        return menuID;
     }
 
-    public HashMap<Long, CompleteMenuInfo> getKids() {
-        return kids;
+    public void setMenuID(Long menuID) {
+        this.menuID = menuID;
     }
 
-    public CompleteTextGroupInfo getCompleteTextGroupInfo() {
-        return completeTextGroupInfo;
+    public String getName() {
+        return name;
     }
 
-    public void setCompleteTextGroupInfo(CompleteTextGroupInfo completeTextGroupInfo) {
-        this.completeTextGroupInfo = completeTextGroupInfo;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public ImageEntity getImage() {
-        return image;
+    public Long getTextGroupID() {
+        return textGroupID;
     }
 
-    public void setImage(ImageEntity image) {
-        this.image = image;
+    public void setTextGroupID(Long textGroupID) {
+        this.textGroupID = textGroupID;
     }
 
-    public CompleteMenuInfo getParentMenuInfo() {
-        return parentMenuInfo;
+    public Long getParentID() {
+        return parentID;
     }
 
-    public void setParentMenuInfo(CompleteMenuInfo parentMenuInfo) {
-        this.parentMenuInfo = parentMenuInfo;
+    public void setParentID(Long parentID) {
+        this.parentID = parentID;
     }
 
-    public SimpleMenu getSimpleMenu() {
-        SimpleMenu simpleMenu = new SimpleMenu();
-        simpleMenu.setMenuID(menuEntity.getMenuID());
-        Collection<TextEntity> textEntities = completeTextGroupInfo.getTextEntityMap().values();
-        simpleMenu.setMenuName("no name-no texts");
-        int i = 0;
-        for (TextEntity textEntity : textEntities) {
-            if (textEntity.getLanguageID() == LanguageType.Russian.getValue()
-                    && textEntity.getText() != null
-                    && !textEntity.getText().isEmpty()) {
-                simpleMenu.setMenuName(textEntity.getText());
-                return simpleMenu;
-            } else {
-                simpleMenu.setMenuName("no name " + i);
-            }
-            i++;
-        }
-        return simpleMenu;
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
+    public Long getIconID() {
+        return iconID;
+    }
+
+    public void setIconID(Long iconID) {
+        this.iconID = iconID;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

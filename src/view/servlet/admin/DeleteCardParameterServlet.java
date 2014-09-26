@@ -23,7 +23,6 @@ public class DeleteCardParameterServlet extends ProtectedServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletHelper.setUTF8(request, response);
         try {
-            ServletHelper.setUTF8(request, response);
             Long cardParameterID = Long.parseLong(request.getParameter("cardParameterID"));
             CardParameterEntity cardParameterEntity = ParameterRequest.getCardParameter(cardParameterID);
             if (cardParameterEntity != null) {

@@ -7,11 +7,6 @@
     </database-info>
     <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
     <schema name="" catalog="worldonline"/>
-    <table name="AdminRole" schema="" catalog="worldonline" type="TABLE">
-      <column name="AdminRoleID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="AdminRoleName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="AdminRoleID"/>
-    </table>
     <table name="AdminUser" schema="" catalog="worldonline" type="TABLE">
       <column name="AdminUserID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="AdminRole" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
@@ -2654,12 +2649,6 @@
       <column name="Percentage" sqlType="FLOAT" length="4" precision="1" nullable="false" jdbcType="7" def="MC4w"/>
       <primary-key name="PRIMARY" columns="CountryCode,Language"/>
     </table>
-    <table name="adminrole" schema="" catalog="worldonline" type="TABLE">
-      <column name="AdminRoleID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="AdminRoleName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="AdminRoleID"/>
-      <exported-key name="FK_294qr6njr7l1ta7w9bw6lnlt9" table="adminuser" schema="" catalog="worldonline" columns="AdminRoleID"/>
-    </table>
     <table name="adminuser" schema="" catalog="worldonline" type="TABLE">
       <column name="AdminUserID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="AdminUserName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
@@ -2668,10 +2657,10 @@
       <column name="AdminRoleID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="AdminUserAdditionalInfoID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="AdminUserID"/>
-      <foreign-key name="FK_294qr6njr7l1ta7w9bw6lnlt9" columns="AdminRoleID" ref-table="adminrole" ref-schema="" ref-catalog="worldonline" ref-columns="AdminRoleID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_56verawt0sn0gnwyayuyhceap" columns="AdminUserAdditionalInfoID" ref-table="adminuseradditionalinfo" ref-schema="" ref-catalog="worldonline" ref-columns="AdminUserAdditionalInfoID" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="FK_2vj6nwmypbkisxiteir2mgsfc" table="adminusersession" schema="" catalog="worldonline" columns="AdminUserID"/>
       <exported-key name="FK_ornsyiqjudhj594vc4p9p9k1x" table="cardchange" schema="" catalog="worldonline" columns="ChangingAdminUser"/>
+      <index name="FK_294qr6njr7l1ta7w9bw6lnlt9" unique="false" columns="AdminRoleID"/>
     </table>
     <table name="adminuseradditionalinfo" schema="" catalog="worldonline" type="TABLE">
       <column name="AdminUserAdditionalInfoID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>

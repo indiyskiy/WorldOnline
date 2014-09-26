@@ -46,7 +46,7 @@ public class NewsRequest {
             GlobalXmlParser.saveParameter("2128506", cardEntity, CardParameterType.Phone);
             GlobalXmlParser.saveParameter("gmail@gmail.com", cardEntity, CardParameterType.Email);
             GlobalXmlParser.saveParameter("http://www.youtube.com/watch?v=57mkfFdvREw&index=2&list=RDLwCF9cZG60s", cardEntity, CardParameterType.Youtube);
-            GlobalXmlParser.saveParameter("javascript:window.parent.ticketManager.placeSchedule(%27ea46b444-07a6-435f-9726-0db1006eb91f%27,2881,%27%7b%22Formats%22%3a%5b%5d%2c%22MaxPrice%22%3anull%2c%22Objects%22%3a%5b%5d%2c%22SaleSupport%22%3anull%2c%22TagID%22%3anull%2c%22TimeStatus%22%3anull%2c%22AllowNonEtickets%22%3afalse%7d%27)", cardEntity, CardParameterType.AfishaBuyTicket);
+            GlobalXmlParser.saveParameter("javascript:window.parent.ticketManager.placeSchedule(%27ea46b444-07a6-435f-9726-0db1006eb91f%27,2881,%27%7b%22Formats%22%3a%5b%5d%2c%2MaxPrice%22%3anull%2c%22Objects%22%3a%5b%5d%2c%22SaleSupport%22%3anull%2c%22TagID%22%3anull%2c%22TimeStatus%22%3anull%2c%22AllowNonEtickets%22%3afalse%7d%27)", cardEntity, CardParameterType.AfishaBuyTicket);
             TagRequest.addCardTag(NewsTag.free.getNameRu(), cardEntity);
         }
     }

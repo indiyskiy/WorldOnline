@@ -20,4 +20,5 @@ public class StringHelper {
     public static String getStringFromArray(List<Object> collection) {
         return getStringFromArray(collection, ",");
     }
+
 }

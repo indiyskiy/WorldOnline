@@ -33,7 +33,7 @@ public enum NewsTag implements TagEnum {
 
     @Override
     public TagEnum setByValue(String value) {
-        return MiddlePrice.values()[Integer.parseInt(value)];
+        return NewsTag.values()[Integer.parseInt(value)];
     }
 
     @Override

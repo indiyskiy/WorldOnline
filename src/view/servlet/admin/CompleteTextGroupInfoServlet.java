@@ -14,27 +14,27 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CompleteTextGroupInfoServlet extends ProtectedServlet {
-    LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, CompleteTextGroupInfoServlet.class);
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, CompleteTextGroupInfoServlet.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
             request.setCharacterEncoding("UTF-8");
             request.setAttribute("languages", LanguageType.values());
-            String textGroupIDString = request.getParameter("TextGroupID");
+            String textGroupIDString = request.getParameter("textGroupID");
             if (textGroupIDString != null && !textGroupIDString.isEmpty()) {
                 long textGroupID = Long.parseLong(textGroupIDString);
                 CompleteTextGroupInfo completeTextGroupInfo = TextRequest.getCompleteTextGroupInfo(textGroupID);
-                request.setAttribute("textGroup", completeTextGroupInfo.getTextGroup());
-                request.setAttribute("textes", completeTextGroupInfo.getTextEntityMap().values());
+                request.setAttribute("textGroup", completeTextGroupInfo);
+                request.setAttribute("textes", TextRequest.getFullTextMap(completeTextGroupInfo.getTextMap()));
                 request.setAttribute("title", cutTitle("Группа текстов [" +
-                        completeTextGroupInfo.getTextGroup().getTextGroupID() +
+                        completeTextGroupInfo.getTextGroupID() +
                         "]" +
-                        completeTextGroupInfo.getTextGroup().getTextGroupName()));
-                ServletHelper.sendForward("/completetextgroupinfo.jsp?TextGroupID=" + textGroupID, this, request, response);
+                        completeTextGroupInfo.getTextGroupName()));
+                request.setAttribute("hidden", ServletHelper.saveAllParamsToHiddenInputType(request));
+                ServletHelper.sendForward("/completetextgroupinfo.jsp?textGroupID=" + textGroupID, this, request, response);
             }
         } catch (Exception e) {
-            loggerFactory.error(e.toString());
-            throw new ServletException(e);
+            ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
     }
 

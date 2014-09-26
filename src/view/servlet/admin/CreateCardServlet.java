@@ -5,7 +5,9 @@ import model.constants.AdminRule;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardType;
 import model.database.requests.CardRequest;
+import model.database.requests.MenuRequest;
 import model.database.worldonlinedb.CardEntity;
+import model.database.worldonlinedb.MenuEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
@@ -26,12 +28,18 @@ public class CreateCardServlet extends ProtectedServlet {
             CardEntity cardEntity = createCardParser.getCard();
             if (cardEntity != null) {
                 boolean isLoaded = CardRequest.addCardSafe(cardEntity);
+                MenuEntity menuEntity = createCardParser.getMenuEntity();
+                if (menuEntity != null) {
+                    MenuRequest.addMenuCardLink(menuEntity, cardEntity);
+                }
                 request.setAttribute("isLoaded", isLoaded);
                 if (isLoaded) {
                     request.setAttribute("cardID", cardEntity.getCardID());
                 }
                 request.setAttribute("cardTypes", CardType.values());
                 ServletHelper.sendForward("/createcard.jsp", this, request, response);
+            } else {
+                throw new ServletException("new card entity is null");
             }
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
@@ -42,6 +50,7 @@ public class CreateCardServlet extends ProtectedServlet {
         ServletHelper.setUTF8(request, response);
         try {
             request.setAttribute("cardTypes", CardType.values());
+            request.setAttribute("hidden", ServletHelper.saveAllParamsToHiddenInputType(request));
             ServletHelper.sendForward("/createcard.jsp", this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

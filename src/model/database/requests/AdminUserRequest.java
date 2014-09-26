@@ -85,6 +85,7 @@ public class AdminUserRequest {
             session.beginTransaction();
             session.save(adminUser);
             session.getTransaction().commit();
+            session.flush();
             return true;
         } finally {
             if (session != null && session.isOpen()) {
@@ -100,6 +101,7 @@ public class AdminUserRequest {
             session.beginTransaction();
             session.update(adminUser);
             session.getTransaction().commit();
+            session.flush();
             return true;
         } finally {
             if (session != null && session.isOpen()) {
@@ -135,10 +137,9 @@ public class AdminUserRequest {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT count(*) AS counter " +
                     "FROM AdminUser " +
-                    "JOIN AdminRole ON (AdminRole.AdminRoleID=AdminUser.AdminRoleID) " +
-                    "WHERE AdminRole.AdminRoleName=?";
+                    "WHERE AdminUser.AdminRole=?";
             ps = connection.prepareStatement(sql);
-            ps.setString(1, protectAdminLevel.toString());
+            ps.setInt(1, protectAdminLevel.getValue());
             rs = ps.executeQuery();
             if (rs.first()) {
                 return rs.getInt("counter");
@@ -220,6 +221,7 @@ public class AdminUserRequest {
             session.beginTransaction();
             session.save(adminUserSessionEntity);
             session.getTransaction().commit();
+            session.flush();
             b = true;
         } finally {
             if (session != null && session.isOpen()) {

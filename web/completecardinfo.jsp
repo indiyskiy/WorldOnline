@@ -218,7 +218,6 @@
             <a href="deletecardimage?cardID=${cardInfo.cardID}&cardImageID=${image.cardImageID}">Удалить</a>
             <br>
             <img src='image/${image.imageID}'/>
-            <%--http://148.251.42.117:8090/worldOnline/--%>
             <br>
             <br>
         </c:forEach>
@@ -245,7 +244,7 @@
                                 <br>
                             </c:forEach>
                             <c:forEach items="${block.cardTexts}" var="text">
-                                <a href="completetextgroupinfo?TextGroupID=${text.textID}">[${text.textID}]${text.typeName}</a>
+                                <a href="completetextgroupinfo?textGroupID=${text.textID}&cardID=${cardInfo.cardID}">[${text.textID}]${text.typeName}</a>
                                 (<a href="deletetextcard?textCardID=${text.textCardID}&cardID=${cardInfo.cardID}">удалить</a>)
                                 <br>
                             </c:forEach>
@@ -258,7 +257,7 @@
             <input type="hidden" name="cardID" value="${cardInfo.cardID}">
             <input type="submit" value="Сохранить"/>
         </form>
-    </c:if>
+        </c:if>
     </dd>
 </dl>
 
@@ -270,7 +269,7 @@
         <br/>
         <c:forEach var="tag" items="${tags}">
             <a href="tagedit?tagID=${tag.tagID}">${tag.tagGroup} - ${tag.tagName}</a>
-            (<a href="deletecardtag?cardTagID=${tag.cardTagID}">удалить</a>)
+            (<a href="deletecardtag?cardTagID=${tag.cardTagID}&cardID=${cardInfo.cardID}">удалить</a>)
             <br>
         </c:forEach>
     </dd>

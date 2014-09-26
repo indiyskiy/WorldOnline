@@ -23,26 +23,16 @@ public class CompleteMenuInfoServlet extends ProtectedServlet {
         ServletHelper.setUTF8(request, response);
         try {
             ServletHelper.setUTF8(request, response);
-            Long menuId = null;
-            if (request.getParameter("menuID") != null && !request.getParameter("menuID").isEmpty()) {
-                menuId = Long.parseLong(request.getParameter("menuID"));
-            }
-            if (menuId != null) {
-                CompleteMenuInfo menuInfo = MenuRequest.getCompleteMenuInfo(menuId);
-                if (menuInfo != null) {
-                    request.setAttribute("menu", menuInfo.getMenuEntity());
-                    request.setAttribute("textGroup", menuInfo.getCompleteTextGroupInfo().getTextGroup());
-                    request.setAttribute("image", menuInfo.getImage());
-                    request.setAttribute("title", cutTitle("Меню [" +
-                            menuInfo.getSimpleMenu().getMenuID() +
-                            "]" +
-                            menuInfo.getSimpleMenu().getMenuName()));
-//                    request.setAttribute("texts",menuInfo.getCompleteTextGroupInfo().getTextEntityMap().values());
-//                    request.setAttribute("menu", menuInfo.getMenu());
-//                    request.setAttribute("submenus", menuInfo.getSubmenus());
-//                    request.setAttribute("parent", menuInfo.getParentMenu());
-                }
-                ServletHelper.sendForward("/completemenuinfo.jsp?menuId=" + menuId, this, request, response);
+            Long menuID = Long.parseLong(request.getParameter("menuID"));
+            CompleteMenuInfo menuInfo = MenuRequest.getCompleteMenuInfo(menuID);
+            if (menuInfo != null) {
+                request.setAttribute("menu", menuInfo);
+
+                request.setAttribute("title", cutTitle("Меню [" +
+                        menuInfo.getMenuID() +
+                        "]" +
+                        menuInfo.getName()));
+                ServletHelper.sendForward("/completemenuinfo.jsp?menuID=" + menuID, this, request, response);
             }
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

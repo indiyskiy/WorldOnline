@@ -37,25 +37,19 @@
                 Имя тега
             </td>
             <td>
-                Тип тега
-            </td>
-            <td width="15%">
-
+                Группа тегов
             </td>
         </tr>
         <c:forEach items="${tags}" var="tag">
             <tr>
                 <td>
-                        ${tag.tagID}
+                    <a href='tagedit?tagID=${tag.tagID}'>${tag.tagID}</a>
                 </td>
                 <td>
                         ${tag.tagName}
                 </td>
                 <td>
-                        <%--${tag.tagType} - unknown--%>
-                </td>
-                <td>
-                    <a href='tagedit?tagID=${tag.tagID}'>Редактировать</a>
+                        ${tag.tagGroupName}
                 </td>
             </tr>
         </c:forEach>

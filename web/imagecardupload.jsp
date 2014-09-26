@@ -44,7 +44,7 @@
     </select>
         <br/>
         <input type="hidden" name="cardID" value="${cardID}"/>
-        <input type="submit" value="Upload"/>
+        <input type="submit" value="Загрузить"/>
     </form>
 </div>
 </body>

@@ -14,4 +14,12 @@ public enum TagViewType {
     public int getValue() {
         return value;
     }
+
+    public static TagViewType parseInt(Integer value) {
+        if (value == null) {
+            return null;
+        }
+        TagViewType[] tagViewTypes = TagViewType.values();
+        return tagViewTypes[value - 1];
+    }
 }

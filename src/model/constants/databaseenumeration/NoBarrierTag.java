@@ -63,7 +63,7 @@ public enum NoBarrierTag implements TagEnum {
 
     @Override
     public TagEnum setByValue(String value) {
-        return MiddlePrice.values()[Integer.parseInt(value)];
+        return NoBarrierTag.values()[Integer.parseInt(value)];
     }
 
     @Override

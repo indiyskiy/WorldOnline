@@ -55,6 +55,7 @@ public class LinkRequest {
             session.beginTransaction();
             session.save(cardToCardLinkEntity);
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

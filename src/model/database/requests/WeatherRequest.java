@@ -20,6 +20,7 @@ public class WeatherRequest {
             session.beginTransaction();
             session.save(weather);
             session.getTransaction().commit();
+            session.flush();
             return true;
         } catch (Exception e) {
             loggerFactory.error(e);

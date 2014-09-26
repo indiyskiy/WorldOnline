@@ -1,32 +1,42 @@
 package model.additionalentity;
 
-import model.database.worldonlinedb.TextEntity;
-import model.database.worldonlinedb.TextGroupEntity;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CompleteTextGroupInfo {
-    private TextGroupEntity textGroup;
-    private HashMap<Long, TextEntity> textEntityMap;
+    private Long textGroupID;
+    private String textGroupName;
+    private ArrayList<CompleteTextInfo> completeTextInfos = new ArrayList<>();
 
-    public CompleteTextGroupInfo(TextGroupEntity textGroup) {
-        this.textGroup = textGroup;
-        textEntityMap = new HashMap<Long, TextEntity>();
+    public Long getTextGroupID() {
+        return textGroupID;
     }
 
-    public TextGroupEntity getTextGroup() {
-        return textGroup;
+    public void setTextGroupID(Long textGroupID) {
+        this.textGroupID = textGroupID;
     }
 
-    public void setTextGroup(TextGroupEntity textGroup) {
-        this.textGroup = textGroup;
+    public String getTextGroupName() {
+        return textGroupName;
     }
 
-    public HashMap<Long, TextEntity> getTextEntityMap() {
-        return textEntityMap;
+    public void setTextGroupName(String textGroupName) {
+        this.textGroupName = textGroupName;
     }
 
-    public void setTextEntityMap(HashMap<Long, TextEntity> textEntityMap) {
-        this.textEntityMap = textEntityMap;
+    public ArrayList<CompleteTextInfo> getCompleteTextInfos() {
+        return completeTextInfos;
+    }
+
+    public void setCompleteTextInfos(ArrayList<CompleteTextInfo> completeTextInfos) {
+        this.completeTextInfos = completeTextInfos;
+    }
+
+    public HashMap<Integer, CompleteTextInfo> getTextMap() {
+        HashMap<Integer, CompleteTextInfo> textMap = new HashMap<>();
+        for (CompleteTextInfo completeTextInfo : completeTextInfos) {
+            textMap.put(completeTextInfo.getLanguageType().getValue(), completeTextInfo);
+        }
+        return textMap;
     }
 }

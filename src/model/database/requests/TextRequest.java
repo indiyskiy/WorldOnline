@@ -1,6 +1,8 @@
 package model.database.requests;
 
+import helper.StringHelper;
 import model.additionalentity.CompleteTextGroupInfo;
+import model.additionalentity.CompleteTextInfo;
 import model.additionalentity.admin.CardText;
 import model.additionalentity.admin.CompleteCardInfo;
 import model.constants.Component;
@@ -18,6 +20,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class TextRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, TextRequest.class);
@@ -31,6 +35,7 @@ public class TextRequest {
             session.beginTransaction();
             session.save(text);
             session.getTransaction().commit();
+            session.flush();
         } catch (DatabaseException e) {
             loggerFactory.error(e.getMessage());
             loggerFactory.error(e);
@@ -78,9 +83,6 @@ public class TextRequest {
         return textCardEntity;
     }
 
-    public static TextCardEntity getTextCardByResultSet(ResultSet rs) throws SQLException {
-        return getTextCardByResultSet(rs, "TextCard", "TextCardParameterType");
-    }
 
     public static TextGroupEntity getTextGroupByResultSet(ResultSet rs) throws SQLException {
         return getTextGroupByResultSet(rs, "TextGroup");
@@ -92,11 +94,11 @@ public class TextRequest {
 
     public static void addTextCard(TextCardEntity textCardEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(textCardEntity);
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -105,22 +107,13 @@ public class TextRequest {
     }
 
 
-    public static void getCompleteTextGroupInfo(ResultSet rs, CompleteTextGroupInfo textGroupInfo, String text) throws SQLException {
-        Long textID = rs.getLong(text + ".TextID");
-        if (textID != 0 && !rs.wasNull()) {
-            if (!textGroupInfo.getTextEntityMap().containsKey(textID) || textGroupInfo.getTextEntityMap().get(textID) == null) {
-                TextEntity textEntity = TextRequest.getTextByResultSet(rs, text);
-                textGroupInfo.getTextEntityMap().put(textID, textEntity);
-            }
-        }
-    }
-
     public static void addTextGroup(TextGroupEntity textGroup) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(textGroup);
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -161,17 +154,38 @@ public class TextRequest {
         ResultSet rs = null;
         try {
             Connection connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT * FROM TextGroup " +
-                    "JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID) " +
+            @Language("MySQL") String sql = "SELECT TextGroup.TextGroupID, " +
+                    "TextGroup.TextGroupName, " +
+                    "Text.TextID, " +
+                    "Text.Text, " +
+                    "Text.LanguageID " +
+                    "FROM TextGroup " +
+                    "LEFT OUTER JOIN Text ON (TextGroup.TextGroupID=Text.TextGroupID) " +
                     "WHERE TextGroup.TextGroupID=?";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, textGroupID);
             rs = ps.executeQuery();
             if (rs.first()) {
-                completeTextGroupInfo = new CompleteTextGroupInfo(getTextGroupByResultSet(rs));
-                getCompleteTextGroupInfo(rs, completeTextGroupInfo, "Text");
+                completeTextGroupInfo = new CompleteTextGroupInfo();
+                completeTextGroupInfo.setTextGroupID(rs.getLong("TextGroup.TextGroupID"));
+                completeTextGroupInfo.setTextGroupName(rs.getString("TextGroup.TextGroupName"));
+                Long textID = rs.getLong("Text.TextID");
+                if (textID != 0 && !rs.wasNull()) {
+                    CompleteTextInfo completeTextInfo = new CompleteTextInfo();
+                    completeTextInfo.setLanguageType(LanguageType.parseInt(rs.getInt("Text.LanguageID")));
+                    completeTextInfo.setText(rs.getString("Text.Text"));
+                    completeTextInfo.setTextID(rs.getLong("Text.TextID"));
+                    completeTextGroupInfo.getCompleteTextInfos().add(completeTextInfo);
+                }
                 while (rs.next()) {
-                    getCompleteTextGroupInfo(rs, completeTextGroupInfo, "Text");
+                    textID = rs.getLong("Text.TextID");
+                    if (textID != 0 && !rs.wasNull()) {
+                        CompleteTextInfo completeTextInfo = new CompleteTextInfo();
+                        completeTextInfo.setLanguageType(LanguageType.parseInt(rs.getInt("Text.LanguageID")));
+                        completeTextInfo.setText(rs.getString("Text.Text"));
+                        completeTextInfo.setTextID(rs.getLong("Text.TextID"));
+                        completeTextGroupInfo.getCompleteTextInfos().add(completeTextInfo);
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -269,6 +283,7 @@ public class TextRequest {
             session.beginTransaction();
             session.update(textEntity);
             session.getTransaction().commit();
+            session.flush();
             b = true;
         } finally {
             if (session != null && session.isOpen()) {
@@ -342,5 +357,49 @@ public class TextRequest {
             addText(textEntity);
         }
         return textCardEntity;
+    }
+
+    public static ArrayList<CompleteTextInfo> getFullTextMap(HashMap<Integer, CompleteTextInfo> textMap) {
+        ArrayList<CompleteTextInfo> completeTextInfos = new ArrayList<>();
+        for (LanguageType languageType : LanguageType.values()) {
+            if (textMap.containsKey(languageType.getValue())) {
+                completeTextInfos.add(textMap.get(languageType.getValue()));
+            } else {
+                CompleteTextInfo completeTextInfo = new CompleteTextInfo();
+                completeTextInfo.setLanguageType(languageType);
+                completeTextInfos.add(completeTextInfo);
+            }
+        }
+        return completeTextInfos;
+    }
+
+    public static TextGroupEntity addTextGroup(Long textGroupID) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            return (TextGroupEntity) session.get(TextGroupEntity.class, textGroupID);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static void deleteText(ArrayList<Long> ids) {
+        if (ids.isEmpty()) {
+            return;
+        }
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "DELETE FROM Text " +
+                    "WHERE Text.TextID IN (" + StringHelper.getStringFromArray((List) ids) + ")";
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
     }
 }

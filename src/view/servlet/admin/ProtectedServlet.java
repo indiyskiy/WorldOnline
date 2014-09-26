@@ -7,6 +7,7 @@ import model.constants.Component;
 import model.constants.ProtectAdminLevel;
 import model.database.requests.AdminUserRequest;
 import model.logger.LoggerFactory;
+import view.servlet.ServletHelper;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,37 +18,46 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public abstract class ProtectedServlet extends HttpServlet {
+    private static final String TRIPLE_DOTS = "...";
+    private final int MAX_TITLE_LENGTH = 43;
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, ProtectedServlet.class);
     private AdminRule adminRule;
     private boolean registered = false;
     private ServerInit serverInit = ServerInit.getInstance();
     protected String pageFrom;
     private HttpServletRequest request;
-    private final int MAX_TITLE_LENGTH = 43;
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.request = request;
-        this.pageFrom = request.getRequestURI().substring(1);
-        this.pageFrom = pageFrom.substring(pageFrom.indexOf("/")) + "?" + request.getQueryString();
-        this.adminRule = setAdminRule();
-        HttpSession session = request.getSession(false);
-        AccessStatus isPassed;
-        isPassed = getIsPassed(session);
-        request.setAttribute("registered", registered);
-        request.setAttribute("pageFrom", pageFrom);
-        if (isPassed != AccessStatus.Accept) {
-            forward(getPageName(isPassed), request, response);
-            return;
+        try {
+            this.request = request;
+            this.pageFrom = request.getRequestURI().substring(1);
+            this.pageFrom = pageFrom.substring(pageFrom.indexOf("/")) + "?" + request.getQueryString();
+            this.adminRule = setAdminRule();
+            if (this.adminRule == null) {
+                throw new ServletException("admin rule for this page is null");
+            }
+            HttpSession session = request.getSession(false);
+            AccessStatus isPassed;
+            isPassed = getIsPassed(session);
+            request.setAttribute("registered", registered);
+            request.setAttribute("pageFrom", pageFrom);
+            if (isPassed != AccessStatus.Accept) {
+                forward(getPageName(isPassed), request, response);
+                return;
+            }
+            if (getTitle() != null) {
+                request.setAttribute("title", cutTitle(getTitle()));
+            }
+            super.service(request, response);
+        } catch (Exception e) {
+            ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
-        if (getTitle() != null) {
-            request.setAttribute("title", cutTitle(getTitle()));
-        }
-        super.service(request, response);
     }
 
     protected String cutTitle(String title) {
-        if (title.length() >= 43) {
-            return title.substring(0, 20) + "..." + title.substring(title.length() - 20, title.length());
+        if (title.length() >= MAX_TITLE_LENGTH) {
+            int halfValue = (MAX_TITLE_LENGTH - TRIPLE_DOTS.length()) / 2;
+            return title.substring(0, halfValue) + TRIPLE_DOTS + title.substring(title.length() - halfValue, title.length());
         }
         return "<a href=\"\">" + title + "</a>";
     }

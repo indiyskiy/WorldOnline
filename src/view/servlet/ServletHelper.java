@@ -2,7 +2,6 @@ package view.servlet;
 
 import controller.phone.parser.MobileErrorParser;
 import helper.FileHelper;
-import model.additionalentity.admin.PagesArray;
 import model.additionalentity.admin.ParsedRequest;
 import model.constants.Component;
 import model.constants.ServerConsts;
@@ -22,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,6 +31,12 @@ public class ServletHelper {
     public static void sendForward(String url, HttpServlet servlet, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = servlet.getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
+//        response.sendRedirect(url);
+    }
+
+
+    public static void sendRedirect(String url, HttpServletResponse response) throws ServletException, IOException {
+        response.sendRedirect(url);
     }
 
     public static void setUTF8(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
@@ -145,4 +151,16 @@ public class ServletHelper {
         throw new ServletException(ex);
     }
 
+    public static String saveAllParamsToHiddenInputType(HttpServletRequest request) {
+        String res = "";
+        Enumeration<String> parameterNames = request.getParameterNames();
+        while (parameterNames.hasMoreElements()) {
+            String name = parameterNames.nextElement();
+            String value = request.getParameter(name);
+            if (!value.isEmpty()) {
+                res += "<input type=\"hidden\" value=\"" + value + "\" name=\"" + name + "\">";
+            }
+        }
+        return res;
+    }
 }

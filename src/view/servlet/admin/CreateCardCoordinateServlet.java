@@ -31,6 +31,7 @@ public class CreateCardCoordinateServlet extends ProtectedServlet {
                     CoordinateRequest.addCardCoordinate(cardEntity);
                 }
             }
+            ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
         }

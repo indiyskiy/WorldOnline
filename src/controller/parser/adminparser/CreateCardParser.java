@@ -2,13 +2,17 @@ package controller.parser.adminparser;
 
 import model.constants.databaseenumeration.CardState;
 import model.constants.databaseenumeration.CardType;
+import model.constants.databaseenumeration.MenuType;
+import model.database.requests.MenuRequest;
 import model.database.worldonlinedb.CardEntity;
+import model.database.worldonlinedb.MenuEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 public class CreateCardParser {
     private CardEntity card;
+    private MenuEntity menuEntity;
 
     public void parse(HttpServletRequest request) throws ServletException {
         CardType cardType;
@@ -23,9 +27,21 @@ public class CreateCardParser {
         }
         CardState cardState = CardState.NotActive;
         card = new CardEntity(cardType, cardName, cardState);
+        String menu = request.getParameter("menuID");
+        if (menu != null && !menu.isEmpty()) {
+            Long menuID = Long.parseLong(menu);
+            menuEntity = MenuRequest.getMenu(menuID);
+            if (menuEntity == null) {
+                throw new ServletException("menu id is incorrect");
+            }
+        }
     }
 
     public CardEntity getCard() {
         return card;
+    }
+
+    public MenuEntity getMenuEntity() {
+        return menuEntity;
     }
 }

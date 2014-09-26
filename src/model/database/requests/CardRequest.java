@@ -1,13 +1,13 @@
 package model.database.requests;
 
 import controller.parser.adminparser.AllCardParser;
-import model.additionalentity.admin.CardCoordinate;
-import model.additionalentity.admin.CardInfo;
-import model.additionalentity.admin.CardPrice;
-import model.additionalentity.admin.CompleteCardInfo;
+import model.additionalentity.SimpleCard;
+import model.additionalentity.admin.*;
 import model.additionalentity.phone.*;
 import model.constants.Component;
-import model.constants.databaseenumeration.*;
+import model.constants.databaseenumeration.CardState;
+import model.constants.databaseenumeration.CardType;
+import model.constants.databaseenumeration.ImageType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardEntity;
@@ -42,9 +42,9 @@ public class CardRequest {
             "CardCoordinate.Longitude, " +
             "Price.PriceID, " +
             "Tag.TagID," +
-            "TargetCard.SourceCardID," +
-            "TargetCard.CardToCardLinkID," +
-            "TargetCard.CardToCardLinkType," +
+//            "TargetCard.SourceCardID," +
+//            "TargetCard.CardToCardLinkID, " +
+//            "TargetCard.CardToCardLinkType " +
             "SourceCard.TargetCardID, " +
             "SourceCard.CardToCardLinkID, " +
             "SourceCard.CardToCardLinkType " +
@@ -65,8 +65,8 @@ public class CardRequest {
             "LEFT OUTER JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
             "LEFT OUTER JOIN CardPriceLink ON (Card.CardID=CardPriceLink.CardID) " +
             "LEFT OUTER JOIN Price ON (Price.PriceID=CardPriceLink.PriceID) " +
-            "LEFT OUTER JOIN CardToCardLink AS SourceCard ON (SourceCard.SourceCardID=Card.CardID) " +
-            "LEFT OUTER JOIN CardToCardLink AS TargetCard ON (TargetCard.TargetCardID=Card.CardID) ";
+            "LEFT OUTER JOIN CardToCardLink AS SourceCard ON (SourceCard.SourceCardID=Card.CardID) ";
+    //            "LEFT OUTER JOIN CardToCardLink AS TargetCard ON (TargetCard.TargetCardID=Card.CardID) ";
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, CardRequest.class);
 
     public static ArrayList<CardEntity> getAllCards(int firstElem, int maxElems) {
@@ -139,6 +139,7 @@ public class CardRequest {
             session.beginTransaction();
             session.save(card);
             session.getTransaction().commit();
+            session.flush();
             b = true;
         } finally {
             if (session != null && session.isOpen()) {
@@ -155,6 +156,7 @@ public class CardRequest {
             session.beginTransaction();
             session.update(card);
             session.getTransaction().commit();
+            session.flush();
             b = true;
         } finally {
             if (session != null && session.isOpen()) {
@@ -182,6 +184,7 @@ public class CardRequest {
                 session.save(card);
             }
             session.getTransaction().commit();
+            session.flush();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -506,7 +509,7 @@ public class CardRequest {
         HashMap<Long, HashSet<Long>> imageSets = new HashMap<>();
         HashMap<Long, HashSet<Long>> parameterSets = new HashMap<>();
         HashMap<Long, HashSet<Long>> sourceLinks = new HashMap<>();
-        HashMap<Long, HashSet<Long>> targetLinks = new HashMap<>();
+//        HashMap<Long, HashSet<Long>> targetLinks = new HashMap<>();
 
         HashMap<Long, MobileCardInfo> cardMap = new HashMap<>();
         while (rs.next()) {
@@ -551,13 +554,13 @@ public class CardRequest {
                         sourceLinkSet = new HashSet<>();
                         sourceLinks.put(cardID, sourceLinkSet);
                     }
-                    HashSet<Long> targetLinkSet;
-                    if (targetLinks.containsKey(cardID)) {
-                        targetLinkSet = targetLinks.get(cardID);
-                    } else {
-                        targetLinkSet = new HashSet<>();
-                        targetLinks.put(cardID, targetLinkSet);
-                    }
+//                    HashSet<Long> targetLinkSet;
+//                    if (targetLinks.containsKey(cardID)) {
+//                        targetLinkSet = targetLinks.get(cardID);
+//                    } else {
+//                        targetLinkSet = new HashSet<>();
+//                        targetLinks.put(cardID, targetLinkSet);
+//                    }
                     Long textID = rs.getLong("TextGroup.TextGroupID");
                     MobileText mobileText;
                     if (!textSet.contains(textID)) {
@@ -580,18 +583,18 @@ public class CardRequest {
                             sourceLinkSet.add(sourceID);
                         }
                     }
-                    Long targetID = rs.getLong("TargetCard.CardToCardLinkID");
-                    if (targetID != 0 && !rs.wasNull()) {
-                        MobileCardToCardLink mobileCardToCardLinkTarget;
-                        if (!targetLinkSet.contains(targetID)) {
-                            mobileCardToCardLinkTarget = new MobileCardToCardLink();
-                            mobileCardToCardLinkTarget.setLinkID(targetID);
-                            mobileCardToCardLinkTarget.setCardID(rs.getString("TargetCard.SourceCardID"));
-                            mobileCardToCardLinkTarget.setLinkType(rs.getString("TargetCard.CardToCardLinkType"));
-                            mobileCardInfo.getTargetLinks().add(mobileCardToCardLinkTarget);
-                            targetLinkSet.add(targetID);
-                        }
-                    }
+//                    Long targetID = rs.getLong("TargetCard.CardToCardLinkID");
+//                    if (targetID != 0 && !rs.wasNull()) {
+//                        MobileCardToCardLink mobileCardToCardLinkTarget;
+//                        if (!targetLinkSet.contains(targetID)) {
+//                            mobileCardToCardLinkTarget = new MobileCardToCardLink();
+//                            mobileCardToCardLinkTarget.setLinkID(targetID);
+//                            mobileCardToCardLinkTarget.setCardID(rs.getString("TargetCard.SourceCardID"));
+//                            mobileCardToCardLinkTarget.setLinkType(rs.getString("TargetCard.CardToCardLinkType"));
+//                            mobileCardInfo.getTargetLinks().add(mobileCardToCardLinkTarget);
+//                            targetLinkSet.add(targetID);
+//                        }
+//                    }
                     Long menuID = rs.getLong("Menu.MenuID");
                     if (menuID != 0 && !rs.wasNull()) {
                         mobileCardInfo.getMenuIDs().add(menuID);
@@ -687,5 +690,91 @@ public class CardRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return 0L;
+    }
+
+    public static ArrayList<SimpleCard> getAllCardsByTagGroup(Long tagGroupID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<SimpleCard> simpleCards = new ArrayList<>();
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT Card.CardID, Card.CardName " +
+                    "FROM Card " +
+                    "JOIN CardTag ON (CardTag.CardID=Card.CardID) " +
+                    "JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
+                    "JOIN TagGroup ON (TagGroup.TagGroupID=Tag.TagGroupID) " +
+                    "WHERE TagGroup.TagGroupID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, tagGroupID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SimpleCard simpleCard = new SimpleCard();
+                simpleCard.setName(rs.getString("Card.CardName"));
+                simpleCard.setCardID(rs.getLong("Card.CardID"));
+                simpleCards.add(simpleCard);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return simpleCards;
+    }
+
+    public static SimpleCard getTagGroupCard(Long tagGroupID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT Card.CardID, Card.CardName " +
+                    "FROM Card " +
+                    "JOIN TagGroup ON (TagGroup.CardID=Card.CardID) " +
+                    "WHERE TagGroup.TagGroupID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, tagGroupID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                SimpleCard simpleCard = new SimpleCard();
+                simpleCard.setName(rs.getString("Card.CardName"));
+                simpleCard.setCardID(rs.getLong("Card.CardID"));
+                return simpleCard;
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return null;
+    }
+
+    public static ArrayList<SimpleCard> getAllCardsByTag(Long tagID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<SimpleCard> simpleCards = new ArrayList<>();
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT Card.CardID, Card.CardName " +
+                    "FROM Card " +
+                    "JOIN CardTag ON (CardTag.CardID=Card.CardID) " +
+                    "JOIN Tag ON (Tag.TagID=CardTag.TagID) " +
+                    "WHERE Tag.TagID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, tagID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SimpleCard simpleCard = new SimpleCard();
+                simpleCard.setName(rs.getString("Card.CardName"));
+                simpleCard.setCardID(rs.getLong("Card.CardID"));
+                simpleCards.add(simpleCard);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return simpleCards;
     }
 }

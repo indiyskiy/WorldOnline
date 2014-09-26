@@ -1,5 +1,7 @@
 package view.servlet.admin;
 
+import model.additionalentity.admin.CompleteTagInfo;
+import model.additionalentity.admin.SimpleTag;
 import model.additionalentity.admin.SimpleTagGroup;
 import model.constants.AdminRule;
 import model.constants.Component;
@@ -23,7 +25,7 @@ public class AllTagsServlet extends ProtectedServlet {
         try {
             ServletHelper.setUTF8(request, response);
             if (request.getParameter("TagGroup") == null || request.getParameter("TagGroup").isEmpty()) {
-                ArrayList<TagEntity> tagEntities = TagRequest.getTags();
+                ArrayList<CompleteTagInfo> tagEntities = TagRequest.getTags();
                 request.setAttribute("tags", tagEntities);
             } else {
                 long tagGroup = Long.parseLong(request.getParameter("TagGroup"));
