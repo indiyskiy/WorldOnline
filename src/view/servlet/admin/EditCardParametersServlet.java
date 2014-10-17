@@ -1,10 +1,8 @@
 package view.servlet.admin;
 
 import controller.parser.adminparser.EditCardParametersParser;
-import model.additionalentity.admin.CardParameter;
 import model.constants.AdminRule;
 import model.constants.Component;
-import model.database.requests.CardRequest;
 import model.database.requests.ParameterRequest;
 import model.database.worldonlinedb.CardParameterEntity;
 import model.logger.LoggerFactory;
@@ -22,8 +20,16 @@ public class EditCardParametersServlet extends ProtectedServlet {
         try {
             ServletHelper.setUTF8(request, response);
             EditCardParametersParser editCardParametersParser = new EditCardParametersParser(request);
+            String errors = "";
             for (CardParameterEntity cardParameter : editCardParametersParser.getCardParameters()) {
-                ParameterRequest.updateCardParameter(cardParameter);
+                try {
+                    ParameterRequest.updateCardParameter(cardParameter);
+                } catch (Exception e) {
+                    errors += e.toString() + "\n";
+                }
+            }
+            if (!errors.isEmpty()) {
+                throw new ServletException(errors);
             }
             ServletHelper.sendForward("/completecardinfo?cardID=" + request.getParameter("cardID"), this, request, response);
 

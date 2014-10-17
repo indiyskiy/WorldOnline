@@ -27,7 +27,7 @@ public class LoggerFactory {
     }
 
     public void error(Exception error) {
-        error(ExceptionUtils.getTrace(error));
+        error(error.toString() + "\n" + ExceptionUtils.getTrace(error));
     }
 
     public void info(String message) {

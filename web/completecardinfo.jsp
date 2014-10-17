@@ -109,24 +109,20 @@
     </dd>
 </dl>
 <%--Прайс--%>
-<c:if test="${not empty price}">
-    <dl class="spoiler">
-        <dt onclick="clickSpoiler(this);">Прайс</dt>
-        <dd>
-                ${price.priceID}
-            <br>
-        </dd>
-    </dl>
-</c:if>
-<c:if test="${empty price}">
-    <dl class="spoiler">
-        <dt onclick="clickSpoiler(this);">Прайс</dt>
-        <dd>
-            Добавить прайс
-            <br>
-        </dd>
-    </dl>
-</c:if>
+<dl class="spoiler">
+    <dt onclick="clickSpoiler(this);">Прайс</dt>
+    <dd>
+        <c:if test="${not empty price.priceID}">
+            <a href="completepriceinfo?priceID=${price.priceID}"> ${price.priceID} </a> (открепить)
+        </c:if>
+        <c:if test="${empty price.priceID}">
+            <%--<a href="completepriceinfo?priceID=${price.priceID}"> ${price.priceID} </a>--%>
+            <a href="addnewprice?cardID=${cardInfo.cardID}">Добавить новое меню</a>
+            <br/>
+            Добавить существующее меню
+        </c:if>
+    </dd>
+</dl>
 <%--target link--%>
 <dl class="spoiler">
     <dt onclick="clickSpoiler(this);">Ссылается на</dt>
@@ -253,11 +249,11 @@
                 </c:if>
             </c:forEach>
             <c:if test="${not empty parameters or not empty texts}">
-            <br>
-            <input type="hidden" name="cardID" value="${cardInfo.cardID}">
-            <input type="submit" value="Сохранить"/>
+                <br>
+                <input type="hidden" name="cardID" value="${cardInfo.cardID}">
+                <input type="submit" value="Сохранить"/>
+            </c:if>
         </form>
-        </c:if>
     </dd>
 </dl>
 
@@ -274,6 +270,44 @@
         </c:forEach>
     </dd>
 </dl>
+
+<c:if test="${cardType==10}">
+    <%--info type 10--%>
+    <dl class="spoiler">
+        <dt onclick="clickSpoiler(this);">Информация</dt>
+        <dd>
+            <a href="addinfoelementtocard?cardID=${cardInfo.cardID}">Добавить</a>
+            <br/>
+            <c:forEach var="info" items="${infos}">
+                <div class="spoilerElement">
+                    <form method="POST" action="changecardinfoimage" name="form${info.informationElementID}"
+                          id="form${info.informationElementID}" enctype="multipart/form-data">
+                        <a href="completetextgroupinfo?textGroupID=${info.textGroupID}&cardID=${cardInfo.cardID}">
+                            Редактировать группу текстов
+                        </a>
+                        <br/>
+                            ${info.text}
+                        <br/>
+                        <br/>
+                        <input type="hidden" value="${info.informationElementID}" name="informationElementID">
+                        <c:if test="${not empty info.imageID and info.imageID!=0}">
+                            Картинка:<input type="file" name="fileName" accept="image/*">
+                            <br>
+                            <input type="submit" value="Изменить картинку">
+                            <br/>
+                            <img src='image/${info.imageID}'/>
+                        </c:if>
+                        <c:if test="${empty info.imageID or info.imageID==0}">
+                            Картинка:<input type="file" name="fileName" accept="image/*">
+                            <br>
+                            <input type="submit" value="Добавить картинку">
+                        </c:if>
+                    </form>
+                </div>
+            </c:forEach>
+        </dd>
+    </dl>
+</c:if>
 </div>
 </body>
 </html>

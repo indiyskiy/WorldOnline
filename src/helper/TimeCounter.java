@@ -20,7 +20,7 @@ public class TimeCounter {
     public void logTime(LoggerFactory loggerFactory, String message) {
         try {
             Timestamp tmpStamp = TimeManager.currentTime();
-            loggerFactory.debug("timeCounterInfo-" + unicID + ": " + (tmpStamp.getTime() - timestamp.getTime()) + " " + message);
+            loggerFactory.info("timeCounterInfo-" + unicID + ": " + (tmpStamp.getTime() - timestamp.getTime()) + " " + message);
             timestamp = tmpStamp;
         } catch (Exception e) {
             e.printStackTrace();

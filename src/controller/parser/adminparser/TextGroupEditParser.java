@@ -37,10 +37,8 @@ public class TextGroupEditParser {
             String text = request.getParameter("text" + postfix);
             completeTextInfo.setText(text);
             completeTextInfo.setLanguageType(languageType);
-            loggerFactory.debug("parsed text " + completeTextInfo.getTextID() + " " + completeTextInfo.getText());
             completeTextInfos.add(completeTextInfo);
         }
-        loggerFactory.debug("completeTextInfos size " + completeTextInfos.size());
     }
 
 
@@ -60,10 +58,9 @@ public class TextGroupEditParser {
     public void formLists() throws ServletException {
         CompleteTextGroupInfo completeTextGroupInfo = TextRequest.getCompleteTextGroupInfo(textGroupID);
         if (completeTextGroupInfo != null) {
-            TextGroupEntity textGroupEntity = TextRequest.addTextGroup(textGroupID);
+            TextGroupEntity textGroupEntity = TextRequest.getTextGroup(textGroupID);
             HashMap<Integer, CompleteTextInfo> completeTextInfoHashMap = completeTextGroupInfo.getTextMap();
             for (CompleteTextInfo completeTextInfo : completeTextInfos) {
-                loggerFactory.debug("formLists text " + completeTextInfo.getTextID() + " " + completeTextInfo.getText());
                 if (completeTextInfo.getTextID() == null || completeTextInfo.getTextID() == 0) {
                     if (completeTextInfoHashMap.get(completeTextInfo.getLanguageType().getValue()) != null) {
                         throw new ServletException("text id is null but text is exist");
@@ -78,12 +75,10 @@ public class TextGroupEditParser {
                     TextEntity textEntity = TextRequest.getText(textID);
                     if (completeTextInfo.getText() == null || completeTextInfo.getText().isEmpty()) {
                         textEntityDeleteArrayList.add(textEntity.getTextID());
-                        loggerFactory.debug("a text " + completeTextInfo.getText());
                     } else {
                         if (!textEntity.getText().equals(completeTextInfo.getText())) {
                             textEntity.setText(completeTextInfo.getText());
                             textEntityUpdateArrayList.add(textEntity);
-                            loggerFactory.debug("edit text " + textEntity.getTextID() + " to " + completeTextInfo.getText());
                         }
                     }
                 }

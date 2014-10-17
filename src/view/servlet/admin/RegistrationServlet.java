@@ -32,7 +32,7 @@ public class RegistrationServlet extends ProtectedServlet {
             ParsedRegistrationRequest parsedRegistrationRequest = RegistrationParse.parse(request);
             AdminUserRequest.registUser(parsedRegistrationRequest);
             RegistrationMailer.sendRegistrationMail(parsedRegistrationRequest);
-        } catch (ParseRequestException e) {
+        } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
         }
     }

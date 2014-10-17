@@ -19,6 +19,7 @@ public class CompleteCardInfo {
     private ArrayList<CardTag> cardTagArrayList = new ArrayList<>();
     private ArrayList<CardImage> cardImages = new ArrayList<>();
     private ArrayList<CardBlock> cardBlocks = new ArrayList<>();
+    private ArrayList<CardInfoElement> cardInfoElements = new ArrayList<>();
 
     public CardInfo getCardInfo() {
         return cardInfo;
@@ -106,6 +107,14 @@ public class CompleteCardInfo {
 
     public void setCardBlocks(ArrayList<CardBlock> cardBlocks) {
         this.cardBlocks = cardBlocks;
+    }
+
+    public ArrayList<CardInfoElement> getCardInfoElements() {
+        return cardInfoElements;
+    }
+
+    public void setCardInfoElements(ArrayList<CardInfoElement> cardInfoElements) {
+        this.cardInfoElements = cardInfoElements;
     }
 
     public void uploadCardBlocks() {

@@ -28,7 +28,6 @@ public class TagGroupCardEditServlet extends ProtectedServlet {
                 } else if (tagGroupCardEditParser.getTagGroup().getCard() != null) {
                     TagRequest.deleteTagGroupCard(tagGroupCardEditParser.getTagGroup());
                 }
-                loggerFactory.debug("/completetaggroupinfo?tagGroupID=" + tagGroupCardEditParser.getTagGroup().getTagGroupID());
                 ServletHelper.sendForward("/completetaggroupinfo?tagGroupID=" + tagGroupCardEditParser.getTagGroup().getTagGroupID(), this, request, response);
             }
         } catch (Exception e) {

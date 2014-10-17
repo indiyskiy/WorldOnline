@@ -14,10 +14,6 @@ public class CardRouteEntity {
     @JoinColumn(name = "CardID")
     private CardEntity card;
 
-    @javax.persistence.Column(name = "CardRouteName")
-    @Basic
-    private String cardRouteName;
-
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "RouteDescriptionTextGroupID")
     private TextGroupEntity routeDescriptionTextGroup;
@@ -38,14 +34,6 @@ public class CardRouteEntity {
         this.card = card;
     }
 
-    public String getCardRouteName() {
-        return cardRouteName;
-    }
-
-    public void setCardRouteName(String cardRouteName) {
-        this.cardRouteName = cardRouteName;
-    }
-
     public TextGroupEntity getRouteDescriptionTextGroup() {
         return routeDescriptionTextGroup;
     }
@@ -59,15 +47,10 @@ public class CardRouteEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         CardRouteEntity that = (CardRouteEntity) o;
 
-        if (cardRouteID != null ? !cardRouteID.equals(that.cardRouteID) : that.cardRouteID != null)
-            return false;
-        if (card != null ? !card.equals(that.card) : that.card != null)
-            return false;
-        if (cardRouteName != null ? !cardRouteName.equals(that.cardRouteName) : that.cardRouteName != null)
-            return false;
+        if (cardRouteID != null ? !cardRouteID.equals(that.cardRouteID) : that.cardRouteID != null) return false;
+        if (card != null ? !card.equals(that.card) : that.card != null) return false;
         if (routeDescriptionTextGroup != null ? !routeDescriptionTextGroup.equals(that.routeDescriptionTextGroup) : that.routeDescriptionTextGroup != null)
             return false;
         return true;
@@ -77,7 +60,7 @@ public class CardRouteEntity {
     public int hashCode() {
         int result = cardRouteID != null ? cardRouteID.hashCode() : 0;
         result = 31 * result + (card != null ? card.hashCode() : 0);
-        result = 31 * result + (cardRouteName != null ? cardRouteName.hashCode() : 0);
+
         result = 31 * result + (routeDescriptionTextGroup != null ? routeDescriptionTextGroup.hashCode() : 0);
         return result;
     }
@@ -85,8 +68,7 @@ public class CardRouteEntity {
     public CardRouteEntity() {
     }
 
-    public CardRouteEntity(String cardRouteName, CardEntity card) {
-        this.cardRouteName = cardRouteName;
+    public CardRouteEntity(CardEntity card) {
         this.card = card;
     }
 }

@@ -4,72 +4,113 @@ import model.constants.Component;
 import model.constants.databaseenumeration.DataType;
 import model.logger.LoggerFactory;
 
+import java.sql.Timestamp;
+
 public class ParameterValidator {
     static LoggerFactory loggerFactory = new LoggerFactory(Component.Global, ParameterValidator.class);
 
-    public static String isValidParameter(String parameter, DataType cardParameterDataType) {
+    public static boolean isValidParameter(String parameter, DataType cardParameterDataType) throws Exception {
+        if (parameter.isEmpty()) {
+            return true;
+        }
         try {
-            if (parameter == null || parameter.replaceAll(" ", "").isEmpty()) {
-                return null;
+            if (parameter == null) {
+                throw new InvalidDataTypeException(null, cardParameterDataType);
             }
             switch (cardParameterDataType) {
                 case DoubleType: {
-                    parameter = parameter.replaceAll("\"", "");
-                    parameter = parameter.replaceAll(",", "");
-                    parameter = parameter.replaceAll(" ", "");
-                    parameter = parameter.replaceAll("в", "");
-                    parameter = parameter.replaceAll("Ђ", "");
-                    parameter = parameter.replaceAll("`", "");
-//                    parameter = parameter.replaceAll("/", "");
-                    return String.valueOf(Double.parseDouble(parameter));
+                    try {
+                        Double.parseDouble(parameter);
+                        return true;
+                    } catch (Exception e) {
+                        throw new InvalidDataTypeException(parameter, cardParameterDataType);
+                    }
                 }
                 case EmailType: {
-                    //todo validator
+                    try {
+                        //todo validator
 //                    InternetAddress emailAddr = new InternetAddress(parameter);
 //                    emailAddr.validate();
-                    break;
+                        return true;
+                    } catch (Exception e) {
+                        throw new InvalidDataTypeException(parameter, cardParameterDataType);
+                    }
                 }
                 case IntegerType: {
-                    return String.valueOf(Integer.parseInt(parameter));
+                    try {
+                        Integer.parseInt(parameter);
+                        return true;
+                    } catch (Exception e) {
+                        throw new InvalidDataTypeException(parameter, cardParameterDataType);
+                    }
                 }
                 case LinkType: {
-                    //todo validator
-                    break;
+                    try {
+                        //todo validator
+                        return true;
+                    } catch (Exception e) {
+                        throw new InvalidDataTypeException(parameter, cardParameterDataType);
+                    }
                 }
                 case PhoneNumberType: {
-                    if (parameter.startsWith("+")) {
-                        parameter = parameter.substring(1, parameter.length());
+                    try {
+                        Long.parseLong(parameter);
+                        return true;
+                    } catch (Exception e) {
+                        throw new InvalidDataTypeException(parameter, cardParameterDataType);
                     }
-                    parameter = parameter.replaceAll("-", "");
-                    parameter = parameter.replaceAll("\"", "");
-                    parameter = parameter.replaceAll(" ", "");
-                    parameter = parameter.replaceAll("\\(", "");
-                    parameter = parameter.replaceAll("\\)", "");
-                    parameter = parameter.replaceAll("\\\\", "");
-                    parameter = parameter.replaceAll("", "");
-                    parameter = parameter.replaceAll("/", "");
-                    if (parameter.length() < 3) {
-                        return null;
-                    }
-                    return String.valueOf(Long.parseLong(parameter));
                 }
                 case StringType: {
-                    break;
+                    try {
+                        return true;
+                    } catch (Exception e) {
+                        throw new InvalidDataTypeException(parameter, cardParameterDataType);
+                    }
                 }
                 case UnknownType: {
-                    break;
+                    return true;
                 }
-                default: {
-                    break;
+                case Cost: {
+                    try {
+                        Double.parseDouble(parameter);
+                        return true;
+                    } catch (Exception e) {
+                        throw new InvalidDataTypeException(parameter, cardParameterDataType);
+                    }
+                }
+                case Header: {
+                    return true;
+                }
+                case Boolean: {
+                    try {
+                        Boolean.parseBoolean(parameter);
+                        return true;
+                    } catch (Exception e) {
+                        throw new InvalidDataTypeException(parameter, cardParameterDataType);
+                    }
+                }
+                case Percent: {
+                    try {
+                        Double.parseDouble(parameter);
+                        return true;
+                    } catch (Exception e) {
+                        throw new InvalidDataTypeException(parameter, cardParameterDataType);
+                    }
+                }
+                case TimestampType: {
+                    try {
+                        Timestamp.valueOf(parameter);
+                    } catch (Exception e) {
+                        throw new InvalidDataTypeException(parameter, cardParameterDataType);
+                    }
                 }
             }
-
         } catch (Exception e) {
             loggerFactory.error("invalid parameter " + parameter);
             loggerFactory.error(e);
-            return null;
+            throw e;
         }
-        return parameter;
+        throw new Exception("unknown data type");
     }
 
 }

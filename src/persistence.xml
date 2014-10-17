@@ -158,6 +158,7 @@
         <class>model.database.worldonlinedb.CardRouteEntity</class>
         <class>model.database.worldonlinedb.RouteElementEntity</class>
         <class>model.database.worldonlinedb.CardCoordinateEntity</class>
+        <class>model.database.worldonlinedb.RouteCoordinateEntity</class>
         <class>model.database.worldonlinedb.CardToCardLinkEntity</class>
         <class>model.database.worldonlinedb.MenuEntity</class>
         <class>model.database.worldonlinedb.AdminUserEntity</class>
@@ -175,6 +176,9 @@
         <class>model.database.worldonlinedb.dishes.DishEntity</class>
         <class>model.database.worldonlinedb.dishes.DishTagDishLinkEntity</class>
         <class>model.database.worldonlinedb.UrgencyTimeEntity</class>
+        <class>model.database.worldonlinedb.CardInformationElementEntity</class>
+        <class>model.database.worldonlinedb.WeatherEntity</class>
+        <class>model.database.worldonlinedb.ExchangeRatesEntity</class>
         <!-- <properties>
              <property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/worldonline"/>
              <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>

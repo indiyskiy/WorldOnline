@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class AllCardsParser extends MobileParser {
     LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, AllCardsParser.class);
-    public static final Integer MaxLimit = 100;
+    public static final Integer MaxLimit = 1000;
 
     @Override
     public AllCardsRequest parse(HttpServletRequest request) throws ParseRequestException {

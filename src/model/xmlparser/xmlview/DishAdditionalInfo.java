@@ -8,6 +8,7 @@ public class DishAdditionalInfo {
     private Integer catID;
     private String categoryNameRus;
     private String categoryNameEng;
+    private String price;
 
     public Integer getParentID() {
         return parentID;
@@ -63,5 +64,13 @@ public class DishAdditionalInfo {
 
     public void setCategoryNameEng(String categoryNameEng) {
         this.categoryNameEng = categoryNameEng;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

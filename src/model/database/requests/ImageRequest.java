@@ -1,9 +1,9 @@
 package model.database.requests;
 
-import model.additionalentity.CompleteCardImageInfo;
-import model.additionalentity.CompleteTextGroupInfo;
 import model.additionalentity.admin.CardImage;
 import model.additionalentity.admin.CompleteCardInfo;
+import model.additionalentity.phone.MobileCardImage;
+import model.additionalentity.phone.MobileCardInfo;
 import model.additionalentity.phone.MobileViewImage;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardState;
@@ -12,7 +12,6 @@ import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardImageEntity;
 import model.database.worldonlinedb.ImageEntity;
-import model.database.worldonlinedb.TextGroupEntity;
 import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -290,4 +289,37 @@ public class ImageRequest {
             dbConnection.closeConnections(ps, null);
         }
     }
+
+    public static void setMobileImages(HashMap<Long, MobileCardInfo> mobileCardInfoHashMap, String cardIDs) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT " +
+                    "CardImage.ImageID, " +
+                    "CardImage.CardImageType, " +
+                    "CardImage.CardID " +
+                    "FROM CardImage " +
+                    "WHERE CardImage.CardID IN (" + cardIDs + ")";
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                MobileCardInfo mobileCardInfo = mobileCardInfoHashMap.get(rs.getLong("CardImage.CardID"));
+                MobileCardImage mobileCardImage = new MobileCardImage();
+//                mobileCardImage.setImageSize();
+//                mobileCardImage.setImageHeight();
+                mobileCardImage.setImageType(ImageType.parseInt(rs.getInt("CardImage.CardImageType")));
+                mobileCardImage.setImageID(rs.getLong("CardImage.ImageID"));
+//                mobileCardImage.setImageWidth();
+                mobileCardInfo.getImages().add(mobileCardImage);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+    }
+
 }

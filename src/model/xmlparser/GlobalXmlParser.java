@@ -90,9 +90,11 @@ public class GlobalXmlParser implements Runnable {
             MenuCardLinkParser menuCardLinkParser = new MenuCardLinkParser();
             menuCardLinkParser.parseMenuCardLink();
             new DishParser().saveDishes(cardEntityHashMap);
-            NewsRequest.addTestNews();
+//            NewsRequest.addTestNews();
         } catch (Exception e) {
             loggerFactory.error(e);
+        } catch (Throwable t) {
+            loggerFactory.error(t.toString() + "\r\n" + t.getMessage());
         }
     }
 
@@ -150,6 +152,7 @@ public class GlobalXmlParser implements Runnable {
                     CardState cardState;
                     if (shopping.notShow.equals("1")) {
                         cardState = CardState.NotActive;
+                        //continue;
                     } else {
                         cardState = CardState.Active;
                     }
@@ -293,6 +296,7 @@ public class GlobalXmlParser implements Runnable {
                     CardState cardState;
                     if (sight.notShow.equals("1")) {
                         cardState = CardState.NotActive;
+                        //continue;
                     } else {
                         cardState = CardState.Active;
                     }
@@ -415,6 +419,7 @@ public class GlobalXmlParser implements Runnable {
                     CardState cardState;
                     if (route.notShow.equals("1")) {
                         cardState = CardState.NotActive;
+                        // continue;
                     } else {
                         cardState = CardState.Active;
                     }
@@ -534,6 +539,7 @@ public class GlobalXmlParser implements Runnable {
                     CardState cardState;
                     if (relax.notShow.equals("1")) {
                         cardState = CardState.NotActive;
+                        //continue;
                     } else {
                         cardState = CardState.Active;
                     }
@@ -654,6 +660,7 @@ public class GlobalXmlParser implements Runnable {
                     CardState cardState;
                     if (meal.notShow.equals("1")) {
                         cardState = CardState.NotActive;
+                        //continue;
                     } else {
                         cardState = CardState.Active;
                     }
@@ -774,6 +781,7 @@ public class GlobalXmlParser implements Runnable {
                     CardState cardState;
                     if (hotel.notShow.equals("1")) {
                         cardState = CardState.NotActive;
+                        //continue;
                     } else {
                         cardState = CardState.Active;
                     }
@@ -875,6 +883,7 @@ public class GlobalXmlParser implements Runnable {
                     CardState cardState;
                     if (handBook.notShow.equals("1")) {
                         cardState = CardState.NotActive;
+                        // continue;
                     } else {
                         cardState = CardState.Active;
                     }
@@ -952,6 +961,7 @@ public class GlobalXmlParser implements Runnable {
                     CardState cardState;
                     if (aboutCity.notShow.equals("1")) {
                         cardState = CardState.NotActive;
+                        //continue;
                     } else {
                         cardState = CardState.Active;
                     }
@@ -1020,17 +1030,24 @@ public class GlobalXmlParser implements Runnable {
     }
 
     public static void saveParameter(String parameter, CardEntity card, CardParameterType cardParameterType) {
-        if (parameter != null
-                && !parameter.replaceAll(" ", "").isEmpty()
-                && !parameter.equals("null")) {
-            String validatedParameter = ParameterValidator.isValidParameter(parameter, cardParameterType.getDataType());
-            if (validatedParameter != null) {
-                CardParameterTypeEntity cardParameterTypeEntity = ParameterRequest.getParameterTypeByName(cardParameterType.getEnglishName());
-                CardParameterEntity cardParameterEntity = new CardParameterEntity(card, cardParameterTypeEntity, validatedParameter);
-                ParameterRequest.addCardParameter(cardParameterEntity);
-            } else {
-                loggerFactory.error("invalid parameter " + parameter + " " + cardParameterType.getEnglishName() + " on card " + card.getCardName());
+        try {
+            if (parameter != null
+                    && !parameter.replaceAll(" ", "").isEmpty()
+                    && !parameter.equals("null")) {
+                if (cardParameterType.getDataType() == DataType.PhoneNumberType) {
+                    parameter = parameter.replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("-", "").replaceAll("\\+", "").replaceAll(" ", "");
+                }
+                if (ParameterValidator.isValidParameter(parameter, cardParameterType.getDataType())) {
+                    CardParameterTypeEntity cardParameterTypeEntity = ParameterRequest.getParameterTypeByName(cardParameterType.getEnglishName());
+                    CardParameterEntity cardParameterEntity = new CardParameterEntity(card, cardParameterTypeEntity, parameter);
+                    ParameterRequest.addCardParameter(cardParameterEntity);
+                } else {
+                    loggerFactory.error("invalid parameter " + parameter + " " + cardParameterType.getEnglishName() + " on card " + card.getCardName());
+                }
             }
+        } catch (Exception e) {
+            loggerFactory.error("error on saving " + parameter + " " + cardParameterType + " for card" + card.getCardID() + " " + card.getCardName());
+            loggerFactory.error(e);
         }
     }
 
@@ -1074,17 +1091,19 @@ public class GlobalXmlParser implements Runnable {
 
     public void saveCoordinate(String lat, String lon, CardEntity card) {
         try {
-            String validLat = ParameterValidator.isValidParameter(lat, DataType.DoubleType);
-            String validLon = ParameterValidator.isValidParameter(lon, DataType.DoubleType);
+            boolean validLat = ParameterValidator.isValidParameter(lat, DataType.DoubleType);
+            boolean validLon = ParameterValidator.isValidParameter(lon, DataType.DoubleType);
 
-            if (validLat != null && validLon != null) {
-                double doubleLat = Double.parseDouble(validLat);
-                double doubleLon = Double.parseDouble(validLon);
+            if (validLat && validLon) {
+                double doubleLat = Double.parseDouble(lat);
+                double doubleLon = Double.parseDouble(lon);
                 CardCoordinateEntity cardCoordinateEntity = new CardCoordinateEntity(card, doubleLon, doubleLat);
                 CoordinateRequest.addCardCoordinate(cardCoordinateEntity);
+            } else {
+                loggerFactory.error("invalid coordinate for card " + card.getCardName() + " " + card.getCardID() + " " + card.getCardName());
             }
         } catch (Exception e) {
-            loggerFactory.error(e);
+            loggerFactory.error(e + " on card " + card.getCardID() + " " + card.getCardName());
         }
     }
 

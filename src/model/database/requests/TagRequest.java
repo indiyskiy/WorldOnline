@@ -3,6 +3,7 @@ package model.database.requests;
 import helper.StringHelper;
 import model.additionalentity.CompleteCardTagInfo;
 import model.additionalentity.admin.*;
+import model.additionalentity.phone.MobileCardInfo;
 import model.additionalentity.phone.MobileTag;
 import model.additionalentity.phone.MobileTagGroup;
 import model.constants.ApplicationBlock;
@@ -679,7 +680,6 @@ public class TagRequest {
                 simpleTag.setName(rs.getString("Text.Text"));
                 simpleTag.setTagID(rs.getLong("Tag.TagID"));
                 simpleTags.add(simpleTag);
-//                loggerFactory.debug("add " + simpleTags.get(simpleTags.size() - 1).getName());
             }
         } catch (SQLException e) {
             loggerFactory.error(e);
@@ -812,6 +812,27 @@ public class TagRequest {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
+        }
+    }
+
+    public static void setMobileTags(HashMap<Long, MobileCardInfo> mobileCardInfoHashMap, String cardIDs) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language(value = "MySQL") String sql = "SELECT CardTag.CardID, CardTag.TagID FROM CardTag " +
+                    "WHERE CardTag.CardID IN (" + cardIDs + ")";
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                MobileCardInfo mobileCardInfo = mobileCardInfoHashMap.get(rs.getLong("CardTag.CardID"));
+                mobileCardInfo.getTagIDs().add(rs.getLong("CardTag.TagID"));
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
         }
     }
 }

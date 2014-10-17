@@ -24,7 +24,6 @@ public class EditMenuIconServlet extends ProtectedServlet {
             imageMenuUploadParser.parse(request);
             MenuEntity menuEntity = imageMenuUploadParser.getMenuEntity();
             File file = (File) imageMenuUploadParser.getFileMap().values().toArray()[0];
-            loggerFactory.debug("file " + file.getName());
             ImageHelper.saveMenuIcon(file, menuEntity);
             long menuID = imageMenuUploadParser.getMenuID();
             ServletHelper.sendForward("/completemenuinfo?menuID=" + menuID, this, request, response);

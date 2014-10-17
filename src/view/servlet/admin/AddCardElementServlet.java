@@ -16,7 +16,7 @@ public class AddCardElementServlet extends ProtectedServlet {
     LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, AddCardElementServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

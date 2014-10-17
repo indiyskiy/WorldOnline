@@ -1,7 +1,9 @@
 package helper;
 
 
+import model.constants.Component;
 import model.constants.databaseenumeration.DayTime;
+import model.logger.LoggerFactory;
 import model.weather.WeatherTime;
 
 import java.sql.Timestamp;
@@ -9,6 +11,8 @@ import java.text.ParseException;
 import java.util.Calendar;
 
 public class TimeManager {
+    private static LoggerFactory loggerFactory = new LoggerFactory(Component.Global, TimeManager.class);
+
     public static Long getDifferentInMillis(Timestamp minuend, Timestamp subtractor) {
         Long a = minuend.getTime();
         Long b = subtractor.getTime();
@@ -39,7 +43,7 @@ public class TimeManager {
     }
 
     public static Timestamp getTimestampFromWeatherTime(WeatherTime weatherTime) throws ParseException {
-        String dateString = weatherTime.getYear() + "-" + weatherTime.getMonth() + "-" + weatherTime.getDay() + " " + weatherTime.getHour() + ":30:00.0";
+        String dateString = weatherTime.getYear() + "-" + weatherTime.getMonth() + "-" + weatherTime.getDay() + " " + weatherTime.getHour() + ":00:00.0";
         return Timestamp.valueOf(dateString);
     }
 
@@ -60,7 +64,6 @@ public class TimeManager {
         if (hour >= 18 && hour <= 21) {
             return DayTime.Evening;
         }
-        System.out.println("omg");
         return DayTime.Day;
     }
 
@@ -68,8 +71,25 @@ public class TimeManager {
         return parseTimestamp(currentTime());
     }
 
+    public static Timestamp getTimestampFromExchangeTime(String date) {
+        try {
+            String[] dateArray = date.split("\\.");
+            for (String element : dateArray) {
+                loggerFactory.debug(element);
+            }
+            String dateString = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0] + " " + "00:00:00.0";
+            return Timestamp.valueOf(dateString);
+        } catch (Exception e) {
+            loggerFactory.error(e);
+            loggerFactory.error("error at date " + date);
+            throw e;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println(currentDayTime());
         System.out.println(currentTime());
     }
+
+
 }

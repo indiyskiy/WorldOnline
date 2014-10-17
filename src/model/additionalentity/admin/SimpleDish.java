@@ -4,6 +4,7 @@ public class SimpleDish {
     private String name;
     private String categoryName;
     private Long dishID;
+    private Double coast;
     private Long categoryID;
     private Long textGroupID;
     private Long categoryTextGroupID;
@@ -54,5 +55,13 @@ public class SimpleDish {
 
     public void setCategoryTextGroupID(Long categoryTextGroupID) {
         this.categoryTextGroupID = categoryTextGroupID;
+    }
+
+    public Double getCoast() {
+        return coast;
+    }
+
+    public void setCoast(Double coast) {
+        this.coast = coast;
     }
 }

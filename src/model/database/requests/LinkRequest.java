@@ -2,6 +2,8 @@ package model.database.requests;
 
 import model.additionalentity.admin.CardLink;
 import model.additionalentity.admin.CompleteCardInfo;
+import model.additionalentity.phone.MobileCardInfo;
+import model.additionalentity.phone.MobileCardToCardLink;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardToCardLinkType;
 import model.database.session.DatabaseConnection;
@@ -17,6 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LinkRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, LinkRequest.class);
@@ -129,7 +132,6 @@ public class LinkRequest {
                 cardLink.setCardName(rs.getString("TargetCard.CardName"));
                 cardLink.setLinkType(CardToCardLinkType.parseInt(rs.getInt("CardToCardLink.CardToCardLinkType")));
                 targetCardLinks.add(cardLink);
-//                loggerFactory.debug("add "+cardLink.getCardID()+" to "+card.getCardInfo().getCardID());
             }
         } catch (SQLException e) {
             loggerFactory.error(e);
@@ -183,6 +185,38 @@ public class LinkRequest {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
+        }
+    }
+
+    public static void setMobileLinks(HashMap<Long, MobileCardInfo> mobileCardInfoHashMap, String cardIDs) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT CardToCardLink.SourceCardID, " +
+                            "CardToCardLink.TargetCardID, " +
+                            "CardToCardLink.CardToCardLinkType," +
+                            "CardToCardLink.CardToCardLinkID " +
+                            "FROM  CardToCardLink " +
+                            "WHERE CardToCardLink.SourceCardID IN (" + cardIDs + ") ";
+
+            ps = connection.prepareStatement(sqlString);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                MobileCardInfo mobileCardInfo = mobileCardInfoHashMap.get(rs.getLong("CardToCardLink.SourceCardID"));
+                MobileCardToCardLink mobileCardToCardLink = new MobileCardToCardLink();
+                mobileCardToCardLink.setCardID(rs.getLong("CardToCardLink.TargetCardID"));
+                mobileCardToCardLink.setLinkType(CardToCardLinkType.parseInt(rs.getInt("CardToCardLink.CardToCardLinkType")));
+                mobileCardToCardLink.setLinkID(rs.getLong("CardToCardLink.CardToCardLinkID"));
+                mobileCardInfo.getSourceLinks().add(mobileCardToCardLink);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
         }
     }
 }

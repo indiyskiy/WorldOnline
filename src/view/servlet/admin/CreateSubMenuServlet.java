@@ -16,10 +16,10 @@ import java.io.IOException;
 
 
 public class CreateSubMenuServlet extends ProtectedServlet {
-    LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, CreateCardCoordinateServlet.class);
+    LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, CreateSubMenuServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,7 +37,6 @@ public class CreateSubMenuServlet extends ProtectedServlet {
                 }
                 MenuEntity menu = new MenuEntity(parentMenu, textGroupEntity, null, menuType);
                 MenuRequest.addMenu(menu);
-                loggerFactory.debug("redirect to " + "/completemenuinfo?menuID=" + menu.getMenuID());
                 ServletHelper.sendForward("/completemenuinfo?menuID=" + menu.getMenuID(), this, request, response);
             } else {
                 throw new ServletException("incorrect menu ID");

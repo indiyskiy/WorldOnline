@@ -8,6 +8,7 @@ import model.additionalentity.admin.CardMenu;
 import model.additionalentity.admin.CompleteCardInfo;
 import model.additionalentity.admin.CompleteMenuInfo;
 import model.additionalentity.phone.MenuCompleteInformation;
+import model.additionalentity.phone.MobileCardInfo;
 import model.constants.Component;
 import model.constants.adminenumerations.RepositionDirection;
 import model.constants.databaseenumeration.CardState;
@@ -61,9 +62,6 @@ public class MenuRequest {
     public static void addMenuCardLinkSafe(MenuCardLinkEntity menuCardLinkEntity) {
         if (!cardMenuLinkExist(menuCardLinkEntity.getCard().getCardID(), menuCardLinkEntity.getMenu().getMenuID())) {
             addMenuCardLink(menuCardLinkEntity);
-            loggerFactory.debug(("link added"));
-        } else {
-            loggerFactory.debug("link duplicated");
         }
     }
 
@@ -81,7 +79,6 @@ public class MenuRequest {
             ps.setLong(2, cardID);
             rs = ps.executeQuery();
             if (rs.first()) {
-                loggerFactory.debug("menuCardLink" + menuID + "-" + cardID + " exist");
                 return true;
             }
         } catch (SQLException e) {
@@ -89,7 +86,6 @@ public class MenuRequest {
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        loggerFactory.debug("menuCardLink" + menuID + "-" + cardID + " not exist");
         return false;
     }
 
@@ -367,7 +363,6 @@ public class MenuRequest {
 
     public static void addMenuCardLink(ArrayList<MenuCardLinkEntity> menuCardLinkEntities) {
         for (MenuCardLinkEntity menuCardLinkEntity : menuCardLinkEntities) {
-            loggerFactory.debug("adding menuCardLink" + menuCardLinkEntity.getMenu().getMenuID() + "-" + menuCardLinkEntity.getCard().getCardID());
             if (!cardMenuLinkExist(menuCardLinkEntity.getCard().getCardID(), menuCardLinkEntity.getMenu().getMenuID())) {
                 Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
                 try {
@@ -375,7 +370,6 @@ public class MenuRequest {
                     session.save(menuCardLinkEntity);
                     session.getTransaction().commit();
                     session.flush();
-                    loggerFactory.debug(menuCardLinkEntity.getMenu().getMenuID() + "-" + menuCardLinkEntity.getCard().getCardID() + " added");
                 } catch (Exception e) {
                     loggerFactory.error(e);
                 } finally {
@@ -653,6 +647,23 @@ public class MenuRequest {
         }
     }
 
+    public static void deleteMenu(Long menuID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "DELETE FROM Menu WHERE Menu.MenuID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, menuID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+    }
+
     public static ArrayList<CardInfo> getAllSimpleCardsOfMenu(Long menuID) {
         DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
@@ -767,6 +778,72 @@ public class MenuRequest {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
+        }
+    }
+
+    public static void deleteCardMenuByMenuID(long menuID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "DELETE " +
+                    "FROM MenuCardLink " +
+                    "WHERE MenuCardLink.MenuID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, menuID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+    }
+
+    public static int countSubmenus(long menuID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT count(*) AS c " +
+                    "FROM Menu " +
+                    "WHERE Menu.ParentMenuID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, menuID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                return rs.getInt("c");
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return 0;
+    }
+
+    public static void setMobileMenus(HashMap<Long, MobileCardInfo> mobileCardInfoHashMap, String cardIDs) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT MenuCardLink.MenuID, MenuCardLink.CardID " +
+                    "FROM  MenuCardLink " +
+                    "WHERE MenuCardLink.CardID IN (" + cardIDs + ")";
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                MobileCardInfo mobileCardInfo = mobileCardInfoHashMap.get(rs.getLong("MenuCardLink.CardID"));
+                mobileCardInfo.getMenuIDs().add(rs.getLong("MenuCardLink.MenuID"));
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
         }
     }
 }

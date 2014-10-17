@@ -7,25 +7,21 @@ import model.constants.databaseenumeration.CardType;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class MobileCardInfo {
     private Long cardID;
     private ArrayList<MobileText> mobileTexts = new ArrayList<>();
-    private HashSet<Long> menuIDs = new HashSet<>();
+    private ArrayList<Long> menuIDs = new ArrayList<>();
     private CardType cardType;
     private ArrayList<MobileCardImage> images = new ArrayList<>();
     private ArrayList<MobileParameter> mobileParameters = new ArrayList<>();
     private MobileCoordinate coordinate;
     private int order;
-    private HashSet<Long> tagIDs = new HashSet<>();
+    private ArrayList<Long> tagIDs = new ArrayList<>();
     private Long priceID;
+    private ArrayList<MobileInformationElement> informationElements = new ArrayList<>();
     private ArrayList<MobileCardToCardLink> sourceLinks = new ArrayList<>();
-//    private ArrayList<MobileCardToCardLink> targetLinks = new ArrayList<>();
-
-    public MobileCoordinate getCoordinate() {
-        return coordinate;
-    }
+    private ArrayList<MobileCardRoute> mobileCardRoutes = new ArrayList<>();
 
     public int getOrder() {
         return order;
@@ -47,32 +43,12 @@ public class MobileCardInfo {
         return mobileTexts;
     }
 
-    public HashSet<Long> getMenuIDs() {
+    public ArrayList<Long> getMenuIDs() {
         return menuIDs;
-    }
-
-    public void setMobileTexts(ArrayList<MobileText> mobileTexts) {
-        this.mobileTexts = mobileTexts;
-    }
-
-    public void setMenuIDs(HashSet<Long> menuIDs) {
-        this.menuIDs = menuIDs;
-    }
-
-    public CardType getCardType() {
-        return cardType;
-    }
-
-    public void setImages(ArrayList<MobileCardImage> images) {
-        this.images = images;
     }
 
     public ArrayList<MobileParameter> getMobileParameters() {
         return mobileParameters;
-    }
-
-    public void setMobileParameters(ArrayList<MobileParameter> mobileParameters) {
-        this.mobileParameters = mobileParameters;
     }
 
     public void setCardType(CardType cardType) {
@@ -87,12 +63,12 @@ public class MobileCardInfo {
         this.coordinate = coordinate;
     }
 
-    public HashSet<Long> getTagIDs() {
+    public ArrayList<Long> getTagIDs() {
         return tagIDs;
     }
 
-    public void setTagIDs(HashSet<Long> tagIDs) {
-        this.tagIDs = tagIDs;
+    public ArrayList<MobileInformationElement> getInformationElements() {
+        return informationElements;
     }
 
     public JsonObject toJson() {
@@ -137,11 +113,12 @@ public class MobileCardInfo {
             sourceLinksJson.add(sourceLink.toJson());
         }
         jsonObject.add("sourceLinks", sourceLinksJson);
-//        JsonArray targetLinksJson = new JsonArray();
-//        for (MobileCardToCardLink targetLink : targetLinks) {
-//            targetLinksJson.add(targetLink.toJson());
-//        }
-//        jsonObject.add("targetLinks", targetLinksJson);
+
+        JsonArray informationJson = new JsonArray();
+        for (MobileInformationElement informationElement : informationElements) {
+            informationJson.add(informationElement.toJson());
+        }
+        jsonObject.add("information", informationJson);
         return jsonObject;
     }
 
@@ -149,25 +126,16 @@ public class MobileCardInfo {
         this.priceID = priceID;
     }
 
-//    public Long getPriceID() {
-//        return priceID;
-//    }
-
-
     public ArrayList<MobileCardToCardLink> getSourceLinks() {
         return sourceLinks;
     }
 
-    //
-    public void setSourceLinks(ArrayList<MobileCardToCardLink> sourceLinks) {
-        this.sourceLinks = sourceLinks;
+
+    public ArrayList<MobileCardRoute> getMobileCardRoutes() {
+        return mobileCardRoutes;
     }
 
-//    public ArrayList<MobileCardToCardLink> getTargetLinks() {
-//        return targetLinks;
-//    }
-//
-//    public void setTargetLinks(ArrayList<MobileCardToCardLink> targetLinks) {
-//        this.targetLinks = targetLinks;
-//    }
+    public void setMobileCardRoutes(ArrayList<MobileCardRoute> mobileCardRoutes) {
+        this.mobileCardRoutes = mobileCardRoutes;
+    }
 }

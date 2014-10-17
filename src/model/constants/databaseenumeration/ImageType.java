@@ -5,7 +5,8 @@ public enum ImageType {
     ViewImage(2, "Вид города"),
     Tag(3, "Тэг"),
     MenuPhoto(4, "Фото иконки в меню"),
-    MenuIcon(5, "Иконка меню");
+    MenuIcon(5, "Иконка меню"),
+    CardInformationElementImage(6, "Кортинка элемента информации карты");
 
     private final int value;
     private final String text;

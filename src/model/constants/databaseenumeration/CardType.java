@@ -1,7 +1,6 @@
 package model.constants.databaseenumeration;
 
 public enum CardType {
-    Unknown(0),
     CardAboutCity(1),
     CardHandBook(2),
     CardPlace(3),
@@ -10,7 +9,8 @@ public enum CardType {
     RestaurantChainCard(6),
     CardPhoto(7),
     CardPerson(8),
-    CardNews(9);
+    CardNews(9),
+    CardInformation(10);
 
     private final int value;
 
@@ -27,18 +27,12 @@ public enum CardType {
             return null;
         }
         CardType[] cardTypes = CardType.values();
-        if (value <= 0 || value >= cardTypes.length) {
-            return Unknown;
-        } else {
-            return cardTypes[value];
-        }
+        return cardTypes[value - 1];
     }
 
     public String getText() {
         switch (this) {
-            case Unknown: {
-                return "неизвестно";
-            }
+
             case CardAboutCity: {
                 return "про город";
             }
@@ -66,6 +60,9 @@ public enum CardType {
             }
             case CardNews: {
                 return "новость";
+            }
+            case CardInformation: {
+                return "информация";
             }
             default: {
                 return "неизвестно";

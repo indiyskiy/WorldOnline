@@ -10,24 +10,25 @@ import model.database.requests.TextRequest;
 import model.database.worldonlinedb.CardEntity;
 import model.database.worldonlinedb.TextEntity;
 import model.database.worldonlinedb.TextGroupEntity;
-import model.database.worldonlinedb.dishes.*;
+import model.database.worldonlinedb.dishes.CardPriceLinkEntity;
+import model.database.worldonlinedb.dishes.DishCategoryEntity;
+import model.database.worldonlinedb.dishes.DishEntity;
+import model.database.worldonlinedb.dishes.PriceEntity;
 import model.logger.LoggerFactory;
 import model.xmlparser.xmlview.DishAdditionalInfo;
-import model.xmlparser.xmlview.menu.*;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DishParser {
-    private static final String menuXmlRoute = ServerConsts.root + "MenuXML.xml";
-    private static final String tagsXmlRoute = ServerConsts.root + "TagsXML.xml";
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Parser, DishParser.class);
-    public static HashMap<String, DishAdditionalInfo> menuCardMap = parseDishAdditionalInfo(ServerConsts.root + "addData/additionalDishInfo.txt");
+    public static ArrayList<DishAdditionalInfo> menuCardList = parseDishAdditionalInfo(ServerConsts.root + "addData/additionalDishInfo.txt");
     private static HashMap<String, DishCategoryEntity> dishCategoryMap = new HashMap<>();
 
-    private static HashMap<String, DishAdditionalInfo> parseDishAdditionalInfo(String root) {
-        HashMap<String, DishAdditionalInfo> dishAdditionalInfoHashMap = new HashMap<>();
+    private static ArrayList<DishAdditionalInfo> parseDishAdditionalInfo(String root) {
+        ArrayList<DishAdditionalInfo> dishAdditionalInfoList = new ArrayList<>();
         InputStream fis = null;
         BufferedReader br = null;
         String line;
@@ -36,26 +37,38 @@ public class DishParser {
             fis = new FileInputStream(file);
             br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
             while ((line = br.readLine()) != null) {
-                String[] elements = line.split("=\\^__\\^=");
-                if (elements.length > 0) {
-                    Integer parentID = Integer.parseInt(elements[0]);
-                    Integer order = Integer.parseInt(elements[1]);
-                    String nameEng = elements[2];
-                    String nameRus = elements[3];
-                    String categoryNameEng = elements[4];
-                    String categoryNameRus = elements[5];
-                    DishAdditionalInfo dishAdditionalInfo = new DishAdditionalInfo();
-                    if (!elements[6].isEmpty()) {
-                        Integer catID = Integer.parseInt(elements[6]);
+                try {
+                    line = line.replaceAll("﻿", "");
+                    String[] elements = line.split("=\\^__\\^=");
+                    if (elements.length > 0) {
+                        Integer parentID = Integer.parseInt(elements[0]);
+                        Integer order = Integer.parseInt(elements[1]);
+                        String nameEng = elements[2];
+                        String nameRus = elements[3];
+                        String categoryNameEng = elements[4];
+                        String categoryNameRus = elements[5];
+                        if ((nameEng == null || nameEng.isEmpty()) && (nameRus == null || nameRus.isEmpty())) {
+                            continue;
+                        }
+                        DishAdditionalInfo dishAdditionalInfo = new DishAdditionalInfo();
+                        if (!elements[6].isEmpty()) {
+                            Integer catID = Integer.parseInt(elements[6]);
+                            dishAdditionalInfo.setCatID(catID);
+                        }
                         dishAdditionalInfo.setCategoryNameEng(categoryNameEng);
                         dishAdditionalInfo.setCategoryNameRus(categoryNameRus);
-                        dishAdditionalInfo.setCatID(catID);
+                        String price = elements[7];
+                        dishAdditionalInfo.setNameEng(nameEng);
+                        dishAdditionalInfo.setNameRus(nameRus);
+                        dishAdditionalInfo.setOrder(order);
+                        dishAdditionalInfo.setParentID(parentID);
+                        Double.parseDouble(price);
+                        dishAdditionalInfo.setPrice(price);
+                        dishAdditionalInfoList.add(dishAdditionalInfo);
                     }
-                    dishAdditionalInfo.setNameEng(nameEng);
-                    dishAdditionalInfo.setNameRus(nameRus);
-                    dishAdditionalInfo.setOrder(order);
-                    dishAdditionalInfo.setParentID(parentID);
-                    dishAdditionalInfoHashMap.put(nameRus, dishAdditionalInfo);
+                } catch (Exception e) {
+                    loggerFactory.error(e);
+                    loggerFactory.error("error at parse line " + line);
                 }
             }
             br.close();
@@ -73,141 +86,108 @@ public class DishParser {
                 loggerFactory.error(e);
             }
         }
-        return dishAdditionalInfoHashMap;
+        return dishAdditionalInfoList;
     }
 
-    public void parseDishes(HashMap<Long, CardEntity> cardEntityHashMap, HashMap<Integer, DishTagEntity> dishTagEntityHashMap) {
-        MenuXML menuXML = new SimpleXmlHelper().getMenuXML(menuXmlRoute);
+    public void parseDishes(HashMap<Long, CardEntity> cardEntityHashMap) {
         HashMap<Integer, PriceEntity> priceEntityHashMap = new HashMap<>();
-        TextGroupEntity nameGroup = new TextGroupEntity("MenuPriceName");
-        TextEntity menuEnName = new TextEntity(LanguageType.English, "Menu", nameGroup);
-        TextEntity menuRuName = new TextEntity(LanguageType.Russian, "Меню", nameGroup);
-        TextRequest.addText(menuEnName);
-        TextRequest.addText(menuRuName);
-        for (Dish dish : menuXML.dishes) {
+
+        for (DishAdditionalInfo dish : menuCardList) {
             try {
-                loggerFactory.debug("parsing dish " + dish.nameRu);
+                loggerFactory.debug("parsing dish " + dish.getNameRus());
                 PriceEntity priceEntity;
-                if (priceEntityHashMap.containsKey(dish.restID)) {
-                    priceEntity = priceEntityHashMap.get(dish.restID);
+                if (priceEntityHashMap.containsKey(dish.getParentID())) {
+                    priceEntity = priceEntityHashMap.get(dish.getParentID());
                 } else {
+                    TextGroupEntity nameGroup = new TextGroupEntity("MenuPriceName");
+                    TextEntity menuEnName = new TextEntity(LanguageType.English, "Menu", nameGroup);
+                    TextEntity menuRuName = new TextEntity(LanguageType.Russian, "Меню", nameGroup);
+                    TextRequest.addText(menuEnName);
+                    TextRequest.addText(menuRuName);
+
                     priceEntity = new PriceEntity();
                     priceEntity.setPriceName(nameGroup);
-                    CardEntity cardEntity = cardEntityHashMap.get(Long.valueOf(dish.restID));
+                    CardEntity cardEntity = cardEntityHashMap.get(Long.valueOf(dish.getParentID()));
                     DishRequest.addPrice(priceEntity);
                     CardPriceLinkEntity cardPriceLinkEntity = new CardPriceLinkEntity();
                     cardPriceLinkEntity.setPrice(priceEntity);
                     cardPriceLinkEntity.setCard(cardEntity);
                     DishRequest.addCardPriceLink(cardPriceLinkEntity);
-                    priceEntityHashMap.put(dish.restID, priceEntity);
+                    priceEntityHashMap.put(dish.getParentID(), priceEntity);
                 }
-                TextGroupEntity textGroupEntity = new TextGroupEntity("dish" + dish.nameEn);
-                if (dish.nameEn != null && !dish.nameEn.isEmpty()) {
-                    TextEntity textEntityEn = new TextEntity(LanguageType.Russian, dish.nameRu, textGroupEntity);
-                    TextRequest.addText(textEntityEn);
-                }
-                if (dish.nameRu != null && !dish.nameRu.isEmpty()) {
-                    TextEntity textEntityRu = new TextEntity(LanguageType.English, dish.nameEn, textGroupEntity);
-                    TextRequest.addText(textEntityRu);
-                }
+
                 DishEntity dishEntity = new DishEntity();
-                String coastString = ParameterValidator.isValidParameter(dish.price, DataType.DoubleType);
-                if (coastString != null) {
-                    dishEntity.setCost(Double.parseDouble(coastString));
+                boolean coastIsValid = ParameterValidator.isValidParameter(dish.getPrice(), DataType.DoubleType);
+                if (coastIsValid) {
+                    dishEntity.setCost(Double.parseDouble(dish.getPrice()));
                 } else {
-                    loggerFactory.error(dish.restID + " " + dish.nameRu + " illegal cost " + dish.price);
+                    loggerFactory.error(dish.getParentID() + " " + dish.getNameRus() + " illegal cost " + dish.getPrice());
                 }
                 dishEntity.setPrice(priceEntity);
-                setCategory(dishEntity, dish.nameRu);
-                TextGroupEntity dishNameGroup = new TextGroupEntity("DishName" + dish.nameEn);
-                if (dish.nameRu != null && !dish.nameRu.isEmpty()) {
-                    TextEntity dishNameRu = new TextEntity(LanguageType.Russian, dish.nameRu, dishNameGroup);
+                setCategory(dishEntity, dish.getCategoryNameRus(), dish.getCategoryNameEng(), dish.getParentID(), dish.getOrder());
+                TextGroupEntity dishNameGroup = new TextGroupEntity("DishName" + dish.getNameEng());
+                if (dish.getNameRus() != null && !dish.getNameRus().isEmpty()) {
+                    TextEntity dishNameRu = new TextEntity(LanguageType.Russian, dish.getNameRus(), dishNameGroup);
                     TextRequest.addText(dishNameRu);
                 }
-                if (dish.nameEn != null && !dish.nameEn.isEmpty()) {
-                    TextEntity dishNameEn = new TextEntity(LanguageType.English, dish.nameEn, dishNameGroup);
+                if (dish.getNameEng() != null && !dish.getNameEng().isEmpty()) {
+                    TextEntity dishNameEn = new TextEntity(LanguageType.English, dish.getNameEng(), dishNameGroup);
                     TextRequest.addText(dishNameEn);
                 }
                 dishEntity.setDishName(dishNameGroup);
-                if (dishEntity.getDishCategory() != null) {
-                    loggerFactory.debug("set " + dish.nameRu + " " + dishEntity.getDishCategory().getName().getTextGroupName());
-                }
-                DishRequest.addDish(dishEntity);
-                for (Tag tag : dish.tags) {
-                    DishTagEntity dishTagEntity = dishTagEntityHashMap.get(tag.tagID);
-                    DishTagDishLinkEntity dishTagDishLinkEntity = new DishTagDishLinkEntity();
-                    dishTagDishLinkEntity.setDish(dishEntity);
-                    dishTagDishLinkEntity.setDishTag(dishTagEntity);
-                    DishRequest.addDishTagDishLink(dishTagDishLinkEntity);
+
+                if (!DishRequest.isDishExist(dish.getCategoryNameRus(), dish.getCategoryNameEng(), dishEntity.getCost(), dishEntity.getPrice().getPriceID())) {
+                    DishRequest.addDish(dishEntity);
                 }
             } catch (Exception e) {
+                loggerFactory.error("error on dish " + dish.getNameRus() + " at card " + dish.getParentID());
                 loggerFactory.error(e);
+            } catch (Throwable t) {
+                loggerFactory.error("error on dish " + dish.getNameRus() + " at card " + dish.getParentID());
+                loggerFactory.error(t.toString() + " " + t.getMessage());
             }
         }
     }
 
-    private void setCategory(DishEntity dishEntity, String nameRu) {
-        loggerFactory.debug("setCategory of " + nameRu);
-        if (menuCardMap.containsKey(nameRu)) {
-            loggerFactory.debug("nameru " + nameRu + " was found");
-            DishAdditionalInfo dishAdditionalInfo = menuCardMap.get(nameRu);
-            if (dishAdditionalInfo.getCatID() != null) {
-                loggerFactory.debug("getCatID not null");
-                String catNameRu = dishAdditionalInfo.getCategoryNameRus();
-//                Integer categoryID = dishAdditionalInfo.getCatID();
+    private void setCategory(DishEntity dishEntity, String nameRu, String nameEn, Integer parentID, Integer order) {
+        try {
+            if (nameRu != null && parentID != null) {
+                String key = nameRu + parentID;
+
                 DishCategoryEntity dishCategoryEntity;
-                if (dishCategoryMap.containsKey(catNameRu)) {
-                    loggerFactory.debug(catNameRu + " categoryID found");
-                    dishCategoryEntity = dishCategoryMap.get(catNameRu);
+                if (dishCategoryMap.containsKey(key)) {
+                    dishCategoryEntity = dishCategoryMap.get(key);
                 } else {
-                    loggerFactory.debug(catNameRu + " categoryID not found");
-                    TextGroupEntity textGroupEntity = new TextGroupEntity("DishCategoryName" + dishAdditionalInfo.getCategoryNameEng());
-                    TextEntity textEntityRu = new TextEntity(LanguageType.Russian, dishAdditionalInfo.getCategoryNameRus(), textGroupEntity);
-                    TextEntity textEntityEn = new TextEntity(LanguageType.English, dishAdditionalInfo.getCategoryNameEng(), textGroupEntity);
+                    TextGroupEntity textGroupEntity = new TextGroupEntity("DishCategoryName" + nameEn);
+                    TextEntity textEntityRu = new TextEntity(LanguageType.Russian, nameRu, textGroupEntity);
+                    TextEntity textEntityEn = new TextEntity(LanguageType.English, nameEn, textGroupEntity);
                     TextRequest.addText(textEntityRu);
                     TextRequest.addText(textEntityEn);
                     dishCategoryEntity = new DishCategoryEntity();
                     dishCategoryEntity.setName(textGroupEntity);
-                    dishCategoryEntity.setName(textGroupEntity);
-                    dishCategoryEntity.setPosition(dishAdditionalInfo.getOrder());
+//                    dishCategoryEntity.setName(textGroupEntity);
+                    dishCategoryEntity.setPosition(order);
                     DishRequest.addDishCategory(dishCategoryEntity);
-                    dishCategoryMap.put(catNameRu, dishCategoryEntity);
-                    loggerFactory.debug("added category " + catNameRu + " (" + textEntityRu.getText() + ") " + dishCategoryMap.get(catNameRu));
+                    dishCategoryMap.put(key, dishCategoryEntity);
+                }
+                if (dishCategoryEntity == null) {
+                    loggerFactory.error(nameRu + " is null");
                 }
                 dishEntity.setDishCategory(dishCategoryEntity);
             }
+        } catch (Exception e) {
+            loggerFactory.error("error on card " + parentID + " on category " + nameRu);
+            loggerFactory.error(e);
         }
     }
 
 
     public void saveDishes(HashMap<Long, CardEntity> cardEntityHashMap) {
         try {
-            HashMap<Integer, DishTagEntity> dishTagEntityHashMap = saveTags();
-            parseDishes(cardEntityHashMap, dishTagEntityHashMap);
+            parseDishes(cardEntityHashMap);
         } catch (Exception e) {
             loggerFactory.error(e);
         }
-    }
-
-    private HashMap<Integer, DishTagEntity> saveTags() {
-        HashMap<Integer, DishTagEntity> tagMap = new HashMap<>();
-        TagsXML tagsXML = new SimpleXmlHelper().getTagsXML(tagsXmlRoute);
-        for (CompleteTag completeTag : tagsXML.tags) {
-            TextGroupEntity textGroup = new TextGroupEntity("dishTag" + completeTag.nameEn);
-            if (completeTag.nameRu != null && !completeTag.nameRu.isEmpty()) {
-                TextEntity ruName = new TextEntity(LanguageType.Russian, completeTag.nameRu, textGroup);
-                TextRequest.addText(ruName);
-            }
-            if (completeTag.nameEn != null && !completeTag.nameEn.isEmpty()) {
-                TextEntity enName = new TextEntity(LanguageType.English, completeTag.nameEn, textGroup);
-                TextRequest.addText(enName);
-            }
-            DishTagEntity dishTagEntity = new DishTagEntity();
-            dishTagEntity.setName(textGroup);
-            DishRequest.addDishTag(dishTagEntity);
-            tagMap.put(completeTag.id, dishTagEntity);
-        }
-        return tagMap;
     }
 
 }

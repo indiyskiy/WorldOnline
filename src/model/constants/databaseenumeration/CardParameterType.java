@@ -1,6 +1,7 @@
 package model.constants.databaseenumeration;
 
 import model.constants.ApplicationBlock;
+import model.database.worldonlinedb.CardParameterTypeEntity;
 
 public enum CardParameterType {
     Phone(3, DataType.PhoneNumberType, ApplicationBlock.Description, true, false, "Телефон", "Phone number"),
@@ -103,13 +104,13 @@ public enum CardParameterType {
         this.enName = enName;
     }
 
-  /*  public static CardParameterType parseInt(Integer value) {
-        if (value == null) {
-            return null;
-        }
-        CardParameterType[] cardParameterTypes = CardParameterType.values();
-        return cardParameterTypes[value];
-    }*/
+//  public static CardParameterType parseInt(Integer value) {
+//        if (value == null) {
+//            return null;
+//        }
+//        CardParameterType[] cardParameterTypes = CardParameterType.values();
+//        return cardParameterTypes[value];
+//    }
 
     public int getValue() {
         return value;
@@ -138,4 +139,6 @@ public enum CardParameterType {
     public String getEnglishName() {
         return enName;
     }
+
+
 }

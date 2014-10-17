@@ -38,7 +38,7 @@ public class AddCardMenuServlet extends ProtectedServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     @Override

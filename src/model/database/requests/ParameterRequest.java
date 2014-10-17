@@ -1,9 +1,12 @@
 package model.database.requests;
 
 import controller.phone.entity.AllCardParameterTypesRequest;
+import helper.ParameterValidator;
 import model.additionalentity.admin.CardParameter;
 import model.additionalentity.admin.CompleteCardInfo;
 import model.additionalentity.admin.ParameterType;
+import model.additionalentity.phone.MobileCardInfo;
+import model.additionalentity.phone.MobileParameter;
 import model.additionalentity.phone.MobileParameterType;
 import model.constants.ApplicationBlock;
 import model.constants.Component;
@@ -23,6 +26,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class ParameterRequest {
@@ -63,13 +67,19 @@ public class ParameterRequest {
         return getCardParameterTypeByResultSet("CardParameterType", rs);
     }
 
-    public static void addCardParameter(CardParameterEntity cardParameterEntity) {
+    public static void addCardParameter(CardParameterEntity cardParameterEntity) throws Exception {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
         try {
-            session.beginTransaction();
-            session.save(cardParameterEntity);
-            session.getTransaction().commit();
-            session.flush();
+            boolean isValid = ParameterValidator.isValidParameter(cardParameterEntity.getCardParameterValue(), DataType.parseInt(cardParameterEntity.getCardParameterType().getDataType()));
+            if (isValid) {
+                session.beginTransaction();
+                session.save(cardParameterEntity);
+                session.getTransaction().commit();
+                session.flush();
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+            throw e;
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -225,21 +235,25 @@ public class ParameterRequest {
         return null;
     }
 
-    public static boolean updateCardParameter(CardParameterEntity cardParameter) {
+    public static boolean updateCardParameter(CardParameterEntity cardParameter) throws Exception {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-        boolean b = false;
         try {
-            session.beginTransaction();
-            session.update(cardParameter);
-            session.getTransaction().commit();
-            session.flush();
-            b = true;
+            boolean isValid = ParameterValidator.isValidParameter(cardParameter.getCardParameterValue(), DataType.parseInt(cardParameter.getCardParameterType().getDataType()));
+            if (isValid) {
+                session.beginTransaction();
+                session.update(cardParameter);
+                session.getTransaction().commit();
+                session.flush();
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+            throw e;
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
-        return b;
+        return true;
     }
 
     public static void deleteCardParameter(CardParameterEntity cardParameterEntity) {
@@ -336,8 +350,39 @@ public class ParameterRequest {
         return false;
     }
 
-    public static void addEmptyCardParameter(CardEntity cardEntity, CardParameterTypeEntity cardParameterTypeEntity) {
+    public static void addEmptyCardParameter(CardEntity cardEntity, CardParameterTypeEntity cardParameterTypeEntity) throws Exception {
         CardParameterEntity cardParameter = new CardParameterEntity(cardEntity, cardParameterTypeEntity, "");
         addCardParameter(cardParameter);
+    }
+
+    public static void setMobileParameters(HashMap<Long, MobileCardInfo> mobileCardInfoHashMap, String cardIDs) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT  " +
+                    "CardParameter.CardParameterValue, " +
+                    "CardParameter.CardParameterID, " +
+                    "CardParameter.CardParameterTypeID, " +
+                    "CardParameter.CardID " +
+                    "FROM  CardParameter " +
+                    "WHERE CardParameter.CardID IN (" + cardIDs + ")";
+            ps = connection.prepareStatement(sql);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                MobileCardInfo mobileCardInfo = mobileCardInfoHashMap.get(rs.getLong("CardParameter.CardID"));
+                MobileParameter mobileParameter = new MobileParameter();
+                mobileParameter.setValue(rs.getString("CardParameter.CardParameterValue"));
+                mobileParameter.setParameterID(rs.getLong("CardParameter.CardParameterID"));
+                mobileParameter.setParameterTypeID(rs.getLong("CardParameter.CardParameterTypeID"));
+                mobileCardInfo.getMobileParameters().add(mobileParameter);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
     }
 }

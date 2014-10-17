@@ -11,7 +11,7 @@ import model.exception.ParseRequestException;
 import javax.servlet.http.HttpServletRequest;
 
 public class RegistrationParse {
-    public static ParsedRegistrationRequest parse(HttpServletRequest request) throws ParseRequestException {
+    public static ParsedRegistrationRequest parse(HttpServletRequest request) throws Exception {
         ParsedRegistrationRequest parsedRegistrationRequest = new ParsedRegistrationRequest();
         String login = request.getParameter("login");
         if (login == null || login.isEmpty()) {
@@ -38,8 +38,8 @@ public class RegistrationParse {
         if (email == null || email.isEmpty()) {
             throw new ParseRequestException("email is empty");
         }
-        String validParameter = ParameterValidator.isValidParameter(email, DataType.EmailType);
-        if (validParameter == null) {
+        boolean validParameter = ParameterValidator.isValidParameter(email, DataType.EmailType);
+        if (!validParameter) {
             throw new ParseRequestException("email is incorrect");
         }
         parsedRegistrationRequest.setLogin(login);

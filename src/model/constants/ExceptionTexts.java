@@ -48,13 +48,15 @@ public class ExceptionTexts {
     public static final String getAllDishCategoriesUserIDEmptyException = "phone.getAllDishCategories.UserID.Empty";
     public static final String getAllDishCategoriesIncorrectException = "phone.getAllDishCategories.UserID.Incorrect";
     public static final String getAllDishCategoriesUserNotExistException = "phone.getAllDishCategories.UserID.NotExist";
-    public static String getAllDishTagsUserIDEmptyException = "phone.getAllDishTags.UserID.Empty";
-    public static String getAllDishTagsIncorrectException = "phone.getAllDishTags.UserID.Incorrect";
-    public static String getAllDishTagsUserNotExistException = "phone.getAllDishTags.UserID.NotExist";
-    public static String allPricesLimitTooBigException = "phone.allPrices.Limit.TooBig";
-    public static String allPricesLimitIncorrectException = "phone.allPrices.Limit.Incorrect";
-    public static String allPricesLimitEmptyException = "phone.allPrices.Offset.Empty";
-    public static String allPricesOffsetIncorrectException = "phone.allPrices.Offset.Incorrect";
+    public static final String getAllDishTagsUserIDEmptyException = "phone.getAllDishTags.UserID.Empty";
+    public static final String getAllDishTagsIncorrectException = "phone.getAllDishTags.UserID.Incorrect";
+    public static final String getAllDishTagsUserNotExistException = "phone.getAllDishTags.UserID.NotExist";
+    public static final String allPricesLimitTooBigException = "phone.allPrices.Limit.TooBig";
+    public static final String allPricesLimitIncorrectException = "phone.allPrices.Limit.Incorrect";
+    public static final String allPricesLimitEmptyException = "phone.allPrices.Offset.Empty";
+    public static final String allPricesOffsetIncorrectException = "phone.allPrices.Offset.Incorrect";
+    public static final String exchangeRatesUserIDEmptyException = "phone.exchangeRates.UserID.Empty";
+    public static final String exchangeRatesUserIDIncorrectException = "phone.exchangeRates.UserID.Incorrect";
 
 
     private static HashSet<String> getMobileErrors() {

@@ -1,11 +1,10 @@
 package view.servlet.admin;
 
-import model.additionalentity.admin.CompleteMenuInfo;
 import model.additionalentity.admin.CompletePriceInfo;
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.constants.databaseenumeration.LanguageType;
 import model.database.requests.DishRequest;
-import model.database.requests.MenuRequest;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
@@ -19,15 +18,15 @@ public class CompletePriceInfoServlet extends ProtectedServlet {
     LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, CompletePriceInfoServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletHelper.setUTF8(request, response);
         try {
             ServletHelper.setUTF8(request, response);
+            request.setAttribute("languages", LanguageType.values());
             Long priceID = Long.parseLong(request.getParameter("priceID"));
-
             CompletePriceInfo priceInfo = DishRequest.getCompletePriceInfo(priceID);
             if (priceInfo != null) {
                 request.setAttribute("price", priceInfo);

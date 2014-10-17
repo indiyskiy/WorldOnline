@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Scheduler implements Runnable {
-    //all time in seconds
+    //all time in hours
     private static Scheduler scheduler = new Scheduler();
     private static LoggerFactory logger;
     private ArrayList<Executable> executableList = new ArrayList<>();
     private int maxPeriod = 1;
+    private static final long oneHour = 1000L * 60L * 60L;
 
     private Scheduler() {
         logger = new LoggerFactory(Component.Global, Scheduler.class);
@@ -33,6 +34,7 @@ public class Scheduler implements Runnable {
 
     private void addTasksToList() {
         executableList.add(new WeatherTask());
+        executableList.add(new ExchangeRatesTask());
     }
 
     public static Scheduler getScheduler() {
@@ -63,15 +65,15 @@ public class Scheduler implements Runnable {
                         periodTimer = 0;
                     }
                     System.out.println(String.valueOf(periodTimer));
-                    Thread.sleep(1000 * 60);
+                    Thread.sleep(oneHour);
                 } catch (Exception e) {
                     logger.error("Attention! Error at endless cycle!");
                     logger.error(e);
                 }
             } while (true);
         } catch (Exception e) {
-            logger.error("The Endless Cycle was stopped");
             logger.error(e);
         }
+        logger.error("The Endless Cycle was stopped");
     }
 }

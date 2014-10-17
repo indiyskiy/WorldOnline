@@ -5,6 +5,8 @@ import model.additionalentity.CompleteTextGroupInfo;
 import model.additionalentity.CompleteTextInfo;
 import model.additionalentity.admin.CardText;
 import model.additionalentity.admin.CompleteCardInfo;
+import model.additionalentity.phone.MobileCardInfo;
+import model.additionalentity.phone.MobileText;
 import model.constants.Component;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
@@ -13,6 +15,7 @@ import model.database.worldonlinedb.*;
 import model.exception.DatabaseException;
 import model.logger.LoggerFactory;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.intellij.lang.annotations.Language;
 
 import java.sql.Connection;
@@ -373,7 +376,7 @@ public class TextRequest {
         return completeTextInfos;
     }
 
-    public static TextGroupEntity addTextGroup(Long textGroupID) {
+    public static TextGroupEntity getTextGroup(Long textGroupID) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
         try {
             return (TextGroupEntity) session.get(TextGroupEntity.class, textGroupID);
@@ -400,6 +403,63 @@ public class TextRequest {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
+        }
+    }
+
+    public static void addText(ArrayList<TextEntity> textEntities) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+            for (TextEntity text : textEntities) {
+                if (text.getTextGroup() == null) {
+                    throw new DatabaseException("TextGroup is null");
+                }
+                session.save(text);
+            }
+            transaction.commit();
+            session.flush();
+        } catch (DatabaseException e) {
+            loggerFactory.error(e.getMessage());
+            loggerFactory.error(e);
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static void setMobileTexts(HashMap<Long, MobileCardInfo> mobileCardInfoHashMap, String cardIDs, LanguageType languageType) {
+        //texts
+//            "Text.Text, " +
+//            "TextCard.CardParameterTypeID, " +
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT " +
+                    "TextCard.CardID, " +
+                    "Text.Text, " +
+                    "TextCard.CardParameterTypeID " +
+                    "FROM TextCard " +
+                    "JOIN Text ON (Text.TextGroupID=TextCard.TextGroupID) " +
+                    "WHERE Text.LanguageID=" + languageType.getValue() + " " +
+                    "AND TextCard.CardID IN (" + cardIDs + ") ";
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                MobileCardInfo mobileCardInfo = mobileCardInfoHashMap.get(rs.getLong("TextCard.CardID"));
+                MobileText mobileText = new MobileText();
+                mobileText.setText(rs.getString("Text.Text"));
+                mobileText.setCardParameterTypeID(rs.getLong("TextCard.CardParameterTypeID"));
+                mobileCardInfo.getMobileTexts().add(mobileText);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
         }
     }
 }

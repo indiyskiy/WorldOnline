@@ -63,7 +63,11 @@ public class CompleteCardInfoServlet extends ProtectedServlet {
                     if (completeCardInfo.getCardTagArrayList() != null && !completeCardInfo.getCardTagArrayList().isEmpty()) {
                         request.setAttribute("tags", completeCardInfo.getCardTagArrayList());
                     }
+                    if (completeCardInfo.getCardInfoElements() != null && !completeCardInfo.getCardInfoElements().isEmpty()) {
+                        request.setAttribute("infos", completeCardInfo.getCardInfoElements());
+                    }
                     request.setAttribute("cardBlocks", completeCardInfo.getCardBlocks());
+                    request.setAttribute("cardType", completeCardInfo.getCardInfo().getCardType().getValue());
                 }
                 ServletHelper.sendForward("/completecardinfo.jsp", this, request, response);
             }

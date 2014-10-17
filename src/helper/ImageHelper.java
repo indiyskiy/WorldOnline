@@ -4,6 +4,7 @@ import model.constants.Component;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.ImageType;
 import model.database.requests.ImageRequest;
+import model.database.requests.InfoRequest;
 import model.database.requests.MenuRequest;
 import model.database.requests.TagRequest;
 import model.database.worldonlinedb.*;
@@ -45,7 +46,7 @@ public class ImageHelper {
             File imageFile = getFileImageByName(imageName);
             return saveImage(imageFile, imageType);
         } catch (DataIsEmptyException e) {
-            loggerFactory.error("data is empty, image name is " + String.valueOf(e.getImageName()));
+//            loggerFactory.error("data is empty, image name is " + String.valueOf(e.getImageName()) + " (or " + imageName + "). type is " + imageType);
         } catch (Exception e) {
             loggerFactory.error(e);
         }
@@ -127,6 +128,16 @@ public class ImageHelper {
             ImageEntity imageEntity = saveImage(file, ImageType.MenuIcon);
             tagEntity.setIcon(imageEntity);
             TagRequest.updateTagIcon(tagEntity);
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        }
+    }
+
+    public static void saveCardInfoImage(File file, CardInformationElementEntity cardInformationElementEntity) {
+        try {
+            ImageEntity imageEntity = saveImage(file, ImageType.MenuIcon);
+            cardInformationElementEntity.setImage(imageEntity);
+            InfoRequest.updateInfoImage(cardInformationElementEntity);
         } catch (Exception e) {
             loggerFactory.error(e);
         }

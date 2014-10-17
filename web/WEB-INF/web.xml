@@ -259,7 +259,6 @@
         <url-pattern>/mailConfirm/*</url-pattern>
     </servlet-mapping>
 
-
     <!--change status-->
     <servlet>
         <display-name>ChangeStatusServlet</display-name>
@@ -293,7 +292,6 @@
         <servlet-name>TextGroupEditServlet</servlet-name>
         <url-pattern>/textgroupedit</url-pattern>
     </servlet-mapping>
-
 
     <servlet>
         <display-name>EditCardParametersServlet</display-name>
@@ -584,6 +582,90 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <display-name>AddDishesServlet</display-name>
+        <servlet-name>AddDishesServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddDishesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddDishesServlet</servlet-name>
+        <url-pattern>/adddishes</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>DeleteMenuServlet</display-name>
+        <servlet-name>DeleteMenuServlet</servlet-name>
+        <servlet-class>view.servlet.admin.DeleteMenuServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteMenuServlet</servlet-name>
+        <url-pattern>/deletemenu</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>DeleteDishServlet</display-name>
+        <servlet-name>DeleteDishServlet</servlet-name>
+        <servlet-class>view.servlet.admin.DeleteDishServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteDishServlet</servlet-name>
+        <url-pattern>/deletedish</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>AddInfoElementToCardServlet</display-name>
+        <servlet-name>AddInfoElementToCardServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddInfoElementToCardServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddInfoElementToCardServlet</servlet-name>
+        <url-pattern>/addinfoelementtocard</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>ChangeCardInfoImageServlet</display-name>
+        <servlet-name>ChangeCardInfoImageServlet</servlet-name>
+        <servlet-class>view.servlet.admin.ChangeCardInfoImageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ChangeCardInfoImageServlet</servlet-name>
+        <url-pattern>/changecardinfoimage</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>AddNewPriceServlet</display-name>
+        <servlet-name>AddNewPriceServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddNewPriceServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddNewPriceServlet</servlet-name>
+        <url-pattern>/addnewprice</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>AddScvToPriceServlet</display-name>
+        <servlet-name>AddScvToPriceServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddScvToPriceServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddScvToPriceServlet</servlet-name>
+        <url-pattern>/addscvtoprice</url-pattern>
+    </servlet-mapping>
+
+
     <welcome-file-list>
         <welcome-file>index</welcome-file>
     </welcome-file-list>
@@ -659,6 +741,18 @@
     <servlet-mapping>
         <servlet-name>WeatherPhoneServlet</servlet-name>
         <url-pattern>/mobile/weather</url-pattern>
+    </servlet-mapping>
+
+    <!--Exchange Rates-->
+    <servlet>
+        <display-name>ExchangeRatesServlet</display-name>
+        <servlet-name>ExchangeRatesServlet</servlet-name>
+        <servlet-class>view.servlet.phone.ExchangeRatesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ExchangeRatesServlet</servlet-name>
+        <url-pattern>/mobile/exchangerates</url-pattern>
     </servlet-mapping>
 
     <!--Get All Card Parameter Types-->

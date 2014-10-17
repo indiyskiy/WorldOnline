@@ -20,7 +20,6 @@ public class TextGroupEditServlet extends ProtectedServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            loggerFactory.debug("TextGroupEditServlet");
             TextGroupEditParser textGroupEditParser = new TextGroupEditParser(request);
             textGroupEditParser.formLists();
             ArrayList<TextEntity> textEntitiesUpdate = textGroupEditParser.getTextEntityUpdateArrayList();

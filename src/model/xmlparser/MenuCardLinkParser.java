@@ -267,7 +267,7 @@ public class MenuCardLinkParser {
                 return null;
             }
             if (menuEntityHashMap.containsKey(cardID)) {
-                loggerFactory.debug("what it was now?!? 0_o Double cards with same ids");
+                loggerFactory.error("what it was now?!? 0_o Double cards with same ids");
                 return menuEntityHashMap.get(cardID);
             }
             Integer menuID = menuCardMap.get(Integer.parseInt(cardID));

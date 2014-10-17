@@ -25,7 +25,6 @@ public class EditTagImageServlet extends ProtectedServlet {
             imageTagUploadParser.parse(request);
             TagEntity tagEntity = imageTagUploadParser.getTagEntity();
             File file = (File) imageTagUploadParser.getFileMap().values().toArray()[0];
-            loggerFactory.debug("file " + file.getName());
             ImageHelper.saveTagIcon(file, tagEntity);
             long tagID = imageTagUploadParser.getTagID();
             ServletHelper.sendForward("/tagedit?tagID=" + tagID, this, request, response);

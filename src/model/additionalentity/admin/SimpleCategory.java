@@ -37,7 +37,4 @@ public class SimpleCategory {
         return simpleDishes;
     }
 
-    public void setSimpleDishes(ArrayList<SimpleDish> simpleDishes) {
-        this.simpleDishes = simpleDishes;
-    }
 }

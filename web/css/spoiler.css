@@ -3,6 +3,7 @@
     border-radius: 7px;
     border: 1px solid blue;
     background: lavender;
+    overflow: hidden;
 }
 
 .spoiler {
@@ -24,6 +25,7 @@
     display: none;
     border-radius: 7px;
     border: 1px solid blue;
+    overflow: hidden;
 }
 
 .spoiler dd {
@@ -62,6 +64,7 @@
     display: none;
     border-radius: 7px;
     border: 1px solid blue;
+    overflow: hidden;
 }
 
 .spoilerSub dd {
@@ -73,3 +76,27 @@
 .spoilerSub dd {
     background: lavender;
 }
+
+.spoilerElement {
+    border-radius: 7px;
+    border: 1px solid blue;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding: 5px 10px;
+    overflow: hidden;
+}
+
+.field {
+    clear: both;
+    text-align: right;
+}
+
+label {
+    float: left;
+    padding: 2px 2px;
+}
+
+.form {
+    float: left
+}
+

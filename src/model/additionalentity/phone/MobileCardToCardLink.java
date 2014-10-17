@@ -2,11 +2,12 @@ package model.additionalentity.phone;
 
 
 import com.google.gson.JsonObject;
+import model.constants.databaseenumeration.CardToCardLinkType;
 
 public class MobileCardToCardLink {
     private Long linkID;
-    private String cardID;
-    private String linkType;
+    private Long cardID;
+    private CardToCardLinkType linkType;
 
     public void setLinkID(Long linkID) {
         this.linkID = linkID;
@@ -16,19 +17,19 @@ public class MobileCardToCardLink {
         return linkID;
     }
 
-    public void setCardID(String cardID) {
+    public void setCardID(Long cardID) {
         this.cardID = cardID;
     }
 
-    public String getCardID() {
+    public Long getCardID() {
         return cardID;
     }
 
-    public void setLinkType(String linkType) {
+    public void setLinkType(CardToCardLinkType linkType) {
         this.linkType = linkType;
     }
 
-    public String getLinkType() {
+    public CardToCardLinkType getLinkType() {
         return linkType;
     }
 
@@ -36,7 +37,7 @@ public class MobileCardToCardLink {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("linkID", linkID);
         jsonObject.addProperty("cardID", cardID);
-        jsonObject.addProperty("linkType", linkType);
+        jsonObject.addProperty("linkType", linkType.getValue());
         return jsonObject;
     }
 }

@@ -4,7 +4,7 @@ import model.weather.GismeteoWeatherParser;
 
 public class WeatherTask extends ExecutableTask {
     public WeatherTask() {
-        super(60 * 12);
+        super(6);
     }
 
     @Override

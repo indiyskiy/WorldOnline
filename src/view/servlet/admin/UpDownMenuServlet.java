@@ -26,16 +26,13 @@ public class UpDownMenuServlet extends ProtectedServlet {
         try {
             Long menuID = Long.parseLong(request.getParameter("menuID"));
             MenuEntity menuEntity = MenuRequest.getMenu(menuID);
-            loggerFactory.debug("current menu position " + menuEntity.getNumber());
             Long rootMenuID = Long.parseLong(request.getParameter("rootMenuID"));
             RepositionDirection repositionDirection = RepositionDirection.valueOf(request.getParameter("reposition"));
             MenuEntity nearbyMenu = MenuRequest.getNearbyMenu(menuID, rootMenuID, repositionDirection);
-            loggerFactory.debug("nearby menu position " + menuEntity.getNumber());
             if (nearbyMenu != null) {
                 int number = nearbyMenu.getNumber();
                 nearbyMenu.setNumber(menuEntity.getNumber());
                 menuEntity.setNumber(number);
-                loggerFactory.debug("switch " + nearbyMenu.getNumber() + " -> " + menuEntity.getNumber());
                 MenuRequest.updateMenu(menuEntity);
                 MenuRequest.updateMenu(nearbyMenu);
             }

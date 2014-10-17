@@ -27,7 +27,6 @@ public class ImageCardUploadParser {
         ParsedRequest parsedRequest = ServletHelper.getParametersMap(request);
         HashMap<String, String> textMap = parsedRequest.getTextMap();
         fileMap = parsedRequest.getFileMap();
-
         try {
             cardID = Long.parseLong(textMap.get("cardID"));
         } catch (Exception e) {

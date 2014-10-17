@@ -85,7 +85,11 @@ public class ServletHelper {
     public static void sendError(Exception error, HttpServletRequest request, HttpServletResponse response, HttpServlet servlet, LoggerFactory loggerFactory) {
         try {
             if (request != null) {
-                request.setAttribute("errorMessage", error.getMessage());
+                if (error.getMessage() != null && !error.getMessage().isEmpty()) {
+                    request.setAttribute("errorMessage", error.getMessage().replaceAll("\n", "<br>"));
+                } else {
+                    request.setAttribute("errorMessage", error.toString());
+                }
             }
             loggerFactory.error(error);
             if (request != null && response != null && servlet != null) {
@@ -127,7 +131,6 @@ public class ServletHelper {
                 String fieldName = item.getFieldName();
                 if (item.isFormField()) {
                     String value = item.getString();
-                    loggerFactory.debug(fieldName + " - " + value);
                     textMap.put(fieldName, value);
                 } else {
                     String filename = FilenameUtils.getName(item.getName());
@@ -162,5 +165,19 @@ public class ServletHelper {
             }
         }
         return res;
+    }
+
+    public static void sendRedirect(String url, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getServerName();
+        int port = request.getServerPort();
+        url = getServerName(request) + url;
+        String res = "http://" + name + ":" + port + "/" + url;
+        sendRedirect(res, response);
+    }
+
+    public static String getServerName(HttpServletRequest request) {
+        String serverName = request.getRequestURI().replaceFirst("/", "");
+        serverName = serverName.substring(0, serverName.indexOf("/"));
+        return serverName;
     }
 }

@@ -28,7 +28,6 @@ public class ParameterParser {
             ApplicationBlock block = cardParameterType.getBlock();
             int position = cardParameterType.getValue();
             CardParameterTypeEntity cardParameterTypeEntity = new CardParameterTypeEntity(cardParameterTypeName, null, dataType, block, position, cardParameterType.isTranslatable(), cardParameterType.isMultiply());
-            loggerFactory.debug("create parameterType: " + LanguageType.Russian + ". Translateble = " + cardParameterTypeEntity.isTranslatable());
             ParameterRequest.addCardParameterType(cardParameterTypeEntity);
         }
     }

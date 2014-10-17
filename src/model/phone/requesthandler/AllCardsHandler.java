@@ -19,11 +19,7 @@ public class AllCardsHandler implements MobileHandler {
     public AllCardsResponse handleRequest(AllCardsRequest allCardsRequest) {
         AllCardsResponse allCardsResponse = new AllCardsResponse();
         LinkedList<MobileCardInfo> mobileCardInfoList;
-//        if (allCardsRequest.getLimit() != null && allCardsRequest.getOffset() != null) {
-        mobileCardInfoList = CardRequest.getAllMobileCards(allCardsRequest.getUserID(), allCardsRequest.getLimit(), allCardsRequest.getOffset());
-//        } else {
-//            mobileCardInfoList = CardRequest.getAllMobileCards(allCardsRequest.getUserID());
-//        }
+        mobileCardInfoList = CardRequest.getMobileCards(allCardsRequest.getUserID(), allCardsRequest.getLimit(), allCardsRequest.getOffset());
         allCardsResponse.setCardList(mobileCardInfoList);
         return allCardsResponse;
     }

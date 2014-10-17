@@ -46,10 +46,6 @@ public class ImageTagUploadParser {
         }
     }
 
-    public static LoggerFactory getLoggerFactory() {
-        return loggerFactory;
-    }
-
     public TagEntity getTagEntity() {
         return tagEntity;
     }

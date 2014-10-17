@@ -30,6 +30,14 @@
                 el.getElementsByTagName("dd")[0].style.display = "none";
             }
         }
+
+        function confirmDelete() {
+            if (confirm("Удаление меню удалит все связи его с карточками. Правда удалить?")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     </SCRIPT>
 </head>
 <body>
@@ -51,6 +59,17 @@
 <div class="container container-lower">
 
     <dl class="spoiler">
+        <dt onclick="clickSpoiler(this);">Основное</dt>
+        <dd>
+            <a href="completetextgroupinfo?textGroupID=${menu.textGroupID}&menuID=${menu.menuID}">
+                Перевод названия меню
+            </a>
+            <br/>
+            <a href="deletemenu?menuID=${menu.menuID}" onClick="return confirmDelete();">Удалить категорию</a>
+        </dd>
+    </dl>
+
+    <dl class="spoiler">
         <dt onclick="clickSpoiler(this);">Меню-родитель</dt>
         <dd>
             <form action="changeparent" method="post">
@@ -62,20 +81,12 @@
             </form>
         </dd>
     </dl>
+
     <dl class="spoiler">
         <dt onclick="clickSpoiler(this);">Положение меню</dt>
         <dd>
             Номер в списке меню ${menu.number}
             <%--ближайшие соседи, опустить, поднять--%>
-        </dd>
-    </dl>
-
-    <dl class="spoiler">
-        <dt onclick="clickSpoiler(this);">Тексты</dt>
-        <dd>
-            <a href="completetextgroupinfo?textGroupID=${menu.textGroupID}&menuID=${menu.menuID}">
-                Перевод названия меню
-            </a>
         </dd>
     </dl>
     <dl class="spoiler">
