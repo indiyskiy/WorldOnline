@@ -266,6 +266,7 @@ public class RouteRequest {
                     mobileRoute = mobileCardRouteHashMap.get(mobileRouteID);
                 } else {
                     mobileRoute = new MobileCardRoute();
+                    mobileRoute.setRouteID(mobileRouteID);
                     //set stats
                     MobileCardInfo mobileCardInfo = mobileCardInfoHashMap.get(rs.getLong("CardRoute.CardID"));
                     if (mobileCardInfo != null) {

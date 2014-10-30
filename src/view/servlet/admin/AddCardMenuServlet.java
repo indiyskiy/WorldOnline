@@ -30,6 +30,7 @@ public class AddCardMenuServlet extends ProtectedServlet {
                 menuCardLinkEntity.setCard(cardEntity);
                 menuCardLinkEntity.setMenu(menuEntity);
                 MenuRequest.addMenuCardLinkSafe(menuCardLinkEntity);
+                CardRequest.updateCard(cardEntity);
             }
             ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
         } catch (Exception e) {

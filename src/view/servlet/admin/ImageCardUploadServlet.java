@@ -32,6 +32,9 @@ public class ImageCardUploadServlet extends ProtectedServlet {
                 ImageHelper.saveImage(file, cardEntity, imageType);
                 isLoaded = true;
             }
+            if (isLoaded) {
+                CardRequest.updateCard(cardEntity);
+            }
             long cardID = imageCardUploadParser.getCardID();
             request.setAttribute("isLoaded", isLoaded);
             request.setAttribute("cardID", cardID);

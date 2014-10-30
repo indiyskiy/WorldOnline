@@ -2,6 +2,7 @@ package view.servlet.admin;
 
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.database.requests.CardRequest;
 import model.database.requests.MenuRequest;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
@@ -24,6 +25,7 @@ public class DeleteCardMenuServlet extends ProtectedServlet {
             Long cardMenuID = Long.parseLong(request.getParameter("cardMenuID"));
             MenuRequest.deleteCardMenu(cardMenuID);
             Long cardID = Long.parseLong(request.getParameter("cardID"));
+            CardRequest.updateCard(CardRequest.getCardByID(cardID));
             ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

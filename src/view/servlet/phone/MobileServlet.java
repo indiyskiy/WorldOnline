@@ -39,6 +39,10 @@ public abstract class MobileServlet extends HttpServlet {
             ServletHelper.sendJson(response, responseString);
         } catch (IllegalTypeException | ParseRequestException | IOException | ServletException | SQLException e) {
             ServletHelper.sendMobileError(loggerFactory, e, response);
+        } catch (Exception e) {
+            loggerFactory.error("unexpected error!!! emits in the blue spectrum! sore wa tenshi desu!");
+            loggerFactory.error(e);
+            ServletHelper.sendMobileError(loggerFactory, e, response);
         }
     }
 

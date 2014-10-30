@@ -2,6 +2,7 @@ package view.servlet.admin;
 
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.database.requests.CardRequest;
 import model.database.requests.ParameterRequest;
 import model.database.worldonlinedb.CardParameterEntity;
 import model.logger.LoggerFactory;
@@ -27,6 +28,7 @@ public class DeleteCardParameterServlet extends ProtectedServlet {
             CardParameterEntity cardParameterEntity = ParameterRequest.getCardParameter(cardParameterID);
             if (cardParameterEntity != null) {
                 ParameterRequest.deleteCardParameter(cardParameterEntity);
+                CardRequest.updateCard(cardParameterEntity.getCard());
             }
             ServletHelper.sendForward("/completecardinfo?cardID=" + request.getParameter("cardID"), this, request, response);
         } catch (Exception e) {

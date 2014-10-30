@@ -4,6 +4,7 @@ import controller.parser.adminparser.CardInfoImageUploadParser;
 import helper.ImageHelper;
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.database.requests.CardRequest;
 import model.database.worldonlinedb.CardInformationElementEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
@@ -27,6 +28,7 @@ public class ChangeCardInfoImageServlet extends ProtectedServlet {
             File file = (File) cardInfoImageUploadParser.getFileMap().values().toArray()[0];
             ImageHelper.saveCardInfoImage(file, cardInformationElementEntity);
             Long cardID = cardInformationElementEntity.getCard().getCardID();
+            CardRequest.updateCard(CardRequest.getCardByID(cardID));
             loggerFactory.debug("card id=" + cardID);
             ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
         } catch (Exception e) {

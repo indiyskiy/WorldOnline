@@ -3,6 +3,7 @@ package view.servlet.admin;
 import controller.parser.adminparser.EditCardParametersParser;
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.database.requests.CardRequest;
 import model.database.requests.ParameterRequest;
 import model.database.worldonlinedb.CardParameterEntity;
 import model.logger.LoggerFactory;
@@ -21,12 +22,17 @@ public class EditCardParametersServlet extends ProtectedServlet {
             ServletHelper.setUTF8(request, response);
             EditCardParametersParser editCardParametersParser = new EditCardParametersParser(request);
             String errors = "";
+            boolean edited = false;
             for (CardParameterEntity cardParameter : editCardParametersParser.getCardParameters()) {
                 try {
                     ParameterRequest.updateCardParameter(cardParameter);
+                    edited = true;
                 } catch (Exception e) {
                     errors += e.toString() + "\n";
                 }
+            }
+            if (edited) {
+                CardRequest.updateCard(CardRequest.getCardByID(Long.parseLong(request.getParameter("cardID"))));
             }
             if (!errors.isEmpty()) {
                 throw new ServletException(errors);

@@ -66,6 +66,9 @@ public class CompleteCardInfoServlet extends ProtectedServlet {
                     if (completeCardInfo.getCardInfoElements() != null && !completeCardInfo.getCardInfoElements().isEmpty()) {
                         request.setAttribute("infos", completeCardInfo.getCardInfoElements());
                     }
+                    if (completeCardInfo.getUrgencyTime() != null) {
+                        request.setAttribute("urgencyTime", completeCardInfo.getUrgencyTime());
+                    }
                     request.setAttribute("cardBlocks", completeCardInfo.getCardBlocks());
                     request.setAttribute("cardType", completeCardInfo.getCardInfo().getCardType().getValue());
                 }

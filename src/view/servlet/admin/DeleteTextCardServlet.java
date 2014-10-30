@@ -2,6 +2,7 @@ package view.servlet.admin;
 
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.database.requests.CardRequest;
 import model.database.requests.TextRequest;
 import model.database.worldonlinedb.TextCardEntity;
 import model.logger.LoggerFactory;
@@ -27,6 +28,7 @@ public class DeleteTextCardServlet extends ProtectedServlet {
             Long textCardID = Long.parseLong(request.getParameter("textCardID"));
             TextCardEntity textCardEntity = TextRequest.getTextCard(textCardID);
             if (textCardEntity != null) {
+                CardRequest.updateCard(textCardEntity.getCard());
                 TextRequest.deleteTextCard(textCardEntity);
             }
             ServletHelper.sendForward("/completecardinfo?cardID=" + request.getParameter("cardID"), this, request, response);

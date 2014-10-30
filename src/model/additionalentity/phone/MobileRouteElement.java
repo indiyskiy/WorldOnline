@@ -1,5 +1,8 @@
 package model.additionalentity.phone;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 public class MobileRouteElement {
 
     private int number;
@@ -28,5 +31,12 @@ public class MobileRouteElement {
 
     public long getPlaceCardID() {
         return placeCardID;
+    }
+
+    public JsonElement toJson() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("position", number);
+        jsonObject.addProperty("placeCardID", placeCardID);
+        return jsonObject;
     }
 }

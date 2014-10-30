@@ -30,7 +30,7 @@ public class ExceptionTexts {
     public static final String allCardsLimitTooBigException = "phone.getAllCards.Limit.TooBig";
     public static final String allCardsLimitEmptyException = "phone.getAllCards.Limit.Empty";
     public static final String allCardsOffsetIncorrectException = "phone.getAllCards.Offset.Incorrect";
-    public static String allCardsOffsetEmptyException = "phone.getAllCards.Offset.Empty";
+    public static final String allCardsOffsetEmptyException = "phone.getAllCards.Offset.Empty";
     public static final String weatherUserIDEmptyException = "phone.weather.UserID.empty";
     public static final String weatherUserIDIncorrectException = "phone.weather.UserID.Incorrect";
     public static final String weatherUserNotExistException = "phone.weather.UserID.NotExist";
@@ -57,10 +57,16 @@ public class ExceptionTexts {
     public static final String allPricesOffsetIncorrectException = "phone.allPrices.Offset.Incorrect";
     public static final String exchangeRatesUserIDEmptyException = "phone.exchangeRates.UserID.Empty";
     public static final String exchangeRatesUserIDIncorrectException = "phone.exchangeRates.UserID.Incorrect";
+    public static final String cardByListCardListEmptyException = "phone.cardbylist.CardList.Empty";
+    public static final String cardByListUserIDIncorrectException = "phone.cardbylist.UserID.Incorrect";
+    public static final String cardByListBodyEmptyException = "phone.cardbylist.Body.Empty";
+    public static final String cardRegistrationUserIDIncorrectException = "phone.cardregistration.UserID.Incorrect";
+    public static final String cardRegistrationBodyEmptyException = "phone.cardregistration.Body.Empty";
+    public static final String cardRegistrationCardListEmptyException = "phone.cardregistration.Body.Empty";
 
 
     private static HashSet<String> getMobileErrors() {
-        HashSet<String> mobileErrors = new HashSet<String>();
+        HashSet<String> mobileErrors = new HashSet<>();
         mobileErrors.add(registrationNoModelException);
         mobileErrors.add(registrationNoDeviceIDException);
         mobileErrors.add(registrationDeviceIDNotUniqueException);
@@ -69,6 +75,51 @@ public class ExceptionTexts {
         mobileErrors.add(allMenusUserIDEmptyException);
         mobileErrors.add(allMenusUserIDIncorrectException);
         mobileErrors.add(allMenusUserNotExistException);
+        mobileErrors.add(getMenuUserIDEmptyException);
+        mobileErrors.add(getMenuUserIDIncorrectException);
+        mobileErrors.add(getMenuUserNotExistException);
+        mobileErrors.add(getMenuMenuIDEmptyException);
+        mobileErrors.add(getMenuMenuIDIncorrectException);
+        mobileErrors.add(allCardsUserIDEmptyException);
+        mobileErrors.add(allCardsUserIDIncorrectException);
+        mobileErrors.add(allCardsUserNotExistException);
+        mobileErrors.add(allCardsLimitIncorrectException);
+        mobileErrors.add(allCardsLimitTooBigException);
+        mobileErrors.add(allCardsLimitEmptyException);
+        mobileErrors.add(allCardsOffsetIncorrectException);
+        mobileErrors.add(allCardsOffsetEmptyException);
+        mobileErrors.add(weatherUserIDEmptyException);
+        mobileErrors.add(weatherUserIDIncorrectException);
+        mobileErrors.add(weatherUserNotExistException);
+        mobileErrors.add(getViewImagesUserIDEmptyException);
+        mobileErrors.add(getViewImagesUserIDIncorrectException);
+        mobileErrors.add(getViewImagesUserNotExistException);
+        mobileErrors.add(restoreUserDeviceIDEmptyException);
+        mobileErrors.add(restoreUserDeviceNotFoundException);
+        mobileErrors.add(getAllCardParameterTypesUserIDEmptyException);
+        mobileErrors.add(getAllCardParameterTypesIncorrectException);
+        mobileErrors.add(getAllCardParameterTypesUserNotExistException);
+        mobileErrors.add(allTagsUserIDEmptyException);
+        mobileErrors.add(allTagsUserIDIncorrectException);
+        mobileErrors.add(allTagsUserNotExistException);
+        mobileErrors.add(getAllDishCategoriesUserIDEmptyException);
+        mobileErrors.add(getAllDishCategoriesIncorrectException);
+        mobileErrors.add(getAllDishCategoriesUserNotExistException);
+        mobileErrors.add(getAllDishTagsUserIDEmptyException);
+        mobileErrors.add(getAllDishTagsIncorrectException);
+        mobileErrors.add(getAllDishTagsUserNotExistException);
+        mobileErrors.add(allPricesLimitTooBigException);
+        mobileErrors.add(allPricesLimitIncorrectException);
+        mobileErrors.add(allPricesLimitEmptyException);
+        mobileErrors.add(allPricesOffsetIncorrectException);
+        mobileErrors.add(exchangeRatesUserIDEmptyException);
+        mobileErrors.add(exchangeRatesUserIDIncorrectException);
+        mobileErrors.add(cardByListCardListEmptyException);
+        mobileErrors.add(cardByListUserIDIncorrectException);
+        mobileErrors.add(cardByListBodyEmptyException);
+        mobileErrors.add(cardRegistrationUserIDIncorrectException);
+        mobileErrors.add(cardRegistrationBodyEmptyException);
+        mobileErrors.add(cardRegistrationCardListEmptyException);
         return mobileErrors;
     }
 }

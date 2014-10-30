@@ -12,9 +12,6 @@ public class UserContentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userContentID;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "GlobalVersionID")
-    private GlobalVersionEntity globalVersion;
     @javax.persistence.Column(name = "LastConnectionTimestamp")
     @Basic
     private Timestamp lastConnectionTimestamp;
@@ -34,14 +31,6 @@ public class UserContentEntity {
 
     public void setUserContentID(Long userContentID) {
         this.userContentID = userContentID;
-    }
-
-    public GlobalVersionEntity getGlobalVersion() {
-        return globalVersion;
-    }
-
-    public void setGlobalVersion(GlobalVersionEntity globalVersion) {
-        this.globalVersion = globalVersion;
     }
 
     public Timestamp getLastConnectionTimestamp() {
@@ -69,8 +58,7 @@ public class UserContentEntity {
 
         if (userContentID != null ? !userContentID.equals(that.userContentID) : that.userContentID != null)
             return false;
-        if (globalVersion != null ? !globalVersion.equals(that.globalVersion) : that.globalVersion != null)
-            return false;
+
         if (lastConnectionTimestamp != null ? !lastConnectionTimestamp.equals(that.lastConnectionTimestamp) : that.lastConnectionTimestamp != null)
             return false;
         if (lastSynchronizeTimestamp != null ? !lastSynchronizeTimestamp.equals(that.lastSynchronizeTimestamp) : that.lastSynchronizeTimestamp != null)
@@ -81,7 +69,6 @@ public class UserContentEntity {
     @Override
     public int hashCode() {
         int result = userContentID != null ? userContentID.hashCode() : 0;
-        result = 31 * result + (globalVersion != null ? globalVersion.hashCode() : 0);
         result = 31 * result + (lastConnectionTimestamp != null ? lastConnectionTimestamp.hashCode() : 0);
         result = 31 * result + (lastSynchronizeTimestamp != null ? lastSynchronizeTimestamp.hashCode() : 0);
         return result;

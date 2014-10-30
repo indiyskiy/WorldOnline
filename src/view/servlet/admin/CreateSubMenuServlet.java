@@ -35,7 +35,9 @@ public class CreateSubMenuServlet extends ProtectedServlet {
                 } else {
                     menuType = MenuType.StandardMenu;
                 }
+                Integer position = MenuRequest.getMaxPosition(menuID);
                 MenuEntity menu = new MenuEntity(parentMenu, textGroupEntity, null, menuType);
+                menu.setNumber(position + 1);
                 MenuRequest.addMenu(menu);
                 ServletHelper.sendForward("/completemenuinfo?menuID=" + menu.getMenuID(), this, request, response);
             } else {

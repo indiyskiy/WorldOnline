@@ -32,6 +32,10 @@
         <br/>
         Карта загружена под номером <a href="completecardinfo?cardID=${cardID}"> ${cardID}</a>
     </c:if>
+    <c:if test="${isLoaded}">
+        <br/>
+        Карта не загружена. Возможно, в базе уже есть карта с таким названием</a>
+    </c:if>
     <br/>
 
     <form action="createcard" method="post">

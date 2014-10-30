@@ -1,20 +1,15 @@
 package model.constants.databaseenumeration;
 
-/**
- * Created by Илья on 27.03.14.
- */
+
 public enum DataBaseEntityType {
     Unknown(0),
-    Card(0),
-    Text(2),
-    Parameter(3),
-    Image(4),
-    Route(5),
-    CardToCardLink(6),
-    Menu(7),
-    Tag(8),
-    Coordinate(9);
-
+    Card(1),
+    Menus(2),
+    Price(3),
+    Tags(4),
+    DishTags(5),
+    ParameterTypes(6),
+    DishCats(7);
 
     private final int value;
 

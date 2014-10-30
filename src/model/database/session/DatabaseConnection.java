@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
     private Connection connection = null;
-    private LoggerFactory loggerFactory = new LoggerFactory(Component.Database, DatabaseConnection.class);
+    private static final LoggerFactory loggerFactory = new LoggerFactory(Component.Database, DatabaseConnection.class);
     private static long connectionCounter = 0;
 
     public DatabaseConnection() {
@@ -58,7 +58,7 @@ public class DatabaseConnection {
             if (rs != null) {
                 rs.close();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         }
     }

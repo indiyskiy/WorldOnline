@@ -1,7 +1,9 @@
 package model.database.requests;
 
+import controller.parser.adminparser.AddCategoryParser;
 import helper.StringHelper;
 import model.additionalentity.admin.CompletePriceInfo;
+import model.additionalentity.admin.SimpleCategory;
 import model.additionalentity.admin.SimpleDish;
 import model.additionalentity.phone.MobileDish;
 import model.additionalentity.phone.MobileDishCategory;
@@ -534,6 +536,107 @@ public class DishRequest {
             if (session != null && session.isOpen()) {
                 session.close();
             }
+        }
+    }
+
+    public static void addCategory(AddCategoryParser addCatParser) {
+        addDishCategory(addCatParser.getDishCategoryEntity());
+    }
+
+    public static ArrayList<SimpleCategory> getPriceCategories(Long priceID) {
+        ArrayList<SimpleCategory> simpleCategories = new ArrayList<>();
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT " +
+                    "DishCategory.DishCategoryID AS DishCategoryID, " +
+                    "CatText.Text AS CatName, " +
+                    "CatText.TextGroupID AS CatTextGroupID " +
+                    "FROM Price " +
+                    "LEFT OUTER JOIN DishCategory ON (Price.PriceID=DishCategory.PriceID) " +
+                    "LEFT OUTER JOIN TextGroup AS CatTextGroup ON (CatTextGroup.TextGroupID=DishCategory.NameID) " +
+                    "LEFT OUTER JOIN Text AS CatText ON (CatText.TextGroupID=CatTextGroup.TextGroupID) " +
+                    "WHERE  (CatText.LanguageID IS NULL OR CatText.LanguageID=" + LanguageType.Russian.getValue() + ") " +
+                    "AND(Price.PriceID=?)";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, priceID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SimpleCategory simpleCategory = new SimpleCategory();
+                simpleCategory.setName(rs.getString("CatName"));
+                simpleCategory.setTextGroupID(rs.getLong("CatTextGroupID"));
+                simpleCategory.setCategoryID(rs.getLong("DishCategoryID"));
+                simpleCategories.add(simpleCategory);
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return simpleCategories;
+    }
+
+    public static void addDishesSQL(ArrayList<DishEntity> dishList) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "INSERT INTO Dish (Cost, DishCategoryID, DishNameID, PriceID) VALUES ";
+            for (int i = 0; i < dishList.size(); i++) {
+                DishEntity dishEntity = dishList.get(i);
+                if (dishEntity.getDishName() != null && dishEntity.getDishName().getTextGroupID() == null) {
+                    TextRequest.addTextGroup(dishEntity.getDishName());
+                }
+                @Language("MySQL") String sqlAdd = "(" + dishEntity.getCost() +
+                        "," + dishEntity.getDishCategory().getDishCategoryID() +
+                        "," + dishEntity.getDishName().getTextGroupID() +
+                        "," + dishEntity.getPrice().getPriceID() +
+                        ")";
+                if (i != dishList.size() - 1) {
+                    sqlAdd += ",";
+                }
+                sql += sqlAdd;
+            }
+            loggerFactory.debug("sql= " + sql);
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+    }
+
+    public static DishEntity getDish(Long dishID) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            return (DishEntity) session.get(DishEntity.class, dishID);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static void deleteDish(DishEntity dishEntity) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "DELETE FROM Dish WHERE Dish.DishID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, dishEntity.getDishID());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
         }
     }
 }

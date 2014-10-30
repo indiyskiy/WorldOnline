@@ -36,12 +36,12 @@ public class AllUsersServlet extends ProtectedServlet {
                 long results = UserRequests.countUser();
                 pages = (results / MAX_ITEMS);
             } else {
-                userEntities = UserRequests.getAllUsers(parser);
-                Long results = UserRequests.countUser(parser);
-                pages = (results / MAX_ITEMS);
+//                userEntities = UserRequests.getAllUsers(parser);
+//                Long results = UserRequests.countUser(parser);
+//                pages = (results / MAX_ITEMS);
             }
-            request.setAttribute("pages", pages);
-            request.setAttribute("userList", userEntities);
+//            request.setAttribute("pages", pages);
+//            request.setAttribute("userList", userEntities);
             request.setAttribute("mobilePlatforms", MobilePlatform.values());
             ServletHelper.sendForward("/allusers.jsp", this, request, response);
         } catch (Exception e) {

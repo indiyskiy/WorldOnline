@@ -33,6 +33,7 @@ public class AddInfoElementToCardServlet extends ProtectedServlet {
             cardInformationElementEntity.setTextGroup(new TextGroupEntity("infoElementTextGroup" + cardID + "_" + counter));
             cardInformationElementEntity.setPosition(counter);
             InfoRequest.addCardInfoElement(cardInformationElementEntity);
+            CardRequest.updateCard(cardEntity);
             ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

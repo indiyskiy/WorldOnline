@@ -666,6 +666,42 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <display-name>AddCategoryServlet</display-name>
+        <servlet-name>AddCategoryServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddCategoryServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddCategoryServlet</servlet-name>
+        <url-pattern>/addcategory</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>AddUrgencyTimeServlet</display-name>
+        <servlet-name>AddUrgencyTimeServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddUrgencyTimeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddUrgencyTimeServlet</servlet-name>
+        <url-pattern>/addurgencytime</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <display-name>EditUrgencyTimeServlet</display-name>
+        <servlet-name>EditUrgencyTimeServlet</servlet-name>
+        <servlet-class>view.servlet.admin.EditUrgencyTimeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditUrgencyTimeServlet</servlet-name>
+        <url-pattern>/editurgencytime</url-pattern>
+    </servlet-mapping>
+
+
     <welcome-file-list>
         <welcome-file>index</welcome-file>
     </welcome-file-list>
@@ -841,6 +877,42 @@
     <servlet-mapping>
         <servlet-name>AllDishTagsServlet</servlet-name>
         <url-pattern>/mobile/alldishtags</url-pattern>
+    </servlet-mapping>
+
+    <!--registration of the downloaded cards -->
+    <servlet>
+        <display-name>CardRegistrationServlet</display-name>
+        <servlet-name>CardRegistrationServlet</servlet-name>
+        <servlet-class>view.servlet.phone.CardRegistrationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CardRegistrationServlet</servlet-name>
+        <url-pattern>/mobile/cardregistration</url-pattern>
+    </servlet-mapping>
+
+    <!--cards list for update -->
+    <servlet>
+        <display-name>CardsForUpdateServlet</display-name>
+        <servlet-name>CardsForUpdateServlet</servlet-name>
+        <servlet-class>view.servlet.phone.CardsForUpdateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CardsForUpdateServlet</servlet-name>
+        <url-pattern>/mobile/cardsforupdate</url-pattern>
+    </servlet-mapping>
+
+    <!--All dish tags -->
+    <servlet>
+        <display-name>CardByListServlet</display-name>
+        <servlet-name>CardByListServlet</servlet-name>
+        <servlet-class>view.servlet.phone.CardByListServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CardByListServlet</servlet-name>
+        <url-pattern>/mobile/cardbylist</url-pattern>
     </servlet-mapping>
 
 

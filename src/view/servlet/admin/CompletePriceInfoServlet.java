@@ -1,6 +1,7 @@
 package view.servlet.admin;
 
 import model.additionalentity.admin.CompletePriceInfo;
+import model.additionalentity.admin.SimpleCategory;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.constants.databaseenumeration.LanguageType;
@@ -12,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class CompletePriceInfoServlet extends ProtectedServlet {
@@ -28,11 +30,14 @@ public class CompletePriceInfoServlet extends ProtectedServlet {
             request.setAttribute("languages", LanguageType.values());
             Long priceID = Long.parseLong(request.getParameter("priceID"));
             CompletePriceInfo priceInfo = DishRequest.getCompletePriceInfo(priceID);
+            ArrayList<SimpleCategory> simpleCategories = DishRequest.getPriceCategories(priceID);
+            request.setAttribute("simpleCategories", simpleCategories);
             if (priceInfo != null) {
                 request.setAttribute("price", priceInfo);
                 request.setAttribute("title", cutTitle("Прайс [" +
                         priceInfo.getPriceID() +
                         "]"));
+
                 ServletHelper.sendForward("/completepriceinfo.jsp?prcieID=" + priceID, this, request, response);
             }
         } catch (Exception e) {

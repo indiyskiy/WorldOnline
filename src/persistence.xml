@@ -142,7 +142,6 @@
         <class>model.database.TableLockWaitsSummaryByTableEntity</class>
         <class>model.database.ThreadsEntity</class>
         <class>model.database.UsersEntity</class>
-        <class>model.database.worldonlinedb.GlobalVersionEntity</class>
         <class>model.database.worldonlinedb.TextCardEntity</class>
         <class>model.database.worldonlinedb.CardParameterEntity</class>
         <class>model.database.worldonlinedb.CardEntity</class>
@@ -165,7 +164,6 @@
         <class>model.database.worldonlinedb.AdminUserAdditionalInfoEntity</class>
         <class>model.database.worldonlinedb.AdminUserSessionEntity</class>
         <class>model.database.worldonlinedb.MenuCardLinkEntity</class>
-        <class>model.database.worldonlinedb.CardChangeEntity</class>
         <class>model.database.worldonlinedb.UserCardEntity</class>
         <class>model.database.worldonlinedb.CardParameterTypeEntity</class>
         <class>model.database.worldonlinedb.TagGroupEntity</class>

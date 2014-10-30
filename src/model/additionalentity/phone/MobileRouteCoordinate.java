@@ -1,5 +1,8 @@
 package model.additionalentity.phone;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 public class MobileRouteCoordinate {
     private int position;
     private double latitude;
@@ -36,5 +39,13 @@ public class MobileRouteCoordinate {
 
     public long getMobileRouteCoordinateID() {
         return mobileRouteCoordinateID;
+    }
+
+    public JsonElement toJson() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("pos", position);
+        jsonObject.addProperty("lat", latitude);
+        jsonObject.addProperty("lon", longitude);
+        return jsonObject;
     }
 }

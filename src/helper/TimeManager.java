@@ -74,9 +74,6 @@ public class TimeManager {
     public static Timestamp getTimestampFromExchangeTime(String date) {
         try {
             String[] dateArray = date.split("\\.");
-            for (String element : dateArray) {
-                loggerFactory.debug(element);
-            }
             String dateString = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0] + " " + "00:00:00.0";
             return Timestamp.valueOf(dateString);
         } catch (Exception e) {
@@ -92,4 +89,14 @@ public class TimeManager {
     }
 
 
+    public static Timestamp getTimestamp(String time) {
+        try {
+            String dateString = time + ":00.0";
+            return Timestamp.valueOf(dateString);
+        } catch (Exception e) {
+            loggerFactory.error(e);
+            loggerFactory.error("error at date " + time);
+            throw e;
+        }
+    }
 }

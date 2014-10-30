@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import model.constants.databaseenumeration.CardType;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class MobileCardInfo {
@@ -101,7 +100,7 @@ public class MobileCardInfo {
             parametersJson.add(mobileParameter.toJson());
         }
         jsonObject.add("parameters", parametersJson);
-        if (coordinate != null) {
+        if (coordinate != null && coordinate.getLatitude() != 0 && coordinate.getLongitude() != 0) {
             JsonObject coordinateJson = coordinate.toJson();
             jsonObject.add("coordinate", coordinateJson);
         }
@@ -119,6 +118,12 @@ public class MobileCardInfo {
             informationJson.add(informationElement.toJson());
         }
         jsonObject.add("information", informationJson);
+
+        JsonArray routeJson = new JsonArray();
+        for (MobileCardRoute route : mobileCardRoutes) {
+            routeJson.add(route.toJson());
+        }
+        jsonObject.add("routes", routeJson);
         return jsonObject;
     }
 

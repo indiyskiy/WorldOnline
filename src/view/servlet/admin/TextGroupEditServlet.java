@@ -3,6 +3,7 @@ package view.servlet.admin;
 import controller.parser.adminparser.TextGroupEditParser;
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.database.requests.CardRequest;
 import model.database.requests.TextRequest;
 import model.database.worldonlinedb.TextEntity;
 import model.logger.LoggerFactory;
@@ -34,8 +35,10 @@ public class TextGroupEditServlet extends ProtectedServlet {
             TextRequest.deleteText(textGroupEditParser.getTextEntityDeleteArrayList());
             boolean redirected = false;
             if (!redirected) {
-                String cardID = request.getParameter("cardID");
-                if (cardID != null && !cardID.isEmpty()) {
+                String cardIDString = request.getParameter("cardID");
+                if (cardIDString != null && !cardIDString.isEmpty()) {
+                    Long cardID = Long.parseLong(cardIDString);
+                    CardRequest.updateCard(CardRequest.getCardByID(cardID));
                     ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
                     redirected = true;
                 }

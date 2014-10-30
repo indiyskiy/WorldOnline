@@ -30,7 +30,7 @@ public class DeleteCardImageServlet extends ProtectedServlet {
             if (cardEntity != null) {
                 Long cardImageID = Long.parseLong(request.getParameter("cardImageID"));
                 ImageRequest.deleteCardImage(cardImageID);
-
+                CardRequest.updateCard(cardEntity);
             }
             ServletHelper.sendForward("/completecardinfo?cardID=" + request.getParameter("cardID"), this, request, response);
         } catch (Exception e) {

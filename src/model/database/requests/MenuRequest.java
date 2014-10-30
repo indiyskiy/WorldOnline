@@ -1,6 +1,7 @@
 package model.database.requests;
 
 import controller.phone.entity.AllMenusRequest;
+import helper.TimeManager;
 import model.additionalentity.MenuInfo;
 import model.additionalentity.SimpleMenu;
 import model.additionalentity.admin.CardInfo;
@@ -800,6 +801,7 @@ public class MenuRequest {
         }
     }
 
+
     public static int countSubmenus(long menuID) {
         DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
@@ -845,6 +847,30 @@ public class MenuRequest {
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
+    }
+
+    public static Integer getMaxPosition(Long menuID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT Max(Menu.Number) AS c " +
+                    "FROM Menu " +
+                    "WHERE Menu.ParentMenuID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, menuID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                return rs.getInt("c");
+            }
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return 0;
     }
 }
 

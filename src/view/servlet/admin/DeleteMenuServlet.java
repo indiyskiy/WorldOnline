@@ -2,6 +2,7 @@ package view.servlet.admin;
 
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.database.requests.CardRequest;
 import model.database.requests.MenuRequest;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
@@ -24,6 +25,7 @@ public class DeleteMenuServlet extends ProtectedServlet {
             long menuID = Long.parseLong(request.getParameter("menuID"));
             int size = MenuRequest.countSubmenus(menuID);
             if (size == 0) {
+                CardRequest.updateCardsByMenu(menuID);
                 MenuRequest.deleteCardMenuByMenuID(menuID);
                 MenuRequest.deleteMenu(menuID);
                 ServletHelper.sendRedirect("/allmenus", request, response);

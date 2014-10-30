@@ -46,7 +46,7 @@ public enum CardType {
                 return "маршрут";
             }
             case CardSight: {
-                return "достопремечательность";
+                return "достопримечательность";
             }
             case RestaurantChainCard: {
                 return "сеть заведений";

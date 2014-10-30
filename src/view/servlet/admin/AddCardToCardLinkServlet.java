@@ -30,6 +30,8 @@ public class AddCardToCardLinkServlet extends ProtectedServlet {
                 CardEntity sourceCard = CardRequest.getCardByID(sourceCardID);
                 CardToCardLinkEntity cardToCardLinkEntity = new CardToCardLinkEntity(sourceCard, targetCard, cardToCardLinkType);
                 LinkRequest.addCardToCardLink(cardToCardLinkEntity);
+                CardRequest.updateCard(targetCard);
+                CardRequest.updateCard(sourceCard);
             }
             Long cardID;
             if (from.equals("target")) {

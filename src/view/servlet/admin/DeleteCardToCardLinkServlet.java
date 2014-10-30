@@ -2,7 +2,9 @@ package view.servlet.admin;
 
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.database.requests.CardRequest;
 import model.database.requests.LinkRequest;
+import model.database.worldonlinedb.CardToCardLinkEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
@@ -23,6 +25,9 @@ public class DeleteCardToCardLinkServlet extends ProtectedServlet {
         try {
             Long cardID = Long.parseLong(request.getParameter("cardID"));
             Long cardToCardLinkID = Long.parseLong(request.getParameter("cardToCardLinkID"));
+            CardToCardLinkEntity cardToCardLinkEntity = LinkRequest.getCardToCardLinkByID(cardToCardLinkID);
+            CardRequest.updateCard(cardToCardLinkEntity.getSourceCard());
+            CardRequest.updateCard(cardToCardLinkEntity.getTargetCard());
             LinkRequest.deleteCardToCardLink(cardToCardLinkID);
             ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
         } catch (Exception e) {

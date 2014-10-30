@@ -2,20 +2,19 @@ package model.database.requests;
 
 import controller.parser.adminparser.AllCardParser;
 import helper.StringHelper;
+import helper.TimeManager;
 import model.additionalentity.SimpleCard;
-import model.additionalentity.admin.CardCoordinate;
-import model.additionalentity.admin.CardInfo;
-import model.additionalentity.admin.CardPrice;
-import model.additionalentity.admin.CompleteCardInfo;
-import model.additionalentity.phone.*;
+import model.additionalentity.admin.*;
+import model.additionalentity.phone.MobileCardInfo;
+import model.additionalentity.phone.MobileCoordinate;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardState;
 import model.constants.databaseenumeration.CardType;
-import model.constants.databaseenumeration.ImageType;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardEntity;
+import model.database.worldonlinedb.UrgencyTimeEntity;
 import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -132,6 +131,7 @@ public class CardRequest {
         boolean b = false;
         try {
             session.beginTransaction();
+            card.setLastUpdateTimestamp(TimeManager.currentTime());
             session.update(card);
             session.getTransaction().commit();
             session.flush();
@@ -183,6 +183,7 @@ public class CardRequest {
                             "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
                             "LEFT OUTER JOIN CardPriceLink ON (Card.CardID=CardPriceLink.CardID) " +
                             "LEFT OUTER JOIN Price ON (CardPriceLink.PriceID=Price.PriceID) " +
+                            "LEFT OUTER JOIN UrgencyTime ON (UrgencyTime.cardID=Card.CardID) " +
                             "WHERE Card.CardID=?";
             ps = connection.prepareStatement(sqlString);
             ps.setLong(1, cardID);
@@ -216,6 +217,14 @@ public class CardRequest {
                     CardPrice cardPrice = new CardPrice();
                     cardPrice.setPriceID(priceID);
                     card.setCardPrice(cardPrice);
+                }
+                Long urgencyTimeID = rs.getLong("UrgencyTime.UrgencyTimeID");
+                if (urgencyTimeID != 0 && !rs.wasNull()) {
+                    SimpleUrgencyTime simpleUrgencyTime = new SimpleUrgencyTime();
+                    simpleUrgencyTime.setStart(rs.getTimestamp("UrgencyTime.OnTimestamp"));
+                    simpleUrgencyTime.setEnd(rs.getTimestamp("UrgencyTime.OffTimestamp"));
+                    simpleUrgencyTime.setUrgencyTimeID(rs.getLong("UrgencyTime.UrgencyTimeID"));
+                    card.setUrgencyTime(simpleUrgencyTime);
                 }
                 LinkRequest.setSourceCardLinks(card, cardID);
                 LinkRequest.setTargetCardLinks(card, cardID);
@@ -445,6 +454,11 @@ public class CardRequest {
     }
 
     public static LinkedList<MobileCardInfo> getMobileCards(Long userID, Integer limit, Integer offset) {
+        String cardIDs = getLimitedCardIDs(limit, offset);
+        return getMobileCardInfos(userID, cardIDs);
+    }
+
+    private static LinkedList<MobileCardInfo> getMobileCardInfos(Long userID, String cardIDs) {
         DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
         ResultSet rs = null;
@@ -453,7 +467,6 @@ public class CardRequest {
         HashMap<Long, MobileCardInfo> mobileCardInfoHashMap = new HashMap<>();
         LanguageType languageType = null;
         try {
-            String cardIDs = getLimitedCardIDs(limit, offset);
             if (cardIDs == null || cardIDs.isEmpty()) {
                 return mobileCardInfos;
             }
@@ -681,5 +694,31 @@ public class CardRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return simpleCards;
+    }
+
+    public static void updateCardsByMenu(long menuID) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "UPDATE Card " +
+                    "JOIN MenuCardLink ON (Card.CardID=MenuCardLink.CardID) " +
+                    "SET LastUpdateTimestamp=? " +
+                    "WHERE MenuCardLink.MenuID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setTimestamp(1, TimeManager.currentTime());
+            ps.setLong(2, menuID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+    }
+
+    public static LinkedList<MobileCardInfo> getMobileCards(Long userID, List<Object> cardIDsList) {
+        String cardIDs = StringHelper.getStringFromArray(cardIDsList);
+        return getMobileCardInfos(userID, cardIDs);
     }
 }

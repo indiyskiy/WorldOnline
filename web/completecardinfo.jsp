@@ -4,42 +4,18 @@
 <fmt:requestEncoding value="UTF-8"/>
 <html>
 <head>
+    <script language="Javascript" type="text/javascript" src="js/jquery.js"></script>
+    <link type="text/css" href="css/anytime.css" rel="Stylesheet"/>
+    <script type="text/javascript" src="js/anytime.js"></script>
     <link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
     <link href="css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" media="screen" href="css/main.css">
+    <link rel="stylesheet" media="screen" href="css/anytime.css">
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/spoiler.css" type="text/css"/>
+    <script type="text/javascript" src="js/spoiler.js"></script>
     <title>complete card information</title>
-    <SCRIPT LANGUAGE="JavaScript">
-        function clickSpoilerCustom(el, className) {//клик по dl, dt, dd
-            el = el.parentNode;
-            var m, k, s;
-            s = el.getElementsByTagName("dd")[0].style.display;
-            m = document.getElementsByTagName("dl");
-            k = m.length;
 
-            while (k--) {
-                if (m[k].className == className) {//
-                    m[k].getElementsByTagName("dd")[0].style.display = "none";
-                }
-            }
-            if (s == "none" || s == "") {
-                el.getElementsByTagName("dd")[0].style.display = "block";
-//
-            }
-            else {
-                el.getElementsByTagName("dd")[0].style.display = "none";
-            }
-        }
-
-        function clickSpoilerSub(el) {//клик по dl, dt, dd
-            clickSpoilerCustom(el, "spoilerSub")
-        }
-
-        function clickSpoiler(el) {
-            clickSpoilerCustom(el, "spoiler")
-        }
-    </SCRIPT>
 </head>
 <body>
 <header>
@@ -305,6 +281,58 @@
                     </form>
                 </div>
             </c:forEach>
+        </dd>
+    </dl>
+</c:if>
+
+
+<c:if test="${cardType==9}">
+    <%--info type 10--%>
+    <dl class="spoiler">
+        <dt onclick="clickSpoiler(this);">Время проведения</dt>
+        <dd>
+            <c:if test="${empty urgencyTime}">
+                <a href="addurgencytime?cardID=${cardInfo.cardID}">Добавить</a>
+            </c:if>
+            <c:if test="${not empty urgencyTime}">
+                <c:if test="${not empty urgencyTime.end and not empty urgencyTime.start}">
+                    Начало ${urgencyTime.start} - конец ${urgencyTime.end}
+                    <br>
+                </c:if>
+                <dl class="spoilerSub">
+                    <dt onclick="clickSpoilerSub(this);">Изменить время проведения</dt>
+                    <dd>
+                        <form method="POST" action="editurgencytime">
+                            <input type="hidden" value="${urgencyTime.urgencyTimeID}" name="urgencyTimeID">
+                            <input type="hidden" value="${cardInfo.cardID}" name="cardID">
+                            Начало события
+                            <br>
+                            <input type="text" value="${urgencyTime.start}" id="start" name="start"/>
+                            <script>
+                                $("#start").AnyTime_picker({
+                                    format: "%Y-%m-%d %H:%i:%s %E %#",
+                                    formatUtcOffset: "%: (%@)",
+                                    hideInput: true,
+                                    placement: "inline" });
+                            </script>
+                            <br>
+                            <br>
+                            Конец события
+                            <br>
+                            <input type="text" value="${urgencyTime.end}" id="end" name="end"/>
+                            <script>
+                                $("#end").AnyTime_picker({
+                                    format: "%Y-%m-%d %H:%i:%s %E %#",
+                                    formatUtcOffset: "%: (%@)",
+                                    hideInput: true,
+                                    placement: "inline" });
+                            </script>
+                            <br>
+                            <input type="submit" value="Сохранить">
+                        </form>
+                    </dd>
+                </dl>
+            </c:if>
         </dd>
     </dl>
 </c:if>

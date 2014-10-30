@@ -9,7 +9,7 @@ public class UserCardEntity {
     @javax.persistence.Column(name = "UserCardID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userCard;
+    private Long userCardID;
 
     @javax.persistence.Column(name = "LastUpdateTimeStamp")
     @Basic
@@ -25,14 +25,14 @@ public class UserCardEntity {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "UserContentID")
-    private UserContentEntity userContentID;
+    private UserContentEntity userContent;
 
-    public Long getUserCard() {
-        return userCard;
+    public Long getUserCardID() {
+        return userCardID;
     }
 
-    public void setUserCard(Long userCard) {
-        this.userCard = userCard;
+    public void setUserCardID(Long userCardID) {
+        this.userCardID = userCardID;
     }
 
     public Timestamp getLastUpdateTimeStamp() {
@@ -59,11 +59,37 @@ public class UserCardEntity {
         this.card = card;
     }
 
-    public UserContentEntity getUserContentID() {
-        return userContentID;
+    public UserContentEntity getUserContent() {
+        return userContent;
     }
 
-    public void setUserContentID(UserContentEntity userContentID) {
-        this.userContentID = userContentID;
+    public void setUserContent(UserContentEntity userContent) {
+        this.userContent = userContent;
+    }
+
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (o.getClass() != this.getClass()) {
+            return false;
+        }
+        UserCardEntity userCardEntity = (UserCardEntity) o;
+        if (!userCardEntity.userCardID.equals(this.userCardID)) {
+            return false;
+        }
+        if (!this.card.equals(userCardEntity.card)) {
+            return false;
+        }
+        if (this.downloadTimeStamp != userCardEntity.downloadTimeStamp) {
+            return false;
+        }
+        if (this.lastUpdateTimeStamp != userCardEntity.lastUpdateTimeStamp) {
+            return false;
+        }
+        if (!this.userContent.equals(userCardEntity.userContent)) {
+            return false;
+        }
+        return true;
     }
 }

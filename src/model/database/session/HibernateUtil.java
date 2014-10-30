@@ -28,7 +28,6 @@ public class HibernateUtil {
     private static Configuration buildConfig() {
         Configuration ac = new Configuration();
         ac.addAnnotatedClass(UserEntity.class)
-                .addAnnotatedClass(GlobalVersionEntity.class)
                 .addAnnotatedClass(UserHardwareEntity.class)
                 .addAnnotatedClass(UserContentEntity.class)
                 .addAnnotatedClass(UserPersonalDataEntity.class)
@@ -52,7 +51,6 @@ public class HibernateUtil {
                 .addAnnotatedClass(AdminUserAdditionalInfoEntity.class)
                 .addAnnotatedClass(AdminUserSessionEntity.class)
                 .addAnnotatedClass(MenuCardLinkEntity.class)
-                .addAnnotatedClass(CardChangeEntity.class)
                 .addAnnotatedClass(WeatherEntity.class)
                 .addAnnotatedClass(ExchangeRatesEntity.class)
                 .addAnnotatedClass(UserCardEntity.class)

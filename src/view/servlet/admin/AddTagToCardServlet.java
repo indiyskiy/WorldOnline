@@ -3,7 +3,9 @@ package view.servlet.admin;
 import model.additionalentity.admin.TagGroup;
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.database.requests.CardRequest;
 import model.database.requests.TagRequest;
+import model.database.worldonlinedb.CardEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
@@ -22,11 +24,13 @@ public class AddTagToCardServlet extends ProtectedServlet {
             Map m = request.getParameterMap();
             Set s = m.entrySet();
             long cardID = 0L;
+            CardEntity cardEntity = null;
             HashSet<Long> tagIDsFromRequest = new HashSet<>();
             for (Object parameter : s) {
                 Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) parameter;
                 if ("cardID".equals(entry.getKey())) {
                     cardID = Long.parseLong(entry.getValue()[0]);
+                    cardEntity = CardRequest.getCardByID(cardID);
                 }
                 if ("tagID".equals(entry.getKey())) {
                     for (String tagIDString : entry.getValue()) {
@@ -35,7 +39,7 @@ public class AddTagToCardServlet extends ProtectedServlet {
                     }
                 }
             }
-            if (cardID != 0L) {
+            if (cardID != 0L && cardEntity != null) {
                 HashSet<Long> cardTagIDs = TagRequest.getCardTagIDs(cardID);
                 ArrayList<Long> idsToAdd = new ArrayList<>();
                 ArrayList<Long> idsToDelete = new ArrayList<>();
@@ -51,6 +55,7 @@ public class AddTagToCardServlet extends ProtectedServlet {
                 }
                 TagRequest.deleteTagsFromCard(cardID, idsToDelete);
                 TagRequest.addTagsToCard(cardID, idsToAdd);
+                CardRequest.updateCard(cardEntity);
             }
             ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
         } catch (Exception e) {

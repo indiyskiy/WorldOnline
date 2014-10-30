@@ -20,6 +20,10 @@ public class DishCategoryEntity {
     @Basic
     private Integer position;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "PriceID")
+    private PriceEntity price;
+
     public Long getDishCategoryID() {
         return dishCategoryID;
     }
@@ -42,5 +46,13 @@ public class DishCategoryEntity {
 
     public void setPosition(Integer position) {
         this.position = position;
+    }
+
+    public void setPrice(PriceEntity price) {
+        this.price = price;
+    }
+
+    public PriceEntity getPrice() {
+        return price;
     }
 }

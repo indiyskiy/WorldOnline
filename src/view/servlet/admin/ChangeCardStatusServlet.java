@@ -37,6 +37,9 @@ public class ChangeCardStatusServlet extends ProtectedServlet {
             if (cardEntity == null) {
                 throw new ServletException("incorrect card ID - card not found");
             }
+            if (CardState.parseInt(cardEntity.getCardState()) == CardState.Deleted) {
+                throw new ServletException("Can't change status of deleted card");
+            }
             ArrayList<String> exceptions = CardRequest.checkCardStatus(cardEntity, cardState);
             if (exceptions.isEmpty()) {
                 cardEntity.setCardState(cardState);

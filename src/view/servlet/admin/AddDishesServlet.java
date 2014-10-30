@@ -22,7 +22,7 @@ public class AddDishesServlet extends ProtectedServlet {
         ServletHelper.setUTF8(request, response);
         try {
             AddDishesParser addDishesParser = new AddDishesParser(request);
-            DishRequest.addDishes(addDishesParser.getDishList());
+            DishRequest.addDishesSQL(addDishesParser.getDishList());
             TextRequest.addText(addDishesParser.getTextEntities());
             ServletHelper.sendForward("/completepriceinfo?priceID=" + addDishesParser.getPriceID(), this, request, response);
         } catch (Exception e) {
@@ -31,7 +31,7 @@ public class AddDishesServlet extends ProtectedServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package model.database.requests;
 
-import controller.parser.adminparser.AllUsersParser;
-import model.additionalentity.CardUserStat;
 import model.constants.Component;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
@@ -23,13 +21,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Graf_D
- * Date: 17.10.13
- * Time: 17:40
- * To change this template use File | Settings | File Templates.
- */
 public class UserRequests {
 
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, UserRequests.class);
@@ -65,39 +56,15 @@ public class UserRequests {
         return userEntity;
     }
 
-    public static ArrayList<CardUserStat> getUserCardStats(long userID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        ArrayList<CardUserStat> cardUserStats = new ArrayList<CardUserStat>();
-        boolean b = true;
-        try {
-            Connection connection = dbConnection.getConnection();
-            @Language(value = "MySQL") String sql = "SELECT * FROM UserCard " +
-                    "JOIN Card ON (UserCard.CardID = Card.CardID)";
-            ps = connection.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                CardUserStat cardUserStat = new CardUserStat();
-                cardUserStat.setCardID(rs.getLong("UserCard.CardID"));
-                cardUserStat.setUserID(rs.getLong("UserCard.UserID"));
-                cardUserStat.setCardVersion(rs.getLong("Card.CardVersion"));
-                cardUserStat.setUserVersion(rs.getLong("UserCard.CardVersion"));
-                cardUserStats.add(cardUserStat);
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }
-        return cardUserStats;
-    }
 
     public static UserEntity getUserByID(Long userID) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
-            return (UserEntity) session.get(UserEntity.class, userID);
+            UserEntity userEntity = (UserEntity) session.get(UserEntity.class, userID);
+            if (userEntity.getUserContent() == null) {
+                loggerFactory.error("user entity " + userID + " personal data is null");
+            }
+            return userEntity;
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -140,7 +107,6 @@ public class UserRequests {
 
     public static void addUsers(List<UserEntity> users) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             for (UserEntity user : users) {
@@ -181,7 +147,6 @@ public class UserRequests {
     public static ArrayList<UserEntity> getAllUsers(int firstElem, int maxElems) {
         ArrayList<UserEntity> userEntities = new ArrayList<UserEntity>();
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             Transaction transaction = session.beginTransaction();
             userEntities = (ArrayList<UserEntity>) session.createCriteria(UserEntity.class).setFirstResult(firstElem).setMaxResults(maxElems).list();
@@ -197,56 +162,6 @@ public class UserRequests {
     public static long countUser() {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
         return (Long) session.createCriteria(UserEntity.class).setProjection(Projections.rowCount()).uniqueResult();
-    }
-
-    public static ArrayList<UserEntity> getAllUsers(AllUsersParser parser) {
-        ArrayList<UserEntity> users = new ArrayList<UserEntity>();
-      /*  DatabaseConnection dbConnection = new DatabaseConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            Connection connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT DISTINCT * FROM Card " +
-                    "WHERE 1=1";
-            if (parser.getCardID() != null) {
-                sql += " AND Card.CardID=?";
-            }
-            if (parser.getCardName() != null && !parser.getCardName().isEmpty()) {
-                sql += " AND Card.CardName=?";
-            }
-            if (parser.getCardType() != null) {
-                sql += " AND Card.CardType=?";
-            }
-            sql += " LIMIT " + parser.getFirstElem() + ", " + parser.getMaxItems();
-            ps = connection.prepareStatement(sql);
-            int i = 1;
-            if (parser.getCardID() != null) {
-                ps.setLong(i, parser.getCardID());
-                i++;
-            }
-            if (parser.getCardName() != null && !parser.getCardName().isEmpty()) {
-                ps.setString(i, parser.getCardName());
-                i++;
-            }
-            if (parser.getCardType() != null) {
-                ps.setInt(i, parser.getCardType().getValue());
-                i++;
-            }
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                CardEntity cardEntity = getCardFromResultSet(rs);
-                cards.add(cardEntity);
-            }
-        } catch (SQLException e) {
-            loggerFactory.error(e);
-        } finally {
-            dbConnection.closeConnections(ps, rs);
-        }*/
-        return users;
-    }
-
-    public static Long countUser(AllUsersParser parser) {
-        return 0L;
     }
 
 

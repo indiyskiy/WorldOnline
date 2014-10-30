@@ -324,6 +324,28 @@ public class TextRequest {
         }
     }
 
+
+    public static void deleteTextGroup(TextGroupEntity textGroupEntity) {
+        DatabaseConnection dbConnection = new DatabaseConnection();
+        Connection connection;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "DELETE FROM Text WHERE Text.TextGroupID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, textGroupEntity.getTextGroupID());
+            ps.executeUpdate();
+            sql = "DELETE FROM TextGroup WHERE TextGroup.TextGroupID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, textGroupEntity.getTextGroupID());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+    }
+
     public static boolean isCardTextExist(long cardID, long cardParameterTypeID) {
         DatabaseConnection dbConnection = new DatabaseConnection();
         PreparedStatement ps = null;
@@ -442,7 +464,8 @@ public class TextRequest {
             @Language("MySQL") String sql = "SELECT " +
                     "TextCard.CardID, " +
                     "Text.Text, " +
-                    "TextCard.CardParameterTypeID " +
+                    "TextCard.CardParameterTypeID, " +
+                    "Text.TextGroupID " +
                     "FROM TextCard " +
                     "JOIN Text ON (Text.TextGroupID=TextCard.TextGroupID) " +
                     "WHERE Text.LanguageID=" + languageType.getValue() + " " +
@@ -454,6 +477,7 @@ public class TextRequest {
                 MobileText mobileText = new MobileText();
                 mobileText.setText(rs.getString("Text.Text"));
                 mobileText.setCardParameterTypeID(rs.getLong("TextCard.CardParameterTypeID"));
+                mobileText.setTextGroupID(rs.getLong("Text.TextGroupID"));
                 mobileCardInfo.getMobileTexts().add(mobileText);
             }
         } catch (SQLException e) {

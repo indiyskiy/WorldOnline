@@ -3,6 +3,7 @@ package view.servlet.admin;
 import controller.parser.adminparser.TagGroupCardEditParser;
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.database.requests.CardRequest;
 import model.database.requests.TagRequest;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
@@ -24,9 +25,11 @@ public class TagGroupCardEditServlet extends ProtectedServlet {
                     if (tagGroupCardEditParser.getTagGroup().getCard() == null ||
                             !tagGroupCardEditParser.getTagGroup().getCard().getCardID().equals(tagGroupCardEditParser.getCard().getCardID())) {
                         TagRequest.setTagGroupCard(tagGroupCardEditParser.getTagGroup(), tagGroupCardEditParser.getCard());
+                        CardRequest.updateCard(tagGroupCardEditParser.getCard());
                     }
                 } else if (tagGroupCardEditParser.getTagGroup().getCard() != null) {
                     TagRequest.deleteTagGroupCard(tagGroupCardEditParser.getTagGroup());
+                    CardRequest.updateCard(tagGroupCardEditParser.getCard());
                 }
                 ServletHelper.sendForward("/completetaggroupinfo?tagGroupID=" + tagGroupCardEditParser.getTagGroup().getTagGroupID(), this, request, response);
             }

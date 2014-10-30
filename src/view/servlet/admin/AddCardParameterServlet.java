@@ -3,6 +3,7 @@ package view.servlet.admin;
 import controller.parser.adminparser.AddCardParameterParser;
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.database.requests.CardRequest;
 import model.database.requests.ParameterRequest;
 import model.database.requests.TextRequest;
 import model.database.worldonlinedb.TextCardEntity;
@@ -30,6 +31,7 @@ public class AddCardParameterServlet extends ProtectedServlet {
                 } else {
                     ParameterRequest.addEmptyCardParameter(addCardParameterParser.getCardEntity(), addCardParameterParser.getCardParameterTypeEntity());
                 }
+                CardRequest.updateCard(addCardParameterParser.getCardEntity());
                 ServletHelper.sendForward("/completecardinfo?cardID=" + addCardParameterParser.getCardEntity().getCardID(), this, request, response);
             }
         } catch (Exception e) {

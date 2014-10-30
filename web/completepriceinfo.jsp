@@ -121,7 +121,7 @@
                                 <span style="float: left">  <a href="editdish?dishID=${dish.dishID}">
                                     [${dish.dishID}] ${dish.name} </a>
                                 </span>
-                                    ${dish.coast} <a href="deletedish?dihsID=${dish.dishID}">(удалить) </a>
+                                    ${dish.coast} <a href="deletedish?dishID=${dish.dishID}">(удалить) </a>
                             </div>
                         </c:forEach>
                     </dd>
@@ -158,7 +158,7 @@
                     <div class="field" id="selectForm">
                         <label for="categorySelect">Категория</label>
                         <select name="categorySelect" id="categorySelect">
-                            <c:forEach items="${price.simpleCategories}" var="category">
+                            <c:forEach items="${simpleCategories}" var="category">
                                 <option value="${category.categoryID}">${category.name}</option>
                             </c:forEach>
                         </select>
@@ -176,14 +176,29 @@
             </c:forEach>
         </dd>
     </dl>
+    <%--<dl class="spoiler">--%>
+    <%--<dt onclick="clickSpoiler(this);">Добавить scv</dt>--%>
+    <%--<dd>--%>
+    <%--<form action="addscvtoprice" method="post" enctype="multipart/form-data">--%>
+    <%--Файл прайса :<input type="file" name="fileName" accept=".csv">--%>
+    <%--</form>--%>
+    <%--<input type="hidden" name="priceID" value="${price.priceID}"/>--%>
+    <%--<input type="submit" value="Загрузить"/>--%>
+    <%--</dd>--%>
+    <%--</dl>--%>
     <dl class="spoiler">
-        <dt onclick="clickSpoiler(this);">Добавить scv</dt>
+        <dt onclick="clickSpoiler(this);">Категории</dt>
         <dd>
-            <form action="addscvtoprice" method="post" enctype="multipart/form-data">
-                Файл прайса :<input type="file" name="fileName" accept=".csv">
+            <form action="addcategory" method="post">
+                <c:forEach var="language" items="${languages}">
+                    <div class="field">
+                        <label for="categoryName${language}">${language.stringValue}</label>
+                        <input name="categoryName${language}" value="" id="categoryName${language}"/>
+                    </div>
+                </c:forEach>
+                <input type="hidden" name="priceID" value="${price.priceID}"/>
+                <input type="submit" value="Сохранить">
             </form>
-            <input type="hidden" name="priceID" value="${price.priceID}"/>
-            <input type="submit" value="Загрузить"/>
         </dd>
     </dl>
 </div>
