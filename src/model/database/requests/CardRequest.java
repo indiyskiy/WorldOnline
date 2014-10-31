@@ -7,6 +7,7 @@ import model.additionalentity.SimpleCard;
 import model.additionalentity.admin.*;
 import model.additionalentity.phone.MobileCardInfo;
 import model.additionalentity.phone.MobileCoordinate;
+import model.additionalentity.phone.MobileUrgencyTime;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardState;
 import model.constants.databaseenumeration.CardType;
@@ -14,7 +15,6 @@ import model.constants.databaseenumeration.LanguageType;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.CardEntity;
-import model.database.worldonlinedb.UrgencyTimeEntity;
 import model.logger.LoggerFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -37,13 +37,15 @@ public class CardRequest {
             //price
             "Price.PriceID, " +
             //language
-            "UserPersonalData.UserLanguage " +
+            "UserPersonalData.UserLanguage, " +
+            "UrgencyTime.UrgencyTimeID, UrgencyTime.OnTimestamp, UrgencyTime.OffTimestamp " +
             "FROM Card " +
             "LEFT OUTER JOIN User ON (User.UserID=?) " +
             "LEFT OUTER JOIN UserPersonalData ON (UserPersonalData.UserPersonalDataID=User.UserPersonalDataID) " +
             "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
             "LEFT OUTER JOIN CardPriceLink ON (Card.CardID=CardPriceLink.CardID) " +
-            "LEFT OUTER JOIN Price ON (Price.PriceID=CardPriceLink.PriceID) ";
+            "LEFT OUTER JOIN Price ON (Price.PriceID=CardPriceLink.PriceID) " +
+            "LEFT OUTER JOIN UrgencyTime ON (UrgencyTime.cardID=Card.CardID)";
 
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, CardRequest.class);
 
@@ -485,6 +487,13 @@ public class CardRequest {
                 mobileCoordinate.setLongitude(rs.getDouble("CardCoordinate.Longitude"));
                 mobileCardInfo.setCoordinate(mobileCoordinate);
                 mobileCardInfo.setPriceID(rs.getLong("Price.PriceID"));
+                Long urgencyTimeID = rs.getLong("UrgencyTime.UrgencyTimeID");
+                if (urgencyTimeID != 0 && !rs.wasNull()) {
+                    MobileUrgencyTime mobileUrgencyTime = new MobileUrgencyTime();
+                    mobileUrgencyTime.setStart(rs.getTimestamp("UrgencyTime.OnTimestamp"));
+                    mobileUrgencyTime.setEnd(rs.getTimestamp("UrgencyTime.OffTimestamp"));
+                    mobileCardInfo.setMobileUrgencyTime(mobileUrgencyTime);
+                }
                 mobileCardInfoHashMap.put(mobileCardInfo.getCardID(), mobileCardInfo);
                 mobileCardInfos.add(mobileCardInfo);
                 languageType = LanguageType.parseInt(rs.getInt("UserPersonalData.UserLanguage"));

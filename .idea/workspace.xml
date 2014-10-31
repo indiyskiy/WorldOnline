@@ -7,104 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="[Admin] card view">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/parser/adminparser/AddCategoryParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AddCategoryServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/delayedtask/AddSomeCardTask.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AddUrgencyTimeServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/CardByListHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/parser/CardByListParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/entity/CardByListRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/CardByListResponse.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/phone/CardByListServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/CardRegistrationEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/CardRegistrationHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/parser/CardRegistrationParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/entity/CardRegistrationRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/phone/CardRegistrationServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/CardUpdateAggregator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/CardsForUpdateHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/parser/CardsForUpdateParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/entity/CardsForUpdateRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/CardsForUpdateResponse.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/phone/CardsForUpdateServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/admin/EditUrgencyTimeServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/requests/GlobalRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/GlobalUpdateEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/helper/MyRequestWrapper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/admin/SimpleUrgencyTime.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/requests/TimeRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/database/requests/UserDataRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/css/anytime.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/js/anytime.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/atlassian-ide-plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/js/jquery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/js/spoiler.js" />
-      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\additionalentity\CardUpdateInfo.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\constants\databaseenumeration\UpdateStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\constants\databaseenumeration\UpdateType.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\database\worldonlinedb\CardChangeEntity.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\database\worldonlinedb\GlobalVersionEntity.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\xmlparser\Test.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/AddCardMenuServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AddCardMenuServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/AddCardParameterServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AddCardParameterServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/AddCardToCardLinkServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AddCardToCardLinkServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/AddDishesServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AddDishesServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/AddInfoElementToCardServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AddInfoElementToCardServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/AddTagToCardServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AddTagToCardServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/AllUsersServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AllUsersServlet.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileUrgencyTime.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/ChangeCardInfoImageServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/ChangeCardInfoImageServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/ChangeCardStatusServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/ChangeCardStatusServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/admin/CompleteCardInfo.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/admin/CompleteCardInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/CompletePriceInfoServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/CompletePriceInfoServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/CreateSubMenuServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/CreateSubMenuServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/DataBaseEntityType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/DataBaseEntityType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" afterPath="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/DeleteCardImageServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/DeleteCardImageServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/DeleteCardMenuServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/DeleteCardMenuServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/DeleteCardParameterServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/DeleteCardParameterServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/DeleteCardTagServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/DeleteCardTagServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/DeleteCardToCardLinkServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/DeleteCardToCardLinkServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/DeleteDishServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/DeleteDishServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/DeleteMenuServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/DeleteMenuServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/DeleteTextCardServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/DeleteTextCardServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/dishes/DishCategoryEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/dishes/DishCategoryEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/DishRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/DishRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/EditCardCoordinateServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/EditCardCoordinateServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/EditCardParametersServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/EditCardParametersServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" afterPath="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/session/HibernateUtil.java" afterPath="$PROJECT_DIR$/src/model/database/session/HibernateUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/ImageCardUploadServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/ImageCardUploadServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardRoute.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardRoute.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/phone/parser/MobileParser.java" afterPath="$PROJECT_DIR$/src/controller/phone/parser/MobileParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileRouteCoordinate.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileRouteCoordinate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileRouteElement.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileRouteElement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/phone/MobileServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/phone/MobileServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/RouteRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/RouteRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/ServletHelper.java" afterPath="$PROJECT_DIR$/src/view/servlet/ServletHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/TagGroupCardEditServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/TagGroupCardEditServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/TextGroupEditServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/TextGroupEditServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/TextRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/TextRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helper/TimeManager.java" afterPath="$PROJECT_DIR$/src/helper/TimeManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/UserCardEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/UserCardEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/UserContentEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/UserContentEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/UserRequests.java" afterPath="$PROJECT_DIR$/src/model/database/requests/UserRequests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/completecardinfo.jsp" afterPath="$PROJECT_DIR$/web/completecardinfo.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/completepriceinfo.jsp" afterPath="$PROJECT_DIR$/web/completepriceinfo.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/createcard.jsp" afterPath="$PROJECT_DIR$/web/createcard.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/src/hibernate.cfg.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/persistence.xml" afterPath="$PROJECT_DIR$/src/persistence.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/worldOnline.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/worldOnline.xml" />
     </list>
     <ignored path="WorldOnline.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -172,65 +78,7 @@
     <favorites_list name="WorldOnline" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="CompleteCardInfoServlet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="17" selection-start="865" selection-end="966" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1394">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompleteCardInfo.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CompleteCardInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="153" column="28" selection-start="4995" selection-end="4995" vertical-scroll-proportion="0.0" vertical-offset="1068" max-vertical-offset="1887">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="atlassian-ide-plugin.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/atlassian-ide-plugin.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="796">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EditUrgencyTimeServlet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/EditUrgencyTimeServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="0" selection-start="1514" selection-end="1514" vertical-scroll-proportion="0.0" vertical-offset="84" max-vertical-offset="901">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimeRequest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/database/requests/TimeRequest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="36" selection-start="683" selection-end="683" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1343">
-              <folding>
-                <element signature="imports" expanded="false" />
-                <marker date="1414676523604" expanded="true" signature="2387:2513" placeholder="SELECT Urgen..UrgencyTime..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimeManager.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/helper/TimeManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="41" selection-start="3126" selection-end="3126" vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="1717">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -255,10 +103,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/AllUsersServlet.java" />
-        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/CardRegistrationHandler.java" />
-        <option value="$PROJECT_DIR$/src/model/database/requests/UserRequests.java" />
-        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/UserCardEntity.java" />
         <option value="$PROJECT_DIR$/src/controller/phone/entity/CardsForUpdateRequest.java" />
         <option value="$PROJECT_DIR$/src/controller/phone/parser/CardsForUpdateParser.java" />
         <option value="$PROJECT_DIR$/src/view/servlet/phone/CardsForUpdateServlet.java" />
@@ -302,10 +146,14 @@
         <option value="$PROJECT_DIR$/src/model/additionalentity/admin/SimpleUrgencyTime.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/helper/TimeManager.java" />
-        <option value="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
         <option value="$PROJECT_DIR$/src/view/servlet/admin/EditUrgencyTimeServlet.java" />
         <option value="$PROJECT_DIR$/web/js/anytime.js" />
         <option value="$PROJECT_DIR$/web/completecardinfo.jsp" />
+        <option value="$PROJECT_DIR$/atlassian-ide-plugin.xml" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/phone/MobileErgency.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/phone/MobileUrgencyTime.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java" />
       </list>
     </option>
   </component>
@@ -387,10 +235,90 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="additionalentity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="additionalentity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -852,31 +780,6 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
-      <option name="VM_PARAMETERS" value="" />
-      <option name="USER_CFG_CLASS" />
-      <option name="CONTEXT_PROVIDER" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
-      <module name="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Remote" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="">
       <option name="LOCAL" value="false" />
       <deployment />
@@ -900,6 +803,31 @@
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
       <method />
     </configuration>
     <configuration default="false" name="Unnamed" type="TomeeConfiguration" factoryName="Remote" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="">
@@ -1103,7 +1031,8 @@
       <workItem from="1414398035054" duration="18064000" />
       <workItem from="1414483863813" duration="24275000" />
       <workItem from="1414586182623" duration="20345000" />
-      <workItem from="1414678476791" duration="5440000" />
+      <workItem from="1414678476791" duration="7095000" />
+      <workItem from="1414744508902" duration="676000" />
     </task>
     <task id="LOCAL-00001" summary="TestCommit">
       <created>1383271700462</created>
@@ -1541,11 +1470,15 @@
       <created>1413555835503</created>
       <updated>1413555835503</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="[Admin] card view">
+      <created>1414684530855</created>
+      <updated>1414684530855</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2610267000" />
+    <option name="totallyTimeSpent" value="2612598000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1569,7 +1502,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1589,14 +1522,13 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20521945" sideWeight="0.5072698" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15751211" sideWeight="0.67215043" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740214" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20521945" sideWeight="0.49192247" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.273021" sideWeight="0.34456354" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289941" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29644588" sideWeight="0.65543646" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29644588" sideWeight="0.65543646" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35705814" sideWeight="0.4911147" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -1605,19 +1537,20 @@
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.64629847" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18030842" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20521945" sideWeight="0.49192247" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878837" sideWeight="0.8014101" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28029078" sideWeight="0.78613394" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878837" sideWeight="0.8014101" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20521945" sideWeight="0.5072698" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15751211" sideWeight="0.67215043" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740214" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1631,17 +1564,17 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.64629847" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18030842" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39952996" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20521945" sideWeight="0.49192247" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.273021" sideWeight="0.34456354" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -1731,11 +1664,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/CardByListParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="13" selection-start="733" selection-end="870" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/CardsForUpdateParser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="13" selection-start="241" selection-end="241" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323" />
@@ -1756,18 +1684,9 @@
         <state line="14" column="0" selection-start="343" selection-end="343" vertical-scroll-proportion="0.35473517" vertical-offset="0" max-vertical-offset="623" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="22" selection-start="1991" selection-end="1991" vertical-scroll-proportion="0.3327869" vertical-offset="528" max-vertical-offset="1955">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/EventEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="165" column="37" selection-start="3475" selection-end="3475" vertical-scroll-proportion="0.33280507" vertical-offset="1711" max-vertical-offset="4420">
-          <folding />
-        </state>
+        <state line="165" column="37" selection-start="3475" selection-end="3475" vertical-scroll-proportion="0.33280507" vertical-offset="1711" max-vertical-offset="4420" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/MobileErrorParser.java">
@@ -1807,9 +1726,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/servlet/phone/CardRegistrationServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="19" selection-start="686" selection-end="686" vertical-scroll-proportion="0.41717792" vertical-offset="0" max-vertical-offset="652">
-          <folding />
-        </state>
+        <state line="21" column="19" selection-start="686" selection-end="686" vertical-scroll-proportion="0.41717792" vertical-offset="0" max-vertical-offset="652" />
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..UserHardware">
@@ -1830,9 +1747,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/servlet/ServletHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="34" selection-start="1129" selection-end="1140" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3230">
-          <folding />
-        </state>
+        <state line="30" column="34" selection-start="1129" selection-end="1140" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3230" />
       </provider>
     </entry>
     <entry file="dbDummy://db-console:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/">
@@ -1868,9 +1783,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/requests/DishRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="638" column="31" selection-start="28659" selection-end="28659" vertical-scroll-proportion="0.7835821" vertical-offset="9791" max-vertical-offset="10608">
-          <folding />
-        </state>
+        <state line="638" column="31" selection-start="28659" selection-end="28659" vertical-scroll-proportion="0.7835821" vertical-offset="9791" max-vertical-offset="10608" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/DeleteDishServlet.java">
@@ -1880,9 +1793,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/xmlparser/GlobalXmlParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="39" selection-start="5461" selection-end="5465" vertical-scroll-proportion="0.33280507" vertical-offset="1116" max-vertical-offset="19227">
-          <folding />
-        </state>
+        <state line="111" column="39" selection-start="5461" selection-end="5465" vertical-scroll-proportion="0.33280507" vertical-offset="1116" max-vertical-offset="19227" />
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..Card">
@@ -1900,9 +1811,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/CreateCardServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="26" selection-start="1502" selection-end="1502" vertical-scroll-proportion="0.53882724" vertical-offset="0" max-vertical-offset="1037">
-          <folding />
-        </state>
+        <state line="34" column="26" selection-start="1502" selection-end="1502" vertical-scroll-proportion="0.53882724" vertical-offset="0" max-vertical-offset="1037" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/completepriceinfo.jsp">
@@ -1912,18 +1821,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/css/anytime.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.6765625" vertical-offset="433" max-vertical-offset="8602">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.6765625" vertical-offset="433" max-vertical-offset="8602" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/jquery.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="0" selection-start="2324" selection-end="2324" vertical-scroll-proportion="0.33333334" vertical-offset="1228" max-vertical-offset="175338">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
+        <state line="88" column="0" selection-start="2324" selection-end="2324" vertical-scroll-proportion="0.33333334" vertical-offset="1228" max-vertical-offset="175338" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/spoiler.js">
@@ -1938,77 +1841,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/requests/UserDataRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="39" selection-start="219" selection-end="219" vertical-scroll-proportion="0.10855683" vertical-offset="0" max-vertical-offset="3196">
-          <folding />
-        </state>
+        <state line="5" column="39" selection-start="219" selection-end="219" vertical-scroll-proportion="0.10855683" vertical-offset="0" max-vertical-offset="3196" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddUrgencyTimeServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="21" selection-start="1185" selection-end="1185" vertical-scroll-proportion="0.42412937" vertical-offset="152" max-vertical-offset="1003">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
+        <state line="29" column="21" selection-start="1185" selection-end="1185" vertical-scroll-proportion="0.42412937" vertical-offset="152" max-vertical-offset="1003" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/UrgencyTimeEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="23" selection-start="211" selection-end="211" vertical-scroll-proportion="0.124847" vertical-offset="0" max-vertical-offset="817">
-          <folding />
-        </state>
+        <state line="7" column="23" selection-start="211" selection-end="211" vertical-scroll-proportion="0.124847" vertical-offset="0" max-vertical-offset="817" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CardPrice.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="237" selection-end="237" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
-          <folding />
-        </state>
+        <state line="14" column="0" selection-start="237" selection-end="237" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddCardElementServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="6" selection-start="873" selection-end="1370" vertical-scroll-proportion="0.25987262" vertical-offset="0" max-vertical-offset="785">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/helper/TimeManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="41" selection-start="3126" selection-end="3126" vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="1717">
-          <folding />
-        </state>
+        <state line="22" column="6" selection-start="873" selection-end="1370" vertical-scroll-proportion="0.25987262" vertical-offset="0" max-vertical-offset="785" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/SimpleUrgencyTime.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="27" selection-start="489" selection-end="489" vertical-scroll-proportion="0.49117175" vertical-offset="0" max-vertical-offset="623">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/requests/TimeRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="36" selection-start="683" selection-end="683" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1343">
-          <folding>
-            <element signature="imports" expanded="false" />
-            <marker date="1414676523604" expanded="true" signature="2387:2513" placeholder="SELECT Urgen..UrgencyTime..." />
-          </folding>
-        </state>
+        <state line="26" column="27" selection-start="489" selection-end="489" vertical-scroll-proportion="0.49117175" vertical-offset="0" max-vertical-offset="623" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/anytime.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="29" selection-start="2859" selection-end="2859" vertical-scroll-proportion="0.9195251" vertical-offset="408" max-vertical-offset="60265">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="17" selection-start="865" selection-end="966" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1394">
-          <folding />
-        </state>
+        <state line="65" column="29" selection-start="2859" selection-end="2859" vertical-scroll-proportion="0.9195251" vertical-offset="408" max-vertical-offset="60265" />
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..UrgencyTime">
@@ -2016,65 +1879,85 @@
         <state />
       </provider>
       <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="695" column="52" selection-start="22529" selection-end="22529" vertical-scroll-proportion="0.20477387" vertical-offset="11652" max-vertical-offset="15946">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/EditUrgencyTimeServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1514" selection-end="1514" vertical-scroll-proportion="0.0" vertical-offset="84" max-vertical-offset="901">
-          <folding />
-        </state>
+        <state line="695" column="52" selection-start="22529" selection-end="22529" vertical-scroll-proportion="0.20477387" vertical-offset="11652" max-vertical-offset="15946" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/completecardinfo.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="334" column="19" selection-start="14310" selection-end="14310" vertical-scroll-proportion="0.73368144" vertical-offset="5116" max-vertical-offset="5882">
+        <state line="334" column="19" selection-start="14310" selection-end="14310" vertical-scroll-proportion="0.73368144" vertical-offset="5116" max-vertical-offset="5882" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/atlassian-ide-plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="796">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CompleteCardInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="130" column="17" selection-start="4281" selection-end="4281" vertical-scroll-proportion="0.32089552" vertical-offset="1068" max-vertical-offset="1887" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="17" selection-start="865" selection-end="966" vertical-scroll-proportion="0.10572139" vertical-offset="0" max-vertical-offset="1394" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/EditUrgencyTimeServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="0" selection-start="1514" selection-end="1514" vertical-scroll-proportion="0.44527364" vertical-offset="84" max-vertical-offset="901" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/TimeRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="36" selection-start="683" selection-end="683" vertical-scroll-proportion="0.19029851" vertical-offset="0" max-vertical-offset="1343" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helper/TimeManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="93" column="43" selection-start="3128" selection-end="3128" vertical-scroll-proportion="0.69900495" vertical-offset="900" max-vertical-offset="1717" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="106" column="101" selection-start="3504" selection-end="3504" vertical-scroll-proportion="0.34452736" vertical-offset="1032" max-vertical-offset="2091">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/requests/CardRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="225" column="45" selection-start="9484" selection-end="9484" vertical-scroll-proportion="0.44065657" vertical-offset="3102" max-vertical-offset="12019">
+        <state line="480" column="21" selection-start="20249" selection-end="20249" vertical-scroll-proportion="0.0" vertical-offset="7603" max-vertical-offset="12172">
           <folding>
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Card..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Card..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT count..Card..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Text..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Text..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT Text...Text..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT count..Card..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1414680286556" expanded="true" signature="-1:-1" placeholder="UPDATE Card ..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Card..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Card..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT count..Card..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Text..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Text..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT Text...Text..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT count..Card..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1414685575121" expanded="true" signature="-1:-1" placeholder="UPDATE Card ..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CompleteCardInfo.java">
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/phone/MobileUrgencyTime.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="153" column="28" selection-start="4995" selection-end="4995" vertical-scroll-proportion="0.0" vertical-offset="1068" max-vertical-offset="1887">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/atlassian-ide-plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="796">
+        <state line="34" column="0" selection-start="699" selection-end="699" vertical-scroll-proportion="0.499388" vertical-offset="0" max-vertical-offset="817">
           <folding />
         </state>
       </provider>

@@ -21,6 +21,7 @@ public class MobileCardInfo {
     private ArrayList<MobileInformationElement> informationElements = new ArrayList<>();
     private ArrayList<MobileCardToCardLink> sourceLinks = new ArrayList<>();
     private ArrayList<MobileCardRoute> mobileCardRoutes = new ArrayList<>();
+    private MobileUrgencyTime mobileUrgencyTime;
 
     public int getOrder() {
         return order;
@@ -75,6 +76,9 @@ public class MobileCardInfo {
         jsonObject.addProperty("cardID", cardID);
         jsonObject.addProperty("cardType", cardType.getValue());
         jsonObject.addProperty("order", order);
+        if (mobileUrgencyTime != null) {
+            jsonObject.add("urgencyTime", mobileUrgencyTime.getJson());
+        }
         JsonArray textArray = new JsonArray();
         for (MobileText mobileText : mobileTexts) {
             textArray.add(mobileText.toJson());
@@ -100,7 +104,7 @@ public class MobileCardInfo {
             parametersJson.add(mobileParameter.toJson());
         }
         jsonObject.add("parameters", parametersJson);
-        if (coordinate != null && coordinate.getLatitude() != 0 && coordinate.getLongitude() != 0) {
+        if (coordinate != null && coordinate.getLatitude() != 0.0 && coordinate.getLongitude() != 0.0) {
             JsonObject coordinateJson = coordinate.toJson();
             jsonObject.add("coordinate", coordinateJson);
         }
@@ -142,5 +146,13 @@ public class MobileCardInfo {
 
     public void setMobileCardRoutes(ArrayList<MobileCardRoute> mobileCardRoutes) {
         this.mobileCardRoutes = mobileCardRoutes;
+    }
+
+    public void setMobileUrgencyTime(MobileUrgencyTime mobileUrgencyTime) {
+        this.mobileUrgencyTime = mobileUrgencyTime;
+    }
+
+    public MobileUrgencyTime getMobileUrgencyTime() {
+        return mobileUrgencyTime;
     }
 }
