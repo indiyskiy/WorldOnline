@@ -32,6 +32,7 @@ public class DeleteDishServlet extends ProtectedServlet {
             }
             DishEntity dishEntity = DishRequest.getDish(dishID);
             if (dishEntity != null) {
+                DishRequest.updatePrice(dishEntity.getPrice());
                 DishRequest.deleteDish(dishEntity);
                 TextRequest.deleteTextGroup(dishEntity.getDishName());
                 ServletHelper.sendForward("/completepriceinfo?priceID=" + dishEntity.getPrice().getPriceID(), this, request, response);

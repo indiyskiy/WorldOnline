@@ -56,7 +56,7 @@ public class ExchangeRatesRequest {
                 exchangeRatesEntity.setExchangeRatesID(rs.getLong("ExchangeRates.ExchangeRatesID"));
                 return exchangeRatesEntity;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);

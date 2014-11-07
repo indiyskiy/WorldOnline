@@ -97,7 +97,7 @@ public class TagRequest {
                 Long id = rs.getLong("Tag.TagID");
                 return getTag(id);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -125,7 +125,7 @@ public class TagRequest {
                 tag.setTagTextGroup(textGroupEntity);
                 tags.add(tag);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -166,7 +166,7 @@ public class TagRequest {
                     tags.add(completeTagInfo);
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -251,7 +251,7 @@ public class TagRequest {
 //                    getCompleteCardTag(rs, cardTag, "TextGroup", "Text");
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -286,7 +286,7 @@ public class TagRequest {
                 completeTagInfo.setCards(CardRequest.getAllCardsByTag(completeTagInfo.getTagID()));
                 return completeTagInfo;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -320,7 +320,7 @@ public class TagRequest {
                 simpleTagGroup.setPosition(rs.getInt("TagGroup.Position"));
                 simpleTagGroups.add(simpleTagGroup);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -421,7 +421,7 @@ public class TagRequest {
             if (tagEntity != null) {
                 addCardTag(tagEntity, cardEntity);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         }
     }
@@ -470,7 +470,7 @@ public class TagRequest {
                 cardTag.setAdded(true);
                 cardTags.add(cardTag);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -538,7 +538,7 @@ public class TagRequest {
                 }
                 cardTags.add(cardTag);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -565,7 +565,7 @@ public class TagRequest {
             while (rs.next()) {
                 tagIDs.add(rs.getLong("Tag.TagID"));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -591,7 +591,7 @@ public class TagRequest {
             ps.setLong(1, cardID);
             ps.executeUpdate();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -613,7 +613,7 @@ public class TagRequest {
                     }
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         }
     }
@@ -639,7 +639,7 @@ public class TagRequest {
             ps = connection.prepareStatement(sql);
             ps.setLong(1, cardTagEntity.getCardTagID());
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
@@ -681,7 +681,7 @@ public class TagRequest {
                 simpleTag.setTagID(rs.getLong("Tag.TagID"));
                 simpleTags.add(simpleTag);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -715,7 +715,7 @@ public class TagRequest {
                 completeTagGroupInfo.setTextGroupID(rs.getLong("TextGroup.TextGroupID"));
                 return completeTagGroupInfo;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -788,7 +788,7 @@ public class TagRequest {
             if (rs.first()) {
                 return rs.getInt("maxValue");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);

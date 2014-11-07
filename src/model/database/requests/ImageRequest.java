@@ -162,7 +162,7 @@ public class ImageRequest {
             if (rs.first()) {
                 image = getImage(rs.getLong("Image.ImageID"));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -204,7 +204,7 @@ public class ImageRequest {
                 mobileViewImage.setImageID(rs.getLong("Image.ImageID"));
                 mobileViewImages.add(mobileViewImage);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -254,7 +254,7 @@ public class ImageRequest {
                 cardImage.setImageName(rs.getString("CardImage.CardImageName"));
                 cardImages.add(cardImage);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -283,7 +283,7 @@ public class ImageRequest {
             ps = connection.prepareStatement(sql);
             ps.setLong(1, cardImageID);
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
@@ -315,7 +315,7 @@ public class ImageRequest {
 //                mobileCardImage.setImageWidth();
                 mobileCardInfo.getImages().add(mobileCardImage);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);

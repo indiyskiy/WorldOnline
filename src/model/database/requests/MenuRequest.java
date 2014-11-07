@@ -82,7 +82,7 @@ public class MenuRequest {
             if (rs.first()) {
                 return true;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -397,7 +397,7 @@ public class MenuRequest {
                 Long menuID = rs.getLong("Menu.MenuID");
                 menuIDList.add(menuID);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -432,7 +432,7 @@ public class MenuRequest {
             if (rs.first()) {
                 parseCompleteMenu(menuCompleteInformation, rs);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -588,7 +588,7 @@ public class MenuRequest {
                 cardMenu.setCardMenuID(rs.getLong("MenuCardLink.MenuCardLinkID"));
                 cardMenus.add(cardMenu);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -623,7 +623,7 @@ public class MenuRequest {
                 menu.setMenuName(rs.getString("Text.Text"));
                 menus.add(menu);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -641,7 +641,7 @@ public class MenuRequest {
             ps = connection.prepareStatement(sql);
             ps.setLong(1, cardMenuID);
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
@@ -658,7 +658,7 @@ public class MenuRequest {
             ps = connection.prepareStatement(sql);
             ps.setLong(1, menuID);
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
@@ -689,7 +689,7 @@ public class MenuRequest {
                 cardInfo.setCardType(CardType.parseInt(rs.getInt("Card.CardType")));
                 cardInfos.add(cardInfo);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
@@ -732,7 +732,7 @@ public class MenuRequest {
             if (rs.first()) {
                 return getMenu(rs.getLong("Menu.MenuID"));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -794,7 +794,7 @@ public class MenuRequest {
             ps = connection.prepareStatement(sql);
             ps.setLong(1, menuID);
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
@@ -818,7 +818,7 @@ public class MenuRequest {
             if (rs.first()) {
                 return rs.getInt("c");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -842,7 +842,7 @@ public class MenuRequest {
                 MobileCardInfo mobileCardInfo = mobileCardInfoHashMap.get(rs.getLong("MenuCardLink.CardID"));
                 mobileCardInfo.getMenuIDs().add(rs.getLong("MenuCardLink.MenuID"));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -865,7 +865,7 @@ public class MenuRequest {
             if (rs.first()) {
                 return rs.getInt("c");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);

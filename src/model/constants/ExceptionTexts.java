@@ -62,7 +62,11 @@ public class ExceptionTexts {
     public static final String cardByListBodyEmptyException = "phone.cardbylist.Body.Empty";
     public static final String cardRegistrationUserIDIncorrectException = "phone.cardregistration.UserID.Incorrect";
     public static final String cardRegistrationBodyEmptyException = "phone.cardregistration.Body.Empty";
-    public static final String cardRegistrationCardListEmptyException = "phone.cardregistration.Body.Empty";
+    public static final String cardRegistrationCardListEmptyException = "phone.cardregistration.CardList.Empty";
+    public static final String pricesRegistrationUserIDIncorrectException = "phone.pricesregistration.UserID.Incorrect";
+    public static final String pricesRegistrationBodyEmptyException = "phone.pricesregistration.Body.Empty";
+    public static final String pricesRegistrationPriceListEmptyException = "phone.pricesregistration.PricesList.Empty";
+    public static final String cardByListPriceListEmptyException = "phone.cardByListPrice.PricesList.Empty";
 
 
     private static HashSet<String> getMobileErrors() {

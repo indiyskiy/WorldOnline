@@ -3,6 +3,7 @@ package model.database.worldonlinedb.dishes;
 import model.database.worldonlinedb.TextGroupEntity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @javax.persistence.Table(name = "Price", schema = "", catalog = "worldonline")
 @Entity
@@ -15,6 +16,10 @@ public class PriceEntity {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "PriceNameID")
     private TextGroupEntity priceName;
+
+    @javax.persistence.Column(name = "LastUpdateTimestamp")
+    @Basic
+    private Timestamp lastUpdateTimestamp;
 
     public Long getPriceID() {
         return priceID;
@@ -30,5 +35,13 @@ public class PriceEntity {
 
     public void setPriceName(TextGroupEntity priceName) {
         this.priceName = priceName;
+    }
+
+    public Timestamp getLastUpdateTimestamp() {
+        return lastUpdateTimestamp;
+    }
+
+    public void setLastUpdateTimestamp(Timestamp lastUpdateTimestamp) {
+        this.lastUpdateTimestamp = lastUpdateTimestamp;
     }
 }

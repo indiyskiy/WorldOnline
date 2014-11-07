@@ -915,6 +915,42 @@
         <url-pattern>/mobile/cardbylist</url-pattern>
     </servlet-mapping>
 
+    <!--Prices registration -->
+    <servlet>
+        <display-name>PricesRegistrationServlet</display-name>
+        <servlet-name>PricesRegistrationServlet</servlet-name>
+        <servlet-class>view.servlet.phone.PricesRegistrationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PricesRegistrationServlet</servlet-name>
+        <url-pattern>/mobile/pricesregistration</url-pattern>
+    </servlet-mapping>
+
+    <!--Prices for update -->
+    <servlet>
+        <display-name>PricesForUpdateServlet</display-name>
+        <servlet-name>PricesForUpdateServlet</servlet-name>
+        <servlet-class>view.servlet.phone.PricesForUpdateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PricesForUpdateServlet</servlet-name>
+        <url-pattern>/mobile/pricesforupdate</url-pattern>
+    </servlet-mapping>
+
+    <!--Prices for update -->
+    <servlet>
+        <display-name>PricesByListServlet</display-name>
+        <servlet-name>PricesByListServlet</servlet-name>
+        <servlet-class>view.servlet.phone.PricesByListServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PricesByListServlet</servlet-name>
+        <url-pattern>/mobile/pricesbylist</url-pattern>
+    </servlet-mapping>
+
 
     <!--test servlets-->
 

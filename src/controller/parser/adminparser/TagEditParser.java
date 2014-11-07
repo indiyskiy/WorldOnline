@@ -29,6 +29,9 @@ public class TagEditParser {
         } catch (SQLException e) {
             addError("Tag with id=" + tagID + " was not found");
             return null;
+        } catch (Exception e) {
+            addError(e.toString());
+            return null;
         }
     }
 

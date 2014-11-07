@@ -129,7 +129,7 @@ public class RouteRequest {
                     getCompleteCardRoute(rs, cardRoute, "RouteCard", "TextGroup", "Text");
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -166,7 +166,7 @@ public class RouteRequest {
                     getCompleteCardRoute(rs, cardRoute, "RouteCard", "TextGroup", "Text");
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -202,7 +202,7 @@ public class RouteRequest {
                     getCompleteCardRoute(rs, cardRoute, "RouteCard", "TextGroup", "Text");
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -283,7 +283,7 @@ public class RouteRequest {
             }
             String idString = StringHelper.getStringFromArray(ids);
             addCoordinates(idString, mobileCardRouteHashMap);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -321,7 +321,7 @@ public class RouteRequest {
                     mobileCardRoute.getMobileRouteCoordinates().add(mobileRouteCoordinate);
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);

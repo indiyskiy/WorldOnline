@@ -57,7 +57,7 @@ public class CoordinateRequest {
                 cardCoordinate.setLongitude(rs.getDouble("CardCoordinate.Longitude"));
                 return cardCoordinate;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -104,7 +104,7 @@ public class CoordinateRequest {
             if (rs.first()) {
                 return true;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);

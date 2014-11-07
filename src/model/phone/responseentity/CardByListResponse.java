@@ -17,7 +17,6 @@ public class CardByListResponse extends MobileResponseEntity {
     @Override
     protected JsonObject toJson() {
         JsonObject jsonObject = new JsonObject();
-//        jsonObject.addProperty("status", getStatus().getValue());
         JsonArray cards = new JsonArray();
         for (MobileCardInfo mobileCardInfo : mobileCards) {
             cards.add(mobileCardInfo.toJson());

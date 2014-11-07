@@ -142,7 +142,7 @@ public class TextRequest {
                 TextGroupEntity textGroupEntity = getTextGroupByResultSet(rs);
                 textEntity.setTextGroup(textGroupEntity);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -191,7 +191,7 @@ public class TextRequest {
                     }
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -218,7 +218,7 @@ public class TextRequest {
             } else {
                 return false;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -260,7 +260,7 @@ public class TextRequest {
                 cardText.setTextCardID(rs.getLong("TextCard.TextCardID"));
                 cardTexts.add(cardText);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -317,7 +317,7 @@ public class TextRequest {
             ps = connection.prepareStatement(sql);
             ps.setLong(1, textCardEntity.getTextCardID());
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
@@ -339,7 +339,7 @@ public class TextRequest {
             ps = connection.prepareStatement(sql);
             ps.setLong(1, textGroupEntity.getTextGroupID());
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
@@ -364,7 +364,7 @@ public class TextRequest {
             if (rs.first()) {
                 return true;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -421,7 +421,7 @@ public class TextRequest {
                     "WHERE Text.TextID IN (" + StringHelper.getStringFromArray((List) ids) + ")";
             ps = connection.prepareStatement(sql);
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
@@ -480,7 +480,7 @@ public class TextRequest {
                 mobileText.setTextGroupID(rs.getLong("Text.TextGroupID"));
                 mobileCardInfo.getMobileTexts().add(mobileText);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);

@@ -101,7 +101,7 @@ public class LinkRequest {
                 cardLink.setLinkType(CardToCardLinkType.parseInt(rs.getInt("CardToCardLink.CardToCardLinkType")));
                 sourceCardLinks.add(cardLink);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -133,7 +133,7 @@ public class LinkRequest {
                 cardLink.setLinkType(CardToCardLinkType.parseInt(rs.getInt("CardToCardLink.CardToCardLinkType")));
                 targetCardLinks.add(cardLink);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -161,7 +161,7 @@ public class LinkRequest {
             if (rs.first()) {
                 return true;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -181,7 +181,7 @@ public class LinkRequest {
             ps = connection.prepareStatement(sqlString);
             ps.setLong(1, cardToCardLinkID);
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
@@ -213,7 +213,7 @@ public class LinkRequest {
                 mobileCardToCardLink.setLinkID(rs.getLong("CardToCardLink.CardToCardLinkID"));
                 mobileCardInfo.getSourceLinks().add(mobileCardToCardLink);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);

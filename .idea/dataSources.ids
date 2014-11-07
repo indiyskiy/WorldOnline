@@ -243,10 +243,12 @@
     <table name="Price" schema="" catalog="worldonline" type="TABLE">
       <column name="PriceID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="PriceNameID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="LastUpdateTimestamp" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="PriceID"/>
       <foreign-key name="FK_8unfdqvxv1016ycflbh8gdmd9" columns="PriceNameID" ref-table="TextGroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="FK_2o4f85e9oev5ekd4utf09hm6e" table="CardPriceLink" schema="" catalog="worldonline" columns="PriceID"/>
       <exported-key name="FK_5a0wiynpumll3pmlqfsj5mfrn" table="Dish" schema="" catalog="worldonline" columns="PriceID"/>
+      <exported-key name="UserPrice_ibfk_3" table="UserPrice" schema="" catalog="worldonline" columns="PriceID"/>
     </table>
     <table name="RouteCoordinate" schema="" catalog="worldonline" type="TABLE">
       <column name="RouteCoordinateID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -360,6 +362,7 @@
       <primary-key name="PRIMARY" columns="UserContentID"/>
       <exported-key name="FK_ni3wk87vu1n5d2jfhblui5veo" table="User" schema="" catalog="worldonline" columns="UserContentID"/>
       <exported-key name="FK_o9hm9i8tnmup36hqj1gougw8l" table="UserCard" schema="" catalog="worldonline" columns="UserContentID"/>
+      <exported-key name="UserPrice_ibfk_2" table="UserPrice" schema="" catalog="worldonline" columns="UserContentID"/>
     </table>
     <table name="UserHardware" schema="" catalog="worldonline" type="TABLE">
       <column name="UserHardwareID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -375,6 +378,17 @@
       <column name="UserLanguage" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="UserPersonalDataID"/>
       <exported-key name="FK_hw73w84hod076vg7ua3ksbq9v" table="User" schema="" catalog="worldonline" columns="UserPersonalDataID"/>
+    </table>
+    <table name="UserPrice" schema="" catalog="worldonline" type="TABLE">
+      <column name="UserPriceID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="LastUpdateTimeStamp" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="DownloadTimeStamp" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="PriceID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="UserContentID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="UserPriceID"/>
+      <foreign-key name="UserPrice_ibfk_2" columns="UserContentID" ref-table="UserContent" ref-schema="" ref-catalog="worldonline" ref-columns="UserContentID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="UserPrice_ibfk_3" columns="PriceID" ref-table="Price" ref-schema="" ref-catalog="worldonline" ref-columns="PriceID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="unique_UserPriceID" unique="true" columns="UserPriceID"/>
     </table>
     <table name="Weather" schema="" catalog="worldonline" type="TABLE">
       <column name="WeatherID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>

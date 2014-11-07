@@ -2,6 +2,7 @@ package model.database.requests;
 
 import controller.parser.adminparser.AddCategoryParser;
 import helper.StringHelper;
+import helper.TimeManager;
 import model.additionalentity.admin.CompletePriceInfo;
 import model.additionalentity.admin.SimpleCategory;
 import model.additionalentity.admin.SimpleDish;
@@ -54,7 +55,28 @@ public class DishRequest {
         boolean b = false;
         try {
             session.beginTransaction();
+            priceEntity.setLastUpdateTimestamp(TimeManager.currentTime());
             session.save(priceEntity);
+            session.getTransaction().commit();
+            session.flush();
+            b = true;
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return b;
+    }
+
+    public static boolean updatePrice(PriceEntity priceEntity) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        boolean b = false;
+        try {
+            session.beginTransaction();
+            priceEntity.setLastUpdateTimestamp(TimeManager.currentTime());
+            session.update(priceEntity);
             session.getTransaction().commit();
             session.flush();
             b = true;
@@ -146,6 +168,23 @@ public class DishRequest {
 
     public static ArrayList<MobilePrice> getAllMobilePrices(Long userID, int limit, int offset) {
         ArrayList<MobilePrice> mobilePrices = new ArrayList<>();
+        String priceLimitString = getPriseLimitedIDs(limit, offset);
+        if (priceLimitString == null || priceLimitString.isEmpty()) {
+            return mobilePrices;
+        }
+        return getMobilePrices(userID, mobilePrices, priceLimitString);
+    }
+
+    public static ArrayList<MobilePrice> getAllMobilePrices(Long userID, ArrayList<Object> priceIDs) {
+        ArrayList<MobilePrice> mobilePrices = new ArrayList<>();
+        String priceLimitString = StringHelper.getStringFromArray(priceIDs);
+        if (priceLimitString == null || priceLimitString.isEmpty()) {
+            return mobilePrices;
+        }
+        return getMobilePrices(userID, mobilePrices, priceLimitString);
+    }
+
+    private static ArrayList<MobilePrice> getMobilePrices(Long userID, ArrayList<MobilePrice> mobilePrices, String priceLimitString) {
         HashMap<Long, MobilePrice> mobilePriceHashMap = new HashMap<>();
         HashMap<Long, HashMap<Long, MobileDish>> dishesMap = new HashMap<>();
         DatabaseConnection dbConnection = new DatabaseConnection();
@@ -153,10 +192,7 @@ public class DishRequest {
         ResultSet rs = null;
         PreparedStatement ps = null;
         try {
-            String priceLimitString = getPriseLimitedIDs(limit, offset);
-            if (priceLimitString == null || priceLimitString.isEmpty()) {
-                return mobilePrices;
-            }
+
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql =
                     "SELECT Price.PriceID, " +
@@ -168,26 +204,16 @@ public class DishRequest {
                             "PriceName.Text " +
                             "FROM Price " +
                             "JOIN Dish ON (Dish.PriceID=Price.PriceID) " +
-//                            "JOIN TextGroup AS DishTextGroup ON (Dish.DishNameID=DishTextGroup.TextGroupID) " +
                             "JOIN Text AS DishText ON (Dish.DishNameID=DishText.TextGroupID) " +
                             "LEFT OUTER JOIN DishTagDishLink ON (DishTagDishLink.DishID=Dish.DishID) " +
                             "LEFT OUTER JOIN DishTag ON (DishTagDishLink.DishTagID=DishTag.DishTagID) " +
                             "JOIN UserPersonalData ON (UserPersonalData.UserLanguage=DishText.LanguageID) " +
                             "JOIN User ON (User.UserPersonalDataID=UserPersonalData.UserPersonalDataID) " +
-//                            "LEFT OUTER JOIN TextGroup AS PriceNameGroup ON (Price.PriceNameID=PriceNameGroup.TextGroupID) " +
                             "LEFT OUTER JOIN Text AS PriceName ON (Price.PriceNameID=PriceName.TextGroupID AND PriceName.LanguageID=UserPersonalData.UserLanguage) " +
-//                            "JOIN (SELECT FilterPrice.PriceID FROM Price AS FilterPrice " +
-//                            "JOIN CardPriceLink ON (FilterPrice.PriceID=CardPriceLink.PriceID) " +
-//                            "JOIN Card ON (Card.CardID=CardPriceLink.CardID) " +
-//                            "WHERE Card.CardState=" + CardState.Active.getValue() + " " +
-//                            "ORDER BY FilterPrice.PriceID LIMIT ?,?) " +
-//                            "AS T ON (Price.PriceID=T.PriceID) " +
                             "WHERE User.UserID=? AND Price.PriceID IN (" + priceLimitString + ")";
 
             ps = connection.prepareStatement(sql);
             ps.setLong(1, userID);
-//            ps.setLong(1, offset);
-//            ps.setLong(2, limit);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Long priceID = rs.getLong("Price.PriceID");
@@ -230,7 +256,7 @@ public class DishRequest {
                     }
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -258,7 +284,7 @@ public class DishRequest {
             while (rs.next()) {
                 mobilePriceIDs.add(rs.getLong("Price.PriceID"));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -294,7 +320,7 @@ public class DishRequest {
                 mobileDishCategory.setPosition(rs.getInt("DishCategory.Position"));
                 mobileDishCategories.add(mobileDishCategory);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -328,7 +354,7 @@ public class DishRequest {
                 mobileDishTag.setTagName(rs.getString("Text.Text"));
                 mobileDishTags.add(mobileDishTag);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -361,7 +387,7 @@ public class DishRequest {
                 completePriceInfo.setCards(CardRequest.getAllPriceCards(priceID));
                 return completePriceInfo;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -409,7 +435,7 @@ public class DishRequest {
                 simpleDish.setCategoryTextGroupID(rs.getLong("CatTextGroupID"));
                 simpleDishes.add(simpleDish);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -487,7 +513,7 @@ public class DishRequest {
                 loggerFactory.debug("found=>true");
                 return true;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -520,7 +546,7 @@ public class DishRequest {
                 Long catID = rs.getLong("DishCategory.DishCategoryID");
                 return getDishCategory(catID);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -571,7 +597,7 @@ public class DishRequest {
                 simpleCategory.setCategoryID(rs.getLong("DishCategoryID"));
                 simpleCategories.add(simpleCategory);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -605,7 +631,7 @@ public class DishRequest {
             ps = connection.prepareStatement(sql);
             ps.executeUpdate();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
@@ -633,7 +659,7 @@ public class DishRequest {
             ps = connection.prepareStatement(sql);
             ps.setLong(1, dishEntity.getDishID());
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);

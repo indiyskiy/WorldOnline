@@ -42,7 +42,7 @@ public class AdminUserRequest {
             if (rs.first()) {
                 return ProtectAdminLevel.parseInt(rs.getInt("AdminUser.AdminRole"));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -70,7 +70,7 @@ public class AdminUserRequest {
                 String password = rs.getString("AdminUserPassword");
                 return Md5Hash.getMd5Hash(login + " @#$%^ " + password);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -144,7 +144,7 @@ public class AdminUserRequest {
             if (rs.first()) {
                 return rs.getInt("counter");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -206,7 +206,7 @@ public class AdminUserRequest {
                 adminUserEntity.setAdminUserAdditionalInfo(adminUserAdditionalInfoEntity);
                 return adminUserEntity;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);

@@ -75,7 +75,7 @@ public class TimeRequest {
             if (rs.first()) {
                 return true;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);

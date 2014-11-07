@@ -40,8 +40,8 @@ public class CardRequest {
             "UserPersonalData.UserLanguage, " +
             "UrgencyTime.UrgencyTimeID, UrgencyTime.OnTimestamp, UrgencyTime.OffTimestamp " +
             "FROM Card " +
-            "LEFT OUTER JOIN User ON (User.UserID=?) " +
-            "LEFT OUTER JOIN UserPersonalData ON (UserPersonalData.UserPersonalDataID=User.UserPersonalDataID) " +
+            "JOIN User ON (User.UserID=?) " +
+            "JOIN UserPersonalData ON (UserPersonalData.UserPersonalDataID=User.UserPersonalDataID) " +
             "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
             "LEFT OUTER JOIN CardPriceLink ON (Card.CardID=CardPriceLink.CardID) " +
             "LEFT OUTER JOIN Price ON (Price.PriceID=CardPriceLink.PriceID) " +
@@ -238,7 +238,7 @@ public class CardRequest {
                 InfoRequest.setInformationParts(card, cardID);
                 card.uploadCardBlocks();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -316,7 +316,7 @@ public class CardRequest {
                 CardEntity cardEntity = getCardFromResultSet(rs);
                 cards.add(cardEntity);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -364,7 +364,7 @@ public class CardRequest {
             if (rs.first()) {
                 return rs.getLong("results");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -392,7 +392,7 @@ public class CardRequest {
                 Long cardID = rs.getLong("Card.CardID");
                 return getCardByID(cardID);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -407,20 +407,15 @@ public class CardRequest {
         PreparedStatement ps = null;
         try {
             connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT * FROM Text " +
-                    "JOIN TextGroup ON (Text.TextGroupID=TextGroup.TextGroupID) " +
-                    "JOIN TextCard ON (TextGroup.TextGroupID=TextCard.TextGroupID) " +
-                    "JOIN Card ON (TextCard.CardID=Card.CardID) " +
-                    "WHERE Text.Text LIKE ? || Card.CardName LIKE ?";
-
+            @Language("MySQL") String sql = "SELECT * FROM  Card " +
+                    "WHERE Card.CardName LIKE ?";
             ps = connection.prepareStatement(sql);
             ps.setString(1, name);
-            ps.setString(2, name);
             rs = ps.executeQuery();
             if (rs.first()) {
                 return true;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -447,7 +442,7 @@ public class CardRequest {
             while (rs.next()) {
                 res.add(rs.getString("Text.Text"));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -508,7 +503,7 @@ public class CardRequest {
                 InfoRequest.setMobileInfos(mobileCardInfoHashMap, cardIDs, languageType);
                 RouteRequest.setMobileRoute(mobileCardInfoHashMap, cardIDs);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -582,7 +577,7 @@ public class CardRequest {
             if (rs.first()) {
                 return rs.getLong("results");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -612,7 +607,7 @@ public class CardRequest {
                 simpleCard.setCardID(rs.getLong("Card.CardID"));
                 simpleCards.add(simpleCard);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -639,7 +634,7 @@ public class CardRequest {
                 simpleCard.setCardID(rs.getLong("Card.CardID"));
                 return simpleCard;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -668,7 +663,7 @@ public class CardRequest {
                 simpleCard.setCardID(rs.getLong("Card.CardID"));
                 simpleCards.add(simpleCard);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -697,7 +692,7 @@ public class CardRequest {
                 simpleCard.setCardID(rs.getLong("Card.CardID"));
                 simpleCards.add(simpleCard);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -719,7 +714,7 @@ public class CardRequest {
             ps.setTimestamp(1, TimeManager.currentTime());
             ps.setLong(2, menuID);
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);

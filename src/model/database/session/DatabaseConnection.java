@@ -42,6 +42,9 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             loggerFactory.error("db connection is closed");
             loggerFactory.error(e);
+        } catch (Exception e) {
+            loggerFactory.error("db connection is closed - unexpected exception");
+            loggerFactory.error(e);
         }
         return connection;
     }

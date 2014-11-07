@@ -38,7 +38,11 @@ public class AddSomeCardTask implements Runnable {
                 }
                 userCardEntity.setUserContent(user.getUserContent());
                 userCardEntity.setLastUpdateTimeStamp(currentTime);
-                UserDataRequest.addUserCard(userCardEntity);
+                try {
+                    UserDataRequest.addUserCard(userCardEntity);
+                } catch (InterruptedException e) {
+                    loggerFactory.error(e);
+                }
             } else {
                 userCardEntity.setLastUpdateTimeStamp(currentTime);
                 UserDataRequest.updateUserCard(userCardEntity);

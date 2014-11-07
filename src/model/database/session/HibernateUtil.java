@@ -54,6 +54,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(WeatherEntity.class)
                 .addAnnotatedClass(ExchangeRatesEntity.class)
                 .addAnnotatedClass(UserCardEntity.class)
+                .addAnnotatedClass(UserPriceEntity.class)
                 .addAnnotatedClass(CardParameterTypeEntity.class)
                 .addAnnotatedClass(CardPriceLinkEntity.class)
                 .addAnnotatedClass(DishCategoryEntity.class)

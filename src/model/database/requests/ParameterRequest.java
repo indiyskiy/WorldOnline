@@ -124,7 +124,7 @@ public class ParameterRequest {
                     return getCardParameterTypeByResultSet(rs);
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -172,7 +172,7 @@ public class ParameterRequest {
                     mobileParameterTypes.add(mobileParameterType);
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -213,7 +213,7 @@ public class ParameterRequest {
                 cardParameter.setValue(rs.getString("CardParameter.CardParameterValue"));
                 cardParameters.add(cardParameter);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -266,7 +266,7 @@ public class ParameterRequest {
             ps = connection.prepareStatement(sql);
             ps.setLong(1, cardParameterEntity.getCardParameterID());
             ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);
@@ -303,7 +303,7 @@ public class ParameterRequest {
                 parameterType.setTranslatable(rs.getBoolean("CardParameterType.Translatable"));
                 parameterTypes.add(parameterType);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -342,7 +342,7 @@ public class ParameterRequest {
             if (rs.first()) {
                 return true;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -379,7 +379,7 @@ public class ParameterRequest {
                 mobileParameter.setParameterTypeID(rs.getLong("CardParameter.CardParameterTypeID"));
                 mobileCardInfo.getMobileParameters().add(mobileParameter);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);

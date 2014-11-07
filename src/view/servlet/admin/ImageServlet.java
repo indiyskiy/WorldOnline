@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.file.Files;
 
 public class ImageServlet extends ProtectedServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -17,7 +18,8 @@ public class ImageServlet extends ProtectedServlet {
         if (image == null) {
             throw new ServletException(imageID + " is null");
         }
-        String mimeType = getServletContext().getMimeType(image.getAbsolutePath());
+//        String mimeType = getServletContext().getMimeType(image.getAbsolutePath());
+        String mimeType = Files.probeContentType(image.toPath());
         if (mimeType == null) {
             throw new ServletException(imageID + " " + "mimetype");
         }

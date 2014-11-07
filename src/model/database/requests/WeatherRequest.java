@@ -68,7 +68,7 @@ public class WeatherRequest {
                 weatherEntity.setWeatherTimestamp(rs.getTimestamp("Weather.WeatherTimestamp"));
                 return weatherEntity;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);

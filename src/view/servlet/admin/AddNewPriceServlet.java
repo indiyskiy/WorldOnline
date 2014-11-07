@@ -43,6 +43,7 @@ public class AddNewPriceServlet extends ProtectedServlet {
             cardPriceLinkEntity.setCard(cardEntity);
             cardPriceLinkEntity.setPrice(priceEntity);
             DishRequest.addCardPriceLink(cardPriceLinkEntity);
+            DishRequest.updatePrice(priceEntity);
             ServletHelper.sendForward("/completepriceinfo?priceID=" + priceEntity.getPriceID(), this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

@@ -136,7 +136,7 @@ public class UserRequests {
             if (rs.first()) {
                 b = false;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -180,7 +180,7 @@ public class UserRequests {
             if (rs.first()) {
                 b = true;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -205,7 +205,7 @@ public class UserRequests {
                 restoreUserResponse.setUserID(rs.getLong("User.UserID"));
                 return restoreUserResponse;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
@@ -233,7 +233,22 @@ public class UserRequests {
             ps = connection.prepareStatement(sql);
             ps.setLong(1, userID);
             ps.executeUpdate();
-        } catch (SQLException e) {
+            sql = "DELETE FROM UserPrice " +
+                    "WHERE UserPrice.UserPriceID IN ( " +
+                    "SELECT " +
+                    "ids " +
+                    "FROM ( " +
+                    "SELECT " +
+                    "temp.UserPriceID AS ids " +
+                    "FROM UserPrice AS temp " +
+                    "JOIN UserContent ON (temp.UserContentID = UserContent.UserContentID) " +
+                    "JOIN User ON (User.UserContentID = UserContent.UserContentID) " +
+                    "WHERE User.userID = ? " +
+                    ")AS additionalTable)";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, userID);
+            ps.executeUpdate();
+        } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, null);

@@ -24,6 +24,7 @@ public class AddDishesServlet extends ProtectedServlet {
             AddDishesParser addDishesParser = new AddDishesParser(request);
             DishRequest.addDishesSQL(addDishesParser.getDishList());
             TextRequest.addText(addDishesParser.getTextEntities());
+            DishRequest.updatePrice(DishRequest.getPrice(addDishesParser.getPriceID()));
             ServletHelper.sendForward("/completepriceinfo?priceID=" + addDishesParser.getPriceID(), this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

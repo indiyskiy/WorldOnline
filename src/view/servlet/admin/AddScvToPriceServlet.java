@@ -2,6 +2,7 @@ package view.servlet.admin;
 
 import controller.parser.adminparser.AddScvToPriceParser;
 import model.constants.Component;
+import model.database.requests.DishRequest;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
@@ -11,9 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by Илья on 17.10.14.
- */
 public class AddScvToPriceServlet extends HttpServlet {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, ImageCardUploadServlet.class);
 
@@ -27,6 +25,7 @@ public class AddScvToPriceServlet extends HttpServlet {
         try {
             AddScvToPriceParser addScvToPriceParser = new AddScvToPriceParser(request);
             addScvToPriceParser.runAdding();
+            DishRequest.updatePrice(addScvToPriceParser.getPriceEntity());
             ServletHelper.sendForward("/completepriceinfo?priceID=" + addScvToPriceParser.getPriceID(), this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

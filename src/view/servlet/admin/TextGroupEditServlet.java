@@ -4,8 +4,10 @@ import controller.parser.adminparser.TextGroupEditParser;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.database.requests.CardRequest;
+import model.database.requests.DishRequest;
 import model.database.requests.TextRequest;
 import model.database.worldonlinedb.TextEntity;
+import model.database.worldonlinedb.dishes.DishEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
@@ -56,6 +58,18 @@ public class TextGroupEditServlet extends ProtectedServlet {
                 String menuID = request.getParameter("menuID");
                 if (menuID != null && !menuID.isEmpty()) {
                     ServletHelper.sendForward("/completemenuinfo?tagID=" + menuID, this, request, response);
+                    redirected = true;
+                }
+            }
+
+            if (!redirected) {
+                String dishID = request.getParameter("dishID");
+                DishEntity dishEntity = DishRequest.getDish(Long.parseLong(dishID));
+                if (dishEntity != null) {
+                    DishRequest.updatePrice(dishEntity.getPrice());
+                }
+                if (dishID != null && !dishID.isEmpty()) {
+                    ServletHelper.sendForward("/completepriceinfo?tagID=" + dishID, this, request, response);
                     redirected = true;
                 }
             }
