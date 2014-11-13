@@ -2,7 +2,7 @@ package model.additionalentity.phone;
 
 import com.google.gson.JsonObject;
 
-public class MobileViewImage {
+public class MobileCardImagePair {
     private long cardID;
     private long imageID;
 

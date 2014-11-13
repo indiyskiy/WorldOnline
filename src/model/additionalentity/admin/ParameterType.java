@@ -1,26 +1,28 @@
 package model.additionalentity.admin;
 
+import model.constants.ApplicationBlock;
+
 public class ParameterType {
-    private int block;
-    private Long ParameterTypeID;
+    private ApplicationBlock block;
+    private Long parameterTypeID;
     private String name;
     private boolean multiply;
     private boolean translatable;
 
-    public int getBlock() {
+    public ApplicationBlock getBlock() {
         return block;
     }
 
-    public void setBlock(int block) {
+    public void setBlock(ApplicationBlock block) {
         this.block = block;
     }
 
     public Long getParameterTypeID() {
-        return ParameterTypeID;
+        return parameterTypeID;
     }
 
     public void setParameterTypeID(Long parameterTypeID) {
-        ParameterTypeID = parameterTypeID;
+        this.parameterTypeID = parameterTypeID;
     }
 
     public String getName() {

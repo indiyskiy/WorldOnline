@@ -187,7 +187,7 @@ public class DishRequest {
     private static ArrayList<MobilePrice> getMobilePrices(Long userID, ArrayList<MobilePrice> mobilePrices, String priceLimitString) {
         HashMap<Long, MobilePrice> mobilePriceHashMap = new HashMap<>();
         HashMap<Long, HashMap<Long, MobileDish>> dishesMap = new HashMap<>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getMobilePrices");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -266,7 +266,7 @@ public class DishRequest {
 
     private static String getPriseLimitedIDs(int limit, int offset) {
         ArrayList<Object> mobilePriceIDs = new ArrayList<>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getPriseLimitedIDs");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -294,7 +294,7 @@ public class DishRequest {
 
     public static ArrayList<MobileDishCategory> getAllMobileDishCategories(Long userID) {
         ArrayList<MobileDishCategory> mobileDishCategories = new ArrayList<>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllMobileDishCategories");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -330,7 +330,7 @@ public class DishRequest {
 
     public static ArrayList<MobileDishTag> getAllMobileDishTags(Long userID) {
         ArrayList<MobileDishTag> mobileDishTags = new ArrayList<>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllMobileDishTags");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -363,7 +363,7 @@ public class DishRequest {
     }
 
     public static CompletePriceInfo getCompletePriceInfo(Long priceID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCompletePriceInfo");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -397,7 +397,7 @@ public class DishRequest {
 
     private static ArrayList<SimpleDish> getPriceDishes(Long priceID) {
         ArrayList<SimpleDish> simpleDishes = new ArrayList<>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getPriceDishes");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -485,12 +485,12 @@ public class DishRequest {
     }
 
     public static boolean isDishExist(String nameRu, String nameEn, Double coast, Long priceID) {
-        loggerFactory.debug("find " + nameRu + " " + nameEn + " " + coast + " " + priceID);
+//        loggerFactory.debug("find " + nameRu + " " + nameEn + " " + coast + " " + priceID);
         if (priceID == 0) {
-            loggerFactory.debug("priceID==0 => not found");
+//            loggerFactory.debug("priceID==0 => not found");
             return false;
         }
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("isDishExist");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -510,7 +510,7 @@ public class DishRequest {
             ps.setLong(4, priceID);
             rs = ps.executeQuery();
             if (rs.first()) {
-                loggerFactory.debug("found=>true");
+//                loggerFactory.debug("found=>true");
                 return true;
             }
         } catch (Exception e) {
@@ -518,12 +518,12 @@ public class DishRequest {
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        loggerFactory.debug("not found=>false");
+//        loggerFactory.debug("not found=>false");
         return false;
     }
 
     public static DishCategoryEntity findCategory(String catEn, String catRu, Long priceID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("findCategory");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -571,7 +571,7 @@ public class DishRequest {
 
     public static ArrayList<SimpleCategory> getPriceCategories(Long priceID) {
         ArrayList<SimpleCategory> simpleCategories = new ArrayList<>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getPriceCategories");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -606,7 +606,7 @@ public class DishRequest {
     }
 
     public static void addDishesSQL(ArrayList<DishEntity> dishList) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("addDishesSQL");
         Connection connection;
         PreparedStatement ps = null;
         try {
@@ -627,7 +627,7 @@ public class DishRequest {
                 }
                 sql += sqlAdd;
             }
-            loggerFactory.debug("sql= " + sql);
+//            loggerFactory.debug("sql= " + sql);
             ps = connection.prepareStatement(sql);
             ps.executeUpdate();
 
@@ -650,7 +650,7 @@ public class DishRequest {
     }
 
     public static void deleteDish(DishEntity dishEntity) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteDish");
         Connection connection;
         PreparedStatement ps = null;
         try {

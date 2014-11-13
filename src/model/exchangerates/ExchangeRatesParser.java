@@ -38,7 +38,7 @@ public class ExchangeRatesParser {
     }
 
     private void saveToDB(ValCurs valCurs) {
-        loggerFactory.debug(valCurs.name + " " + valCurs.date);
+//        loggerFactory.debug(valCurs.name + " " + valCurs.date);
         Double eur = 0.0;
         Double usd = 0.0;
         for (Valute valute : valCurs.valutes) {

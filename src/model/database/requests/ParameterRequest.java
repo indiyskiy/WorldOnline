@@ -102,10 +102,11 @@ public class ParameterRequest {
     }
 
     public static CardParameterTypeEntity getParameterTypeByName(String name) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getParameterTypeByName");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
+        CardParameterTypeEntity cardParameterTypeEntity = null;
         try {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT * FROM Text AS CardParameterTypeText " +
@@ -120,7 +121,7 @@ public class ParameterRequest {
             if (rs.first()) {
                 Long cardID = rs.getLong("CardParameterType.CardParameterTypeID");
                 if (cardID != 0 && !rs.wasNull()) {
-                    CardParameterTypeEntity cardParameterTypeEntity = getCardParameterTypeByResultSet(rs);
+                    cardParameterTypeEntity = getCardParameterTypeByResultSet(rs);
                     return getCardParameterTypeByResultSet(rs);
                 }
             }
@@ -129,12 +130,12 @@ public class ParameterRequest {
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return null;
+        return cardParameterTypeEntity;
     }
 
     public static ArrayList<MobileParameterType> getAllMobileParameterTypes(AllCardParameterTypesRequest allCardParameterTypesRequest) {
         Long userID = allCardParameterTypesRequest.getUserID();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllMobileParameterTypes");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -181,7 +182,7 @@ public class ParameterRequest {
     }
 
     public static void setCardParameters(CompleteCardInfo card, long cardID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setCardParameters");
         ArrayList<CardParameter> cardParameters = new ArrayList<>();
         Connection connection;
         ResultSet rs = null;
@@ -257,7 +258,7 @@ public class ParameterRequest {
     }
 
     public static void deleteCardParameter(CardParameterEntity cardParameterEntity) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteCardParameter");
         Connection connection;
         PreparedStatement ps = null;
         try {
@@ -275,7 +276,7 @@ public class ParameterRequest {
     }
 
     public static ArrayList<ParameterType> getAllTypes() {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllTypes");
         ArrayList<ParameterType> parameterTypes = new ArrayList<>();
         Connection connection;
         ResultSet rs = null;
@@ -291,14 +292,15 @@ public class ParameterRequest {
                             "FROM CardParameterType " +
                             "JOIN TextGroup ON (CardParameterType.CardParameterTypeName =TextGroup.TextGroupID) " +
                             "JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
-                            "WHERE Text.LanguageID=" + LanguageType.Russian.getValue();
+                            "WHERE Text.LanguageID=" + LanguageType.Russian.getValue() + " " +
+                            "ORDER BY CardParameterType.Block";
             ps = connection.prepareStatement(sqlString);
             rs = ps.executeQuery();
             while (rs.next()) {
                 ParameterType parameterType = new ParameterType();
                 parameterType.setParameterTypeID(rs.getLong("CardParameterType.CardParameterTypeID"));
                 parameterType.setName(rs.getString("Text.Text"));
-                parameterType.setBlock(rs.getInt("CardParameterType.Block"));
+                parameterType.setBlock(ApplicationBlock.parseInt(rs.getInt("CardParameterType.Block")));
                 parameterType.setMultiply(rs.getBoolean("CardParameterType.Multiply"));
                 parameterType.setTranslatable(rs.getBoolean("CardParameterType.Translatable"));
                 parameterTypes.add(parameterType);
@@ -326,9 +328,10 @@ public class ParameterRequest {
     }
 
     public static boolean isCardParameterExist(long cardID, long cardParameterTypeID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("isCardParameterExist");
         PreparedStatement ps = null;
         ResultSet rs = null;
+        boolean b = false;
         try {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT CardParameter.CardParameterID FROM CardParameter " +
@@ -340,14 +343,14 @@ public class ParameterRequest {
             ps.setLong(2, cardParameterTypeID);
             rs = ps.executeQuery();
             if (rs.first()) {
-                return true;
+                b = true;
             }
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return false;
+        return b;
     }
 
     public static void addEmptyCardParameter(CardEntity cardEntity, CardParameterTypeEntity cardParameterTypeEntity) throws Exception {
@@ -356,7 +359,7 @@ public class ParameterRequest {
     }
 
     public static void setMobileParameters(HashMap<Long, MobileCardInfo> mobileCardInfoHashMap, String cardIDs) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setMobileParameters");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {

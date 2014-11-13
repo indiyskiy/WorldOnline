@@ -21,7 +21,7 @@ public class ChangeCardInfoImageServlet extends ProtectedServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletHelper.setUTF8(request, response);
         try {
-            loggerFactory.debug("ChangeCardInfoImageServlet start");
+//            loggerFactory.debug("ChangeCardInfoImageServlet start");
             CardInfoImageUploadParser cardInfoImageUploadParser = new CardInfoImageUploadParser();
             cardInfoImageUploadParser.parse(request);
             CardInformationElementEntity cardInformationElementEntity = cardInfoImageUploadParser.getCardInformationElementEntity();
@@ -29,7 +29,7 @@ public class ChangeCardInfoImageServlet extends ProtectedServlet {
             ImageHelper.saveCardInfoImage(file, cardInformationElementEntity);
             Long cardID = cardInformationElementEntity.getCard().getCardID();
             CardRequest.updateCard(CardRequest.getCardByID(cardID));
-            loggerFactory.debug("card id=" + cardID);
+//            loggerFactory.debug("card id=" + cardID);
             ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

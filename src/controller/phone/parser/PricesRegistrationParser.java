@@ -29,7 +29,7 @@ public class PricesRegistrationParser extends MobileParser {
             if (body == null || body.isEmpty()) {
                 throw new ParseRequestException(ExceptionTexts.pricesRegistrationBodyEmptyException);
             }
-            String ids = body.replaceAll("\\[", "").replaceAll("\\]", "");
+            String ids = body.replaceAll("\\{", "").replaceAll("\\}", "").replaceAll("\\\"", "").replaceAll(":", "").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").replaceAll("pricesIDs", "");
             String[] priceIds = ids.split(",");
             for (String priceIDString : priceIds) {
                 Long priceID = Long.parseLong(priceIDString);

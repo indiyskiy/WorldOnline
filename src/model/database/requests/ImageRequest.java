@@ -3,8 +3,8 @@ package model.database.requests;
 import model.additionalentity.admin.CardImage;
 import model.additionalentity.admin.CompleteCardInfo;
 import model.additionalentity.phone.MobileCardImage;
+import model.additionalentity.phone.MobileCardImagePair;
 import model.additionalentity.phone.MobileCardInfo;
-import model.additionalentity.phone.MobileViewImage;
 import model.constants.Component;
 import model.constants.databaseenumeration.CardState;
 import model.constants.databaseenumeration.ImageType;
@@ -149,7 +149,7 @@ public class ImageRequest {
 
     public static ImageEntity getImageByHash(String hash) {
         ImageEntity image = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getImageByHash");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -182,9 +182,9 @@ public class ImageRequest {
         return new File(imageFilePath);
     }
 
-    public static LinkedList<MobileViewImage> getViewCardImages() {
-        LinkedList<MobileViewImage> mobileViewImages = new LinkedList<>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+    public static LinkedList<MobileCardImagePair> getCardImages(ImageType imageType) {
+        LinkedList<MobileCardImagePair> mobileCardImagePairs = new LinkedList<>();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCardImages");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -195,21 +195,21 @@ public class ImageRequest {
                     "JOIN Card ON (CardImage.CardID = Card.CardID) " +
                     "WHERE Card.CardState IN (" +
                     CardState.Active.getValue() +
-                    ") AND CardImage.CardImageType=" + ImageType.ViewImage.getValue();
+                    ") AND CardImage.CardImageType=" + imageType.getValue();
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                MobileViewImage mobileViewImage = new MobileViewImage();
-                mobileViewImage.setCardID(rs.getLong("Card.CardID"));
-                mobileViewImage.setImageID(rs.getLong("Image.ImageID"));
-                mobileViewImages.add(mobileViewImage);
+                MobileCardImagePair mobileCardImagePair = new MobileCardImagePair();
+                mobileCardImagePair.setCardID(rs.getLong("Card.CardID"));
+                mobileCardImagePair.setImageID(rs.getLong("Image.ImageID"));
+                mobileCardImagePairs.add(mobileCardImagePair);
             }
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return mobileViewImages;
+        return mobileCardImagePairs;
     }
 
     public static ImageEntity getImageByResultSet(ResultSet rs, String cardParameterType) throws SQLException {
@@ -227,7 +227,7 @@ public class ImageRequest {
     }
 
     public static void setCardImages(CompleteCardInfo card, long cardID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setCardImages");
         ArrayList<CardImage> cardImages = new ArrayList<>();
         Connection connection;
         ResultSet rs = null;
@@ -274,7 +274,7 @@ public class ImageRequest {
     }
 
     public static void deleteCardImage(Long cardImageID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteCardImage");
         Connection connection;
         PreparedStatement ps = null;
         try {
@@ -291,7 +291,7 @@ public class ImageRequest {
     }
 
     public static void setMobileImages(HashMap<Long, MobileCardInfo> mobileCardInfoHashMap, String cardIDs) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setMobileImages");
         Connection connection;
         PreparedStatement ps = null;
         ResultSet rs = null;

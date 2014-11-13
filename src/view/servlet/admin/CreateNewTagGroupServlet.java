@@ -7,6 +7,7 @@ import model.constants.databaseenumeration.LanguageType;
 import model.constants.databaseenumeration.TagViewType;
 import model.database.requests.TagRequest;
 import model.database.requests.TextRequest;
+import model.database.requests.UserDataRequest;
 import model.database.worldonlinedb.TagGroupEntity;
 import model.database.worldonlinedb.TextEntity;
 import model.database.worldonlinedb.TextGroupEntity;
@@ -45,6 +46,7 @@ public class CreateNewTagGroupServlet extends ProtectedServlet {
             TextEntity textEntity = new TextEntity(LanguageType.Russian, name, textGroup);
             TextRequest.addText(textEntity);
             TagRequest.addTagGroup(tagGroup);
+            UserDataRequest.updateTags();
             ServletHelper.sendForward("/completetaggroupinfo?tagGroupID=" + tagGroup.getTagGroupID(), this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

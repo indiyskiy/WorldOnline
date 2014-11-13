@@ -21,10 +21,11 @@ public class CardRegistrationHandler implements MobileHandler {
     public CardRegistrationEntity handleRequest(CardRegistrationRequest cardRegistrationRequest) {
         UserEntity userEntity = UserRequests.getUserByID(cardRegistrationRequest.getUserID());
         if (userEntity.getUserContent() == null) {
-            loggerFactory.debug("handleRequest- user content is null");
+//            loggerFactory.debug("handleRequest- user content is null");
         }
         CardRegistrationEntity cardRegistrationEntity = new CardRegistrationEntity();
-        AddSomeCardTask addSomeCardTask = new AddSomeCardTask(cardRegistrationRequest.getCardEntities(), userEntity);
+//        AddSomeCardTask addSomeCardTask = new AddSomeCardTask(cardRegistrationRequest.getCardEntities(), userEntity);
+        AddSomeCardTask addSomeCardTask = new AddSomeCardTask(cardRegistrationRequest.getCardIDs(), userEntity);
         addSomeCardTask.execute();
         return cardRegistrationEntity;
     }

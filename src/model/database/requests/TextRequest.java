@@ -126,7 +126,7 @@ public class TextRequest {
 
     public static TextEntity findTextByText(String text) {
         TextEntity textEntity = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("findTextByText");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -152,7 +152,7 @@ public class TextRequest {
 
     public static CompleteTextGroupInfo getCompleteTextGroupInfo(long textGroupID) {
         CompleteTextGroupInfo completeTextGroupInfo = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCompleteTextGroupInfo");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -200,7 +200,7 @@ public class TextRequest {
     }
 
     public static boolean isTranslated(String text, LanguageType language) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("isTranslated");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -227,7 +227,7 @@ public class TextRequest {
     }
 
     public static void setCardTexts(CompleteCardInfo card, long cardID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setCardTexts");
         ArrayList<CardText> cardTexts = new ArrayList<>();
         Connection connection;
         ResultSet rs = null;
@@ -308,7 +308,7 @@ public class TextRequest {
     }
 
     public static void deleteTextCard(TextCardEntity textCardEntity) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteTextCard");
         Connection connection;
         PreparedStatement ps = null;
         try {
@@ -326,7 +326,7 @@ public class TextRequest {
 
 
     public static void deleteTextGroup(TextGroupEntity textGroupEntity) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteTextGroup");
         Connection connection;
         PreparedStatement ps = null;
         try {
@@ -347,7 +347,7 @@ public class TextRequest {
     }
 
     public static boolean isCardTextExist(long cardID, long cardParameterTypeID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("isCardTextExist");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -413,7 +413,7 @@ public class TextRequest {
         if (ids.isEmpty()) {
             return;
         }
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteText");
         PreparedStatement ps = null;
         try {
             Connection connection = dbConnection.getConnection();
@@ -456,7 +456,7 @@ public class TextRequest {
         //texts
 //            "Text.Text, " +
 //            "TextCard.CardParameterTypeID, " +
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setMobileTexts");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {

@@ -55,7 +55,7 @@ public class AddScvToPriceParser implements Runnable {
                         String nameRu = csvRecord.get(3);
                         Double cost = Double.parseDouble(csvRecord.get(6));
                         if (!DishRequest.isDishExist(nameRu, nameEn, cost, priceID)) {
-                            loggerFactory.debug("add dish " + nameRu);
+//                            loggerFactory.debug("add dish " + nameRu);
                             DishCategoryEntity dishCategoryEntity = DishRequest.findCategory(catEn, catRu, priceID);
                             if (dishCategoryEntity == null) {
                                 dishCategoryEntity = new DishCategoryEntity();
@@ -77,7 +77,7 @@ public class AddScvToPriceParser implements Runnable {
                             TextRequest.addText(ru);
                             TextRequest.addText(en);
                         } else {
-                            loggerFactory.debug("repeated dish  " + nameRu);
+//                            loggerFactory.debug("repeated dish  " + nameRu);
                         }
                     }
                 } catch (IOException e) {

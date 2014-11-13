@@ -22,7 +22,7 @@ public class InfoRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, InfoRequest.class);
 
     public static void setMobileInfos(HashMap<Long, MobileCardInfo> mobileCardInfoHashMap, String cardIDs, LanguageType languageType) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setMobileInfos");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -56,7 +56,7 @@ public class InfoRequest {
     }
 
     public static void setInformationParts(CompleteCardInfo card, long cardID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setInformationParts");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -94,7 +94,7 @@ public class InfoRequest {
     }
 
     public static int countInfoElements(Long cardID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("countInfoElements");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -143,7 +143,7 @@ public class InfoRequest {
     }
 
     public static void updateInfoImage(CardInformationElementEntity cardInformationElementEntity) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("updateInfoImage");
         Connection connection;
         PreparedStatement ps = null;
         try {

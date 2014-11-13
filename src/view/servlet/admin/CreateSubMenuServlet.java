@@ -4,6 +4,7 @@ import model.constants.AdminRule;
 import model.constants.Component;
 import model.constants.databaseenumeration.MenuType;
 import model.database.requests.MenuRequest;
+import model.database.requests.UserDataRequest;
 import model.database.worldonlinedb.MenuEntity;
 import model.database.worldonlinedb.TextGroupEntity;
 import model.logger.LoggerFactory;
@@ -39,6 +40,7 @@ public class CreateSubMenuServlet extends ProtectedServlet {
                 MenuEntity menu = new MenuEntity(parentMenu, textGroupEntity, null, menuType);
                 menu.setNumber(position + 1);
                 MenuRequest.addMenu(menu);
+                UserDataRequest.updateMenus();
                 ServletHelper.sendForward("/completemenuinfo?menuID=" + menu.getMenuID(), this, request, response);
             } else {
                 throw new ServletException("incorrect menu ID");

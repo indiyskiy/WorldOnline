@@ -26,7 +26,7 @@ public class AddSomePricesTask implements Runnable {
 
     @Override
     public void run() {
-        loggerFactory.debug("AddSomePricesTask run");
+//        loggerFactory.debug("AddSomePricesTask run");
         try {
             for (PriceEntity priceEntity : priceEntities) {
                 UserPriceEntity userPriceEntity = UserDataRequest.getUserPrice(user.getUserID(), priceEntity.getPriceID());
@@ -41,11 +41,11 @@ public class AddSomePricesTask implements Runnable {
                     userPriceEntity.setUserContent(user.getUserContent());
                     userPriceEntity.setLastUpdateTimeStamp(currentTime);
                     UserDataRequest.addUserPrice(userPriceEntity);
-                    loggerFactory.debug("AddSomePricesTask addUserPrice");
+//                    loggerFactory.debug("AddSomePricesTask addUserPrice");
                 } else {
                     userPriceEntity.setLastUpdateTimeStamp(currentTime);
                     UserDataRequest.updateUserPrice(userPriceEntity);
-                    loggerFactory.debug("AddSomePricesTask updateUserPrice");
+//                    loggerFactory.debug("AddSomePricesTask updateUserPrice");
                 }
             }
         } catch (Exception e) {

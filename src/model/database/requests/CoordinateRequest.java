@@ -34,7 +34,7 @@ public class CoordinateRequest {
     }
 
     public static CardCoordinateEntity getCardCoordinate(long cardID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCardCoordinate");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -89,7 +89,7 @@ public class CoordinateRequest {
     }
 
     public static boolean cardCoordinateExist(CardEntity cardEntity) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("cardCoordinateExist");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {

@@ -1,11 +1,8 @@
 package model.constants;
 
-import java.util.HashSet;
-
 public class ExceptionTexts {
 
     //MOBILE
-    public static final HashSet<String> mobileErrors = getMobileErrors();
     //registration
     public static final String registrationNoModelException = "phone.registration.model.empty";
     public static final String registrationNoDeviceIDException = "phone.registration.deviceID.empty";
@@ -67,63 +64,10 @@ public class ExceptionTexts {
     public static final String pricesRegistrationBodyEmptyException = "phone.pricesregistration.Body.Empty";
     public static final String pricesRegistrationPriceListEmptyException = "phone.pricesregistration.PricesList.Empty";
     public static final String cardByListPriceListEmptyException = "phone.cardByListPrice.PricesList.Empty";
-
-
-    private static HashSet<String> getMobileErrors() {
-        HashSet<String> mobileErrors = new HashSet<>();
-        mobileErrors.add(registrationNoModelException);
-        mobileErrors.add(registrationNoDeviceIDException);
-        mobileErrors.add(registrationDeviceIDNotUniqueException);
-        mobileErrors.add(registrationNoLanguageException);
-        mobileErrors.add(registrationIllegalLanguageException);
-        mobileErrors.add(allMenusUserIDEmptyException);
-        mobileErrors.add(allMenusUserIDIncorrectException);
-        mobileErrors.add(allMenusUserNotExistException);
-        mobileErrors.add(getMenuUserIDEmptyException);
-        mobileErrors.add(getMenuUserIDIncorrectException);
-        mobileErrors.add(getMenuUserNotExistException);
-        mobileErrors.add(getMenuMenuIDEmptyException);
-        mobileErrors.add(getMenuMenuIDIncorrectException);
-        mobileErrors.add(allCardsUserIDEmptyException);
-        mobileErrors.add(allCardsUserIDIncorrectException);
-        mobileErrors.add(allCardsUserNotExistException);
-        mobileErrors.add(allCardsLimitIncorrectException);
-        mobileErrors.add(allCardsLimitTooBigException);
-        mobileErrors.add(allCardsLimitEmptyException);
-        mobileErrors.add(allCardsOffsetIncorrectException);
-        mobileErrors.add(allCardsOffsetEmptyException);
-        mobileErrors.add(weatherUserIDEmptyException);
-        mobileErrors.add(weatherUserIDIncorrectException);
-        mobileErrors.add(weatherUserNotExistException);
-        mobileErrors.add(getViewImagesUserIDEmptyException);
-        mobileErrors.add(getViewImagesUserIDIncorrectException);
-        mobileErrors.add(getViewImagesUserNotExistException);
-        mobileErrors.add(restoreUserDeviceIDEmptyException);
-        mobileErrors.add(restoreUserDeviceNotFoundException);
-        mobileErrors.add(getAllCardParameterTypesUserIDEmptyException);
-        mobileErrors.add(getAllCardParameterTypesIncorrectException);
-        mobileErrors.add(getAllCardParameterTypesUserNotExistException);
-        mobileErrors.add(allTagsUserIDEmptyException);
-        mobileErrors.add(allTagsUserIDIncorrectException);
-        mobileErrors.add(allTagsUserNotExistException);
-        mobileErrors.add(getAllDishCategoriesUserIDEmptyException);
-        mobileErrors.add(getAllDishCategoriesIncorrectException);
-        mobileErrors.add(getAllDishCategoriesUserNotExistException);
-        mobileErrors.add(getAllDishTagsUserIDEmptyException);
-        mobileErrors.add(getAllDishTagsIncorrectException);
-        mobileErrors.add(getAllDishTagsUserNotExistException);
-        mobileErrors.add(allPricesLimitTooBigException);
-        mobileErrors.add(allPricesLimitIncorrectException);
-        mobileErrors.add(allPricesLimitEmptyException);
-        mobileErrors.add(allPricesOffsetIncorrectException);
-        mobileErrors.add(exchangeRatesUserIDEmptyException);
-        mobileErrors.add(exchangeRatesUserIDIncorrectException);
-        mobileErrors.add(cardByListCardListEmptyException);
-        mobileErrors.add(cardByListUserIDIncorrectException);
-        mobileErrors.add(cardByListBodyEmptyException);
-        mobileErrors.add(cardRegistrationUserIDIncorrectException);
-        mobileErrors.add(cardRegistrationBodyEmptyException);
-        mobileErrors.add(cardRegistrationCardListEmptyException);
-        return mobileErrors;
-    }
+    public static final String userStatsUserIDEmptyException = "phone.userStats.UserID.Empty";
+    public static final String userStatsIncorrectException = "phone.userStats.UserID.Incorrect";
+    public static final String userStatsUserNotExistException = "phone.userStats.User.NotExist";
+    public static final String userGlobalUpdatedUserIDEmptyException = "phone.userGlobalUpdated.UserID.Empty";
+    public static final String userGlobalUpdatedIncorrectException = "phone.userGlobalUpdated.UserID.Incorrect";
+    public static final String userGlobalUpdatedUserNotExistException = "phone.userGlobalUpdated.User.NotExist";
 }

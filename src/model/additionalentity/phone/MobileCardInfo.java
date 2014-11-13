@@ -76,7 +76,7 @@ public class MobileCardInfo {
         jsonObject.addProperty("cardID", cardID);
         jsonObject.addProperty("cardType", cardType.getValue());
         jsonObject.addProperty("order", order);
-        if (mobileUrgencyTime != null) {
+        if (mobileUrgencyTime != null && mobileUrgencyTime.getStart() != null && mobileUrgencyTime.getEnd() != null) {
             jsonObject.add("urgencyTime", mobileUrgencyTime.getJson());
         }
         JsonArray textArray = new JsonArray();

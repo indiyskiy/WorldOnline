@@ -4,6 +4,7 @@ import helper.ImageHelper;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.database.requests.MenuRequest;
+import model.database.requests.UserDataRequest;
 import model.database.worldonlinedb.MenuEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
@@ -25,6 +26,7 @@ public class EditMenuIconServlet extends ProtectedServlet {
             MenuEntity menuEntity = imageMenuUploadParser.getMenuEntity();
             File file = (File) imageMenuUploadParser.getFileMap().values().toArray()[0];
             ImageHelper.saveMenuIcon(file, menuEntity);
+            UserDataRequest.updateMenus();
             long menuID = imageMenuUploadParser.getMenuID();
             ServletHelper.sendForward("/completemenuinfo?menuID=" + menuID, this, request, response);
         } catch (Exception e) {

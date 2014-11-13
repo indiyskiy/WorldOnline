@@ -1,7 +1,6 @@
 package model.database.requests;
 
 import controller.phone.entity.AllMenusRequest;
-import helper.TimeManager;
 import model.additionalentity.MenuInfo;
 import model.additionalentity.SimpleMenu;
 import model.additionalentity.admin.CardInfo;
@@ -67,7 +66,7 @@ public class MenuRequest {
     }
 
     private static boolean cardMenuLinkExist(Long cardID, Long menuID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("cardMenuLinkExist");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -122,7 +121,7 @@ public class MenuRequest {
     }
 
     public static void setParent(MenuEntity menu) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setParent");
         PreparedStatement ps = null;
         try {
             Connection connection = dbConnection.getConnection();
@@ -142,7 +141,7 @@ public class MenuRequest {
 
     public static MenuInfo getMenuInfo(Long menuID, LanguageType language) {
         MenuInfo menuInfo = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getMenuInfo");
         PreparedStatement ps = null;
         ResultSet rs = null;
 
@@ -247,7 +246,7 @@ public class MenuRequest {
 
     public static MenuInfo getRootMenuInfo(LanguageType language) {
         MenuInfo menuInfo = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getRootMenuInfo");
         PreparedStatement ps = null;
         ResultSet rs = null;
 
@@ -281,9 +280,10 @@ public class MenuRequest {
     }
 
     public static CompleteMenuInfo getCompleteMenuInfo(Long menuID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCompleteMenuInfo");
         PreparedStatement ps = null;
         ResultSet rs = null;
+        CompleteMenuInfo completeMenuInfo = null;
         try {
             Connection connection = dbConnection.getConnection();
             @Language(value = "MySQL") String sql = "SELECT " +
@@ -310,7 +310,7 @@ public class MenuRequest {
             ps.setLong(1, menuID);
             rs = ps.executeQuery();
             if (rs.first()) {
-                CompleteMenuInfo completeMenuInfo = new CompleteMenuInfo();
+                completeMenuInfo = new CompleteMenuInfo();
                 completeMenuInfo.setName(rs.getString("Text.Text"));
                 completeMenuInfo.setIconID(rs.getLong("Menu.IconImageID"));
                 completeMenuInfo.setMenuID(rs.getLong("Menu.MenuID"));
@@ -318,7 +318,7 @@ public class MenuRequest {
                 completeMenuInfo.setParentID(rs.getLong("ParentMenu.MenuID"));
                 completeMenuInfo.setParentName(rs.getString("ParentText.Text"));
                 completeMenuInfo.setTextGroupID(rs.getLong("TextGroup.TextGroupID"));
-                return completeMenuInfo;
+
             }
 
         } catch (Exception e) {
@@ -326,12 +326,12 @@ public class MenuRequest {
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return null;
+        return completeMenuInfo;
     }
 
 
     public static MenuEntity getMenuByName(String name) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getMenuByName");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -384,7 +384,7 @@ public class MenuRequest {
 
     public static LinkedList<Long> getMenuList() {
         LinkedList<Long> menuIDList = new LinkedList<>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getMenuList");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -407,7 +407,7 @@ public class MenuRequest {
 
     public static MenuCompleteInformation getMenuCompleteInformation(controller.phone.entity.MenuRequest menuRequest) {
         MenuCompleteInformation menuCompleteInformation = new MenuCompleteInformation();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getMenuCompleteInformation");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -457,7 +457,7 @@ public class MenuRequest {
 
     public static ArrayList<MenuCompleteInformation> getAllMenusCompleteInformation(AllMenusRequest allMenusRequest) {
         ArrayList<MenuCompleteInformation> menusCompleteInformation = new ArrayList<MenuCompleteInformation>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllMenusCompleteInformation");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -564,7 +564,7 @@ public class MenuRequest {
     }
 
     public static void setCardMenus(CompleteCardInfo card, long cardID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setCardMenus");
         ArrayList<CardMenu> cardMenus = new ArrayList<>();
         Connection connection;
         ResultSet rs = null;
@@ -597,7 +597,7 @@ public class MenuRequest {
     }
 
     public static ArrayList<SimpleMenu> getLastLevelMenus() {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getLastLevelMenus");
         ArrayList<SimpleMenu> menus = new ArrayList<>();
         Connection connection;
         ResultSet rs = null;
@@ -632,7 +632,7 @@ public class MenuRequest {
     }
 
     public static void deleteCardMenu(Long cardMenuID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteCardMenu");
         Connection connection;
         PreparedStatement ps = null;
         try {
@@ -649,7 +649,7 @@ public class MenuRequest {
     }
 
     public static void deleteMenu(Long menuID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteMenu");
         Connection connection;
         PreparedStatement ps = null;
         try {
@@ -666,7 +666,7 @@ public class MenuRequest {
     }
 
     public static ArrayList<CardInfo> getAllSimpleCardsOfMenu(Long menuID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllSimpleCardsOfMenu");
         Connection connection;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -698,7 +698,7 @@ public class MenuRequest {
     }
 
     public static MenuEntity getNearbyMenu(Long menuID, Long rootMenuID, RepositionDirection repositionDirection) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getNearbyMenu");
         Connection connection;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -764,7 +764,7 @@ public class MenuRequest {
     }
 
     public static void updateMenuIcon(MenuEntity menuEntity) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("updateMenuIcon");
         PreparedStatement ps = null;
         try {
             Connection connection = dbConnection.getConnection();
@@ -783,7 +783,7 @@ public class MenuRequest {
     }
 
     public static void deleteCardMenuByMenuID(long menuID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteCardMenuByMenuID");
         Connection connection;
         PreparedStatement ps = null;
         try {
@@ -803,7 +803,7 @@ public class MenuRequest {
 
 
     public static int countSubmenus(long menuID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("countSubmenus");
         Connection connection;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -827,7 +827,7 @@ public class MenuRequest {
     }
 
     public static void setMobileMenus(HashMap<Long, MobileCardInfo> mobileCardInfoHashMap, String cardIDs) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setMobileMenus");
         Connection connection;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -850,7 +850,7 @@ public class MenuRequest {
     }
 
     public static Integer getMaxPosition(Long menuID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getMaxPosition");
         Connection connection;
         PreparedStatement ps = null;
         ResultSet rs = null;

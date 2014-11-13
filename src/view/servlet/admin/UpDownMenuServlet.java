@@ -4,6 +4,7 @@ import model.constants.AdminRule;
 import model.constants.Component;
 import model.constants.adminenumerations.RepositionDirection;
 import model.database.requests.MenuRequest;
+import model.database.requests.UserDataRequest;
 import model.database.worldonlinedb.MenuEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
@@ -35,6 +36,7 @@ public class UpDownMenuServlet extends ProtectedServlet {
                 menuEntity.setNumber(number);
                 MenuRequest.updateMenu(menuEntity);
                 MenuRequest.updateMenu(nearbyMenu);
+                UserDataRequest.updateMenus();
             }
             ServletHelper.sendForward("/allmenus?menuID=" + rootMenuID, this, request, response);
         } catch (Exception e) {

@@ -61,7 +61,7 @@ public class TimeRequest {
     }
 
     public static boolean containsUrgencyTimeEntity(CardEntity cardEntity) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("containsUrgencyTimeEntity");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {

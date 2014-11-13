@@ -78,7 +78,7 @@ public class LinkRequest {
     }
 
     public static void setSourceCardLinks(CompleteCardInfo card, long cardID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setSourceCardLinks");
         ArrayList<CardLink> sourceCardLinks = new ArrayList<>();
         Connection connection;
         ResultSet rs = null;
@@ -110,7 +110,7 @@ public class LinkRequest {
     }
 
     public static void setTargetCardLinks(CompleteCardInfo card, long cardID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setTargetCardLinks");
         ArrayList<CardLink> targetCardLinks = new ArrayList<>();
         Connection connection;
         ResultSet rs = null;
@@ -142,7 +142,7 @@ public class LinkRequest {
     }
 
     public static boolean isLinkExist(Long sourceCardID, Long targetCardID, CardToCardLinkType cardToCardLinkType) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("isLinkExist");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -170,7 +170,7 @@ public class LinkRequest {
     }
 
     public static void deleteCardToCardLink(Long cardToCardLinkID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteCardToCardLink");
         Connection connection;
         PreparedStatement ps = null;
         try {
@@ -189,7 +189,7 @@ public class LinkRequest {
     }
 
     public static void setMobileLinks(HashMap<Long, MobileCardInfo> mobileCardInfoHashMap, String cardIDs) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setMobileLinks");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;

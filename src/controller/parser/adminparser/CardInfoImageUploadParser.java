@@ -23,7 +23,7 @@ public class CardInfoImageUploadParser {
 
 
     public void parse(HttpServletRequest request) throws FileUploadException, ServletException {
-        loggerFactory.debug("CardInfoImageUploadParser start");
+//        loggerFactory.debug("CardInfoImageUploadParser start");
         ParsedRequest parsedRequest = ServletHelper.getParametersMap(request);
         HashMap<String, String> textMap = parsedRequest.getTextMap();
         fileMap = parsedRequest.getFileMap();
@@ -43,7 +43,7 @@ public class CardInfoImageUploadParser {
             loggerFactory.warning("file null");
             throw new ServletException("image not found");
         }
-        loggerFactory.debug("CardInfoImageUploadParser end");
+//        loggerFactory.debug("CardInfoImageUploadParser end");
     }
 
     public CardInformationElementEntity getCardInformationElementEntity() {

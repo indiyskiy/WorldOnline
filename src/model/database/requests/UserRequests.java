@@ -1,5 +1,6 @@
 package model.database.requests;
 
+import helper.TimeManager;
 import model.constants.Component;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
@@ -17,7 +18,6 @@ import org.intellij.lang.annotations.Language;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +27,6 @@ public class UserRequests {
 
     public static void editUser(UserEntity userEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.update(userEntity);
@@ -61,15 +60,18 @@ public class UserRequests {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
         try {
             UserEntity userEntity = (UserEntity) session.get(UserEntity.class, userID);
-            if (userEntity.getUserContent() == null) {
-                loggerFactory.error("user entity " + userID + " personal data is null");
-            }
+//            if (userEntity.getUserContent() == null) {
+//                loggerFactory.error("user entity " + userID + " personal data is null");
+//            }
             return userEntity;
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
+        return null;
     }
 
     public static boolean addUser(UserEntity user) {
@@ -122,7 +124,7 @@ public class UserRequests {
     }
 
     public static boolean isDeviceIDUnique(String deviceID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("isDeviceIDUnique");
         PreparedStatement ps = null;
         ResultSet rs = null;
         boolean b = true;
@@ -166,7 +168,7 @@ public class UserRequests {
 
 
     public static boolean isUserExist(Long userID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("isUserExist");
         PreparedStatement ps = null;
         ResultSet rs = null;
         boolean b = false;
@@ -189,7 +191,7 @@ public class UserRequests {
     }
 
     public static RestoreUserResponse getUserByDeviceID(String deviceID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getUserByDeviceID");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -214,7 +216,7 @@ public class UserRequests {
     }
 
     public static void deleteOldUserInfo(long userID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteOldUserInfo");
         PreparedStatement ps = null;
         try {
             Connection connection = dbConnection.getConnection();
@@ -253,5 +255,24 @@ public class UserRequests {
         } finally {
             dbConnection.closeConnections(ps, null);
         }
+    }
+
+    public static void updateUserContent(UserContentEntity userContent) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.update(userContent);
+            session.getTransaction().commit();
+            session.flush();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static void userGlobalUpdated(UserEntity userEntity) {
+        userEntity.getUserContent().setLastSynchronizeTimestamp(TimeManager.currentTime());
+        updateUserContent(userEntity.getUserContent());
     }
 }

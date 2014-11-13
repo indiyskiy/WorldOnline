@@ -1,12 +1,10 @@
 package view.servlet.admin;
 
-import controller.parser.adminparser.TagEditParser;
 import model.additionalentity.admin.CompleteTagInfo;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.constants.databaseenumeration.TagType;
 import model.database.requests.TagRequest;
-import model.database.worldonlinedb.TagEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
@@ -47,6 +45,7 @@ public class TagEditServlet extends ProtectedServlet {
 //            TagEntity tagEntity = parser.parse(request);
 //            if (parser.hasNoErrors()) {
 //                TagRequest.editTag(tagEntity);
+//        UserDataRequest.updateTags();
 //            } else {
 //                throw new ServletException(parser.getErrorsForHTML());
 //            }

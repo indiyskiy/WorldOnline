@@ -20,10 +20,10 @@ public class PricesRegistrationHandler implements MobileHandler {
     public PricesRegistrationEntity handleRequest(PricesRegistrationRequest priceRegistrationRequest) {
         UserEntity userEntity = UserRequests.getUserByID(priceRegistrationRequest.getUserID());
         if (userEntity.getUserContent() == null) {
-            loggerFactory.debug("handleRequest- user content is null");
+//            loggerFactory.debug("handleRequest- user content is null");
         }
         PricesRegistrationEntity priceRegistrationEntity = new PricesRegistrationEntity();
-        loggerFactory.debug("add addSomePriceTask " + priceRegistrationRequest.getPriceEntities().size());
+//        loggerFactory.debug("add addSomePriceTask " + priceRegistrationRequest.getPriceEntities().size());
         AddSomePricesTask addSomePriceTask = new AddSomePricesTask(priceRegistrationRequest.getPriceEntities(), userEntity);
         addSomePriceTask.execute();
         return priceRegistrationEntity;

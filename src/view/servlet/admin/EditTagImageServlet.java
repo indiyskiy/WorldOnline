@@ -5,6 +5,7 @@ import helper.ImageHelper;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.database.requests.TagRequest;
+import model.database.requests.UserDataRequest;
 import model.database.worldonlinedb.TagEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
@@ -26,6 +27,7 @@ public class EditTagImageServlet extends ProtectedServlet {
             TagEntity tagEntity = imageTagUploadParser.getTagEntity();
             File file = (File) imageTagUploadParser.getFileMap().values().toArray()[0];
             ImageHelper.saveTagIcon(file, tagEntity);
+            UserDataRequest.updateTags();
             long tagID = imageTagUploadParser.getTagID();
             ServletHelper.sendForward("/tagedit?tagID=" + tagID, this, request, response);
         } catch (Exception e) {

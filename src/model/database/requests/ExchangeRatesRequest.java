@@ -31,7 +31,7 @@ public class ExchangeRatesRequest {
 
     public static ExchangeRatesEntity getActualExchangeRates() {
         Timestamp timestamp = TimeManager.currentTime();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getActualExchangeRates");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {

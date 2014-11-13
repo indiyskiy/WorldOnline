@@ -26,7 +26,7 @@ public class AdminUserRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, AdminUserRequest.class);
 
     public static ProtectAdminLevel getProtectedLevel(String key) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getProtectedLevel");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -51,7 +51,7 @@ public class AdminUserRequest {
     }
 
     public static String getKey(LoginRequest loginRequest) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getKey");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -129,7 +129,7 @@ public class AdminUserRequest {
     }
 
     private static int countUsers(ProtectAdminLevel protectAdminLevel) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("countUsers");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -176,7 +176,7 @@ public class AdminUserRequest {
     }
 
     public static AdminUserEntity getUserByLogin(String login) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getUserByLogin");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;

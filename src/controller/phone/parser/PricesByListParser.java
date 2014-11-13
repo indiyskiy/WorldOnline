@@ -26,7 +26,7 @@ public class PricesByListParser extends MobileParser {
             if (body == null || body.isEmpty()) {
                 throw new ParseRequestException(ExceptionTexts.cardByListBodyEmptyException);
             }
-            String ids = body.replaceAll("\\[", "").replaceAll("\\]", "");
+            String ids = body.replaceAll("\\{", "").replaceAll("\\}", "").replaceAll("\\\"", "").replaceAll(":", "").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").replaceAll("pricesIDs", "");
             for (String idString : ids.split(",")) {
                 cardIDList.add(Long.parseLong(idString));
             }

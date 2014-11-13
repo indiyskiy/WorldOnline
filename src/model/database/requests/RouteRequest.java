@@ -104,7 +104,7 @@ public class RouteRequest {
 
     public static HashMap<Long, CompleteCardRouteInfo> getCompleteCardRoutes() {
         HashMap<Long, CompleteCardRouteInfo> cardRoutes = new HashMap<Long, CompleteCardRouteInfo>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCompleteCardRoutes");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -139,7 +139,7 @@ public class RouteRequest {
 
     public static HashMap<Long, CompleteCardRouteInfo> getCompleteCardRoutesByCard(long cardID) {
         HashMap<Long, CompleteCardRouteInfo> cardRoutes = new HashMap<Long, CompleteCardRouteInfo>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCompleteCardRoutesByCard");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -176,7 +176,7 @@ public class RouteRequest {
 
     public static CompleteCardRouteInfo getCompleteCardRouteByCardRouteID(long cardRouteID) throws SQLException {
         CompleteCardRouteInfo cardRoute = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCompleteCardRouteByCardRouteID");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -241,7 +241,7 @@ public class RouteRequest {
     }
 
     public static void setMobileRoute(HashMap<Long, MobileCardInfo> mobileCardInfoHashMap, String cardIDs) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setMobileRoute");
         PreparedStatement ps = null;
         ResultSet rs = null;
         HashMap<Long, MobileCardRoute> mobileCardRouteHashMap = new HashMap<>();
@@ -291,7 +291,7 @@ public class RouteRequest {
     }
 
     private static void addCoordinates(String idString, HashMap<Long, MobileCardRoute> mobileCardRouteHashMap) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("addCoordinates");
         PreparedStatement ps = null;
         ResultSet rs = null;
         if (idString == null || idString.isEmpty()) {

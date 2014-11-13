@@ -84,7 +84,7 @@ public class TagRequest {
     public static TagEntity getTag(String tagName) throws SQLException {
         ResultSet rs = null;
         PreparedStatement ps = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getTag");
         try {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL")
@@ -109,7 +109,7 @@ public class TagRequest {
         ArrayList<TagEntity> tags = new ArrayList<TagEntity>();
         ResultSet rs = null;
         PreparedStatement ps = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getTags");
         try {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL")
@@ -137,7 +137,7 @@ public class TagRequest {
         ArrayList<CompleteTagInfo> tags = new ArrayList<>();
         ResultSet rs = null;
         PreparedStatement ps = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getTags");
         try {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL")
@@ -230,7 +230,7 @@ public class TagRequest {
 
     public static HashMap<Long, CompleteCardTagInfo> getCompleteCardTags() {
         HashMap<Long, CompleteCardTagInfo> cardTags = new HashMap<Long, CompleteCardTagInfo>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCompleteCardTags");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -261,7 +261,7 @@ public class TagRequest {
 
 
     public static CompleteTagInfo getCompleteTag(long tagID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCompleteTag");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -296,7 +296,7 @@ public class TagRequest {
 
     public static ArrayList<SimpleTagGroup> getAllSimpleTagGroups(LanguageType languageType) {
         ArrayList<SimpleTagGroup> simpleTagGroups = new ArrayList<>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllSimpleTagGroups");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -330,7 +330,7 @@ public class TagRequest {
 
     public static ArrayList<MobileTagGroup> getMobileTagGroups(Long userID) throws SQLException {
         ArrayList<MobileTagGroup> mobileTagGroups = new ArrayList<>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getMobileTagGroups");
         PreparedStatement ps = null;
         ResultSet rs = null;
         HashMap<Long, MobileTagGroup> mobileTagGroupHashMap = new HashMap<>();
@@ -432,7 +432,7 @@ public class TagRequest {
     }
 
     public static void setCardTags(CompleteCardInfo card, long cardID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setCardTags");
         ArrayList<CardTag> cardTags = new ArrayList<>();
         Connection connection;
         ResultSet rs = null;
@@ -479,7 +479,7 @@ public class TagRequest {
     }
 
     public static Collection<TagGroup> getAllTagGroups(long cardID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllTagGroups");
         HashMap<Long, TagGroup> tagGroups = new HashMap<>();
         Connection connection;
         ResultSet rs = null;
@@ -547,7 +547,7 @@ public class TagRequest {
     }
 
     public static HashSet<Long> getCardTagIDs(long cardID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCardTagIDs");
         HashSet<Long> tagIDs = new HashSet<>();
         Connection connection;
         ResultSet rs = null;
@@ -577,7 +577,7 @@ public class TagRequest {
         if (idsToDelete.isEmpty()) {
             return;
         }
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteTagsFromCard");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -630,7 +630,7 @@ public class TagRequest {
     }
 
     public static void deleteCardTag(CardTagEntity cardTagEntity) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteCardTag");
         Connection connection;
         PreparedStatement ps = null;
         try {
@@ -658,7 +658,7 @@ public class TagRequest {
     }
 
     private static ArrayList<SimpleTag> getTagGroupTags(Long tagGroupID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getTagGroupTags");
         ArrayList<SimpleTag> simpleTags = new ArrayList<>();
         Connection connection;
         ResultSet rs = null;
@@ -690,7 +690,7 @@ public class TagRequest {
     }
 
     private static CompleteTagGroupInfo getSimplePartOfCompleteTagGroupInfo(Long tagGroupID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getSimplePartOfCompleteTagGroupInfo");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -724,7 +724,7 @@ public class TagRequest {
     }
 
     public static void setTagGroupCard(TagGroupEntity tagGroup, CardEntity card) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setTagGroupCard");
         PreparedStatement ps = null;
         try {
             Connection connection = dbConnection.getConnection();
@@ -743,7 +743,7 @@ public class TagRequest {
     }
 
     public static void deleteTagGroupCard(TagGroupEntity tagGroup) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteTagGroupCard");
         PreparedStatement ps = null;
         try {
             Connection connection = dbConnection.getConnection();
@@ -772,7 +772,7 @@ public class TagRequest {
     }
 
     public static Integer getMaxApplicationBlockPosition(ApplicationBlock applicationBlock) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getMaxApplicationBlockPosition");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -797,7 +797,7 @@ public class TagRequest {
     }
 
     public static void updateTagIcon(TagEntity tagEntity) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("updateTagIcon");
         PreparedStatement ps = null;
         try {
             Connection connection = dbConnection.getConnection();
@@ -816,7 +816,7 @@ public class TagRequest {
     }
 
     public static void setMobileTags(HashMap<Long, MobileCardInfo> mobileCardInfoHashMap, String cardIDs) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("setMobileTags");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {

@@ -4,6 +4,7 @@ import model.constants.AdminRule;
 import model.constants.Component;
 import model.database.requests.CardRequest;
 import model.database.requests.MenuRequest;
+import model.database.requests.UserDataRequest;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
@@ -28,6 +29,7 @@ public class DeleteMenuServlet extends ProtectedServlet {
                 CardRequest.updateCardsByMenu(menuID);
                 MenuRequest.deleteCardMenuByMenuID(menuID);
                 MenuRequest.deleteMenu(menuID);
+                UserDataRequest.updateMenus();
                 ServletHelper.sendRedirect("/allmenus", request, response);
             } else {
                 throw new ServletException("there are " + size + " submenus. Please delete them before delete their parent");

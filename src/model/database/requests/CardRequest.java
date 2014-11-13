@@ -174,7 +174,7 @@ public class CardRequest {
 
     public static CompleteCardInfo getCompleteCardInfo(long cardID) throws SQLException {
         CompleteCardInfo card = null;
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCompleteCardInfo");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -267,7 +267,7 @@ public class CardRequest {
 
     public static ArrayList<CardEntity> getAllCards(AllCardParser parser) {
         ArrayList<CardEntity> cards = new ArrayList<CardEntity>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllCards");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -330,7 +330,7 @@ public class CardRequest {
     }
 
     public static Long countCard(AllCardParser parser) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("countCard");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -373,7 +373,7 @@ public class CardRequest {
     }
 
     public static CardEntity getCardByName(String name) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCardByName");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -401,7 +401,7 @@ public class CardRequest {
     }
 
     public static boolean isCardExist(String name) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("isCardExist");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -425,7 +425,7 @@ public class CardRequest {
 
     public static HashSet<String> getAllCardNames(Long cardID) {
         HashSet<String> res = new HashSet<String>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllCardNames");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -456,7 +456,7 @@ public class CardRequest {
     }
 
     private static LinkedList<MobileCardInfo> getMobileCardInfos(Long userID, String cardIDs) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getMobileCardInfos");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -512,7 +512,7 @@ public class CardRequest {
     }
 
     private static String getLimitedCardIDs(Integer limit, Integer offset) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getLimitedCardIDs");
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -564,7 +564,7 @@ public class CardRequest {
     }
 
     public static Long countCard(CardType cardType) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("countCard");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -586,7 +586,7 @@ public class CardRequest {
     }
 
     public static ArrayList<SimpleCard> getAllCardsByTagGroup(Long tagGroupID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllCardsByTagGroup");
         PreparedStatement ps = null;
         ResultSet rs = null;
         ArrayList<SimpleCard> simpleCards = new ArrayList<>();
@@ -616,7 +616,7 @@ public class CardRequest {
     }
 
     public static SimpleCard getTagGroupCard(Long tagGroupID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getTagGroupCard");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -643,7 +643,7 @@ public class CardRequest {
     }
 
     public static ArrayList<SimpleCard> getAllCardsByTag(Long tagID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllCardsByTag");
         PreparedStatement ps = null;
         ResultSet rs = null;
         ArrayList<SimpleCard> simpleCards = new ArrayList<>();
@@ -672,7 +672,7 @@ public class CardRequest {
     }
 
     public static ArrayList<SimpleCard> getAllPriceCards(Long priceID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllPriceCards");
         PreparedStatement ps = null;
         ResultSet rs = null;
         ArrayList<SimpleCard> simpleCards = new ArrayList<>();
@@ -701,7 +701,7 @@ public class CardRequest {
     }
 
     public static void updateCardsByMenu(long menuID) {
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("updateCardsByMenu");
         Connection connection;
         PreparedStatement ps = null;
         try {

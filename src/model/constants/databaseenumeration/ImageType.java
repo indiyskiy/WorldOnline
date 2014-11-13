@@ -6,7 +6,8 @@ public enum ImageType {
     Tag(3, "Тэг"),
     MenuPhoto(4, "Фото иконки в меню"),
     MenuIcon(5, "Иконка меню"),
-    CardInformationElementImage(6, "Кортинка элемента информации карты");
+    CardInformationElementImage(6, "Кортинка элемента информации карты"),
+    Banner(7, "Рекламный баннер");
 
     private final int value;
     private final String text;
@@ -34,7 +35,7 @@ public enum ImageType {
 
 
     public static ImageType[] cardTypes() {
-        return new ImageType[]{Photo, ViewImage, MenuPhoto};
+        return new ImageType[]{Photo, ViewImage, MenuPhoto, Banner};
     }
 }
 

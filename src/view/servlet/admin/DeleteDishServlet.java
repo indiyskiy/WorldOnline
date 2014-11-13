@@ -23,7 +23,7 @@ public class DeleteDishServlet extends ProtectedServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            loggerFactory.debug("DeleteDishServlet doGet");
+//            loggerFactory.debug("DeleteDishServlet doGet");
             Long dishID;
             try {
                 dishID = Long.parseLong(request.getParameter("dishID"));

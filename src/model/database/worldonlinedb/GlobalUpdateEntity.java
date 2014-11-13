@@ -9,7 +9,7 @@ public class GlobalUpdateEntity {
     @javax.persistence.Column(name = "GlobalUpdateID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long cardID;
+    private Long globalUpdateID;
 
     @javax.persistence.Column(name = "TagsUpdateTime")
     @Basic
@@ -31,13 +31,12 @@ public class GlobalUpdateEntity {
     @Basic
     private Timestamp dishCategoriesUpdateTime;
 
-    public Long getCardID() {
-
-        return cardID;
+    public Long getGlobalUpdateID() {
+        return globalUpdateID;
     }
 
-    public void setCardID(Long cardID) {
-        this.cardID = cardID;
+    public void setGlobalUpdateID(Long globalUpdateID) {
+        this.globalUpdateID = globalUpdateID;
     }
 
     public Timestamp getTagsUpdateTime() {

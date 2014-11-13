@@ -56,7 +56,7 @@
             <dt onclick="clickSpoiler(this);">${block.rusText}</dt>
             <dd>
                 <c:forEach items="${parameterTypes}" var="parameterType">
-                    <c:if test="${parameterType.block==block.value}">
+                    <c:if test="${parameterType.block.value==block.value}">
                         <a href="addcardparameter?cardParameterType=${parameterType.parameterTypeID}&cardID=${cardID}">${parameterType.name}</a>
                         <br>
                     </c:if>

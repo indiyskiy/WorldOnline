@@ -20,7 +20,7 @@ public class CardRegistrationParser extends MobileParser {
     public MobileRequest parse(HttpServletRequest request) throws ParseRequestException, IOException {
         try {
             CardRegistrationRequest cardRegistrationRequest = new CardRegistrationRequest();
-            ArrayList<CardEntity> cardEntities = new ArrayList<>();
+//            ArrayList<CardEntity> cardEntities = new ArrayList<>();
             ArrayList<Long> cardIDs = new ArrayList<>();
             try {
                 cardRegistrationRequest.setUserID(Long.parseLong(request.getParameter("userID")));
@@ -31,20 +31,21 @@ public class CardRegistrationParser extends MobileParser {
             if (body == null || body.isEmpty()) {
                 throw new ParseRequestException(ExceptionTexts.cardRegistrationBodyEmptyException);
             }
-            String ids = body.replaceAll("\\[", "").replaceAll("\\]", "");
+            String ids = body.replaceAll("\\{", "").replaceAll("\\}", "").replaceAll("\\\"", "").replaceAll(":", "").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").replaceAll("cardIDs", "");
             String[] cardIds = ids.split(",");
             for (String cardIDString : cardIds) {
                 Long cardID = Long.parseLong(cardIDString);
                 cardIDs.add(cardID);
-                CardEntity cardEntity = CardRequest.getCardByID(cardID);
-                if (cardEntity != null) {
-                    cardEntities.add(cardEntity);
-                }
+//                CardEntity cardEntity = CardRequest.getCardByID(cardID);
+//                if (cardEntity != null) {
+//                    cardEntities.add(cardEntity);
+//                }
             }
-            if (cardIDs.size() != cardEntities.size()) {
-                throw new ParseRequestException(ExceptionTexts.cardRegistrationCardListEmptyException);
-            }
-            cardRegistrationRequest.setCardEntities(cardEntities);
+//            if (cardIDs.size() != cardEntities.size()) {
+//                throw new ParseRequestException(ExceptionTexts.cardRegistrationCardListEmptyException);
+//            }
+//            cardRegistrationRequest.setCardEntities(cardEntities);
+            cardRegistrationRequest.setCardIDs(cardIDs);
             return cardRegistrationRequest;
         } catch (ParseRequestException e) {
             throw e;

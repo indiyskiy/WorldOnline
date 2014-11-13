@@ -34,7 +34,7 @@ public class WeatherRequest {
 
     public static WeatherEntity getCurrentWeather() {
         Timestamp timestamp = TimeManager.currentTime();
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DatabaseConnection dbConnection = new DatabaseConnection("getCurrentWeather");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {

@@ -33,8 +33,8 @@ public class EditUrgencyTimeServlet extends ProtectedServlet {
             String end = request.getParameter("end");
             start = start.substring(0, 16);
             end = end.substring(0, 16);
-            loggerFactory.debug(start);
-            loggerFactory.debug(end);
+//            loggerFactory.debug(start);
+//            loggerFactory.debug(end);
             Timestamp startTime = TimeManager.getTimestamp(start);
             Timestamp endTime = TimeManager.getTimestamp(end);
             UrgencyTimeEntity urgencyTimeEntity = TimeRequest.getUrgencyTimeEntity(Long.parseLong(request.getParameter("urgencyTimeID")));

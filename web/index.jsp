@@ -35,6 +35,8 @@
         <a href="alltags">Все тэги</a>
         <br/>
         <a href="allmenus">Все категории</a>
+        <br/>
+        <a href="allcardparametertypes">Все типы параметров</a>
         <%--<br/>--%>
         <%--<a href="logout">Вход</a>--%>
         <%--<br/>--%>

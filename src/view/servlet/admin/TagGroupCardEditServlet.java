@@ -5,6 +5,7 @@ import model.constants.AdminRule;
 import model.constants.Component;
 import model.database.requests.CardRequest;
 import model.database.requests.TagRequest;
+import model.database.requests.UserDataRequest;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
@@ -31,6 +32,7 @@ public class TagGroupCardEditServlet extends ProtectedServlet {
                     TagRequest.deleteTagGroupCard(tagGroupCardEditParser.getTagGroup());
                     CardRequest.updateCard(tagGroupCardEditParser.getCard());
                 }
+                UserDataRequest.updateTags();
                 ServletHelper.sendForward("/completetaggroupinfo?tagGroupID=" + tagGroupCardEditParser.getTagGroup().getTagGroupID(), this, request, response);
             }
         } catch (Exception e) {

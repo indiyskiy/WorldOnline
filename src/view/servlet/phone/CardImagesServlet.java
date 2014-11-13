@@ -1,23 +1,23 @@
 package view.servlet.phone;
 
+import controller.phone.parser.CardImagesParser;
 import controller.phone.parser.MobileParser;
-import controller.phone.parser.ViewImagesParser;
 import model.constants.Component;
 import model.logger.LoggerFactory;
+import model.phone.requesthandler.CardImageHandler;
 import model.phone.requesthandler.MobileHandler;
-import model.phone.requesthandler.ViewImageHandler;
 
-public class ViewImagesServlet extends MobileServlet {
-    public static LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, ViewImagesServlet.class);
+public class CardImagesServlet extends MobileServlet {
+    public static LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, CardImagesServlet.class);
 
     @Override
     protected MobileHandler getMobileHandler() {
-        return new ViewImageHandler();
+        return new CardImageHandler();
     }
 
     @Override
     public MobileParser getMobileParser() {
-        return new ViewImagesParser();
+        return new CardImagesParser();
     }
 
     @Override
