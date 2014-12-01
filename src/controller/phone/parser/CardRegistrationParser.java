@@ -4,8 +4,6 @@ import controller.phone.entity.CardRegistrationRequest;
 import controller.phone.entity.MobileRequest;
 import model.constants.Component;
 import model.constants.ExceptionTexts;
-import model.database.requests.CardRequest;
-import model.database.worldonlinedb.CardEntity;
 import model.exception.ParseRequestException;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
@@ -16,11 +14,12 @@ import java.util.ArrayList;
 
 public class CardRegistrationParser extends MobileParser {
 
+    LoggerFactory loggerFactory = new LoggerFactory(Component.Phone, CardRegistrationParser.class);
+
     @Override
     public MobileRequest parse(HttpServletRequest request) throws ParseRequestException, IOException {
         try {
             CardRegistrationRequest cardRegistrationRequest = new CardRegistrationRequest();
-//            ArrayList<CardEntity> cardEntities = new ArrayList<>();
             ArrayList<Long> cardIDs = new ArrayList<>();
             try {
                 cardRegistrationRequest.setUserID(Long.parseLong(request.getParameter("userID")));
@@ -32,24 +31,20 @@ public class CardRegistrationParser extends MobileParser {
                 throw new ParseRequestException(ExceptionTexts.cardRegistrationBodyEmptyException);
             }
             String ids = body.replaceAll("\\{", "").replaceAll("\\}", "").replaceAll("\\\"", "").replaceAll(":", "").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").replaceAll("cardIDs", "");
-            String[] cardIds = ids.split(",");
-            for (String cardIDString : cardIds) {
-                Long cardID = Long.parseLong(cardIDString);
-                cardIDs.add(cardID);
-//                CardEntity cardEntity = CardRequest.getCardByID(cardID);
-//                if (cardEntity != null) {
-//                    cardEntities.add(cardEntity);
-//                }
+            if (!ids.isEmpty()) {
+                String[] cardIds = ids.split(",");
+                for (String cardIDString : cardIds) {
+                    Long cardID = Long.parseLong(cardIDString);
+                    cardIDs.add(cardID);
+                }
+                cardRegistrationRequest.setCardIDs(cardIDs);
             }
-//            if (cardIDs.size() != cardEntities.size()) {
-//                throw new ParseRequestException(ExceptionTexts.cardRegistrationCardListEmptyException);
-//            }
-//            cardRegistrationRequest.setCardEntities(cardEntities);
-            cardRegistrationRequest.setCardIDs(cardIDs);
             return cardRegistrationRequest;
         } catch (ParseRequestException e) {
+            loggerFactory.error(e);
             throw e;
         } catch (Exception e) {
+            loggerFactory.error(e);
             throw new ParseRequestException(e.getMessage());
         }
     }

@@ -1,18 +1,18 @@
 package controller.phone.entity;
 
 
-import model.database.worldonlinedb.dishes.PriceEntity;
-
 import java.util.ArrayList;
 
 public class PricesRegistrationRequest extends MobileRequest {
-    private ArrayList<PriceEntity> priceEntities;
 
-    public void setPriceEntities(ArrayList<PriceEntity> priceEntities) {
-        this.priceEntities = priceEntities;
+    private ArrayList<Long> pricesIDs;
+
+    public ArrayList<Long> getPricesIDs() {
+        return pricesIDs;
     }
 
-    public ArrayList<PriceEntity> getPriceEntities() {
-        return priceEntities;
+    public void setPricesIDs(ArrayList<Long> pricesIDs) {
+        this.pricesIDs = pricesIDs;
     }
 }
+
