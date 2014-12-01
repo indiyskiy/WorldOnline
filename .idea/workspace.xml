@@ -6,85 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="[Admin] card view">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AllCardParameterTypesServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/entity/CardImagesRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/CardImagesResponse.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/phone/CompleteCardParameterTypeInfoServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/UserGlobalUpdateHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/parser/UserGlobalUpdateParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/entity/UserGlobalUpdateRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/phone/UserGlobalUpdateServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/UserGlobalUpdateStatus.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/UserGlobalUpdatedEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/UserGlobalUpdatedHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/parser/UserGlobalUpdatedParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/entity/UserGlobalUpdatedRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/phone/UserGlobalUpdatedServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/responseentity/UserStatsEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/UserStatsHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/parser/UserStatsParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/phone/entity/UserStatsRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/servlet/phone/UserStatsServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/allcardparametertypes.jsp" />
-      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\controller\phone\entity\ViewImagesRequest.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\phone\responseentity\ViewImagesResponse.java" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\controller\phone\parser\ViewImagesParser.java" afterPath="$PROJECT_DIR$/src/controller/phone/parser/CardImagesParser.java" />
-      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\additionalentity\phone\MobileViewImage.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardImagePair.java" />
-      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\model\phone\requesthandler\ViewImageHandler.java" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/CardImageHandler.java" />
-      <change type="MOVED" beforePath="C:\Users\Илья\IdeaProjects\WorldOnline\src\view\servlet\phone\ViewImagesServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/phone/CardImagesServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/AddCategoryServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/AddCategoryServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/parser/adminparser/AddScvToPriceParser.java" afterPath="$PROJECT_DIR$/src/controller/parser/adminparser/AddScvToPriceParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/phone/delayedtask/AddSomeCardTask.java" afterPath="$PROJECT_DIR$/src/model/phone/delayedtask/AddSomeCardTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/phone/delayedtask/AddSomePricesTask.java" afterPath="$PROJECT_DIR$/src/model/phone/delayedtask/AddSomePricesTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/phone/parser/CardByListParser.java" afterPath="$PROJECT_DIR$/src/controller/phone/parser/CardByListParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/parser/adminparser/CardInfoImageUploadParser.java" afterPath="$PROJECT_DIR$/src/controller/parser/adminparser/CardInfoImageUploadParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/phone/requesthandler/CardRegistrationHandler.java" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/CardRegistrationHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/phone/parser/CardRegistrationParser.java" afterPath="$PROJECT_DIR$/src/controller/phone/parser/CardRegistrationParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/phone/entity/CardRegistrationRequest.java" afterPath="$PROJECT_DIR$/src/controller/phone/entity/CardRegistrationRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/ChangeCardInfoImageServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/ChangeCardInfoImageServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/CoordinateRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/CoordinateRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/CreateNewTagGroupServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/CreateNewTagGroupServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/CreateSubMenuServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/CreateSubMenuServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" afterPath="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/DeleteDishServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/DeleteDishServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/DeleteMenuServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/DeleteMenuServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/DishRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/DishRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/EditMenuIconServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/EditMenuIconServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/EditTagImageServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/EditTagImageServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/EditUrgencyTimeServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/EditUrgencyTimeServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" afterPath="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/exchangerates/ExchangeRatesParser.java" afterPath="$PROJECT_DIR$/src/model/exchangerates/ExchangeRatesParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/ExchangeRatesRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/ExchangeRatesRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/GlobalBaseParseServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/GlobalBaseParseServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/worldonlinedb/GlobalUpdateEntity.java" afterPath="$PROJECT_DIR$/src/model/database/worldonlinedb/GlobalUpdateEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/constants/databaseenumeration/ImageType.java" afterPath="$PROJECT_DIR$/src/model/constants/databaseenumeration/ImageType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/InfoRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/InfoRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/LinkRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/LinkRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/MenuRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/phone/MobileCardInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/ParameterRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/ParameterRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/additionalentity/admin/ParameterType.java" afterPath="$PROJECT_DIR$/src/model/additionalentity/admin/ParameterType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/phone/parser/PricesByListParser.java" afterPath="$PROJECT_DIR$/src/controller/phone/parser/PricesByListParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/phone/requesthandler/PricesRegistrationHandler.java" afterPath="$PROJECT_DIR$/src/model/phone/requesthandler/PricesRegistrationHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/phone/parser/PricesRegistrationParser.java" afterPath="$PROJECT_DIR$/src/controller/phone/parser/PricesRegistrationParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/RouteRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/RouteRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/TagEditServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/TagEditServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/TagGroupCardEditServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/TagGroupCardEditServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/TagRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/TagRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/TextRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/TextRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/TimeRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/TimeRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/servlet/admin/UpDownMenuServlet.java" afterPath="$PROJECT_DIR$/src/view/servlet/admin/UpDownMenuServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/UserDataRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/UserDataRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/UserRequests.java" afterPath="$PROJECT_DIR$/src/model/database/requests/UserRequests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/database/requests/WeatherRequest.java" afterPath="$PROJECT_DIR$/src/model/database/requests/WeatherRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/addcardelement.jsp" afterPath="$PROJECT_DIR$/web/addcardelement.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/index.jsp" afterPath="$PROJECT_DIR$/web/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" />
+    <list default="true" id="79bc2e07-43eb-4aa7-b2ac-1c8d932abcc0" name="Default" comment="[Global] weakly update">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/additionalentity/admin/CompleteCardParameterTypeInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WorldOnline.iws" />
@@ -154,36 +79,65 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Data Source" pinned="false" current="false" current-in-tab="false">
-        <entry file="dbDummy://db-console:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/">
+      <file leaf-file-name="completecardinfo.jsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/completecardinfo.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="724" column="45" selection-start="21023" selection-end="21047" vertical-scroll-proportion="-23.206896" vertical-offset="11635" max-vertical-offset="12410">
+            <state line="398" column="66" selection-start="17854" selection-end="17865" vertical-scroll-proportion="-7.8846154" vertical-offset="6561" max-vertical-offset="7157">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserDataRequest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/model/database/requests/UserDataRequest.java">
+      <file leaf-file-name="web.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="573" column="98" selection-start="25818" selection-end="25818" vertical-scroll-proportion="0.4371134" vertical-offset="9529" max-vertical-offset="10166">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1415894690584" expanded="true" signature="6737:7186" placeholder="SELECT Card...Card..." />
-                <marker date="1415894690584" expanded="true" signature="6897:7159" placeholder="SELECT UserC..UserCard..." />
-                <marker date="1415894690584" expanded="true" signature="8018:8599" placeholder="SELECT Price..Price..." />
-                <marker date="1415894690584" expanded="true" signature="8286:8552" placeholder="SELECT UserP..UserPrice..." />
-                <marker date="1415894690584" expanded="true" signature="9429:9833" placeholder="SELECT Card...Card..." />
-                <marker date="1415894690584" expanded="true" signature="10662:11294" placeholder="SELECT UserP..UserPrice..." />
-                <marker date="1415894690584" expanded="true" signature="11116:11258" placeholder="SELECT CardP..CardPriceLink..." />
-                <marker date="1415894690584" expanded="true" signature="12118:12521" placeholder="SELECT Card...Card..." />
-                <marker date="1415894690584" expanded="true" signature="13350:13923" placeholder="SELECT Price..Price..." />
-                <marker date="1415894690584" expanded="true" signature="14790:14979" placeholder="SELECT UserC..UserCard..." />
-                <marker date="1415894690584" expanded="true" signature="15848:16043" placeholder="SELECT UserP..UserPrice..." />
-                <marker date="1415894690584" expanded="true" signature="20491:21051" placeholder="SELECT UserC..UserContent..." />
-                <marker date="1415894690584" expanded="true" signature="24566:24753" placeholder="UPDATE UserC..." />
-                <marker date="1415894690584" expanded="true" signature="25541:25654" placeholder="INSERT INTO ..." />
-              </folding>
+            <state line="824" column="49" selection-start="26985" selection-end="26985" vertical-scroll-proportion="0.0" vertical-offset="13718" max-vertical-offset="19159">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddRouteCoordinateServlet.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddRouteCoordinateServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="44" column="113" selection-start="2475" selection-end="2475" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="1037">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddRouteElementServlet.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddRouteElementServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="76" selection-start="1752" selection-end="1752" vertical-scroll-proportion="0.0" vertical-offset="29" max-vertical-offset="833">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddRouteServlet.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddRouteServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="42" selection-start="1189" selection-end="1189" vertical-scroll-proportion="0.0" vertical-offset="107" max-vertical-offset="782">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddUrgencyTimeServlet.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddUrgencyTimeServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="55" selection-start="1508" selection-end="1508" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="816">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AllCardParameterTypeIconServlet.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AllCardParameterTypeIconServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="46" column="11" selection-start="2137" selection-end="2137" vertical-scroll-proportion="0.52234995" vertical-offset="101" max-vertical-offset="884">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -214,57 +168,57 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/ViewImageHandler.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/entity/ViewImagesRequest.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/parser/ViewImagesParser.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/parser/CardImagesParser.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/phone/ViewImagesServlet.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/phone/CardImagesServlet.java" />
-        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/CardImageHandler.java" />
-        <option value="$PROJECT_DIR$/src/model/database/requests/ImageRequest.java" />
-        <option value="$PROJECT_DIR$/src/controller/parser/adminparser/AddScvToPriceParser.java" />
-        <option value="$PROJECT_DIR$/src/controller/parser/adminparser/CardInfoImageUploadParser.java" />
-        <option value="$PROJECT_DIR$/src/model/database/requests/DishRequest.java" />
-        <option value="$PROJECT_DIR$/src/model/database/session/DatabaseConnection.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/entity/CardRegistrationRequest.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/entity/PricesRegistrationRequest.java" />
         <option value="$PROJECT_DIR$/src/model/exchangerates/ExchangeRatesParser.java" />
-        <option value="$PROJECT_DIR$/src/model/phone/delayedtask/AddSomePricesTask.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/EditUrgencyTimeServlet.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/DeleteDishServlet.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/ChangeCardInfoImageServlet.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/ExchangeRatesRequest.java" />
+        <option value="$PROJECT_DIR$/src/model/constants/databaseenumeration/CardToCardLinkType.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/AdminUserRequest.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/CoordinateRequest.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/CompleteCardInfo.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java" />
         <option value="$PROJECT_DIR$/src/model/phone/requesthandler/PricesRegistrationHandler.java" />
-        <option value="$PROJECT_DIR$/src/model/phone/responseentity/CardImagesResponse.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/phone/UserStats.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/phone/UserStatsServlet.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/parser/UserStatsParser.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/entity/UserStatsRequest.java" />
-        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/UserStatsHandler.java" />
-        <option value="$PROJECT_DIR$/src/model/phone/responseentity/UserStatsEntity.java" />
-        <option value="$PROJECT_DIR$/src/model/phone/responseentity/UserGlobalUpdateStatus.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/phone/UserGlobalUpdatedServlet.java" />
-        <option value="$PROJECT_DIR$/src/model/constants/ExceptionTexts.java" />
-        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/UserGlobalUpdatedHandler.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/entity/UserGlobalUpdatedRequest.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/parser/UserGlobalUpdatedParser.java" />
-        <option value="$PROJECT_DIR$/src/model/phone/responseentity/UserGlobalUpdatedEntity.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/AllCardParameterTypes.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/AllCardParametersTypes.java" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/AllCardParametersTypesServlet.java" />
-        <option value="$PROJECT_DIR$/src/model/database/requests/UserRequests.java" />
-        <option value="$PROJECT_DIR$/web/addcardelement.jsp" />
-        <option value="$PROJECT_DIR$/src/view/servlet/admin/AllCardParameterTypesServlet.java" />
-        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/ParameterType.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/parser/CardRegistrationParser.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/parser/PricesRegistrationParser.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/RouteCard.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/SimpleRouteElement.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/delayedtask/AddSomeCardTask.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/delayedtask/AddSomePricesTask.java" />
+        <option value="$PROJECT_DIR$/src/controller/phone/parser/CardByListParser.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/DishRequest.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/CompleteCardParameterTypeInfoServlet.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/AllCardsServlet.java" />
+        <option value="$PROJECT_DIR$/src/controller/parser/adminparser/AllUsersParser.java" />
+        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/UserRegistrationHandler.java" />
+        <option value="$PROJECT_DIR$/src/model/database/worldonlinedb/UserEntity.java" />
+        <option value="$PROJECT_DIR$/src/model/additionalentity/admin/SimpleUserInfo.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/AllUsersServlet.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/DeleteCardInfoElementServlet.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/InfoRequest.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/ServletHelper.java" />
+        <option value="$PROJECT_DIR$/web/completecardparametertypeinfo.jsp" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/DeleteRouteCardServlet.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/AddRouteElementServlet.java" />
+        <option value="$PROJECT_DIR$/web/allusers.jsp" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/EditCardParameterTypeServlet.java" />
         <option value="$PROJECT_DIR$/web/allcardparametertypes.jsp" />
         <option value="$PROJECT_DIR$/src/model/database/requests/ParameterRequest.java" />
-        <option value="$PROJECT_DIR$/web/index.jsp" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/view/servlet/phone/CompleteCardParameterTypeInfoServlet.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/entity/CardRegistrationRequest.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/parser/CardRegistrationParser.java" />
-        <option value="$PROJECT_DIR$/src/model/phone/requesthandler/CardRegistrationHandler.java" />
-        <option value="$PROJECT_DIR$/src/model/phone/delayedtask/AddSomeCardTask.java" />
-        <option value="$PROJECT_DIR$/src/controller/phone/parser/CardByListParser.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/TextGroupEditServlet.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/phone/MobileServlet.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/UserRequests.java" />
         <option value="db-console:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/" />
-        <option value="$PROJECT_DIR$/src/model/database/requests/UserDataRequest.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/AddUrgencyTimeServlet.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/CreateCardCoordinateServlet.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/CreateCardParameterTypeServlet.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/CreateCardServlet.java" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/CardRequest.java" />
+        <option value="$PROJECT_DIR$/web/index.jsp" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/AddRouteServlet.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/web/completecardinfo.jsp" />
+        <option value="$PROJECT_DIR$/src/model/database/requests/RouteRequest.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/AddRouteCoordinateServlet.java" />
+        <option value="$PROJECT_DIR$/src/view/servlet/admin/AllCardParameterTypeIconServlet.java" />
       </list>
     </option>
   </component>
@@ -332,7 +286,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -343,7 +297,44 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldOnline" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Console.TableResult.DefaultCopyAction" value="HTML Table" />
@@ -384,21 +375,21 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\web\js" />
-      <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\lib" />
-      <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\web\images" />
-      <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\extendedfiles" />
-      <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\src" />
+      <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\web\images\error" />
+      <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\web\images\cardNotUpoaded" />
+      <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\web\images\cardUpload" />
+      <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\web\images\welcome" />
+      <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\web\images\wellcome" />
     </key>
     <key name="IntroduceConstantDialog.RECENTS_KEY">
       <recent name="model.database.requests.CardRequest" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="model.additionalentity.admin" />
+      <recent name="controller.parser.adminparser" />
       <recent name="model.phone.responseentity" />
       <recent name="model.phone.delayedtask" />
       <recent name="model.phone.requesthandler" />
-      <recent name="controller.phone.entity" />
-      <recent name="controller.phone.parser" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Илья\IdeaProjects\WorldOnline\web\font" />
@@ -418,7 +409,7 @@
       <recent name="controller.parser.edit.phone" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.UserDataRequest">
+  <component name="RunManager" selected="Application.AdminUserRequest">
     <configuration default="false" name="DishParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -427,50 +418,6 @@
         </pattern>
       </extension>
       <option name="MAIN_CLASS_NAME" value="model.xmlparser.DishParser" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="WorldOnline" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="ExchangeRatesParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="model.exchangerates.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="model.exchangerates.ExchangeRatesParser" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="WorldOnline" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="TimeManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="helper.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="helper.TimeManager" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -515,6 +462,50 @@
         </pattern>
       </extension>
       <option name="MAIN_CLASS_NAME" value="model.database.requests.UserDataRequest" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="WorldOnline" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="IndexServlet" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="view.servlet.admin.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="view.servlet.admin.IndexServlet" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="WorldOnline" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="AdminUserRequest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="model.database.requests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="model.database.requests.AdminUserRequest" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -912,18 +903,18 @@
       <item index="0" class="java.lang.String" itemvalue="TomEE Server.Unnamed" />
       <item index="1" class="java.lang.String" itemvalue="Tomcat Server.TomcatServer" />
       <item index="2" class="java.lang.String" itemvalue="Application.DishParser" />
-      <item index="3" class="java.lang.String" itemvalue="Application.ExchangeRatesParser" />
-      <item index="4" class="java.lang.String" itemvalue="Application.TimeManager" />
-      <item index="5" class="java.lang.String" itemvalue="Application.Test" />
-      <item index="6" class="java.lang.String" itemvalue="Application.UserDataRequest" />
+      <item index="3" class="java.lang.String" itemvalue="Application.Test" />
+      <item index="4" class="java.lang.String" itemvalue="Application.UserDataRequest" />
+      <item index="5" class="java.lang.String" itemvalue="Application.IndexServlet" />
+      <item index="6" class="java.lang.String" itemvalue="Application.AdminUserRequest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.UserDataRequest" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Test" />
-        <item index="2" class="java.lang.String" itemvalue="Application.DishParser" />
-        <item index="3" class="java.lang.String" itemvalue="Application.TimeManager" />
-        <item index="4" class="java.lang.String" itemvalue="Application.ExchangeRatesParser" />
+        <item index="0" class="java.lang.String" itemvalue="Application.AdminUserRequest" />
+        <item index="1" class="java.lang.String" itemvalue="Application.IndexServlet" />
+        <item index="2" class="java.lang.String" itemvalue="Application.UserDataRequest" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Test" />
+        <item index="4" class="java.lang.String" itemvalue="Application.DishParser" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -1060,7 +1051,11 @@
       <workItem from="1415174459025" duration="42296000" />
       <workItem from="1415353885744" duration="46411000" />
       <workItem from="1415783561887" duration="31448000" />
-      <workItem from="1415885792921" duration="8431000" />
+      <workItem from="1415885792921" duration="52273000" />
+      <workItem from="1416470141172" duration="67700000" />
+      <workItem from="1417004095934" duration="14929000" />
+      <workItem from="1417102073634" duration="600000" />
+      <workItem from="1417166203593" duration="22483000" />
     </task>
     <task id="LOCAL-00001" summary="TestCommit">
       <created>1383271700462</created>
@@ -1510,11 +1505,39 @@
       <created>1415354211891</created>
       <updated>1415354211891</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="[Admin] card view">
+      <created>1415895121985</created>
+      <updated>1415895121985</updated>
+    </task>
+    <task id="LOCAL-00114" summary="[Global] weakly update">
+      <created>1417447370475</created>
+      <updated>1417447370475</updated>
+    </task>
+    <task id="LOCAL-00115" summary="[Global] weakly update">
+      <created>1417447376974</created>
+      <updated>1417447376974</updated>
+    </task>
+    <task id="LOCAL-00116" summary="[Global] weakly update">
+      <created>1417447384361</created>
+      <updated>1417447384362</updated>
+    </task>
+    <task id="LOCAL-00117" summary="[Global] weakly update">
+      <created>1417447395276</created>
+      <updated>1417447395276</updated>
+    </task>
+    <task id="LOCAL-00118" summary="[Global] weakly update">
+      <created>1417447723905</created>
+      <updated>1417447723905</updated>
+    </task>
+    <task id="LOCAL-00119" summary="[Global] weakly update">
+      <created>1417447734192</created>
+      <updated>1417447734192</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2757831000" />
+    <option name="totallyTimeSpent" value="2927241000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1537,15 +1560,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878837" sideWeight="0.8014101" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.10096931" sideWeight="0.78613394" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22051696" sideWeight="0.78613394" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20521945" sideWeight="0.5072698" order="10" side_tool="true" content_ui="tabs" />
@@ -1554,15 +1577,15 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740214" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858837" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28432956" sideWeight="0.65543646" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30936995" sideWeight="0.56702256" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35705814" sideWeight="0.4911147" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6761566" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.58837485" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37841043" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3772242" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39952996" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28432956" sideWeight="0.43297747" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19335707" sideWeight="0.49192247" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.273021" sideWeight="0.34456354" order="1" side_tool="true" content_ui="tabs" />
@@ -1579,10 +1602,10 @@
     <layout-to-restore>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21647818" sideWeight="0.78613394" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878837" sideWeight="0.8014101" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22051696" sideWeight="0.78613394" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1592,10 +1615,10 @@
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32858837" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28432956" sideWeight="0.65543646" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28432956" sideWeight="0.56702256" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35705814" sideWeight="0.4911147" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6761566" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35705814" sideWeight="0.4911147" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.58837485" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977462" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
@@ -1603,9 +1626,9 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37841043" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3772242" sideWeight="0.49192247" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39952996" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28432956" sideWeight="0.43297747" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19335707" sideWeight="0.49192247" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.273021" sideWeight="0.34456354" order="1" side_tool="true" content_ui="tabs" />
@@ -1629,7 +1652,6 @@
       <TodoPanelSettings />
     </option>
     <confirmMoveToFailedCommit value="2" />
-    <MESSAGE value="Xml parse to db 2" />
     <MESSAGE value="Xml parse to db 3" />
     <MESSAGE value="Xml parse to db 4&#10;+menu xml parser" />
     <MESSAGE value="[admin] card view update&#10;[global] logger" />
@@ -1654,7 +1676,8 @@
     <MESSAGE value="[Mobile] card counting" />
     <MESSAGE value="[Mobile] dishes" />
     <MESSAGE value="[Admin] card view" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Admin] card view" />
+    <MESSAGE value="[Global] weakly update" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Global] weakly update" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1700,406 +1723,389 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/controller/parser/adminparser/AllCardParser.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddCategoryServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="189" selection-end="189" vertical-scroll-proportion="0.13654618" vertical-offset="0" max-vertical-offset="1292">
+        <state line="16" column="13" selection-start="539" selection-end="539" vertical-scroll-proportion="0.086845465" vertical-offset="0" max-vertical-offset="783">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/MenuRequest.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddDishesServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="498" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/requests/MenuRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="828" column="107" selection-start="36633" selection-end="36633" vertical-scroll-proportion="0.0" vertical-offset="13473" max-vertical-offset="14501">
+        <state line="17" column="13" selection-start="574" selection-end="574" vertical-scroll-proportion="0.086845465" vertical-offset="0" max-vertical-offset="783">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/glassfish4/jdk7/jre/lib/rt.jar!/java/security/Timestamp.class">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddInfoElementToCardServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="19" selection-start="162" selection-end="162" vertical-scroll-proportion="0.10678392" vertical-offset="0" max-vertical-offset="796" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/responseentity/UserStatsEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="74" selection-start="1643" selection-end="1643" vertical-scroll-proportion="0.0" vertical-offset="424" max-vertical-offset="901" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..UserPrice">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..User">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..UserCard">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="289" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/responseentity/UserGlobalUpdateStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="25" selection-start="1952" selection-end="1952" vertical-scroll-proportion="0.68711656" vertical-offset="327" max-vertical-offset="816">
+        <state line="17" column="13" selection-start="597" selection-end="597" vertical-scroll-proportion="0.086845465" vertical-offset="0" max-vertical-offset="783">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/phone/UserGlobalUpdatedServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddNewPriceServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="28" selection-start="816" selection-end="816" vertical-scroll-proportion="0.73006135" vertical-offset="0" max-vertical-offset="510" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/MobileParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="22" selection-start="325" selection-end="325" vertical-scroll-proportion="0.1390593" vertical-offset="0" max-vertical-offset="489">
+        <state line="21" column="13" selection-start="800" selection-end="800" vertical-scroll-proportion="0.021144278" vertical-offset="51" max-vertical-offset="867">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/requesthandler/MobileHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddScvToPriceServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="17" selection-start="272" selection-end="272" vertical-scroll-proportion="0.13333334" vertical-offset="0" max-vertical-offset="510">
+        <state line="14" column="13" selection-start="449" selection-end="449" vertical-scroll-proportion="0.08457711" vertical-offset="0" max-vertical-offset="804">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/MobileRequest.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddTagToCardServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="22" selection-start="56" selection-end="56" vertical-scroll-proportion="0.067729086" vertical-offset="0" max-vertical-offset="502">
+        <state line="17" column="13" selection-start="543" selection-end="543" vertical-scroll-proportion="-0.23258707" vertical-offset="255" max-vertical-offset="1377">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/UserGlobalUpdateRequest.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/ChangeParentServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="13" selection-start="48" selection-end="48" vertical-scroll-proportion="0.09751434" vertical-offset="0" max-vertical-offset="523" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/AllCardParameterTypesParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="55" selection-start="554" selection-end="1239" vertical-scroll-proportion="0.6830266" vertical-offset="6" max-vertical-offset="510">
+        <state line="43" column="27" selection-start="1993" selection-end="1993" vertical-scroll-proportion="0.5708955" vertical-offset="68" max-vertical-offset="986">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/constants/ExceptionTexts.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/ChangeCardStatusServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="96" selection-start="6665" selection-end="6665" vertical-scroll-proportion="0.6333333" vertical-offset="833" max-vertical-offset="1343">
+        <state line="45" column="33" selection-start="1965" selection-end="1965" vertical-scroll-proportion="0.63432837" vertical-offset="51" max-vertical-offset="1241">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/requesthandler/AllCardParameterTypesHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/ChangeCardInfoImageServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="59" selection-start="1141" selection-end="1495" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/responseentity/MobileResponseEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="22" selection-start="126" selection-end="126" vertical-scroll-proportion="0.017928287" vertical-offset="59" max-vertical-offset="561">
+        <state line="17" column="13" selection-start="564" selection-end="564" vertical-scroll-proportion="0.08457711" vertical-offset="0" max-vertical-offset="804">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/UserGlobalUpdatedParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="51" selection-start="1428" selection-end="1428" vertical-scroll-proportion="0.8795181" vertical-offset="106" max-vertical-offset="714">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/responseentity/UserGlobalUpdatedEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="31" selection-start="325" selection-end="325" vertical-scroll-proportion="0.40963855" vertical-offset="0" max-vertical-offset="498" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/UserGlobalUpdatedRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="5" selection-start="312" selection-end="312" vertical-scroll-proportion="0.47791165" vertical-offset="0" max-vertical-offset="498" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/requesthandler/UserStatsHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="76" selection-start="975" selection-end="975" vertical-scroll-proportion="0.0" vertical-offset="33" max-vertical-offset="816">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..GlobalUpdate">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/worldonline..UserContent">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/requesthandler/UserGlobalUpdatedHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="9" selection-start="1167" selection-end="1167" vertical-scroll-proportion="0.8666667" vertical-offset="0" max-vertical-offset="629">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/CompleteCardInfoServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="13" selection-start="814" selection-end="814" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1394">
+        <state line="18" column="13" selection-start="642" selection-end="642" vertical-scroll-proportion="0.08457711" vertical-offset="0" max-vertical-offset="1445">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AllCardsServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/CreateCardCoordinateServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="5" selection-start="749" selection-end="2947" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1139">
+        <state line="31" column="55" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.44854882" vertical-offset="0" max-vertical-offset="765">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/CardBlock.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/CreateCardParameterTypeServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="81" selection-end="81" vertical-scroll-proportion="0.14255765" vertical-offset="0" max-vertical-offset="697">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddCardElementServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="54" selection-start="1202" selection-end="1216" vertical-scroll-proportion="0.6228448" vertical-offset="0" max-vertical-offset="663" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/requests/UserRequests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="15" selection-start="2479" selection-end="2479" vertical-scroll-proportion="0.0" vertical-offset="573" max-vertical-offset="4488">
-          <folding>
-            <marker date="1415874623005" expanded="true" signature="-1:-1" placeholder="SELECT UserH..UserHardware..." />
-            <marker date="1415874623005" expanded="true" signature="-1:-1" placeholder="SELECT User...User..." />
-            <marker date="1415874623005" expanded="true" signature="-1:-1" placeholder="SELECT User...User..." />
-            <marker date="1415874623005" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1415874623005" expanded="true" signature="-1:-1" placeholder="SELECT ids F..UserCardID..." />
-            <marker date="1415874623005" expanded="true" signature="-1:-1" placeholder="SELECT temp...UserCard..." />
-            <marker date="1415874623005" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1415874623005" expanded="true" signature="-1:-1" placeholder="SELECT ids F..UserPriceID..." />
-            <marker date="1415874623005" expanded="true" signature="-1:-1" placeholder="SELECT temp...UserPrice..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/constants/ApplicationBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="28" selection-start="908" selection-end="915" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1360">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/ParameterType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="26" selection-start="136" selection-end="136" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="629">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/addcardelement.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="59" selection-start="2241" selection-end="2241" vertical-scroll-proportion="0.39954337" vertical-offset="811" max-vertical-offset="1275" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/allcards.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="234" selection-end="235" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="1632">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AllCardParameterTypesServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="87" selection-start="1069" selection-end="1069" vertical-scroll-proportion="0.0" vertical-offset="339" max-vertical-offset="935">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/allcardparametertypes.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="20" selection-start="2007" selection-end="2007" vertical-scroll-proportion="0.0" vertical-offset="454" max-vertical-offset="1224">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="59" selection-start="1272" selection-end="1272" vertical-scroll-proportion="0.0" vertical-offset="646" max-vertical-offset="935">
+        <state line="33" column="50" selection-start="1743" selection-end="1743" vertical-scroll-proportion="0.41463414" vertical-offset="0" max-vertical-offset="779">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/requests/CardRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="291" column="43" selection-start="12724" selection-end="12724" vertical-scroll-proportion="0.33189654" vertical-offset="4419" max-vertical-offset="12087">
+        <state line="118" column="67" selection-start="4739" selection-end="4739" vertical-scroll-proportion="0.43905473" vertical-offset="1279" max-vertical-offset="12410">
           <folding>
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Card..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Card..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT count..Card..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Text..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Card..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT Text...Text..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT count..Card..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
-            <marker date="1415370328755" expanded="true" signature="-1:-1" placeholder="UPDATE Card ..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Card..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Card..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT count..Card..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Text..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Card..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT Text...Text..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT count..Card..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="SELECT Card...Card..." />
+            <marker date="1417185558094" expanded="true" signature="-1:-1" placeholder="UPDATE Card ..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/phone/CompleteCardParameterTypeInfoServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/CreateCardServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="25" selection-start="815" selection-end="815" vertical-scroll-proportion="0.44849247" vertical-offset="0" max-vertical-offset="796">
+        <state line="31" column="52" selection-start="1352" selection-end="1352" vertical-scroll-proportion="0.2748756" vertical-offset="51" max-vertical-offset="1139">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/CreateNewTagGroupServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="13" selection-start="784" selection-end="784" vertical-scroll-proportion="0.021144278" vertical-offset="51" max-vertical-offset="1105">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/CreateSubMenuServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="13" selection-start="589" selection-end="589" vertical-scroll-proportion="0.021144278" vertical-offset="68" max-vertical-offset="935">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/DeleteCardToCardLinkServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="13" selection-start="488" selection-end="488" vertical-scroll-proportion="0.086845465" vertical-offset="0" max-vertical-offset="783">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/DeleteCardTagServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="13" selection-start="480" selection-end="480" vertical-scroll-proportion="0.086845465" vertical-offset="0" max-vertical-offset="783">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/DeleteCardParameterServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="72" selection-start="777" selection-end="777" vertical-scroll-proportion="0.14800996" vertical-offset="0" max-vertical-offset="804">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/DeleteCardMenuServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="13" selection-start="430" selection-end="430" vertical-scroll-proportion="0.08457711" vertical-offset="0" max-vertical-offset="804">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/DeleteCardInfoElementServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="13" selection-start="589" selection-end="589" vertical-scroll-proportion="0.08457711" vertical-offset="0" max-vertical-offset="804">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/DeleteCardImageServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="13" selection-start="529" selection-end="529" vertical-scroll-proportion="0.10572139" vertical-offset="0" max-vertical-offset="804">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/DeleteTextCardServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="13" selection-start="483" selection-end="483" vertical-scroll-proportion="0.10572139" vertical-offset="0" max-vertical-offset="804">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/DeleteRouteCardServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="13" selection-start="535" selection-end="535" vertical-scroll-proportion="0.08457711" vertical-offset="0" max-vertical-offset="804">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/DeleteMenuServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="13" selection-start="478" selection-end="478" vertical-scroll-proportion="0.08457711" vertical-offset="0" max-vertical-offset="804">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/DeleteDishServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="13" selection-start="486" selection-end="486" vertical-scroll-proportion="0.027363185" vertical-offset="63" max-vertical-offset="867">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/EditUrgencyTimeServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="31" selection-start="1934" selection-end="1934" vertical-scroll-proportion="0.60791826" vertical-offset="51" max-vertical-offset="901">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/EditTagImageServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="13" selection-start="587" selection-end="587" vertical-scroll-proportion="0.086845465" vertical-offset="0" max-vertical-offset="1054">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/EditMenuIconServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="13" selection-start="530" selection-end="530" vertical-scroll-proportion="0.08457711" vertical-offset="0" max-vertical-offset="1054">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/EditCardParameterTypeServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="13" selection-start="595" selection-end="595" vertical-scroll-proportion="0.10572139" vertical-offset="0" max-vertical-offset="918">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/EditCardCoordinateServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="28" selection-start="1074" selection-end="1074" vertical-scroll-proportion="0.25373134" vertical-offset="0" max-vertical-offset="804">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/EditCardParametersServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="31" selection-start="1485" selection-end="1485" vertical-scroll-proportion="0.46517414" vertical-offset="0" max-vertical-offset="918">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/ImageMenuUploadParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="13" selection-start="563" selection-end="563" vertical-scroll-proportion="0.08457711" vertical-offset="0" max-vertical-offset="804">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/TextGroupEditServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="93" column="0" selection-start="4447" selection-end="4447" vertical-scroll-proportion="0.0" vertical-offset="985" max-vertical-offset="1802">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/TagEditServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="51" selection-start="1475" selection-end="1482" vertical-scroll-proportion="0.4934037" vertical-offset="0" max-vertical-offset="1071">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/ImageCardUploadServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="33" selection-start="1524" selection-end="1524" vertical-scroll-proportion="0.44402984" vertical-offset="0" max-vertical-offset="1343">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/ExampleServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="13" selection-start="394" selection-end="394" vertical-scroll-proportion="0.08457711" vertical-offset="0" max-vertical-offset="804">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/UpDownMenuServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="44" selection-start="1742" selection-end="1742" vertical-scroll-proportion="0.52860695" vertical-offset="0" max-vertical-offset="850">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/TagGroupCardEditServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="13" selection-start="538" selection-end="538" vertical-scroll-proportion="0.08457711" vertical-offset="0" max-vertical-offset="850">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="29" selection-start="1440" selection-end="1440" vertical-scroll-proportion="0.69911504" vertical-offset="144" max-vertical-offset="935">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/RouteCoordinateEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="178" selection-end="178" vertical-scroll-proportion="0.20440882" vertical-offset="0" max-vertical-offset="969">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/admin/RouteCard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="31" selection-start="565" selection-end="565" vertical-scroll-proportion="0.47530866" vertical-offset="24" max-vertical-offset="561">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="821" column="65" selection-start="26819" selection-end="26819" vertical-scroll-proportion="0.51040393" vertical-offset="13540" max-vertical-offset="17374">
+        <state line="824" column="49" selection-start="26985" selection-end="26985" vertical-scroll-proportion="0.0" vertical-offset="13718" max-vertical-offset="19159">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/requests/ParameterRequest.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddCardElementServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="295" column="61" selection-start="14900" selection-end="14900" vertical-scroll-proportion="0.0" vertical-offset="4861" max-vertical-offset="6749">
+        <state line="30" column="9" selection-start="873" selection-end="1370" vertical-scroll-proportion="0.4238683" vertical-offset="134" max-vertical-offset="663">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/completecardinfo.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="398" column="66" selection-start="17854" selection-end="17865" vertical-scroll-proportion="-7.8846154" vertical-offset="6561" max-vertical-offset="7157">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/database/requests/RouteRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="554" column="31" selection-start="26319" selection-end="26319" vertical-scroll-proportion="0.44032922" vertical-offset="8796" max-vertical-offset="9282">
           <folding>
-            <marker date="1415884528173" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Text..." />
-            <marker date="1415884528173" expanded="true" signature="-1:-1" placeholder="SELECT CardP..CardParameterType..." />
-            <marker date="1415884528173" expanded="true" signature="-1:-1" placeholder="SELECT CardP..Card..." />
-            <marker date="1415884528173" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1415884528173" expanded="true" signature="-1:-1" placeholder="SELECT Text...CardParameterType..." />
-            <marker date="1415884528173" expanded="true" signature="-1:-1" placeholder="SELECT CardP..CardParameter..." />
-            <marker date="1415884528173" expanded="true" signature="-1:-1" placeholder="SELECT CardP..CardParameter..." />
+            <marker date="1417446164292" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..CardRoute..." />
+            <marker date="1417446164292" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..CardRoute..." />
+            <marker date="1417446164292" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..CardRoute..." />
+            <marker date="1417446164292" expanded="true" signature="-1:-1" placeholder="SELECT CardR..CardRoute..." />
+            <marker date="1417446164292" expanded="true" signature="-1:-1" placeholder="SELECT CardR..CardRoute..." />
+            <marker date="1417446164292" expanded="true" signature="-1:-1" placeholder="SELECT CardR..CardRoute..." />
+            <marker date="1417446164292" expanded="true" signature="-1:-1" placeholder="SELECT CardR..CardRoute..." />
+            <marker date="1417446164292" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1417446164292" expanded="true" signature="-1:-1" placeholder="SELECT Route..RouteElement..." />
+            <marker date="1417446164292" expanded="true" signature="-1:-1" placeholder="SELECT CardR..CardRoute..." />
+            <marker date="1417446164292" expanded="true" signature="-1:-1" placeholder="SELECT Route..RouteCoordinate..." />
+            <marker date="1417446164292" expanded="true" signature="-1:-1" placeholder="UPDATE Route..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/CardRegistrationParser.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddRouteCoordinateServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="13" selection-start="2045" selection-end="2045" vertical-scroll-proportion="-21.08" vertical-offset="0" max-vertical-offset="850">
+        <state line="44" column="113" selection-start="2475" selection-end="2475" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="1037">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/worldonlinedb/UserEntity.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddRouteElementServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="17" selection-start="304" selection-end="304" vertical-scroll-proportion="0.2685624" vertical-offset="0" max-vertical-offset="1496">
-          <folding>
-            <element signature="e#1108#1109#0" expanded="false" />
-            <element signature="e#1137#1138#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/requesthandler/CardRegistrationHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="56" selection-start="1337" selection-end="1337" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+        <state line="35" column="76" selection-start="1752" selection-end="1752" vertical-scroll-proportion="0.0" vertical-offset="29" max-vertical-offset="833">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/entity/CardRegistrationRequest.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddRouteServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="41" selection-start="529" selection-end="529" vertical-scroll-proportion="0.39534885" vertical-offset="0" max-vertical-offset="817">
-          <folding>
-            <element signature="e#558#559#0" expanded="false" />
-            <element signature="e#613#614#0" expanded="false" />
-            <element signature="e#651#652#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/servlet/phone/CardRegistrationServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="31" selection-start="698" selection-end="698" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+        <state line="29" column="42" selection-start="1189" selection-end="1189" vertical-scroll-proportion="0.0" vertical-offset="107" max-vertical-offset="782">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/phone/delayedtask/AddSomeCardTask.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AddUrgencyTimeServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="44" selection-start="2526" selection-end="2526" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1173">
+        <state line="33" column="55" selection-start="1508" selection-end="1508" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="816">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/phone/parser/CardByListParser.java">
+    <entry file="file://$PROJECT_DIR$/src/view/servlet/admin/AllCardParameterTypeIconServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="25" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782">
+        <state line="46" column="11" selection-start="2137" selection-end="2137" vertical-scroll-proportion="0.52234995" vertical-offset="101" max-vertical-offset="884">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/additionalentity/phone/MobileDishCategory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="92" selection-end="92" vertical-scroll-proportion="0.08323134" vertical-offset="0" max-vertical-offset="817">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://db-console:/c16da0f7/34f38d7b-cfb2-451e-9c30-8bd9e281b76d/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="724" column="45" selection-start="21023" selection-end="21047" vertical-scroll-proportion="-23.206896" vertical-offset="11635" max-vertical-offset="12410">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/database/requests/UserDataRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="573" column="98" selection-start="25818" selection-end="25818" vertical-scroll-proportion="0.4371134" vertical-offset="9529" max-vertical-offset="10166">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1415894690584" expanded="true" signature="6737:7186" placeholder="SELECT Card...Card..." />
-            <marker date="1415894690584" expanded="true" signature="6897:7159" placeholder="SELECT UserC..UserCard..." />
-            <marker date="1415894690584" expanded="true" signature="8018:8599" placeholder="SELECT Price..Price..." />
-            <marker date="1415894690584" expanded="true" signature="8286:8552" placeholder="SELECT UserP..UserPrice..." />
-            <marker date="1415894690584" expanded="true" signature="9429:9833" placeholder="SELECT Card...Card..." />
-            <marker date="1415894690584" expanded="true" signature="10662:11294" placeholder="SELECT UserP..UserPrice..." />
-            <marker date="1415894690584" expanded="true" signature="11116:11258" placeholder="SELECT CardP..CardPriceLink..." />
-            <marker date="1415894690584" expanded="true" signature="12118:12521" placeholder="SELECT Card...Card..." />
-            <marker date="1415894690584" expanded="true" signature="13350:13923" placeholder="SELECT Price..Price..." />
-            <marker date="1415894690584" expanded="true" signature="14790:14979" placeholder="SELECT UserC..UserCard..." />
-            <marker date="1415894690584" expanded="true" signature="15848:16043" placeholder="SELECT UserP..UserPrice..." />
-            <marker date="1415894690584" expanded="true" signature="20491:21051" placeholder="SELECT UserC..UserContent..." />
-            <marker date="1415894690584" expanded="true" signature="24566:24753" placeholder="UPDATE UserC..." />
-            <marker date="1415894690584" expanded="true" signature="25541:25654" placeholder="INSERT INTO ..." />
-          </folding>
         </state>
       </provider>
     </entry>

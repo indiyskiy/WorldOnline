@@ -340,6 +340,7 @@
       <column name="UserContentID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="UserHardwareID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="UserPersonalDataID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="UserRegistrationTimestamp" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
       <primary-key name="PRIMARY" columns="UserID"/>
       <foreign-key name="FK_brhus6h5p1pcopgtusn5d2uh5" columns="UserHardwareID" ref-table="UserHardware" ref-schema="" ref-catalog="worldonline" ref-columns="UserHardwareID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_hw73w84hod076vg7ua3ksbq9v" columns="UserPersonalDataID" ref-table="UserPersonalData" ref-schema="" ref-catalog="worldonline" ref-columns="UserPersonalDataID" update-rule="3" delete-rule="3" deferrability="2"/>
@@ -388,7 +389,6 @@
       <primary-key name="PRIMARY" columns="UserPriceID"/>
       <foreign-key name="UserPrice_ibfk_2" columns="UserContentID" ref-table="UserContent" ref-schema="" ref-catalog="worldonline" ref-columns="UserContentID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="UserPrice_ibfk_3" columns="PriceID" ref-table="Price" ref-schema="" ref-catalog="worldonline" ref-columns="PriceID" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="unique_UserPriceID" unique="true" columns="UserPriceID"/>
     </table>
     <table name="Weather" schema="" catalog="worldonline" type="TABLE">
       <column name="WeatherID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
