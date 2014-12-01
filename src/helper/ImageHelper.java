@@ -3,10 +3,7 @@ package helper;
 import model.constants.Component;
 import model.constants.ServerConsts;
 import model.constants.databaseenumeration.ImageType;
-import model.database.requests.ImageRequest;
-import model.database.requests.InfoRequest;
-import model.database.requests.MenuRequest;
-import model.database.requests.TagRequest;
+import model.database.requests.*;
 import model.database.worldonlinedb.*;
 import model.exception.DataIsEmptyException;
 import model.logger.LoggerFactory;
@@ -141,5 +138,11 @@ public class ImageHelper {
         } catch (Exception e) {
             loggerFactory.error(e);
         }
+    }
+
+    public static void saveParameterIcon(File file, CardParameterTypeEntity cardParameterTypeEntity) {
+        ImageEntity imageEntity = saveImage(file, ImageType.CardParameterIcon);
+        cardParameterTypeEntity.setImage(imageEntity);
+        ParameterRequest.editCardParameterType(cardParameterTypeEntity);
     }
 }
