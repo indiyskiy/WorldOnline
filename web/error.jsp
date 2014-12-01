@@ -24,7 +24,11 @@
     </div>
 </header>
 <div class="container container-lower">
-    Ошибка: ${errorMessage}
+    <p>
+        <img src="images/error/4-Fail-${imgID}.png" alt="Иллюстрация" align="left"
+             vspace="5" hspace="5"/>
+        Ошибка: ${errorMessage}
+    </p>
 </div>
 </body>
 </html>

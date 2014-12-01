@@ -24,27 +24,27 @@
     </div>
 </header>
 <div class="container container-lower">
-    Добро пожаловать в админку Петербурга на ладони!
-    <br/>
-    <c:if test="${registered==true}">
-        <br/>
-        <a href="allcards">Все карточки</a>
-        <br/>
-        <a href="alltaggroups">Все группы тегов</a>
-        <br/>
-        <a href="alltags">Все тэги</a>
-        <br/>
-        <a href="allmenus">Все категории</a>
-        <br/>
-        <a href="allcardparametertypes">Все типы параметров</a>
-        <%--<br/>--%>
-        <%--<a href="logout">Вход</a>--%>
-        <%--<br/>--%>
-        <%--<a href="logout">Выход</a>--%>
-    </c:if>
-    <c:if test="${registered==false}">
-        <a href="login">Вход</a>
-    </c:if>
+    <p>
+        <c:if test="${registered==true}">
+            <img src="images/welcome/1-h-${imgID}.png" alt="Иллюстрация" align="left"
+                 vspace="5" hspace="5"/>
+            <br/>
+            <a href="allcards">Все карточки</a>
+            <br/>
+            <a href="alltaggroups">Все группы тегов</a>
+            <br/>
+            <a href="alltags">Все тэги</a>
+            <br/>
+            <a href="allmenus">Все категории</a>
+            <br/>
+            <a href="allcardparametertypes">Все типы параметров</a>
+            <br/>
+            <a href="allusers">Все пользователи</a>
+        </c:if>
+        <c:if test="${registered==false}">
+            <a href="login">Вход</a>
+        </c:if>
+    </p>
 </div>
 </body>
 </html>

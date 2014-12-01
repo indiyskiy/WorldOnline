@@ -29,12 +29,17 @@
 </header>
 <div class="container container-lower">
     <c:if test="${isLoaded}">
-        <br/>
-        Карта загружена под номером <a href="completecardinfo?cardID=${cardID}"> ${cardID}</a>
+        <p>
+            <img src="images/cardUpload/3-zagruzhena-${imgID}.png" alt="Иллюстрация" align="left"
+                 vspace="5" hspace="5"/>
+            Карта загружена под номером <a href="completecardinfo?cardID=${cardID}"> ${cardID}</a>
+        </p>
     </c:if>
-    <c:if test="${isLoaded}">
-        <br/>
-        Карта не загружена. Возможно, в базе уже есть карта с таким названием</a>
+    <c:if test="${not empty isLoaded and not isLoaded}">
+        <p>
+            <img src="images/cardNotUploaded/2-m-${imgID}.png" alt="Иллюстрация" align="left"
+                 vspace="5" hspace="5"/>
+        </p>
     </c:if>
     <br/>
 

@@ -29,27 +29,9 @@
     </div>
 </header>
 <div class="container container-lower">
-    Страница <c:forEach var="i" begin="0" end="${pages}">
-    <c:choose>
-        <c:when test="${i==0 && (''.equals(page) || empty  page )}">
-            <b> ${i} </b>
-        </c:when>
-        <c:when test="${i==page}">
-            <b> ${i} </b>
-        </c:when>
-        <c:otherwise>
-            <a href="allusers?Page=${i}">
-                    ${i}
-            </a>
-        </c:otherwise>
-    </c:choose>
-
-</c:forEach>
+    ${pagesString}
     <br/>
 
-    <form action="allusers" method="GET">
-        поиск
-    </form>
     <table border="" width="70%" align="center">
         <tr>
             <td width="3%">
@@ -62,33 +44,43 @@
                 Дата регистрации
             </td>
             <td>
-                Последний визит
+                Последний выход в он-лайн
+            </td>
+            <td>
+                Последняя синхронизация
+            </td>
+            <td>
+                Язык
             </td>
         </tr>
         <c:forEach items="${userList}" var="user">
         <tr>
             <td width="3%">
                 <a href="completeuserinfo?userID=${user.userID}">${user.userID}</a>
+                <c:if test="${not empty user.additionalInformation}">*</c:if>
             </td>
             <td>
-                <c:if test="${not empty user.userHardware}">
-                    <c:forEach items="${mobilePlatforms}" var="platform">
-                        <c:if test="${user.userHardware.mobilePlatform==platform.value}">
-                            ${platform}
-                        </c:if>
-                    </c:forEach>
-                    <%--${user.userHardware.mobilePlatform}--%>
+                <c:if test="${not empty user.mobilePlatform}">
+                    ${user.mobilePlatform}
                 </c:if>
             </td>
             <td>
-                    <%--${user.userContent.registrationTimeStamp}--%>udk
+                    ${user.userRegistrationTimestamp}
             </td>
             <td>
-                    ${user.userContent.lastConnectionTimestamp}
+                    ${user.lastConnectionTimestamp}
+            </td>
+            <td>
+                    ${user.lastSynchronizeTimestamp}
+            </td>
+            <td>
+                    ${user.userLanguage}
             </td>
         <tr>
             </c:forEach>
     </table>
+    <br/>
+    ${pagesString}
 </div>
 </body>
 </html>

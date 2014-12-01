@@ -255,31 +255,38 @@
             <a href="addinfoelementtocard?cardID=${cardInfo.cardID}">Добавить</a>
             <br/>
             <c:forEach var="info" items="${infos}">
-                <div class="spoilerElement">
-                    <form method="POST" action="changecardinfoimage" name="form${info.informationElementID}"
-                          id="form${info.informationElementID}" enctype="multipart/form-data">
-                        <a href="completetextgroupinfo?textGroupID=${info.textGroupID}&cardID=${cardInfo.cardID}">
-                            Редактировать группу текстов
-                        </a>
+                <dl class="spoilerSub">
+                    <dt onclick="clickSpoilerSub(this);">id-${info.informationElementID}</dt>
+                    <dd>
+                        <a href="deletecardinfoelement?cardInfoID=${info.informationElementID}">Удалить</a>
                         <br/>
-                            ${info.text}
-                        <br/>
-                        <br/>
-                        <input type="hidden" value="${info.informationElementID}" name="informationElementID">
-                        <c:if test="${not empty info.imageID and info.imageID!=0}">
-                            Картинка:<input type="file" name="fileName" accept="image/*">
-                            <br>
-                            <input type="submit" value="Изменить картинку">
+
+                        <form method="POST" action="changecardinfoimage" name="form${info.informationElementID}"
+                              id="form${info.informationElementID}" enctype="multipart/form-data">
+                            <a href="completetextgroupinfo?textGroupID=${info.textGroupID}&cardID=${cardInfo.cardID}">
+                                Редактировать группу текстов
+                            </a>
                             <br/>
-                            <img src='image/${info.imageID}'/>
-                        </c:if>
-                        <c:if test="${empty info.imageID or info.imageID==0}">
-                            Картинка:<input type="file" name="fileName" accept="image/*">
-                            <br>
-                            <input type="submit" value="Добавить картинку">
-                        </c:if>
-                    </form>
-                </div>
+                                ${info.text}
+                            <br/>
+                            <br/>
+                            <input type="hidden" value="${info.informationElementID}" name="informationElementID">
+                            <c:if test="${not empty info.imageID and info.imageID!=0}">
+                                Картинка:<input type="file" name="fileName" accept="image/*">
+                                <br>
+                                <input type="submit" value="Изменить картинку">
+                                <br/>
+                                <img src='image/${info.imageID}'/>
+                            </c:if>
+                            <c:if test="${empty info.imageID or info.imageID==0}">
+                                Картинка:<input type="file" name="fileName" accept="image/*">
+                                <br>
+                                <input type="submit" value="Добавить картинку">
+                            </c:if>
+                        </form>
+                            <%--</div>--%>
+                    </dd>
+                </dl>
             </c:forEach>
         </dd>
     </dl>
@@ -287,7 +294,7 @@
 
 
 <c:if test="${cardType==9}">
-    <%--info type 10--%>
+    <%--info type 9--%>
     <dl class="spoiler">
         <dt onclick="clickSpoiler(this);">Время проведения</dt>
         <dd>
@@ -329,6 +336,74 @@
                             </script>
                             <br>
                             <input type="submit" value="Сохранить">
+                        </form>
+                    </dd>
+                </dl>
+            </c:if>
+        </dd>
+    </dl>
+</c:if>
+
+
+<c:if test="${cardType==4}">
+    <dl class="spoiler">
+        <dt onclick="clickSpoiler(this);">Маршрут</dt>
+        <dd>
+            <c:if test="${empty routeCard}">
+                <a href="addroute?cardID=${cardInfo.cardID}">Добавить</a>
+            </c:if>
+            <c:if test="${not empty routeCard}">
+                Маршрут № ${routeCard.cardRouteID}
+                <dl class="spoilerSub">
+                    <dt onclick="clickSpoilerSub(this);">Карты маршрута</dt>
+                    <dd>
+                        <c:forEach var="cardOfRoute" items="${routeCard.elements}">
+                            <a href="completecardinfo?cardID=${cardOfRoute.simpleCard.cardID}">
+                                [${cardOfRoute.simpleCard.cardID}] ${cardOfRoute.simpleCard.name}
+                            </a>
+                            <a href="deleteroutecard?routeElementID=${cardOfRoute.routeElementID}">
+                                Удалить
+                            </a>
+                            <br/>
+                        </c:forEach>
+                        <form method="post" action="addrouteelement">
+                            ID карточки <input type="text" value="" name="cardID"/>
+                            <input type="hidden" value="${routeCard.cardRouteID}" name="cardRouteID"/>
+                            <input type="submit" value="Добавить"/>
+                        </form>
+                    </dd>
+                </dl>
+                <dl class="spoilerSub">
+                    <dt onclick="clickSpoilerSub(this);">Точки маршрута</dt>
+                    <dd>
+                        <form action="editroutecoordinates" method="post">
+                            <c:forEach var="coordinate" items="${routeCard.routeCoordinates}">
+                                [${coordinate.position}]
+                                <input type="text" name="lat${coordinate.routeCoordinateID}"
+                                       value="${coordinate.latitude}">
+                                -
+                                <input type="text" name="lon${coordinate.routeCoordinateID}"
+                                       value="${coordinate.longitude}">
+                                <a href="deleteroutecoordinate?coordinateID=${coordinate.routeCoordinateID}">удалить</a>
+                                <a href="updownroutecoordinate?routeCoordinateID=${coordinate.routeCoordinateID}&reposition=DOWN">
+                                    <img src="images/Down_arrow.png"/>
+                                </a>
+                                <a href="updownroutecoordinate?routeCoordinateID=${coordinate.routeCoordinateID}&reposition=UP">
+                                    <img src="images/Up_arrow.png"/>
+                                </a>
+                                <br/>
+                            </c:forEach>
+                            <input type="submit" value="Сохранить">
+                        </form>
+                        <form action="addroutecoordinate" method="post">
+                            <input type="hidden" name="routeCardID" value="${routeCard.routeCardID}"/>:
+                            <input type="text" name="latitude" value="">
+                            <br/>
+                            <input type="text" name="longitude" value=""/>
+                            Номер <input type="hidden" name="position" value="${routeCard.coordinateSize}"/>
+                            <input type="hidden" name="routeCardID" value="${routeCard.coordinateSize}"/>
+                            <br/>
+                            <input type="submit" value="Добавить"/>
                         </form>
                     </dd>
                 </dl>

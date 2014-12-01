@@ -67,20 +67,28 @@
             </td>
         </tr>
         <c:forEach items="${cardList}" var="card">
-            <tr>
-                <td>
-                    <a href='completecardinfo?cardID=${card.cardID}'> ${card.cardID}</a>
-                </td>
-                <td>
-                        ${card.cardName}
-                </td>
-                <td>
-                    <c:forEach items="${cardTypes}" var="cardType">
-                        <c:if test="${cardType.value==card.cardType}">
-                            ${cardType.text}
-                        </c:if>
-                    </c:forEach>
-                </td>
+            <c:if test="${card.cardState==1}">
+                <tr bgcolor="#d6dafc">
+            </c:if>
+            <c:if test="${card.cardState==2}">
+                <tr bgcolor="#ffd3d3">
+            </c:if>
+            <c:if test="${card.cardState==3}">
+                <tr>
+            </c:if>
+            <td>
+                <a href='completecardinfo?cardID=${card.cardID}'> ${card.cardID}</a>
+            </td>
+            <td>
+                    ${card.cardName}
+            </td>
+            <td>
+                <c:forEach items="${cardTypes}" var="cardType">
+                    <c:if test="${cardType.value==card.cardType}">
+                        ${cardType.text}
+                    </c:if>
+                </c:forEach>
+            </td>
             </tr>
         </c:forEach>
     </table>

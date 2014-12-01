@@ -714,6 +714,123 @@
     </servlet-mapping>
 
 
+    <!--Card Parameter Type info-->
+    <servlet>
+        <display-name>CompleteCardParameterTypeInfoServlet</display-name>
+        <servlet-name>CompleteCardParameterTypeInfoServlet</servlet-name>
+        <servlet-class>view.servlet.admin.CompleteCardParameterTypeInfoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CompleteCardParameterTypeInfoServlet</servlet-name>
+        <url-pattern>/completecardparametertypeinfo</url-pattern>
+    </servlet-mapping>
+
+
+    <!--Card Parameter Type image-->
+    <servlet>
+        <display-name>AllCardParameterTypeIconServlet</display-name>
+        <servlet-name>AllCardParameterTypeIconServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AllCardParameterTypeIconServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AllCardParameterTypeIconServlet</servlet-name>
+        <url-pattern>/allcardparametertypeicon</url-pattern>
+    </servlet-mapping>
+
+
+    <!--delete info element-->
+    <servlet>
+        <display-name>DeleteCardInfoElementServlet</display-name>
+        <servlet-name>DeleteCardInfoElementServlet</servlet-name>
+        <servlet-class>view.servlet.admin.DeleteCardInfoElementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteCardInfoElementServlet</servlet-name>
+        <url-pattern>/deletecardinfoelement</url-pattern>
+    </servlet-mapping>
+
+
+    <!--delete route card element-->
+    <servlet>
+        <display-name>DeleteRouteCardServlet</display-name>
+        <servlet-name>DeleteRouteCardServlet</servlet-name>
+        <servlet-class>view.servlet.admin.DeleteRouteCardServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteRouteCardServlet</servlet-name>
+        <url-pattern>/deleteroutecard</url-pattern>
+    </servlet-mapping>
+
+
+    <!--add route card element-->
+    <servlet>
+        <display-name>AddRouteElementServlet</display-name>
+        <servlet-name>AddRouteElementServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddRouteElementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddRouteElementServlet</servlet-name>
+        <url-pattern>/addrouteelement</url-pattern>
+    </servlet-mapping>
+
+
+    <!--add route card element-->
+    <servlet>
+        <display-name>CreateCardParameterTypeServlet</display-name>
+        <servlet-name>CreateCardParameterTypeServlet</servlet-name>
+        <servlet-class>view.servlet.admin.CreateCardParameterTypeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateCardParameterTypeServlet</servlet-name>
+        <url-pattern>/createcardparametertype</url-pattern>
+    </servlet-mapping>
+
+
+    <!--edit card parameter type -->
+    <servlet>
+        <display-name>EditCardParameterTypeServlet</display-name>
+        <servlet-name>EditCardParameterTypeServlet</servlet-name>
+        <servlet-class>view.servlet.admin.EditCardParameterTypeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditCardParameterTypeServlet</servlet-name>
+        <url-pattern>/editcardparametertype</url-pattern>
+    </servlet-mapping>
+
+
+    <!--edit card parameter type -->
+    <servlet>
+        <display-name>AddRouteServlet</display-name>
+        <servlet-name>AddRouteServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddRouteServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddRouteServlet</servlet-name>
+        <url-pattern>/addroute</url-pattern>
+    </servlet-mapping>
+
+
+    <!--edit card parameter type -->
+    <servlet>
+        <display-name>AddRouteCoordinateServlet</display-name>
+        <servlet-name>AddRouteCoordinateServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddRouteCoordinateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddRouteCoordinateServlet</servlet-name>
+        <url-pattern>/addroutecoordinate</url-pattern>
+    </servlet-mapping>
+
+
     <welcome-file-list>
         <welcome-file>index</welcome-file>
     </welcome-file-list>
@@ -813,18 +930,6 @@
     <servlet-mapping>
         <servlet-name>AllCardParameterTypesMobileServlet</servlet-name>
         <url-pattern>/mobile/allcardparametertypes</url-pattern>
-    </servlet-mapping>
-
-    <!--Get All Card Parameter Types-->
-    <servlet>
-        <display-name>CompleteCardParameterTypeInfoServlet</display-name>
-        <servlet-name>CompleteCardParameterTypeInfoServlet</servlet-name>
-        <servlet-class>view.servlet.phone.CompleteCardParameterTypeInfoServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>CompleteCardParameterTypeInfoServlet</servlet-name>
-        <url-pattern>/mobile/completecarparametertypeinfo</url-pattern>
     </servlet-mapping>
 
 

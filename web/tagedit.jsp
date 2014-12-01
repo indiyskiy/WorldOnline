@@ -66,12 +66,22 @@
         <dt onclick="clickSpoiler(this);">Иконка</dt>
         <dd>
             <c:if test="${not empty tag.iconID && tag.iconID!=0}">
-                Иконка тэга [${tag.iconID}] <a href="edittagimage?tagID=${tag.tagID}">Изменить</a>
+                <form action="edittagimage" method="post" enctype="multipart/form-data">
+                    Картинка:<input type="file" name="fileName" accept="image/*">
+                    <br/>
+                    <input type="hidden" name="tagID" value="${tag.tagID}"/>
+                    <input type="submit" value="Изменить"/>
+                </form>
                 <br/>
                 <img src='image/${tag.iconID}'/>
             </c:if>
             <c:if test="${empty tag.iconID || tag.iconID==0}">
-                <a href="edittagimage?tagID=${tag.tagID}">Загрузить иконку тега</a>
+                <form action="edittagimage" method="post" enctype="multipart/form-data">
+                    Картинка:<input type="file" name="fileName" accept="image/*">
+                    <br/>
+                    <input type="hidden" name="tagID" value="${tag.tagID}"/>
+                    <input type="submit" value="Загрузить"/>
+                </form>
             </c:if>
         </dd>
     </dl>
