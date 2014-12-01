@@ -178,6 +178,7 @@
         <class>model.database.worldonlinedb.CardInformationElementEntity</class>
         <class>model.database.worldonlinedb.WeatherEntity</class>
         <class>model.database.worldonlinedb.ExchangeRatesEntity</class>
+        <class>model.database.worldonlinedb.GlobalUpdateEntity</class>
         <!-- <properties>
              <property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/worldonline"/>
              <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
