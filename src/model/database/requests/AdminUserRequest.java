@@ -20,7 +20,6 @@ import org.intellij.lang.annotations.Language;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class AdminUserRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, AdminUserRequest.class);
@@ -30,6 +29,7 @@ public class AdminUserRequest {
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
+        ProtectAdminLevel protectAdminLevel = ProtectAdminLevel.Unregistered;
         try {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT AdminUser.AdminRole FROM AdminUser  " +
@@ -40,14 +40,14 @@ public class AdminUserRequest {
             ps.setString(1, key);
             rs = ps.executeQuery();
             if (rs.first()) {
-                return ProtectAdminLevel.parseInt(rs.getInt("AdminUser.AdminRole"));
+                protectAdminLevel = ProtectAdminLevel.parseInt(rs.getInt("AdminUser.AdminRole"));
             }
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return ProtectAdminLevel.Unregistered;
+        return protectAdminLevel;
     }
 
     public static String getKey(LoginRequest loginRequest) {
@@ -55,6 +55,7 @@ public class AdminUserRequest {
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
+        String key = null;
         try {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT AdminUserName,AdminUserPassword " +
@@ -68,51 +69,69 @@ public class AdminUserRequest {
             if (rs.first()) {
                 String login = rs.getString("AdminUserName");
                 String password = rs.getString("AdminUserPassword");
-                return Md5Hash.getMd5Hash(login + " @#$%^ " + password);
+                key = Md5Hash.getMd5Hash(login + " @#$%^ " + password);
             }
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return null;
+        return key;
     }
 
 
     public static boolean addAdminUser(AdminUserEntity adminUser) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        boolean b = false;
         try {
             session.beginTransaction();
             session.save(adminUser);
             session.getTransaction().commit();
             session.flush();
-            return true;
+            b = true;
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
+        return b;
     }
 
 
     public static boolean editAdminUser(AdminUserEntity adminUser) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        boolean b = false;
         try {
             session.beginTransaction();
             session.update(adminUser);
             session.getTransaction().commit();
             session.flush();
-            return true;
+            b = true;
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
+        return b;
     }
 
     public static Long countUsers() {
+        Long res = null;
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-        return (Long) session.createCriteria(AdminUserEntity.class).setProjection(Projections.rowCount()).uniqueResult();
+        try {
+            res = (Long) session.createCriteria(AdminUserEntity.class).setProjection(Projections.rowCount()).uniqueResult();
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return res;
     }
 
 
@@ -133,6 +152,7 @@ public class AdminUserRequest {
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
+        int counter = 0;
         try {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT count(*) AS counter " +
@@ -142,14 +162,14 @@ public class AdminUserRequest {
             ps.setInt(1, protectAdminLevel.getValue());
             rs = ps.executeQuery();
             if (rs.first()) {
-                return rs.getInt("counter");
+                counter = rs.getInt("counter");
             }
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return 0;
+        return counter;
     }
 
     public static void addUser(String name, String pass, boolean confirmed, ProtectAdminLevel protectAdminLevel, String mail, String firstName, String lastName) {
@@ -223,6 +243,8 @@ public class AdminUserRequest {
             session.getTransaction().commit();
             session.flush();
             b = true;
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -256,6 +278,5 @@ public class AdminUserRequest {
         str = Md5Hash.getMd5Hash(str);
         return str;
     }
-
 
 }

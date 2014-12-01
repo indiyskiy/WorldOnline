@@ -3,6 +3,7 @@ package model.phone.requesthandler;
 import controller.phone.entity.AllMenuIDsRequest;
 import controller.phone.entity.MobileRequest;
 import controller.phone.entity.ParsedRegistrationRequest;
+import helper.TimeManager;
 import model.database.requests.UserRequests;
 import model.database.worldonlinedb.UserContentEntity;
 import model.database.worldonlinedb.UserEntity;
@@ -21,7 +22,7 @@ public class UserRegistrationHandler implements MobileHandler {
                 parsedRegistrationRequest.getDeviceToken(),
                 parsedRegistrationRequest.getMobilePlatform());
         UserContentEntity userContent = UserContentEntity.getNewUserContentEntity();
-        UserEntity userEntity = new UserEntity(userPersonalData, userHardware, userContent);
+        UserEntity userEntity = new UserEntity(userPersonalData, userHardware, userContent, TimeManager.currentTime());
         UserRequests.addUser(userEntity);
         RegistrationResponse registrationResponse = new RegistrationResponse();
         registrationResponse.setUserID(userEntity.getUserID());

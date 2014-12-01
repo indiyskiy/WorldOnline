@@ -10,7 +10,10 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.intellij.lang.annotations.Language;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
 
 public class ExchangeRatesRequest {
     private static final LoggerFactory loggerFactory = new LoggerFactory(Component.Database, ExchangeRatesRequest.class);
@@ -34,6 +37,7 @@ public class ExchangeRatesRequest {
         DatabaseConnection dbConnection = new DatabaseConnection("getActualExchangeRates");
         PreparedStatement ps = null;
         ResultSet rs = null;
+        ExchangeRatesEntity exchangeRatesEntity = null;
         try {
             Connection connection = dbConnection.getConnection();
             @Language(value = "MySQL") String sql = "SELECT ExchangeRates.ActualDayTimestamp, " +
@@ -48,19 +52,19 @@ public class ExchangeRatesRequest {
             ps.setTimestamp(1, timestamp);
             rs = ps.executeQuery();
             if (rs.first()) {
-                ExchangeRatesEntity exchangeRatesEntity = new ExchangeRatesEntity();
+                exchangeRatesEntity = new ExchangeRatesEntity();
                 exchangeRatesEntity.setActualDayTimestamp(rs.getTimestamp("ExchangeRates.ActualDayTimestamp"));
                 exchangeRatesEntity.setDownloadTimestamp(rs.getTimestamp("ExchangeRates.DownloadTimestamp"));
                 exchangeRatesEntity.setUsd(rs.getDouble("ExchangeRates.USD"));
                 exchangeRatesEntity.setEur(rs.getDouble("ExchangeRates.EUR"));
                 exchangeRatesEntity.setExchangeRatesID(rs.getLong("ExchangeRates.ExchangeRatesID"));
-                return exchangeRatesEntity;
+
             }
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return null;
+        return exchangeRatesEntity;
     }
 }

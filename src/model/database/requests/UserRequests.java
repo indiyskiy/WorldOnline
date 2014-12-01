@@ -1,7 +1,10 @@
 package model.database.requests;
 
 import helper.TimeManager;
+import model.additionalentity.admin.SimpleUserInfo;
 import model.constants.Component;
+import model.constants.databaseenumeration.LanguageType;
+import model.constants.databaseenumeration.MobilePlatform;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.UserContentEntity;
@@ -37,6 +40,11 @@ public class UserRequests {
                 session.close();
             }
         }
+    }
+
+    public static void userOnline(UserEntity userEntity) {
+        userEntity.getUserContent().setLastConnectionTimestamp(TimeManager.currentTime());
+        editUser(userEntity);
     }
 
     public static ArrayList<UserEntity> getAllUsers() {
@@ -194,6 +202,7 @@ public class UserRequests {
         DatabaseConnection dbConnection = new DatabaseConnection("getUserByDeviceID");
         PreparedStatement ps = null;
         ResultSet rs = null;
+        RestoreUserResponse restoreUserResponse = null;
         try {
             Connection connection = dbConnection.getConnection();
             @Language(value = "MySQL") String sql = "SELECT User.UserID FROM User " +
@@ -203,16 +212,15 @@ public class UserRequests {
             ps.setString(1, deviceID);
             rs = ps.executeQuery();
             if (rs.first()) {
-                RestoreUserResponse restoreUserResponse = new RestoreUserResponse();
+                restoreUserResponse = new RestoreUserResponse();
                 restoreUserResponse.setUserID(rs.getLong("User.UserID"));
-                return restoreUserResponse;
             }
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return null;
+        return restoreUserResponse;
     }
 
     public static void deleteOldUserInfo(long userID) {
@@ -274,5 +282,66 @@ public class UserRequests {
     public static void userGlobalUpdated(UserEntity userEntity) {
         userEntity.getUserContent().setLastSynchronizeTimestamp(TimeManager.currentTime());
         updateUserContent(userEntity.getUserContent());
+    }
+
+    public static ArrayList<SimpleUserInfo> getAllSimpleUsers(long offset, int limit) {
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllSimpleUsers");
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<SimpleUserInfo> simpleUserInfos = new ArrayList<>();
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language(value = "MySQL") String sql = "SELECT User.UserID, " +
+                    "User.UserRegistrationTimestamp, " +
+                    "UserHardware.MobilePlatform, " +
+                    "UserPersonalData.UserLanguage, " +
+                    "UserPersonalData.AdditionalInformation, " +
+                    "UserContent.LastConnectionTimestamp, " +
+                    "UserContent.LastSynchronizeTimestamp " +
+                    "FROM User " +
+                    "JOIN UserHardware ON (User.UserHardwareID=UserHardware.UserHardwareID) " +
+                    "JOIN UserContent ON (User.UserContentID=UserContent.UserContentID) " +
+                    "JOIN UserPersonalData ON (User.UserPersonalDataID=UserPersonalData.UserPersonalDataID) " +
+                    "ORDER BY UserContent.LastConnectionTimestamp DESC LIMIT ?,?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, offset);
+            ps.setInt(2, limit);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SimpleUserInfo simpleUserInfo = new SimpleUserInfo();
+                simpleUserInfo.setUserID(rs.getLong("User.UserID"));
+                simpleUserInfo.setUserLanguage(LanguageType.parseInt(rs.getInt("UserPersonalData.UserLanguage")));
+                simpleUserInfo.setAdditionalInformation(rs.getString("UserPersonalData.AdditionalInformation"));
+                simpleUserInfo.setLastConnectionTimestamp(rs.getTimestamp("UserContent.LastConnectionTimestamp"));
+                simpleUserInfo.setLastSynchronizeTimestamp(rs.getTimestamp("UserContent.LastSynchronizeTimestamp"));
+                simpleUserInfo.setUserRegistrationTimestamp(rs.getTimestamp("User.UserRegistrationTimestamp"));
+                simpleUserInfo.setMobilePlatform(MobilePlatform.parseInt(rs.getInt("UserHardware.MobilePlatform")));
+                simpleUserInfos.add(simpleUserInfo);
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return simpleUserInfos;
+    }
+
+    public static void userOnline(Long userID) {
+        DatabaseConnection dbConnection = new DatabaseConnection("userOnline");
+        PreparedStatement ps = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language(value = "MySQL") String sql = "UPDATE UserContent JOIN User ON (User.UserContentID=UserContent.UserContentID) " +
+                    "SET LastConnectionTimestamp=? " +
+                    "WHERE User.UserID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setTimestamp(1, TimeManager.currentTime());
+            ps.setLong(2, userID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
     }
 }

@@ -21,6 +21,7 @@ public class CompleteCardInfo {
     private ArrayList<CardBlock> cardBlocks = new ArrayList<>();
     private ArrayList<CardInfoElement> cardInfoElements = new ArrayList<>();
     private SimpleUrgencyTime urgencyTime;
+    private RouteCard routeCard;
 
     public CardInfo getCardInfo() {
         return cardInfo;
@@ -116,6 +117,14 @@ public class CompleteCardInfo {
 
     public void setCardInfoElements(ArrayList<CardInfoElement> cardInfoElements) {
         this.cardInfoElements = cardInfoElements;
+    }
+
+    public RouteCard getRouteCard() {
+        return routeCard;
+    }
+
+    public void setRouteCard(RouteCard routeCard) {
+        this.routeCard = routeCard;
     }
 
     public void uploadCardBlocks() {

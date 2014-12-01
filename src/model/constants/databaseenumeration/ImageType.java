@@ -7,7 +7,8 @@ public enum ImageType {
     MenuPhoto(4, "Фото иконки в меню"),
     MenuIcon(5, "Иконка меню"),
     CardInformationElementImage(6, "Кортинка элемента информации карты"),
-    Banner(7, "Рекламный баннер");
+    Banner(7, "Рекламный баннер"),
+    CardParameterIcon(8, "Иконка параметра карточки");
 
     private final int value;
     private final String text;

@@ -1,10 +1,12 @@
 package model.database.worldonlinedb;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @javax.persistence.Table(name = "User", schema = "", catalog = "worldonline")
 @Entity
 public class UserEntity {
+
     @javax.persistence.Column(name = "UserID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,15 +20,19 @@ public class UserEntity {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "UserContentID")
     private UserContentEntity userContent;
+    @javax.persistence.Column(name = "UserRegistrationTimestamp")
+    @Basic
+    private Timestamp userRegistrationTimestamp;
 
     public UserEntity() {
 
     }
 
-    public UserEntity(UserPersonalDataEntity userPersonalData, UserHardwareEntity userHardware, UserContentEntity userContent) {
+    public UserEntity(UserPersonalDataEntity userPersonalData, UserHardwareEntity userHardware, UserContentEntity userContent, Timestamp userRegistrationTimestamp) {
         this.userPersonalData = userPersonalData;
         this.userHardware = userHardware;
         this.userContent = userContent;
+        this.userRegistrationTimestamp = userRegistrationTimestamp;
     }
 
     public Long getUserID() {
@@ -79,6 +85,14 @@ public class UserEntity {
         return true;
     }
 
+    public Timestamp getUserRegistrationTimestamp() {
+        return userRegistrationTimestamp;
+    }
+
+    public void setUserRegistrationTimestamp(Timestamp userRegistrationTimestamp) {
+        this.userRegistrationTimestamp = userRegistrationTimestamp;
+    }
+
     @Override
     public int hashCode() {
         int result = userID != null ? userID.hashCode() : 0;
@@ -88,9 +102,4 @@ public class UserEntity {
         return result;
     }
 
-    public void updateLastSinc() {
-        if (this.userContent != null) {
-            this.userContent.updateLastSinc();
-        }
-    }
 }

@@ -24,7 +24,6 @@ import org.intellij.lang.annotations.Language;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -191,8 +190,10 @@ public class DishRequest {
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
+        if (priceLimitString == null || priceLimitString.isEmpty()) {
+            return mobilePrices;
+        }
         try {
-
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql =
                     "SELECT Price.PriceID, " +
@@ -367,6 +368,7 @@ public class DishRequest {
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
+        CompletePriceInfo completePriceInfo = null;
         try {
             connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT Price.PriceID,TextGroup.TextGroupID,Text.Text FROM Price " +
@@ -378,21 +380,21 @@ public class DishRequest {
             ps.setLong(1, priceID);
             rs = ps.executeQuery();
             if (rs.first()) {
-                CompletePriceInfo completePriceInfo = new CompletePriceInfo();
+                completePriceInfo = new CompletePriceInfo();
                 completePriceInfo.setPriceID(rs.getLong("Price.PriceID"));
                 completePriceInfo.setName(rs.getString("Text.Text"));
                 completePriceInfo.setTextGroupID(rs.getLong("TextGroup.TextGroupID"));
                 ArrayList<SimpleDish> simpleDishes = getPriceDishes(priceID);
                 completePriceInfo.setCategories(simpleDishes);
                 completePriceInfo.setCards(CardRequest.getAllPriceCards(priceID));
-                return completePriceInfo;
+
             }
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return null;
+        return completePriceInfo;
     }
 
     private static ArrayList<SimpleDish> getPriceDishes(Long priceID) {
@@ -463,31 +465,37 @@ public class DishRequest {
 
     public static PriceEntity getPrice(Long priceID) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        PriceEntity priceEntity = null;
         try {
-            return (PriceEntity) session.get(PriceEntity.class, priceID);
+            priceEntity = (PriceEntity) session.get(PriceEntity.class, priceID);
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
+        return priceEntity;
     }
 
 
     public static DishCategoryEntity getCategory(Long categoryID) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        DishCategoryEntity dishCategoryEntity = null;
         try {
-            return (DishCategoryEntity) session.get(DishCategoryEntity.class, categoryID);
+            dishCategoryEntity = (DishCategoryEntity) session.get(DishCategoryEntity.class, categoryID);
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
+        return dishCategoryEntity;
     }
 
     public static boolean isDishExist(String nameRu, String nameEn, Double coast, Long priceID) {
-//        loggerFactory.debug("find " + nameRu + " " + nameEn + " " + coast + " " + priceID);
         if (priceID == 0) {
-//            loggerFactory.debug("priceID==0 => not found");
             return false;
         }
         DatabaseConnection dbConnection = new DatabaseConnection("isDishExist");
@@ -501,7 +509,6 @@ public class DishRequest {
                     "FROM Dish " +
                     "JOIN Text AS TextRu ON (Dish.DishNameID = TextRu.TextGroupID AND TextRu.LanguageID = 1) " +
                     "JOIN Text AS TextEn ON (Dish.DishNameID = TextEn.TextGroupID AND TextEn.LanguageID = 2) " +
-//                    "JOIN CardPriceLink ON (CardPriceLink.PriceID=Dish.PriceID) " +
                     "WHERE TextRu.Text LIKE ? AND  TextEn.Text LIKE ? AND Dish.Cost=? AND Dish.PriceID=?";
             ps = connection.prepareStatement(sql);
             ps.setString(1, nameRu);

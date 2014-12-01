@@ -79,6 +79,7 @@ public class DatabaseConnection {
             connection.close();
 //            loggerFactory.debug("connection closerd for caller " + callerName);
 //            }
+            connectionCounterMap.put(callerName, connectionCounterMap.get(callerName) - 1);
             if (ps != null) {
                 ps.close();
             }

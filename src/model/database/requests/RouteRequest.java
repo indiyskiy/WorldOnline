@@ -2,6 +2,10 @@ package model.database.requests;
 
 import helper.StringHelper;
 import model.additionalentity.CompleteCardRouteInfo;
+import model.additionalentity.SimpleCard;
+import model.additionalentity.admin.CompleteCardInfo;
+import model.additionalentity.admin.RouteCard;
+import model.additionalentity.admin.SimpleRouteElement;
 import model.additionalentity.phone.MobileCardInfo;
 import model.additionalentity.phone.MobileCardRoute;
 import model.additionalentity.phone.MobileRouteCoordinate;
@@ -327,4 +331,234 @@ public class RouteRequest {
             dbConnection.closeConnections(ps, rs);
         }
     }
+
+    public static void setCardRoute(CompleteCardInfo card, long cardID) {
+        setRouteCards(card, cardID);
+        setRouteCoordinates(card, cardID);
+    }
+
+    private static void setRouteCoordinates(CompleteCardInfo card, long cardID) {
+        DatabaseConnection dbConnection = new DatabaseConnection("addCoordinates");
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        RouteCard routeCard = card.getRouteCard();
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT " +
+                    "CardRoute.CardRouteID, " +
+                    "RouteCoordinate.RouteCoordinateID," +
+                    "RouteCoordinate.Latitude," +
+                    "RouteCoordinate.Longitude," +
+                    "RouteCoordinate.Position " +
+                    "FROM CardRoute " +
+                    "LEFT OUTER JOIN RouteCoordinate ON (RouteCoordinate.CardRouteID=CardRoute.CardRouteID) " +
+                    "WHERE CardRoute.CardID=? " +
+                    "ORDER BY RouteCoordinate.Position";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                if (routeCard == null) {
+                    routeCard = new RouteCard();
+                    routeCard.setCardRouteID(rs.getLong("CardRoute.CardRouteID"));
+                }
+                RouteCoordinateEntity routeCoordinateEntity = new RouteCoordinateEntity();
+                routeCoordinateEntity.setPosition(rs.getInt("RouteCoordinate.Position"));
+                routeCoordinateEntity.setLongitude(rs.getDouble("RouteCoordinate.Longitude"));
+                routeCoordinateEntity.setLatitude(rs.getDouble("RouteCoordinate.Latitude"));
+                routeCoordinateEntity.setRouteCoordinateID(rs.getLong("RouteCoordinate.RouteCoordinateID"));
+                routeCard.getRouteCoordinates().add(routeCoordinateEntity);
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        card.setRouteCard(routeCard);
+    }
+
+
+    private static void setRouteCards(CompleteCardInfo card, long cardID) {
+        DatabaseConnection dbConnection = new DatabaseConnection("addCoordinates");
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        RouteCard routeCard = card.getRouteCard();
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT " +
+                    "CardRoute.CardRouteID, " +
+                    "RouteElement.RouteElementNumber, " +
+                    "RouteElement.RouteElementID, " +
+                    "Card.CardName," +
+                    "Card.CardID " +
+                    "FROM CardRoute " +
+                    "LEFT OUTER JOIN RouteElement ON (RouteElement.CardRouteID=CardRoute.CardRouteID) " +
+                    "LEFT OUTER JOIN Card ON (Card.CardID=RouteElement.PlaceCardID) " +
+                    "WHERE CardRoute.CardID=? " +
+                    "ORDER BY RouteElement.RouteElementNumber";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                if (routeCard == null) {
+                    routeCard = new RouteCard();
+                    routeCard.setCardRouteID(rs.getLong("CardRoute.CardRouteID"));
+                }
+                SimpleRouteElement simpleRouteElement = new SimpleRouteElement();
+                simpleRouteElement.setPosition(rs.getInt("RouteElement.RouteElementNumber"));
+                simpleRouteElement.setRouteElementID(rs.getLong("RouteElement.RouteElementID"));
+                SimpleCard simpleCard = new SimpleCard();
+                simpleRouteElement.setSimpleCard(simpleCard);
+                simpleCard.setCardID(rs.getLong("Card.CardID"));
+                simpleCard.setName(rs.getString("Card.CardName"));
+                routeCard.getElements().add(simpleRouteElement);
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        card.setRouteCard(routeCard);
+    }
+
+    public static RouteElementEntity getRouteElement(Long routeElementID) {
+        RouteElementEntity routeElementEntity = null;
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            routeElementEntity = (RouteElementEntity) session.get(RouteElementEntity.class, routeElementID);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return routeElementEntity;
+    }
+
+    public static void deleteRouteElement(RouteElementEntity routeElementEntity) {
+        deleteRouteElement(routeElementEntity.getRouteElementID());
+    }
+
+    private static void deleteRouteElement(Long routeElementID) {
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteCardParameter");
+        Connection connection;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "DELETE FROM RouteElement WHERE RouteElement.RouteElementID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, routeElementID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+
+    }
+
+    public static CardRouteEntity getCardRoute(Long cardRouteID) {
+        CardRouteEntity cardRouteEntity = null;
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            cardRouteEntity = (CardRouteEntity) session.get(CardRouteEntity.class, cardRouteID);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return cardRouteEntity;
+    }
+
+    public static int getMaxNumber(CardRouteEntity cardRouteEntity) {
+        DatabaseConnection dbConnection = new DatabaseConnection("getMaxNumber");
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int number = 0;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT RouteElement.RouteElementNumber " +
+                    "FROM RouteElement " +
+                    "WHERE RouteElement.CardRouteID=? " +
+                    "ORDER BY RouteElement.RouteElementNumber DESC LIMIT 0,1";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardRouteEntity.getCardRouteID());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                number = rs.getInt("RouteElement.RouteElementNumber");
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return number;
+    }
+
+    public static boolean isCardRouteExist(Long cardID) {
+        DatabaseConnection dbConnection = new DatabaseConnection("getMaxNumber");
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean b = false;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT CardRoute.CardRouteID " +
+                    "FROM CardRoute " +
+                    "WHERE CardRoute.CardID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                b = true;
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return b;
+    }
+
+    public static int getMaxCoordinateNumber(Long routeCardID) {
+        DatabaseConnection dbConnection = new DatabaseConnection("getMaxNumber");
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int n = 0;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT RouteCoordinate.Position " +
+                    "FROM RouteCoordinate " +
+                    "WHERE RouteCoordinate.CardRouteID=? " +
+                    "ORDER BY RouteCoordinate.Position DESC LIMIT 0,1";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, routeCardID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                n = rs.getInt("RouteCoordinate.Position");
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return n;
+    }
+
+    public static void moveCoordinates(int position, Long routeCardID) {
+        DatabaseConnection dbConnection = new DatabaseConnection("getMaxNumber");
+        PreparedStatement ps = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "UPDATE RouteCoordinate SET Position=Position+1 " +
+                    "WHERE Position>=? AND CardRouteID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, position);
+            ps.setLong(2, routeCardID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+    }
 }
+

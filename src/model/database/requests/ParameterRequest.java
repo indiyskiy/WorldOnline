@@ -4,6 +4,7 @@ import controller.phone.entity.AllCardParameterTypesRequest;
 import helper.ParameterValidator;
 import model.additionalentity.admin.CardParameter;
 import model.additionalentity.admin.CompleteCardInfo;
+import model.additionalentity.admin.CompleteCardParameterTypeInfo;
 import model.additionalentity.admin.ParameterType;
 import model.additionalentity.phone.MobileCardInfo;
 import model.additionalentity.phone.MobileParameter;
@@ -290,11 +291,12 @@ public class ParameterRequest {
                             "CardParameterType.Translatable," +
                             "CardParameterType.Multiply " +
                             "FROM CardParameterType " +
-                            "JOIN TextGroup ON (CardParameterType.CardParameterTypeName =TextGroup.TextGroupID) " +
-                            "JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
-                            "WHERE Text.LanguageID=" + LanguageType.Russian.getValue() + " " +
+                            "LEFT OUTER JOIN TextGroup ON (CardParameterType.CardParameterTypeName =TextGroup.TextGroupID) " +
+                            "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                            "WHERE (Text.LanguageID=? OR Text.TextID IS NULL) " +
                             "ORDER BY CardParameterType.Block";
             ps = connection.prepareStatement(sqlString);
+            ps.setInt(1, LanguageType.Russian.getValue());
             rs = ps.executeQuery();
             while (rs.next()) {
                 ParameterType parameterType = new ParameterType();
@@ -387,5 +389,88 @@ public class ParameterRequest {
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
+    }
+
+    public static CompleteCardParameterTypeInfo getCompleteCardParameterTypeInfo(Long cardParameterTypeID) {
+        DatabaseConnection dbConnection = new DatabaseConnection("isCardParameterExist");
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        CompleteCardParameterTypeInfo completeCardParameterTypeInfo = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT " +
+                    "CardParameterType.CardParameterTypeID, " +
+                    "CardParameterType.Block," +
+                    "CardParameterType.DataType," +
+                    "CardParameterType.Multiply," +
+                    "CardParameterType.Translatable," +
+                    "CardParameterType.Position," +
+                    "Text.Text, " +
+                    "TextGroup.TextGroupID," +
+                    "Image.ImageID " +
+                    "FROM CardParameterType " +
+                    "LEFT OUTER JOIN TextGroup ON (CardParameterType.CardParameterTypeName=TextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+                    "LEFT OUTER JOIN Image ON (Image.ImageID=CardParameterType.ImageID) " +
+                    "WHERE (Text.LanguageID=" + LanguageType.Russian.getValue() + " OR Text.TextID IS NULL) AND CardParameterType.CardParameterTypeID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardParameterTypeID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                completeCardParameterTypeInfo = new CompleteCardParameterTypeInfo();
+                completeCardParameterTypeInfo.setName(rs.getString("Text.Text"));
+                completeCardParameterTypeInfo.setCardParameterTypeID(rs.getLong("CardParameterType.CardParameterTypeID"));
+                completeCardParameterTypeInfo.setImageID(rs.getLong("Image.ImageID"));
+                completeCardParameterTypeInfo.setMultiply(rs.getBoolean("CardParameterType.Multiply"));
+                completeCardParameterTypeInfo.setTextGroupID(rs.getLong("TextGroup.TextGroupID"));
+                completeCardParameterTypeInfo.setTranslatable(rs.getBoolean("CardParameterType.Translatable"));
+                completeCardParameterTypeInfo.setBlock(ApplicationBlock.parseInt(rs.getInt("CardParameterType.Block")));
+                completeCardParameterTypeInfo.setDataType(DataType.parseInt(rs.getInt("CardParameterType.DataType")));
+                completeCardParameterTypeInfo.setPosition(rs.getInt("CardParameterType.Position"));
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return completeCardParameterTypeInfo;
+    }
+
+    public static void editCardParameterType(CardParameterTypeEntity cardParameterTypeEntity) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.update(cardParameterTypeEntity);
+            session.getTransaction().commit();
+            session.flush();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static int getMaxNumber(Integer block) {
+        DatabaseConnection dbConnection = new DatabaseConnection("isCardExist");
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        int b = 0;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT CardParameterType.Position FROM  CardParameterType " +
+                    "WHERE CardParameterType.Block=? ORDER BY CardParameterType.Position DESC LIMIT 0,1";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, block);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                b = rs.getInt("CardParameterType.Position");
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return b;
     }
 }

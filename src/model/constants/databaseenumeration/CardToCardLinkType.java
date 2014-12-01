@@ -6,7 +6,12 @@ public enum CardToCardLinkType {
     Photographer(3),
     PlaceOnPhoto(4),
     LinkedPlace(5),
-    Venue(6);
+    Venue(6),
+    CDSOffice(7),
+    CDSObject(8),
+    LuckyStar(9),
+    Electra(10),
+    CityTour(11);
 
     private final int value;
 
@@ -37,6 +42,16 @@ public enum CardToCardLinkType {
                 return "Связанное место";
             case Venue:
                 return "Место проведения";
+            case CDSOffice:
+                return "Офис ЦДС";
+            case CDSObject:
+                return "Объекты ЦДС";
+            case LuckyStar:
+                return "Звезда удачи";
+            case Electra:
+                return "Велопрокат";
+            case CityTour:
+                return "Маршруты City Tour";
             default:
                 return "Подозрительный тип-сообщите о нём программистам!";
         }

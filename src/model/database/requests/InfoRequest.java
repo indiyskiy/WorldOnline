@@ -161,4 +161,22 @@ public class InfoRequest {
             dbConnection.closeConnections(ps, null);
         }
     }
+
+    public static void deleteInfoElement(Long cardInfoID) {
+        DatabaseConnection dbConnection = new DatabaseConnection("deleteInfoElement");
+        Connection connection;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            final @Language("MySQL") String sql = "DELETE FROM CardInformationElement " +
+                    "WHERE CardInformationElementID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardInfoID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+    }
 }

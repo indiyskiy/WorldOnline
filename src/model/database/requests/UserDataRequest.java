@@ -207,7 +207,7 @@ public class UserDataRequest {
         //prices to update
         try {
             Connection connection = dbConnection.getConnection();
-            @Language("MySQL") String sql = "SELECT Price.PriceID FROM Price " +
+            @Language("MySQL") String sql = "SELECT DISTINCT Price.PriceID FROM Price " +
                     "JOIN CardPriceLink ON (Price.PriceID=CardPriceLink.PriceID) " +
                     "JOIN Card ON (CardPriceLink.CardID=Card.CardID) " +
                     "WHERE Price.PriceID NOT IN (" +
@@ -358,7 +358,7 @@ public class UserDataRequest {
     }
 
     public static UserPriceEntity getUserPrice(Long userID, Long priceID) {
-        DatabaseConnection dbConnection = new DatabaseConnection("getUserPrice");
+        DatabaseConnection dbConnection = new DatabaseConnection("getUserPrice 1");
         PreparedStatement ps = null;
         ResultSet rs = null;
         UserPriceEntity userPriceEntity = null;
@@ -461,6 +461,8 @@ public class UserDataRequest {
             session.update(globalUpdateEntity);
             session.getTransaction().commit();
             session.flush();
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -470,7 +472,7 @@ public class UserDataRequest {
 
     public static UserGlobalUpdateStatus getUserStatus(Long userID) {
 
-        DatabaseConnection dbConnection = new DatabaseConnection("getUserPrice");
+        DatabaseConnection dbConnection = new DatabaseConnection("getUserPrice 2");
         PreparedStatement ps = null;
         ResultSet rs = null;
         UserGlobalUpdateStatus userGlobalUpdateStatus = null;
@@ -570,8 +572,8 @@ public class UserDataRequest {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "INSERT INTO UserCard (CardID,DownloadTimeStamp,LastUpdateTimeStamp,UserContentID) " +
                     "VALUES ";
-            for (int i = 0; i < cardsForCreate.size(); i++) {
-                sql += "(" + cardsForCreate.get(i) + ",'" + currentTime + "','" + currentTime + "'," + user.getUserContent().getUserContentID() + "),";
+            for (Long aCardsForCreate : cardsForCreate) {
+                sql += "(" + aCardsForCreate + ",'" + currentTime + "','" + currentTime + "'," + user.getUserContent().getUserContentID() + "),";
             }
             sql = sql.substring(0, sql.lastIndexOf(","));
             loggerFactory.debug(sql);
@@ -585,8 +587,52 @@ public class UserDataRequest {
         }
     }
 
-    public static void main(String[] args) {
-        String sq = "(),(),(),";
-        System.out.println(sq.substring(0, sq.lastIndexOf(",")));
+
+    public static void createUserPrices(UserEntity user, ArrayList<Long> pricesForCreate, Timestamp currentTime) {
+        if (pricesForCreate.isEmpty()) {
+            return;
+        }
+        DatabaseConnection dbConnection = new DatabaseConnection("createUserPrices");
+        PreparedStatement ps = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "INSERT INTO UserPrice (PriceID,DownloadTimeStamp,LastUpdateTimeStamp,UserContentID) " +
+                    "VALUES ";
+            for (Long aPriceForCreate : pricesForCreate) {
+                sql += "(" + aPriceForCreate + ",'" + currentTime + "','" + currentTime + "'," + user.getUserContent().getUserContentID() + "),";
+            }
+            sql = sql.substring(0, sql.lastIndexOf(","));
+            loggerFactory.debug(sql);
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
     }
+
+
+    public static void updateUserPrices(UserEntity user, ArrayList<Object> pricesForUpdate, Timestamp currentTime) {
+        if (pricesForUpdate.isEmpty()) {
+            return;
+        }
+        DatabaseConnection dbConnection = new DatabaseConnection("updateUserCards");
+        PreparedStatement ps = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "UPDATE UserPrice SET UserPrice.LastUpdateTimeStamp=? " +
+                    "WHERE UserPrice.PriceID IN (" + StringHelper.getStringFromArray(pricesForUpdate) + ") AND UserPrice.UserContentID=?";
+            ps = connection.prepareStatement(sql);
+            ps.setTimestamp(1, currentTime);
+            ps.setLong(2, user.getUserContent().getUserContentID());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+    }
+
 }

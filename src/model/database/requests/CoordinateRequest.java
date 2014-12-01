@@ -12,31 +12,34 @@ import org.intellij.lang.annotations.Language;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class CoordinateRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, CoordinateRequest.class);
 
     public static boolean addCardCoordinate(CardCoordinateEntity cardCoordinateEntity) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-//        Transaction transaction = null;
+        boolean b = false;
         try {
             session.beginTransaction();
             session.save(cardCoordinateEntity);
             session.getTransaction().commit();
             session.flush();
-            return true;
+            b = true;
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
+        return b;
     }
 
     public static CardCoordinateEntity getCardCoordinate(long cardID) {
         DatabaseConnection dbConnection = new DatabaseConnection("getCardCoordinate");
         PreparedStatement ps = null;
         ResultSet rs = null;
+        CardCoordinateEntity cardCoordinate = null;
         try {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT CardCoordinate.CardID," +
@@ -50,19 +53,18 @@ public class CoordinateRequest {
             ps.setLong(1, cardID);
             rs = ps.executeQuery();
             if (rs.first()) {
-                CardCoordinateEntity cardCoordinate = new CardCoordinateEntity();
+                cardCoordinate = new CardCoordinateEntity();
                 cardCoordinate.setCard(CardRequest.getCardByID(rs.getLong("CardCoordinate.CardID")));
                 cardCoordinate.setCardCoordinateID(rs.getLong("CardCoordinate.CardCoordinateID"));
                 cardCoordinate.setLatitude(rs.getDouble("CardCoordinate.Latitude"));
                 cardCoordinate.setLongitude(rs.getDouble("CardCoordinate.Longitude"));
-                return cardCoordinate;
             }
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return null;
+        return cardCoordinate;
     }
 
     public static boolean editCardCoordinate(CardCoordinateEntity cardCoordinate) {
@@ -74,6 +76,8 @@ public class CoordinateRequest {
             session.getTransaction().commit();
             session.flush();
             b = true;
+        } catch (Exception e) {
+            loggerFactory.error(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -92,6 +96,7 @@ public class CoordinateRequest {
         DatabaseConnection dbConnection = new DatabaseConnection("cardCoordinateExist");
         PreparedStatement ps = null;
         ResultSet rs = null;
+        boolean b = false;
         try {
             Connection connection = dbConnection.getConnection();
             @Language("MySQL") String sql = "SELECT 1 " +
@@ -102,14 +107,14 @@ public class CoordinateRequest {
             ps.setLong(1, cardEntity.getCardID());
             rs = ps.executeQuery();
             if (rs.first()) {
-                return true;
+                b = true;
             }
         } catch (Exception e) {
             loggerFactory.error(e);
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
-        return false;
+        return b;
     }
 }
 
