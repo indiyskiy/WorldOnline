@@ -1,8 +1,5 @@
 package view.servlet.admin;
 
-import model.additionalentity.admin.CardBlock;
-import model.additionalentity.admin.CardParameter;
-import model.additionalentity.admin.CardText;
 import model.additionalentity.admin.CompleteCardInfo;
 import model.constants.AdminRule;
 import model.constants.ApplicationBlock;
@@ -18,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class CompleteCardInfoServlet extends ProtectedServlet {
     LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, CompleteCardInfoServlet.class);
@@ -68,6 +64,9 @@ public class CompleteCardInfoServlet extends ProtectedServlet {
                     }
                     if (completeCardInfo.getUrgencyTime() != null) {
                         request.setAttribute("urgencyTime", completeCardInfo.getUrgencyTime());
+                    }
+                    if (completeCardInfo.getRouteCard() != null) {
+                        request.setAttribute("routeCard", completeCardInfo.getRouteCard());
                     }
                     request.setAttribute("cardBlocks", completeCardInfo.getCardBlocks());
                     request.setAttribute("cardType", completeCardInfo.getCardInfo().getCardType().getValue());

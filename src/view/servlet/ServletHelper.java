@@ -20,13 +20,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class ServletHelper {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, ServletHelper.class);
+    private static final Random random = new Random(System.currentTimeMillis());
 
     public static void sendForward(String url, HttpServlet servlet, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = servlet.getServletContext().getRequestDispatcher(url);
@@ -93,6 +91,8 @@ public class ServletHelper {
             }
             loggerFactory.error(error);
             if (request != null && response != null && servlet != null) {
+                //5 is number of imgs in error folder
+                request.setAttribute("imgID", random.nextInt(5) + 1);
                 ServletHelper.sendForward("/error.jsp", servlet, request, response);
             }
         } catch (ServletException | IOException e) {
@@ -117,6 +117,24 @@ public class ServletHelper {
         } catch (Exception e) {
             ServletHelper.loggerFactory.error(e);
         }
+    }
+
+    public static ParsedRequest getStringParametersMap(HttpServletRequest request) throws FileUploadException {
+        HashMap<String, String> textMap = new HashMap<>();
+        ParsedRequest parsedRequest = new ParsedRequest(textMap, null);
+        try {
+            FileItemFactory factory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            List<FileItem> uploadItems = upload.parseRequest(request);
+            for (FileItem item : uploadItems) {
+                String fieldName = item.getFieldName();
+                String value = item.getString();
+                textMap.put(fieldName, value);
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        }
+        return parsedRequest;
     }
 
     public static ParsedRequest getParametersMap(HttpServletRequest request) throws FileUploadException {

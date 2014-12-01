@@ -33,16 +33,9 @@ public class AllCardsServlet extends ProtectedServlet {
             ServletHelper.setUTF8(request, response);
             ArrayList<CardEntity> cardEntities;
             int pages;
-            if (!parser.haveMatter()) {
-                cardEntities = CardRequest.getAllCards(parser.getFirstElem(), MAX_ITEMS);
-                long results = CardRequest.countCard();
-                pages = (int) (results / MAX_ITEMS);
-            } else {
-                cardEntities = CardRequest.getAllCards(parser);
-                Long results = CardRequest.countCard(parser);
-                pages = (int) (results / MAX_ITEMS);
-            }
-//            request.setAttribute("pages", pages);
+            cardEntities = CardRequest.getAllCards(parser);
+            Long results = CardRequest.countCard(parser);
+            pages = (int) (results / MAX_ITEMS);
             String prefix = "";
             prefix += "<a href=\"allcards?Page=${i}";
             if (parser.getCardName() != null) {

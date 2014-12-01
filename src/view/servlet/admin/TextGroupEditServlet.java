@@ -6,6 +6,7 @@ import model.constants.Component;
 import model.database.requests.CardRequest;
 import model.database.requests.DishRequest;
 import model.database.requests.TextRequest;
+import model.database.requests.UserDataRequest;
 import model.database.worldonlinedb.TextEntity;
 import model.database.worldonlinedb.dishes.DishEntity;
 import model.logger.LoggerFactory;
@@ -49,6 +50,7 @@ public class TextGroupEditServlet extends ProtectedServlet {
             if (!redirected) {
                 String tagID = request.getParameter("tagID");
                 if (tagID != null && !tagID.isEmpty()) {
+                    UserDataRequest.updateTags();
                     ServletHelper.sendForward("/tagedit?tagID=" + tagID, this, request, response);
                     redirected = true;
                 }
@@ -57,6 +59,7 @@ public class TextGroupEditServlet extends ProtectedServlet {
             if (!redirected) {
                 String menuID = request.getParameter("menuID");
                 if (menuID != null && !menuID.isEmpty()) {
+                    UserDataRequest.updateMenus();
                     ServletHelper.sendForward("/completemenuinfo?tagID=" + menuID, this, request, response);
                     redirected = true;
                 }
@@ -65,15 +68,29 @@ public class TextGroupEditServlet extends ProtectedServlet {
             if (!redirected) {
                 String dishID = request.getParameter("dishID");
                 DishEntity dishEntity = DishRequest.getDish(Long.parseLong(dishID));
-                if (dishEntity != null) {
+                if (dishEntity != null && dishID != null && !dishID.isEmpty()) {
                     DishRequest.updatePrice(dishEntity.getPrice());
-                }
-                if (dishID != null && !dishID.isEmpty()) {
-                    ServletHelper.sendForward("/completepriceinfo?tagID=" + dishID, this, request, response);
+                    ServletHelper.sendForward("/completepriceinfo?priceID=" + dishEntity.getPrice().getPriceID(), this, request, response);
                     redirected = true;
                 }
             }
 
+            if (!redirected) {
+                String priceID = request.getParameter("priceID");
+                if (priceID != null && !priceID.isEmpty()) {
+                    DishRequest.updatePrice(DishRequest.getPrice(Long.parseLong(priceID)));
+                    ServletHelper.sendForward("/completepriceinfo?priceID=" + priceID, this, request, response);
+                    redirected = true;
+                }
+            }
+            if (!redirected) {
+                String cardParameterTypeID = request.getParameter("cardParameterTypeID");
+                if (cardParameterTypeID != null && !cardParameterTypeID.isEmpty()) {
+                    UserDataRequest.updateParameterType();
+                    ServletHelper.sendForward("/completecardparametertypeinfo?cardParameterTypeID=" + cardParameterTypeID, this, request, response);
+                    redirected = true;
+                }
+            }
             if (!redirected) {
                 ServletHelper.sendForward("/completetextgroupinfo?textGroupID=" + request.getParameter("textGroupID"), this, request, response);
             }

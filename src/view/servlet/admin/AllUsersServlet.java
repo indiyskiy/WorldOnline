@@ -1,11 +1,11 @@
 package view.servlet.admin;
 
 import controller.parser.adminparser.AllUsersParser;
+import model.additionalentity.admin.PagesArray;
+import model.additionalentity.admin.SimpleUserInfo;
 import model.constants.AdminRule;
 import model.constants.Component;
-import model.constants.databaseenumeration.MobilePlatform;
 import model.database.requests.UserRequests;
-import model.database.worldonlinedb.UserEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
@@ -25,24 +25,19 @@ public class AllUsersServlet extends ProtectedServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ServletHelper.setUTF8(request, response);
-        AllUsersParser parser = new AllUsersParser(MAX_ITEMS);
-        parser.parse(request);
         try {
+            AllUsersParser parser = new AllUsersParser(MAX_ITEMS);
+            parser.parse(request);
             ServletHelper.setUTF8(request, response);
-            ArrayList<UserEntity> userEntities;
-            long pages;
-            if (!parser.haveMatter()) {
-                userEntities = UserRequests.getAllUsers(parser.getFirstElem(), MAX_ITEMS);
-                long results = UserRequests.countUser();
-                pages = (results / MAX_ITEMS);
-            } else {
-//                userEntities = UserRequests.getAllUsers(parser);
-//                Long results = UserRequests.countUser(parser);
-//                pages = (results / MAX_ITEMS);
-            }
-//            request.setAttribute("pages", pages);
-//            request.setAttribute("userList", userEntities);
-            request.setAttribute("mobilePlatforms", MobilePlatform.values());
+            ArrayList<SimpleUserInfo> userInfos;
+            int pages;
+            userInfos = UserRequests.getAllSimpleUsers(parser.getFirstElem(), parser.getMaxItems());
+            Long results = UserRequests.countUser();
+            pages = (int) (results / MAX_ITEMS);
+            String prefix = "";
+            prefix += "<a href=\"allusers?Page=${i}\"> ";
+            request.setAttribute("pagesString", new PagesArray(pages, parser.getPage()).print(prefix, "</a> "));
+            request.setAttribute("userList", userInfos);
             ServletHelper.sendForward("/allusers.jsp", this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

@@ -3,9 +3,9 @@ package view.servlet.admin;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.database.requests.CardRequest;
-import model.database.requests.TimeRequest;
+import model.database.requests.RouteRequest;
 import model.database.worldonlinedb.CardEntity;
-import model.database.worldonlinedb.UrgencyTimeEntity;
+import model.database.worldonlinedb.RouteElementEntity;
 import model.logger.LoggerFactory;
 import view.servlet.ServletHelper;
 
@@ -14,28 +14,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AddUrgencyTimeServlet extends ProtectedServlet {
-    LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, AddUrgencyTimeServlet.class);
-
+public class DeleteRouteCardServlet extends ProtectedServlet {
+    LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, DeleteRouteCardServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ServletHelper.setUTF8(request, response);
         try {
-            Long cardID = Long.parseLong(request.getParameter("cardID"));
-            CardEntity cardEntity = CardRequest.getCardByID(cardID);
-            if (cardEntity != null) {
-                if (!TimeRequest.containsUrgencyTimeEntity(cardEntity)) {
-                    UrgencyTimeEntity urgencyTimeEntity = new UrgencyTimeEntity();
-                    urgencyTimeEntity.setCard(cardEntity);
-                    TimeRequest.addUrgencyTimeEntity(urgencyTimeEntity);
-                    CardRequest.updateCard(cardEntity);
-                }
+            Long routeElementID = Long.parseLong(request.getParameter("routeElementID"));
+            RouteElementEntity routeElementEntity = RouteRequest.getRouteElement(routeElementID);
+            if (routeElementEntity != null) {
+                CardEntity cardEntity = routeElementEntity.getCardRoute().getCard();
+                Long cardID = cardEntity.getCardID();
+                CardRequest.updateCard(cardEntity);
+                RouteRequest.deleteRouteElement(routeElementEntity);
                 ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
-            } else {
-                throw new ServletException("incorrect card ID");
             }
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);

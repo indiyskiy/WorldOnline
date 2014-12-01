@@ -15,9 +15,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Random;
 
 public class CreateCardServlet extends ProtectedServlet {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Admin, CreateCardServlet.class);
+    private static final Random rnd = new Random(System.currentTimeMillis());
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletHelper.setUTF8(request, response);
@@ -35,6 +37,11 @@ public class CreateCardServlet extends ProtectedServlet {
                 request.setAttribute("isLoaded", isLoaded);
                 if (isLoaded) {
                     request.setAttribute("cardID", cardEntity.getCardID());
+                    //5 imgs in card  upload folder
+                    request.setAttribute("imgID", rnd.nextInt(5) + 1);
+                } else {
+                    //5 imgs in card not uploaded folder
+                    request.setAttribute("imgID", rnd.nextInt(5) + 1);
                 }
                 request.setAttribute("cardTypes", CardType.values());
                 ServletHelper.sendForward("/createcard.jsp", this, request, response);
