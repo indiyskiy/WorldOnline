@@ -25,7 +25,7 @@ public class CompleteCardInfoServlet extends ProtectedServlet {
             request.setAttribute("cardStates", CardState.getValues());
             request.setAttribute("parameterBlocks", ApplicationBlock.values());
             request.setAttribute("cardToCardLinkTypes", CardToCardLinkType.values());
-            request.setAttribute("cardMenus", MenuRequest.getLastLevelMenus());
+            request.setAttribute("parentCardMenus", MenuRequest.getLastLevelMenus());
             String cardIDString = request.getParameter("cardID");
             if (cardIDString != null) {
                 long cardID = Long.parseLong(cardIDString);

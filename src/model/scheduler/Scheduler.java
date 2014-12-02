@@ -35,6 +35,7 @@ public class Scheduler implements Runnable {
     private void addTasksToList() {
         executableList.add(new WeatherTask());
         executableList.add(new ExchangeRatesTask());
+        executableList.add(new EventsCleaner());
     }
 
     public static Scheduler getScheduler() {

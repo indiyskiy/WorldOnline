@@ -162,11 +162,16 @@
     <dt onclick="clickSpoiler(this);">Категории</dt>
     <dd>
         <form method="post" action="addcardmenu">
-            Категория <select name="menuID">
-            <c:forEach var="cardMenu" items="${cardMenus}">
-                <option value="${cardMenu.menuID}">${cardMenu.menuName}</option>
-            </c:forEach>
-        </select>
+            Категория
+            <select name="menuID" size="">
+                <c:forEach var="parentCardMenu" items="${parentCardMenus}">
+                    <optgroup label="${parentCardMenu.name}">
+                        <c:forEach var="cardMenu" items="${parentCardMenu.cardMenus}">
+                            <option value="${cardMenu.menuID}">${cardMenu.menuName}</option>
+                        </c:forEach>
+                    </optgroup>
+                </c:forEach>
+            </select>
             <input type="hidden" value="${cardInfo.cardID}" name="cardID">
             <input value="Добавить" type="submit">
         </form>

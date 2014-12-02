@@ -2,6 +2,7 @@ package model.database.requests;
 
 import controller.phone.entity.AllMenusRequest;
 import model.additionalentity.MenuInfo;
+import model.additionalentity.ParentMenu;
 import model.additionalentity.SimpleMenu;
 import model.additionalentity.admin.CardInfo;
 import model.additionalentity.admin.CardMenu;
@@ -596,9 +597,10 @@ public class MenuRequest {
         card.setCardMenuArrayList(cardMenus);
     }
 
-    public static ArrayList<SimpleMenu> getLastLevelMenus() {
+    public static ArrayList<ParentMenu> getLastLevelMenus() {
         DatabaseConnection dbConnection = new DatabaseConnection("getLastLevelMenus");
-        ArrayList<SimpleMenu> menus = new ArrayList<>();
+        ArrayList<ParentMenu> menus = new ArrayList<>();
+        HashMap<Long, ParentMenu> parentMenuHashSet = new HashMap<>();
         Connection connection;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -608,20 +610,37 @@ public class MenuRequest {
                     "SELECT DISTINCT " +
                             "Menu.MenuID, " +
                             "Text.Text, " +
-                            "tmp.MenuID " +
+                            "Parent.MenuID, " +
+                            "ParentText.Text " +
                             "FROM Menu " +
                             "JOIN TextGroup ON (Menu.NameTextGroupID = TextGroup.TextGroupID) " +
                             "JOIN Text ON (Text.TextGroupID = TextGroup.TextGroupID) " +
                             "LEFT OUTER JOIN Menu AS tmp ON (tmp.ParentMenuID = Menu.MenuID) " +
+                            "LEFT OUTER JOIN Menu AS Parent ON (Parent.MenuID=Menu.ParentMenuID) " +
+                            "LEFT OUTER JOIN TextGroup AS ParentTextGroup ON (ParentTextGroup.TextGroupID=Parent.NameTextGroupID) " +
+                            "LEFT OUTER JOIN Text AS ParentText ON (ParentText.TextGroupID=ParentTextGroup.TextGroupID)" +
                             "WHERE " +
-                            "tmp.MenuID IS NULL AND Text.LanguageID =" + LanguageType.Russian.getValue();
+                            "tmp.MenuID IS NULL AND Text.LanguageID =" + LanguageType.Russian.getValue() + " " +
+                            "AND (ParentText.TextID IS NULL OR ParentText.LanguageID=" + LanguageType.Russian.getValue() + ")";
             ps = connection.prepareStatement(sqlString);
             rs = ps.executeQuery();
             while (rs.next()) {
+                ParentMenu parentMenu;
+                Long parentMenuID = rs.getLong("Parent.MenuID");
+                if (parentMenuHashSet.containsKey(parentMenuID)) {
+                    parentMenu = parentMenuHashSet.get(parentMenuID);
+                } else {
+                    parentMenu = new ParentMenu();
+                    parentMenu.setName(rs.getString("ParentText.Text"));
+                    parentMenu.setParentMenuID(parentMenuID);
+                    parentMenuHashSet.put(parentMenuID, parentMenu);
+                    menus.add(parentMenu);
+                }
                 SimpleMenu menu = new SimpleMenu();
                 menu.setMenuID(rs.getLong("Menu.MenuID"));
                 menu.setMenuName(rs.getString("Text.Text"));
-                menus.add(menu);
+                parentMenu.getCardMenus().add(menu);
+//                loggerFactory.debug("add "+menu.getMenuName()+" to "+parentMenu.getName());
             }
         } catch (Exception e) {
             loggerFactory.error(e);
