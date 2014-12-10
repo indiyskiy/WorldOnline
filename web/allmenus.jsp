@@ -35,7 +35,7 @@
         </c:if>
         <c:if test="${empty parent}">
             <a href="allmenus">
-                ...
+                В родительское меню
             </a>
         </c:if>
     </div>

@@ -55,9 +55,11 @@
         </tr>
         <c:forEach items="${userList}" var="user">
         <tr>
-            <td width="3%">
-                <a href="completeuserinfo?userID=${user.userID}">${user.userID}</a>
-                <c:if test="${not empty user.additionalInformation}">*</c:if>
+            <td width="7%">
+                <a href="completeuserinfo?userID=${user.userID}">
+                        ${user.userID}
+                    <c:if test="${not empty user.additionalInformation}">*</c:if>
+                </a>
             </td>
             <td>
                 <c:if test="${not empty user.mobilePlatform}">

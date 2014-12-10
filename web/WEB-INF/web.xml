@@ -90,6 +90,17 @@
         <url-pattern>/completecardinfo</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <display-name>AddCardParameterNewServlet</display-name>
+        <servlet-name>AddCardParameterNewServlet</servlet-name>
+        <servlet-class>view.servlet.admin.AddCardParameterNewServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddCardParameterNewServlet</servlet-name>
+        <url-pattern>/addcardparameternew</url-pattern>
+    </servlet-mapping>
+
     <!-- staticfile -->
     <servlet>
         <display-name>GetStaticFileServlet</display-name>
@@ -1104,6 +1115,41 @@
         <url-pattern>/mobile/userglobalupdated</url-pattern>
     </servlet-mapping>
 
+    <!--card activity-->
+    <servlet>
+        <display-name>CardActivityRegistrationServlet</display-name>
+        <servlet-name>CardActivityRegistrationServlet</servlet-name>
+        <servlet-class>view.servlet.phone.CardActivityRegistrationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CardActivityRegistrationServlet</servlet-name>
+        <url-pattern>/mobile/statistics/cardactivity</url-pattern>
+    </servlet-mapping>
+
+    <!--card event-->
+    <servlet>
+        <display-name>CardEventRegistrationServlet</display-name>
+        <servlet-name>CardEventRegistrationServlet</servlet-name>
+        <servlet-class>view.servlet.phone.CardEventRegistrationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CardEventRegistrationServlet</servlet-name>
+        <url-pattern>/mobile/statistics/cardevent</url-pattern>
+    </servlet-mapping>
+
+    <!--card popularity-->
+    <servlet>
+        <display-name>CardPopularityServlet</display-name>
+        <servlet-name>CardPopularityServlet</servlet-name>
+        <servlet-class>view.servlet.admin.CardPopularityServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CardPopularityServlet</servlet-name>
+        <url-pattern>/cardpopularity</url-pattern>
+    </servlet-mapping>
 
     <!--test servlets-->
 

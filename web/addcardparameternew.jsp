@@ -43,7 +43,6 @@
                 <ul class="nav">
                     <li><a href="index">На главную</a></li>
                     <li><a href="completecardinfo?cardID="${cardID}>К карточке</a></li>
-                    <%--<li><a href="createаfield">Создать поле</a></li>--%>
                 </ul>
             </div>
         </div>
@@ -51,19 +50,24 @@
 </header>
 
 <div class="container container-lower">
-    <c:forEach items="${blocks}" var="block">
-        <dl class="spoiler">
-            <dt onclick="clickSpoiler(this);">${block.rusText}</dt>
-            <dd>
-                <c:forEach items="${parameterTypes}" var="parameterType">
-                    <c:if test="${parameterType.block.value==block.value}">
-                        <a href="addcardparametern?cardParameterType=${parameterType.parameterTypeID}&cardID=${cardID}">${parameterType.name}</a>
-                        <br>
-                    </c:if>
-                </c:forEach>
-            </dd>
-        </dl>
-    </c:forEach>
+    <form action="addcardparameternew" method="post">
+        <c:forEach items="${blocks}" var="block">
+            <dl class="spoiler">
+                <dt onclick="clickSpoiler(this);">${block.rusText}</dt>
+                <dd>
+                    <c:forEach items="${parameterTypes}" var="parameterType">
+                        <c:if test="${parameterType.block.value==block.value}">
+                            <input type="checkbox" name="cardParameterType" value="${parameterType.parameterTypeID}">
+                            ${parameterType.name}
+                            <br/>
+                        </c:if>
+                    </c:forEach>
+                </dd>
+            </dl>
+        </c:forEach>
+        <input type="hidden" value="${cardID}" name="cardID">
+        <input type="submit" value="Сохранить">
+    </form>
 </div>
 </body>
 </html>

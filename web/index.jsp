@@ -18,6 +18,7 @@
                     <span class="brand">${title}</span>
                 </div>
                 <ul class="nav">
+                    <li><a href="createcard">Создать карточку</a></li>
                 </ul>
             </div>
         </div>

@@ -205,7 +205,7 @@
 <dl class="spoiler">
     <dt onclick="clickSpoiler(this);">Параметры</dt>
     <dd>
-        <a href="addcardelement?cardID=${cardInfo.cardID}">Добавить</a>
+        <a href="addcardparameternew?cardID=${cardInfo.cardID}">Добавить</a>
         <br>
 
         <form method="POST" action="editcardparameters">
@@ -297,54 +297,96 @@
     </dl>
 </c:if>
 
-
+<%--news time--%>
+<%--card type 9--%>
 <c:if test="${cardType==9}">
-    <%--info type 9--%>
     <dl class="spoiler">
         <dt onclick="clickSpoiler(this);">Время проведения</dt>
         <dd>
-            <c:if test="${empty urgencyTime}">
-                <a href="addurgencytime?cardID=${cardInfo.cardID}">Добавить</a>
-            </c:if>
-            <c:if test="${not empty urgencyTime}">
+            <a href="addurgencytime?cardID=${cardInfo.cardID}">Добавить</a>
+            <br/>
+            <c:forEach var="urgencyTime" items="${urgencyTimes}">
                 <c:if test="${not empty urgencyTime.end and not empty urgencyTime.start}">
                     Начало ${urgencyTime.start} - конец ${urgencyTime.end}
                     <br>
-                </c:if>
-                <dl class="spoilerSub">
-                    <dt onclick="clickSpoilerSub(this);">Изменить время проведения</dt>
-                    <dd>
+
+                    <div class="spoilerElement">
                         <form method="POST" action="editurgencytime">
                             <input type="hidden" value="${urgencyTime.urgencyTimeID}" name="urgencyTimeID">
                             <input type="hidden" value="${cardInfo.cardID}" name="cardID">
                             Начало события
-                            <br>
-                            <input type="text" value="${urgencyTime.start}" id="start" name="start"/>
-                            <script>
-                                $("#start").AnyTime_picker({
-                                    format: "%Y-%m-%d %H:%i:%s %E %#",
-                                    formatUtcOffset: "%: (%@)",
-                                    hideInput: true,
-                                    placement: "inline" });
-                            </script>
-                            <br>
-                            <br>
+                            <table width="50%" align="center">
+                                <tr>
+                                    <td>День</td>
+                                    <td> Месяц</td>
+                                    <td>Год</td>
+                                    <td>Часы</td>
+                                    <td>Минуты</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" width="100" value="${urgencyTime.start.day}"
+                                               name="startDay"/>
+                                    </td>
+                                    <td>
+                                        <select name="startMonth"><c:forEach items="${months}" var="month">
+                                            <option value="${month.value}"
+                                                    <c:if test="${month.value==urgencyTime.start.month.value}"> selected</c:if>
+                                                    >
+                                                    ${month.name}
+                                            </option>
+                                        </c:forEach></select>
+                                    </td>
+                                    <td>
+                                        <input type="text" width="100" value="${urgencyTime.start.year}"
+                                               name="startYear"/>
+                                    </td>
+                                    <td>
+                                        <input type="text" width="100" value="${urgencyTime.start.hour}"
+                                               name="startHour"/>
+                                    </td>
+                                    <td>
+                                        <input type="text" value="${urgencyTime.start.minute}"
+                                               name="startMinute"/>
+                                    </td>
+                                </tr>
+                            </table>
                             Конец события
-                            <br>
-                            <input type="text" value="${urgencyTime.end}" id="end" name="end"/>
-                            <script>
-                                $("#end").AnyTime_picker({
-                                    format: "%Y-%m-%d %H:%i:%s %E %#",
-                                    formatUtcOffset: "%: (%@)",
-                                    hideInput: true,
-                                    placement: "inline" });
-                            </script>
-                            <br>
+                            <table width="50%" align="center">
+                                <tr>
+                                    <td>День</td>
+                                    <td> Месяц</td>
+                                    <td>Год</td>
+                                    <td>Часы</td>
+                                    <td>Минуты</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" width="100" value="${urgencyTime.end.day}" name="endDay"/>
+                                    </td>
+
+                                    <td>
+                                        <select name="endMonth"><c:forEach items="${months}" var="month">
+                                            <option value="${month.value}"
+                                                    <c:if test="${month.value==urgencyTime.end.month.value}"> selected</c:if>
+                                                    >
+                                                    ${month.name}
+                                            </option>
+
+                                        </c:forEach></select>
+                                    </td>
+                                    <td><input type="text" width="100" value="${urgencyTime.end.year}" name="endYear"/>
+                                    </td>
+                                    <td><input type="text" width="100" value="${urgencyTime.end.hour}" name="endHour"/>
+                                    </td>
+                                    <td><input type="text" width="100" value="${urgencyTime.end.minute}"
+                                               name="endMinute"/></td>
+                                </tr>
+                            </table>
                             <input type="submit" value="Сохранить">
                         </form>
-                    </dd>
-                </dl>
-            </c:if>
+                    </div>
+                </c:if>
+            </c:forEach>
         </dd>
     </dl>
 </c:if>
