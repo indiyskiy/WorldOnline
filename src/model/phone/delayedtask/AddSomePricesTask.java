@@ -17,7 +17,6 @@ public class AddSomePricesTask implements Runnable {
     private final UserEntity user;
     private final Thread thread;
 
-
     public AddSomePricesTask(ArrayList<Long> priceIDs, UserEntity user) {
         this.priceIDs = priceIDs;
         this.user = user;

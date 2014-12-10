@@ -2,10 +2,7 @@ package view.servlet.admin;
 
 import model.constants.AdminRule;
 import model.constants.Component;
-import model.database.requests.CardRequest;
 import model.logger.LoggerFactory;
-import model.xmlparser.GlobalXmlParser;
-import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

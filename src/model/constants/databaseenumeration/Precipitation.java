@@ -1,8 +1,5 @@
 package model.constants.databaseenumeration;
 
-/**
- * Created by Илья on 13.05.14.
- */
 public enum Precipitation {
     Rain(4),
     Shower(5),

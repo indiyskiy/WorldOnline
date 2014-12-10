@@ -6,13 +6,11 @@ import model.constants.AdminRule;
 import model.constants.Component;
 import model.constants.databaseenumeration.ImageType;
 import model.database.requests.UserDataRequest;
-import model.database.worldonlinedb.CardEntity;
 import model.database.worldonlinedb.CardParameterTypeEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;

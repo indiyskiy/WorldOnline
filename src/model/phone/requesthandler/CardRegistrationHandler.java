@@ -19,7 +19,6 @@ public class CardRegistrationHandler implements MobileHandler {
 
     public CardRegistrationEntity handleRequest(CardRegistrationRequest cardRegistrationRequest) {
         UserEntity userEntity = UserRequests.getUserByID(cardRegistrationRequest.getUserID());
-
         CardRegistrationEntity cardRegistrationEntity = new CardRegistrationEntity();
         AddSomeCardTask addSomeCardTask = new AddSomeCardTask(cardRegistrationRequest.getCardIDs(), userEntity);
         addSomeCardTask.execute();

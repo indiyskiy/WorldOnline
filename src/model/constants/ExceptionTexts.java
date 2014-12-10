@@ -70,4 +70,16 @@ public class ExceptionTexts {
     public static final String userGlobalUpdatedUserIDEmptyException = "phone.userGlobalUpdated.UserID.Empty";
     public static final String userGlobalUpdatedIncorrectException = "phone.userGlobalUpdated.UserID.Incorrect";
     public static final String userGlobalUpdatedUserNotExistException = "phone.userGlobalUpdated.User.NotExist";
+    public static final String cardActivityRegistrationUserIDEmptyException = "phone.cardActivityRegistration.UserID.Empty";
+    public static final String cardActivityRegistrationUserIDIncorrectException = "phone.cardActivityRegistration.UserID.Incorrect";
+    public static final String cardActivityRegistrationUserNotExistException = "phone.cardActivityRegistration.UserID.NotExist";
+    public static final String cardActivityRegistrationCardIDIncorrectException = "phone.cardActivityRegistration.CardID.Incorrect";
+    public static final String cardActivityRegistrationTimestampIncorrectException = "phone.cardActivityRegistration.Timestamp.Incorrect";
+    public static final String cardEventRegistrationUserIDEmptyException = "phone.cardEventRegistration.UserID.Empty";
+    public static final String cardEventRegistrationUserIDIncorrectException = "phone.cardEventRegistration.UserID.Incorrect";
+    public static final String cardEventRegistrationUserNotExistException = "phone.cardEventRegistration.UserID.NotExist";
+    public static final String cardEventRegistrationCardIDIncorrectException = "phone.cardEventRegistration.CardID.Incorrect";
+    public static final String cardEventRegistrationEventTypeIncorrectException = "phone.cardEventRegistration.EventType.Incorrect";
+    public static final String cardEventRegistrationTimestampIncorrectException = "phone.cardEventRegistration.Timestamp.Incorrect";
+
 }

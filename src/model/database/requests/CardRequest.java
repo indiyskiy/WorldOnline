@@ -37,15 +37,17 @@ public class CardRequest {
             //price
             "Price.PriceID, " +
             //language
-            "UserPersonalData.UserLanguage, " +
-            "UrgencyTime.UrgencyTimeID, UrgencyTime.OnTimestamp, UrgencyTime.OffTimestamp " +
+            "UserPersonalData.UserLanguage " +
+//            "UrgencyTime.UrgencyTimeID, UrgencyTime.OnTimestamp, UrgencyTime.OffTimestamp " +
             "FROM Card " +
             "JOIN User ON (User.UserID=?) " +
             "JOIN UserPersonalData ON (UserPersonalData.UserPersonalDataID=User.UserPersonalDataID) " +
             "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
             "LEFT OUTER JOIN CardPriceLink ON (Card.CardID=CardPriceLink.CardID) " +
-            "LEFT OUTER JOIN Price ON (Price.PriceID=CardPriceLink.PriceID) " +
-            "LEFT OUTER JOIN UrgencyTime ON (UrgencyTime.cardID=Card.CardID)";
+            "LEFT OUTER JOIN Price ON (Price.PriceID=CardPriceLink.PriceID) "
+//            +
+//            "LEFT OUTER JOIN UrgencyTime ON (UrgencyTime.cardID=Card.CardID)"
+            ;
 
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, CardRequest.class);
 
@@ -187,7 +189,7 @@ public class CardRequest {
                             "LEFT OUTER JOIN CardCoordinate ON (Card.CardID=CardCoordinate.CardID) " +
                             "LEFT OUTER JOIN CardPriceLink ON (Card.CardID=CardPriceLink.CardID) " +
                             "LEFT OUTER JOIN Price ON (CardPriceLink.PriceID=Price.PriceID) " +
-                            "LEFT OUTER JOIN UrgencyTime ON (UrgencyTime.cardID=Card.CardID) " +
+//                            "LEFT OUTER JOIN UrgencyTime ON (UrgencyTime.cardID=Card.CardID) " +
                             "WHERE Card.CardID=?";
             ps = connection.prepareStatement(sqlString);
             ps.setLong(1, cardID);
@@ -222,14 +224,8 @@ public class CardRequest {
                     cardPrice.setPriceID(priceID);
                     card.setCardPrice(cardPrice);
                 }
-                Long urgencyTimeID = rs.getLong("UrgencyTime.UrgencyTimeID");
-                if (urgencyTimeID != 0 && !rs.wasNull()) {
-                    SimpleUrgencyTime simpleUrgencyTime = new SimpleUrgencyTime();
-                    simpleUrgencyTime.setStart(rs.getTimestamp("UrgencyTime.OnTimestamp"));
-                    simpleUrgencyTime.setEnd(rs.getTimestamp("UrgencyTime.OffTimestamp"));
-                    simpleUrgencyTime.setUrgencyTimeID(rs.getLong("UrgencyTime.UrgencyTimeID"));
-                    card.setUrgencyTime(simpleUrgencyTime);
-                }
+//
+                TimeRequest.setUrgencyTime(card, cardID);
                 LinkRequest.setSourceCardLinks(card, cardID);
                 LinkRequest.setTargetCardLinks(card, cardID);
                 MenuRequest.setCardMenus(card, cardID);
@@ -499,13 +495,13 @@ public class CardRequest {
                     mobileCoordinate.setLongitude(rs.getDouble("CardCoordinate.Longitude"));
                     mobileCardInfo.setCoordinate(mobileCoordinate);
                     mobileCardInfo.setPriceID(rs.getLong("Price.PriceID"));
-                    Long urgencyTimeID = rs.getLong("UrgencyTime.UrgencyTimeID");
-                    if (urgencyTimeID != 0 && !rs.wasNull()) {
-                        MobileUrgencyTime mobileUrgencyTime = new MobileUrgencyTime();
-                        mobileUrgencyTime.setStart(rs.getTimestamp("UrgencyTime.OnTimestamp"));
-                        mobileUrgencyTime.setEnd(rs.getTimestamp("UrgencyTime.OffTimestamp"));
-                        mobileCardInfo.setMobileUrgencyTime(mobileUrgencyTime);
-                    }
+//                    Long urgencyTimeID = rs.getLong("UrgencyTime.UrgencyTimeID");
+//                    if (urgencyTimeID != 0 && !rs.wasNull()) {
+//                        MobileUrgencyTime mobileUrgencyTime = new MobileUrgencyTime();
+//                        mobileUrgencyTime.setStart(rs.getTimestamp("UrgencyTime.OnTimestamp"));
+//                        mobileUrgencyTime.setEnd(rs.getTimestamp("UrgencyTime.OffTimestamp"));
+//                        mobileCardInfo.setMobileUrgencyTime(mobileUrgencyTime);
+//                    }
                     mobileCardInfoHashMap.put(mobileCardInfo.getCardID(), mobileCardInfo);
                     mobileCardInfos.add(mobileCardInfo);
                     languageType = LanguageType.parseInt(rs.getInt("UserPersonalData.UserLanguage"));
@@ -519,6 +515,7 @@ public class CardRequest {
                     LinkRequest.setMobileLinks(mobileCardInfoHashMap, cardIDs);
                     InfoRequest.setMobileInfos(mobileCardInfoHashMap, cardIDs, languageType);
                     RouteRequest.setMobileRoute(mobileCardInfoHashMap, cardIDs);
+                    TimeRequest.setMobileUrgencyTimes(mobileCardInfoHashMap, cardIDs);
                 }
             }
         } catch (Exception e) {

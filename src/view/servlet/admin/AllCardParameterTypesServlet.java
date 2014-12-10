@@ -8,7 +8,7 @@ import model.constants.Component;
 import model.constants.databaseenumeration.TextType;
 import model.database.requests.ParameterRequest;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

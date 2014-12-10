@@ -7,7 +7,7 @@ import model.constants.databaseenumeration.CardState;
 import model.constants.databaseenumeration.LanguageType;
 import model.database.requests.MenuRequest;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

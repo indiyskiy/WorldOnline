@@ -8,7 +8,7 @@ import model.constants.databaseenumeration.WindDirection;
 import model.database.requests.WeatherRequest;
 import model.database.worldonlinedb.WeatherEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

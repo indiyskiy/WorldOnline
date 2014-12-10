@@ -12,7 +12,7 @@ import model.database.worldonlinedb.TagGroupEntity;
 import model.database.worldonlinedb.TextEntity;
 import model.database.worldonlinedb.TextGroupEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

@@ -1,7 +1,7 @@
 package view.servlet.admin;
 
 import model.constants.AdminRule;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

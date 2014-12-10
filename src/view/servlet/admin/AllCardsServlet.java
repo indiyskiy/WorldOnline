@@ -9,7 +9,7 @@ import model.constants.databaseenumeration.TextType;
 import model.database.requests.CardRequest;
 import model.database.worldonlinedb.CardEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +30,6 @@ public class AllCardsServlet extends ProtectedServlet {
             ServletHelper.setUTF8(request, response);
             AllCardParser parser = new AllCardParser(MAX_ITEMS);
             parser.parse(request);
-            ServletHelper.setUTF8(request, response);
             ArrayList<CardEntity> cardEntities;
             int pages;
             cardEntities = CardRequest.getAllCards(parser);

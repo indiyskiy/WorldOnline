@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 public class DatabaseConnection {
+    private static final int Max_Connections_value = 50;
     private Connection connection = null;
     private static final LoggerFactory loggerFactory = new LoggerFactory(Component.Database, DatabaseConnection.class);
     private static long connectionCounter = 0;
@@ -38,7 +39,7 @@ public class DatabaseConnection {
     }
 
     private void printStats() {
-        if (connectionCounter > 50) {
+        if (connectionCounter > Max_Connections_value) {
             loggerFactory.error("connectionCounter overvalued " + connectionCounter);
             for (String key : connectionCounterMap.keySet()) {
                 if (connectionCounterMap.get(key) != 0) {

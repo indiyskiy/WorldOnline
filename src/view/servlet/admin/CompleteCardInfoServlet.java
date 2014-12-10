@@ -4,12 +4,13 @@ import model.additionalentity.admin.CompleteCardInfo;
 import model.constants.AdminRule;
 import model.constants.ApplicationBlock;
 import model.constants.Component;
+import model.constants.Month;
 import model.constants.databaseenumeration.CardState;
 import model.constants.databaseenumeration.CardToCardLinkType;
 import model.database.requests.CardRequest;
 import model.database.requests.MenuRequest;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -62,14 +63,15 @@ public class CompleteCardInfoServlet extends ProtectedServlet {
                     if (completeCardInfo.getCardInfoElements() != null && !completeCardInfo.getCardInfoElements().isEmpty()) {
                         request.setAttribute("infos", completeCardInfo.getCardInfoElements());
                     }
-                    if (completeCardInfo.getUrgencyTime() != null) {
-                        request.setAttribute("urgencyTime", completeCardInfo.getUrgencyTime());
+                    if (completeCardInfo.getUrgencyTimes() != null) {
+                        request.setAttribute("urgencyTimes", completeCardInfo.getUrgencyTimes());
                     }
                     if (completeCardInfo.getRouteCard() != null) {
                         request.setAttribute("routeCard", completeCardInfo.getRouteCard());
                     }
                     request.setAttribute("cardBlocks", completeCardInfo.getCardBlocks());
                     request.setAttribute("cardType", completeCardInfo.getCardInfo().getCardType().getValue());
+                    request.setAttribute("months", Month.values());
                 }
                 ServletHelper.sendForward("/completecardinfo.jsp", this, request, response);
             }

@@ -7,7 +7,7 @@ import model.constants.Component;
 import model.constants.ProtectAdminLevel;
 import model.database.requests.AdminUserRequest;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

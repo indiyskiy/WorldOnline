@@ -1,13 +1,14 @@
 package view.servlet.admin;
 
 import helper.TimeManager;
+import model.additionalentity.admin.SimpleDate;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.database.requests.CardRequest;
 import model.database.requests.TimeRequest;
 import model.database.worldonlinedb.UrgencyTimeEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,17 +30,14 @@ public class EditUrgencyTimeServlet extends ProtectedServlet {
         try {
             String cardIDString = request.getParameter("cardID");
 
-            String start = request.getParameter("start");
-            String end = request.getParameter("end");
-            start = start.substring(0, 16);
-            end = end.substring(0, 16);
-//            loggerFactory.debug(start);
-//            loggerFactory.debug(end);
-            Timestamp startTime = TimeManager.getTimestamp(start);
-            Timestamp endTime = TimeManager.getTimestamp(end);
+
+            SimpleDate start = new SimpleDate(request, "start");
+            SimpleDate end = new SimpleDate(request, "end");
+//            Timestamp startTime = TimeManager.getTimestamp(start);
+//            Timestamp endTime = TimeManager.getTimestamp(end);
             UrgencyTimeEntity urgencyTimeEntity = TimeRequest.getUrgencyTimeEntity(Long.parseLong(request.getParameter("urgencyTimeID")));
-            urgencyTimeEntity.setOnTimeStamp(startTime);
-            urgencyTimeEntity.setOffTimeStamp(endTime);
+            urgencyTimeEntity.setOnTimeStamp(start.getTimestamp());
+            urgencyTimeEntity.setOffTimeStamp(end.getTimestamp());
             TimeRequest.updateUrgencyTimeEntity(urgencyTimeEntity);
             CardRequest.updateCard(urgencyTimeEntity.getCard());
             ServletHelper.sendForward("/completecardinfo?cardID=" + cardIDString, this, request, response);

@@ -8,7 +8,7 @@ import model.database.requests.RouteRequest;
 import model.database.worldonlinedb.CardEntity;
 import model.database.worldonlinedb.CardRouteEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

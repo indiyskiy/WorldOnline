@@ -1,6 +1,6 @@
 package controller.parser.adminparser;
 
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.http.HttpServletRequest;
 

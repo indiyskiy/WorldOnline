@@ -7,7 +7,7 @@ import model.database.requests.CardRequest;
 import model.database.worldonlinedb.CardEntity;
 import model.logger.LoggerFactory;
 import org.apache.commons.fileupload.FileUploadException;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

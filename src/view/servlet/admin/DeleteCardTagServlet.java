@@ -6,7 +6,7 @@ import model.database.requests.CardRequest;
 import model.database.requests.TagRequest;
 import model.database.worldonlinedb.CardTagEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

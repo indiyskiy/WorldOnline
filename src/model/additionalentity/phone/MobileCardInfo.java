@@ -21,7 +21,9 @@ public class MobileCardInfo {
     private ArrayList<MobileInformationElement> informationElements = new ArrayList<>();
     private ArrayList<MobileCardToCardLink> sourceLinks = new ArrayList<>();
     private ArrayList<MobileCardRoute> mobileCardRoutes = new ArrayList<>();
-    private MobileUrgencyTime mobileUrgencyTime;
+//    private MobileUrgencyTime mobileUrgencyTime;
+
+    private ArrayList<MobileUrgencyTime> mobileUrgencyTimes = new ArrayList<>();
 
     public int getOrder() {
         return order;
@@ -76,8 +78,15 @@ public class MobileCardInfo {
         jsonObject.addProperty("cardID", cardID);
         jsonObject.addProperty("cardType", cardType.getValue());
         jsonObject.addProperty("order", order);
-        if (mobileUrgencyTime != null && mobileUrgencyTime.getStart() != null && mobileUrgencyTime.getEnd() != null) {
-            jsonObject.add("urgencyTime", mobileUrgencyTime.getJson());
+//        if (mobileUrgencyTime != null && mobileUrgencyTime.getStart() != null && mobileUrgencyTime.getEnd() != null) {
+//            jsonObject.add("urgencyTime", mobileUrgencyTime.getJson());
+//        }
+        if (!mobileUrgencyTimes.isEmpty()) {
+            JsonArray urgencyTimesArray = new JsonArray();
+            for (MobileUrgencyTime mobileUrgencyTime : mobileUrgencyTimes) {
+                urgencyTimesArray.add(mobileUrgencyTime.getJson());
+            }
+            jsonObject.add("urgencyTimes", urgencyTimesArray);
         }
         JsonArray textArray = new JsonArray();
         for (MobileText mobileText : mobileTexts) {
@@ -148,11 +157,15 @@ public class MobileCardInfo {
         this.mobileCardRoutes = mobileCardRoutes;
     }
 
-    public void setMobileUrgencyTime(MobileUrgencyTime mobileUrgencyTime) {
-        this.mobileUrgencyTime = mobileUrgencyTime;
-    }
+//    public void setMobileUrgencyTime(MobileUrgencyTime mobileUrgencyTime) {
+//        this.mobileUrgencyTime = mobileUrgencyTime;
+//    }
 
-    public MobileUrgencyTime getMobileUrgencyTime() {
-        return mobileUrgencyTime;
+//    public MobileUrgencyTime getMobileUrgencyTime() {
+//        return mobileUrgencyTime;
+//    }
+
+    public ArrayList<MobileUrgencyTime> getMobileUrgencyTimes() {
+        return mobileUrgencyTimes;
     }
 }

@@ -64,7 +64,11 @@ public class HibernateUtil {
                 .addAnnotatedClass(UrgencyTimeEntity.class)
                 .addAnnotatedClass(CardInformationElementEntity.class)
                 .addAnnotatedClass(GlobalUpdateEntity.class)
-                .addAnnotatedClass(PriceEntity.class);
+                .addAnnotatedClass(PriceEntity.class)
+                .addAnnotatedClass(CardActivityEntity.class)
+                .addAnnotatedClass(CardEventEntity.class)
+                .addAnnotatedClass(FieldActivityEntity.class)
+                .addAnnotatedClass(GlobalEventEntity.class);
         ac.configure();
         return ac;
     }

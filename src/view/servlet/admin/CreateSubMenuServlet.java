@@ -8,7 +8,7 @@ import model.database.requests.UserDataRequest;
 import model.database.worldonlinedb.MenuEntity;
 import model.database.worldonlinedb.TextGroupEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

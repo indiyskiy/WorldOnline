@@ -2,8 +2,8 @@ package model;
 
 import model.database.requests.AdminUserRequest;
 import model.database.requests.CardRequest;
-import model.database.requests.NewsRequest;
 import model.scheduler.Scheduler;
+import test.TestStatistics;
 
 public class ServerInit {
     private static ServerInit ourInstance = new ServerInit();
@@ -16,5 +16,6 @@ public class ServerInit {
         CardRequest.countCard();
         AdminUserRequest.addRootAdminUser();
         Scheduler.start();
+//        TestStatistics.createCardActivities();
     }
 }

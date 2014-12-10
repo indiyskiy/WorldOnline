@@ -5,7 +5,7 @@ import controller.phone.entity.PriceByListRequest;
 import controller.phone.entity.MobileRequest;
 import model.constants.ExceptionTexts;
 import model.exception.ParseRequestException;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

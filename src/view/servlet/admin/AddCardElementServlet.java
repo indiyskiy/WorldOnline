@@ -5,7 +5,7 @@ import model.constants.ApplicationBlock;
 import model.constants.Component;
 import model.database.requests.ParameterRequest;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

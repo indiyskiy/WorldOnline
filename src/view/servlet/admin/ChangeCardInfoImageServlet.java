@@ -7,7 +7,7 @@ import model.constants.Component;
 import model.database.requests.CardRequest;
 import model.database.worldonlinedb.CardInformationElementEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

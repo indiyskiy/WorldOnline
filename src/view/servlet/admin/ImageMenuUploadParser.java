@@ -2,12 +2,11 @@ package view.servlet.admin;
 
 import model.additionalentity.admin.ParsedRequest;
 import model.constants.Component;
-import model.constants.databaseenumeration.ImageType;
 import model.database.requests.MenuRequest;
 import model.database.worldonlinedb.MenuEntity;
 import model.logger.LoggerFactory;
 import org.apache.commons.fileupload.FileUploadException;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

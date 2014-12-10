@@ -696,7 +696,7 @@ public class MenuRequest {
                     "JOIN MenuCardLink ON (Card.CardID=MenuCardLink.CardID) " +
                     "JOIN Menu ON (MenuCardLink.MenuID=Menu.MenuID) " +
                     "WHERE Menu.MenuID=? " +
-                    "ORDER BY Card.CardName";
+                    "ORDER BY Card.CardState, Card.CardName";
             ps = connection.prepareStatement(sql);
             ps.setLong(1, menuID);
             rs = ps.executeQuery();

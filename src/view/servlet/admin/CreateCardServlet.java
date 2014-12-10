@@ -9,7 +9,7 @@ import model.database.requests.MenuRequest;
 import model.database.worldonlinedb.CardEntity;
 import model.database.worldonlinedb.MenuEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

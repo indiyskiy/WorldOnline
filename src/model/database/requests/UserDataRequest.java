@@ -2,10 +2,15 @@ package model.database.requests;
 
 import helper.StringHelper;
 import helper.TimeManager;
+import model.additionalentity.admin.CompleteUserCardInfo;
+import model.additionalentity.admin.SimpleUserCard;
 import model.additionalentity.phone.CardUpdateAggregator;
 import model.additionalentity.phone.PricesUpdateAggregator;
 import model.constants.Component;
+import model.constants.UserCardState;
 import model.constants.databaseenumeration.CardState;
+import model.constants.databaseenumeration.LanguageType;
+import model.constants.databaseenumeration.MobilePlatform;
 import model.database.session.DatabaseConnection;
 import model.database.session.HibernateUtil;
 import model.database.worldonlinedb.GlobalUpdateEntity;
@@ -618,7 +623,7 @@ public class UserDataRequest {
         if (pricesForUpdate.isEmpty()) {
             return;
         }
-        DatabaseConnection dbConnection = new DatabaseConnection("updateUserCards");
+        DatabaseConnection dbConnection = new DatabaseConnection("updateUserPrices");
         PreparedStatement ps = null;
         try {
             Connection connection = dbConnection.getConnection();
@@ -635,4 +640,92 @@ public class UserDataRequest {
         }
     }
 
+
+    public static void getCompleteUserCardInfo(Long userID, CompleteUserCardInfo completeUserCardInfo) {
+        if (completeUserCardInfo == null) {
+            return;
+        }
+        DatabaseConnection dbConnection = new DatabaseConnection("getCompleteUserCardInfo");
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT " +
+                    "Card.CardID, " +
+                    "Card.CardName, " +
+                    "CASE 1 " +
+                    "WHEN (UserCard.LastUpdateTimeStamp >= Card.LastUpdateTimestamp OR Card.LastUpdateTimestamp IS NULL) THEN 1 " +
+                    "WHEN (UserCard.LastUpdateTimeStamp < Card.LastUpdateTimestamp) AND Card.CardState = 1 THEN 2 " +
+                    "WHEN (UserCard.LastUpdateTimeStamp < Card.LastUpdateTimestamp) AND Card.CardState != 1 THEN 3 " +
+                    "WHEN UserCard.UserCardID IS NULL AND Card.CardState = 1 THEN 4 " +
+                    "ELSE 5 END AS State " +
+                    "FROM Card " +
+                    "LEFT OUTER JOIN UserCard ON Card.CardID = UserCard.CardID " +
+                    "LEFT OUTER JOIN UserContent ON UserCard.UserContentID = UserContent.UserContentID " +
+                    "LEFT OUTER JOIN User ON User.UserContentID = UserContent.UserContentID " +
+                    "WHERE (UserCard.UserContentID = ?  OR UserCard.UserContentID IS NULL) AND (Card.CardState=1 OR UserCard.UserContentID IS NOT NULL) " +
+                    "ORDER BY Card.CardID";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, userID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Long cardID = rs.getLong("Card.CardID");
+                String name = rs.getString("Card.CardName");
+                UserCardState userCardState = null;
+                Integer state = rs.getInt("State");
+                if (state != 0 && !rs.wasNull()) {
+                    userCardState = UserCardState.parseInt(state);
+                }
+                SimpleUserCard simpleUserCard = new SimpleUserCard(cardID, userCardState, name);
+                completeUserCardInfo.getSimpleUserCards().add(simpleUserCard);
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+    }
+
+    public static CompleteUserCardInfo getCompleteUserCardInfo(Long userID) {
+        DatabaseConnection dbConnection = new DatabaseConnection("getCompleteUserCardInfo");
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        CompleteUserCardInfo completeUserCardInfo = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT " +
+                    "  User.UserID, " +
+                    "  UserHardware.DeviceUniqueKey, " +
+                    "  UserHardware.DeviceTokenKey, " +
+                    "  UserHardware.MobilePlatform, " +
+                    "  UserPersonalData.AdditionalInformation, " +
+                    "  UserPersonalData.UserLanguage, " +
+                    "  User.UserRegistrationTimestamp, " +
+                    "  UserContent.LastSynchronizeTimestamp " +
+                    "FROM User " +
+                    "  JOIN UserHardware ON UserHardware.UserHardwareID = User.UserHardwareID " +
+                    "  JOIN UserPersonalData ON UserPersonalData.UserPersonalDataID = User.UserPersonalDataID " +
+                    "  JOIN UserContent ON UserContent.UserContentID = User.UserContentID " +
+                    "WHERE User.UserID = ? ";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, userID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                completeUserCardInfo = new CompleteUserCardInfo();
+                completeUserCardInfo.setUserID(rs.getLong("User.UserID"));
+                completeUserCardInfo.setDeviceUniqueKey(rs.getString("UserHardware.DeviceUniqueKey"));
+                completeUserCardInfo.setDeviceTokenKey(rs.getString("UserHardware.DeviceTokenKey"));
+                completeUserCardInfo.setMobilePlatform(MobilePlatform.parseInt(rs.getInt("UserHardware.MobilePlatform")));
+                completeUserCardInfo.setAdditionalInformation(rs.getString("UserPersonalData.AdditionalInformation"));
+                completeUserCardInfo.setLanguageType(LanguageType.parseInt(rs.getInt("UserPersonalData.UserLanguage")));
+                completeUserCardInfo.setUserRegistration(rs.getTimestamp("User.UserRegistrationTimestamp"));
+                completeUserCardInfo.setLastSynchronized(rs.getTimestamp("UserContent.LastSynchronizeTimestamp"));
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return completeUserCardInfo;
+    }
 }

@@ -7,7 +7,7 @@ import model.constants.Component;
 import model.constants.ExceptionTexts;
 import model.exception.ParseRequestException;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

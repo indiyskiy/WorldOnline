@@ -5,9 +5,8 @@ import model.constants.Component;
 import model.database.requests.CardRequest;
 import model.database.requests.ImageRequest;
 import model.database.worldonlinedb.CardEntity;
-import model.database.worldonlinedb.ImageEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

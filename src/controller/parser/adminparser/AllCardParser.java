@@ -1,16 +1,16 @@
 package controller.parser.adminparser;
 
+import helper.ServletHelper;
 import model.constants.databaseenumeration.CardType;
-import view.servlet.ServletHelper;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class AllCardParser {
-    Long cardID = null;
-    String cardName = null;
-    CardType cardType = null;
-    int firstElem = 0;
-    int maxItems = 0;
+    private Long cardID = null;
+    private String cardName = null;
+    private CardType cardType = null;
+    private int firstElem = 0;
+    private int maxItems = 0;
     private int page;
 
     public AllCardParser(int maxItems) {

@@ -2,10 +2,8 @@ package model.database.requests;
 
 import controller.phone.entity.AllCardParameterTypesRequest;
 import helper.ParameterValidator;
-import model.additionalentity.admin.CardParameter;
-import model.additionalentity.admin.CompleteCardInfo;
-import model.additionalentity.admin.CompleteCardParameterTypeInfo;
-import model.additionalentity.admin.ParameterType;
+import helper.StringHelper;
+import model.additionalentity.admin.*;
 import model.additionalentity.phone.MobileCardInfo;
 import model.additionalentity.phone.MobileParameter;
 import model.additionalentity.phone.MobileParameterType;
@@ -28,6 +26,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 
 
 public class ParameterRequest {
@@ -472,5 +472,145 @@ public class ParameterRequest {
             dbConnection.closeConnections(ps, rs);
         }
         return b;
+    }
+
+    public static ArrayList<ParameterType> getAvailableCardParameters(long cardID) {
+        DatabaseConnection dbConnection = new DatabaseConnection("getAvailableCardParameters");
+        ArrayList<ParameterType> parameterTypes = new ArrayList<>();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT " +
+                            "  Text.Text, " +
+                            "  CardParameterType.Block, " +
+                            "  CardParameterType.CardParameterTypeID, " +
+                            "  CardParameterType.Translatable, " +
+                            "  CardParameterType.Multiply " +
+                            "FROM CardParameterType   " +
+                            "  LEFT OUTER JOIN TextGroup ON (CardParameterType.CardParameterTypeName = TextGroup.TextGroupID) " +
+                            "  LEFT OUTER JOIN Text ON (Text.TextGroupID = TextGroup.TextGroupID AND (Text.LanguageID = ? OR Text.TextID IS NULL)) " +
+                            "WHERE CardParameterTypeID NOT IN ( " +
+                            "  SELECT " +
+                            "    CardParameter.CardParameterTypeID AS ID " +
+                            "  FROM CardParameter " +
+                            "  WHERE (CardParameter.CardID = ?) " +
+                            "  UNION " +
+                            "  SELECT " +
+                            "    TextCard.CardParameterTypeID AS ID " +
+                            "  FROM TextCard " +
+                            "  WHERE (TextCard.CardID = ?) " +
+                            ") OR (CardParameterType.Multiply) ";
+            ps = connection.prepareStatement(sqlString);
+            ps.setInt(1, LanguageType.Russian.getValue());
+            ps.setLong(2, cardID);
+            ps.setLong(3, cardID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ParameterType parameterType = new ParameterType();
+                parameterType.setParameterTypeID(rs.getLong("CardParameterType.CardParameterTypeID"));
+                parameterType.setName(rs.getString("Text.Text"));
+                parameterType.setBlock(ApplicationBlock.parseInt(rs.getInt("CardParameterType.Block")));
+                parameterType.setMultiply(rs.getBoolean("CardParameterType.Multiply"));
+                parameterType.setTranslatable(rs.getBoolean("CardParameterType.Translatable"));
+                parameterTypes.add(parameterType);
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return parameterTypes;
+    }
+
+    public static HashSet<SimpleCardParameterType> getSimpleCardParameterTypes(HashSet<Long> cardParameterTypeIDs) {
+        DatabaseConnection dbConnection = new DatabaseConnection("getAllTypes");
+        HashSet<SimpleCardParameterType> simpleCardParameterTypes = new HashSet<>();
+        Connection connection;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        String stringParameterTypeIDs = StringHelper.getStringFromCollection(cardParameterTypeIDs);
+        try {
+            connection = dbConnection.getConnection();
+            @Language("MySQL") String sqlString =
+                    "SELECT " +
+                            "  CardParameterType.CardParameterTypeID, " +
+                            "  CardParameterType.Multiply, " +
+                            "  CardParameterType.Translatable " +
+                            "FROM CardParameterType " +
+                            "  WHERE CardParameterType.CardParameterTypeID IN (" + stringParameterTypeIDs + ")";
+            ps = connection.prepareStatement(sqlString);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SimpleCardParameterType simpleCardParameterType = new SimpleCardParameterType();
+                simpleCardParameterType.setCardParameterTypeID(rs.getLong("CardParameterType.CardParameterTypeID"));
+                simpleCardParameterType.setMultiply(rs.getBoolean("CardParameterType.Multiply"));
+                simpleCardParameterType.setTranslatable(rs.getBoolean("CardParameterType.Translatable"));
+                simpleCardParameterTypes.add(simpleCardParameterType);
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return simpleCardParameterTypes;
+    }
+
+    public static boolean areRepeatingParametersExists(long cardID, HashSet<Long> cardParameterTypeIDs) {
+        if (cardParameterTypeIDs.isEmpty()) {
+            return false;
+        }
+        DatabaseConnection dbConnection = new DatabaseConnection("areRepeatingParametersExists");
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String stringIDs = StringHelper.getStringFromCollection(cardParameterTypeIDs);
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT CardParameter.CardParameterID FROM CardParameter " +
+                    "JOIN Card ON (Card.CardID=CardParameter.CardID) " +
+                    "JOIN CardParameterType ON (CardParameter.CardParameterTypeID=CardParameterType.CardParameterTypeID)" +
+                    "WHERE Card.CardID=? AND CardParameterType.CardParameterTypeID IN (" + stringIDs + ") AND (NOT CardParameterType.Multiply)";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                return true;
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return false;
+    }
+
+    public static void addParametersToCard(long cardID, HashSet<Long> cardParameterTypeIDs) {
+//        loggerFactory.debug("start");
+        if (cardParameterTypeIDs.isEmpty()) {
+//            loggerFactory.debug("end 1");
+            return;
+        }
+        DatabaseConnection dbConnection = new DatabaseConnection("addParametersToCard");
+        PreparedStatement ps = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "INSERT INTO CardParameter (CardID,CardParameterTypeID) " +
+                    "VALUES ";
+            Iterator<Long> it = cardParameterTypeIDs.iterator();
+            while (it.hasNext()) {
+                sql += "(" + cardID + "," + it.next() + "),";
+            }
+            sql = sql.substring(0, sql.lastIndexOf(","));
+            loggerFactory.debug(sql);
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+//            loggerFactory.debug("end 2");
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
     }
 }

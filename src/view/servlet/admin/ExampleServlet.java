@@ -3,7 +3,7 @@ package view.servlet.admin;
 import model.constants.AdminRule;
 import model.database.requests.UserRequests;
 import model.database.worldonlinedb.UserEntity;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

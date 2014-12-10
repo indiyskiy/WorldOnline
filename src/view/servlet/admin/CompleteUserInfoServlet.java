@@ -1,14 +1,15 @@
 package view.servlet.admin;
 
+import helper.ServletHelper;
+import model.additionalentity.admin.CompleteUserCardInfo;
 import model.constants.AdminRule;
 import model.constants.Component;
-import model.constants.databaseenumeration.LanguageType;
-import model.constants.databaseenumeration.MobilePlatform;
+import model.constants.UserCardState;
+import model.database.requests.UserDataRequest;
 import model.database.requests.UserRequests;
 import model.database.worldonlinedb.UserEntity;
 import model.logger.LoggerFactory;
 import model.textparser.RequestParser;
-import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +23,14 @@ public class CompleteUserInfoServlet extends ProtectedServlet {
         try {
             ServletHelper.setUTF8(request, response);
             String userIDValue = request.getParameter("userID");
-            Long userID = Long.parseLong(userIDValue);
-            UserEntity user = UserRequests.getUserByID(userID);
-            String addInformation = request.getParameter("additionalInformation");
-            addInformation = RequestParser.shieldText(addInformation);
-            user.getUserPersonalData().setAdditionalInformation(addInformation);
-            UserRequests.editUser(user);
+            String additionalInformation = request.getParameter("additionalInformation");
+            if (userIDValue != null && !userIDValue.isEmpty() && additionalInformation != null) {
+                Long userID = Long.parseLong(userIDValue);
+                UserEntity user = UserRequests.getUserByID(userID);
+                additionalInformation = RequestParser.shieldText(additionalInformation);
+                user.getUserPersonalData().setAdditionalInformation(additionalInformation);
+                UserRequests.editUser(user);
+            }
             doGet(request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
@@ -39,12 +42,12 @@ public class CompleteUserInfoServlet extends ProtectedServlet {
             ServletHelper.setUTF8(request, response);
             String userIDValue = request.getParameter("userID");
             Long userID = Long.parseLong(userIDValue);
-            UserEntity user = UserRequests.getUserByID(userID);
-            request.setAttribute("user", user);
-            request.setAttribute("mobilePlatforms", MobilePlatform.values());
-            request.setAttribute("languages", LanguageType.values());
-            request.setAttribute("title", cutTitle("Пользователь ID[${user.userID}]"));
-            ServletHelper.sendForward("/completeuserinfo.jsp", this, request, response);
+            CompleteUserCardInfo completeUserCardInfo = UserDataRequest.getCompleteUserCardInfo(userID);
+            UserDataRequest.getCompleteUserCardInfo(userID, completeUserCardInfo);
+            request.setAttribute("completeUserCardInfo", completeUserCardInfo);
+            request.setAttribute("userCardStates", UserCardState.values());
+            request.setAttribute("title", cutTitle("Пользователь ID[" + userID + "]"));
+            ServletHelper.sendForward("/completeuserinfo.jsp?o?userID=437", this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
         }

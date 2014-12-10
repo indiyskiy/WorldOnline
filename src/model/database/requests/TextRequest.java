@@ -22,9 +22,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class TextRequest {
     private static LoggerFactory loggerFactory = new LoggerFactory(Component.Database, TextRequest.class);
@@ -239,14 +237,14 @@ public class TextRequest {
                             "FROM Card " +
                             "JOIN TextCard ON (TextCard.CardID = Card.CardID) " +
                             "JOIN TextGroup ON (TextGroup.TextGroupID=TextCard.TextGroupID)" +
-                            "JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
+//                            "LEFT OUTER JOIN Text ON (Text.TextGroupID=TextGroup.TextGroupID) " +
                             "JOIN CardParameterType ON (TextCard.CardParameterTypeID = CardParameterType.CardParameterTypeID) " +
                             "JOIN TextGroup AS ParameterTypeTextGroup " +
                             "ON (ParameterTypeTextGroup.TextGroupID = CardParameterType.CardParameterTypeName) " +
                             "JOIN Text AS ParameterTypeText ON (ParameterTypeText.TextGroupID=ParameterTypeTextGroup.TextGroupID) " +
                             "WHERE Card.CardID = ? " +
                             "AND ParameterTypeText.LanguageID=" + LanguageType.Russian.getValue() + " " +
-                            "AND Text.LanguageID=" + LanguageType.Russian.getValue() + " " +
+//                            "AND Text.LanguageID=" + LanguageType.Russian.getValue() + " " +
                             "ORDER BY CardParameterType.Position";
             ps = connection.prepareStatement(sqlString);
             ps.setLong(1, cardID);
@@ -372,6 +370,35 @@ public class TextRequest {
         return false;
     }
 
+    public static boolean areRepeatingTextsExists(long cardID, HashSet<Long> cardParameterTypeIDs) {
+        if (cardParameterTypeIDs.isEmpty()) {
+            return false;
+        }
+        DatabaseConnection dbConnection = new DatabaseConnection("areRepeatingTextsExists");
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String stringIDs = StringHelper.getStringFromCollection(cardParameterTypeIDs);
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "SELECT TextGroup.TextGroupID FROM TextGroup " +
+                    "JOIN TextCard ON (TextCard.TextGroupID=TextGroup.TextGroupID) " +
+                    "JOIN Card ON (Card.CardID=TextCard.CardID) " +
+                    "JOIN CardParameterType ON (TextCard.CardParameterTypeID=CardParameterType.CardParameterTypeID)" +
+                    "WHERE Card.CardID=? AND CardParameterType.CardParameterTypeID IN (" + stringIDs + ") AND (NOT CardParameterType.Multiply)";
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1, cardID);
+            rs = ps.executeQuery();
+            if (rs.first()) {
+                return true;
+            }
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, rs);
+        }
+        return false;
+    }
+
     public static TextCardEntity addEmptyCardText(CardEntity cardEntity, CardParameterTypeEntity cardParameterTypeEntity) {
         TextGroupEntity textGroupEntity = new TextGroupEntity(cardParameterTypeEntity.getCardParameterTypeName().getTextGroupName() + cardEntity.getCardName());
         TextCardEntity textCardEntity = new TextCardEntity(textGroupEntity, cardEntity, cardParameterTypeEntity);
@@ -485,5 +512,44 @@ public class TextRequest {
         } finally {
             dbConnection.closeConnections(ps, rs);
         }
+    }
+
+    public static void addTextsToCard(long cardID, HashSet<Long> cardTextParameterTypeIDs) {
+//        loggerFactory.debug("start");
+        if (cardTextParameterTypeIDs.isEmpty()) {
+//            loggerFactory.debug("end 1");
+            return;
+        }
+        ArrayList<Long> textGroupIDs = new ArrayList<>(cardTextParameterTypeIDs.size());
+        for (Long cardTextParameterTypeID : cardTextParameterTypeIDs) {
+            TextGroupEntity textGroupEntity = new TextGroupEntity("cardText " + cardID + "-" + cardTextParameterTypeID);
+            addTextGroup(textGroupEntity);
+            textGroupIDs.add(textGroupEntity.getTextGroupID());
+        }
+
+        DatabaseConnection dbConnection = new DatabaseConnection("addTextsToCard");
+        PreparedStatement ps = null;
+        try {
+            Connection connection = dbConnection.getConnection();
+            @Language("MySQL") String sql = "INSERT INTO TextCard (CardID,CardParameterTypeID,TextGroupID) " +
+                    "VALUES ";
+            Iterator<Long> it = cardTextParameterTypeIDs.iterator();
+            for (long textGroupID : textGroupIDs) {
+                sql += "(" + cardID + "," + it.next() + "," + textGroupID + "),";
+            }
+            sql = sql.substring(0, sql.lastIndexOf(","));
+            loggerFactory.debug(sql);
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            loggerFactory.error(e);
+        } finally {
+            dbConnection.closeConnections(ps, null);
+        }
+
+//        for (int i = 0; i < textGroupIDs.size(); i++) {
+//            deleteTextGroup(getTextGroup(textGroupIDs.get(i)));
+//        }
+//        loggerFactory.debug("end 2");
     }
 }

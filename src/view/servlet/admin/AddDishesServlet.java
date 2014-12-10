@@ -2,13 +2,11 @@ package view.servlet.admin;
 
 import controller.parser.adminparser.AddDishesParser;
 import model.constants.AdminRule;
-import model.constants.ApplicationBlock;
 import model.constants.Component;
 import model.database.requests.DishRequest;
-import model.database.requests.ParameterRequest;
 import model.database.requests.TextRequest;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

@@ -5,10 +5,9 @@ import model.additionalentity.admin.ParsedRegistrationRequest;
 import model.constants.AdminRule;
 import model.constants.Component;
 import model.database.requests.AdminUserRequest;
-import model.exception.ParseRequestException;
 import model.logger.LoggerFactory;
 import model.mailer.RegistrationMailer;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

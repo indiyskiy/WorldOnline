@@ -9,7 +9,7 @@ import model.exception.ParseRequestException;
 import model.logger.LoggerFactory;
 import model.phone.requesthandler.MobileHandler;
 import model.phone.responseentity.MobileResponseEntity;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

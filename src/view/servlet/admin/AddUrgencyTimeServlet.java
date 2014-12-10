@@ -1,13 +1,15 @@
 package view.servlet.admin;
 
+import helper.ServletHelper;
+import helper.TimeManager;
 import model.constants.AdminRule;
 import model.constants.Component;
+import model.constants.databaseenumeration.CardType;
 import model.database.requests.CardRequest;
 import model.database.requests.TimeRequest;
 import model.database.worldonlinedb.CardEntity;
 import model.database.worldonlinedb.UrgencyTimeEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,13 +28,19 @@ public class AddUrgencyTimeServlet extends ProtectedServlet {
         try {
             Long cardID = Long.parseLong(request.getParameter("cardID"));
             CardEntity cardEntity = CardRequest.getCardByID(cardID);
-            if (cardEntity != null) {
-                if (!TimeRequest.containsUrgencyTimeEntity(cardEntity)) {
-                    UrgencyTimeEntity urgencyTimeEntity = new UrgencyTimeEntity();
-                    urgencyTimeEntity.setCard(cardEntity);
-                    TimeRequest.addUrgencyTimeEntity(urgencyTimeEntity);
-                    CardRequest.updateCard(cardEntity);
+            if (cardEntity != null && cardEntity.getCardType() == CardType.CardNews.getValue()) {
+                UrgencyTimeEntity urgencyTimeEntity = new UrgencyTimeEntity();
+                urgencyTimeEntity.setCard(cardEntity);
+                if (TimeRequest.containsUrgencyTimeEntity(cardEntity)) {
+                    UrgencyTimeEntity maxUrgencyTimeEntity = TimeRequest.getMaxUrgencyTime(cardEntity);
+                    urgencyTimeEntity.setOnTimeStamp(maxUrgencyTimeEntity.getOnTimeStamp());
+                    urgencyTimeEntity.setOffTimeStamp(maxUrgencyTimeEntity.getOffTimeStamp());
+                } else {
+                    urgencyTimeEntity.setOnTimeStamp(TimeManager.currentTime());
+                    urgencyTimeEntity.setOffTimeStamp(TimeManager.currentTime());
                 }
+                TimeRequest.addUrgencyTimeEntity(urgencyTimeEntity);
+                CardRequest.updateCard(cardEntity);
                 ServletHelper.sendForward("/completecardinfo?cardID=" + cardID, this, request, response);
             } else {
                 throw new ServletException("incorrect card ID");

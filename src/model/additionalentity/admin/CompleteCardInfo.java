@@ -20,7 +20,7 @@ public class CompleteCardInfo {
     private ArrayList<CardImage> cardImages = new ArrayList<>();
     private ArrayList<CardBlock> cardBlocks = new ArrayList<>();
     private ArrayList<CardInfoElement> cardInfoElements = new ArrayList<>();
-    private SimpleUrgencyTime urgencyTime;
+    private ArrayList<CardUrgencyTime> urgencyTimes = new ArrayList<>();
     private RouteCard routeCard;
 
     public CardInfo getCardInfo() {
@@ -160,11 +160,11 @@ public class CompleteCardInfo {
         this.cardBlocks = cardBlocksNew;
     }
 
-    public SimpleUrgencyTime getUrgencyTime() {
-        return urgencyTime;
+    public ArrayList<CardUrgencyTime> getUrgencyTimes() {
+        return urgencyTimes;
     }
 
-    public void setUrgencyTime(SimpleUrgencyTime urgencyTime) {
-        this.urgencyTime = urgencyTime;
+    public void setUrgencyTimes(ArrayList<CardUrgencyTime> urgencyTimes) {
+        this.urgencyTimes = urgencyTimes;
     }
 }

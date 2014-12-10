@@ -4,7 +4,7 @@ import model.constants.AdminRule;
 import model.constants.Component;
 import model.logger.LoggerFactory;
 import model.mailer.RegistrationMailer;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

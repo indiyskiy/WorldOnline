@@ -12,7 +12,7 @@ import model.database.worldonlinedb.TextGroupEntity;
 import model.database.worldonlinedb.dishes.CardPriceLinkEntity;
 import model.database.worldonlinedb.dishes.PriceEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

@@ -1,7 +1,6 @@
 package view.servlet.admin;
 
 import model.additionalentity.admin.CompleteTagInfo;
-import model.additionalentity.admin.SimpleTag;
 import model.additionalentity.admin.SimpleTagGroup;
 import model.constants.AdminRule;
 import model.constants.Component;
@@ -9,7 +8,7 @@ import model.constants.databaseenumeration.LanguageType;
 import model.database.requests.TagRequest;
 import model.database.worldonlinedb.TagEntity;
 import model.logger.LoggerFactory;
-import view.servlet.ServletHelper;
+import helper.ServletHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +31,8 @@ public class AllTagsServlet extends ProtectedServlet {
                 ArrayList<TagEntity> tagEntities = TagRequest.getTags(tagGroup);
                 request.setAttribute("tags", tagEntities);
             }
-            ArrayList<SimpleTagGroup> simpleTagGroups = TagRequest.getAllSimpleTagGroups(LanguageType.Russian);
-            request.setAttribute("tagGroups", simpleTagGroups);
+//            ArrayList<SimpleTagGroup> simpleTagGroups = TagRequest.getAllSimpleTagGroups(LanguageType.Russian);
+//            request.setAttribute("tagGroups", simpleTagGroups);
             ServletHelper.sendForward("/alltags.jsp", this, request, response);
         } catch (Exception e) {
             ServletHelper.sendError(e, request, response, this, loggerFactory);
