@@ -44,7 +44,9 @@
       <column name="LastUpdateTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
       <column name="NumberInList" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="CardID"/>
+      <exported-key name="CardActivity_ibfk_1" table="CardActivity" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_55sp0hs3nhgu8yq0xlp3s84d4" table="CardCoordinate" schema="" catalog="worldonline" columns="CardID"/>
+      <exported-key name="CardEvent_ibfk_1" table="CardEvent" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_kad18leo0yike87hf7oa63gi9" table="CardImage" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_pxapghyurb73mt4ixwwnicoed" table="CardInformationElement" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_ic9fnltx16lm8nm7cbqnj6i14" table="CardParameter" schema="" catalog="worldonline" columns="CardID"/>
@@ -53,12 +55,24 @@
       <exported-key name="FK_d5988m03oyar0cmc1rrehabop" table="CardTag" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_d26ian9314gtlpkc64pm04qdx" table="CardToCardLink" schema="" catalog="worldonline" columns="TargetCardID"/>
       <exported-key name="FK_nd7l1a14umsae1dvncv3juko7" table="CardToCardLink" schema="" catalog="worldonline" columns="SourceCardID"/>
+      <exported-key name="FieldActivity_ibfk_1" table="FieldActivity" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_q9w7t32uurt9fgvs7opfm7u64" table="MenuCardLink" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_s9ydgplfrhc8u7wjao1n475fc" table="RouteElement" schema="" catalog="worldonline" columns="PlaceCardID"/>
       <exported-key name="FK_5882m7f2hh8oacjyqt8vr3fu0" table="TagGroup" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_ldbgpy6a9uyuawvm6yfnyni4" table="TextCard" schema="" catalog="worldonline" columns="CardID"/>
       <exported-key name="FK_dxceql6ir6ppr6tmk8fi7pan8" table="UrgencyTime" schema="" catalog="worldonline" columns="cardID"/>
       <exported-key name="FK_lv8j07r0w9oki3nwxvhiam6qm" table="UserCard" schema="" catalog="worldonline" columns="CardID"/>
+    </table>
+    <table name="CardActivity" schema="" catalog="worldonline" type="TABLE">
+      <column name="CardActivityID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="UserContentID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="OnTimestamp" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="OffTimestamp" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="CardActivityID"/>
+      <foreign-key name="CardActivity_ibfk_1" columns="CardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="CardActivity_ibfk_2" columns="UserContentID" ref-table="UserContent" ref-schema="" ref-catalog="worldonline" ref-columns="UserContentID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="unique_CardActivityID" unique="true" columns="CardActivityID"/>
     </table>
     <table name="CardCoordinate" schema="" catalog="worldonline" type="TABLE">
       <column name="CardCoordinateID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -67,6 +81,17 @@
       <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="CardCoordinateID"/>
       <foreign-key name="FK_55sp0hs3nhgu8yq0xlp3s84d4" columns="CardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="CardEvent" schema="" catalog="worldonline" type="TABLE">
+      <column name="CardEventID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="UserContentID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="EventType" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="EventTimestamp" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="Text" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="CardEventID"/>
+      <foreign-key name="CardEvent_ibfk_1" columns="CardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="CardEvent_ibfk_2" columns="UserContentID" ref-table="UserContent" ref-schema="" ref-catalog="worldonline" ref-columns="UserContentID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="CardImage" schema="" catalog="worldonline" type="TABLE">
       <column name="CardImageID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -114,6 +139,7 @@
       <foreign-key name="FK_ftefs10dpu32c10qxf37n0eua" columns="CardParameterTypeName" ref-table="TextGroup" ref-schema="" ref-catalog="worldonline" ref-columns="TextGroupID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_nt03r589j5eyhppfacw2lb103" columns="ImageID" ref-table="Image" ref-schema="" ref-catalog="worldonline" ref-columns="ImageID" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="FK_qvqmg3u9a6ltpy5kl6fis7llo" table="CardParameter" schema="" catalog="worldonline" columns="CardParameterTypeID"/>
+      <exported-key name="FieldActivity_ibfk_3" table="FieldActivity" schema="" catalog="worldonline" columns="CardParameterTypeID"/>
       <exported-key name="FK_lulcmfpaovrudbepfjpkj7b2u" table="TextCard" schema="" catalog="worldonline" columns="CardParameterTypeID"/>
     </table>
     <table name="CardPriceLink" schema="" catalog="worldonline" type="TABLE">
@@ -194,6 +220,27 @@
       <column name="EUR" sqlType="DOUBLE" length="22" precision="0" nullable="true" jdbcType="8"/>
       <column name="USD" sqlType="DOUBLE" length="22" precision="0" nullable="true" jdbcType="8"/>
       <primary-key name="PRIMARY" columns="ExchangeRatesID"/>
+    </table>
+    <table name="FieldActivity" schema="" catalog="worldonline" type="TABLE">
+      <column name="FieldActivityID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="CardID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="UserContentID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="ActivityTimestamp" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="CardParameterTypeID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="Text" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="FieldActivityID"/>
+      <foreign-key name="FieldActivity_ibfk_1" columns="CardID" ref-table="Card" ref-schema="" ref-catalog="worldonline" ref-columns="CardID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FieldActivity_ibfk_2" columns="UserContentID" ref-table="UserContent" ref-schema="" ref-catalog="worldonline" ref-columns="UserContentID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FieldActivity_ibfk_3" columns="CardParameterTypeID" ref-table="CardParameterType" ref-schema="" ref-catalog="worldonline" ref-columns="CardParameterTypeID" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="GlobalEvent" schema="" catalog="worldonline" type="TABLE">
+      <column name="GlobalEventID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="UserContentID" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="GlobalEventType" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="EventTimestamp" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="Text" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="GlobalEventID"/>
+      <foreign-key name="GlobalEvent_ibfk_1" columns="UserContentID" ref-table="UserContent" ref-schema="" ref-catalog="worldonline" ref-columns="UserContentID" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="GlobalUpdate" schema="" catalog="worldonline" type="TABLE">
       <column name="GlobalUpdateID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
@@ -361,6 +408,10 @@
       <column name="LastConnectionTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
       <column name="LastSynchronizeTimestamp" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="UserContentID"/>
+      <exported-key name="CardActivity_ibfk_2" table="CardActivity" schema="" catalog="worldonline" columns="UserContentID"/>
+      <exported-key name="CardEvent_ibfk_2" table="CardEvent" schema="" catalog="worldonline" columns="UserContentID"/>
+      <exported-key name="FieldActivity_ibfk_2" table="FieldActivity" schema="" catalog="worldonline" columns="UserContentID"/>
+      <exported-key name="GlobalEvent_ibfk_1" table="GlobalEvent" schema="" catalog="worldonline" columns="UserContentID"/>
       <exported-key name="FK_ni3wk87vu1n5d2jfhblui5veo" table="User" schema="" catalog="worldonline" columns="UserContentID"/>
       <exported-key name="FK_o9hm9i8tnmup36hqj1gougw8l" table="UserCard" schema="" catalog="worldonline" columns="UserContentID"/>
       <exported-key name="UserPrice_ibfk_2" table="UserPrice" schema="" catalog="worldonline" columns="UserContentID"/>
